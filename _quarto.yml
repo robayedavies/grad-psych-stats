@@ -12,6 +12,7 @@ book:
     - references.qmd
 
 bibliography: references.bib
+csl: psychological-bulletin.csl
 
 format:
   html:
