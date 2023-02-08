@@ -5,7 +5,7 @@ project:
 book:
   title: "Psychological data analysis for graduate students"
   author: "Rob Davies"
-  date: "2023-02-08""
+  date: "2023-02-08"
   chapters:
     - index.qmd
     - part: "Making the most of R"
