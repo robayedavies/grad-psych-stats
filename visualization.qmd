@@ -111,12 +111,7 @@ The `gg` in `ggplot` stands for the "Grammar of Graphics", and the ideas motivat
 
 What is helpful to us, here, is the insight that the code elements (and how they result in visual elements) can be identified as building blocks, or layers, that we can add and adjust piece by piece when we are producing a visualization.
 
-A plot represents information and, critically, every time we write `ggplot` code we must specify somewhere the ways that our plot links data to something we see.
-In terms of `ggplot`, we specify *aesthetic mappings* using the `aes()` code to tell R what variables should be mapped e.g. to x-axis or y-axis location, to colour, or to group assignments.
-We then add elements to instruct R how to represent the aesthetic mappings as visual objects or attributes: geometric objects like a scatter of points `geom_point()` or a collection of bars `geom_bar()`; or visual features like colour, shape or size e.g. `aes(colour = group)`.
-We can add visual elements in a series of layers, as shall see in the practical demonstrations of plot construction.
-We can adjust how scaling works.
-And we can add annotation, labels, and other elements to guide and inform the attention of the audience.
+A plot represents information and, critically, every time we write `ggplot` code we must specify somewhere the ways that our plot links data to something we see. In terms of `ggplot`, we specify *aesthetic mappings* using the `aes()` code to tell R what variables should be mapped e.g. to x-axis or y-axis location, to colour, or to group assignments. We then add elements to instruct R how to represent the aesthetic mappings as visual objects or attributes: geometric objects like a scatter of points `geom_point()` or a collection of bars `geom_bar()`; or visual features like colour, shape or size e.g. `aes(colour = group)`. We can add visual elements in a series of layers, as shall see in the practical demonstrations of plot construction. We can adjust how scaling works. And we can add annotation, labels, and other elements to guide and inform the attention of the audience.
 
 You can read more about mastering the grammar [here](https://ggplot2-book.org/mastery.html){.external target="_blank"}.
 
@@ -153,8 +148,8 @@ What you can see is that each line ending in a `%>` pipe passes something on to 
 Each step is executed in turn, in strict sequence. This means that if I delete line 3 `summarise(average = mean(Reaction)) %>%` then the following lines cannot work because the `ggplot()` function will be looking for a variable `average` that does not yet exist.
 
 ::: callout-warning
-- You can see that in the data processing part of the code, successive steps in data processing end in a pipe `%>%`.
-- In contrast, successive steps of the plotting code add `ggplot` elements line by line with each line (except the last) ending in a `+`.
+-   You can see that in the data processing part of the code, successive steps in data processing end in a pipe `%>%`.
+-   In contrast, successive steps of the plotting code add `ggplot` elements line by line with each line (except the last) ending in a `+`.
 :::
 
 Notice that none of the processing steps actually changes the dataset called `sleepstudy`. The results of the process exist and can be used only within the sequence of steps that I have coded. If you want to keep the results of processing steps, you need to assign an object name to hold them, and I show how to do this, in the following.
@@ -203,7 +198,7 @@ In practice, this may involve the following (I paraphrase them, here).
 
 You will see a rich variety of data visualizations in media and in the research literature. You will know that some choices, in the production of those visualizations, appear to work better than others.
 
-Some of the reasons why some choices work better will relate to what we can understand in terms of the psychological science of how visual data communication works. A useful recent review of relevant research is presented by @franconeri2021. 
+Some of the reasons why some choices work better will relate to what we can understand in terms of the psychological science of how visual data communication works. A useful recent review of relevant research is presented by @franconeri2021.
 
 @franconeri2021 provide a reason for working on visualizations: they allow us humans to process an array of information at once, often faster than if we were reading about the information, bit by bit. Effective visualization, then, is about harnessing the power of the human visual system, or visual cognition, for quick, efficient, information processing. Critically for science, in addition, visualizations can be more effective for discovering or communicating the critical features of data than summary statistics, as we shall see.
 
@@ -246,11 +241,9 @@ I will model the process, to give you an example workflow:
 
 When we work with R, we usually work with functions like `ggplot()` provided in libraries like `ggplot2` [@R-ggplot2]. These libraries typically provide not only functions but also datasets that we can use for demonstration and learning.
 
-The `lme4` library [@R-lme4] provides the `sleepstudy` dataset and we will take a look at these data to offer a taste of what we can learn to do. 
-Usually, information about the R libraries we use will be located on the [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org){.external target="_blank"} web pages, and we can find the technical reference information for [lme4](https://cran.r-project.org/web/packages/lme4/lme4.pdf){.external target="_blank"} in the CRAN reference manual for the library, where we see that the `sleepstudy` data are from a study reported by [@belenky2003].
-The manual says that the `sleepstudy` dataset comprises:
+The `lme4` library [@R-lme4] provides the `sleepstudy` dataset and we will take a look at these data to offer a taste of what we can learn to do. Usually, information about the R libraries we use will be located on the [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org){.external target="_blank"} web pages, and we can find the technical reference information for [lme4](https://cran.r-project.org/web/packages/lme4/lme4.pdf){.external target="_blank"} in the CRAN reference manual for the library, where we see that the `sleepstudy` data are from a study reported by [@belenky2003]. The manual says that the `sleepstudy` dataset comprises:
 
-> A data frame with 180 observations on the following 3 variables. [1.] Reaction -- Average reaction time (ms) [2.] Days -- Number of days of sleep deprivation [3.] Subject -- Subject number on which the observation was made.
+> A data frame with 180 observations on the following 3 variables. \[1.\] Reaction -- Average reaction time (ms) \[2.\] Days -- Number of days of sleep deprivation \[3.\] Subject -- Subject number on which the observation was made.
 
 We can take a look at the first few rows of the dataset.
 
@@ -335,7 +328,7 @@ Let's go through the code step-by-step:
 6.  `xintercept = mean(sleepstudy$Reaction), ...` tells R to draw the vertical line at the mean value of the variable `Reaction` in the `sleepstudy` dataset.
 7.  `colour = "red", linetype = 'dashed', size = 1.5` tells R we want the vertical line to be red, dashed and 1.5 times the usual size.
 8.  `annotate("text", ...)` tells R we want to add a text note.
-9.  `x = 370, y =20, ...` tells R  we want the note added at the x,y coordinates given.
+9.  `x = 370, y =20, ...` tells R we want the note added at the x,y coordinates given.
 10. `colour = "red", ..;` and we want the text in red.
 11. `...label = "Average value shown in red") +` tells R we want the text note to say that this is where the average is.
 12. `theme_bw()` lastly, we change the theme.
@@ -497,36 +490,31 @@ The data processing and plotting functions in the `tidyverse` collection of libr
 
 ### Summary: Quick start lessons
 
-What we have seen, so far, is that we can make dramatic changes to the appearance of visualizations (e.g., through faceting) and also that we can exert fine control over the details (e.g., adjusting scale labels). 
-What we need to stop and consider are what we want to do (and why), in what order.
+What we have seen, so far, is that we can make dramatic changes to the appearance of visualizations (e.g., through faceting) and also that we can exert fine control over the details (e.g., adjusting scale labels). What we need to stop and consider are what we want to do (and why), in what order.
 
-We have seen how we can feed a data process into a plot to first prepare then produce the plot in a sequence of steps.
-In processing the data, we can take some original data and extract or calculate information that we can use for our plotting e.g. calculating the mean of a distribution in order to then highlight where that mean is located.
+We have seen how we can feed a data process into a plot to first prepare then produce the plot in a sequence of steps. In processing the data, we can take some original data and extract or calculate information that we can use for our plotting e.g. calculating the mean of a distribution in order to then highlight where that mean is located.
 
-We have also seen the use of plots, and the editing of their appearance, to represent information visually.
-We can verbalize the thought process behind the production of these plots through a series of questions.
+We have also seen the use of plots, and the editing of their appearance, to represent information visually. We can verbalize the thought process behind the production of these plots through a series of questions.
 
-1. Are we looking at the distribution of one variable (if yes: consider a histogram) or are we comparing the distributions of two or more variables (if yes: consider a scatterplot)?
-2. Is there a salient feature of the plot we want to draw the attention of the audience to? We can add a visual element (like a line) and annotation text to guide the audience.
-3. Are we interested in variation between sub-sets of the data? We can facet the plot to examine variation between sub-sets (facets) enabling the comparison of trends.
+1.  Are we looking at the distribution of one variable (if yes: consider a histogram) or are we comparing the distributions of two or more variables (if yes: consider a scatterplot)?
+2.  Is there a salient feature of the plot we want to draw the attention of the audience to? We can add a visual element (like a line) and annotation text to guide the audience.
+3.  Are we interested in variation between sub-sets of the data? We can facet the plot to examine variation between sub-sets (facets) enabling the comparison of trends.
 
 ## A practical guide to visualization ideas {#sec-practical-visualization}
 
-In this guide, we illustrate some of the ideas about visualization we discussed at the start, working with practical coding examples.
-We will be working with real data from a published research project.
-We are going to focus the practical coding examples on the data collected for the analysis reported by @ricketts2021. 
+In this guide, we illustrate some of the ideas about visualization we discussed at the start, working with practical coding examples. We will be working with real data from a published research project. We are going to focus the practical coding examples on the data collected for the analysis reported by @ricketts2021.
 
 ::: callout-advice
 We will focus on working with the data from one of the tasks, in one of the studies reported by @ricketts2021.
 
-- This means that you can consolidate your learning by applying the same code moves to data from the other task in the same study, or to data from the other study.
-- In applying code to other data, you will need to be aware of differences in, say, the way that some things like the outcome response variable are coded.
+-   This means that you can consolidate your learning by applying the same code moves to data from the other task in the same study, or to data from the other study.
+-   In applying code to other data, you will need to be aware of differences in, say, the way that some things like the outcome response variable are coded.
 
 You can then further extend your development by trying out the coding moves for yourself using the data collected by @rodríguez-ferreiro2020.
 
-- These data are from a quite distinct kind of investigation, on a different research topic than the topic we will be exploring through our working examples. 
-- However, some aspects of the data structure are similar.
-- Critically, the data are provided with comprehensive documentation.
+-   These data are from a quite distinct kind of investigation, on a different research topic than the topic we will be exploring through our working examples.
+-   However, some aspects of the data structure are similar.
+-   Critically, the data are provided with comprehensive documentation.
 :::
 
 ### Set up for coding {#sec-set-up}
@@ -587,12 +575,9 @@ The folder also includes the @rodríguez-ferreiro2020 data files:
 
 ### Information about the Ricketts study and the datasets {#sec-ricketts-study}
 
-@ricketts2021 conducted an investigation of word learning in school-aged children.
-They taught children 16 novel words in a study with a *2 x 2* factorial design.
-In this investigation, they tested whether word learning is helped by presenting targets for word learning with their spellings, and whether learning is helped by telling children that they would benefit from the presence of those spellings.
+@ricketts2021 conducted an investigation of word learning in school-aged children. They taught children 16 novel words in a study with a *2 x 2* factorial design. In this investigation, they tested whether word learning is helped by presenting targets for word learning with their spellings, and whether learning is helped by telling children that they would benefit from the presence of those spellings.
 
-The presence of orthography (the word spelling) was manipulated within participants (orthography absent vs. orthography present): for all children, eight of the words were taught with orthography present and eight with orthography absent. 
-Instructions (incidental vs. explicit) were manipulated between participants such that children in the explicit condition were alerted to the presence of orthography whereas children in the incidental condition were not.
+The presence of orthography (the word spelling) was manipulated within participants (orthography absent vs. orthography present): for all children, eight of the words were taught with orthography present and eight with orthography absent. Instructions (incidental vs. explicit) were manipulated between participants such that children in the explicit condition were alerted to the presence of orthography whereas children in the incidental condition were not.
 
 A pre-test was conducted to establish participants' knowledge of the stimuli. Then, each child was seen for three 45-minute sessions to complete training (Sessions 1 and 2) and post-tests (Session 3). @ricketts2021 completed two studies: Study 1 and Study 2. All children, in both studies 1 and 2 completed the Session 3 post-tests.
 
@@ -669,7 +654,7 @@ However, the analysis reported by @ricketts2021 focused on the more sensitive Le
 ::: callout-warning
 Levenshtein distance scores are higher *if* a child makes more errors in producing the letters in a spelling response.
 
-- This means that if we want to see what factors help a child to learn a word, including its spelling, then we want to see that helpful factors are associated with *lower* Levenshtein scores.
+-   This means that if we want to see what factors help a child to learn a word, including its spelling, then we want to see that helpful factors are associated with *lower* Levenshtein scores.
 :::
 
 To demonstrate some of the processes we can enact to process and visualize data, and some of the benefits of doing so, we are going to work with the `concurrent.orth_2020-08-11.csv` dataset. These are data corresponding to the @ricketts2021 Study 2. `concurrent` refers to the analysis (a concurrent comparison) of data from younger and older children.
@@ -702,9 +687,7 @@ We can inspect these data using `summary()`.
 summary(conc.orth)
 ```
 
-You should notice one key bit of information in the summary. 
-Focus on the summary for what is in the `Participant` column.
-You can see that we have a number of participants in this dataset, listed by `Participant` identity code in the `summary()` view e.g. `EOF001`. For each participant, we have `16` rows of data.
+You should notice one key bit of information in the summary. Focus on the summary for what is in the `Participant` column. You can see that we have a number of participants in this dataset, listed by `Participant` identity code in the `summary()` view e.g. `EOF001`. For each participant, we have `16` rows of data.
 
 When we ask R for a `summary` of a nominal variable or *factor* it will show us the levels of each factor (i.e., each category or class of objects encoded by the categorical variable), and a count for the number of observations for each level.
 
@@ -719,7 +702,7 @@ conc.orth %>%
   kable_styling()
 ```
 
-You can see that for `EOF001`, as for every participant, we have information on the conditions under which we observed their responses (`Instructions, Orthography`), as well as information about the stimuli that we asked participants to respond to (e.g., `Word, Consistency_H`), information about the responses or *outcomes* we recorded (`Measure, Score, Spelling.transcription,	Levenshtein.Score`), and information about the participants themselves (e.g., `TOWREsweRS, TOWREpdeRS`).
+You can see that for `EOF001`, as for every participant, we have information on the conditions under which we observed their responses (`Instructions, Orthography`), as well as information about the stimuli that we asked participants to respond to (e.g., `Word, Consistency_H`), information about the responses or *outcomes* we recorded (`Measure, Score, Spelling.transcription,  Levenshtein.Score`), and information about the participants themselves (e.g., `TOWREsweRS, TOWREpdeRS`).
 
 ### Process the data {#sec-ricketts-process-data}
 
@@ -850,15 +833,13 @@ Notice:
 
 ##### Exercise
 
-In these bits of demonstration code, we extract information relating just to participants.
-However, in this study, we recorded the responses participants made to 16 stimulus words, and we include in the dataset information about the word properties `Consistency_H`. 
+In these bits of demonstration code, we extract information relating just to participants. However, in this study, we recorded the responses participants made to 16 stimulus words, and we include in the dataset information about the word properties `Consistency_H`.
 
-- Can you adapt the code you see here in order to calculate a mean score for each word, and then extract the word-level information for each distinct stimulus word identity?
+-   Can you adapt the code you see here in order to calculate a mean score for each word, and then extract the word-level information for each distinct stimulus word identity?
 
 ##### Further information
 
-You can read more about the `psych` library, which is often useful, [here](https://personality-project.org/r/psych/vignettes/intro.pdf){.external target="_blank"}.
-You can read more about the `distinct()` function [here](https://dplyr.tidyverse.org/reference/distinct.html){.external target="_blank"}.
+You can read more about the `psych` library, which is often useful, [here](https://personality-project.org/r/psych/vignettes/intro.pdf){.external target="_blank"}. You can read more about the `distinct()` function [here](https://dplyr.tidyverse.org/reference/distinct.html){.external target="_blank"}.
 
 ### Visualize the data: introduction {#visualize-data}
 
@@ -931,11 +912,11 @@ ggplot(data = conc.orth.subjs, aes(x = WASImRS)) +
 
 We could, if we wanted, add a line and annotation to indicate the mean value, as you saw in @fig-sleep-study-histogram.
 
-- Can you add the necessary code to indicate the mean value of WASI scores, for this plot?
+-   Can you add the necessary code to indicate the mean value of WASI scores, for this plot?
 
 We can, of course, plot histograms to indicate the distributions of other variables.
 
-- Can you apply the histogram code to plot histograms of other variables?
+-   Can you apply the histogram code to plot histograms of other variables?
 
 ### Comparing the distributions of numeric variables {#sec-compare-distributions}
 
@@ -1035,8 +1016,8 @@ p.mean.score + p.BPVSRS + p.WASIvRS + p.WASImRS +
   p.TOWREpdeRS + p.TOWREsweRS + plot_layout(ncol = 3)
 ```
 
--   In the code, we add a series of plots together e.g. `p.mean.score + p.BPVSRS + p.WASIvRS ...` 
-- and then specify we want a grid of plots with a layout of three columns `plot_layout(ncol = 3)`.
+-   In the code, we add a series of plots together e.g. `p.mean.score + p.BPVSRS + p.WASIvRS ...`
+-   and then specify we want a grid of plots with a layout of three columns `plot_layout(ncol = 3)`.
 
 This syntax requires the `library(patchwork)` and more information about this very useful library can be found [here](https://patchwork.data-imaginist.com){.external target="_blank"}.
 
@@ -1059,10 +1040,10 @@ Take a look, you may notice the following features.
 -   Developmental samples are often highly varied (just like clinical samples). Are all the children in the sample at the same developmental stage, or are they all typically developing?
 
 ::: callout-tip
-Notice that in presenting a grid of plots like this, we offer a compact visual way to present the same summary information we might otherwise present using a table of descriptive statistics. In some ways, this grid of plots is more informative than the descriptive statistics because the mean and SD values do not tell you what you can see: 
+Notice that in presenting a grid of plots like this, we offer a compact visual way to present the same summary information we might otherwise present using a table of descriptive statistics. In some ways, this grid of plots is more informative than the descriptive statistics because the mean and SD values do not tell you what you can see:
 
-- the characteristics of the variation in values, like the presence of two peaks;
-- or the presence of unusually high or low scores (for this sample).
+-   the characteristics of the variation in values, like the presence of two peaks;
+-   or the presence of unusually high or low scores (for this sample).
 :::
 
 Grids of plots like this can be helpful to inspect the distributions of variables in a concise approach. They are not really too useful for *comparing* the distributions because they require your eyes to move between plots, repeatedly, to do the comparison.
@@ -1169,12 +1150,12 @@ There are different ways to examine the distributions of variables *so that* we 
 
 @fig-distribution-comparison-grid presents some alternatives as a grid of 4 different kinds of plots designed to enable the same comparison. Each plot presents the distribution of scores for the @ricketts2021 Study 2 participant sample on the BPVS vocabulary measure so that we can compare the distribution of vocabulary scores between age groups.
 
-The plots differ in method using: 
+The plots differ in method using:
 
-a. facetted histograms showing the distribution of vocabulary scores, separately for each group, in side-by-side histograms for comparison; 
-b. boxplots, showing the distribution of scores for each group, indicated by the y-axis locations of the edges of the boxes (25% and 75% quartiles) and the middle lines (medians); 
-c. superimposed histograms, where the histograms for the separate groups are laid on top of each other but given different colours to allow comparison; and 
-d. superimposed density plots where the densities for the separate groups are laid on top of each other but given different colours to allow comparison.
+a.  facetted histograms showing the distribution of vocabulary scores, separately for each group, in side-by-side histograms for comparison;
+b.  boxplots, showing the distribution of scores for each group, indicated by the y-axis locations of the edges of the boxes (25% and 75% quartiles) and the middle lines (medians);
+c.  superimposed histograms, where the histograms for the separate groups are laid on top of each other but given different colours to allow comparison; and
+d.  superimposed density plots where the densities for the separate groups are laid on top of each other but given different colours to allow comparison.
 
 ::: callout-tip
 There is one thing you should notice about all these plots.
@@ -1336,7 +1317,7 @@ Here is what the code does:
 
 As we work with visualization, we should aim to develop skills in reading plots, so:
 
-- What do we see?
+-   What do we see?
 
 When we look at @fig-density-BPVS-WASI, we can see that the younger and older children in the @ricketts2021 sample have broadly overlapping distributions of vocabulary scores. However, as we have noticed previously, the peak of the distribution is a bit lower for the younger children compared to the older children. This appears to be the case whether we are looking at the BPVS or at the WASI measures of vocabulary, suggesting that the observation does not depend on the particular vocabulary test. Is this observation unexpected? Probably not, as we should hope to see vocabulary knowledge increase as children get older. Is this observation a problem for our analysis? You need to read the paper to find out what we decided.
 
@@ -1787,7 +1768,7 @@ Using grids of plots like this allow us to compactly communicate these potential
 ::: callout-warning
 Levenshtein distance scores are higher *if* a child makes more errors in producing the letters in a spelling response.
 
-- This means that if we want to see what factors help a child to learn a word, including its spelling, then we want to see that helpful factors are associated with *lower* Levenshtein scores.
+-   This means that if we want to see what factors help a child to learn a word, including its spelling, then we want to see that helpful factors are associated with *lower* Levenshtein scores.
 :::
 
 ### Answering a scientific question: Visualize the effects of experimental conditions {#sec-visualize-effects}
@@ -1978,30 +1959,23 @@ Once we have done the data processing in preparation, the code to produce the pl
 
 Visualizing associations between variables encompasses a wide range of the things we have to do, in terms of both discovery and communication, when we work with data from psychological experiments.
 
-The conventional method to visualize how the distribution of values in one variable covaries with the distribution of values in another variable is through using a scatterplot.
-However, the construction of a scatterplot can be elaborated in various ways to enrich the information we present or communicate to our audiences, or to ourselves.
+The conventional method to visualize how the distribution of values in one variable covaries with the distribution of values in another variable is through using a scatterplot. However, the construction of a scatterplot can be elaborated in various ways to enrich the information we present or communicate to our audiences, or to ourselves.
 
-- We can add elements like smoothers to indicate trends.
-- We can add annotation, as with the histograms, to highlight specific thresholds.
-- We can facet the plots to indicate how trends may vary between sub-sets of the data.
+-   We can add elements like smoothers to indicate trends.
+-   We can add annotation, as with the histograms, to highlight specific thresholds.
+-   We can facet the plots to indicate how trends may vary between sub-sets of the data.
 
-In the final phases of our practical work, we started by presenting model-based predictions of the effects of experimental manipulations.
-However, you will have noticed that presenting plots of effects is not where we stop when we engage with a dataset.
-Further plotting indicates quite marked variation between participants in the effects of the conditions.
-This kind of insight is something we can and should seek to reveal through our visualization work.
+In the final phases of our practical work, we started by presenting model-based predictions of the effects of experimental manipulations. However, you will have noticed that presenting plots of effects is not where we stop when we engage with a dataset. Further plotting indicates quite marked variation between participants in the effects of the conditions. This kind of insight is something we can and should seek to reveal through our visualization work.
 
 ## Next steps for development
 
 To take your development further, take a look at the resources listed in @sec-resources.
 
-In my experience, the most productive way to learn about visualization and about coding the production of plots, is by doing.
-And this work is most interesting if you have a dataset you care about: for your research report, or for your dissertation study.
+In my experience, the most productive way to learn about visualization and about coding the production of plots, is by doing. And this work is most interesting if you have a dataset you care about: for your research report, or for your dissertation study.
 
-As you have the alternate datasets described in @sec-from-repros, you can start with the data from the other task or the other study in @ricketts2021.
-@ricketts2021 recorded children's responses in two different outcome tasks, the orthographic spelling task we have looked at, and a semantic or meaning-based task. It would be a fairly short step to adapt the code you see in the example code chunks to work with the semantic datasets.
+As you have the alternate datasets described in @sec-from-repros, you can start with the data from the other task or the other study in @ricketts2021. @ricketts2021 recorded children's responses in two different outcome tasks, the orthographic spelling task we have looked at, and a semantic or meaning-based task. It would be a fairly short step to adapt the code you see in the example code chunks to work with the semantic datasets.
 
-Alternatively, you can look at the data reported by @rodríguez-ferreiro2020.
-@rodríguez-ferreiro2020 present both measures of individual differences (on schizotypyal traits) and experimental manipulations (of semantic priming) so you can do similar things with those data as we have explored here.
+Alternatively, you can look at the data reported by @rodríguez-ferreiro2020. @rodríguez-ferreiro2020 present both measures of individual differences (on schizotypyal traits) and experimental manipulations (of semantic priming) so you can do similar things with those data as we have explored here.
 
 ## Helpful resources {#sec-resources}
 
