@@ -1,13 +1,25 @@
 project:
   type: book
+  output-dir: docs
 
-book:
-  title: "grad-psych-stats"
-  author: "Jane Doe"
-  date: "08/02/2023"
+  title: "Psychological data analysis for graduate students"
+  author: "Rob Davies"
+  date: "2023-02-08"
   chapters:
     - index.qmd
+    - part: "Making the most of R”
+    - knowledge-ecosystem.qmd
+    - visualization.qmd
+    - part: “Models”
+    - 01-multilevel.qmd
+    - 02-mixed.qmd
+    - 03-mixed.qmd
+    - 04-glmm.qmd
+    - part: “Writing research reports”
     - intro.qmd
+    - what.qmd
+    - how.qmd
+    - part: "End"
     - summary.qmd
     - references.qmd
 
@@ -17,8 +29,9 @@ csl: psychological-bulletin.csl
 format:
   html:
     theme: cosmo
+    link-external-icon: true
+    link-external-newwindow: true
   pdf:
     documentclass: scrreprt
 
 editor: visual
-
