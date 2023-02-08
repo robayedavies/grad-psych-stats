@@ -2,27 +2,28 @@ project:
   type: book
   output-dir: docs
 
+book:
   title: "Psychological data analysis for graduate students"
   author: "Rob Davies"
-  date: "2023-02-08"
+  date: "2023-02-08""
   chapters:
     - index.qmd
-    - part: "Making the most of R”
+    - part: "Making the most of R"
     - knowledge-ecosystem.qmd
     - visualization.qmd
-    - part: “Models”
+    - part: "Models"
     - 01-multilevel.qmd
     - 02-mixed.qmd
     - 03-mixed.qmd
     - 04-glmm.qmd
-    - part: “Writing research reports”
+    - part: "Writing research reports"
     - intro.qmd
     - what.qmd
     - how.qmd
     - part: "End"
     - summary.qmd
     - references.qmd
-
+      
 bibliography: references.bib
 csl: psychological-bulletin.csl
 
