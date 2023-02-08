@@ -1,0 +1,114 @@
+# What {#sec-what}
+
+## PSYC401 Project -- research report -- what you are expected to do
+
+We present the following guidelines to help you to complete the coursework assessment. 
+If you have any questions, email Padraic Monaghan at: `p.monaghan@lancaster.ac.uk`
+
+Note the information mirrors exactly the information provided on Moodle:
+
+<https://modules.lancaster.ac.uk/mod/page/view.php?id=1921399>
+
+### What data can I analyse?
+
+Reports will concern, usually, findings from analyses of data-sets we have provided to you. 
+Some students may wish to analyse data collected in previous studies or data accessed from online sources: they should correspond with Padraic Monaghan or Rob Davies if they wish to do so. 
+
+The evaluation of reports will focus on clarity, read the following for discussion of what is required.
+
+We expect students to use one of the analysis methods taught in the module. Marks will be awarded depending:
+
+- on how appropriate the method is to the context, to the study design, to answering the research question, and to the features of the data; the appropriateness of methods to contexts will be taught in class;
+
+- on how effectively the analysis is explained; students must explain the motivations for their decisions, explain their methods, and explain their findings effectively to gain points.
+
+### What structure should reports take?
+
+1. The reports should include abstract, introduction, methods, results, discussion and references sections, like a short research article in the journal *Psychological Science*. You can view examples of articles here
+
+<https://journals.sagepub.com/toc/PSS/current>
+
+2. Word count limit: no more than 1500 words are allowed for all materials.
+
+3. Unlike a published research article, for PSYC401, the Results and Discussion sections must be written in full, but the Introduction and Methods sections can be written in the form of notes.
+
+### What content should reports present?
+
+#### Introduction and Method sections
+
+The focus of marking will be on the quality of the Results and Discussion sections. This means you can write your notes in the Introduction and Methods sections as short answers to the following questions:-
+
+##### Introduction
+
+- What did the researchers do and why did the researchers do it?
+
+- What was the question addressed in the study and why is it interesting?
+
+- What were the hypotheses?
+
+- What results were expected and how would they relate to the hypotheses?
+
+How can you write this as a set of notes? We require main points of information on the hypotheses concerning expected results. We will ignore the absence of citations, or of explanations of critical previous experimental work, in the Introduction.
+
+##### Method
+
+Note the origin of the data at the start of the method section. As for the Introduction, your method section writing needs to furnish answers to questions like the following:-
+
+- What was done to collect the data?
+
+- Who were tested (Participants)?
+
+- What materials were used in testing (Materials)?
+
+- What was the design of the study?
+
+- What procedure was used?
+
+How can you write this as a set of notes? We require main points of information, especially the main features of the data analyzed -- what were the variables, how many observations were recorded, what exclusions or other data treatment steps were applied?
+
+#### Results and Discussion sections
+
+The focus of marking will be on the quality of the Results and Discussion sections. This means you must write in complete sentences in full paragraphs in a style appropriate for a research article appearing in a journal like *Psychological Science*. You must not use notes for these sections. You must write text that explains to the reader the analysis you did, why you did it, the results you found, and the implications of those results. You should write the text for the sections so that the questions listed following are answered fully.
+
+If you use a data set that is already published in a journal such as *Psychological Science*, then your presentation of the results must differ from that in the article in ways that highlight new features of the data.
+
+##### Results
+
+Be clear on what the outcome measure or dependent variable for analysis was, and on what factors or predictor variables were brought into the analysis of that outcome. You then need to ensure the results section answers the following questions:-
+
+- What hypotheses were tested?
+
+- What methods were used to test the hypotheses?
+
+- Why are they appropriate?
+
+- What were the results? What were the direction and relative size of effects?
+
+Do what seems reasonable using one or more of the analysis methods practiced in class, or practiced in association with the workbooks, and explain your reasoning.
+
+##### Discussion
+
+What the reader must be able to do, given your report, is understand the answer to the following questions:         
+
+- What are the theoretical implications of the study findings?
+
+- What are the practical implications? 
+
+Reports should present **enough information that the reader can understand**: the background and motivation for a study; the features of the data analyzed and the methods of data collection; the approach taken in analysis, the analysis steps, and the results; the relationship between the observed results and the expected results, and the interpretation of findings in relation to previous work.
+To be clear about clarity: explain, spell things out (decisions, reasoning, interpretations) as if you were explaining them to a reasonably intelligent reader, a Psychologist who is not a specialist in the area of study occupied by the study reported, i.e. me. The main point is that you should keep in mind what the reader should get out of (what benefit) reading your report.
+
+### What format?
+
+#### Statistics, tables and figures should follow APA guidelines. See here for a free guide:
+
+For general APA formatting of reports:
+
+<https://owl.purdue.edu/owl/research_and_citation/apa_style/apa_style_introduction.html>
+
+And for APA formatting of statistics and numbers:
+
+<https://owl.purdue.edu/owl/research_and_citation/apa_style/apa_formatting_and_style_guide/apa_numbers_statistics.html>
+
+Though the APA guidelines are the authoritative guide.
+
+#### Add a link to the data analysed for the report

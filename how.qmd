@@ -1,0 +1,361 @@
+# How {#sec-how}
+
+The research report assignment requires students to locate, access, analyse and report previously collected data. Here, we answer the question:
+
+-   How can the assignment be done?
+
+We outline the workflow you can follow, proceeding through a series of steps to complete the essential tasks. Look at this outline, make a plan, and then follow the advice, taking it **one step at a time**.
+
+## The variety of things students do
+
+Students have taken a variety of approaches to the assignment.
+
+-   Some students choose to complete an analysis of a publicly available dataset, analyzed previously, data for which the report has been published in a journal article.
+-   Some students choose to complete an analysis of a publicly available dataset that has been made available (for a report published as a data journal) but has not been analysed previously.
+-   Some students choose to complete an analysis of one of the data-sets used for practical exercises in class: the example or demonstration data we collect together as the *curated data*.
+
+Ask in class or on the discussion forum for advice about any one of these approaches.
+
+Here, I offer guidance on what to do if you want to locate, access, and analyse previously collected data where those data are presented in a journal article. I consider, first, working with datasets where an analysis of the data has been presented in the article ([see Section -@sec-publishedanalysis]). I then look at working with datasets where the data are presented without an analysis ([see Section -@sec-noanalysis]). Our advice on working with datasets presented without an analysis will overlap in key respects with our advice on working with curated data.
+
+## Working with data associated with a published analysis {#sec-publishedanalysis}
+
+In the following, I split our guidance into two parts. I look next at the task of locating, accessing and checking the data ([Section -@sec-locateaccesscheck]). Then I look at the task of figuring out what analysis you can do with the data ([see Section -@sec-whatanalysis]). Obviously, you cannot consider an analysis if you cannot be sure that you can work with the data [@minocher].
+
+### Locate, access and check the data {#sec-locateaccesscheck}
+
+At the start of your work on the assignment, you will need to (1.) locate then (2.) access data for analysis, and then you will need to (3.) check that the data are usable. I set out advice on doing each step, following. Work through the steps: **one step at a time**.
+
+#### Locate {#sec-locate}
+
+It is usually helpful to find a dataset where the data have been collected in a study within a topic area you care about, or could be interested in. It is helpful because you will need to work with the data and it will be motivating if you are interested in what the data concern. And it is helpful because, often, you will need to do a bit of reading on related research to learn about the context for the data collection, and you will usually want to read research sources that interest you.
+
+::: callout-tip
+The task here is:
+
+-   Do a search: look for an article with usable data in a topic area that interests you.
+:::
+
+There are at least two ways you can do this. Both should be reasonably quick methods to get to a usable dataset.
+
+1.  Do a search on [Google scholar](https://scholar.google.com){.external target="_blank"}).
+2.  Do a search on the webpages of a journal.
+
+Most psychological research is published in journals like *Psychological Science*. If you want, you can look at a list of psychology journals [here](https://en.wikipedia.org/wiki/List_of_psychology_journals){.external target="_blank"}.
+
+In a journal like *Psychological Science* you can look through lists of previously published articles (in issues, volumes, by year) on the journal webpage. [Here is the list of issues for *Psychological Science*.](https://journals.sagepub.com/loi/PSS){.external target="_blank"}.
+
+##### Key words {#sec-keywords}
+
+In both methods, you are looking for an article associated with data (and maybe analysis code) you can access and that you are sure you can use. In both methods, you need to first think about some **key words** to use in your search. Ask yourself:
+
+-   What are you interested in? What population, intervention or effect, comparison, or outcome?
+
+Then:
+
+-   What words do people use, in articles you have seen, when they talk about this thing?
+
+You can use these words, and maybe consider alternate terms. For example, I am interested in `reading comprehension` or `development reading comprehension` but researchers working on reading development might also refer to `children reading comprehension`.
+
+You want to be as efficient as possible so combine your search for articles in an interesting topic area with your search for accessible data. We can learn from the research we discussed on data sharing practices ([see Section -@sec-sharing]) by looking for specific markers that data associated with an article should be accessible.
+
+If you are doing a search (1.) on [Google scholar](https://scholar.google.com){.external target="_blank"}), I would use the key words related to your topic plus words like: `open data badge`; `open science badge`. So, I would do a search for the words: `reading comprehension open data badge`. I have done this: you can try it. The search results will list articles related to the topic of reading comprehension, where the authors claim to have earned the open data badge because they have made data available.
+
+If you are doing a search (2.) in a journal list of articles, then what you are looking for are articles that interest you and which are listed with open data badges. In the listing for *Psychological Science* [(here)](https://journals.sagepub.com/loi/PSS){.external target="_blank"}) a quick read of the journal issue articles index shows that article titles are listed together with symbols representing the open science badges that authors have claimed.
+
+In other journals (e.g., *PLOS ONE*, *PeerJ*, *Collabra*), you may be looking for interesting articles with the words `Data Availability Statement`, `Data Accessibility Statement`, `Supplementary data` or `Supplementary materials` in the article webpage somewhere. Journals like *PeerJ* or *Collabra*, in particular, make it easy to locate data associated with published articles on their web pages.
+
+In *Collabra*, you can find published articles through the journal webpage [(here)](https://online.ucpress.edu/collabra){.external target="_blank"}. If you click on the title of any article, and look at the article webpage, then on the left of the article text, you can see an index of article contents and that index lists the `Data Availability Statement`. Click on that and you are often taken to a link to a data repository.
+
+#### Access {#sec-access}
+
+If you have located an interesting article with evidence (an open data badge or a data accessibility statement) that the authors have shared their data, you need to check that you can access the data. Most of the time, now, you are looking for a link you can use to go directly to the shared data. The link is often presented as a hyperlink on a webpage, associated with Digital Object Identifiers (DOIs) or Universal resource locators (URLs). Or, increasingly, you are looking for a link to a data repository on a site like the Open Science Framework (OSF).
+
+::: callout-tip
+The task here is:
+
+-   Access the data associated with the article you have found.
+:::
+
+Here are some recent examples from my work that you can check, to give you a sense of where or how to find the accessible link to the shared data.
+
+Ricketts, J., Dawson, N., & Davies, R. (2021). The hidden depths of new word knowledge: Using graded measures of orthographic and semantic learning to measure vocabulary acquisition. Learning and Instruction, 74, 101468. <https://doi.org/10.1016/j.learninstruc.2021.101468>
+
+Rodríguez-Ferreiro, J., Aguilera, M., & Davies, R. (2020). Semantic priming and schizotypal personality: Reassessing the link between thought disorder and enhanced spreading of semantic activation. PeerJ, 8, e9511. <https://doi.org/10.7717/peerj.9511>
+
+These are both open access articles.
+
+If you look at the webpage for, @rodríguez-ferreiro2020, [(here)](https://peerj.com/articles/9511/){.external target="_blank"}), you can do a search in the article text for the keyword `OSF` (on the article webpage, use keys `CMD-F` plus `OSF`). You are checking to see if you can click on the link *and* and if clicking on the link takes you to a repository listing the data for the article. The @rodríguez-ferreiro2020 article is associated with a data plus analysis code repository [(OSF)](https://osf.io/j29fn/){.external target="_blank"})
+
+Notice that on the repository webpage, you can see a description of the project plus .pdf files and a folder `Dataset and Code`. If you can click through to the folders, and download the datafiles, you have accessed the data successfully.
+
+I have guided you, here, through to the @rodríguez-ferreiro2020 data repository, can you find the data for the @ricketts2021 repository?
+
+#### Check {#sec-check}
+
+If you have located an interesting article with data that you can access, and if you have read the introductory notes ([see Section -@sec-checkanalyses]), then you will know that you need to make sure that you can use the data.
+
+::: callout-tip
+The task here is:
+
+-   Check the data and the data documentation to make sure you can understand what you have got *and* whether you can use it.
+:::
+
+What make data usable are:
+
+1.  Information in the article, or in the data repository documentation, on the study design and data collection methods: you need to be able to understand where the data came from, how they were collected, and why.
+2.  Clear data documentation: you need to find information on the variables, the observations, the scoring, the coding, and whether and how the data were processed to get them from raw data state to the data ready for analysis.
+
+Data documentation is often presented as a note or a wiki page or a miniature paper and may be called a *codebook, data dictionary, guide to materials* or something similar. You will need to check that you can find information on (examples shown are from the @rodríguez-ferreiro2020 OSF *guide to materials*):
+
+-   what the data files are called e.g. `PrimDir-111019.csv`;
+-   how the named data files correspond to the studies presented in the report;
+-   what the data file columns are called and what variables the column data represent e.g. `relation, coding for prime-target relatedness condition ...`;
+-   how scores or responses in columns were collected or calculated e.g. `age, giving the age in years ...`;
+-   how coding was done, if coding was used e.g. `biling, giving the bilingualism status`;
+-   whether data were processed, how missing values were coded, whether participants or observations were excluded before analysis e.g. `Missing values in the rt column ... coded as NA`
+
+If these information are not presented, or are not clear: **walk away**.
+
+### Plan the analysis you want to do {#sec-whatanalysis}
+
+After you have found an interesting article, and have confirmed that you can use the associated data, you will need to plan what analysis you want to do.
+
+::: callout-tip
+The task here is:
+
+-   Identify and understand the analysis in the article.
+-   Work out what analysis *you* want to do.
+:::
+
+Students have taken a variety of approaches to the assignment.
+
+-   Some students choose to complete a reanalysis of the data, in an attempt to reproduce the results presented in the article ([see Section -@sec-publishedanalysis]).
+-   Some students choose to complete an alternate analysis of the data, varying elements of the analysis ([see Section -@sec-multiverse]).
+
+Either way, you will want to first make sure you can identify exactly *what* the authors of the original study did, *how* they did it, and *why* they did it.
+
+You can process the key article information efficiently using the *QALMRI* method we discussed in the class on graduate writing skills [@brosowsky; @kosslyn2005]. You are first aiming to **locate** information on the broad and the specific question the study addresses, the methods the study authors used to collect data, the results they report, and the conclusions they present given the results. Can you find these bits of information?
+
+#### Are you interested in attempting a **methods reproducibility** test? {#try-repro}
+
+Following Hardwicke and colleagues [@hardwicke2018; @hardwicke] it would be sensible to focus on identifying the primary or *substantive* result for a study in an article.
+
+-   **Substantive** if emphasized in the abstract, or presented in a table or figure.
+
+As we discussed in the class on graduate writing skills, the article authors *should* signal what they consider to be the primary result for a study by telling you that a result is critical or key or that a result is the or an answer to their research question.
+
+::: callout-tip
+-   An article may present multiple studies: focus on one.
+-   The results section of an article, for a study, may list multiple results: identify the primary or substantive result.
+:::
+
+If you are, then you will want to identify a result that is both substantive and *straightforward* [@hardwicke2018; @hardwicke].
+
+-   **straightforward** if the outcome could be calculated using the kind of test you have been learning about or will learn about (e.g., t-test, correlation, the linear model)
+
+Psychological science researchers use a variety of data analysis methods and not all the analyses that you read about will be analyses done using methods that you know about. The use of the methods we teach --- t-test, correlation, and the linear model --- are very *very* common; that is why we teach them. But you may also see reports of analyses done using methods like ANOVA, and multilevel or (increasingly) linear mixed-effects models [@meteyard2020].
+
+In the research on the reproducibility of results in the literature ([see Section -@sec-checkanalyses]), the researchers attempting to reproduce results often focused on answering the research question the original authors stated using the data the original authors shared. This does not mean that they always tried to *exactly* reproduce an analysis or an analysis result. Sometimes, that was not possible.
+
+Sometimes, you will encounter an article and a dataset you are interested in but the analysis presented in the article looks a bit complicated, or more complex than the methods you have learned would allow you to do. In this situation, don't give up. What you can do -- maybe with our advice -- is identify *a part* of the primary result that you *can* try to reproduce. For example, what if the original study authors report a linear mixed-effects analysis of the effects of both prime relatedness and schizotypy score on response reaction time [@rodríguez-ferreiro2020]? Maybe you have not learned about mixed-effects models, or you have not learned about analysing the effects of two variables but you *have* (you will) learn about analysing the effect of one variable using the linear model method: OK then, do an analysis of the shared data using the method you know.
+
+You may be helped, here, by knowing about two good-enough (mostly true) insights from statistical analysis:
+
+1.  Many of the common analysis methods you see used in psychological science can be coded as a linear model.
+2.  More advanced common analysis methods --- (Generalized) Linear Mixed-effects Models (GLMMs) --- can be understood as more sophisticated versions of the linear model. (Conversely, the linear model can be understood as an approximation of a GLMM.)
+
+There is a nice discussion of the idea that common statistical tests are linear models [here](https://lindeloev.github.io/tests-as-linear/){.external target="_blank"}.
+
+::: callout-tip
+-   Identify the analysis method used to get the result you are interested in.
+-   If it is complex or unfamiliar, discuss whether a simpler method can be used.
+-   If the result is complex, discuss whether you can attempt to reproduce a part or a simpler result.
+:::
+
+#### Are you interested in attempting a different analysis? {#sec-try-multiverse}
+
+It can be interesting and important work to complete a simpler analysis of shared data. Sometimes, we learn that a simpler analysis is as good account of the behaviour we observe as other more complex analyses. This can happen if, for example, our theory predicts that two effects should work together but an analysis shows that we can explain behaviour in an account in which the two effects are independent. For example, @ricketts2021 predicted that children should learn words more effectively if they were shown the spellings of the words *and* they were told they would be helped by seeing the spelling but, in our data, we found that just seeing the spellings was enough to explain the learning we observed.
+
+In completing analyses that *vary* from original analyses, we are engaging in the kind of work people do when they do *multiverse analyses* or *robustness checks* ([see Section -@sec-multiverse]).
+
+::: callout-tip
+In planning an alternate or multiverse analysis, do not suppose that you need to do multiple analyses: you do not.
+:::
+
+In planning an alternate or multiverse analysis, you will want to begin by critically evaluating the analysis you see described in the published article. I talk about how to do this, next.
+
+Before we go on, note that I previously discussed an example of how to critically evaluate the results of published research in the context of @rodríguez-ferreiro2020. Take a look at the Introduction of that article. There, we summarised the analyses researchers did previously and used the information about the analyses to explain inconsistencies in the research literature. We found limitations in the analyses that people did that had (negative) consequences for the strength of the conclusions we can take from the data.
+
+##### Critically evaluate the analysis description
+
+If you revisit our discussion of multiverse analyses, you will see that we discussed two things: (1.) analyses of the impact on results of varying how you construct datasets for analysis ([Section -@sec-multiversedata]) and (2.) analyses of the impact on results of varying what analysis method you use, or how you use the method ([see Section -@sec-multiverseanalysis]). These are both good ways to approach thinking about the description of the analysis you see in a published article.
+
+As we noted in [Section -@sec-multiversedata], you almost always have to process the data you collect (in an experiment or a survey) before you can analyze the data. Often, this means you need to code for responses to survey questions e.g. asking people to self-report their gender, or you need to identify and code for people making errors when they try to do the experimental task you set them, or you need to process the data to exclude participants who took too long to do the task (if taking too long is a problem). Not all of these processing steps will have an impact on the results but some might. This is why you can sometimes do **useful** and sometimes **original** research work in reanalyzing previously published data.
+
+You can begin your analysis planning work by first identifying exactly what data processing the original study authors did then identifying what different data processing they could have done. Remember the research we discussed in relation to reproducibility studies, you need to be prepared for the possibility that it is challenging to identify what researchers did to process their data for analysis [Section -@sec-datachallenges]. To identify the information you need, look for keywords like `code, exclude, process, tidy, transform` in the text of the article, or look for words like this in the documentation you find in the data repository.
+
+When you have identified this information, you can then consider three questions:
+
+1.  What data processing steps were completed before analysis?
+2.  What were the reasons given explaining why these processing steps were completed?
+3.  What could happen to the results if different choices were made?
+
+Working through these questions can then get you to a good plan for an analysis of the data. For example, a simple but useful analysis you can do is to check what happens to the results if you do an analysis with data from all the participants tested, if participants are excluded (for some reason) in the data processing step. Obviously, if the original study authors *only* share processed data, you cannot do this kind of work. Another simple but useful analysis you can do is to check what happens to the results if you change the coding of variables. Sometimes different coding of categorical variables (e.g., ethnicity) are reasonable. For example, you can ask: what happens if you analyze the impact of the variable given a different coding? (In case you are reading these notes and thinking about recoding a factor, there are some useful functions you can use; [read about them here](https://forcats.tidyverse.org/reference/fct_recode.html){.external target="_blank"}.)
+
+::: callout-tip
+-   Do you want to check the impact of varying data processing choices: check, do you need and have access to the raw data? can you see how to recode variables?
+:::
+
+As we noted in [Section -@sec-multiverseanalysis], when we consider how to answer a research question with a dataset, it is often possible to imagine multiple different analysis methods: reasonable alternatives. Most often, this is most clearly apparent when we are looking at an *observational* dataset or data collected given a *cross-sectional* study design.
+
+In *cross-sectional* or *observational* studies, we typically are not manipulating experimental conditions, and we are often analyzed data using some kind of linear model. We often collect data or have access to data on a number of different variables relevant to our interests. For example, in studies I have done on how people read [@davies2013; @davies2017], we wanted to know what factors would predict or influence how people do basic reading tasks like reading aloud. We collected information on many different kinds of word properties and on the attributes of the participants we tested. (Note: the papers are associated with data repositories in Supplementary Materials.) It is an **open question** *which* variables should be included in a prediction model of the observed outcome (reading response reaction times). Therefore, if you are interested in a study like this, and can access usable data from the study, it will often be true that you are able to sensibly motivate a different analysis of the study data using a different choice of variables.
+
+As discussed in a number of interesting analyses, over the years [e.g., @patel2015], researchers may be interested in the specific impact of one particular predictor variable (e.g., we may be interested in whether it is easier to read words we learned early in life), but will need to include in their analysis that variable plus other variables known to affect the outcome. In that situation, the effect of the variable of interest may appear to be different depending on what other variables are also analyzed. This makes it interesting and useful to check the impact of different analysis choices.
+
+We will look at data like these, for analyses involving the linear model, in our classes on this method.
+
+::: callout-tip
+-   Do you want to check the impact of different analysis choices: check, do you need and have access to a choice of variables?
+-   Can you think of some reasons to justify using a different choice of variables in your analysis.
+:::
+
+### Summary: working with data associated with a published analysis
+
+Here's a quick summary of the advice we have discussed so far.
+
+- At the start of your work, you will need to (1.) locate then (2.) access data for analysis, and then you will need to (3.) check that the data are usable. 
+- Once you have confirmed you have found interesting data you can use, you should plan your analysis.
+- Students do a variety of kinds of analysis. Whatever your interest, you first will want to first make sure you can identify exactly what the authors of the original study did, how they did it, and why they did it.
+- If you are interested in attempting a methods reproducibility test (can you repeat a result, given shared data?) you will perhaps benefit from focusing a result that is both substantive and straightforward.
+- If you are interested in doing an alternate analysis, you can critically evaluate the data processing and the data analysis choices that the original study authors made. You can consider whether other choices would be appropriate, and might sensibly motivate a (limited) investigation of the impact of a different analysis pipeline choice on the results.
+
+What if you access interesting data that were shared without a previous analysis? 
+We talk about that situation, next.
+
+## Working with data that are not associated with a published analysis {#sec-noanalysis}
+
+A number of datasets have been published online with information about the data but with no analysis.
+You can look for data that may be interest you in a number of different places, now, but I would focus on one. I talk about that next.
+Then I offer some guidance on how you might approach analyzing such data [Section -@sec-openanalysis].
+
+### Looking for open data
+
+Wicherts and colleagues set up the Journal of Open Psychology Data (JOPD) to make it easier for Psychologists to share experimental data.
+A link to the journal webpage is [here](https://openpsychologydata.metajnl.com/articles/){.external target="_blank"})
+Usually, a data paper reports a study and provides a link to a downloadable dataset.
+
+Some datasets that I have looked at in JOPD and other places include the following.
+
+#### Wicherts intelligence and personality data
+
+Wicherts did what he recommended and put a large dataset online [here](http://www.sciencedirect.com/science/article/pii/S0160289612000050){.external target="_blank"}
+
+You can analyse these data in a number of different interesting ways.
+You can explore relationships between gender, intelligence and personality differences.
+
+The data file and an explanatory document are located at the end of the article. 
+Read the article, it's worth your time.
+Wicherts reports:
+
+::: {.border}
+The file includes data from our freshman-testing program called "Testweek" ( Busato et al., 2000, Smits et al., 2011 and Wicherts and Vorst, 2010) in which 537 students (age: M = 21.0, SD = 4.3) took the Advanced Progressive Matrices ( Raven, Court, & Raven, 1996), a test of Arithmetic, a Number Series test, a Hidden Figures Test, a test of Vocabulary, a test of Verbal Analogies, and a Logical Reasoning test ( Elshout, 1976). 
+
+Also included are data from a Dutch big five personality inventory (Elshout & Akkerman, 1975), the NEO-PI-R ( Hoekstra, Ormel, & Fruyt, 1996), scales of social desirability and impression management (based on work by Paulhus, 1984 and Wicherts, 2002), sex of the participants, and grade point averages of the freshmen's first trimester that may act as outcome variable.
+:::
+
+#### Smits personality data
+
+Smits and colleagues (including Wicherts) put an even larger dataset online at the Journal of Open Psychology Data [here](http://openpsychologydata.metajnl.com/articles/10.5334/jopd.e2/){.external target="_blank"})
+
+You will need to register to be able to download the data but the process is simple.
+
+The Smits dataset includes **Big-5** personality scores for several thousand individuals recorded over a series of years.
+You can analyse these data in interesting ways including examining changes in personality scores among students over different years.
+
+#### Embodied terror management
+
+Tjew A Sin and colleagues shared a dataset at the Journal of Open Psychology Data on an interesting study they did to test the idea that interpersonal touch or simulated interpersonal touch can relieve existential concerns (fear of death) among individuals with low self-esteem.
+The data can be found [here](http://openpsychologydata.metajnl.com/articles/10.5334/jopd.ah/){.external target="_blank"})
+
+The Tjew A Sin can be downloaded from a link to a repository location, given at the end of the article.
+You will likely need to register to download the data.
+Note that the spreadsheets holding the study data include `999` values to code for missing data.
+Note also that the data spreadsheets include (in different columns) scores per participant for various measures e.g. mortality anxiety or self-esteem. 
+The measures are explained in the paper.
+To use the data, you will need to work out the simple process of how to sum the scores across items to get e.g. a measure of self-esteem for each person.
+
+#### Demographic influences on disgust
+
+Berger and Anaki shared data on the disgust sensitivity of a large sample of individuals.
+The data are from the administration of the Disgust Scale to a set of Hebrew speakers.
+They can be found [here](http://openpsychologydata.metajnl.com/articles/10.5334/jopd.ag/){.external target="_blank"})
+
+The experimenters collected data on participants' characteristics so that analyses of the way in which sensitivity varies in relation to demographic attributes is possible.
+You will see that the disgust scale is explained in the paper.
+The different disgust scores, for each item in the disgust scale, can be found in different columns.
+The disgust scores, for person, are calculated overall as values:
+`Mean_general_ds, Mean_core, Mean_Animal_reminder, Mean_Contamination`
+
+When you download the dataset, you may need to change the file name, adding a suffix: `.txt` (for the tab delimited file), to be opened in Excel, or `.sav` (for the SPSS data file), to be opened in SPSS -- to the file name to allow you to open it in the appropriate application.
+
+### Thinking about analyses of open data {#sec-openanalysis}
+
+The availability of rich, curated, clearly usable datasets with many variables can make it challenging to decide what to do.
+
+I would advise beginning with an exploratory analysis of the data you have accessed.
+You will want to begin by using the data visualization skills we have taught you to examine:
+
+1. The distributions of the variables that interest you using histograms, density plots or bar charts.
+2. The potential relationship between variables using scatterplots.
+
+In such *Exploratory Data Analyses*, you are interested in what the data visualization tells you about the nature of the dataset you have accessed.
+The papers associated with the datasets can sometimes offer only outline information: how the data were collected, coded, and processed.
+You may need to satisfy yourself that there is nothing odd or surprising about the distributions of scores.
+This stage can help you to identify problems like survey responses with implausible scores.
+
+The work you do in exploring, and summarizing, the data variables that interest you will often constitute a substantial element of the work you can do and present for your report.
+You may discuss, for advice, what parts of this work will be interesting or useful to present.
+
+Then, our advice is simple.
+
+::: callout-tip
+-   When working with open datasets, consider keeping the analysis *simple*.
+:::
+
+Note that *simple* is relative.
+Do what interests you.
+Work with the methods you have learned or will learn (the linear model).
+
+In practice, you will find that part of the challenge is located not in using the data or in running an analysis like a linear model, it is in (1.) justifying or motivating the analysis and (2.) explaining the implications of your findings.
+
+Working on the thinking you must develop to motivate an analysis or to explain implications requires you to do some (limited) reading of relevant research. (Relevant sources will be cited in data papers, as part of their outline of the background for their data collection.) 
+If you consider the advice we discussed in the graduate class on developing writing skills, you will see that there I talked about how you might extract data from a set of relevant sources (papers) to get an understanding of the questions people ask, the assumptions they make.
+That is the kind of process you can follow to develop your thinking around the analysis you will do.
+What you are looking for is information you can use so that you can say something brief about, for example, why it might be interesting to analyze, say, whether personality (measured using the Big-5) varies given differences in gender or differences between population cohorts.
+The reading and the conceptual development should be fairly limited, not extensive, but should be sufficient that you can write something sensible when you introduce and then when you discuss your analysis results.
+
+## Summary: how
+
+In this chapter, I have outlined some advice on how you might approach the task of locating, accessing, and analyzing previously collected data.
+The main advice is to think about your workflow in stages, then progress through the work one step at a time.
+
+You will need to begin by assuring yourself that you can find a dataset that interests you, and that you can access and use the data.
+The usability of data will require clear, understandable, descriptions in the published article (if any) about the research question and hypothesis, the study design, the data collection methods, the data processing steps, and the data analysis (if any).
+Sometimes, useful information about data processing and data analysis can be found in detail in repository documentation (e.g., in guides to materials) but only referenced in the text of the article.
+
+If you know you can locate, access and have checked data as usable, you will want to think about what analysis you want to do the data.
+The approach you take depending on what aims you would like to pursue.
+
+If you are interested in attempting a methods reproducibility test (i.e. checking if you can repeat presented results, given shared data), then you will first need to identify a substantive and straightforward result to try to reproduce. If you identify a primary result to examine, you will want to check that you can work with the data that have been shared, and then that you can use the analysis methods you have learned to reproduce some or all of the result that interests you.
+
+If you are interested in doing an alternate or a different analysis (from what may be presented), you may need to consider the information you can locate on data processing and on data analysis choices. Did the original study authors process the data before sharing it, how? are the raw data available? What analyses did the authors do and why? When you consider this information, you may critically evaluate the choices made. In the context of this critical evaluation, you may find good reasons to justify doing a different analysis, whether to examine the impact of making different data processing choices, or to examine the impact of using a different analysis method, or of applying the same method differently (e.g., by including different variables).
+
+In considering an analysis of data shared without a published set of results, you may want to keep your approach simple. Focus on what analysis you can do using the methods you have learned. And think about the understanding you will need to develop, to justify the analysis you do, and to make sense, in the discussion of your report of the analysis results you will present.
+
+It is always a good idea to explore your data using visualization techniques throughout your workflow. 
+
+:::  callout-tip
+- You can always get advice, do not hesitate to ask.
+- We are happy to discuss your thinking, especially in class.
+:::
