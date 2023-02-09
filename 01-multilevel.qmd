@@ -134,14 +134,16 @@ The dataset consists of rows and columns. Take a look. If you have successfully 
 
 You could look at the dataset by using the `View()` function.
 
-```{r view, eval=FALSE}
+```{r view}
+#| eval: false
 View(BAFACALO_DATASET)
 ```
 
 Or you can use the `head()` function to see the top few rows of the dataset.
 
 ```{r headcheck-wide}
-head(BAFACALO_DATASET, n = 2)
+#| eval: false
+head(BAFACALO_DATASET)
 ```
 
 You can check for yourself that each row holds data about a child, including their participant identity code, as well as information about their parents, household, gender, age, school class, and their grades on end-of-year subject attainment (e.g., how well they did in English language).
@@ -194,7 +196,7 @@ Inspect the data to see what you have.
 summary(brazil)
 ```
 
-::: callout: tip
+::: callout-tip
 Notice the code is written to create the new selected dataset and, at the same time, gave it a more usable (shorter) name, with `brazil <- BAFACALO_DATASET ...`
 :::
 
@@ -216,16 +218,22 @@ If you then look at a summary of the data again then you will see that the `NAs`
 summary(brazil)
 ```
 
-### Getting R to treat a variable as a type object of the kind required -- using the as.numeric() function
+### Getting R to treat a variable as a type object of the kind required -- using the as.numeric() function {#sec-multi-data-coerce}
 
-But if you look closely at the output from `summary(brazil)` you will see that the `portuguese` and `english` variables are summarized in the way that R summarizes factors. When you ask R to summarize factors, R gives you a count of the number of observations associated with each factor level, that is, each category in each variable. Here, it is treating a grade score like $100$ in `english` as a category (like you might treat $dog$ as a category of pets), and you can see that the count shows you that 17 children were recorded as having scored 100 in their class. We do not want numeric variables like subject grades (e.g. children's grades in English) treated as categorical variables, factors.
+But if you look closely at the output from `summary(brazil)` you will see that the `portuguese` and `english` variables are summarized in the way that R summarizes factors. 
+When you ask R to summarize factors, R gives you a count of the number of observations associated with each factor level, that is, each category in each variable. Here, it is treating a grade score like $100$ in `english` as a category (like you might treat $dog$ as a category of pets), and you can see that the count shows you that 17 children were recorded as having scored 100 in their class. We do not want numeric variables like subject grades (e.g. children's grades in English) treated as categorical variables, factors.
 
 You can also see that R gives you a numeric summary of the recorded values in the `participant_id` variable. This makes no sense because the identity code numbers are (presumably) assigned at random so identity numbers provide no useful numeric information for us. We do not want this either.
 
-We want R to treat the educational attainment scores as numbers, and we can do this using the `as.numeric()` function. We want R to treat the class and participant identity numbers as factors (categorical variables), and we can do this using the `as.factor()` function.
+We want R to treat the educational attainment scores as numbers.
+We can do this using the `as.numeric()` function.
+We want R to treat the class and participant identity numbers as factors (categorical variables).
+We can do this using the `as.factor()` function.
+
+We could do this one variable at a time.
 
 ```{r coercion}
-# -- change the variable types: coercion
+#| eval: false
 brazil$portuguese <- as.numeric(brazil$portuguese)
 brazil$english <- as.numeric(brazil$english)
 brazil$math <- as.numeric(brazil$math)
@@ -233,12 +241,22 @@ brazil$physics <- as.numeric(brazil$physics)
 
 brazil$class_number <- as.factor(brazil$class_number)
 brazil$participant_id <- as.factor(brazil$participant_id)
+```
 
-# -- inspect the data:
-summary(brazil)
+But it is simpler and more efficient in `tidyverse` style.
+([Here](https://stackoverflow.com/questions/43917904/how-to-change-column-data-type-of-a-tibble-with-least-typing) is how I figured this out.)
+
+```{r-tidy-coercion}
+brazil <- brazil %>%
+  mutate(across(portuguese, english, math, physics, as.integer),
+         across(class_number, participant_id, as.factor)) 
 ```
 
 If you now look at the summary of the data, you can see that R will give you mean etc. for the subject or class score variables, showing that it is now treating them as numeric variables. In comparison, R gives you counts of the numbers of observations for each level (category) of categorical or nominal variables like `participant_id`.
+
+```{r coerced}
+summary(brazil)
+```
 
 #### Coercion: a quick lesson
 
