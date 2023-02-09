@@ -20,6 +20,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -61,6 +124,7 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -174,7 +238,56 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#motivations" id="toc-motivations" class="nav-link active" data-scroll-target="#motivations"><span class="toc-section-number">3.1</span>  Motivations</a></li>
+  <li><a href="#motivations" id="toc-motivations" class="nav-link active" data-scroll-target="#motivations"><span class="toc-section-number">3.1</span>  Motivations</a>
+  <ul class="collapse">
+  <li><a href="#a-word-about-names" id="toc-a-word-about-names" class="nav-link" data-scroll-target="#a-word-about-names"><span class="toc-section-number">3.1.1</span>  A word about names</a></li>
+  </ul></li>
+  <li><a href="#challenges" id="toc-challenges" class="nav-link" data-scroll-target="#challenges"><span class="toc-section-number">3.2</span>  Challenges</a></li>
+  <li><a href="#the-key-idea-to-get-us-started" id="toc-the-key-idea-to-get-us-started" class="nav-link" data-scroll-target="#the-key-idea-to-get-us-started"><span class="toc-section-number">3.3</span>  The key idea to get us started</a></li>
+  <li><a href="#the-approach-we-take" id="toc-the-approach-we-take" class="nav-link" data-scroll-target="#the-approach-we-take"><span class="toc-section-number">3.4</span>  The approach we take</a></li>
+  <li><a href="#targets" id="toc-targets" class="nav-link" data-scroll-target="#targets"><span class="toc-section-number">3.5</span>  Targets</a></li>
+  <li><a href="#study-guide" id="toc-study-guide" class="nav-link" data-scroll-target="#study-guide"><span class="toc-section-number">3.6</span>  Study guide</a></li>
+  <li><a href="#the-data-we-will-work-with-brazilian-school-children" id="toc-the-data-we-will-work-with-brazilian-school-children" class="nav-link" data-scroll-target="#the-data-we-will-work-with-brazilian-school-children"><span class="toc-section-number">3.7</span>  The data we will work with: Brazilian school children</a>
+  <ul class="collapse">
+  <li><a href="#locate-and-download-the-data-file" id="toc-locate-and-download-the-data-file" class="nav-link" data-scroll-target="#locate-and-download-the-data-file"><span class="toc-section-number">3.7.1</span>  Locate and download the data file</a></li>
+  <li><a href="#read-in-the-data-file-so-that-you-can-access-the-data-by-using-the-load-function" id="toc-read-in-the-data-file-so-that-you-can-access-the-data-by-using-the-load-function" class="nav-link" data-scroll-target="#read-in-the-data-file-so-that-you-can-access-the-data-by-using-the-load-function"><span class="toc-section-number">3.7.2</span>  Read in the data file – so that you can access the data – by using the load() function</a></li>
+  <li><a href="#inspect-the-data" id="toc-inspect-the-data" class="nav-link" data-scroll-target="#inspect-the-data"><span class="toc-section-number">3.7.3</span>  Inspect the data</a></li>
+  </ul></li>
+  <li><a href="#tidy-the-data" id="toc-tidy-the-data" class="nav-link" data-scroll-target="#tidy-the-data"><span class="toc-section-number">3.8</span>  Tidy the data</a>
+  <ul class="collapse">
+  <li><a href="#select-the-variables" id="toc-select-the-variables" class="nav-link" data-scroll-target="#select-the-variables"><span class="toc-section-number">3.8.1</span>  Select the variables</a></li>
+  <li><a href="#remove-missing-values" id="toc-remove-missing-values" class="nav-link" data-scroll-target="#remove-missing-values"><span class="toc-section-number">3.8.2</span>  Remove missing values</a></li>
+  <li><a href="#getting-r-to-treat-a-variable-as-a-type-object-of-the-kind-required-using-the-as.numeric-function" id="toc-getting-r-to-treat-a-variable-as-a-type-object-of-the-kind-required-using-the-as.numeric-function" class="nav-link" data-scroll-target="#getting-r-to-treat-a-variable-as-a-type-object-of-the-kind-required-using-the-as.numeric-function"><span class="toc-section-number">3.8.3</span>  Getting R to treat a variable as a type object of the kind required – using the as.numeric() function</a></li>
+  </ul></li>
+  <li><a href="#introduction-to-multilevel-models" id="toc-introduction-to-multilevel-models" class="nav-link" data-scroll-target="#introduction-to-multilevel-models"><span class="toc-section-number">3.9</span>  Introduction to multilevel models</a>
+  <ul class="collapse">
+  <li><a href="#main-ideas-phenomena-and-data-sets-in-the-social-sciences-often-have-a-multilevel-structure" id="toc-main-ideas-phenomena-and-data-sets-in-the-social-sciences-often-have-a-multilevel-structure" class="nav-link" data-scroll-target="#main-ideas-phenomena-and-data-sets-in-the-social-sciences-often-have-a-multilevel-structure"><span class="toc-section-number">3.9.1</span>  Main ideas – Phenomena and data sets in the social sciences often have a multilevel structure</a></li>
+  <li><a href="#multilevel-models-why-they-are-more-used-and-more-useful-than-traditional-methods" id="toc-multilevel-models-why-they-are-more-used-and-more-useful-than-traditional-methods" class="nav-link" data-scroll-target="#multilevel-models-why-they-are-more-used-and-more-useful-than-traditional-methods"><span class="toc-section-number">3.9.2</span>  Multilevel models – why they are more used and more useful than traditional methods</a></li>
+  <li><a href="#practical-applications-children-sampled-within-classes" id="toc-practical-applications-children-sampled-within-classes" class="nav-link" data-scroll-target="#practical-applications-children-sampled-within-classes"><span class="toc-section-number">3.9.3</span>  Practical applications: children sampled within classes</a></li>
+  <li><a href="#to-understand-the-application-of-multilevel-models-first-we-ignore-the-multilevel-structure-in-the-data" id="toc-to-understand-the-application-of-multilevel-models-first-we-ignore-the-multilevel-structure-in-the-data" class="nav-link" data-scroll-target="#to-understand-the-application-of-multilevel-models-first-we-ignore-the-multilevel-structure-in-the-data"><span class="toc-section-number">3.9.4</span>  To understand the application of multilevel models: first, we ignore the multilevel structure in the data</a></li>
+  <li><a href="#a-linear-model-ignores-the-multilevel-structure-in-the-data" id="toc-a-linear-model-ignores-the-multilevel-structure-in-the-data" class="nav-link" data-scroll-target="#a-linear-model-ignores-the-multilevel-structure-in-the-data"><span class="toc-section-number">3.9.5</span>  A linear model ignores the multilevel structure in the data</a></li>
+  <li><a href="#notation" id="toc-notation" class="nav-link" data-scroll-target="#notation"><span class="toc-section-number">3.9.6</span>  Notation</a></li>
+  <li><a href="#can-we-really-ignore-the-multilevel-structure" id="toc-can-we-really-ignore-the-multilevel-structure" class="nav-link" data-scroll-target="#can-we-really-ignore-the-multilevel-structure"><span class="toc-section-number">3.9.7</span>  Can we really ignore the multilevel structure?</a></li>
+  <li><a href="#linear-models-for-multilevel-data-dealing-with-the-hierarchical-structure" id="toc-linear-models-for-multilevel-data-dealing-with-the-hierarchical-structure" class="nav-link" data-scroll-target="#linear-models-for-multilevel-data-dealing-with-the-hierarchical-structure"><span class="toc-section-number">3.9.8</span>  Linear models for multilevel data – dealing with the hierarchical structure</a></li>
+  <li><a href="#two-step-or-slopes-as-outcomes-linear-models-as-approximations-to-the-linear-mixed-effects-or-multilevel-modeling-approach" id="toc-two-step-or-slopes-as-outcomes-linear-models-as-approximations-to-the-linear-mixed-effects-or-multilevel-modeling-approach" class="nav-link" data-scroll-target="#two-step-or-slopes-as-outcomes-linear-models-as-approximations-to-the-linear-mixed-effects-or-multilevel-modeling-approach"><span class="toc-section-number">3.9.9</span>  Two-step or slopes-as-outcomes linear models as approximations to the Linear Mixed-effects or Multilevel modeling approach</a></li>
+  <li><a href="#multilevel-models" id="toc-multilevel-models" class="nav-link" data-scroll-target="#multilevel-models"><span class="toc-section-number">3.9.10</span>  Multilevel models</a></li>
+  <li><a href="#how-should-we-think-about-the-differences-between-the-classes" id="toc-how-should-we-think-about-the-differences-between-the-classes" class="nav-link" data-scroll-target="#how-should-we-think-about-the-differences-between-the-classes"><span class="toc-section-number">3.9.11</span>  How should we think about the differences between the classes?</a></li>
+  <li><a href="#fitting-a-multilevel-model-using-the-lmer-function" id="toc-fitting-a-multilevel-model-using-the-lmer-function" class="nav-link" data-scroll-target="#fitting-a-multilevel-model-using-the-lmer-function"><span class="toc-section-number">3.9.12</span>  Fitting a multilevel model using the lmer() function</a></li>
+  <li><a href="#reading-the-lmer-results" id="toc-reading-the-lmer-results" class="nav-link" data-scroll-target="#reading-the-lmer-results"><span class="toc-section-number">3.9.13</span>  Reading the <em>lmer</em> results</a></li>
+  <li><a href="#fixed-and-random-effects" id="toc-fixed-and-random-effects" class="nav-link" data-scroll-target="#fixed-and-random-effects"><span class="toc-section-number">3.9.14</span>  Fixed and random effects</a></li>
+  <li><a href="#is-there-a-difference-between-linear-model-and-linear-mixed-effects-model-results" id="toc-is-there-a-difference-between-linear-model-and-linear-mixed-effects-model-results" class="nav-link" data-scroll-target="#is-there-a-difference-between-linear-model-and-linear-mixed-effects-model-results"><span class="toc-section-number">3.9.15</span>  Is there a difference between linear model and linear mixed-effects model results?</a></li>
+  </ul></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions"><span class="toc-section-number">3.10</span>  Conclusions</a>
+  <ul class="collapse">
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="toc-section-number">3.10.1</span>  Summary</a></li>
+  <li><a href="#useful-functions" id="toc-useful-functions" class="nav-link" data-scroll-target="#useful-functions"><span class="toc-section-number">3.10.2</span>  Useful functions</a></li>
+  </ul></li>
+  <li><a href="#r-code-and-data-file-access-for-the-class" id="toc-r-code-and-data-file-access-for-the-class" class="nav-link" data-scroll-target="#r-code-and-data-file-access-for-the-class"><span class="toc-section-number">3.11</span>  R code and data file access for the class</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="toc-section-number">3.12</span>  References</a>
+  <ul class="collapse">
+  <li><a href="#recommended-reading" id="toc-recommended-reading" class="nav-link" data-scroll-target="#recommended-reading"><span class="toc-section-number">3.12.1</span>  Recommended reading</a></li>
+  <li><a href="#references-list" id="toc-references-list" class="nav-link" data-scroll-target="#references-list"><span class="toc-section-number">3.12.2</span>  References list</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -203,840 +316,777 @@ ul.task-list li input[type="checkbox"] {
 <section id="motivations" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="motivations"><span class="header-section-number">3.1</span> Motivations</h2>
 <p>This week, we shall start to develop skills in using a method or approach that is essential in modern data analysis: <em>multilevel modeling</em>. We are going to invest four weeks in working on this approach. This investment is designed to give you a specific, important, advantage in your work as a psychologist, or as someone who produces or consumes psychological research.</p>
-<!-- \begin{description} -->
-<!-- \item[Multilevel models: why do we need to do this?] -->
-<!-- Four weeks is a lot of time to spend on one method. -->
-<!-- \end{description} -->
-<!-- It is now clear that someone who works in psychological research *has* to know about multilevel or hierarchically structured data, and has to know how to apply multilevel models (or mixed-effects models). -->
-<!-- Growth in the popularity of these kinds of analysis has been very very rapid, as can be seen in Figure \@ref(fig:meteyard-davies-2020-fig-5-lme-growth). -->
-<!-- It is now, effectively, the standard or default method for professional data analysis in most areas of psychological and other social or clinical sciences (or it soon will be).  -->
-<!-- There are good reasons for this (Baayen, Davidson, \& Bates, 2008). -->
-<!-- ```{r meteyard-davies-2020-fig-5-lme-growth, echo=FALSE, fig.cap="Number of Pubmed citations for ‘Linear Mixed Models’ by year. Generated using the tool available at http://dan.corlan.net/medline-trend.html, entering “Linear Mixed Models” as the phrase search term and using data from 2000 to 2018, from Meteyard and Davies (2020) -- used without permission", out.width = '60%', fig.align='center'} -->
-<!-- knitr::include_graphics("meteyard-davies-2020-fig-5-lme-growth.png") -->
-<!-- ``` -->
-<!-- We continue to teach ANOVA and multiple regression (linear models) in our courses because the research literature is full of the results of analyses done using these methods and because many psychologists continue to use these methods in their research. -->
-<!-- However, there is increasingly wide-spread recognition that these classical methods have serious problems when applied to data with hierarchical structure. -->
-<!-- Because most psychological data (not all) will have hierarchical structure, this makes learning about multilevel or mixed-effects methods a key learning objective. -->
-<!-- But, because it is relatively new, many professional psychologists struggle to understand why or how to use these methods effectively. -->
-<!-- This means that students who acquire the skill graduate with a clear *employability* advantage. -->
-<!-- It also means that we have to take seriously the challenge of learning about these methods. -->
-<!-- This is why we will spend a bit of time on them. -->
-<!-- In my experience, in over a decade of teaching multilevel models, in working with both students and professionals, we shall need to develop understanding and skills gradually. -->
-<!-- We will work patiently, so that we can secure understanding by building our learning through a series of practical examples, increasing the scope of our practical skills, and developing the sophistication of our understanding, step-by-step, as we go. -->
-<!-- ### A word about names -->
-<!-- Multilevel models are also known as hierarchical models or linear mixed-effects models or random effects models.  -->
-<!-- People use these terms interchangeably. -->
-<!-- They also use the abbreviations LMMs or LMEs. -->
-<!-- Sorry about that: humans make methods, and the names we use for things do vary. -->
-<!-- I will only use the terms 'multilevel' or 'linear mixed-effects' models. -->
-<!-- \begin{description} -->
-<!-- \item[This week, we emphasize the multilevel perspective] -->
-<!-- But, to anticipate future development, we will come to think in terms of mixed-effects models. -->
-<!-- \end{description} -->
-<!-- ## Challenges -->
-<!-- The key challenges for learning should be explained at the start so that we know what we shall have to do to overcome them. -->
-<!-- Firstly, even though most psychological data has some sort of multilevel or hierarchical structure, we are not used to recognizing it. -->
-<!-- This is because the structure has often been hidden or ignored in the education and practice of traditional research methods in Psychology. -->
-<!-- In time, you will come to see multilevel structure everywhere (Kreft \& de Leeuw, 1998). -->
-<!-- But first you will need to get some practice so that you can become familiar with the idea and learn to recognize what it looks like when data have a multilevel or hierarchical structure. -->
-<!-- This is why we will examine multilevel structured data across a range of different kinds of experiments or surveys, over a series of weeks. -->
-<!-- We will learn to identify and understand hierarchical structure in psychological data by just looking at datasets, by producing visualizations, by doing analyses, and by trying to explain to ourselves and each other what we think we see. -->
-<!-- Secondly, the ideas that support an understanding of why and how we use multilevel models can be intimidating when we first encounter them. -->
-<!-- The mathematics behind how the models work *is* both profound and sophisticated. -->
-<!-- But the good news is that we can practice the application of the analysis method while talking and thinking about the critical ideas using just words or plots. -->
-<!-- We cannot or should not avoid engaging with the ideas -- because we have to be able to explain what we are doing -- but there are many routes to an effective understanding. -->
-<!-- For those who want to develop a more mathematically-based perspective, I will provide references to important texts in the literature on multilevel models. -->
-<!-- ## The key idea to get us started -->
-<!-- \begin{description} -->
-<!-- \item[Multilevel models]  -->
-<!-- are a \emph{general} form of linear model. -->
-<!-- \end{description} -->
-<!-- Another way of saying this is: *linear models are a special form of multilevel models*. -->
-<!-- This is because linear models assume that observations are independent. -->
-<!-- We often cannot make this assumption, as we shall see. -->
-<!-- More generally, then, we do not assume that observations are independent and so we use multilevel models. -->
-<!-- ## The approach we take -->
-<!-- We are *not* going to take a mathematical approach to learning about multilevel models. -->
-<!-- We do not have to. -->
-<!-- The approach we are going to take is: -->
-<!-- \begin{description} -->
-<!-- \item[verbal] -->
-<!-- We will talk about the main ideas in words. Sometimes, we will present formulas but that is just to save having to use \emph{too many} words. -->
-<!-- \item[visual] -->
-<!-- We will show ourselves and each other what multilevel structure in data looks like, and what that structure means for our analyses of behaviour. -->
-<!-- \item[practical] -->
-<!-- We will use R to complete analyses, so we will learn about coding models in practice. Fortunately, through coding we can get a clear idea of what we want the models to do. -->
-<!-- \end{description} -->
-<!-- ## Targets -->
-<!-- Our learning objectives include the development of key concepts and skills. -->
-<!-- \begin{description} -->
-<!--    \item[concepts]  -->
-<!--    multilevel data and multilevel modeling -->
-<!--    \item[skills]  -->
-<!--    visualization -- examine data within classes (sampling groups) -->
-<!--   \item[skills] -->
-<!--    run linear models over all data and within each class -->
-<!--    \item[skills] -->
-<!--    use the \verb:lmer(): function to fit models of multilevel data -->
-<!-- \end{description} -->
-<!-- We are just getting started. -->
-<!-- Our plan will be to build depth and breadth in understanding as we progress over the next few weeks. -->
-<!-- ## Study guide -->
-<!-- \begin{enumerate} -->
-<!--    \item -->
-<!--    Read in the example data \verb:BAFACALO_DATASET.RData: and identify how the data are structured at multiple levels. -->
-<!--    \item -->
-<!--   Use visualizations to explore the impact of the structure. -->
-<!--   \item -->
-<!--    Run analyses using linear models (revision) and linear mixed-effects models (extension) code. -->
-<!--    \item -->
-<!--    Review readings provided. -->
-<!-- \end{enumerate} -->
-<!-- ## The data we will work with: Brazilian school children -->
-<!-- This week, we will be working with data taken from a study on education outcomes in Brazilian children, reported by Golina and Gomes (2014). -->
-<!-- First, we will progress through the steps required to download and prepare the files for analysis in R. -->
-<!-- The `BAFACALO_DATASET.RData` data were collected and shared online by Golina and Gomes (2014).  -->
-<!-- Information about the background motivating the study, the methods of data collection, along with the dataset itself, can be found here: -->
-<!-- \url{https://openpsychologydata.metajnl.com/articles/10.5334/jopd.af/} -->
-<!-- Golina and Gomes (2014) collected school end-of-year subject grades for a sample of 292 children recruited from multiple classes in a school in Brazil. -->
-<!-- Here, each subject is a theme or course that children studied in school, e.g., Physics or English language, and for which each child was awarded a grade at the end of the school year. -->
-<!-- So, we have information on different children, and information about their subject grades. -->
-<!-- Children were taught in different classes but the classes appear to be units of the school organization (the information is not quite clear) not subject or course groupings. -->
-<!-- Thus, we also have information on which classes children were in when data about them were collected. -->
-<!-- The data were compiled to an .RData format file.  -->
-<!-- `.RData` is R's own file format so the code you use to load and access the data for analysis is a bit simpler than you are used to. -->
-<!-- (You will have used `read.csv()` or `read_csv()`.) -->
-<!-- In my own practice, I prefer to keep files in formats like `.csv` which can be opened and read in other software applications (like Excel), so using an `.RData` is an exception in these materials. -->
-<!-- ### Locate and download the data file -->
-<!-- Go to the 402 Moodle folder for week 16, find and download the `BAFACALO_DATASET.RData` file from: -->
-<!-- \url{https://modules.lancaster.ac.uk/course/view.php?id=34085#section-10} -->
-<!-- The file is located in a .zip folder called `PSYC402-01-multilevel-resources`. -->
-<!-- The data file is collected together with the `402-01-multilevel-workbook.R` workbook you will need to do the practical exercises. -->
-<!-- ### Read in the data file -- so that you can access the data -- by using the load() function -->
-<!-- You can read the `BAFACALO_DATASET.RData` file into the R workspace or environment using the following code. -->
-<!-- ```{r read.rdata} -->
-<!-- load("BAFACALO_DATASET.RData") -->
-<!-- ```     -->
-<!-- ### Inspect the data -->
-<!-- The dataset consists of rows and columns. -->
-<!-- Take a look. -->
-<!-- If you have successfully loaded the dataset into the R environment, then you should be able to view it. -->
-<!-- You could look at the dataset by using the `View()` function. -->
-<!-- ```{r view, eval=FALSE} -->
-<!-- View(BAFACALO_DATASET) -->
-<!-- ``` -->
-<!-- Or you can use the `head()` function to see the top few rows of the dataset. -->
-<!-- \small -->
-<!-- ```{r headcheck-wide} -->
-<!-- head(BAFACALO_DATASET) -->
-<!-- ``` -->
-<!-- \normalsize -->
-<!-- You can check for yourself that each row holds data about a child, including their participant identity code, as well as information about their parents, household, gender, age, school class, and their grades on end-of-year subject attainment (e.g., how well they did in English language). -->
-<!-- There are many more variables in the dataset than we need for our exercises, and a summary would fill pages of this chapter. -->
-<!-- You can see for yourself if you inspect the dataset using -->
-<!-- ```{r not-summary-rdata, eval=FALSE} -->
-<!-- summary(BAFACALO_DATASET) -->
-<!-- ```     -->
-<!-- ## Tidy the data -->
-<!-- When you inspect the file, you will see that it includes a large number of variables, but we only really care about those we will use in our exercises: -->
-<!-- \begin{itemize} -->
-<!-- \item -->
-<!-- \verb:participant_id: the participant identity code for each child -->
-<!-- \item -->
-<!-- \verb:class_number: the class identity code for the school class for each child -->
-<!-- \item -->
-<!-- \verb:portuguese:, \verb:english:, \verb:math:, \verb:physics: the score for each child in subject class attainment measures -->
-<!-- \end{itemize} -->
-<!-- You can see that I am not explaining the variables in great depth. -->
-<!-- For our aims, we do not need more detailed information but please do read the data article if you wish to find out more. -->
-<!-- We need to tidy the data before we can get to the analysis parts of this chapter. -->
-<!-- We are going to: -->
-<!-- \begin{enumerate} -->
-<!-- \item -->
-<!-- Select the variables we want to work with; -->
-<!-- \item -->
-<!-- Filter out missing values, if any are present; -->
-<!-- \item -->
-<!-- And make sure R knows how we want each variable to be identified; what type the variable should have. -->
-<!-- \end{enumerate} -->
-<!-- We shall need the `tidyverse` library of functions. -->
-<!-- ```{r libtidyverse, eval = FALSE} -->
-<!-- library(tidyverse) -->
-<!-- ``` -->
-<!-- ### Select the variables -->
-<!-- We can start by selecting the variables we want, which include those named here, ignoring all the rest. -->
-<!-- We take the `BAFACALO_DATASET`. -->
-<!-- We then use the `select()` function to select the variables we want. -->
-<!-- And, lastly, we inspect the data using `summary()`. -->
-<!-- ```{r select.brazil} -->
-<!-- brazil <- BAFACALO_DATASET %>% -->
-<!--                     select( -->
-<!--                       class_number, participant_id, -->
-<!--                       portuguese, english, math, physics -->
-<!--                       ) -->
-<!-- # inspect -->
-<!-- summary(brazil) -->
-<!-- ``` -->
-<!-- #### Code tip -->
-<!-- Notice the code is written to create the new selected dataset and, at the same time, gave it a more usable (shorter) name, with \verb:brazil <- BAFACALO_DATASET %>%: -->
-<!-- ### Remove missing values -->
-<!-- If you look at the results of the selection, you can see that there are missing values, written as e.g. `NA's 62` at the bottom of each summary of each variable (if a variable column includes missing values). -->
-<!-- (Remember that in R `NA` means "not available" i.e. missing.) -->
-<!-- We will need to get rid of the missing values. -->
-<!-- It is simpler to do this at the start rather than wait for an error message, later, when some arithmetic function tells us it cannot give us a result because there are `NAs` present. -->
-<!-- We can get rid of the missing values using `na.omit()` -->
-<!-- ```{r omit-na} -->
-<!-- brazil <- na.omit(brazil) -->
-<!-- ``` -->
-<!-- If you then look at a summary of the data again then you will see that the `NAs` are gone. -->
-<!-- ```{r no-missing} -->
-<!-- # inspect -->
-<!-- summary(brazil) -->
-<!-- ```     -->
-<!-- ### Getting R to treat a variable as a type object of the kind required -- using the as.numeric() function -->
-<!-- But if you look closely at the output from `summary(brazil)` you will see that the `portuguese` and `english` variables are summarized in the way that R summarizes factors. -->
-<!-- When you ask R to summarize factors, R gives you a count of the number of observations associated with each factor level, that is, each category in each variable. -->
-<!-- Here, it is treating a grade score like $100$ in `english` as a category (like you might treat $dog$ as a category of pets), and you can see that the count shows you that 17 children were recorded as having scored 100 in their class. -->
-<!-- We do not want numeric variables like subject grades (e.g. children's grades in English) treated as categorical variables, factors. -->
-<!-- You can also see that R gives you a numeric summary of the recorded values in the `participant_id` variable. -->
-<!-- This makes no sense because the identity code numbers are (presumably) assigned at random so identity numbers provide no useful numeric information for us. -->
-<!-- We do not want this either. -->
-<!-- We want R to treat the educational attainment scores as numbers, and we can do this using the -->
-<!-- `as.numeric()` function. -->
-<!-- We want R to treat the class and participant identity numbers as factors (categorical variables), and we can do this using the `as.factor()` function. -->
-<!-- ```{r coercion} -->
-<!-- # -- change the variable types: coercion -->
-<!-- brazil$portuguese <- as.numeric(brazil$portuguese) -->
-<!-- brazil$english <- as.numeric(brazil$english) -->
-<!-- brazil$math <- as.numeric(brazil$math) -->
-<!-- brazil$physics <- as.numeric(brazil$physics) -->
-<!-- brazil$class_number <- as.factor(brazil$class_number) -->
-<!-- brazil$participant_id <- as.factor(brazil$participant_id) -->
-<!-- # -- inspect the data: -->
-<!-- summary(brazil)         -->
-<!-- ```     -->
-<!-- If you now look at the summary of the data, you can see that R will give you mean etc. for the subject or class score variables, showing that it is now treating them as numeric variables. -->
-<!-- In comparison, R gives you counts of the numbers of observations for each level (category) of categorical or nominal variables like `participant_id`. -->
-<!-- #### Coercion: a quick lesson -->
-<!-- R treats things like variables as vectors. -->
-<!-- A vector can be understood to be a set or list of elements, things like numbers of words. -->
-<!-- R gives each vector a type (factor, numeric etc.) which helps to inform different functions how to handle that vector. -->
-<!-- Usually, R assigns type correctly but sometimes it does not. -->
-<!-- We can use what is called *coercion* to force R to assign the correct type to a variable. -->
-<!-- It is more efficient to do this at the start. -->
-<!-- Normally, I would use `read_csv()` from `tidyverse` and assign type to variable using `col_types()` specification. -->
-<!-- See here for more information and an example: -->
-<!-- \url{https://readr.tidyverse.org/} -->
-<!-- But it is useful to learn what you need to do if you need to change the way a variable is treated after you have got the data into the R environment. -->
-<!-- #### Exercise -- experiment with coercion -->
-<!-- In R, there are a family of functions that work together. -->
-<!-- You can test whether a variable (a vector, technically) is or is not a certain type using the `is.[something]` function. -->
-<!-- For example: -->
-<!-- ```{r coerce-exx, eval=FALSE} -->
-<!-- is.factor(brazil$english) -->
-<!-- is.numeric(brazil$english) -->
-<!-- is.character(brazil$english) -->
-<!-- ``` -->
-<!-- And you can coerce variables so that they are treated as of certain types. -->
-<!-- ```{r coercion-exx, eval=FALSE} -->
-<!-- brazil$english <- as.factor(brazil$english) -->
-<!-- brazil$english <- as.numeric(brazil$english) -->
-<!-- brazil$english <- as.character(brazil$english) -->
-<!-- ``` -->
-<!-- \begin{enumerate} -->
-<!-- \item -->
-<!-- Test out variable type using \verb:is...(): for some of the variables -->
-<!-- \item -->
-<!-- Test out coercion -- and its results -- using \verb:as...(): for some of the variables -->
-<!-- \item -->
-<!-- Look at the results using \verb:summary(): -->
-<!-- \end{enumerate} -->
-<!-- ## Introduction to multilevel models -->
-<!-- ### Main ideas -- Phenomena and data sets in the social sciences often have a multilevel structure -->
-<!-- We (Psychologists) often adopt *Repeated Measures* or *Clustered* designs in our studies, and these designs yield data that have a multilevel structure. -->
-<!-- Examples of research which results in data with a multilevel structure include: -->
-<!-- \begin{itemize} -->
-<!-- \item -->
-<!-- Studies where we test the same people multiple times, maybe in developmental or learning longitudinal investigations; -->
-<!-- \item -->
-<!-- Intervention, learning or treatment studies where we need to make pre- and post-treatment comparisons; -->
-<!-- \item -->
-<!-- Studies where we present multiple stimuli and everyone sees the same stimuli; -->
-<!-- \item -->
-<!-- Studies that involve multi-stage sampling; -->
-<!-- \begin{itemize} -->
-<!-- \item -->
-<!-- Finding (sample) classes or schools -- then testing (sample) children within classes or schools; -->
-<!-- \item -->
-<!-- Or finding (sample) clinics -- then testing (sample) patients within clinics. -->
-<!-- \end{itemize} -->
-<!-- \end{itemize} -->
-<!-- The key insight to keep in mind when considering the analysis of such data is that observations are clustered and are *not independent*. -->
-<!-- They are correlated.  -->
-<!-- What is correlated with what?  -->
-<!-- Imagine testing a number of subjects by giving them all the same test.  -->
-<!-- In that test, you might present them all with the same stimuli over a series of trials, so that everybody sees the same set of stimuli.  -->
-<!-- Do you think an observed response recorded for any one individual will be uncorrelated i.e. independent of that person's other responses?  -->
-<!-- People are different and one usually finds that a slow or inaccurate subject is slow or inaccurate for most of their responses.  -->
-<!-- That means that if you have information about one of their responses you can predict, in part, what the time or accuracy of one of their other responses would be.  -->
-<!-- That capacity to predict one response from another is what we mean when we talk about a lack of independence. -->
-<!-- Alternatively, imagine going to test children in a school.  -->
-<!-- Will the children in one class be more like each other than they are like children in other classes?  -->
-<!-- In other words, is there an effect of class -- maybe due to the approach of the teacher, the effect of the class environment etc. -- so that outcomes for children in a class are correlated with each other? -->
-<!-- We are talking, here, about a really quite general property of data collected in certain, very widely used, designs in Psychology: the *clustering or hierarchical ordering* of data. -->
-<!-- This week, we will see that we must deal with the dependence of observations within a class, where the observed responses were made about the different pupils tested in a class, for a number of different classes. -->
-<!-- ### Multilevel models -- why they are more used and more useful than traditional methods -->
-<!-- The utility of **multilevel models** to analyze **multilevel data** or hierarchically structured data is well established in education. -->
-<!-- In educational research, we often need to think about effects of interventions or correlations in the context of observing children in classes, schools or districts, perhaps over time or at different time points. -->
-<!-- This means that many of the critical textbooks present examples that are based on educational research data (Bryk \& Raudenbush, 1992; Goldstein, 2011; Kreft \& de Leeuw, 1998; Snijders \& Bosker, 2012).  -->
-<!-- Multilevel models are growing in popularity in Psychology as well as in Education because they can be used to account for systematic and random sources of variance in observed outcomes when data are hierarchically structured. -->
-<!-- A hierarchical structure is present in data when a researcher: tests participants who belong to different groups like classes, clinics or schools; presents a sample of stimuli to each member of a sample of participants; or makes repeated observations for each participant over a series of test occasions. -->
-<!-- In these circumstances, the application of traditional analytic methods has typically required the researcher to aggregate their data (e.g., averaging the responses made by a participant to different stimuli) or to ignore the hierarchical structure in their data, (e.g., analyzing the responses made by some pupils while ignoring the fact that the pupils were tested in different classes).  -->
-<!-- But the application of traditional analysis approaches (e.g., regression, ANOVA) to multilevel structured data extracts scientific costs (Baayen et al., 2008; Barr, Levy, Scheepers, \& Tily, 2013). -->
-<!-- Ignoring structure by ignoring or averaging over sources of variability like differences between classes, participants, or stimulus items can mean that analyses are less sensitive because they fail to fully account for error variance.  -->
-<!-- Where differences between classes, participants or stimuli include variation in the impact of experimental variables, e.g., individual differences in response to an experimental manipulation, the application of traditional methods can be associated with an increased risk of false positives in discovery.  -->
-<!-- Yet these costs need no longer be suffered because the capacity to perform multilevel modeling is now readily accessible. -->
-<!-- ### Practical applications: children sampled within classes -->
-<!-- ```{r SB12multistage, echo=FALSE, fig.cap="Snijders and Bosker (2012) Multistage sample -- used without permission", out.width = '55%', fig.align='center'} -->
-<!-- knitr::include_graphics("LME-multistage-sample-snijders-fig2-1.png") -->
-<!-- ``` -->
-<!-- If a researcher tests participants belonging to different groups, e.g., records the educational attainment of different children recruited from different classes in a school, the test scores for the participants are observations that occupy the lowest level of a hierarchy. -->
-<!-- In multilevel modeling, those observations are understood to be nested within higher-level sampling units, here, the classes. -->
-<!-- We can say that the children are sampled from the population of children. -->
-<!-- And the classes are sampled from the population of classes. -->
-<!-- Critically, we recognize that the children's test scores are **nested within the classes**. -->
-<!-- Figure \@ref(fig:SB12multistage) presents a schematic of this kind of multi-stage sampling (from Snijders and Bosker, 2012). -->
-<!-- What the figure shows you is that psychologists often first sample groups (shown as big rectangles or squares) like schools or classes and then sample individuals within the groups (shown as small circles or squares). -->
-<!-- This multi-stage sampling has important consequences, as we shall see. -->
-<!-- We are going to be working with the school data collected by Golino and Gomes (2014) in Brazil, so let's take another look at that dataset. -->
-<!-- Figure \@ref(fig:SB12multistage) presents the first 25 rows of the selected-variables `brazil` dataset. -->
-<!-- (I have arranged the rows by class number ID.) -->
-<!-- You can see that there are multiple rows of data for each `class_number`, one row for each child, with multiple children (you can see different `participant_id` numbers). -->
-<!-- This presentation of the dataset illustrates in practical terms -- what you can actually see when you look at your data -- what the schematic Figure \@ref(fig:SB12multistage) shows in conceptual terms. -->
-<!-- ```{r show-arrange, echo = FALSE} -->
-<!-- brazil %>% -->
-<!--        arrange(desc(class_number)) %>% -->
-<!--                  head(n = 25) -->
-<!-- ``` -->
-<!-- ### To understand the application of multilevel models: first, we ignore the multilevel structure in the data -->
-<!-- Recognizing that the children's data are observed within classes means that, when we examine the factors that influence variance in observed outcomes, we need to take into account the fact that the children can be grouped by (or under) the class they were in when their grades were recorded. -->
-<!-- We can develop an understanding of what this means by moving through a series of steps. -->
-<!-- To illustrate the understanding we need to develop, we analyze the end-of-year school subject grades for the sample of 292 children studied by Golino and Gomes (2014). -->
-<!-- With these data, we can examine whether differences between children in their Portuguese language grades predicts differences in their English language grades. -->
-<!-- (We don't have a theoretical reason to make this prediction though it does not seem unreasonable.) -->
-<!-- Let's make this our research question. -->
-<!-- \begin{description} -->
-<!-- \item[Research question] Does Portuguese grade predict English grade? -->
-<!-- \end{description} -->
-<!-- Now, the first step we take in our development of understanding will be to *first ignore* the importance of the potential differences between classes. -->
-<!-- We can begin our analysis in order to address the research question by plotting the possible association between Portuguese and English grades. -->
-<!-- We shall create a scatterplot to do this, and we create the plot by running the following code and *ignoring group (class) membership*. -->
-<!-- In the following chunk of code, I pipe the `brazil` data using `%>%` to `ggplot()` and then create the plot step-by-step, with each step separated by a `+` except for the last step. -->
-<!-- ```{r brazil-all, message = FALSE, fig.cap='Portuguese compared to English grades: each point represents the scores for one child', fig.width=5, fig.height=5, out.width = "60%", fig.align='center', cache = TRUE} -->
-<!-- brazil %>% -->
-<!-- ggplot(aes(x = portuguese, y = english)) + -->
-<!--   geom_point(colour = "black", size = 3, alpha = .5) + -->
-<!--   geom_smooth(method = "lm", size = 2, se = FALSE, colour = "red") + -->
-<!--   xlab("Portuguese") + ylab("English") + -->
-<!--   theme_bw() -->
-<!-- ``` -->
-<!-- Remember that each child ID is associated with a pair of grades: their grade in English and their grade in Portuguese. -->
-<!-- Each point in Figure \@ref(fig:brazil-all) represents the paired grade data for one child. -->
-<!-- Because I say that we are interested in predicting English grades then, by convention, we map English grades to the height of the points (i.e. English grade differences are shown as differences on the y-axis). -->
-<!-- Because we are using Portuguese grades to do the predicting, by convention, we map Portuguese grades to the horizontal position of the points (i.e. Portuguese grade differences are shown as differences on the x-axis). -->
-<!-- I have added a line using `geom_smooth()` in red to indicate the trend of the potential association between variation in Portuguese grades and variation in English grades. -->
-<!-- Figure \@ref(fig:brazil-all) suggests that children with higher grades in Portuguese tend, on average, to also have higher grades in English. -->
-<!-- #### Exercise -- edit plots -->
-<!-- Notice that when we write the code to produce the plot, we add arguments to the `geom_point()` and `geom_smooth()` function calls to adjust the appearance of the points and the smoother line. -->
-<!-- Notice, also, that we adjust the labels for the x-axis and y-axis and, finally, that we determine the overall appearance of the plot using the `theme_bw()` function call. -->
-<!-- Do the following exercises to practice your `ggplot()` skills -->
-<!-- \begin{enumerate} -->
-<!-- \item -->
-<!-- Change the x and y variables to \verb:math: and \verb:physics: -->
-<!-- \item -->
-<!-- Change the theme from \verb:theme_bw(): to something different -->
-<!-- \item -->
-<!-- Change the appearance of the points, try different colour, shape, size -->
-<!-- \end{enumerate} -->
-<!-- Further information to help you try out coding options can be found here (on scatterplots): -->
-<!-- \url{https://ggplot2.tidyverse.org/reference/geom_point.html} -->
-<!-- and here (on themes): -->
-<!-- \url{https://ggplot2.tidyverse.org/reference/ggtheme.html} -->
-<!-- ### A linear model ignores the multilevel structure in the data -->
-<!-- Our plot indicates the relationship between English and Portuguese language grades, in Figure \@ref(fig:brazil-all), ignoring the fact that children in the sample belonged to different classes when they were tested. -->
-<!-- The plot shows us only information about the children and grades, with each point representing the observed English and Portuguese grades for each $i$ child. -->
-<!-- Can we predict variation in English grades given information about children's Portuguese grades? -->
-<!-- Are English grades related to Portuguese grades? -->
-<!-- We can estimate the relationship between English and Portuguese grades using a linear model in which the English grades variable is the **outcome** variable (or the dependent variable) and the Portuguese grades variable is the **predictor** or independent variable: -->
-<!-- \begin{equation} -->
-<!-- y_i = \beta_0 + \beta_1X_i + e_i -->
-<!-- \end{equation} -->
-<!-- * where $y_i$ represents the English grade for each $i$ child; -->
-<!-- * $\beta_0$ represents the intercept, the outcome value obtained if values of the explanatory variable are zero; -->
-<!-- * $\beta_1$ represents the effect of variation in $X_i$ the Portuguese grade for each child, with the effect of that variation estimated as the the rate of change in English grade for unit change in Portuguese grade; -->
-<!-- * $e_i$ represents differences, for each child, between the observed English grade and the English grade predicted by the relationship with Portuguese grades. -->
-<!-- As you have seen, the code for running a linear model corresponds transparently to the statistical model given in the formula. -->
-<!-- ```{r brazil.lm} -->
-<!-- summary(lm(english ~ portuguese, data = brazil)) -->
-<!-- ``` -->
-<!-- The linear model yields the estimate that for unit increase in Portuguese grade there is an associated increase of about .47 in English grade, on average (for the model, $F(1, 228) = 35, p < .001; adj. R^2 = .13$). -->
-<!-- So, we have a preliminary answer to our research question. -->
-<!-- \begin{description} -->
-<!-- \item[Research question]  -->
-<!-- Does Portuguese grade predict English grade? -->
-<!-- \item[Result]  -->
-<!-- Our analysis shows that children who score one grade higher in their Portuguese class (e.g., 61 compared to 60) tended to score .47 of a grade higher in their English class. -->
-<!-- \end{description} -->
-<!-- We shall see that we will need to revise this estimate when we do an analysis that *does* take school class differences into account. -->
-<!-- #### Code tip -->
-<!-- Notice: here, I have dispensed with the creation of a model object by name. -->
-<!-- The model is estimated anyway, and I have embedded the `lm()` function call within a `summary()` function so that I am asking R to do two things: -->
-<!-- 1. `lm()` fit a linear model -->
-<!-- 2. `summary()` print out a summary of the fitted model object -->
-<!-- I do this to give an example of the way in which code can be varied. -->
-<!-- Also, to show you how one function can be embedded inside another. -->
-<!-- #### Exercise -- fit a different linear model -->
-<!-- Do the following exercises to practice your `lm()` skills -->
-<!-- \begin{enumerate} -->
-<!-- \item -->
-<!-- Change the outcome and predictor variables to \verb:math: and \verb:physics: -->
-<!-- \item -->
-<!-- What do the results tell you about the relationship between maths and physics ability? -->
-<!-- \end{enumerate} -->
-<!-- ### Notation -->
-<!-- In the following discussion, I will present some model formulas as equations. -->
-<!-- I am not doing that because the discussion is going to consider the modeling in terms of the underlying mathematics. -->
-<!-- I am doing it with the aim of clarifying how quantities -- observed, estimated or predicted -- add up, in terms of the linear and then the linear mixed-effects model. -->
-<!-- \begin{enumerate} -->
-<!-- \item -->
-<!-- I am going to refer to the dependent or outcome variable (e.g., school grade), $y$ -->
-<!-- \item -->
-<!-- and to explanatory or experimental or independent variables (e.g., language skill) as $X$ -->
-<!-- \item -->
-<!-- Models shall be fitted to estimate the coefficients, written $\beta$, of the effects of the explanatory variables on the outcome variable -->
-<!-- \item -->
-<!-- To distinguish the different coefficients of the different effects, I am going to number the coefficients so -->
-<!-- \begin{itemize} -->
-<!-- \item -->
-<!-- $\beta_0$ is the coefficient of the intercept -->
-<!-- \item -->
-<!-- $\beta_1$ will be the coefficient of the effect of a first explanatory variable: in the Brazilian schools example, the coefficient of the effect of Portuguese language skill -->
-<!-- \end{itemize} -->
-<!-- \end{enumerate} -->
-<!-- To make it clear that each observation can be understood as part of a complex multilevel or crossed random effects structure, I am going to use indices as subscripts for variables. -->
-<!-- \begin{enumerate} -->
-<!-- \item -->
-<!-- I will, here, index individual participants (children) with $i$ -->
-<!-- \item -->
-<!-- I will index (in the Brazilian schools example) index classes in which children were tested with $j$ -->
-<!-- \end{enumerate} -->
-<!-- Thus, in the Brazilian schools example, we shall see that we are concerned with observations about children's school grades, where children are sampled as individuals *nested* in samples of classes. -->
-<!-- We will examine how an outcome variable (English language grade) is related to a predictor variable (Portuguese language grade) such that: -->
-<!-- \begin{enumerate} -->
-<!-- \item -->
-<!-- $y_{ij}$ is the outcome English language grade recorded for each child $i$ in each class $j$ -->
-<!-- \item -->
-<!-- while $X_{ij}$ represents the explanatory variable, see following, the Portuguese language grade -->
-<!-- \begin{itemize} -->
-<!-- \item -->
-<!-- it is subscripted $_{ij}$ because values of the variable depend upon child identity, and children are identified as child $i$ in class $j$ to represent the multilevel structure of the data -->
-<!-- \end{itemize} -->
-<!-- \end{enumerate} -->
-<!-- ### Can we really ignore the multilevel structure? -->
-<!-- The linear model ignores the higher-level structure, the distinction between classes.  -->
-<!-- Does that matter? -->
-<!-- We can see the answer to that question if we inspect Figure \@ref(fig:pporteng). -->
-<!-- We create the plot using the following chunk of code; we discuss that later, first reflecting on what the plot shows us. -->
-<!-- ```{r pporteng, fig.cap = 'Plot of child grades, comparing English with Portuguese grades, shown separately for each school class', warning=FALSE, message=FALSE, fig.height = 8, fig.width = 6, out.width='150%'} -->
-<!-- brazil %>% -->
-<!-- ggplot(aes(x = portuguese, y = english)) + -->
-<!-- geom_point(colour = "darkgrey") + -->
-<!--   geom_smooth(method = "lm", se = FALSE, colour = "black") + -->
-<!--   facet_wrap(~ class_number) + -->
-<!--   xlab("Portuguese") + ylab("English") +  -->
-<!--   theme_bw() + -->
-<!--   scale_x_continuous(breaks=c(25,50,75)) + scale_y_continuous(breaks=c(0,50,100)) -->
-<!-- ``` -->
-<!-- Figure \@ref(fig:pporteng) presents a different scatterplot to show the relationship between children's Portuguese and English grades for the children in each different class. -->
-<!-- We can see that the relationship between Portuguese and English grades is (roughly) similar across classes: in general, children with higher Portuguese grades also tend to have higher English grades. -->
-<!-- However, Figure \@ref(fig:pporteng) makes it obvious that there are important differences between classes. -->
-<!-- We can see that the slope of the best fit line (shown in black) varies between classes. -->
-<!-- And we can see that the intercept (where the line meets the y-axis) also varies between classes. -->
-<!-- Further, we can see that in some classes, there is no relationship or a negative relationship between Portuguese and English grades. -->
-<!-- Critically, we can see that classes differ in how much data we have for each. -->
-<!-- For some classes, we have many observations (e.g., M11) and for other classes we have few or one observation (e.g., M22, with one child). -->
-<!-- We know, in advance, that variation in sample size will be associated with variation in the uncertainty we have about the estimated relationship between Portuguese and English grades. -->
-<!-- You will remember that the Central Limit Theorem allows us to calculate the standard error of an estimate like the mean, given the sample size, and that the standard error is an index of our uncertainty of the estimate. -->
-<!-- #### Code tip -- facetting -- creating grids of plots -->
-<!-- As you have seen, you can ask `ggplot()` to print a separate plot for each sub-group in a dataset. -->
-<!-- To produce Figure \@ref(fig:pporteng), we ask for a separate plot of the $english ~ portuguese$ relationship, one plot for each class. -->
-<!-- Notice that in the code, the key expression is `facet_wrap(~ class_number)` -->
-<!-- This means -->
-<!-- \begin{itemize} -->
-<!-- \item -->
-<!-- The \verb:class_number: variable is a factor, check the summary for the dataframe, and that factor codes what class a child is in. -->
-<!-- \item -->
-<!-- The \verb:facet_wrap(...): function call asks ggplot to produce separate plots for each \emph{facet} for the data -- the word facet means face or aspect. -->
-<!-- \item -->
-<!-- We use the formula \verb:facet_wrap(~ ...): to ask ggplot to split the data up by using the classification information in the named variable, here \verb:class_number:. -->
-<!-- \end{itemize} -->
-<!-- The production of a grid of plots is a useful method for comparing patterns between data sub-sets or groups. -->
-<!-- You can see more information about `facet_wrap()` here: -->
-<!-- \url{https://ggplot2.tidyverse.org/reference/facet_wrap.html} -->
-<!-- #### Code tip -- adjusting scales -->
-<!-- Notice that in these plots I modified the axes, to show x-axis and y-axis ticks at specific locations using scale functions. -->
-<!-- The tick is the notch or short line where we show the numbers on the axes. -->
-<!-- \begin{itemize} -->
-<!-- \item -->
-<!-- \verb:scale_x_continuous(breaks=c(25,50,75)): means: set the x-axis ticks at 25, 50 and 75, defined using a vector \verb:c(): of values -->
-<!-- \item -->
-<!-- \verb:scale_y_continuous(breaks=c(0,50,100)): means: set the y-axis ticks at 0, 50, 100, defined using a vector of values -->
-<!-- \end{itemize} -->
-<!-- It can be useful to adjust the ticks on axes, where other plot production factors cause crowding of labels. -->
-<!-- You can see more information on scales here: -->
-<!-- \url{https://ggplot2.tidyverse.org/reference/scale_continuous.html} -->
-<!-- #### Exercise -- edit plots -->
-<!-- Do the following exercises to practice your \verb:facet_wrap(): skills -->
-<!-- \begin{enumerate} -->
-<!-- \item -->
-<!-- Change the x and y variables to \verb:math: and \verb:physics: -->
-<!-- \item -->
-<!-- Experiment with showing the differences between classes in a different way: instead of using \verb:facet_wrap(): in \verb:aes(): add \verb:colour = class_number: -- what happens?  -->
-<!-- \end{enumerate} -->
-<!-- ### Linear models for multilevel data -- dealing with the hierarchical structure -->
-<!-- Figure \@ref(fig:pporteng) shows that there is variation between classes in both the average English grade, shown as differences in the y-axis intercept, and the 'effect' of Portuguese language skill, shown as differences in the slope of the best fit line for the predicted relationship between Portuguese and English grades. -->
-<!-- We put 'effect' in quotes to signal the fact that we do not wish to assert a causal relation. -->
-<!-- The interpretation of the results of the linear model assumes those results are valid provided that the observations are independent, among other things. -->
-<!-- We can see that we cannot make the assumption of independence because individuals in classes with high average English grades are more likely to have higher English grades. -->
-<!-- We can represent in our analysis the information we have about hierarchical structure in the data (child within class) by allowing the regression coefficients to vary between groups. -->
-<!-- We therefore modify the subscripting to take into account the fact that we must distinguish which child $i$ and which class $j$ we are examining, adapting our model to: -->
-<!-- \begin{equation} -->
-<!-- y_{ij} = \beta_{0j} + \beta_{1j}X_{ij} + e_{ij} -->
-<!-- \end{equation} -->
-<!-- \begin{itemize} -->
-<!-- \item -->
-<!-- where $y_{ij}$ represents the outcome measure, the English grade for each $i$ child in each $j$ class -->
-<!-- \item -->
-<!-- $\beta_{0j}$ represents the average grade, different in different classes -->
-<!-- \item -->
-<!-- $\beta_{1j}X_{ij}$ represents the variation in $X$ the Portuguese grade for each $i$ child in $j$ class, with the effect of that variation estimated as the coefficient $\beta_{1j}$, different in different classes -->
-<!-- \item -->
-<!-- and $e_{ij}$ represents differences between observed and predicted English grades for each $i$ child in $j$ class -->
-<!-- \end{itemize} -->
-<!-- ### Two-step or slopes-as-outcomes linear models as approximations to the Linear Mixed-effects or Multilevel modeling approach -->
-<!-- In practice, we could capture the variation between classes by performing a **two-step analysis**. -->
-<!-- * First, we estimate the coefficient of the 'Portuguese' effect for each class analysed separately.  -->
-<!-- * Second, we can take those per-class coefficients as the outcome variable in a 'slopes-as-outcomes analysis' to examine if the per-class estimates of the experimental effect are reliably different from zero or, more usefully, if the per-class estimates vary in relation to some explanatory variable like teacher skill.  -->
-<!-- The problem with the approach is apparent in Figure \@ref(fig:pointclass). -->
-<!-- Figure \@ref(fig:pointclass) shows the estimated intercept and coefficient of the slope of the 'Portuguese' effect for each class, when we have analyzed the data for each class in a separate linear model. -->
-<!-- The estimate for each class is shown as a black dot. -->
-<!-- The standard error of the estimate is shown as a black vertical line, shown above and below a point. -->
-<!-- You can say that where there is a longer line there we have more uncertainty about the location of the estimate. -->
-<!-- The critical point is that **the standard errors vary** a lot between classes. -->
-<!-- In some classes, the standard error is small (the black line is short) so we can maybe have more certainty over the estimated intercept or slope for those classes. -->
-<!-- In other classes, the standard error is large (the black line is long) so we can maybe have less certainty over the estimated intercept or slope for those classes. -->
-<!-- The **key idea** here is that standard errors vary widely between classes but the two-step modeling approach, while it can take into account the between-class differences in estimates, cannot account for the variation in the standard errors about those estimates. -->
-<!-- #### Code tip -->
-<!-- Notice that the code I used fits a separate model for each class, and then plots the per-class estimates of intercepts and slopes of the $english \sim portuguese$ relationship. -->
-<!-- You can check out the code for yourself in the **how-to.R** for this week. -->
-<!-- ```{r pointclass, echo=FALSE, warning=FALSE, message=FALSE, fig.cap = 'Plot showing the estimated intercept and coefficient of the slope of the Portuguese effect for each class analysed separately', fig.height = 4, fig.width = 5, fig.show = 'hold', out.width = '50%'} -->
-<!-- library(broom) -->
-<!-- brazlm <- brazil %>% -->
-<!--           group_by(class_number) %>% -->
-<!--           do(tidy(lm(english ~ portuguese, data=.))) -->
-<!-- brazlm$term <- as.factor(brazlm$term) -->
-<!-- brazlmint <- filter(brazlm, term == '(Intercept)') -->
-<!-- brazlmport <- filter(brazlm, term == 'portuguese') -->
-<!-- pbrazlmint <- ggplot(brazlmint, aes(x = class_number, y = estimate, ymin = estimate - std.error, ymax = estimate + std.error)) -->
-<!-- pbrazlmint + geom_point() + geom_linerange() + theme_bw() + -->
-<!--   ggtitle("Intercept") + -->
-<!--   ylab("Estimated coefficient +/- SE") + xlab("Class") + -->
-<!--   theme(axis.title.y = element_text(size = 10), axis.text.x = element_blank(), panel.grid = element_blank()) -->
-<!-- pbrazlmport <- ggplot(brazlmport, aes(x = class_number, y = estimate, ymin = estimate - std.error, ymax = estimate + std.error)) -->
-<!-- pbrazlmport + geom_point() + geom_linerange() + theme_bw() + -->
-<!--   ggtitle("Portuguese effect") + -->
-<!--   ylab("Estimated coefficient +/- SE") + xlab("Class") + -->
-<!--   theme(axis.title.y = element_text(size = 10), axis.text.x = element_blank(), panel.grid = element_blank()) -->
-<!-- ``` -->
-<!-- #### Discussion: slopes-as-outcomes analyses as a common approach -->
-<!-- The 'slopes-as-outcomes' approach is quite common and can be found in a number of papers in the psychological and educational research literatures, e.g., in Balota et al.'s (2004) of the analysis of psycholinguistic effects in older and younger adults. -->
-<!-- Balota et al. (2004) wanted to examine if or how effects of variables like word frequency, on reading response latencies, were different in different age groups. -->
-<!-- To do this, they first estimated the effect of the (word-level) psycholinguistic variables in separate linear model (multple regressions) for each adult. -->
-<!-- They then took the estimated coefficients as the dependent variable (slopes-as-outcomes) for a second analysis in which they tested the effect of age group on variation in the estimated coefficients (see Lorch \& Myers, 1990, for a discussion of the approach). -->
-<!-- You may be asked to do this. -->
-<!-- I would advise you against it because there is a better way, as we see next. -->
-<!-- ### Multilevel models -->
-<!-- Multilevel models incorporate estimates of the intercept and the effect of independent (experimental or correlational) variables plus estimates of the random variation between classes in intercepts and slopes.  -->
-<!-- Multilevel models are also known as **mixed-effects models** because they involve the estimation of **fixed effects** (effects due to independent variables) and **random effects** (effects due to random differences between groups). -->
-<!-- We model the intercept (varying between classes) as: -->
-<!-- \begin{equation} -->
-<!-- \beta_{0j} = \gamma_0 + U_{0j} -->
-<!-- \end{equation} -->
-<!-- \begin{itemize} -->
-<!-- \item -->
-<!-- where $\beta_{0j}$ values equal $\gamma_0$ the overall average intercept -->
-<!-- \item -->
-<!-- plus $U_{0j}$ the differences, for each class, between that average intercept and the intercept for that class -->
-<!-- \end{itemize} -->
-<!-- We model the coefficient of the (Portuguese language) skill effect as: -->
-<!-- \begin{equation} -->
-<!-- \beta_{1j} = \gamma_1 + U_{1j} -->
-<!-- \end{equation} -->
-<!-- \begin{itemize} -->
-<!-- \item -->
-<!-- where $\beta_{1j}$ values equal $\gamma_1$ the average slope -->
-<!-- \item -->
-<!-- plus $U_{1j}$ the differences, for each class, between that average slope and the slope for that class -->
-<!-- \end{itemize} -->
-<!-- These models can then be combined: -->
-<!-- \begin{equation} -->
-<!-- y_{ij} = \gamma_0 + \gamma_1X_{ij} + U_{0j} + U_{1j}X_{ij} + e_{ij} -->
-<!-- \end{equation} -->
-<!-- such that the English grade observed for each child $y_{ij}$ can be predicted given: -->
-<!-- \begin{itemize} -->
-<!-- \item -->
-<!-- the average grade overall $\gamma_0$ plus -->
-<!-- \item -->
-<!-- the average relationship between English and Portuguese language skills $\gamma_1$ plus -->
-<!-- \item -->
-<!-- adjustments to capture -->
-<!-- \begin{itemize} -->
-<!-- \item -->
-<!-- the difference between the average grade overall and the average grade for the child's class $U_{0j}$ -->
-<!-- \item -->
-<!-- as well as the difference between the average slope of the Portuguese effect and the slope of that effect for their class $U_{1j}X_{ij}$ -->
-<!-- \end{itemize} -->
-<!-- \item -->
-<!-- plus any residual differences between the observed and the model predicted English grade $e_{ij}$ -->
-<!-- \end{itemize} -->
-<!-- ### How should we think about the differences between the classes? -->
-<!-- If you have had some experience analyzing psychological data, then there is a potential approach to thinking about the effect of the differences between classes that would seem natural. -->
-<!-- We could seek to estimate the relationship of interest -- here, the association between English and Portuguese grades -- while also estimating the relationship between (outcome) English grades and the impact made by what class a child is in. -->
-<!-- If you think back to, say, Figure \@ref(fig:SB12multistage), then you could imagine how it would make sense to create a factor variable to code for class, and to then specify a model in which English grades are the outcome and Portuguese grade and also class are the predictors. -->
-<!-- This approach has, in fact, been proposed (see e.g. Lorch \& Myers, 1990). -->
-<!-- In this approach, we would construct a model in which we have English grades as the outcome variable, Portuguese grades as one predictor variable, and then add a variable to code for class identity.  -->
-<!-- The 'effect' of the class variable would then capture the differences in intercepts between classes.  -->
-<!-- You could add a further variable to code for differences between classes in the slope of the relationship between English and Portuguese grades, i.e., to allow for the fact that the relationship is positive or negative, stronger or weaker, in different classes. -->
-<!-- If we added that further variable to code for differences between classes in the English-Portuguese relationship, then we would be estimating those differences as *interactions* between (1.) the predictive 'effect' of Portuguese grades on English grades and (2.) the class effect. -->
-<!-- An interaction effect is what we have when the effect of one variable (the predictive 'effect' of Portuguese grades) is different for different levels of the other variable (the predictive 'effect' of Portuguese grades is different for different classes). -->
-<!-- Thinking about this approach helps us to think about what we are doing when we are working with multilevel structured data. -->
-<!-- But the problem with this approach is that it does not allow us to generalize beyond the sample we have. -->
-<!-- The estimates we would have, given a model in which we code directly for class, would tell us only about the classes in our sample. -->
-<!-- Most of the time, we would prefer to do analyses whose results could be generalized: to other children, to other classes. -->
-<!-- For this reason, it makes more sense to suppose that $U_{0j} + U_{1j}$, the class-level deviations, are unexplained differences drawn at random from a population of potential class differences. -->
-<!-- What does this mean? -->
-<!-- Think back to your understanding of the linear model. -->
-<!-- You have learnt that when we fit a linear model like $y_i = \beta_0 + \beta_1X_i + e_i$ we include a term $e_i$ to represents the differences, for each child, between the *observed* (outcome) English grade and the English grade *predicted* by the relationship with Portuguese grades. -->
-<!-- Those differences between observed and predicted outcomes are called **residuals**. -->
-<!-- We assume that the direction and size of any one residual, for any one child, is randomly determined because we typically have no idea why there might be a big difference between the predicted and observed grade for one child but a small residual difference for another. -->
-<!-- Now, we can imagine that there will be many classes in many schools, and we can surely expect that there will be differences between the classes. -->
-<!-- These differences will result from plenty of factors we do not measure or cannot explain. -->
-<!-- Indeed, we have seen that there are differences between the average (outcome) English grade i.e. the *predicted* intercept and the observed intercept for each class, and we have seen that  there are differences between the average slope of the English-Portuguese grades relationship i.e. the *predicted* slope and the slope for each class. -->
-<!-- These differences would, in effect, be *random differences*. -->
-<!-- And we can see how the variation in these differences are, for us, just a kind of random error variance, which we can see as **class-level residuals**. -->
-<!-- We suppose, technically, that the differences between classes, controlling for the effect of the explanatory variable, are exchangeable (it does not matter which class is which), with classes varying at random. -->
-<!-- Multilevel models incorporate estimation of the explanatory variables effects $\gamma_0 + \gamma_1$ accounting for group-level error variance $U_{0j} + U_{1j}$. -->
-<!-- The difference between the two-step approach and the multilevel modelling approach is this. -->
-<!-- In the two-step approach, seen earlier, we estimate -- separately, for each class -- the intercept and the slope of the Portuguese effect, using *just the data for that class* and ignoring the data for other classes. In the multilevel model, in contrast, we use all the observations, estimating the average intercept and the average slope of the Portuguese effect *plus the variance* due to the difference for each class (1.) between the average intercept and the class intercept or (2.) between the average slope and the class slope.  -->
-<!-- We can understand these differences between the average (intercept or class) and the class differences as class-level residuals $U_{0j} + U_{1j}$ in addition to the child-level residuals $e_{ij}$.  -->
-<!-- This leads us to a conclusion that represents a critical way to understand multilevel models. -->
-<!-- \begin{description} -->
-<!-- \item[The multilevel model is a linear model but with multiple random effects terms] -->
-<!-- to take into account the hierarchical structure in the data. -->
-<!-- \end{description} -->
-<!-- ### Fitting a multilevel model using the lmer() function -->
-<!-- We can fit a multilevel model of the $english \sim portuguese$ relationship, taking into account the fact that the pupils tested in the study were recruited from different classes, using the convenient and powerful `lmer()` function. -->
-<!-- Happily, the code we use to define a model in `lmer()` is much like the code we use to define a model in `lm()` with *one important difference* which I shall explain. -->
-<!-- Let's try it out. -->
-<!-- To use the `lmer()` function you need to make the `lme4` library available. -->
-<!-- ```{r lme4} -->
-<!-- library(lme4) -->
-<!-- ``` -->
-<!-- The model you are going to code will correspond to the statistical model that we have been discussing: -->
-<!-- \begin{equation} -->
-<!-- y_{ij} = \gamma_0 + \gamma_1X_{ij} + U_{0j} + U_{1j}X_{ij} + e_{ij} -->
-<!-- \end{equation} -->
-<!-- And the code is written as follows. -->
-<!-- ```{r lmer1, message = FALSE} -->
-<!-- porto.lmer1 <- lmer(english ~ portuguese + -->
-<!--                               (portuguese + 1|class_number),  -->
-<!--                               data = brazil) -->
-<!-- ``` -->
-<!-- You can see that the `lmer()` function call is closely similar to the `lm()` function call, with one critical exception, as I explain next. -->
-<!-- First, we have a chunk of code mostly similar to what we do when we do a regression analysis. -->
-<!-- \begin{itemize} -->
-<!-- \item -->
-<!-- \verb:porto.lmer1 <- lmer(...): creates a \emph{linear mixed-effects model} object using the \verb:lmer(): function. -->
-<!-- \item -->
-<!-- \verb:english ~ portuguese: is a formula expressing the model in which we estimate the fixed effect on the outcome or dependent variable \verb:english: (English grades) predicted $\sim$ by the independent or predictor variable \verb:portuguese: (Portuguese grades). -->
-<!-- \item -->
-<!-- If there were more terms in the model, the terms would be added in series separated as variable names separated by \verb:+: sum symbols. -->
-<!-- \item -->
-<!-- \verb:...(..., data = brazil): specifies the dataset in which you can find the variables named in the model fitting code. -->
-<!-- \item -->
-<!-- \verb:summary(porto.lmer1): gets a summary of the fitted model object. -->
-<!-- \end{itemize} -->
-<!-- Second, we have a bit that is specific to multilevel or mixed-effects models. -->
-<!-- \begin{itemize} -->
-<!-- \item -->
-<!-- Critically, we add \verb:(...|class_number): to tell R about the random effects corresponding to random differences between sample groups (classes) coded by the \verb:class_number: variable. -->
-<!-- \item -->
-<!-- \verb:(...1 |class_number): says that we want to estimate random differences between sample groups (classes) in intercepts coded \verb:1:. -->
-<!-- \item -->
-<!-- \verb:(portuguese... |class_number):: adds random differences between sample groups (classes) in slopes of the portuguese effect coded by using the \verb:portuguese: variable name. -->
-<!-- \end{itemize} -->
-<!-- If you run the model code as written -- see the .R file for an example of the code -- and it works then the code will be shown in the console window in R-Studio. -->
-<!-- To show the model results, you need to get a summary of the model, using the model name. -->
-<!-- ```{r lmer-summary-null, eval=FALSE} -->
-<!-- summary(porto.lmer1) -->
-<!-- ``` -->
-<!-- #### Exercise -- fitting linear mixed-effects models -->
-<!-- Mixed-effects model code is hard to get used to *at first*. -->
-<!-- A bit of practice helps to show you which bits of code are important, and which bits you will change for your own analyses -->
-<!-- \begin{enumerate} -->
-<!-- \item -->
-<!-- Change the outcome (from \verb:english:) and the predictor (from \verb:portuguese:) -- this is about changing the fixed effect part of the model. -->
-<!-- \item -->
-<!-- Vary the random effects part of the model. -->
-<!-- \begin{enumerate} -->
-<!-- \item -->
-<!-- Change it from \verb:(portuguese + 1 | class_number): to \verb:(1 | class_number): -- what you are doing is asking R to ignore the differences in the slope of the effect of Portuguese grades. -->
-<!-- \item -->
-<!-- Change it from \verb:(portuguese + 1 | class_number): to \verb:(portuguese + 0 | class_number): -- what you are doing is asking R to ignore the differences in the intercept. -->
-<!-- \end{enumerate} -->
-<!-- \end{enumerate} -->
-<!-- Try out these variations and *look carefully* at the different results. -->
-<!-- ### Reading the *lmer* results -->
-<!-- Now let's take a look at the results. -->
-<!-- ```{r lmer-summary-show} -->
-<!-- summary(porto.lmer1) -->
-<!-- ``` -->
-<!-- Notice that the output has a number of elements. -->
-<!-- \begin{itemize} -->
-<!-- \item -->
-<!-- First, we see information about the function used to fit the model, and the model object created by the \verb:lmer(): function call. -->
-<!-- \item -->
-<!-- Then, we see the model formula \verb:english ~ portuguese + (portuguese + 1 | class_number):. -->
-<!-- \item -->
-<!-- Then, we see \verb:REML criterion at convergence: about the model fitting process, which we can usually ignore. -->
-<!-- \item -->
-<!-- Then, we see information about the distribution of the model residuals. -->
-<!-- \item -->
-<!-- Then, we see information about the error terms estimated (technically, predicted) by the model. -->
-<!-- \begin{itemize} -->
-<!-- \item -->
-<!-- Residuals, just like a linear model plus error terms specific to multilevel or mixed-effects models, group-level residuals: -->
-<!-- \item -->
-<!-- differences between the average intercept and, here, the intercept (average \verb:english: score) per class; -->
-<!-- \item -->
-<!-- and differences between the average slope capturing the $english \sim portuguese$ relationship and the slope (of the effect) per class. -->
-<!-- \end{itemize} -->
-<!-- \item -->
-<!-- Then, just as for linear models, we see estimates of the coefficients (of the slopes) of the fixed effects, the intercept and the slope of the $english \sim portuguese$ relationship. -->
-<!-- \end{itemize} -->
-<!-- Note that we see coefficient estimates like in a linear model summary **but no p-values**. -->
-<!-- We will come back to p-values later but note that their absence is not a bug. -->
-<!-- Note also that we do not see an $R^2$ estimate. -->
-<!-- We will come back to that too. -->
-<!-- #### Exercise -- How do we report mixed-effects models results? -->
-<!-- There is no convention, yet, on how to report the results of these models. -->
-<!-- Lotte Meteyard and I argue for a set of conventions that will help researchers to understand each others' results better: check out the bit where we advise Psychologists how to write about the results, in our paper (Meteyard \& Davies, 2020). -->
-<!-- ### Fixed and random effects -->
-<!-- You will have noticed the reference to fixed and random effects in the discussion in this chapter, and the use of fixed and random effects as titles for sections of the model output. -->
-<!-- The terms *fixed effects* and *random effects* are not used consistently in the statistical literature (Gelman \& Hill, 2007). -->
-<!-- I am going to use these terms because they are helpful, at first, and because they are widely used, not least in the results of our analyses in R. -->
-<!-- It is common in the psychological literature to refer to the effects on outcomes of experimental manipulations (e.g., the effect on outcomes of differences between experimental conditions) or to the effects of correlated variables of theoretical or explanatory interest (e.g., the effect of differences in Portuguese language skill) as *fixed effects*. -->
-<!-- Typically, we are aiming to get estimates of the coefficients of these effects. -->
-<!-- And, much like we would do when we use linear models, we expect that these coefficients represent an estimate of the effects of these variables, on average, across the population. -->
-<!-- (Hence, some analysts prefer to talk about these effects as population average effects). -->
-<!-- In comparison, when we are thinking about the effects on outcomes of what we understand to be the random differences between sampled children (e.g., the child-level residuals) or the random differences between sampled classes (e.g., the class-level residuals) then we refer to these effects as *random effects*. -->
-<!-- As we have seen, we usually estimate random effects as variances and can estimate them as random error variances. -->
-<!-- While we may care to estimate how differences in, say, Portuguese language score, is associated with English grade, we typically do not care about the impact of the specific difference between any two classes in English grade. -->
-<!-- However, if you take your education in this area further, you will find that the way that fixed and random effects are talked about in the statistical literature can be, at best, inconsistent. -->
-<!-- And, ultimately, you might ask yourself if there are principled distinctions between fixed and random effects. -->
-<!-- We can leave these problems aside, here, because they do not influence how we shall learn and practice using multilevel models in the early to medium term in our development of skills and understanding. -->
-<!-- ### Is there a difference between linear model and linear mixed-effects model results? -->
-<!-- Recall that the linear model yields the estimate that for unit increase in Portuguese grade there is an associated .5 increase in English grade, on average ($F(1, 228) = 35, p < .001; adj. R^2 = .13$). -->
-<!-- We can see that the estimate of the effect **for the mixed-effects model** is $\beta = .659$ which is somewhat different from the effect estimate we got from the linear model. -->
-<!-- \begin{description} -->
-<!-- \item[Research question] Does Portuguese grade predict English grade? -->
-<!-- \item[Result] Our analysis shows that children who score one grade higher in their Portuguese class (e.g., 61 compared to 60) tended to score about \emph{.66} of a grade higher in their English class. -->
-<!-- \end{description} -->
-<!-- ## Conclusions -->
-<!-- Psychological studies frequently result in hierarchically structured data.  -->
-<!-- The structure can be understood in terms of the grouping of observations, as when there are multiple observations per group, participant or stimulus.  -->
-<!-- The existence of such structure must be taken into account in analyses.  -->
-<!-- Multilevel or mixed-effects models can be specified by the researcher to include random effects parameters that capture unexplained differences between participants or other sampling units in the intercepts or the slopes of explanatory variables.  -->
-<!-- Where a sample of participants is asked to respond to a sample of stimuli, structure relating both to participants and to stimuli can be incorporated. -->
-<!-- Many researchers will be aware of concerns over the non-replication of published effects in psychological science (Pashler \& Wagenmakers, 2012).  -->
-<!-- As Gelman (2014) discusses, non-replication of results may arise if effects vary between contexts groups while traditional analytic methods assume that effects are constant.  -->
-<!-- Psychological researchers can expect average outcomes and the effects of independent variables to vary among sampling units, whether their investigations involve multiple observations per child or stimulus, or children sampled within classes, clinics or schools.  -->
-<!-- However, traditional analytic methods often require us to ignore this variation by averaging, say, responses over multiple trials for each child, to collapse an inherently multilevel data structure into a single level of observations that can be analysed using regression or ANOVA. -->
-<!-- By using multilevel models, researchers will, instead, be able to properly estimate the effects of theoretical interest, and better understand how those effects vary. -->
-<!-- ### Summary -->
-<!-- We outlined the features of a \emph{multilevel} structure dataset. -->
-<!-- We then discussed visualizing and modeling the relationship between outcome and predictor variables: -->
-<!-- \begin{enumerate} -->
-<!-- \item -->
-<!-- When you ignore the multilevel structure; -->
-<!-- \item -->
-<!-- Why ignoring the structure is a bad idea; -->
-<!-- \item -->
-<!-- How slopes-as-outcomes analyses are an approximate method to take the structure into account; -->
-<!-- \item -->
-<!-- How multilevel modeling is a better method to estimate the relationship between outcome and predictor variables -->
-<!-- \end{enumerate} -->
-<!-- ### Useful functions -->
-<!-- We used functions to read-in the libraries of functions we needed. -->
-<!-- \begin{verbatim} -->
-<!-- library(tidyverse) -->
-<!-- library(lme4) -->
-<!-- \end{verbatim} -->
-<!-- We used some new functions, or focused on functions we have seen before but not discussed -->
-<!-- \begin{itemize} -->
-<!-- \item -->
-<!-- We used \verb:load(): to load an \verb:.RData: file into R workspace -->
-<!-- \item -->
-<!-- For visualization, we used \verb:facet_wrap(): to show plots of the relationship between English and Portuguese scores in each class separately -->
-<!-- \item -->
-<!-- We used \verb:lmer(): to fit a multilevel model -->
-<!-- \end{itemize} -->
-<!-- We used the \verb:summary(): function to get model results for both linear models and for the mulilevel or liner mixed-effects model. -->
-<!-- ## R code and data file access for the class -->
-<!-- Activities in the class that goes with this chapter are associated with the following data file and .R code file: -->
-<!-- \begin{verbatim} -->
-<!-- BAFACALO_DATASET.RData -->
-<!-- 402-01-multilevel-workbook.R -->
-<!-- \end{verbatim} -->
-<!-- These files are located in a .zip folder called `PSYC402-01-multilevel-resources`. -->
-<!-- Go to the 402 Moodle folder for week 16, find and download the `PSYC402-01-multilevel-resources` folder from: -->
-<!-- \url{https://modules.lancaster.ac.uk/course/view.php?id=34085#section-10} -->
-<!-- Run the code in the .R file to reproduce the results presented in this chapter and in accompanying the slides. -->
-<!-- ## References -->
-<!-- ### Recommended reading -->
-<!-- Snijders and Bosker (2012) present a helpful overview of multilevel modelling.  -->
-<!-- Readers familiar with the book will see that I rely on it to construct the formal presentation of the models. -->
-<!-- Baayen et al. (2008; see, also, Barr et al., 2013; Judd et al., 2012) discuss mixed-effects models with crossed random effects. -->
-<!-- This is the topic we shall discuss next. -->
-<!-- I wrote a tutorial article on mixed-effects models with Lotte Meteyard. -->
-<!-- We discuss how important the approach now is for psychological science, what researchers worry about when they use it, and what they should do and report when they use the method/ -->
-<!-- Meteyard, L., \& Davies, R.A.I. (2020). Best practice guidance for linear mixed-effects models in psychological science, *Journal of Memory and Language*, 112, 104092, \url{https://doi.org/10.1016/j.jml.2020.104092} -->
-<!-- ### References list -->
-<!-- Baayen, R. H., Davidson, D. J., \& Bates, D. M. (2008). Mixed-effects modeling with crossed random effects for subjects and items. *Journal of Memory and Language*, 59, 390-412. -->
-<!-- Balota, D. A., Cortese, M. J., Sergent-Marshall, S. D., Spieler, D. H., \& Yap, M. J. (2004). Visual word recognition of single-syllable words. *Journal of Experimental Psychology: General*, 133(2), 283. -->
-<!-- Barr, D. J., Levy, R., Scheepers, C., \& Tily, H. J. (2013). Random effects structure for confirmatory hypothesis testing: Keep it maximal. *Journal of Memory and Language*, 68, 255-278. -->
-<!-- Bryk, A. S., \& Raudenbush, S. W. (1992). \emph{Hierarchical linear models: applications and data analysis methods}. London, UK: Sage. -->
-<!-- Gelman, A. (2014). The Connection Between Varying Treatment Effects and the Crisis of Unreplicable Research: A Bayesian Perspective. *Journal of Management*, DOI: 0149206314525208. -->
-<!-- Gelman, A., & Hill, J. (2007). *Data analysis using regression and multilevel/hierarchical models.* Cambridge University Press. -->
-<!-- Goldstein, H. (2011). \emph{Multilevel statistical models}. London, UK: John Wiley \& Sons. -->
-<!-- Golino, H.F. \& Gomes, C.M.A. (2014). Psychology data from the “BAFACALO project: The Brazilian Intelligence Battery based on two state-of-the-art models – Carroll’s Model and the CHC model”. *Journal of Open Psychology Data*, 2(1): e6, DOI: \url{http://dx.doi.org/10.5334/jopd.af} -->
-<!-- Judd, C. M., Westfall, J., \& Kenny, D. A. (2012). Treating stimuli as a random factor in social psychology: a new and comprehensive solution to a pervasive but largely ignored problem. *Journal of Personality and Social Psychology*, 103, 54. -->
-<!-- Kreft, I., \& de Leeuw, J. (1998). \emph{Introducing multilevel modeling}. London, UK: Sage. -->
-<!-- Lorch, R. F., Jr., \& Myers, J. L. (1990). Regression analyses of repeated measures data in cognitive research. *Journal of Experimental Psychology: Learning, Memory, and Cognition*, 16, 149–157. http://dx.doi.org/ 10.1037/0278-7393.16.1.149 -->
-<!-- Pashler, H., \& Wagenmakers, E. J. (2012). Editors’ Introduction to the Special Section on Replicability in Psychological Science A Crisis of Confidence? *Perspectives on Psychological Science*, 7, 528-530. -->
-<!-- Snijders, T.A., \& Bosker, R.J. (2012). *Multilevel analysis (2nd Edition)*. London, UK: Sage. -->
+<p>It is now clear that someone who works in psychological research <em>has</em> to know about multilevel or hierarchically structured data, and has to know how to apply multilevel models (or mixed-effects models). Growth in the popularity of these kinds of analysis has been very very rapid, as can be seen in Figure @ref(fig:meteyard-davies-2020-fig-5-lme-growth). It is now, effectively, the standard or default method for professional data analysis in most areas of psychological and other social or clinical sciences (or it soon will be). There are good reasons for this (Baayen, Davidson, &amp; Bates, 2008).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="meteyard-davies-2020-fig-5-lme-growth.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption class="figure-caption">Number of Pubmed citations for ‘Linear Mixed Models’ by year. Generated using the tool available at http://dan.corlan.net/medline-trend.html, entering “Linear Mixed Models” as the phrase search term and using data from 2000 to 2018, from Meteyard and Davies (2020) – used without permission</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We continue to teach ANOVA and multiple regression (linear models) in our courses because the research literature is full of the results of analyses done using these methods and because many psychologists continue to use these methods in their research. However, there is increasingly wide-spread recognition that these classical methods have serious problems when applied to data with hierarchical structure. Because most psychological data (not all) will have hierarchical structure, this makes learning about multilevel or mixed-effects methods a key learning objective.</p>
+<p>But, because it is relatively new, many professional psychologists struggle to understand why or how to use these methods effectively. This means that students who acquire the skill graduate with a clear <em>employability</em> advantage. It also means that we have to take seriously the challenge of learning about these methods. This is why we will spend a bit of time on them. In my experience, in over a decade of teaching multilevel models, in working with both students and professionals, we shall need to develop understanding and skills gradually. We will work patiently, so that we can secure understanding by building our learning through a series of practical examples, increasing the scope of our practical skills, and developing the sophistication of our understanding, step-by-step, as we go.</p>
+<section id="a-word-about-names" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="a-word-about-names"><span class="header-section-number">3.1.1</span> A word about names</h3>
+<p>Multilevel models are also known as hierarchical models or linear mixed-effects models or random effects models. People use these terms interchangeably. They also use the abbreviations LMMs or LMEs. Sorry about that: humans make methods, and the names we use for things do vary.</p>
+<p>I will only use the terms ‘multilevel’ or ‘linear mixed-effects’ models.</p>
+</section>
+</section>
+<section id="challenges" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="challenges"><span class="header-section-number">3.2</span> Challenges</h2>
+<p>The key challenges for learning should be explained at the start so that we know what we shall have to do to overcome them.</p>
+<p>Firstly, even though most psychological data has some sort of multilevel or hierarchical structure, we are not used to recognizing it. This is because the structure has often been hidden or ignored in the education and practice of traditional research methods in Psychology.</p>
+<p>In time, you will come to see multilevel structure everywhere (Kreft &amp; de Leeuw, 1998). But first you will need to get some practice so that you can become familiar with the idea and learn to recognize what it looks like when data have a multilevel or hierarchical structure. This is why we will examine multilevel structured data across a range of different kinds of experiments or surveys, over a series of weeks. We will learn to identify and understand hierarchical structure in psychological data by just looking at datasets, by producing visualizations, by doing analyses, and by trying to explain to ourselves and each other what we think we see.</p>
+<p>Secondly, the ideas that support an understanding of why and how we use multilevel models can be intimidating when we first encounter them. The mathematics behind how the models work <em>is</em> both profound and sophisticated. But the good news is that we can practice the application of the analysis method while talking and thinking about the critical ideas using just words or plots. We cannot or should not avoid engaging with the ideas – because we have to be able to explain what we are doing – but there are many routes to an effective understanding. For those who want to develop a more mathematically-based perspective, I will provide references to important texts in the literature on multilevel models.</p>
+</section>
+<section id="the-key-idea-to-get-us-started" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="the-key-idea-to-get-us-started"><span class="header-section-number">3.3</span> The key idea to get us started</h2>
+<p>Another way of saying this is: <em>linear models are a special form of multilevel models</em>. This is because linear models assume that observations are independent. We often cannot make this assumption, as we shall see. More generally, then, we do not assume that observations are independent and so we use multilevel models.</p>
+</section>
+<section id="the-approach-we-take" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="the-approach-we-take"><span class="header-section-number">3.4</span> The approach we take</h2>
+<p>We are <em>not</em> going to take a mathematical approach to learning about multilevel models. We do not have to. The approach we are going to take is:</p>
+</section>
+<section id="targets" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="targets"><span class="header-section-number">3.5</span> Targets</h2>
+<p>Our learning objectives include the development of key concepts and skills.</p>
+<p>We are just getting started. Our plan will be to build depth and breadth in understanding as we progress over the next few weeks.</p>
+</section>
+<section id="study-guide" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="study-guide"><span class="header-section-number">3.6</span> Study guide</h2>
+
+</section>
+<section id="the-data-we-will-work-with-brazilian-school-children" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="the-data-we-will-work-with-brazilian-school-children"><span class="header-section-number">3.7</span> The data we will work with: Brazilian school children</h2>
+<p>This week, we will be working with data taken from a study on education outcomes in Brazilian children, reported by Golina and Gomes (2014). First, we will progress through the steps required to download and prepare the files for analysis in R.</p>
+<p>The <code>BAFACALO_DATASET.RData</code> data were collected and shared online by Golina and Gomes (2014). Information about the background motivating the study, the methods of data collection, along with the dataset itself, can be found here:</p>
+<p></p>
+<p>Golina and Gomes (2014) collected school end-of-year subject grades for a sample of 292 children recruited from multiple classes in a school in Brazil. Here, each subject is a theme or course that children studied in school, e.g., Physics or English language, and for which each child was awarded a grade at the end of the school year. So, we have information on different children, and information about their subject grades. Children were taught in different classes but the classes appear to be units of the school organization (the information is not quite clear) not subject or course groupings. Thus, we also have information on which classes children were in when data about them were collected.</p>
+<p>The data were compiled to an .RData format file.</p>
+<p><code>.RData</code> is R’s own file format so the code you use to load and access the data for analysis is a bit simpler than you are used to. (You will have used <code>read.csv()</code> or <code>read_csv()</code>.)</p>
+<p>In my own practice, I prefer to keep files in formats like <code>.csv</code> which can be opened and read in other software applications (like Excel), so using an <code>.RData</code> is an exception in these materials.</p>
+<section id="locate-and-download-the-data-file" class="level3" data-number="3.7.1">
+<h3 data-number="3.7.1" class="anchored" data-anchor-id="locate-and-download-the-data-file"><span class="header-section-number">3.7.1</span> Locate and download the data file</h3>
+<p>Go to the 402 Moodle folder for week 16, find and download the <code>BAFACALO_DATASET.RData</code> file from:</p>
+<p></p>
+<p>The file is located in a .zip folder called <code>PSYC402-01-multilevel-resources</code>. The data file is collected together with the <code>402-01-multilevel-workbook.R</code> workbook you will need to do the practical exercises.</p>
+</section>
+<section id="read-in-the-data-file-so-that-you-can-access-the-data-by-using-the-load-function" class="level3" data-number="3.7.2">
+<h3 data-number="3.7.2" class="anchored" data-anchor-id="read-in-the-data-file-so-that-you-can-access-the-data-by-using-the-load-function"><span class="header-section-number">3.7.2</span> Read in the data file – so that you can access the data – by using the load() function</h3>
+<p>You can read the <code>BAFACALO_DATASET.RData</code> file into the R workspace or environment using the following code.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"BAFACALO_DATASET.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="inspect-the-data" class="level3" data-number="3.7.3">
+<h3 data-number="3.7.3" class="anchored" data-anchor-id="inspect-the-data"><span class="header-section-number">3.7.3</span> Inspect the data</h3>
+<p>The dataset consists of rows and columns. Take a look. If you have successfully loaded the dataset into the R environment, then you should be able to view it.</p>
+<p>You could look at the dataset by using the <code>View()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(BAFACALO_DATASET)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Or you can use the <code>head()</code> function to see the top few rows of the dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(BAFACALO_DATASET)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  participant_id scholarity_father scholarity_mother household_income
+1              1                NA                NA               NA
+2              2                 1                 1                2
+3              3                 3                 3                2
+4              4                 1                 3                3
+5              5                 2                 2                1
+6              6                 1                 1                1
+  class_number previous_school_type sex age VZi01 VZi02 VZi03 VZi04 VZi05 VZi06
+1         &lt;NA&gt;                   NA  NA  NA     1     1     1     1     1     1
+2         &lt;NA&gt;                   NA  NA  NA     1     1     1     1     1     0
+3          M15                    2   0  16     1     1     0     1     0     1
+4          M14                    2   1  14     1     1     1     1     1     1
+5          M23                    2   0  17     1     1     1     1     1     1
+6          M21                    2   1  17     1     1     1     1     1     1
+  VZi07 VZi08 VZi09 VZi10 VZi11 VZi12 VZi13 VZi14 VZi15 VZi16 VZi17 VZi18 VZi19
+1     0     1     1     1     1     1     0     0     1     1     0     1     1
+2     0     1     1     1    NA    NA     0    NA    NA    NA    NA    NA    NA
+3     0     1     0     1     1     1     1     0     1     1     1     1     1
+4     1     1     1     1     1     1     1     1     1     1     1     1     1
+5     0     1     0     1     1     1     0     0     1     1     0     1     1
+6     1     1     1     1    NA     1    NA    NA     1     1     1     1     1
+  VZi20 VZi21 VZi22 VZi23 VZi24 VZi25 VZi26 VZi27 VZi28 VZi29 VZi30 CFi01 CFi02
+1     0     1     1     1     1     1     0     0     1     1     1     0     0
+2    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA     0     0
+3     1     0     1     0     1     1     0     1     1     1     1     1     1
+4     1     1     1     1     1     1     1     1     1     1     1     1     1
+5     0     1     1     0     0     1    NA     1    NA    NA    NA     1     1
+6     0     1     1     1     1     1    NA    NA    NA    NA    NA     1     1
+  CFi03 CFi04 CFi05 CFi06 CFi07 CFi08 CFi09 CFi10 CFi11 CFi12 CFi13 CFi14 CFi15
+1     0     0     0     0     0     0     0     0     0     0     0     0     0
+2     1     1     0    NA    NA    NA     1     0     1     0    NA    NA    NA
+3     1     1    NA     1     1     1     1     1     1    NA     1     1     1
+4     1     1     1     1     1     1     1     1     1     1     1     1     1
+5     1     1     1    NA    NA    NA     1     0     1     1     0    NA    NA
+6     1     1     1     1     1     1     1     1     1     1     1     1     1
+  CFi16 CFi17 CFi18 CFi19 CFi20 CFi21 CFi22 CFi23 CFi24 CFi25 CFi26 CFi27 CFi28
+1     0     0     0     0     0     0     0     0     0     0     0     0     0
+2    NA     1     1     1    NA    NA    NA    NA     1     1     1     0     0
+3     1     1     1     1     1     1     1     1     1     1     1     1     1
+4     1     1     1     1     1     1     1     1     0     1     1     1     1
+5    NA     1     1     1     0     1    NA    NA    NA     1     1     1     1
+6     1     1     1     1     1     1     1     1     1     1     1     1     1
+  CFi29 CFi30 CFi31 CFi32 V1i01 V1i02 V1i03 V1i04 V1i05 V1i06 V1i07 V1i08 V1i09
+1     0     0     0     0     1     1     1     1     1     1     1     0     0
+2    NA    NA    NA    NA     0     1     0     1     1     0     0     0     0
+3     1     1     1     1     1     0     1     0     1     0     0     0     1
+4     0     1     1     1     1    NA     1     0     1    NA    NA    NA    NA
+5     0    NA    NA    NA     0     1    NA     1     1    NA    NA    NA    NA
+6     1     1     1     1     1    NA     1     0     1     1    NA     1     1
+  V1i10 V1i11 V1i12 V1i13 V1i14 V1i15 V1i16 V1i17 V1i18 V1i19 V1i20 V1i21 V1i22
+1     1     0     1     1     1     1     0     1     1     1     0     0     0
+2     1     0     1     1     1     1     0     1     0     0     0     1     0
+3     1     0     0     0     1     1     1     1     0     0     0     0     0
+4     0    NA    NA    NA     1     1    NA    NA    NA     1    NA    NA    NA
+5    NA    NA     0    NA     1     1    NA     1     1     1    NA    NA     0
+6     1     1     1    NA     1     1    NA     1     1     1     0    NA     0
+  V1i23 V1i24 V2i01 V2i02 V2i03 V2i04 V2i05 V2i06 V2i07 V2i08 V2i09 V2i10 V2i11
+1     1     1     0     1     0     0    NA    NA     0     1     1     0     0
+2     1     1     0     0    NA     1    NA     0     0     1     1     1     0
+3     1     0     0     1     1    NA    NA     0     1     0     0     0     1
+4    NA    NA    NA    NA     1    NA    NA    NA    NA    NA     1    NA    NA
+5     0    NA    NA    NA     0    NA    NA    NA     1     1     1    NA    NA
+6     0    NA    NA     1     1    NA    NA    NA     0    NA     1    NA     0
+  V2i12 V2i13 V2i14 V2i15 V2i16 V2i17 V2i18 V3i01 V3i02 V3i03 V3i04 V3i05 V3i06
+1     0     0     1    NA    NA     0    NA     0     1     0     1     1     1
+2     0     0     0    NA    NA     0     1     1     0     0     1    NA     0
+3     0     0     0     0     0     0     0     1     1     0     1     1     1
+4    NA    NA     1    NA    NA    NA    NA     1     0     1     1    NA    NA
+5    NA    NA     1    NA    NA    NA    NA     1     1     0     1     1    NA
+6     1    NA     1    NA    NA    NA    NA     1     1     0     1     1    NA
+  V3i07 V3i08 V3i09 V3i10 V3i11 V3i12 V3i13 V3i14 V3i15 V3i16 V3i17 V3i18
+1     1     1     0     0     0     0     0     0     1     1     0     1
+2     0     0    NA    NA     1     1     0     1     1     1     1     0
+3     0     0     0     0     0     1     0     1     0     1     1     1
+4    NA    NA    NA    NA    NA    NA    NA    NA    NA     0     1    NA
+5    NA    NA    NA    NA    NA     1    NA    NA    NA     0     1     0
+6    NA    NA    NA    NA     1     1    NA     1     0     1     1     1
+  MA1i01 MA1i02 MA1i03 MA1i04 MA1i05 MA1i06 MA1i07 MA1i08 MA1i09 MA1i10 MA1i11
+1      0     NA      0      0     NA     NA     NA     NA     NA     NA     NA
+2     NA     NA     NA      1     NA      0     NA     NA     NA      1      0
+3      0      1      1      1      1      1      1      1      1      1      1
+4      1      1      0      1      1      1      1      1      1      1      1
+5      1      1      1      1      1      1      0      0      0      1      1
+6      0      1      0      1      1      1      0      1      1      1      1
+  MA1i12 MA1i13 MA1i14 MA1i15 MA2i01 MA2i02 MA2i03 MA2i04 MA2i05 MA2i06 MA2i07
+1      1      1     NA     NA      1     NA     NA     NA     NA     NA     NA
+2      1      0      1      0     NA      0     NA     NA     NA     NA     NA
+3      1      1      1     NA      1      1      1      1      1      1      1
+4      1      0      1      1      1      1      1      1      1      1      1
+5      1      1      1      1      1      1      1      1      1      1      1
+6      1      1      0      1      1     NA      1      1     NA     NA      1
+  MA2i08 MA2i09 MA2i10 MVi01 MViO2 MViO3 MVi02 MViO4 MViO5 MVi03 MViO6 MViO7
+1      1      0     NA     0     1     0     1    NA     1     0     1     1
+2      0      1     NA     1     0     1     0    NA     1    NA     1     1
+3      1      1     NA     1     1     1     0     1     1     1     1     1
+4      0      1      1     1     1     1     1     1    NA     1     1     1
+5      1      1      1     1     1     1     1     1     1     1     1     1
+6      1     NA      1     1     1     1     1     1     1     1     1     1
+  MVi04 MViO8 MViO9 RGi01 RGi02 RGi03 RGi04 RGi05 RGi06 RGi07 RGi08 RGi09 RGi10
+1    NA     0     1    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA
+2     1     0    NA     1     0     0     0     1     0    NA     1    NA    NA
+3     1     0     1     1     1     1     1     1    NA     1     0     0    NA
+4     1     1     1     1     1     1    NA     1     1     1     1     1     1
+5     1     1     1     0     1     1     0     1     1     0    NA     1    NA
+6     1     1     1     1     1     1     1     1     1     1     1     1     1
+  RGi11 RGi12 RGi13 RGi14 RGi15 RLi01 RLi02 RLi03 RLi04 RLi05 RLi06 RLi07 RLi08
+1    NA    NA    NA    NA    NA     1     1     1     1     0     1     1     0
+2    NA    NA    NA    NA    NA     1     1     0     1    NA     1     1     1
+3    NA    NA    NA    NA    NA     1     1     1     1     0     0     1     1
+4     1     1     0     1     1     1     1     1     1     0     1     0     1
+5     1     1    NA    NA    NA     1     1     1     1     1     1     0     1
+6     1     0    NA     1     1     1     1     1     1     0     1     1     0
+  RLi09 RLi10 RLi11 RLi12 RLi13 RLi14 RLi15 RLi16 RLi17 RLi18 RLi19 RLi20 RLi21
+1     1     1     0     0     0     1     1     1     0     1     1     0     1
+2     0     0     0     0     1     0     0     1     0     1     0     0     1
+3     1     1     1     0     0     0     0     1     0     1     0     0     1
+4     1     0     1     0     0     0     1     1     0     1     0     0     1
+5     1     1     1     1     1     0     0     1     0     1     1     1     1
+6     1     0     1     1     0     1     0     1     1     1     1    NA     1
+  RLi22 RLi23 RLi24 RLi25 RLi26 RLi27 RLi28 RLi29 RLi30 Ii01 Ii02 Ii03 Ii04
+1     0     1     0     0     0     1     1     1     0    1    1    1    1
+2     1     1     0     1     0     1     0     0     0   NA    1   NA    0
+3     0     1     1     0     0     1     1     1     0    1   NA    1    1
+4     0     1     0     1     1     1     1     0     1    1   NA    1    1
+5     0     1     0     0     0     1     1     0     1    1    1    1    1
+6     1     1    NA    NA    NA    NA    NA    NA    NA    1    1    1   NA
+  Ii05 Ii06 Ii07 Ii08 Ii09 Ii10 Ii11 Ii12 Ii13 Ii14 Ii15  N P1 P2   P3 FI1 FI2
+1    1    1    1   NA    1   NA   NA   NA   NA   NA   NA NA NA NA &lt;NA&gt;  NA  NA
+2   NA   NA    0   NA   NA   NA   NA   NA   NA   NA   NA NA NA NA &lt;NA&gt;  NA  NA
+3    1    0    1    1    1    1    1    1    0    1   NA 35 25 22   40   9  12
+4    1    1    1    1    1    1    1   NA   NA    0   NA 43 24 25   47  30  16
+5    1    1   NA    1    1    1    0   NA   NA   NA   NA 39 27 22   33   9   9
+6    1    1    1    1    1    1    1   NA   NA   NA   NA 38 34 23   44  14  11
+  FF portuguese english math biology physics chimestry geography history
+1 NA       &lt;NA&gt;    &lt;NA&gt; &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;
+2 NA       &lt;NA&gt;    &lt;NA&gt; &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;
+3 17         72    78.5 60.1    62.6    65.8      68.3        61    &lt;NA&gt;
+4 15         62    81.5 85.5    72.2    77.7        90      65.5    &lt;NA&gt;
+5  9         77      74   75      77      69      83.5      &lt;NA&gt;    81.5
+6  9         82      96   92    91.6      80        91      &lt;NA&gt;      85</code></pre>
+</div>
+</div>
+<p>You can check for yourself that each row holds data about a child, including their participant identity code, as well as information about their parents, household, gender, age, school class, and their grades on end-of-year subject attainment (e.g., how well they did in English language).</p>
+<p>There are many more variables in the dataset than we need for our exercises, and a summary would fill pages of this chapter. You can see for yourself if you inspect the dataset using</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(BAFACALO_DATASET)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="tidy-the-data" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="tidy-the-data"><span class="header-section-number">3.8</span> Tidy the data</h2>
+<p>When you inspect the file, you will see that it includes a large number of variables, but we only really care about those we will use in our exercises:</p>
+<p>You can see that I am not explaining the variables in great depth. For our aims, we do not need more detailed information but please do read the data article if you wish to find out more.</p>
+<p>We need to tidy the data before we can get to the analysis parts of this chapter. We are going to:</p>
+<p>We shall need the <code>tidyverse</code> library of functions.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="select-the-variables" class="level3" data-number="3.8.1">
+<h3 data-number="3.8.1" class="anchored" data-anchor-id="select-the-variables"><span class="header-section-number">3.8.1</span> Select the variables</h3>
+<p>We can start by selecting the variables we want, which include those named here, ignoring all the rest. We take the <code>BAFACALO_DATASET</code>. We then use the <code>select()</code> function to select the variables we want. And, lastly, we inspect the data using <code>summary()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>brazil <span class="ot">&lt;-</span> BAFACALO_DATASET <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">select</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                      class_number, participant_id,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                      portuguese, english, math, physics</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                      )</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(brazil)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  class_number participant_id     portuguese     english         math    
+ M11    : 21   Min.   :  1.00   60     : 10   100    : 17   60     : 13  
+ M15    : 20   1st Qu.: 73.75   76     :  9   79     : 11   69     :  9  
+ M14    : 19   Median :146.50   65     :  8   96     :  8   70     :  9  
+ M36    : 19   Mean   :146.50   73     :  8   81     :  7   62     :  8  
+ M18    : 18   3rd Qu.:219.25   74     :  7   89     :  7   71     :  7  
+ (Other):133   Max.   :292.00   (Other):188   (Other):180   (Other):184  
+ NA's   : 62                    NA's   : 62   NA's   : 62   NA's   : 62  
+    physics   
+ 60     : 16  
+ 60.1   :  5  
+ 0      :  4  
+ 61.8   :  4  
+ 66     :  4  
+ (Other):197  
+ NA's   : 62  </code></pre>
+</div>
+</div>
+<section id="code-tip" class="level4" data-number="3.8.1.1">
+<h4 data-number="3.8.1.1" class="anchored" data-anchor-id="code-tip"><span class="header-section-number">3.8.1.1</span> Code tip</h4>
+<p>Notice the code is written to create the new selected dataset and, at the same time, gave it a more usable (shorter) name, with </p>
+</section>
+</section>
+<section id="remove-missing-values" class="level3" data-number="3.8.2">
+<h3 data-number="3.8.2" class="anchored" data-anchor-id="remove-missing-values"><span class="header-section-number">3.8.2</span> Remove missing values</h3>
+<p>If you look at the results of the selection, you can see that there are missing values, written as e.g.&nbsp;<code>NA's 62</code> at the bottom of each summary of each variable (if a variable column includes missing values). (Remember that in R <code>NA</code> means “not available” i.e.&nbsp;missing.) We will need to get rid of the missing values. It is simpler to do this at the start rather than wait for an error message, later, when some arithmetic function tells us it cannot give us a result because there are <code>NAs</code> present.</p>
+<p>We can get rid of the missing values using <code>na.omit()</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>brazil <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(brazil)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If you then look at a summary of the data again then you will see that the <code>NAs</code> are gone.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(brazil)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  class_number participant_id    portuguese     english         math    
+ M11    : 21   Min.   :  3.0   60     : 10   100    : 17   60     : 13  
+ M15    : 20   1st Qu.: 77.5   76     :  9   79     : 11   69     :  9  
+ M14    : 19   Median :144.5   65     :  8   96     :  8   70     :  9  
+ M36    : 19   Mean   :146.6   73     :  8   81     :  7   62     :  8  
+ M18    : 18   3rd Qu.:222.8   74     :  7   89     :  7   71     :  7  
+ M21    : 17   Max.   :291.0   82     :  7   86     :  6   66     :  6  
+ (Other):116                   (Other):181   (Other):174   (Other):178  
+    physics   
+ 60     : 16  
+ 60.1   :  5  
+ 0      :  4  
+ 61.8   :  4  
+ 66     :  4  
+ 74.2   :  4  
+ (Other):193  </code></pre>
+</div>
+</div>
+</section>
+<section id="getting-r-to-treat-a-variable-as-a-type-object-of-the-kind-required-using-the-as.numeric-function" class="level3" data-number="3.8.3">
+<h3 data-number="3.8.3" class="anchored" data-anchor-id="getting-r-to-treat-a-variable-as-a-type-object-of-the-kind-required-using-the-as.numeric-function"><span class="header-section-number">3.8.3</span> Getting R to treat a variable as a type object of the kind required – using the as.numeric() function</h3>
+<p>But if you look closely at the output from <code>summary(brazil)</code> you will see that the <code>portuguese</code> and <code>english</code> variables are summarized in the way that R summarizes factors. When you ask R to summarize factors, R gives you a count of the number of observations associated with each factor level, that is, each category in each variable. Here, it is treating a grade score like <span class="math inline">\(100\)</span> in <code>english</code> as a category (like you might treat <span class="math inline">\(dog\)</span> as a category of pets), and you can see that the count shows you that 17 children were recorded as having scored 100 in their class. We do not want numeric variables like subject grades (e.g.&nbsp;children’s grades in English) treated as categorical variables, factors.</p>
+<p>You can also see that R gives you a numeric summary of the recorded values in the <code>participant_id</code> variable. This makes no sense because the identity code numbers are (presumably) assigned at random so identity numbers provide no useful numeric information for us. We do not want this either.</p>
+<p>We want R to treat the educational attainment scores as numbers, and we can do this using the <code>as.numeric()</code> function. We want R to treat the class and participant identity numbers as factors (categorical variables), and we can do this using the <code>as.factor()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -- change the variable types: coercion</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>brazil<span class="sc">$</span>portuguese <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(brazil<span class="sc">$</span>portuguese)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>brazil<span class="sc">$</span>english <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(brazil<span class="sc">$</span>english)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>brazil<span class="sc">$</span>math <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(brazil<span class="sc">$</span>math)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>brazil<span class="sc">$</span>physics <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(brazil<span class="sc">$</span>physics)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>brazil<span class="sc">$</span>class_number <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(brazil<span class="sc">$</span>class_number)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>brazil<span class="sc">$</span>participant_id <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(brazil<span class="sc">$</span>participant_id)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co"># -- inspect the data:</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(brazil)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  class_number participant_id   portuguese       english           math       
+ M11    : 21   3      :  1    Min.   : 1.00   Min.   : 1.00   Min.   :  1.00  
+ M15    : 20   4      :  1    1st Qu.:26.25   1st Qu.:29.00   1st Qu.: 39.00  
+ M14    : 19   5      :  1    Median :42.00   Median :55.00   Median : 58.00  
+ M36    : 19   6      :  1    Mean   :43.55   Mean   :50.25   Mean   : 58.17  
+ M18    : 18   7      :  1    3rd Qu.:58.75   3rd Qu.:73.00   3rd Qu.: 79.75  
+ M21    : 17   9      :  1    Max.   :83.00   Max.   :93.00   Max.   :104.00  
+ (Other):116   (Other):224                                                    
+    physics      
+ Min.   :  1.00  
+ 1st Qu.: 34.00  
+ Median : 71.50  
+ Mean   : 71.57  
+ 3rd Qu.:107.75  
+ Max.   :148.00  
+                 </code></pre>
+</div>
+</div>
+<p>If you now look at the summary of the data, you can see that R will give you mean etc. for the subject or class score variables, showing that it is now treating them as numeric variables. In comparison, R gives you counts of the numbers of observations for each level (category) of categorical or nominal variables like <code>participant_id</code>.</p>
+<section id="coercion-a-quick-lesson" class="level4" data-number="3.8.3.1">
+<h4 data-number="3.8.3.1" class="anchored" data-anchor-id="coercion-a-quick-lesson"><span class="header-section-number">3.8.3.1</span> Coercion: a quick lesson</h4>
+<p>R treats things like variables as vectors. A vector can be understood to be a set or list of elements, things like numbers of words.</p>
+<p>R gives each vector a type (factor, numeric etc.) which helps to inform different functions how to handle that vector. Usually, R assigns type correctly but sometimes it does not. We can use what is called <em>coercion</em> to force R to assign the correct type to a variable.</p>
+<p>It is more efficient to do this at the start. Normally, I would use <code>read_csv()</code> from <code>tidyverse</code> and assign type to variable using <code>col_types()</code> specification. See here for more information and an example:</p>
+<p></p>
+<p>But it is useful to learn what you need to do if you need to change the way a variable is treated after you have got the data into the R environment.</p>
+</section>
+<section id="exercise-experiment-with-coercion" class="level4" data-number="3.8.3.2">
+<h4 data-number="3.8.3.2" class="anchored" data-anchor-id="exercise-experiment-with-coercion"><span class="header-section-number">3.8.3.2</span> Exercise – experiment with coercion</h4>
+<p>In R, there are a family of functions that work together. You can test whether a variable (a vector, technically) is or is not a certain type using the <code>is.[something]</code> function. For example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.factor</span>(brazil<span class="sc">$</span>english)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>(brazil<span class="sc">$</span>english)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>(brazil<span class="sc">$</span>english)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And you can coerce variables so that they are treated as of certain types.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>brazil<span class="sc">$</span>english <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(brazil<span class="sc">$</span>english)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>brazil<span class="sc">$</span>english <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(brazil<span class="sc">$</span>english)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>brazil<span class="sc">$</span>english <span class="ot">&lt;-</span> <span class="fu">as.character</span>(brazil<span class="sc">$</span>english)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="introduction-to-multilevel-models" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="introduction-to-multilevel-models"><span class="header-section-number">3.9</span> Introduction to multilevel models</h2>
+<section id="main-ideas-phenomena-and-data-sets-in-the-social-sciences-often-have-a-multilevel-structure" class="level3" data-number="3.9.1">
+<h3 data-number="3.9.1" class="anchored" data-anchor-id="main-ideas-phenomena-and-data-sets-in-the-social-sciences-often-have-a-multilevel-structure"><span class="header-section-number">3.9.1</span> Main ideas – Phenomena and data sets in the social sciences often have a multilevel structure</h3>
+<p>We (Psychologists) often adopt <em>Repeated Measures</em> or <em>Clustered</em> designs in our studies, and these designs yield data that have a multilevel structure. Examples of research which results in data with a multilevel structure include:</p>
+<p>The key insight to keep in mind when considering the analysis of such data is that observations are clustered and are <em>not independent</em>. They are correlated. What is correlated with what?</p>
+<p>Imagine testing a number of subjects by giving them all the same test. In that test, you might present them all with the same stimuli over a series of trials, so that everybody sees the same set of stimuli. Do you think an observed response recorded for any one individual will be uncorrelated i.e.&nbsp;independent of that person’s other responses? People are different and one usually finds that a slow or inaccurate subject is slow or inaccurate for most of their responses. That means that if you have information about one of their responses you can predict, in part, what the time or accuracy of one of their other responses would be. That capacity to predict one response from another is what we mean when we talk about a lack of independence.</p>
+<p>Alternatively, imagine going to test children in a school. Will the children in one class be more like each other than they are like children in other classes? In other words, is there an effect of class – maybe due to the approach of the teacher, the effect of the class environment etc. – so that outcomes for children in a class are correlated with each other? We are talking, here, about a really quite general property of data collected in certain, very widely used, designs in Psychology: the <em>clustering or hierarchical ordering</em> of data.</p>
+<p>This week, we will see that we must deal with the dependence of observations within a class, where the observed responses were made about the different pupils tested in a class, for a number of different classes.</p>
+</section>
+<section id="multilevel-models-why-they-are-more-used-and-more-useful-than-traditional-methods" class="level3" data-number="3.9.2">
+<h3 data-number="3.9.2" class="anchored" data-anchor-id="multilevel-models-why-they-are-more-used-and-more-useful-than-traditional-methods"><span class="header-section-number">3.9.2</span> Multilevel models – why they are more used and more useful than traditional methods</h3>
+<p>The utility of <strong>multilevel models</strong> to analyze <strong>multilevel data</strong> or hierarchically structured data is well established in education. In educational research, we often need to think about effects of interventions or correlations in the context of observing children in classes, schools or districts, perhaps over time or at different time points. This means that many of the critical textbooks present examples that are based on educational research data (Bryk &amp; Raudenbush, 1992; Goldstein, 2011; Kreft &amp; de Leeuw, 1998; Snijders &amp; Bosker, 2012).</p>
+<p>Multilevel models are growing in popularity in Psychology as well as in Education because they can be used to account for systematic and random sources of variance in observed outcomes when data are hierarchically structured. A hierarchical structure is present in data when a researcher: tests participants who belong to different groups like classes, clinics or schools; presents a sample of stimuli to each member of a sample of participants; or makes repeated observations for each participant over a series of test occasions.</p>
+<p>In these circumstances, the application of traditional analytic methods has typically required the researcher to aggregate their data (e.g., averaging the responses made by a participant to different stimuli) or to ignore the hierarchical structure in their data, (e.g., analyzing the responses made by some pupils while ignoring the fact that the pupils were tested in different classes). But the application of traditional analysis approaches (e.g., regression, ANOVA) to multilevel structured data extracts scientific costs (Baayen et al., 2008; Barr, Levy, Scheepers, &amp; Tily, 2013).</p>
+<p>Ignoring structure by ignoring or averaging over sources of variability like differences between classes, participants, or stimulus items can mean that analyses are less sensitive because they fail to fully account for error variance. Where differences between classes, participants or stimuli include variation in the impact of experimental variables, e.g., individual differences in response to an experimental manipulation, the application of traditional methods can be associated with an increased risk of false positives in discovery. Yet these costs need no longer be suffered because the capacity to perform multilevel modeling is now readily accessible.</p>
+</section>
+<section id="practical-applications-children-sampled-within-classes" class="level3" data-number="3.9.3">
+<h3 data-number="3.9.3" class="anchored" data-anchor-id="practical-applications-children-sampled-within-classes"><span class="header-section-number">3.9.3</span> Practical applications: children sampled within classes</h3>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="LME-multistage-sample-snijders-fig2-1.png" class="img-fluid figure-img" style="width:55.0%"></p>
+<p></p><figcaption class="figure-caption">Snijders and Bosker (2012) Multistage sample – used without permission</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>If a researcher tests participants belonging to different groups, e.g., records the educational attainment of different children recruited from different classes in a school, the test scores for the participants are observations that occupy the lowest level of a hierarchy. In multilevel modeling, those observations are understood to be nested within higher-level sampling units, here, the classes. We can say that the children are sampled from the population of children. And the classes are sampled from the population of classes. Critically, we recognize that the children’s test scores are <strong>nested within the classes</strong>.</p>
+<p>Figure @ref(fig:SB12multistage) presents a schematic of this kind of multi-stage sampling (from Snijders and Bosker, 2012). What the figure shows you is that psychologists often first sample groups (shown as big rectangles or squares) like schools or classes and then sample individuals within the groups (shown as small circles or squares). This multi-stage sampling has important consequences, as we shall see.</p>
+<p>We are going to be working with the school data collected by Golino and Gomes (2014) in Brazil, so let’s take another look at that dataset. Figure @ref(fig:SB12multistage) presents the first 25 rows of the selected-variables <code>brazil</code> dataset. (I have arranged the rows by class number ID.) You can see that there are multiple rows of data for each <code>class_number</code>, one row for each child, with multiple children (you can see different <code>participant_id</code> numbers). This presentation of the dataset illustrates in practical terms – what you can actually see when you look at your data – what the schematic Figure @ref(fig:SB12multistage) shows in conceptual terms.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>   class_number participant_id portuguese english math physics
+1           M36             11         80      55   60      81
+2           M36             30         48      55   43      57
+3           M36             93         83      75   55      80
+4           M36             95         80      66   55      66
+5           M36            111         80      57   99     129
+6           M36            117         27      76   83      89
+7           M36            153          2      66   89     141
+8           M36            163         68      88   74     137
+9           M36            176         80      75   60     127
+10          M36            216         75      79   64     124
+11          M36            223         81      56   58      78
+12          M36            234         81      75   49      74
+13          M36            242         81      67   45      77
+14          M36            254         76      51   33     103
+15          M36            260         81      59   39      82
+16          M36            271         64      69   82     138
+17          M36            278         80      57   56     107
+18          M36            280         83      64   56      84
+19          M36            286         80      91   64      98
+20          M35             20         42      61   97      92
+21          M35            118         33      59   33      80
+22          M35            140         28      40   33      58
+23          M35            179         38      69   56     145
+24          M35            247         65      51   64      97
+25          M33             15         76      70   73      85</code></pre>
+</div>
+</div>
+</section>
+<section id="to-understand-the-application-of-multilevel-models-first-we-ignore-the-multilevel-structure-in-the-data" class="level3" data-number="3.9.4">
+<h3 data-number="3.9.4" class="anchored" data-anchor-id="to-understand-the-application-of-multilevel-models-first-we-ignore-the-multilevel-structure-in-the-data"><span class="header-section-number">3.9.4</span> To understand the application of multilevel models: first, we ignore the multilevel structure in the data</h3>
+<p>Recognizing that the children’s data are observed within classes means that, when we examine the factors that influence variance in observed outcomes, we need to take into account the fact that the children can be grouped by (or under) the class they were in when their grades were recorded. We can develop an understanding of what this means by moving through a series of steps.</p>
+<p>To illustrate the understanding we need to develop, we analyze the end-of-year school subject grades for the sample of 292 children studied by Golino and Gomes (2014). With these data, we can examine whether differences between children in their Portuguese language grades predicts differences in their English language grades. (We don’t have a theoretical reason to make this prediction though it does not seem unreasonable.) Let’s make this our research question.</p>
+<p>Now, the first step we take in our development of understanding will be to <em>first ignore</em> the importance of the potential differences between classes.</p>
+<p>We can begin our analysis in order to address the research question by plotting the possible association between Portuguese and English grades. We shall create a scatterplot to do this, and we create the plot by running the following code and <em>ignoring group (class) membership</em>. In the following chunk of code, I pipe the <code>brazil</code> data using <code>%&gt;%</code> to <code>ggplot()</code> and then create the plot step-by-step, with each step separated by a <code>+</code> except for the last step.</p>
+<div class="cell" data-layout-align="center" data-hash="01-multilevel_cache/html/brazil-all_d373e4d635645a523c144e080353680c">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>brazil <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> portuguese, <span class="at">y =</span> english)) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">colour =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Portuguese"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"English"</span>) <span class="sc">+</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="01-multilevel_files/figure-html/brazil-all-1.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption class="figure-caption">Portuguese compared to English grades: each point represents the scores for one child</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Remember that each child ID is associated with a pair of grades: their grade in English and their grade in Portuguese. Each point in Figure @ref(fig:brazil-all) represents the paired grade data for one child.</p>
+<p>Because I say that we are interested in predicting English grades then, by convention, we map English grades to the height of the points (i.e.&nbsp;English grade differences are shown as differences on the y-axis). Because we are using Portuguese grades to do the predicting, by convention, we map Portuguese grades to the horizontal position of the points (i.e.&nbsp;Portuguese grade differences are shown as differences on the x-axis).</p>
+<p>I have added a line using <code>geom_smooth()</code> in red to indicate the trend of the potential association between variation in Portuguese grades and variation in English grades.</p>
+<p>Figure @ref(fig:brazil-all) suggests that children with higher grades in Portuguese tend, on average, to also have higher grades in English.</p>
+<section id="exercise-edit-plots" class="level4" data-number="3.9.4.1">
+<h4 data-number="3.9.4.1" class="anchored" data-anchor-id="exercise-edit-plots"><span class="header-section-number">3.9.4.1</span> Exercise – edit plots</h4>
+<p>Notice that when we write the code to produce the plot, we add arguments to the <code>geom_point()</code> and <code>geom_smooth()</code> function calls to adjust the appearance of the points and the smoother line. Notice, also, that we adjust the labels for the x-axis and y-axis and, finally, that we determine the overall appearance of the plot using the <code>theme_bw()</code> function call.</p>
+<p>Do the following exercises to practice your <code>ggplot()</code> skills</p>
+<p>Further information to help you try out coding options can be found here (on scatterplots):</p>
+<p></p>
+<p>and here (on themes):</p>
+<p></p>
+</section>
+</section>
+<section id="a-linear-model-ignores-the-multilevel-structure-in-the-data" class="level3" data-number="3.9.5">
+<h3 data-number="3.9.5" class="anchored" data-anchor-id="a-linear-model-ignores-the-multilevel-structure-in-the-data"><span class="header-section-number">3.9.5</span> A linear model ignores the multilevel structure in the data</h3>
+<p>Our plot indicates the relationship between English and Portuguese language grades, in Figure @ref(fig:brazil-all), ignoring the fact that children in the sample belonged to different classes when they were tested. The plot shows us only information about the children and grades, with each point representing the observed English and Portuguese grades for each <span class="math inline">\(i\)</span> child.</p>
+<p>Can we predict variation in English grades given information about children’s Portuguese grades? Are English grades related to Portuguese grades? We can estimate the relationship between English and Portuguese grades using a linear model in which the English grades variable is the <strong>outcome</strong> variable (or the dependent variable) and the Portuguese grades variable is the <strong>predictor</strong> or independent variable:</p>
+<p><span class="math display">\[\begin{equation}
+y_i = \beta_0 + \beta_1X_i + e_i
+\end{equation}\]</span></p>
+<ul>
+<li>where <span class="math inline">\(y_i\)</span> represents the English grade for each <span class="math inline">\(i\)</span> child;</li>
+<li><span class="math inline">\(\beta_0\)</span> represents the intercept, the outcome value obtained if values of the explanatory variable are zero;</li>
+<li><span class="math inline">\(\beta_1\)</span> represents the effect of variation in <span class="math inline">\(X_i\)</span> the Portuguese grade for each child, with the effect of that variation estimated as the the rate of change in English grade for unit change in Portuguese grade;</li>
+<li><span class="math inline">\(e_i\)</span> represents differences, for each child, between the observed English grade and the English grade predicted by the relationship with Portuguese grades.</li>
+</ul>
+<p>As you have seen, the code for running a linear model corresponds transparently to the statistical model given in the formula.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(english <span class="sc">~</span> portuguese, <span class="at">data =</span> brazil))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = english ~ portuguese, data = brazil)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-64.909 -17.573   2.782  20.042  53.292 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 29.77780    3.81426   7.807 2.11e-13 ***
+portuguese   0.47001    0.07897   5.952 9.91e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 25.02 on 228 degrees of freedom
+Multiple R-squared:  0.1345,    Adjusted R-squared:  0.1307 
+F-statistic: 35.43 on 1 and 228 DF,  p-value: 9.906e-09</code></pre>
+</div>
+</div>
+<p>The linear model yields the estimate that for unit increase in Portuguese grade there is an associated increase of about .47 in English grade, on average (for the model, <span class="math inline">\(F(1, 228) = 35, p &lt; .001; adj. R^2 = .13\)</span>). So, we have a preliminary answer to our research question.</p>
+<p>We shall see that we will need to revise this estimate when we do an analysis that <em>does</em> take school class differences into account.</p>
+<section id="code-tip-1" class="level4" data-number="3.9.5.1">
+<h4 data-number="3.9.5.1" class="anchored" data-anchor-id="code-tip-1"><span class="header-section-number">3.9.5.1</span> Code tip</h4>
+<p>Notice: here, I have dispensed with the creation of a model object by name. The model is estimated anyway, and I have embedded the <code>lm()</code> function call within a <code>summary()</code> function so that I am asking R to do two things:</p>
+<ol type="1">
+<li><code>lm()</code> fit a linear model</li>
+<li><code>summary()</code> print out a summary of the fitted model object</li>
+</ol>
+<p>I do this to give an example of the way in which code can be varied. Also, to show you how one function can be embedded inside another.</p>
+</section>
+<section id="exercise-fit-a-different-linear-model" class="level4" data-number="3.9.5.2">
+<h4 data-number="3.9.5.2" class="anchored" data-anchor-id="exercise-fit-a-different-linear-model"><span class="header-section-number">3.9.5.2</span> Exercise – fit a different linear model</h4>
+<p>Do the following exercises to practice your <code>lm()</code> skills</p>
+</section>
+</section>
+<section id="notation" class="level3" data-number="3.9.6">
+<h3 data-number="3.9.6" class="anchored" data-anchor-id="notation"><span class="header-section-number">3.9.6</span> Notation</h3>
+<p>In the following discussion, I will present some model formulas as equations. I am not doing that because the discussion is going to consider the modeling in terms of the underlying mathematics. I am doing it with the aim of clarifying how quantities – observed, estimated or predicted – add up, in terms of the linear and then the linear mixed-effects model.</p>
+<p>To make it clear that each observation can be understood as part of a complex multilevel or crossed random effects structure, I am going to use indices as subscripts for variables.</p>
+<p>Thus, in the Brazilian schools example, we shall see that we are concerned with observations about children’s school grades, where children are sampled as individuals <em>nested</em> in samples of classes. We will examine how an outcome variable (English language grade) is related to a predictor variable (Portuguese language grade) such that:</p>
+</section>
+<section id="can-we-really-ignore-the-multilevel-structure" class="level3" data-number="3.9.7">
+<h3 data-number="3.9.7" class="anchored" data-anchor-id="can-we-really-ignore-the-multilevel-structure"><span class="header-section-number">3.9.7</span> Can we really ignore the multilevel structure?</h3>
+<p>The linear model ignores the higher-level structure, the distinction between classes. Does that matter?</p>
+<p>We can see the answer to that question if we inspect Figure @ref(fig:pporteng). We create the plot using the following chunk of code; we discuss that later, first reflecting on what the plot shows us.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>brazil <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> portuguese, <span class="at">y =</span> english)) <span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"darkgrey"</span>) <span class="sc">+</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> class_number) <span class="sc">+</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Portuguese"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"English"</span>) <span class="sc">+</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">25</span>,<span class="dv">50</span>,<span class="dv">75</span>)) <span class="sc">+</span> <span class="fu">scale_y_continuous</span>(<span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">50</span>,<span class="dv">100</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="01-multilevel_files/figure-html/pporteng-1.png" class="img-fluid figure-img" style="width:150.0%"></p>
+<p></p><figcaption class="figure-caption">Plot of child grades, comparing English with Portuguese grades, shown separately for each school class</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Figure @ref(fig:pporteng) presents a different scatterplot to show the relationship between children’s Portuguese and English grades for the children in each different class. We can see that the relationship between Portuguese and English grades is (roughly) similar across classes: in general, children with higher Portuguese grades also tend to have higher English grades. However, Figure @ref(fig:pporteng) makes it obvious that there are important differences between classes. We can see that the slope of the best fit line (shown in black) varies between classes. And we can see that the intercept (where the line meets the y-axis) also varies between classes. Further, we can see that in some classes, there is no relationship or a negative relationship between Portuguese and English grades.</p>
+<p>Critically, we can see that classes differ in how much data we have for each. For some classes, we have many observations (e.g., M11) and for other classes we have few or one observation (e.g., M22, with one child). We know, in advance, that variation in sample size will be associated with variation in the uncertainty we have about the estimated relationship between Portuguese and English grades. You will remember that the Central Limit Theorem allows us to calculate the standard error of an estimate like the mean, given the sample size, and that the standard error is an index of our uncertainty of the estimate.</p>
+<section id="code-tip-facetting-creating-grids-of-plots" class="level4" data-number="3.9.7.1">
+<h4 data-number="3.9.7.1" class="anchored" data-anchor-id="code-tip-facetting-creating-grids-of-plots"><span class="header-section-number">3.9.7.1</span> Code tip – facetting – creating grids of plots</h4>
+<p>As you have seen, you can ask <code>ggplot()</code> to print a separate plot for each sub-group in a dataset. To produce Figure @ref(fig:pporteng), we ask for a separate plot of the <span class="math inline">\(english ~ portuguese\)</span> relationship, one plot for each class. Notice that in the code, the key expression is <code>facet_wrap(~ class_number)</code> This means</p>
+<p>The production of a grid of plots is a useful method for comparing patterns between data sub-sets or groups.</p>
+<p>You can see more information about <code>facet_wrap()</code> here:</p>
+<p></p>
+</section>
+<section id="code-tip-adjusting-scales" class="level4" data-number="3.9.7.2">
+<h4 data-number="3.9.7.2" class="anchored" data-anchor-id="code-tip-adjusting-scales"><span class="header-section-number">3.9.7.2</span> Code tip – adjusting scales</h4>
+<p>Notice that in these plots I modified the axes, to show x-axis and y-axis ticks at specific locations using scale functions. The tick is the notch or short line where we show the numbers on the axes.</p>
+<p>It can be useful to adjust the ticks on axes, where other plot production factors cause crowding of labels.</p>
+<p>You can see more information on scales here:</p>
+<p></p>
+</section>
+<section id="exercise-edit-plots-1" class="level4" data-number="3.9.7.3">
+<h4 data-number="3.9.7.3" class="anchored" data-anchor-id="exercise-edit-plots-1"><span class="header-section-number">3.9.7.3</span> Exercise – edit plots</h4>
+<p>Do the following exercises to practice your skills</p>
+</section>
+</section>
+<section id="linear-models-for-multilevel-data-dealing-with-the-hierarchical-structure" class="level3" data-number="3.9.8">
+<h3 data-number="3.9.8" class="anchored" data-anchor-id="linear-models-for-multilevel-data-dealing-with-the-hierarchical-structure"><span class="header-section-number">3.9.8</span> Linear models for multilevel data – dealing with the hierarchical structure</h3>
+<p>Figure @ref(fig:pporteng) shows that there is variation between classes in both the average English grade, shown as differences in the y-axis intercept, and the ‘effect’ of Portuguese language skill, shown as differences in the slope of the best fit line for the predicted relationship between Portuguese and English grades. We put ‘effect’ in quotes to signal the fact that we do not wish to assert a causal relation. The interpretation of the results of the linear model assumes those results are valid provided that the observations are independent, among other things. We can see that we cannot make the assumption of independence because individuals in classes with high average English grades are more likely to have higher English grades.</p>
+<p>We can represent in our analysis the information we have about hierarchical structure in the data (child within class) by allowing the regression coefficients to vary between groups. We therefore modify the subscripting to take into account the fact that we must distinguish which child <span class="math inline">\(i\)</span> and which class <span class="math inline">\(j\)</span> we are examining, adapting our model to:</p>
+<p><span class="math display">\[\begin{equation}
+y_{ij} = \beta_{0j} + \beta_{1j}X_{ij} + e_{ij}
+\end{equation}\]</span></p>
+</section>
+<section id="two-step-or-slopes-as-outcomes-linear-models-as-approximations-to-the-linear-mixed-effects-or-multilevel-modeling-approach" class="level3" data-number="3.9.9">
+<h3 data-number="3.9.9" class="anchored" data-anchor-id="two-step-or-slopes-as-outcomes-linear-models-as-approximations-to-the-linear-mixed-effects-or-multilevel-modeling-approach"><span class="header-section-number">3.9.9</span> Two-step or slopes-as-outcomes linear models as approximations to the Linear Mixed-effects or Multilevel modeling approach</h3>
+<p>In practice, we could capture the variation between classes by performing a <strong>two-step analysis</strong>.</p>
+<ul>
+<li>First, we estimate the coefficient of the ‘Portuguese’ effect for each class analysed separately.</li>
+<li>Second, we can take those per-class coefficients as the outcome variable in a ‘slopes-as-outcomes analysis’ to examine if the per-class estimates of the experimental effect are reliably different from zero or, more usefully, if the per-class estimates vary in relation to some explanatory variable like teacher skill.</li>
+</ul>
+<p>The problem with the approach is apparent in Figure @ref(fig:pointclass). Figure @ref(fig:pointclass) shows the estimated intercept and coefficient of the slope of the ‘Portuguese’ effect for each class, when we have analyzed the data for each class in a separate linear model. The estimate for each class is shown as a black dot. The standard error of the estimate is shown as a black vertical line, shown above and below a point. You can say that where there is a longer line there we have more uncertainty about the location of the estimate.</p>
+<p>The critical point is that <strong>the standard errors vary</strong> a lot between classes. In some classes, the standard error is small (the black line is short) so we can maybe have more certainty over the estimated intercept or slope for those classes. In other classes, the standard error is large (the black line is long) so we can maybe have less certainty over the estimated intercept or slope for those classes. The <strong>key idea</strong> here is that standard errors vary widely between classes but the two-step modeling approach, while it can take into account the between-class differences in estimates, cannot account for the variation in the standard errors about those estimates.</p>
+<section id="code-tip-2" class="level4" data-number="3.9.9.1">
+<h4 data-number="3.9.9.1" class="anchored" data-anchor-id="code-tip-2"><span class="header-section-number">3.9.9.1</span> Code tip</h4>
+<p>Notice that the code I used fits a separate model for each class, and then plots the per-class estimates of intercepts and slopes of the <span class="math inline">\(english \sim portuguese\)</span> relationship. You can check out the code for yourself in the <strong>how-to.R</strong> for this week.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="01-multilevel_files/figure-html/pointclass-1.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<p></p><figcaption class="figure-caption">Plot showing the estimated intercept and coefficient of the slope of the Portuguese effect for each class analysed separately</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="01-multilevel_files/figure-html/pointclass-2.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<p></p><figcaption class="figure-caption">Plot showing the estimated intercept and coefficient of the slope of the Portuguese effect for each class analysed separately</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="discussion-slopes-as-outcomes-analyses-as-a-common-approach" class="level4" data-number="3.9.9.2">
+<h4 data-number="3.9.9.2" class="anchored" data-anchor-id="discussion-slopes-as-outcomes-analyses-as-a-common-approach"><span class="header-section-number">3.9.9.2</span> Discussion: slopes-as-outcomes analyses as a common approach</h4>
+<p>The ‘slopes-as-outcomes’ approach is quite common and can be found in a number of papers in the psychological and educational research literatures, e.g., in Balota et al.’s (2004) of the analysis of psycholinguistic effects in older and younger adults. Balota et al.&nbsp;(2004) wanted to examine if or how effects of variables like word frequency, on reading response latencies, were different in different age groups. To do this, they first estimated the effect of the (word-level) psycholinguistic variables in separate linear model (multple regressions) for each adult. They then took the estimated coefficients as the dependent variable (slopes-as-outcomes) for a second analysis in which they tested the effect of age group on variation in the estimated coefficients (see Lorch &amp; Myers, 1990, for a discussion of the approach).</p>
+<p>You may be asked to do this. I would advise you against it because there is a better way, as we see next.</p>
+</section>
+</section>
+<section id="multilevel-models" class="level3" data-number="3.9.10">
+<h3 data-number="3.9.10" class="anchored" data-anchor-id="multilevel-models"><span class="header-section-number">3.9.10</span> Multilevel models</h3>
+<p>Multilevel models incorporate estimates of the intercept and the effect of independent (experimental or correlational) variables plus estimates of the random variation between classes in intercepts and slopes. Multilevel models are also known as <strong>mixed-effects models</strong> because they involve the estimation of <strong>fixed effects</strong> (effects due to independent variables) and <strong>random effects</strong> (effects due to random differences between groups).</p>
+<p>We model the intercept (varying between classes) as:</p>
+<p><span class="math display">\[\begin{equation}
+\beta_{0j} = \gamma_0 + U_{0j}
+\end{equation}\]</span></p>
+<p>We model the coefficient of the (Portuguese language) skill effect as:</p>
+<p><span class="math display">\[\begin{equation}
+\beta_{1j} = \gamma_1 + U_{1j}
+\end{equation}\]</span></p>
+<p>These models can then be combined:</p>
+<p><span class="math display">\[\begin{equation}
+y_{ij} = \gamma_0 + \gamma_1X_{ij} + U_{0j} + U_{1j}X_{ij} + e_{ij}
+\end{equation}\]</span></p>
+<p>such that the English grade observed for each child <span class="math inline">\(y_{ij}\)</span> can be predicted given:</p>
+</section>
+<section id="how-should-we-think-about-the-differences-between-the-classes" class="level3" data-number="3.9.11">
+<h3 data-number="3.9.11" class="anchored" data-anchor-id="how-should-we-think-about-the-differences-between-the-classes"><span class="header-section-number">3.9.11</span> How should we think about the differences between the classes?</h3>
+<p>If you have had some experience analyzing psychological data, then there is a potential approach to thinking about the effect of the differences between classes that would seem natural. We could seek to estimate the relationship of interest – here, the association between English and Portuguese grades – while also estimating the relationship between (outcome) English grades and the impact made by what class a child is in. If you think back to, say, Figure @ref(fig:SB12multistage), then you could imagine how it would make sense to create a factor variable to code for class, and to then specify a model in which English grades are the outcome and Portuguese grade and also class are the predictors. This approach has, in fact, been proposed (see e.g.&nbsp;Lorch &amp; Myers, 1990).</p>
+<p>In this approach, we would construct a model in which we have English grades as the outcome variable, Portuguese grades as one predictor variable, and then add a variable to code for class identity. The ‘effect’ of the class variable would then capture the differences in intercepts between classes. You could add a further variable to code for differences between classes in the slope of the relationship between English and Portuguese grades, i.e., to allow for the fact that the relationship is positive or negative, stronger or weaker, in different classes. If we added that further variable to code for differences between classes in the English-Portuguese relationship, then we would be estimating those differences as <em>interactions</em> between (1.) the predictive ‘effect’ of Portuguese grades on English grades and (2.) the class effect. An interaction effect is what we have when the effect of one variable (the predictive ‘effect’ of Portuguese grades) is different for different levels of the other variable (the predictive ‘effect’ of Portuguese grades is different for different classes).</p>
+<p>Thinking about this approach helps us to think about what we are doing when we are working with multilevel structured data. But the problem with this approach is that it does not allow us to generalize beyond the sample we have. The estimates we would have, given a model in which we code directly for class, would tell us only about the classes in our sample.</p>
+<p>Most of the time, we would prefer to do analyses whose results could be generalized: to other children, to other classes. For this reason, it makes more sense to suppose that <span class="math inline">\(U_{0j} + U_{1j}\)</span>, the class-level deviations, are unexplained differences drawn at random from a population of potential class differences. What does this mean?</p>
+<p>Think back to your understanding of the linear model. You have learnt that when we fit a linear model like <span class="math inline">\(y_i = \beta_0 + \beta_1X_i + e_i\)</span> we include a term <span class="math inline">\(e_i\)</span> to represents the differences, for each child, between the <em>observed</em> (outcome) English grade and the English grade <em>predicted</em> by the relationship with Portuguese grades. Those differences between observed and predicted outcomes are called <strong>residuals</strong>. We assume that the direction and size of any one residual, for any one child, is randomly determined because we typically have no idea why there might be a big difference between the predicted and observed grade for one child but a small residual difference for another.</p>
+<p>Now, we can imagine that there will be many classes in many schools, and we can surely expect that there will be differences between the classes. These differences will result from plenty of factors we do not measure or cannot explain. Indeed, we have seen that there are differences between the average (outcome) English grade i.e.&nbsp;the <em>predicted</em> intercept and the observed intercept for each class, and we have seen that there are differences between the average slope of the English-Portuguese grades relationship i.e.&nbsp;the <em>predicted</em> slope and the slope for each class. These differences would, in effect, be <em>random differences</em>. And we can see how the variation in these differences are, for us, just a kind of random error variance, which we can see as <strong>class-level residuals</strong>.</p>
+<p>We suppose, technically, that the differences between classes, controlling for the effect of the explanatory variable, are exchangeable (it does not matter which class is which), with classes varying at random. Multilevel models incorporate estimation of the explanatory variables effects <span class="math inline">\(\gamma_0 + \gamma_1\)</span> accounting for group-level error variance <span class="math inline">\(U_{0j} + U_{1j}\)</span>.</p>
+<p>The difference between the two-step approach and the multilevel modelling approach is this. In the two-step approach, seen earlier, we estimate – separately, for each class – the intercept and the slope of the Portuguese effect, using <em>just the data for that class</em> and ignoring the data for other classes. In the multilevel model, in contrast, we use all the observations, estimating the average intercept and the average slope of the Portuguese effect <em>plus the variance</em> due to the difference for each class (1.) between the average intercept and the class intercept or (2.) between the average slope and the class slope. We can understand these differences between the average (intercept or class) and the class differences as class-level residuals <span class="math inline">\(U_{0j} + U_{1j}\)</span> in addition to the child-level residuals <span class="math inline">\(e_{ij}\)</span>. This leads us to a conclusion that represents a critical way to understand multilevel models.</p>
+</section>
+<section id="fitting-a-multilevel-model-using-the-lmer-function" class="level3" data-number="3.9.12">
+<h3 data-number="3.9.12" class="anchored" data-anchor-id="fitting-a-multilevel-model-using-the-lmer-function"><span class="header-section-number">3.9.12</span> Fitting a multilevel model using the lmer() function</h3>
+<p>We can fit a multilevel model of the <span class="math inline">\(english \sim portuguese\)</span> relationship, taking into account the fact that the pupils tested in the study were recruited from different classes, using the convenient and powerful <code>lmer()</code> function. Happily, the code we use to define a model in <code>lmer()</code> is much like the code we use to define a model in <code>lm()</code> with <em>one important difference</em> which I shall explain.</p>
+<p>Let’s try it out.</p>
+<p>To use the <code>lmer()</code> function you need to make the <code>lme4</code> library available.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The model you are going to code will correspond to the statistical model that we have been discussing:</p>
+<p><span class="math display">\[\begin{equation}
+y_{ij} = \gamma_0 + \gamma_1X_{ij} + U_{0j} + U_{1j}X_{ij} + e_{ij}
+\end{equation}\]</span></p>
+<p>And the code is written as follows.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>porto.lmer1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(english <span class="sc">~</span> portuguese <span class="sc">+</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                              (portuguese <span class="sc">+</span> <span class="dv">1</span><span class="sc">|</span>class_number),</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">data =</span> brazil)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can see that the <code>lmer()</code> function call is closely similar to the <code>lm()</code> function call, with one critical exception, as I explain next.</p>
+<p>First, we have a chunk of code mostly similar to what we do when we do a regression analysis.</p>
+<p>Second, we have a bit that is specific to multilevel or mixed-effects models.</p>
+<p>If you run the model code as written – see the .R file for an example of the code – and it works then the code will be shown in the console window in R-Studio. To show the model results, you need to get a summary of the model, using the model name.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(porto.lmer1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="exercise-fitting-linear-mixed-effects-models" class="level4" data-number="3.9.12.1">
+<h4 data-number="3.9.12.1" class="anchored" data-anchor-id="exercise-fitting-linear-mixed-effects-models"><span class="header-section-number">3.9.12.1</span> Exercise – fitting linear mixed-effects models</h4>
+<p>Mixed-effects model code is hard to get used to <em>at first</em>. A bit of practice helps to show you which bits of code are important, and which bits you will change for your own analyses</p>
+<p>Try out these variations and <em>look carefully</em> at the different results.</p>
+</section>
+</section>
+<section id="reading-the-lmer-results" class="level3" data-number="3.9.13">
+<h3 data-number="3.9.13" class="anchored" data-anchor-id="reading-the-lmer-results"><span class="header-section-number">3.9.13</span> Reading the <em>lmer</em> results</h3>
+<p>Now let’s take a look at the results.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(porto.lmer1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML ['lmerMod']
+Formula: english ~ portuguese + (portuguese + 1 | class_number)
+   Data: brazil
+
+REML criterion at convergence: 2104.3
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.81321 -0.59584  0.04359  0.60018  2.23722 
+
+Random effects:
+ Groups       Name        Variance Std.Dev. Corr 
+ class_number (Intercept) 341.4803 18.479        
+              portuguese    0.3295  0.574   -0.98
+ Residual                 493.1009 22.206        
+Number of obs: 230, groups:  class_number, 18
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept)  25.2837     6.2669   4.034
+portuguese    0.6590     0.1729   3.811
+
+Correlation of Fixed Effects:
+           (Intr)
+portuguese -0.943</code></pre>
+</div>
+</div>
+<p>Notice that the output has a number of elements.</p>
+<p>Note that we see coefficient estimates like in a linear model summary <strong>but no p-values</strong>. We will come back to p-values later but note that their absence is not a bug. Note also that we do not see an <span class="math inline">\(R^2\)</span> estimate. We will come back to that too.</p>
+<section id="exercise-how-do-we-report-mixed-effects-models-results" class="level4" data-number="3.9.13.1">
+<h4 data-number="3.9.13.1" class="anchored" data-anchor-id="exercise-how-do-we-report-mixed-effects-models-results"><span class="header-section-number">3.9.13.1</span> Exercise – How do we report mixed-effects models results?</h4>
+<p>There is no convention, yet, on how to report the results of these models. Lotte Meteyard and I argue for a set of conventions that will help researchers to understand each others’ results better: check out the bit where we advise Psychologists how to write about the results, in our paper (Meteyard &amp; Davies, 2020).</p>
+</section>
+</section>
+<section id="fixed-and-random-effects" class="level3" data-number="3.9.14">
+<h3 data-number="3.9.14" class="anchored" data-anchor-id="fixed-and-random-effects"><span class="header-section-number">3.9.14</span> Fixed and random effects</h3>
+<p>You will have noticed the reference to fixed and random effects in the discussion in this chapter, and the use of fixed and random effects as titles for sections of the model output. The terms <em>fixed effects</em> and <em>random effects</em> are not used consistently in the statistical literature (Gelman &amp; Hill, 2007). I am going to use these terms because they are helpful, at first, and because they are widely used, not least in the results of our analyses in R.</p>
+<p>It is common in the psychological literature to refer to the effects on outcomes of experimental manipulations (e.g., the effect on outcomes of differences between experimental conditions) or to the effects of correlated variables of theoretical or explanatory interest (e.g., the effect of differences in Portuguese language skill) as <em>fixed effects</em>. Typically, we are aiming to get estimates of the coefficients of these effects. And, much like we would do when we use linear models, we expect that these coefficients represent an estimate of the effects of these variables, on average, across the population. (Hence, some analysts prefer to talk about these effects as population average effects).</p>
+<p>In comparison, when we are thinking about the effects on outcomes of what we understand to be the random differences between sampled children (e.g., the child-level residuals) or the random differences between sampled classes (e.g., the class-level residuals) then we refer to these effects as <em>random effects</em>. As we have seen, we usually estimate random effects as variances and can estimate them as random error variances. While we may care to estimate how differences in, say, Portuguese language score, is associated with English grade, we typically do not care about the impact of the specific difference between any two classes in English grade.</p>
+<p>However, if you take your education in this area further, you will find that the way that fixed and random effects are talked about in the statistical literature can be, at best, inconsistent. And, ultimately, you might ask yourself if there are principled distinctions between fixed and random effects. We can leave these problems aside, here, because they do not influence how we shall learn and practice using multilevel models in the early to medium term in our development of skills and understanding.</p>
+</section>
+<section id="is-there-a-difference-between-linear-model-and-linear-mixed-effects-model-results" class="level3" data-number="3.9.15">
+<h3 data-number="3.9.15" class="anchored" data-anchor-id="is-there-a-difference-between-linear-model-and-linear-mixed-effects-model-results"><span class="header-section-number">3.9.15</span> Is there a difference between linear model and linear mixed-effects model results?</h3>
+<p>Recall that the linear model yields the estimate that for unit increase in Portuguese grade there is an associated .5 increase in English grade, on average (<span class="math inline">\(F(1, 228) = 35, p &lt; .001; adj. R^2 = .13\)</span>). We can see that the estimate of the effect <strong>for the mixed-effects model</strong> is <span class="math inline">\(\beta = .659\)</span> which is somewhat different from the effect estimate we got from the linear model.</p>
+</section>
+</section>
+<section id="conclusions" class="level2" data-number="3.10">
+<h2 data-number="3.10" class="anchored" data-anchor-id="conclusions"><span class="header-section-number">3.10</span> Conclusions</h2>
+<p>Psychological studies frequently result in hierarchically structured data. The structure can be understood in terms of the grouping of observations, as when there are multiple observations per group, participant or stimulus. The existence of such structure must be taken into account in analyses. Multilevel or mixed-effects models can be specified by the researcher to include random effects parameters that capture unexplained differences between participants or other sampling units in the intercepts or the slopes of explanatory variables. Where a sample of participants is asked to respond to a sample of stimuli, structure relating both to participants and to stimuli can be incorporated.</p>
+<p>Many researchers will be aware of concerns over the non-replication of published effects in psychological science (Pashler &amp; Wagenmakers, 2012). As Gelman (2014) discusses, non-replication of results may arise if effects vary between contexts groups while traditional analytic methods assume that effects are constant. Psychological researchers can expect average outcomes and the effects of independent variables to vary among sampling units, whether their investigations involve multiple observations per child or stimulus, or children sampled within classes, clinics or schools. However, traditional analytic methods often require us to ignore this variation by averaging, say, responses over multiple trials for each child, to collapse an inherently multilevel data structure into a single level of observations that can be analysed using regression or ANOVA. By using multilevel models, researchers will, instead, be able to properly estimate the effects of theoretical interest, and better understand how those effects vary.</p>
+<section id="summary" class="level3" data-number="3.10.1">
+<h3 data-number="3.10.1" class="anchored" data-anchor-id="summary"><span class="header-section-number">3.10.1</span> Summary</h3>
+<p>We outlined the features of a structure dataset. We then discussed visualizing and modeling the relationship between outcome and predictor variables:</p>
+</section>
+<section id="useful-functions" class="level3" data-number="3.10.2">
+<h3 data-number="3.10.2" class="anchored" data-anchor-id="useful-functions"><span class="header-section-number">3.10.2</span> Useful functions</h3>
+<p>We used functions to read-in the libraries of functions we needed.</p>
+<p>We used some new functions, or focused on functions we have seen before but not discussed</p>
+<p>We used the function to get model results for both linear models and for the mulilevel or liner mixed-effects model.</p>
+</section>
+</section>
+<section id="r-code-and-data-file-access-for-the-class" class="level2" data-number="3.11">
+<h2 data-number="3.11" class="anchored" data-anchor-id="r-code-and-data-file-access-for-the-class"><span class="header-section-number">3.11</span> R code and data file access for the class</h2>
+<p>Activities in the class that goes with this chapter are associated with the following data file and .R code file:</p>
+<p>These files are located in a .zip folder called <code>PSYC402-01-multilevel-resources</code>.</p>
+<p>Go to the 402 Moodle folder for week 16, find and download the <code>PSYC402-01-multilevel-resources</code> folder from:</p>
+<p></p>
+<p>Run the code in the .R file to reproduce the results presented in this chapter and in accompanying the slides.</p>
+</section>
+<section id="references" class="level2" data-number="3.12">
+<h2 data-number="3.12" class="anchored" data-anchor-id="references"><span class="header-section-number">3.12</span> References</h2>
+<section id="recommended-reading" class="level3" data-number="3.12.1">
+<h3 data-number="3.12.1" class="anchored" data-anchor-id="recommended-reading"><span class="header-section-number">3.12.1</span> Recommended reading</h3>
+<p>Snijders and Bosker (2012) present a helpful overview of multilevel modelling. Readers familiar with the book will see that I rely on it to construct the formal presentation of the models.</p>
+<p>Baayen et al.&nbsp;(2008; see, also, Barr et al., 2013; Judd et al., 2012) discuss mixed-effects models with crossed random effects. This is the topic we shall discuss next.</p>
+<p>I wrote a tutorial article on mixed-effects models with Lotte Meteyard. We discuss how important the approach now is for psychological science, what researchers worry about when they use it, and what they should do and report when they use the method/</p>
+<p>Meteyard, L., &amp; Davies, R.A.I. (2020). Best practice guidance for linear mixed-effects models in psychological science, <em>Journal of Memory and Language</em>, 112, 104092, </p>
+</section>
+<section id="references-list" class="level3" data-number="3.12.2">
+<h3 data-number="3.12.2" class="anchored" data-anchor-id="references-list"><span class="header-section-number">3.12.2</span> References list</h3>
+<p>Baayen, R. H., Davidson, D. J., &amp; Bates, D. M. (2008). Mixed-effects modeling with crossed random effects for subjects and items. <em>Journal of Memory and Language</em>, 59, 390-412.</p>
+<p>Balota, D. A., Cortese, M. J., Sergent-Marshall, S. D., Spieler, D. H., &amp; Yap, M. J. (2004). Visual word recognition of single-syllable words. <em>Journal of Experimental Psychology: General</em>, 133(2), 283.</p>
+<p>Barr, D. J., Levy, R., Scheepers, C., &amp; Tily, H. J. (2013). Random effects structure for confirmatory hypothesis testing: Keep it maximal. <em>Journal of Memory and Language</em>, 68, 255-278.</p>
+<p>Bryk, A. S., &amp; Raudenbush, S. W. (1992). . London, UK: Sage.</p>
+<p>Gelman, A. (2014). The Connection Between Varying Treatment Effects and the Crisis of Unreplicable Research: A Bayesian Perspective. <em>Journal of Management</em>, DOI: 0149206314525208.</p>
+<p>Gelman, A., &amp; Hill, J. (2007). <em>Data analysis using regression and multilevel/hierarchical models.</em> Cambridge University Press.</p>
+<p>Goldstein, H. (2011). . London, UK: John Wiley &amp; Sons.</p>
+<p>Golino, H.F. &amp; Gomes, C.M.A. (2014). Psychology data from the “BAFACALO project: The Brazilian Intelligence Battery based on two state-of-the-art models – Carroll’s Model and the CHC model”. <em>Journal of Open Psychology Data</em>, 2(1): e6, DOI: </p>
+<p>Judd, C. M., Westfall, J., &amp; Kenny, D. A. (2012). Treating stimuli as a random factor in social psychology: a new and comprehensive solution to a pervasive but largely ignored problem. <em>Journal of Personality and Social Psychology</em>, 103, 54.</p>
+<p>Kreft, I., &amp; de Leeuw, J. (1998). . London, UK: Sage.</p>
+<p>Lorch, R. F., Jr., &amp; Myers, J. L. (1990). Regression analyses of repeated measures data in cognitive research. <em>Journal of Experimental Psychology: Learning, Memory, and Cognition</em>, 16, 149–157. http://dx.doi.org/ 10.1037/0278-7393.16.1.149</p>
+<p>Pashler, H., &amp; Wagenmakers, E. J. (2012). Editors’ Introduction to the Special Section on Replicability in Psychological Science A Crisis of Confidence? <em>Perspectives on Psychological Science</em>, 7, 528-530.</p>
+<p>Snijders, T.A., &amp; Bosker, R.J. (2012). <em>Multilevel analysis (2nd Edition)</em>. London, UK: Sage.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
