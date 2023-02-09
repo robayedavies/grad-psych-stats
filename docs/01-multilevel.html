@@ -270,7 +270,7 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#sec-multi-data-download" id="toc-sec-multi-data-download" class="nav-link" data-scroll-target="#sec-multi-data-download"><span class="toc-section-number">3.7.1</span>  Locate and download the data file</a></li>
   <li><a href="#sec-multi-data-load" id="toc-sec-multi-data-load" class="nav-link" data-scroll-target="#sec-multi-data-load"><span class="toc-section-number">3.7.2</span>  Read in the data file – so that you can access the data – by using the load() function</a></li>
-  <li><a href="#inspect-the-data" id="toc-inspect-the-data" class="nav-link" data-scroll-target="#inspect-the-data"><span class="toc-section-number">3.7.3</span>  Inspect the data</a></li>
+  <li><a href="#sec-multi-data-inspect" id="toc-sec-multi-data-inspect" class="nav-link" data-scroll-target="#sec-multi-data-inspect"><span class="toc-section-number">3.7.3</span>  Inspect the data</a></li>
   </ul></li>
   <li><a href="#tidy-the-data" id="toc-tidy-the-data" class="nav-link" data-scroll-target="#tidy-the-data"><span class="toc-section-number">3.8</span>  Tidy the data</a>
   <ul class="collapse">
@@ -467,8 +467,8 @@ Warning
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"BAFACALO_DATASET.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="inspect-the-data" class="level3" data-number="3.7.3">
-<h3 data-number="3.7.3" class="anchored" data-anchor-id="inspect-the-data"><span class="header-section-number">3.7.3</span> Inspect the data</h3>
+<section id="sec-multi-data-inspect" class="level3" data-number="3.7.3">
+<h3 data-number="3.7.3" class="anchored" data-anchor-id="sec-multi-data-inspect"><span class="header-section-number">3.7.3</span> Inspect the data</h3>
 <p>The dataset consists of rows and columns. Take a look. If you have successfully loaded the dataset into the R environment, then you should be able to view it.</p>
 <p>You could look at the dataset by using the <code>View()</code> function.</p>
 <div class="cell">
@@ -476,148 +476,68 @@ Warning
 </div>
 <p>Or you can use the <code>head()</code> function to see the top few rows of the dataset.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(BAFACALO_DATASET)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(BAFACALO_DATASET, <span class="at">n =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  participant_id scholarity_father scholarity_mother household_income
 1              1                NA                NA               NA
 2              2                 1                 1                2
-3              3                 3                 3                2
-4              4                 1                 3                3
-5              5                 2                 2                1
-6              6                 1                 1                1
   class_number previous_school_type sex age VZi01 VZi02 VZi03 VZi04 VZi05 VZi06
 1         &lt;NA&gt;                   NA  NA  NA     1     1     1     1     1     1
 2         &lt;NA&gt;                   NA  NA  NA     1     1     1     1     1     0
-3          M15                    2   0  16     1     1     0     1     0     1
-4          M14                    2   1  14     1     1     1     1     1     1
-5          M23                    2   0  17     1     1     1     1     1     1
-6          M21                    2   1  17     1     1     1     1     1     1
   VZi07 VZi08 VZi09 VZi10 VZi11 VZi12 VZi13 VZi14 VZi15 VZi16 VZi17 VZi18 VZi19
 1     0     1     1     1     1     1     0     0     1     1     0     1     1
 2     0     1     1     1    NA    NA     0    NA    NA    NA    NA    NA    NA
-3     0     1     0     1     1     1     1     0     1     1     1     1     1
-4     1     1     1     1     1     1     1     1     1     1     1     1     1
-5     0     1     0     1     1     1     0     0     1     1     0     1     1
-6     1     1     1     1    NA     1    NA    NA     1     1     1     1     1
   VZi20 VZi21 VZi22 VZi23 VZi24 VZi25 VZi26 VZi27 VZi28 VZi29 VZi30 CFi01 CFi02
 1     0     1     1     1     1     1     0     0     1     1     1     0     0
 2    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA     0     0
-3     1     0     1     0     1     1     0     1     1     1     1     1     1
-4     1     1     1     1     1     1     1     1     1     1     1     1     1
-5     0     1     1     0     0     1    NA     1    NA    NA    NA     1     1
-6     0     1     1     1     1     1    NA    NA    NA    NA    NA     1     1
   CFi03 CFi04 CFi05 CFi06 CFi07 CFi08 CFi09 CFi10 CFi11 CFi12 CFi13 CFi14 CFi15
 1     0     0     0     0     0     0     0     0     0     0     0     0     0
 2     1     1     0    NA    NA    NA     1     0     1     0    NA    NA    NA
-3     1     1    NA     1     1     1     1     1     1    NA     1     1     1
-4     1     1     1     1     1     1     1     1     1     1     1     1     1
-5     1     1     1    NA    NA    NA     1     0     1     1     0    NA    NA
-6     1     1     1     1     1     1     1     1     1     1     1     1     1
   CFi16 CFi17 CFi18 CFi19 CFi20 CFi21 CFi22 CFi23 CFi24 CFi25 CFi26 CFi27 CFi28
 1     0     0     0     0     0     0     0     0     0     0     0     0     0
 2    NA     1     1     1    NA    NA    NA    NA     1     1     1     0     0
-3     1     1     1     1     1     1     1     1     1     1     1     1     1
-4     1     1     1     1     1     1     1     1     0     1     1     1     1
-5    NA     1     1     1     0     1    NA    NA    NA     1     1     1     1
-6     1     1     1     1     1     1     1     1     1     1     1     1     1
   CFi29 CFi30 CFi31 CFi32 V1i01 V1i02 V1i03 V1i04 V1i05 V1i06 V1i07 V1i08 V1i09
 1     0     0     0     0     1     1     1     1     1     1     1     0     0
 2    NA    NA    NA    NA     0     1     0     1     1     0     0     0     0
-3     1     1     1     1     1     0     1     0     1     0     0     0     1
-4     0     1     1     1     1    NA     1     0     1    NA    NA    NA    NA
-5     0    NA    NA    NA     0     1    NA     1     1    NA    NA    NA    NA
-6     1     1     1     1     1    NA     1     0     1     1    NA     1     1
   V1i10 V1i11 V1i12 V1i13 V1i14 V1i15 V1i16 V1i17 V1i18 V1i19 V1i20 V1i21 V1i22
 1     1     0     1     1     1     1     0     1     1     1     0     0     0
 2     1     0     1     1     1     1     0     1     0     0     0     1     0
-3     1     0     0     0     1     1     1     1     0     0     0     0     0
-4     0    NA    NA    NA     1     1    NA    NA    NA     1    NA    NA    NA
-5    NA    NA     0    NA     1     1    NA     1     1     1    NA    NA     0
-6     1     1     1    NA     1     1    NA     1     1     1     0    NA     0
   V1i23 V1i24 V2i01 V2i02 V2i03 V2i04 V2i05 V2i06 V2i07 V2i08 V2i09 V2i10 V2i11
 1     1     1     0     1     0     0    NA    NA     0     1     1     0     0
 2     1     1     0     0    NA     1    NA     0     0     1     1     1     0
-3     1     0     0     1     1    NA    NA     0     1     0     0     0     1
-4    NA    NA    NA    NA     1    NA    NA    NA    NA    NA     1    NA    NA
-5     0    NA    NA    NA     0    NA    NA    NA     1     1     1    NA    NA
-6     0    NA    NA     1     1    NA    NA    NA     0    NA     1    NA     0
   V2i12 V2i13 V2i14 V2i15 V2i16 V2i17 V2i18 V3i01 V3i02 V3i03 V3i04 V3i05 V3i06
 1     0     0     1    NA    NA     0    NA     0     1     0     1     1     1
 2     0     0     0    NA    NA     0     1     1     0     0     1    NA     0
-3     0     0     0     0     0     0     0     1     1     0     1     1     1
-4    NA    NA     1    NA    NA    NA    NA     1     0     1     1    NA    NA
-5    NA    NA     1    NA    NA    NA    NA     1     1     0     1     1    NA
-6     1    NA     1    NA    NA    NA    NA     1     1     0     1     1    NA
   V3i07 V3i08 V3i09 V3i10 V3i11 V3i12 V3i13 V3i14 V3i15 V3i16 V3i17 V3i18
 1     1     1     0     0     0     0     0     0     1     1     0     1
 2     0     0    NA    NA     1     1     0     1     1     1     1     0
-3     0     0     0     0     0     1     0     1     0     1     1     1
-4    NA    NA    NA    NA    NA    NA    NA    NA    NA     0     1    NA
-5    NA    NA    NA    NA    NA     1    NA    NA    NA     0     1     0
-6    NA    NA    NA    NA     1     1    NA     1     0     1     1     1
   MA1i01 MA1i02 MA1i03 MA1i04 MA1i05 MA1i06 MA1i07 MA1i08 MA1i09 MA1i10 MA1i11
 1      0     NA      0      0     NA     NA     NA     NA     NA     NA     NA
 2     NA     NA     NA      1     NA      0     NA     NA     NA      1      0
-3      0      1      1      1      1      1      1      1      1      1      1
-4      1      1      0      1      1      1      1      1      1      1      1
-5      1      1      1      1      1      1      0      0      0      1      1
-6      0      1      0      1      1      1      0      1      1      1      1
   MA1i12 MA1i13 MA1i14 MA1i15 MA2i01 MA2i02 MA2i03 MA2i04 MA2i05 MA2i06 MA2i07
 1      1      1     NA     NA      1     NA     NA     NA     NA     NA     NA
 2      1      0      1      0     NA      0     NA     NA     NA     NA     NA
-3      1      1      1     NA      1      1      1      1      1      1      1
-4      1      0      1      1      1      1      1      1      1      1      1
-5      1      1      1      1      1      1      1      1      1      1      1
-6      1      1      0      1      1     NA      1      1     NA     NA      1
   MA2i08 MA2i09 MA2i10 MVi01 MViO2 MViO3 MVi02 MViO4 MViO5 MVi03 MViO6 MViO7
 1      1      0     NA     0     1     0     1    NA     1     0     1     1
 2      0      1     NA     1     0     1     0    NA     1    NA     1     1
-3      1      1     NA     1     1     1     0     1     1     1     1     1
-4      0      1      1     1     1     1     1     1    NA     1     1     1
-5      1      1      1     1     1     1     1     1     1     1     1     1
-6      1     NA      1     1     1     1     1     1     1     1     1     1
   MVi04 MViO8 MViO9 RGi01 RGi02 RGi03 RGi04 RGi05 RGi06 RGi07 RGi08 RGi09 RGi10
 1    NA     0     1    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA
 2     1     0    NA     1     0     0     0     1     0    NA     1    NA    NA
-3     1     0     1     1     1     1     1     1    NA     1     0     0    NA
-4     1     1     1     1     1     1    NA     1     1     1     1     1     1
-5     1     1     1     0     1     1     0     1     1     0    NA     1    NA
-6     1     1     1     1     1     1     1     1     1     1     1     1     1
   RGi11 RGi12 RGi13 RGi14 RGi15 RLi01 RLi02 RLi03 RLi04 RLi05 RLi06 RLi07 RLi08
 1    NA    NA    NA    NA    NA     1     1     1     1     0     1     1     0
 2    NA    NA    NA    NA    NA     1     1     0     1    NA     1     1     1
-3    NA    NA    NA    NA    NA     1     1     1     1     0     0     1     1
-4     1     1     0     1     1     1     1     1     1     0     1     0     1
-5     1     1    NA    NA    NA     1     1     1     1     1     1     0     1
-6     1     0    NA     1     1     1     1     1     1     0     1     1     0
   RLi09 RLi10 RLi11 RLi12 RLi13 RLi14 RLi15 RLi16 RLi17 RLi18 RLi19 RLi20 RLi21
 1     1     1     0     0     0     1     1     1     0     1     1     0     1
 2     0     0     0     0     1     0     0     1     0     1     0     0     1
-3     1     1     1     0     0     0     0     1     0     1     0     0     1
-4     1     0     1     0     0     0     1     1     0     1     0     0     1
-5     1     1     1     1     1     0     0     1     0     1     1     1     1
-6     1     0     1     1     0     1     0     1     1     1     1    NA     1
   RLi22 RLi23 RLi24 RLi25 RLi26 RLi27 RLi28 RLi29 RLi30 Ii01 Ii02 Ii03 Ii04
 1     0     1     0     0     0     1     1     1     0    1    1    1    1
 2     1     1     0     1     0     1     0     0     0   NA    1   NA    0
-3     0     1     1     0     0     1     1     1     0    1   NA    1    1
-4     0     1     0     1     1     1     1     0     1    1   NA    1    1
-5     0     1     0     0     0     1     1     0     1    1    1    1    1
-6     1     1    NA    NA    NA    NA    NA    NA    NA    1    1    1   NA
   Ii05 Ii06 Ii07 Ii08 Ii09 Ii10 Ii11 Ii12 Ii13 Ii14 Ii15  N P1 P2   P3 FI1 FI2
 1    1    1    1   NA    1   NA   NA   NA   NA   NA   NA NA NA NA &lt;NA&gt;  NA  NA
 2   NA   NA    0   NA   NA   NA   NA   NA   NA   NA   NA NA NA NA &lt;NA&gt;  NA  NA
-3    1    0    1    1    1    1    1    1    0    1   NA 35 25 22   40   9  12
-4    1    1    1    1    1    1    1   NA   NA    0   NA 43 24 25   47  30  16
-5    1    1   NA    1    1    1    0   NA   NA   NA   NA 39 27 22   33   9   9
-6    1    1    1    1    1    1    1   NA   NA   NA   NA 38 34 23   44  14  11
   FF portuguese english math biology physics chimestry geography history
 1 NA       &lt;NA&gt;    &lt;NA&gt; &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;
-2 NA       &lt;NA&gt;    &lt;NA&gt; &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;
-3 17         72    78.5 60.1    62.6    65.8      68.3        61    &lt;NA&gt;
-4 15         62    81.5 85.5    72.2    77.7        90      65.5    &lt;NA&gt;
-5  9         77      74   75      77      69      83.5      &lt;NA&gt;    81.5
-6  9         82      96   92    91.6      80        91      &lt;NA&gt;      85</code></pre>
+2 NA       &lt;NA&gt;    &lt;NA&gt; &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;</code></pre>
 </div>
 </div>
 <p>You can check for yourself that each row holds data about a child, including their participant identity code, as well as information about their parents, household, gender, age, school class, and their grades on end-of-year subject attainment (e.g., how well they did in English language).</p>
