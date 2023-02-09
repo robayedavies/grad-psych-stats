@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.189">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Psychological data analysis for graduate students - 4&nbsp; Introduction to linear mixed-effects models</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./03-mixed.html" rel="next">
+<link href="./01-multilevel.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to linear mixed-effects models</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Psychological data analysis for graduate students</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">Making the most of R</span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./knowledge-ecosystem.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R knowledge</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data visualization</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">Models</span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-multilevel.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to multilevel data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-mixed.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to linear mixed-effects models</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-mixed.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">03-mixed.html</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-glmm.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">04-glmm.html</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">Writing research reports</span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction: the why</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./what.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">What</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./how.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">How</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">End</span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#crossed-random" id="toc-crossed-random" class="nav-link active" data-scroll-target="#crossed-random"><span class="toc-section-number">4.1</span>  Motivations: repeated measures designs and crossed random effects</a></li>
+  <li><a href="#key-ideas" id="toc-key-ideas" class="nav-link" data-scroll-target="#key-ideas"><span class="toc-section-number">4.2</span>  The key idea to get us started</a></li>
+  <li><a href="#targets" id="toc-targets" class="nav-link" data-scroll-target="#targets"><span class="toc-section-number">4.3</span>  Targets</a></li>
+  <li><a href="#study-guide" id="toc-study-guide" class="nav-link" data-scroll-target="#study-guide"><span class="toc-section-number">4.4</span>  Study guide</a></li>
+  <li><a href="#CP-study" id="toc-CP-study" class="nav-link" data-scroll-target="#CP-study"><span class="toc-section-number">4.5</span>  The data we will work with: CP reading study</a>
+  <ul class="collapse">
+  <li><a href="#research-question" id="toc-research-question" class="nav-link" data-scroll-target="#research-question"><span class="toc-section-number">4.5.1</span>  Our research question</a></li>
+  <li><a href="#untidy-data" id="toc-untidy-data" class="nav-link" data-scroll-target="#untidy-data"><span class="toc-section-number">4.5.2</span>  The challenges of working with real (untidy) experimental data</a></li>
+  <li><a href="#access" id="toc-access" class="nav-link" data-scroll-target="#access"><span class="toc-section-number">4.5.3</span>  Locate and download the data files</a></li>
+  </ul></li>
+  <li><a href="#tidy-the-data" id="toc-tidy-the-data" class="nav-link" data-scroll-target="#tidy-the-data"><span class="toc-section-number">4.6</span>  Tidy the data</a>
+  <ul class="collapse">
+  <li><a href="#import" id="toc-import" class="nav-link" data-scroll-target="#import"><span class="toc-section-number">4.6.1</span>  Read in the data files by using the read_csv and read_tsv functions</a></li>
+  <li><a href="#restructure" id="toc-restructure" class="nav-link" data-scroll-target="#restructure"><span class="toc-section-number">4.6.2</span>  Reshape the data from wide to long using the gather() function</a></li>
+  <li><a href="#merging-data-from-different-data-sets-using-_join" id="toc-merging-data-from-different-data-sets-using-_join" class="nav-link" data-scroll-target="#merging-data-from-different-data-sets-using-_join"><span class="toc-section-number">4.6.3</span>  Merging data from different data-sets using _join()</a></li>
+  <li><a href="#transform" id="toc-transform" class="nav-link" data-scroll-target="#transform"><span class="toc-section-number">4.6.4</span>  Select or transform the variables</a></li>
+  <li><a href="#filter" id="toc-filter" class="nav-link" data-scroll-target="#filter"><span class="toc-section-number">4.6.5</span>  Filter observations</a></li>
+  <li><a href="#now-we-have-some-tidy-data" id="toc-now-we-have-some-tidy-data" class="nav-link" data-scroll-target="#now-we-have-some-tidy-data"><span class="toc-section-number">4.6.6</span>  Now we have some tidy data</a></li>
+  <li><a href="#we-can-output-the-data-as-a-.csv-file" id="toc-we-can-output-the-data-as-a-.csv-file" class="nav-link" data-scroll-target="#we-can-output-the-data-as-a-.csv-file"><span class="toc-section-number">4.6.7</span>  We can output the data as a .csv file</a></li>
+  <li><a href="#data-tidying-conclusions" id="toc-data-tidying-conclusions" class="nav-link" data-scroll-target="#data-tidying-conclusions"><span class="toc-section-number">4.6.8</span>  Data tidying – conclusions</a></li>
+  </ul></li>
+  <li><a href="#crossed-random" id="toc-crossed-random" class="nav-link" data-scroll-target="#crossed-random"><span class="toc-section-number">4.7</span>  Repeated measures designs and crossed random effects</a></li>
+  <li><a href="#working-with-mixed-effects-models" id="toc-working-with-mixed-effects-models" class="nav-link" data-scroll-target="#working-with-mixed-effects-models"><span class="toc-section-number">4.8</span>  Working with mixed-effects models</a>
+  <ul class="collapse">
+  <li><a href="#load-the-data-if-you-need-to" id="toc-load-the-data-if-you-need-to" class="nav-link" data-scroll-target="#load-the-data-if-you-need-to"><span class="toc-section-number">4.8.1</span>  Load the data if you need to</a></li>
+  <li><a href="#linear-model-for-multilevel-data-ignoring-the-hierarchical-structure" id="toc-linear-model-for-multilevel-data-ignoring-the-hierarchical-structure" class="nav-link" data-scroll-target="#linear-model-for-multilevel-data-ignoring-the-hierarchical-structure"><span class="toc-section-number">4.8.2</span>  Linear model for multilevel data – ignoring the hierarchical structure</a></li>
+  <li><a href="#can-we-ignore-the-hierarchical-structure" id="toc-can-we-ignore-the-hierarchical-structure" class="nav-link" data-scroll-target="#can-we-ignore-the-hierarchical-structure"><span class="toc-section-number">4.8.3</span>  Can we ignore the hierarchical structure?</a></li>
+  <li><a href="#multilevel-here-more-appropriately-known-as-mixed-effects-models" id="toc-multilevel-here-more-appropriately-known-as-mixed-effects-models" class="nav-link" data-scroll-target="#multilevel-here-more-appropriately-known-as-mixed-effects-models"><span class="toc-section-number">4.8.4</span>  Multilevel – here, more appropriately known as – mixed-effects models</a></li>
+  <li><a href="#is-there-a-difference-between-linear-model-and-linear-mixed-effects-model-results" id="toc-is-there-a-difference-between-linear-model-and-linear-mixed-effects-model-results" class="nav-link" data-scroll-target="#is-there-a-difference-between-linear-model-and-linear-mixed-effects-model-results"><span class="toc-section-number">4.8.5</span>  Is there a difference between linear model and linear mixed-effects model results?</a></li>
+  <li><a href="#BLUPS" id="toc-BLUPS" class="nav-link" data-scroll-target="#BLUPS"><span class="toc-section-number">4.8.6</span>  What we estimate when we estimate random effects</a></li>
+  </ul></li>
+  <li><a href="#fixed-fallacy" id="toc-fixed-fallacy" class="nav-link" data-scroll-target="#fixed-fallacy"><span class="toc-section-number">4.9</span>  Variation between stimuli: the “language as fixed-effect fallacy”</a>
+  <ul class="collapse">
+  <li><a href="#include-the-random-effect-of-stimulus" id="toc-include-the-random-effect-of-stimulus" class="nav-link" data-scroll-target="#include-the-random-effect-of-stimulus"><span class="toc-section-number">4.9.1</span>  Include the random effect of stimulus</a></li>
+  </ul></li>
+  <li><a href="#variance-covariance" id="toc-variance-covariance" class="nav-link" data-scroll-target="#variance-covariance"><span class="toc-section-number">4.10</span>  Variances and covariances of random effects</a>
+  <ul class="collapse">
+  <li><a href="#but-remember-we-excluded-random-effects-covariance" id="toc-but-remember-we-excluded-random-effects-covariance" class="nav-link" data-scroll-target="#but-remember-we-excluded-random-effects-covariance"><span class="toc-section-number">4.10.1</span>  But remember we excluded random effects covariance</a></li>
+  </ul></li>
+  <li><a href="#reporting-the-results-of-a-mixed-effects-model" id="toc-reporting-the-results-of-a-mixed-effects-model" class="nav-link" data-scroll-target="#reporting-the-results-of-a-mixed-effects-model"><span class="toc-section-number">4.11</span>  Reporting the results of a mixed-effects model</a></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions"><span class="toc-section-number">4.12</span>  Conclusions</a>
+  <ul class="collapse">
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="toc-section-number">4.12.1</span>  Summary</a></li>
+  <li><a href="#useful-functions" id="toc-useful-functions" class="nav-link" data-scroll-target="#useful-functions"><span class="toc-section-number">4.12.2</span>  Useful functions</a></li>
+  </ul></li>
+  <li><a href="#r-code-and-data-file-access-for-the-class" id="toc-r-code-and-data-file-access-for-the-class" class="nav-link" data-scroll-target="#r-code-and-data-file-access-for-the-class"><span class="toc-section-number">4.13</span>  R code and data file access for the class</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="toc-section-number">4.14</span>  References</a>
+  <ul class="collapse">
+  <li><a href="#recommended-reading" id="toc-recommended-reading" class="nav-link" data-scroll-target="#recommended-reading"><span class="toc-section-number">4.14.1</span>  Recommended reading</a></li>
+  <li><a href="#references-list" id="toc-references-list" class="nav-link" data-scroll-target="#references-list"><span class="toc-section-number">4.14.2</span>  References list</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to linear mixed-effects models</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="crossed-random" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="crossed-random"><span class="header-section-number">4.1</span> Motivations: repeated measures designs and crossed random effects</h2>
+<p>In the <strong>Introduction to multilevel data</strong>, we looked at a multilevel structured dataset in which there are observations about children’s grades, and it is evident that those children can be grouped by or under classes. As we discussed, this kind of data structure will come from studies with a very common design in which the researcher recorded observations about a sample of children who are members of a sample of classes. In working with these kind of data, it is common to say that the observations of children’s grades are <em>nested</em> within classes in a hierarchy.</p>
+<p>Many Psychologists conduct studies where observations are properly understood to be structured in groups of some form but where, nevertheless, it is inappropriate to think of the observations as being nested (Baayen et al., 2008). We are talking, here, about <strong>repeated-measures designs</strong> where the experimenter presents a sample of multiple stimuli for response to each participant in a sample of for multiple participants. This is another <em>very</em> common experimental design in psychological science. Studies with this kind of design will produce data with a structure that, also, requires the use of mixed-effects models but, as we shall see, the way we think about the structure will be a bit more complicated. We could say that observations of the responses made by participants to each stimulus can be grouped by participant: each person will tend to respond in similar ways to different stimuli. Or, we could say that observations of responses can be grouped by stimulus because each stimulus will tend to evoke similar kinds of responses in different people. Or, we could say that both forms of grouping should be taken into account at the same time.</p>
+<p>We shall take the third position and this chapter will concern why, and how we will adapt our thinking and practice.</p>
+</section>
+<section id="key-ideas" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="key-ideas"><span class="header-section-number">4.2</span> The key idea to get us started</h2>
+<p>This week, we again look at data with multilevel structure. But we are looking at data where participants were asked to respond to a set of stimuli (words) so that our observations consist of recordings made of the response made by each child to each stimulus. We use the same procedure we did for multilevel data but with one significant change which we shall identify and explain.</p>
+</section>
+<section id="targets" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="targets"><span class="header-section-number">4.3</span> Targets</h2>
+<p>Our learning objectives again include the development of both understanding and practical skills.</p>
+</section>
+<section id="study-guide" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="study-guide"><span class="header-section-number">4.4</span> Study guide</h2>
+
+</section>
+<section id="CP-study" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="CP-study"><span class="header-section-number">4.5</span> The data we will work with: CP reading study</h2>
+<p>This week, we will be working with the <strong>CP reading study</strong> dataset. CP tested 62 children (aged 116-151 months) on reading aloud in English. In the experimental reading task, she presented 160 words as stimuli. The same 160 words were presented to all children. The words were presented one at a time on a computer screen. Each time a word was shown, the children had to read the word out loud and their response was recorded. Thus, the CP reading study dataset comprised observations about the responses made by 62 children to 160 words.</p>
+<p>In addition to the reading task, CP administered tests of reading skill (TOWRE sight word and phonemic tests, Torgesen et al., 1999), reading experience (CART, Stainthorp, 1997), the Spoonerisms sub-test of the Phonological Awareness test Battery (Frederickson et al., 1997), and an orthographic choice test measure of orthographic knowledge (based on Olson et al., 1985). She also recorded the gender and the handedness of the children.</p>
+<p>Ultimately, the CP dataset were incorporated in an analysis of the impact of age on reading skills over the life-span, reported by Davies, Arnell, Birchenough, Grimmond and Houlson (2017). You can find more details on the data and the methods in that paper.</p>
+<p>The CP study resembles many studies in psychological science. The critical features of the study are that we have an outcome measure – the reading response – observed multiple times (for each stimulus) for each participant. We have 160 responses recorded for each participant, one response for each stimulus word. And we have 62 responses recorded for each word, one response for each participant. The presence of these features is the reason why we need to use mixed-effects models in our analysis. These features are common across a range of study designs so the lessons we learn will apply frequently in psychological research. This is the reason why it is important we teach and learn how to use mixed-effects models.</p>
+<section id="research-question" class="level3" data-number="4.5.1">
+<h3 data-number="4.5.1" class="anchored" data-anchor-id="research-question"><span class="header-section-number">4.5.1</span> Our research question</h3>
+<p>We are going to use these data to examine the answers to the following question:</p>
+<p>We can look at the answers to this question while also taking into account the impacts of random differences – between sampled participants or between sampled words – using mixed-effects models. But, first, we are going to look at how we get the data ready for analysis.</p>
+</section>
+<section id="untidy-data" class="level3" data-number="4.5.2">
+<h3 data-number="4.5.2" class="anchored" data-anchor-id="untidy-data"><span class="header-section-number">4.5.2</span> The challenges of working with real (untidy) experimental data</h3>
+<p>Ordinarily, textbooks and guides to data analysis give you the data ready for analysis but this situation will never be true for your professional practice (at least, not at first). Instead of pretending that data arrive ready for analysis, we are going to look at the process of <strong>data tidying</strong>, step-by-step. This will help you to get ready for the same process when you have to develop and use it in your own research.</p>
+<p>We are going to spend a bit of time looking at the data tidying process. This process involves identifying and resolving a series of challenges, in order. Looking at the tidying process will give you a concrete sense of the structure in the data. You should also take this opportunity to reflect on the nature of the process itself – what we have to do and why, in what order and why – so that you can develop a sense of the process you might need to build when the time comes for you to prepare your own data for analysis.</p>
+<p>The time that we spend looking at data tidying is an investment in learning that will save you time later, in your professional work. If, however, you want to skip it, go to section @ref(crossed-random).</p>
+<section id="the-data-we-need-to-use-for-analysis-are-not-all-in-the-same-file" class="level4" data-number="4.5.2.1">
+<h4 data-number="4.5.2.1" class="anchored" data-anchor-id="the-data-we-need-to-use-for-analysis-are-not-all-in-the-same-file"><span class="header-section-number">4.5.2.1</span> The data we need to use for analysis are not all in the same file</h4>
+<p>In analyzing psychological data, the first step is usually to collect the data together. In psychological research, the data may exist, at first, in separate files. For the CP study, we have <em>separate files</em> for each of the pieces of information we need to use in our analyses:</p>
+<p>Often, we need all these kinds of information for our analyses but different pieces of information are produced in separate ways and come to us in separate files. For example, we may collect experimental response data using software like PsychoPy, E-Prime, Qualtrics or DMDX. We may collect information about participant characteristics using standardized measures, or by asking participants to complete a set of questions on their age, gender, and so on.</p>
+</section>
+<section id="the-data-we-need-to-use-are-untidy" class="level4" data-number="4.5.2.2">
+<h4 data-number="4.5.2.2" class="anchored" data-anchor-id="the-data-we-need-to-use-are-untidy"><span class="header-section-number">4.5.2.2</span> The data we need to use are untidy</h4>
+<p>Often, the files we get are untidy: not in a useful or <em>tidy</em> format. For example, if you open the file <code>CP_study_word_naming_rt_180211.dat</code> (a <code>.dat</code> or tab delimited file) in Excel, you will see a spreadsheet that looks like Figure @ref(fig:CPrt).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="CP_study_word_naming_rt_180211-excel-shot.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">CP study RTs .dat file</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Typical of the output from data collection software, we can see a data table with:</p>
+<ol type="1">
+<li>in the top row, column header labels <code>item_name, AislingoC, AllanaD ...</code>;</li>
+<li>in the first (leftmost) column, row labels <code>item_name, act, ask, both ...</code>;</li>
+<li>for each row, we see values equal to the reaction time (RT) observed for the response made to each stimulus (listed in the row labels);</li>
+<li>for each column, we see values equal to the RTs observed for each person (listed in the column labels);</li>
+<li>and at each intersection of row and column (for each cell), we see the RT observed for a response made by a participant to a stimulus.</li>
+</ol>
+<p>Data laid out like this are sometimes said to be in <em>wide</em> format. You can see that the data are <em>wide</em> because at least one variable – here, reading reaction time – is held not in one column but spread out over several columns, side-by-side. Thus, the dataset is wide with fewer rows and many columns.</p>
+<p>We want the data in what is called the <em>tidy</em> format.</p>
+</section>
+<section id="how-tidy-data-are-tidy" class="level4" data-number="4.5.2.3">
+<h4 data-number="4.5.2.3" class="anchored" data-anchor-id="how-tidy-data-are-tidy"><span class="header-section-number">4.5.2.3</span> How tidy data are tidy</h4>
+<p>There are three inter-related rules which make data <em>tidy</em> (Grolemund &amp; Wickham, 2019):</p>
+<ol type="1">
+<li>Each variable must have its own column.</li>
+<li>Each observation must have its own row.</li>
+<li>Each value must have its own cell.</li>
+</ol>
+<p>You can read more about tidy data here:</p>
+<p></p>
+<p>For our purposes, the reason we want the data in <em>tidy</em> format is that it is required for the functions we are going to use for mixed-effects modelling. However, in general, <em>tidy</em> format is maximally flexible, and convenient, for use with different R functions.</p>
+</section>
+</section>
+<section id="access" class="level3" data-number="4.5.3">
+<h3 data-number="4.5.3" class="anchored" data-anchor-id="access"><span class="header-section-number">4.5.3</span> Locate and download the data files</h3>
+<p>Go to the 402 Moodle folder for week 18, and download the .zip (compressed) folder labeled <strong>PSYC402-01-multilevel-resources</strong></p>
+<p>Or, download the same folder by clicking on the link:</p>
+<p></p>
+<p>In this folder, we have got four files that we will need to import or read in to R:</p>
+<p>The <code>words.items</code> file holds information about the 160 stimulus words presented in the experimental reading (word naming) task. The <code>all.subjects</code> file holds information about the 62 participants who volunteered to take part in the experiment. The <code>.csv</code> files are <em>comma separated values</em> files. The <code>.dat</code> files are <em>tab delimited</em> files holding behavioural data: the latency or reaction time <code>rt</code> (in milliseconds) and the accuracy <code>acc</code> of response made by each participant to each stimulus.</p>
+</section>
+</section>
+<section id="tidy-the-data" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="tidy-the-data"><span class="header-section-number">4.6</span> Tidy the data</h2>
+<p>To answer our research question, we will need to combine the behavioural data with information about the participants (age, gender …) and about the words (word, frequency …) We will need to ensure that the data-set we construct will be in <em>tidy</em> format. We will need to <em>select</em> variables (columns) to get just those required for our later analyses. And we will need to <em>filter</em> cases (rows), excluding errors or outliers.</p>
+<p>We shall need to do this work in a series of processing steps:</p>
+<ol type="1">
+<li>Import the data or read the data into R, see Section @ref(import)</li>
+<li>Restructure the data, see Section @ref(restructure)</li>
+<li>Select or transform variables, see Section @ref(transform)</li>
+<li>Filter observations, see Section @ref(filter)</li>
+</ol>
+<p>We will use <code>tidyverse</code> library functions from the begining, starting with the import stage.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>(Every step can also be done in alternative processing steps with the same result using <em>base R</em> code.)</p>
+<section id="import" class="level3" data-number="4.6.1">
+<h3 data-number="4.6.1" class="anchored" data-anchor-id="import"><span class="header-section-number">4.6.1</span> Read in the data files by using the read_csv and read_tsv functions</h3>
+<p>I am going to assume you have downloaded the data files, that they are all in the same folder, and that you know where they are on your computer or server. We need to use different versions of the <code>read_</code> function to read all four files into R.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>behaviour.rt <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"CP study word naming rt 180211.dat"</span>, <span class="at">na =</span> <span class="st">"-999"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>behaviour.acc <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"CP study word naming acc 180211.dat"</span>, <span class="at">na =</span> <span class="st">"-999"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>subjects <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"all.subjects 110614-050316-290518.csv"</span>, <span class="at">na =</span> <span class="st">"-999"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>words <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"words.items.5 120714 150916.csv"</span>, <span class="at">na =</span> <span class="st">"-999"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>These different versions respect the different ways in which the <code>.dat</code> and <code>.csv</code> file formats work. We need <code>read_tsv()</code> when data files consist of tab separated values. We need <code>read_csv()</code> when data files consist of comma separated values.</p>
+<p>You can read more about the <strong>tidyverse readr</strong> library of helpful functions here:</p>
+<p></p>
+<p>It is <em>very</em> common to get experimental data in all sorts of different formats. Learning to use <strong>tidyverse</strong> functions will make it easier to cope with this when you do research.</p>
+<section id="code-tip" class="level4" data-number="4.6.1.1">
+<h4 data-number="4.6.1.1" class="anchored" data-anchor-id="code-tip"><span class="header-section-number">4.6.1.1</span> Code tip</h4>
+<p>Notice, here, that we use the <code>read_</code> function to read in the data, entering two arguments inside the brackets after the function name. For example, we write the code as:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>behaviour.rt <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"CP study word naming rt 180211.dat"</span>, <span class="at">na =</span> <span class="st">"-999"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Take a look at what this line of code includes, element by element.</p>
+<ol type="1">
+<li>We write <code>behaviour.rt &lt;- read_tsv(...)</code> to create an object in the R environment, which we call <code>behaviour.rt</code> – the object with this name is the dataset we read into R using <code>read_tsv(...)</code>.</li>
+<li>When we write the function <code>read_tsv(...)</code> we include two arguments inside it.</li>
+<li><code>read_tsv("CP study word naming rt 180211.dat", ...</code> first, the name of the file, given in quotes <code>""</code> and then a comma.</li>
+<li><code>read_tsv(..., na = "-999")</code> second, we tell R that there are some missing values <code>na</code> which are coded with the value <code>"-999"</code>.</li>
+</ol>
+</section>
+<section id="a-quick-lesson-about-missing-value-codes" class="level4" data-number="4.6.1.2">
+<h4 data-number="4.6.1.2" class="anchored" data-anchor-id="a-quick-lesson-about-missing-value-codes"><span class="header-section-number">4.6.1.2</span> A quick lesson about missing value codes</h4>
+<p>In R, a missing value is said to be “not available”: <code>NA</code>.</p>
+<p>In the datasets – typically, the spreadsheets – we create in our research, we will have values missing for different reasons. Take another look at the data spreadsheet you saw earlier, Figure @ref(fig:CPrt-2).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="CP_study_word_naming_rt_180211-excel-shot.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">CP study RTs .dat file</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>You should be able to see that the spreadsheet holds information, as explained, about the RTs of the responses made by each child to each stimulus word. Each of the cells in the spreadsheet (i.e.&nbsp;the box where a column intersects with a row) includes a number value. Most of the values are positive numbers like 751.3: the reaction time of a response, recorded in milliseconds. The values have to be positive because they represent the length of time between the moment the stimulus word is presented on the test computer screen and the moment the child’s spoken word response has begun to be registered by the computer microphone and sound recording software.</p>
+<p>Some of the cells hold the value <code>-999</code>, however. Obviously, we cannot have negative RT. The value represents the fact that we have no data. Take a look at Figure @ref(fig:CPrt-2): we have a <code>-999</code> where we should have a RT for the response made by participant <code>AllanaD</code> to the word <code>broad</code>. This <code>-999</code> is there because, for some reason, we did not record an RT or a response for that combination of participant and stimulus.</p>
+<p>We can choose any value we like, as researchers, to code for missing data like this. Some researchers choose not to code for the absence of a response recording or leave the cell in a spreadsheet blank or empty where data are missing. This is <strong>bad practice</strong> though it is common.</p>
+<p>There are a number of reasons why it is bad practice to just leave a cell empty when it is empty because no observation is to be recorded.</p>
+<ol type="1">
+<li>Data may be missing for different reasons: maybe a child did not make any response to a stimulus (often called a “null response”); or maybe a child made a response but there was a microphone or other technical fault; or maybe a child made a response but it was an error and (here) the corresponding performance measure (RT) cannot be counted.</li>
+<li>If you do not code for missingness in the data then the software you use will do it for you, but you may not know how it does so, or where.</li>
+<li>If you have missing data, you ought to be able to identify where the data are missing.</li>
+</ol>
+<p>I use <code>-999</code> to code for missing values because you should never see a value like that in real reading RT data. You can use whatever value you like but you should make sure you <em>do</em> code for missing data somehow.</p>
+</section>
+</section>
+<section id="restructure" class="level3" data-number="4.6.2">
+<h3 data-number="4.6.2" class="anchored" data-anchor-id="restructure"><span class="header-section-number">4.6.2</span> Reshape the data from wide to long using the gather() function</h3>
+<p>We are going to need to restructure these data from a wide format to a longer format. We need to restructure both behavioural data-sets, accuracy and RT. We do this using the <code>pivot_longer()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>rt.long <span class="ot">&lt;-</span> behaviour.rt <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">pivot_longer</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">62</span>, <span class="at">names_to =</span> <span class="st">"subjectID"</span>, <span class="at">values_to =</span> <span class="st">"RT"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>acc.long <span class="ot">&lt;-</span> behaviour.acc <span class="sc">%&gt;%</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">pivot_longer</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">62</span>, <span class="at">names_to =</span> <span class="st">"subjectID"</span>, <span class="at">values_to =</span> <span class="st">"accuracy"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Doing data-set construction programmatically, using R functions, is generally more reliable, and faster, than doing it by hand. Researchers used to have to do this sort of thing by hand, using copying and pasting, in Excel or SPSS. Doing the process by hand takes many hours or days. And you <em>always</em> make errors.</p>
+<section id="code-tip-1" class="level4" data-number="4.6.2.1">
+<h4 data-number="4.6.2.1" class="anchored" data-anchor-id="code-tip-1"><span class="header-section-number">4.6.2.1</span> Code tip</h4>
+<p>Here, we use a function you may not have seen before: <code>pivot_longer()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>rt.long <span class="ot">&lt;-</span> behaviour.rt <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">pivot_longer</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">62</span>, <span class="at">names_to =</span> <span class="st">"subjectID"</span>, <span class="at">values_to =</span> <span class="st">"RT"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The name of the function comes from the fact that we are starting with data in wide format e.g.&nbsp;<code>behaviour.rt</code> where we have what should be a single variable of observations (RTs) arranged in a wide series of multiple columns, side-by-side (one column for each participant). But we want to take those wide data and <em>lengthen</em> the dataset, increasing the number of rows and decreasing the number of columns.</p>
+<p>Let’s look at this line of code bit by bit. It includes a powerful function that accomplishes a lot of tasks, so it is worth explaining this function in some detail.</p>
+<ol type="1">
+<li><code>rt.long &lt;- behaviour.rt %&gt;%</code></li>
+</ol>
+<ul>
+<li>At the start, I tell R that I am going to create a new longer dataset (more rows, fewer columns) that I shall call <code>rt.long</code>.</li>
+<li>I will create this longer dataset from <code>&lt;-</code> the original wide dataset <code>behaviour.rt</code>.</li>
+<li>and I will create the new longer dataset by taking the original wide dataset and piping it <code>%&gt;%</code> to the pivot function coded on the next line:</li>
+</ul>
+<ol start="2" type="1">
+<li><code>pivot_longer(2:62, names_to = "subjectID", values_to = "RT")</code></li>
+</ol>
+<ul>
+<li>On this next line, I tell R how to do the pivoting by using three arguments.</li>
+</ul>
+<ol type="a">
+<li><code>pivot_longer(2:62...)</code></li>
+</ol>
+<ul>
+<li>First, I tell R that I want to re-arrange all the columns that can be found in the dataset from the second column to the sixty-second column.</li>
+<li>In a spreadsheet, we have a number of columns.</li>
+<li>Columns can be identified by their position in the spreadsheet.</li>
+<li>The position of a column in a spreadsheet can be identified by number, from the leftmost column (column number 1) to the rightmost column (here, column number 62) in our dataset.</li>
+<li>So this argument tells R exactly which columns I want to pivot.</li>
+</ul>
+<ol start="2" type="a">
+<li><code>pivot_longer(..., names_to = "subjectID", ...)</code></li>
+</ol>
+<ul>
+<li>Second, I tell R that I want it to take the column labels and put them into a new column, called <code>subjectID</code>.</li>
+<li>In the wide dataset <code>behaviour.rt</code>, each column holds a list of numbers (RTs) but begins with a word in the topmost cell, the name code for a participant, in the column label position.</li>
+<li>We want to keep the information about which participant produces which response when we pivot the wide data to a longer structure.</li>
+<li>We do this by asking R to take the column labels (the participant names) and listing them in a new column, called <code>subjectID</code> which now holds the names as participant ID codes.</li>
+</ul>
+<ol start="3" type="a">
+<li><code>pivot_longer(...values_to = "RT")</code></li>
+</ol>
+<ul>
+<li>Third, we tell R that all the RT values should be put in a single column.</li>
+<li>We can understand that this new column <code>RT</code> will hold RT observations in a vertical stack, one cell for each response by a person to a word, with rows ordered by <code>subjectID</code>.</li>
+</ul>
+<p>There are 61 columns of data listed by participant though 62 children were tested because we lost one child’s data through an administrative error. As a result, in the wide data sets there are 62 columns, with the first column holding <code>item_name</code> data.</p>
+<p>You can find more information about pivoting data here:</p>
+<p></p>
+<p>And you can find more information specifically about the <code>pivot_longer()</code> operation here:</p>
+<p></p>
+<section id="why-restructure" class="level5" data-number="4.6.2.1.1">
+<h5 data-number="4.6.2.1.1" class="anchored" data-anchor-id="why-restructure"><span class="header-section-number">4.6.2.1.1</span> Why we restructure the data</h5>
+<p>As I noted, one problem with the wide format is that the data are structured so that the column names are not names of variables. In our example wide format dataset <code>behaviour.rt</code>, the columns are headed by a participant identity code or name but a participant code is not the name of a variable, it is a value of the variable I call <code>subjectID</code>. In the design of the CP reading study, we want to take into account the impact of differences between participants on response RT (so, we need to identify which participant makes which response). But we do not see the responses made by a participant as a predictor variable.</p>
+<p>A second problem is that, in a wide format file like <code>behaviour.rt</code>, information about the responses made to each stimulus word is all on the same row (that seems good) but in different columns. Each person responded to all the words. But the response made to a word e.g.&nbsp;<code>act</code> made by one participant is in a different column (e.g., 594.8ms, for <code>AislingoC</code>) from the response made to the same word by a different participant (e.g., 586ms, for <code>AlexB</code>). This means that information about the responses made to each stimulus word are spread out as values across multiple columns.</p>
+<p>You can see this for yourself if you inspect the source data using <code>head()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(behaviour.rt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 62
+  item_name Aisli…¹ AlexB AllanaD  AmyR AndyD AnnaF AoifeH Chloe…² ChloeF ChloeS
+  &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 act          595.  586      NA   693   597   627    649    1081    642    623.
+2 ask          482.  864    1163   694.  616   631    538     799.   603    526 
+3 both         458.  670    1114.  980  1019   796.   545.     NA    581    568.
+4 box          546   749.    975   678   589   604    574     658    689.   492 
+5 broad        580  1474.     NA   789   684    NA    816.     NA     NA    798 
+6 bronze       546   861.     NA   845   732.  803.   487.   1701    871    574 
+# … with 51 more variables: CianR &lt;dbl&gt;, ConorF &lt;dbl&gt;, DavidL &lt;dbl&gt;,
+#   DillonF &lt;dbl&gt;, DJHerlihy &lt;dbl&gt;, EamonD &lt;dbl&gt;, EimearK &lt;dbl&gt;, EllenH &lt;dbl&gt;,
+#   EoinL &lt;dbl&gt;, GrainneH &lt;dbl&gt;, JackBr &lt;dbl&gt;, JackK &lt;dbl&gt;, JackS &lt;dbl&gt;,
+#   JamesoC &lt;dbl&gt;, JenniferoS &lt;dbl&gt;, KateF &lt;dbl&gt;, KayleighMc &lt;dbl&gt;, KenW &lt;dbl&gt;,
+#   KevinL &lt;dbl&gt;, KieranF &lt;dbl&gt;, KillianB &lt;dbl&gt;, KirstyC &lt;dbl&gt;, LeeJ &lt;dbl&gt;,
+#   MarkC &lt;dbl&gt;, MatthewC &lt;dbl&gt;, MeganoB &lt;dbl&gt;, MichaelaoD &lt;dbl&gt;,
+#   NataliaR &lt;dbl&gt;, NiallG &lt;dbl&gt;, NiallGavin &lt;dbl&gt;, NiallW &lt;dbl&gt;, …</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(behaviour.acc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 62
+  item_name Aisli…¹ AlexB AllanaD  AmyR AndyD AnnaF AoifeH Chloe…² ChloeF ChloeS
+  &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 have            1     1       1     1     1     1      1       1      1      1
+2 cheer           1     1       0     1     1     1      1       1      1      1
+3 ask             1     1       1     1     1     1      1       1      1      1
+4 care            1     1       0     1     1     1      1       1      1      1
+5 with            1     1       1     1     1     1      1       1      1      1
+6 false           1     1       0     1     1     1      1       1      1      1
+# … with 51 more variables: CianR &lt;dbl&gt;, ConorF &lt;dbl&gt;, DavidL &lt;dbl&gt;,
+#   DillonF &lt;dbl&gt;, DJHerlihy &lt;dbl&gt;, EamonD &lt;dbl&gt;, EimearK &lt;dbl&gt;, EllenH &lt;dbl&gt;,
+#   EoinL &lt;dbl&gt;, GrainneH &lt;dbl&gt;, JackBr &lt;dbl&gt;, JackK &lt;dbl&gt;, JackS &lt;dbl&gt;,
+#   JamesoC &lt;dbl&gt;, JenniferoS &lt;dbl&gt;, KateF &lt;dbl&gt;, KayleighMc &lt;dbl&gt;, KenW &lt;dbl&gt;,
+#   KevinL &lt;dbl&gt;, KieranF &lt;dbl&gt;, KillianB &lt;dbl&gt;, KirstyC &lt;dbl&gt;, LeeJ &lt;dbl&gt;,
+#   MarkC &lt;dbl&gt;, MatthewC &lt;dbl&gt;, MeganoB &lt;dbl&gt;, MichaelaoD &lt;dbl&gt;,
+#   NataliaR &lt;dbl&gt;, NiallG &lt;dbl&gt;, NiallGavin &lt;dbl&gt;, NiallW &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<p>This structure is a problem for visualization and for analysis because the functions we will use require us to specify <em>single</em> columns for an outcome variable like reaction time.</p>
+<p>We are looking at the process of tidying data because untidiness is very common. Learning how to deal with it will save you a lot of time and grief later.</p>
+<p>You should check for yourself how <code>subjectID</code> and <code>RT</code> or <code>accuracy</code> scores get transposed from the old structure to the new structure.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(rt.long)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  item_name subjectID    RT
+  &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt;
+1 act       AislingoC  595.
+2 act       AlexB      586 
+3 act       AllanaD     NA 
+4 act       AmyR       693 
+5 act       AndyD      597 
+6 act       AnnaF      627 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(acc.long)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  item_name subjectID accuracy
+  &lt;chr&gt;     &lt;chr&gt;        &lt;dbl&gt;
+1 have      AislingoC        1
+2 have      AlexB            1
+3 have      AllanaD          1
+4 have      AmyR             1
+5 have      AndyD            1
+6 have      AnnaF            1</code></pre>
+</div>
+</div>
+<p>If you compare the <code>rt.long</code> or <code>acc.long</code> data with what you see in when the data are in the original wide format then you can see how – in going from wide – we have re-arranged the data to a longer and narrower set of columns, one column listing each word, one column for <code>subjectID</code> and one column for <code>RT</code> or <code>accuracy</code>. What a check will show you is that we have multiple rows for responses to each item so that the item is repeated multiple times in different rows.</p>
+<p>These data are <em>now tidy</em>.</p>
+<p>But these data are <em>incomplete</em>. Next we shall combine behavioural observations with data about stimulus words and about participants.</p>
+</section>
+<section id="evolves" class="level5" data-number="4.6.2.1.2">
+<h5 data-number="4.6.2.1.2" class="anchored" data-anchor-id="evolves"><span class="header-section-number">4.6.2.1.2</span> The tidyverse evolves</h5>
+<p>Over the years, different ways of reshaping data have evolved. This reflects how important and common the task is. An older way to do the same operation uses the function <code>gather()</code>.</p>
+<p>You can read more about <code>gather()</code> here:</p>
+<p></p>
+<p>In the functions designed to enable you to restructure data have evolved through a series of different forms. This change is one of the real benefits of using open software like R. In my experience, the newer functions can be useful for <em>really</em> untidy data. I expect things will continue to evolve and improve over time.</p>
+</section>
+</section>
+</section>
+<section id="merging-data-from-different-data-sets-using-_join" class="level3" data-number="4.6.3">
+<h3 data-number="4.6.3" class="anchored" data-anchor-id="merging-data-from-different-data-sets-using-_join"><span class="header-section-number">4.6.3</span> Merging data from different data-sets using _join()</h3>
+<p>To answer our research question, we next need to combine the <strong>RT</strong> with the <strong>accuracy</strong> data, and then the combined behavioural data with <strong>participant</strong> information and <strong>stimulus</strong> information. This is because, as we have seen, information about behavioural responses, about participant attributes or stimulus word properties, are located in separate files.</p>
+<p>Many researchers have completed this kind of operation by hand. This involves copying and pasting bits of data in a spreadsheet. It can take hours or days. I know because I have done it, and I have seen others do it. <strong>Please don’t.</strong> There are better ways to spend your time. And you will make mistakes that you will not then be able to identify.</p>
+<p>We can combine the datasets, in the way that we need, using the <code>tidyverse</code> <code>full_join()</code> function. This gets the job done quickly, and accurately.</p>
+<p>First, we join RT and accuracy data together.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>long <span class="ot">&lt;-</span> rt.long <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">full_join</span>(acc.long)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then, we join subject and item information to the behavioural data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>long.subjects <span class="ot">&lt;-</span> long <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">full_join</span>(subjects, <span class="at">by =</span> <span class="st">"subjectID"</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>long.all <span class="ot">&lt;-</span> long.subjects <span class="sc">%&gt;%</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">full_join</span>(words, <span class="at">by =</span> <span class="st">"item_name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Notice, we can let R figure out how to join the pieces of data together. If we were doing this by hand then we would need to check <em>very carefully</em> the correspondences between observations in different datasets.</p>
+<section id="code-tip-2" class="level4" data-number="4.6.3.1">
+<h4 data-number="4.6.3.1" class="anchored" data-anchor-id="code-tip-2"><span class="header-section-number">4.6.3.1</span> Code tip</h4>
+<p>Here, in a series of steps, we take one dataset and join it (merge it) with the second dataset. Let’s look at an example.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>long <span class="ot">&lt;-</span> rt.long <span class="sc">%&gt;%</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">full_join</span>(acc.long)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The code work as follows.</p>
+<ol type="1">
+<li><code>long &lt;- rt.long %&gt;%</code></li>
+</ol>
+<ul>
+<li>We create a new dataset we call <code>long</code>.</li>
+<li>We do this by taking one original dataset <code>rt.long</code> and <code>%&gt;%</code> piping it to the operation defined in the second step.</li>
+</ul>
+<ol start="2" type="1">
+<li><code>full_join(acc.long)</code></li>
+</ol>
+<ul>
+<li>In this second step, we use the function <code>full_join()</code> to add observations from a second original dataset <code>acc.long</code> to those already from <code>rt.long</code></li>
+</ul>
+<p>The addition of observations from one database joining to those from another happens through a matching process.</p>
+<p>Note that in one example, the example of code I discuss here, I did not specify identifying columns in common, allowing the function to do the work. In the other code chunks I did: <code>long.all &lt;- long.subjects %&gt;% full_join(words, by = "item_name")</code> using the <code>by = ...</code> argument.</p>
+</section>
+<section id="relational-data" class="level4" data-number="4.6.3.2">
+<h4 data-number="4.6.3.2" class="anchored" data-anchor-id="relational-data"><span class="header-section-number">4.6.3.2</span> Relational data</h4>
+<p>In the <code>tidyverse</code> family of <code>dplyr</code> functions, when you work with multiple datasets (tables of data), we call the datasets <strong>relational</strong> data.</p>
+<p><a href="http://r4ds.had.co.nz/relational-data.html#relational-data" class="uri">http://r4ds.had.co.nz/relational-data.html#relational-data</a></p>
+<p>There are three families of verbs designed to work with relational data:</p>
+<ul>
+<li>Mutating joins, which add new variables to one data frame from matching observations in another.</li>
+<li>Filtering joins, which filter observations from one data frame based on whether or not they match an observation in the other table.</li>
+<li>Set operations, which treat observations as if they were set elements.</li>
+</ul>
+<p>We can connect datasets – relate them – according to shared variables like <code>subjectID, item_name</code> (for our data). In <code>tidyverse</code>, the variables that connect pairs of tables are called keys where, and this is what counts, <em>key(-s) are variable(-s) that uniquely identify an observation</em>.</p>
+<p>For the experimental reading data, we have observations about each response made by a participant (one of 61 subjects) to an item (one of 160 words). For these data, we can match up a pair of RT and accuracy observations for each (unique) <code>subjectID-item_name</code> combination.</p>
+<p>If you reflect, we could not combine the RT and accuracy data correctly:</p>
+<ol type="1">
+<li>If we did not have both identifying variables for both datasets, both required to uniquely identify each observation.</li>
+<li>If there were mismatches in values of the identifying variable.</li>
+</ol>
+<p>Sometimes, I have done this operation and it has gone wrong because a subjectID has been spelled one way in one dataset e.g.&nbsp;<code>hugh</code> and another way in the other dataset e.g.&nbsp;<code>HughH</code>. This means I am careful about spelling identifiers and I always check my work after merger operations, calculating dataset lengths to ensure the number of rows in the new dataset matches my expectations.</p>
+</section>
+<section id="join-functions" class="level4" data-number="4.6.3.3">
+<h4 data-number="4.6.3.3" class="anchored" data-anchor-id="join-functions"><span class="header-section-number">4.6.3.3</span> _join functions</h4>
+<p>We used the <code>full_join()</code> function.</p>
+<p>There are three kinds of joins.</p>
+<ul>
+<li>A left join keeps all observations in x.</li>
+<li>A right join keeps all observations in y.</li>
+<li>A full join keeps all observations in x and y.</li>
+</ul>
+<p>I used <code>full_join()</code> because I wanted to retain all observations from both datasets, whether there was a match (as assumed) or not, in the identifying variables, between observations in each dataset.</p>
+</section>
+<section id="exercise" class="level4" data-number="4.6.3.4">
+<h4 data-number="4.6.3.4" class="anchored" data-anchor-id="exercise"><span class="header-section-number">4.6.3.4</span> Exercise</h4>
+<p>As I discuss, you need to have matches in values on key (common) variables. If the <code>subjectID</code> is different on different datasets, you will lose data that would otherwise be merged to form the merged or composite dataset. So, check what happens if you deliberately mis-spell one of the <code>subjectID</code> values in one of the original source wide behavioural data files.</p>
+<p>To be safe, you might want to do this exercise with copies of the source files kept in a folder you create for this purpose. If it goes wrong, you can always re-access the source files and read them in again.</p>
+<p>You can check what happens before and after you break the match by counting the number of rows in the dataset that results from the merger. We can count the number of rows in a dataset with:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(long.all<span class="sc">$</span>RT)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9762</code></pre>
+</div>
+</div>
+<p>This bit of code takes the length of the vector (i.e.&nbsp;variable column <code>RT</code> in dataset <code>long.all</code>), thus counting the number of rows in the dataset.</p>
+</section>
+</section>
+<section id="transform" class="level3" data-number="4.6.4">
+<h3 data-number="4.6.4" class="anchored" data-anchor-id="transform"><span class="header-section-number">4.6.4</span> Select or transform the variables</h3>
+<p>OK, now we have all the data about everything all in one big, long and wide, dataset. But we do not actually need all this stuff. We next need to do two things. First, we need to get rid of variables we will not use: we do that by using <code>select()</code>. Then, we need to remove errors and outlying short RT observations: we do that by using <code>filter()</code> in Section @ref(filter).</p>
+<p>We are going to select just the variables we need using the <code>select()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>long.all.select <span class="ot">&lt;-</span> long.all <span class="sc">%&gt;%</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">select</span>(item_name, subjectID, RT, accuracy, </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                               Lg.UK.CDcount, brookesIMG, AoA_Kup_lem, </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                               Ortho_N, regularity, Length, BG_Mean, </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>                               Voice,   Nasal,  Fricative,  Liquid_SV,  </span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>                               Bilabials,   Labiodentals,   Alveolars,  </span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>                               Palatals,    Velars, Glottals, age.months, </span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>                               TOWREW_skill, TOWRENW_skill, spoonerisms, CART_score)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Notice that these variables do not have <em>reader-friendly</em> names. Naming things well is important, as Jenny Bryan teaches:</p>
+<p></p>
+<p>I would say that this true for variables as much as for files. The names we have in the CP study data were fine for internal use within my research group but we should be careful to ensure that variables have names that make sense to others and to our future selves. We can adjust variable names using the <code>rename()</code> function but I will leave that as an exercise for you to do.</p>
+<!-- ```{r rename, message=FALSE} -->
+<!-- # Rename the variables to easier to understand names -->
+<!-- CP.data <- long.all.select.filter %>% -->
+<!--                   rename("word" = "item_name", -->
+<!--                          "participant" = "subjectID", -->
+<!--                          "frequency" = "Lg.UK.CDcount", -->
+<!--                          "imageability" = "brookesIMG", -->
+<!--                          "aoa" = "AoA_Kup_lem", -->
+<!--                          "neighbourhood" = "Ortho_N", -->
+<!--                          "length" = "Length", -->
+<!--                          "bigram.mean" = "BG_Mean", -->
+<!--                          "Liquids" = "Liquid_SV", -->
+<!--                          "TOWRE.words" = "TOWREW_skill", -->
+<!--                          "TOWRE.nonwords" = "TOWRENW_skill", -->
+<!--                          "CART" = "CART_score" -->
+<!--                          ) -->
+<!-- ``` -->
+<section id="exercise-1" class="level4" data-number="4.6.4.1">
+<h4 data-number="4.6.4.1" class="anchored" data-anchor-id="exercise-1"><span class="header-section-number">4.6.4.1</span> Exercise</h4>
+
+</section>
+</section>
+<section id="filter" class="level3" data-number="4.6.5">
+<h3 data-number="4.6.5" class="anchored" data-anchor-id="filter"><span class="header-section-number">4.6.5</span> Filter observations</h3>
+<p>We now have a tidy dataset <code>long.all.select</code> with 26 columns and 9762 rows.</p>
+<p>The dataset includes missing values, designated <code>NA</code> for <em>not available</em> (to you). Here, every error (coded <code>0</code>, in <code>accuracy</code>) corresponds to an <code>NA</code> in the <code>RT</code> column.</p>
+<p>The dataset also includes outlier data. In this context, <span class="math inline">\(RT &lt; 200\)</span> are probably response errors or equipment failures. We will want to analyse <code>accuracy</code> later, so we shall need to be careful about getting rid of <code>NAs</code>.</p>
+<p>At this point, I am going to exclude two sets of observations only.</p>
+<ul>
+<li>observations corresponding to correct response reaction times that are too short: <span class="math inline">\(RT &lt; 200\)</span>.</li>
+<li>plus observations corresponding to the word <em>false</em> which (because of stupid Excel auto-formatting) dropped item attribute data.</li>
+</ul>
+<p>We can do this using the <code>filter()</code> function, setting conditions on rows, as arguments.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># step 1</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>long.all.select.filter <span class="ot">&lt;-</span> long.all.select <span class="sc">%&gt;%</span> </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                                           <span class="fu">filter</span>(item_name <span class="sc">!=</span> <span class="st">'FALSE'</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># step 2</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>long.all.select.filter <span class="ot">&lt;-</span> long.all.select.filter <span class="sc">%&gt;%</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>                                                  <span class="fu">filter</span>(RT <span class="sc">&gt;=</span> <span class="dv">200</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="code-tip-3" class="level4" data-number="4.6.5.1">
+<h4 data-number="4.6.5.1" class="anchored" data-anchor-id="code-tip-3"><span class="header-section-number">4.6.5.1</span> Code tip</h4>
+<p>Here, I am using the function <code>filter()</code> to …</p>
+</section>
+<section id="the-difference-between-and" class="level4" data-number="4.6.5.2">
+<h4 data-number="4.6.5.2" class="anchored" data-anchor-id="the-difference-between-and"><span class="header-section-number">4.6.5.2</span> The difference between = and ==</h4>
+<p>You need to be careful to distinguish these signs.</p>
+</section>
+<section id="using-multiple-arguments-in-filtering" class="level4" data-number="4.6.5.3">
+<h4 data-number="4.6.5.3" class="anchored" data-anchor-id="using-multiple-arguments-in-filtering"><span class="header-section-number">4.6.5.3</span> Using multiple arguments in filtering</h4>
+<p>You can supply multiple arguments to <code>filter()</code> and this may be helpful if (1.) you want to filter observations according to a match on condition-A <strong>and</strong> condition-B (logical “and” is coded with <code>&amp;</code>) or (2.) you want to filter observations according to a match on condition-A or condition-B (logical “or” is coded <code>|</code>).</p>
+<p>You can read more about using multiple arguments to filter observations here:</p>
+<p></p>
+</section>
+<section id="exercise-2" class="level4" data-number="4.6.5.4">
+<h4 data-number="4.6.5.4" class="anchored" data-anchor-id="exercise-2"><span class="header-section-number">4.6.5.4</span> Exercise</h4>
+<p>Filtering or re-coding observations is an important element of the research workflow in psychological science. How we do or do not remove observations from original data may have an impact on our results (as explored by, e.g., Steegen et al., 2014). It is important, therefore, that we learn how to do this reproducibly using R scripts that we can share with our research reports.</p>
+<p>You can read further information about filtering here:</p>
+<p></p>
+</section>
+<section id="remove-missing-values" class="level4" data-number="4.6.5.5">
+<h4 data-number="4.6.5.5" class="anchored" data-anchor-id="remove-missing-values"><span class="header-section-number">4.6.5.5</span> Remove missing values</h4>
+<p>We will be working with the <code>long.all.select.filter.csv</code> dataset collated from the experimental, subject ability scores, and item property data collected for the CP word naming study.</p>
+<p>For convenience, I am going to remove missing values before we go any further, using the <code>na.omit()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>long.all.noNAs <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(long.all.select.filter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="code-tip-4" class="level4" data-number="4.6.5.6">
+<h4 data-number="4.6.5.6" class="anchored" data-anchor-id="code-tip-4"><span class="header-section-number">4.6.5.6</span> Code tip</h4>
+<p>The <code>na.omit()</code> function is powerful. In using this function, I am asking R to create a new dataset <code>long.all.noNAs</code> from the old dataset <code>long.all.select.filter</code> in a process in which the new dataset will have <em>no</em> rows in which there is a missing value <code>NA</code> in <em>any</em> column. You need to be reasonably sure, when you use this function, where your <code>NAs</code> may be because, otherwise, you may end the process with a new filtered dataset that has many fewer rows in it than you expected.</p>
+</section>
+</section>
+<section id="now-we-have-some-tidy-data" class="level3" data-number="4.6.6">
+<h3 data-number="4.6.6" class="anchored" data-anchor-id="now-we-have-some-tidy-data"><span class="header-section-number">4.6.6</span> Now we have some tidy data</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(long.all.noNAs, <span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 26
+   item_n…¹ subje…²    RT accur…³ Lg.UK…⁴ brook…⁵ AoA_K…⁶ Ortho_N regul…⁷ Length
+   &lt;chr&gt;    &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+ 1 act      Aislin…  595.       1    4.03       4    6.42       5       1      3
+ 2 act      AlexB    586        1    4.03       4    6.42       5       1      3
+ 3 act      AmyR     693        1    4.03       4    6.42       5       1      3
+ 4 act      AndyD    597        1    4.03       4    6.42       5       1      3
+ 5 act      AnnaF    627        1    4.03       4    6.42       5       1      3
+ 6 act      AoifeH   649        1    4.03       4    6.42       5       1      3
+ 7 act      ChloeB… 1081        1    4.03       4    6.42       5       1      3
+ 8 act      ChloeF   642        1    4.03       4    6.42       5       1      3
+ 9 act      ChloeS   623.       1    4.03       4    6.42       5       1      3
+10 act      CianR    701        1    4.03       4    6.42       5       1      3
+# … with 16 more variables: BG_Mean &lt;dbl&gt;, Voice &lt;dbl&gt;, Nasal &lt;dbl&gt;,
+#   Fricative &lt;dbl&gt;, Liquid_SV &lt;dbl&gt;, Bilabials &lt;dbl&gt;, Labiodentals &lt;dbl&gt;,
+#   Alveolars &lt;dbl&gt;, Palatals &lt;dbl&gt;, Velars &lt;dbl&gt;, Glottals &lt;dbl&gt;,
+#   age.months &lt;dbl&gt;, TOWREW_skill &lt;dbl&gt;, TOWRENW_skill &lt;dbl&gt;,
+#   spoonerisms &lt;dbl&gt;, CART_score &lt;dbl&gt;, and abbreviated variable names
+#   ¹​item_name, ²​subjectID, ³​accuracy, ⁴​Lg.UK.CDcount, ⁵​brookesIMG,
+#   ⁶​AoA_Kup_lem, ⁷​regularity</code></pre>
+</div>
+</div>
+<p>If we inspect the data-set, we can see that we have now got a tidy data-set with all the data we need for our analyses:</p>
+<ul>
+<li>One observation per row, corresponding to data about a response made by a participant to a stimulus in an experimental trial</li>
+<li>One variable per column</li>
+<li>We have information about the speed and accuracy of responses</li>
+<li>And we have information about the children and about the words.</li>
+</ul>
+<p>We have removed the missing values and we have filtered outliers.</p>
+</section>
+<section id="we-can-output-the-data-as-a-.csv-file" class="level3" data-number="4.6.7">
+<h3 data-number="4.6.7" class="anchored" data-anchor-id="we-can-output-the-data-as-a-.csv-file"><span class="header-section-number">4.6.7</span> We can output the data as a .csv file</h3>
+<p>Having produced the tidy dataset, we may wish to share it, or save ourselves the trouble of going through the process again. We can do this by creating a .csv file.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(long.all.noNAs, <span class="st">"long.all.noNAs.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This function will create a <code>.csv</code> file from the dataset you name <code>long.all.noNAs</code> which R will put in your working directory.</p>
+</section>
+<section id="data-tidying-conclusions" class="level3" data-number="4.6.8">
+<h3 data-number="4.6.8" class="anchored" data-anchor-id="data-tidying-conclusions"><span class="header-section-number">4.6.8</span> Data tidying – conclusions</h3>
+<p>Most research work involving quantitative evidence requires a <em>big</em> chunk of data tidying or other processing before you get to the statistics. Most of the time, this is work <em>you</em> will have to do. The lessons you can learn about the process will generalize to many future research scenarios.</p>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+<section id="crossed-random" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="crossed-random"><span class="header-section-number">4.7</span> Repeated measures designs and crossed random effects</h2>
+<p>Our focus this week is on analyzing data that come from studies with <strong>repeated-measures designs</strong> where the experimenter presents multiple stimuli for response to each participant. In our working example, the <strong>CP reading study</strong>, CP asked all participants in her study to read a selection of words. All participants read the same selection of words, and every person read every word. For each participant, we have multiple observations and these (within-participant) observations will not be independent of each other. One participant will tend to be slower or less accurate compared to another participant, on average. Likewise, one participant’s responses will reveal a stronger (or weaker) impact of the effect of an experimental variable than another participant. These between-participant differences will tend to be apparent for each set of observations we have for each participant, across the sample of participants.</p>
+<p>You could say that the lowest trial-level observations can be grouped with respect to participants, that observations are nested within participant. But the data can also be grouped by stimuli. Remember that in the CP study, all participants read the same selection of words, and every person read every word. This means that for each stimulus word, there are multiple observations because all participants responded to each word, and these (within-item) observations will not be independent of each other. One word may prove to be more challenging compared to another, eliciting slower or less accurate responses, on average. Likewise, participants’ responses to a word will reveal a stronger (or weaker) impact of the effect of an experimental variable than the responses to another word. Again, these between-stimulus differences will tend to be apparent for each set of observations we have for each stimulus word, across the sample of words.</p>
+<p>Under these circumstances, are observations about the responses made by different participants nested under words or are observations about the responses to different words nested under participants? We do not have to make a decision.</p>
+<p>Given this common <strong>repeated-measures</strong> design, we can analyze the outcome variable in relation to:</p>
+<p>In this situation, we can say that the random effects are crossed (Baayen et al., 2008). When multilevel models require the specification of crossed random effects, they tend to be called <strong>mixed-effects models</strong>.</p>
+</section>
+<section id="working-with-mixed-effects-models" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="working-with-mixed-effects-models"><span class="header-section-number">4.8</span> Working with mixed-effects models</h2>
+<p>To illustrate the approach, we examine observations from the CP study. We begin, as we did previously, by ignoring differences due to grouping variables (like participant or stimulus). We pretend that all observations are independent. In this fantasy situation, we address our research question.</p>
+<section id="load-the-data-if-you-need-to" class="level3" data-number="4.8.1">
+<h3 data-number="4.8.1" class="anchored" data-anchor-id="load-the-data-if-you-need-to"><span class="header-section-number">4.8.1</span> Load the data if you need to</h3>
+<p>If you did not go through the process of tidying the CP study data from the component source data files, then you can import the pre-tidied data here.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>long.all.noNAs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"long.all.noNAs.csv"</span>, </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">subjectID =</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">item_name =</span> <span class="fu">col_factor</span>()</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>                    )</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>                  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="code-tip-5" class="level4" data-number="4.8.1.1">
+<h4 data-number="4.8.1.1" class="anchored" data-anchor-id="code-tip-5"><span class="header-section-number">4.8.1.1</span> Code tip</h4>
+<p>Notice that I am using <code>read_csv()</code> with an additional argument <code>col_types = cols(...)</code> through which I control how <code>read_csv()</code> processes specific column variables in the data. Here, I am requesting that <code>read_csv()</code> treats <code>subjectID</code> and <code>item_name</code> as factors.</p>
+<p>This is a very useful capacity, and a more efficient way to work than, say, first reading in the data and then using <em>coercion</em> to ensure that variabels are assigned appropriate types. You can read more about it here.</p>
+<p></p>
+</section>
+</section>
+<section id="linear-model-for-multilevel-data-ignoring-the-hierarchical-structure" class="level3" data-number="4.8.2">
+<h3 data-number="4.8.2" class="anchored" data-anchor-id="linear-model-for-multilevel-data-ignoring-the-hierarchical-structure"><span class="header-section-number">4.8.2</span> Linear model for multilevel data – ignoring the hierarchical structure</h3>
+<p>We begin by asking if reading reaction time (RT) varies in association with word frequency. A scatterplot shows that response latencies decrease with increasing word frequency (Figure @ref(fig:pfreqc5)).</p>
+<div class="cell" data-layout-align="center" data-hash="02-mixed_cache/html/pfreqc5_ae7f3d926519df0aa1104a92679984ae">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>long.all.noNAs <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Lg.UK.CDcount, <span class="at">y =</span> RT)) <span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">size =</span> <span class="fl">1.5</span>, <span class="at">colour=</span><span class="st">"red"</span>) <span class="sc">+</span> </span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Word frequency: log context distinctiveness (CD) count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><embed src="02-mixed_files/figure-html/pfreqc5-1.pdf" class="img-fluid" style="width:65.0%"></p>
+<p></p><figcaption class="figure-caption">Reading reaction time compared to word frequency, all data</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In the plot, we see that the best fit line drawn with <code>geom_smooth()</code> trends downward for higher values of word frequency. This means that Figure @ref(fig:pfreqc5) suggests that RT decreases with increasing word frequency. (I know there is a weird looking line of points around 0 but we can ignore that here.)</p>
+<p>We can estimate the relationship between RT and word frequency using a linear model in which we ignore the possibility that there may be differences (between subjects, or between items) in the intercept or (between subjects) in the slope of the frequency effect:</p>
+<p><span class="math display">\[\begin{equation}
+Y_{ij} = \beta_0 + \beta_1X_j + e_{ij}
+\end{equation}\]</span></p>
+<ul>
+<li>where <span class="math inline">\(Y_{ij}\)</span> is the value of the observed outcome variable, the RT of the response made by the <span class="math inline">\(i\)</span> participant to the <span class="math inline">\(j\)</span> word;</li>
+<li><span class="math inline">\(\beta_1X_j\)</span> refers to the fixed effect of the explanatory variable (here, word frequency), where the frequency value <span class="math inline">\(X_j\)</span> is different for different words <span class="math inline">\(j\)</span>, and <span class="math inline">\(\beta_1\)</span> is the estimated coefficient of the effect due to the relationship between response RT and word frequency;</li>
+<li><span class="math inline">\(e_{ij}\)</span> is the residual error term, representing the differences between observed <span class="math inline">\(Y_{ij}\)</span> and predicted values (given the model).</li>
+</ul>
+<p>The linear model can be fit in R using the <code>lm()</code> function, as we have done previously.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>lm.all<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(RT <span class="sc">~</span>  Lg.UK.CDcount,</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> long.all.noNAs)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.all<span class="fl">.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = RT ~ Lg.UK.CDcount, data = long.all.noNAs)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-346.62 -116.03  -38.37   62.05 1981.58 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)    882.983     11.901   74.19   &lt;2e-16 ***
+Lg.UK.CDcount  -53.375      3.067  -17.40   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 185.9 on 9083 degrees of freedom
+Multiple R-squared:  0.03227,   Adjusted R-squared:  0.03216 
+F-statistic: 302.8 on 1 and 9083 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>We can see that, in this first analysis, the estimated effect of word frequency is <span class="math inline">\(\beta = -53.375\)</span> (here, word frequency information is in the <code>Lg.UK.CDcount</code> variable). This means that, in the linear model, RT decreases by about 54 milliseconds for each unit increase in log word frequency. (In our analyses, in common with many in the reading literature, we transformed the frequency estimate to the Log base 10 of the frequency of occurrence estimated for each word.) The model does not explain much variance, as <span class="math inline">\(R^2 = .03\)</span> but, no doubt due to the large sample, the regression model is overall significant <span class="math inline">\(F(1,9083) = 302.8, p &lt; .001\)</span>.</p>
+<section id="exercise-3" class="level4" data-number="4.8.2.1">
+<h4 data-number="4.8.2.1" class="anchored" data-anchor-id="exercise-3"><span class="header-section-number">4.8.2.1</span> Exercise</h4>
+<p>The CP study dataset is rich with possibility. It would be useful to experiment with it.</p>
+</section>
+</section>
+<section id="can-we-ignore-the-hierarchical-structure" class="level3" data-number="4.8.3">
+<h3 data-number="4.8.3" class="anchored" data-anchor-id="can-we-ignore-the-hierarchical-structure"><span class="header-section-number">4.8.3</span> Can we ignore the hierarchical structure?</h3>
+<p>In this linear model, the observations are assumed to be independent but the assumption of independence is questionable given the expectation that participants will differ, with one participant’s responses perhaps slower or less accurate than another, perhaps more or less affected by word frequency than another. We can examine that variation by estimating the intercept and the slope of the frequency effect separately using the data for each participant alone.</p>
+<p>We can start by examining the frequency effect for each child in a grid of plots, with each plot representing the <span class="math inline">\(RT \sim frequency\)</span> relationship for the data for a child (Figure @ref(fig:freqperchildtrellis)).</p>
+<p>We discussed how the plotting code functions in the previous chapter.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>long.all.noNAs <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Lg.UK.CDcount, <span class="at">y =</span> RT)) <span class="sc">+</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">size =</span> <span class="fl">1.25</span>, <span class="at">colour =</span> <span class="st">"red"</span>) <span class="sc">+</span> </span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">"Word frequency (log10 UK SUBTLEX CD count)"</span>) <span class="sc">+</span> </span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> subjectID)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><embed src="02-mixed_files/figure-html/freqperchildtrellis-1.pdf" class="img-fluid" style="width:95.0%"></p>
+<p></p><figcaption class="figure-caption">RT vs.&nbsp;word frequency, considered separately for data for each child</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Figure @ref(fig:freqperchildtrellis) shows how, on average, more frequent words are associated with shorter reaction time, faster responses. The plot further shows, however, that the effect of frequency varies considerably between children. Some children show little or no effect; the best fit line is practically level. Other children show a marked effect, with a steep fit line indicating a strong frequency effect.</p>
+<p>We can get more insight into the differences between children, however, if we plot the estimated intercept and frequency effect coefficients for each child directly. This allows more insight because it focuses the eye on the differences between children in the estimates.</p>
+<p>Figure @ref(fig:freqperchildlm) presents a plot showing the estimates of the intercept and the coefficient of the effect of word frequency on reading RT, calculated separately for each child. The estimate for each child is shown as a black dot. The standard error of the estimate is shown as a black vertical line, shown above and below a point. You can say that where there is a longer line there we have more uncertainty about the location of the estimate.</p>
+<p>Figure @ref(fig:freqperchildlm) presents the estimates of intercept and the frequency coefficient, calculated for each child, ordered by the size of the estimate. Drawn this way, we can see how the estimates of both the intercept and the slope of the frequency effect vary substantially between children. We can see also how the standard errors vary greatly between children.</p>
+<p>Notice that if there is an average intercept for everyone in the sample or, better, an intercept we could estimate for everyone in the population, then the different intercepts we have estimated for each child would be distributed around that population-level average. Some children will have slower (here, larger) intercepts and other children will have faster (shorter) intercepts. (Here, the intercept can be taken to be the average RT when all other effects in the model are set to zero. RT varies for this sample around somewhere like <span class="math inline">\(\beta_0 = 883ms\)</span> so a slower larger intercept might be e.g.&nbsp;<span class="math inline">\(\beta_0 = 1000ms\)</span>.)</p>
+<p>In the same way, if there is an average slope for the frequency effect, an effect of frequency on reading RT, averaged across everyone in the population, then, again, the different slopes we have estimated for each child would be distributed around that population-level effect. Some children will have larger (here, more negative) frequency effects and other children will have smaller (less negative) frequency effects. (Here, the frequency effect is associated with a negative coefficient e.g.&nbsp;<span class="math inline">\(\beta_1 = -53\)</span> so a larger frequency effect will be a bigger negative number e.g.&nbsp;<span class="math inline">\(\beta_1 = -100\)</span>.)</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><embed src="02-mixed_files/figure-html/freqperchildlm-1.pdf" class="img-fluid" style="width:95.0%"></p>
+<p></p><figcaption class="figure-caption">Estimated intercepts and frequency effect slopes (with SEs) calculated for each child analysed separately, with point estimates presented in order of size</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="multilevel-here-more-appropriately-known-as-mixed-effects-models" class="level3" data-number="4.8.4">
+<h3 data-number="4.8.4" class="anchored" data-anchor-id="multilevel-here-more-appropriately-known-as-mixed-effects-models"><span class="header-section-number">4.8.4</span> Multilevel – here, more appropriately known as – mixed-effects models</h3>
+<p>In a mixed-effects model, we account for this variation: the differences between participants in intercepts and slopes. We do this by modeling the intercept as two terms:</p>
+<p><span class="math display">\[\begin{equation}
+\beta_{0i} = \gamma_0 + U_{0i}
+\end{equation}\]</span></p>
+<ul>
+<li>where <span class="math inline">\(\gamma_0\)</span> is the average intercept and <span class="math inline">\(U_{0i}\)</span> is the difference for each <span class="math inline">\(i\)</span> child between their intercept and the average intercept.</li>
+</ul>
+<p>We model the frequency effect as two terms:</p>
+<p><span class="math display">\[\begin{equation}
+\beta_{1i} = \gamma_1 + U_{1i}
+\end{equation}\]</span></p>
+<ul>
+<li>where <span class="math inline">\(\gamma_1\)</span> is the average slope and <span class="math inline">\(U_{1i}\)</span> represents the difference for each <span class="math inline">\(i\)</span> child between the slope of their frequency effect and the average slope.</li>
+</ul>
+<!-- (It is useful to note, here, that numeric subscripts for $\gamma_0 + \gamma_1$ represent how the coefficients relate to intercept or to explanatory variable effects.) -->
+<p>We can then incorporate in a single model the <strong>fixed effects</strong> due to the average intercept and the average frequency effect, as well as the <strong>random effects</strong>, error variance due to unexplained differences between participants in intercepts and frequency effects:</p>
+<p><span class="math display">\[\begin{equation}
+Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + e_{ij}
+\end{equation}\]</span></p>
+<ul>
+<li>where the outcome <span class="math inline">\(Y_{ij}\)</span> is related to …</li>
+<li>the average intercept <span class="math inline">\(\gamma_0\)</span> and differences between <span class="math inline">\(i\)</span> children in the intercept <span class="math inline">\(U_{0i}\)</span>;</li>
+<li>the average effect of the explanatory variable frequency <span class="math inline">\(\gamma_1X_j\)</span> and differences between <span class="math inline">\(i\)</span> participants in the slope <span class="math inline">\(U_{1i}X_j\)</span>;</li>
+<li>in addition to residual error variance <span class="math inline">\(e_{ij}\)</span>.</li>
+</ul>
+<section id="what-are-we-doing-with-these-random-effects-terms" class="level4" data-number="4.8.4.1">
+<h4 data-number="4.8.4.1" class="anchored" data-anchor-id="what-are-we-doing-with-these-random-effects-terms"><span class="header-section-number">4.8.4.1</span> What are we doing with these random effects terms?</h4>
+<p>Note that in sections @ref(BLUPS) and @ref(variance-covariance), we look at what <em>exactly</em> is captured in these random effects terms <span class="math inline">\(U_{0i}, U_{1i}\)</span>. Let’s first look at the practicalities of analysis then come back to deepen our understanding a bit more.</p>
+<p>Right now, it is important to understand that in our analysis we do not care about the differences between <em>specific</em> children. We care that there are differences. And we care how widely spread are the differences between child A and the average intercept (or slope), or between child B and the average intercept (or slope), or between child C … (you get the idea). Therefore, in our analysis, we estimate the spread of the differences as a <em>variance term</em>. We can see this when we look at the results of the mixed-effects model we specify, next.</p>
+</section>
+<section id="lmer-first" class="level4" data-number="4.8.4.2">
+<h4 data-number="4.8.4.2" class="anchored" data-anchor-id="lmer-first"><span class="header-section-number">4.8.4.2</span> Fitting a mixed-effect model using the lmer() function</h4>
+<p>We can fit a mixed-effects model of the <span class="math inline">\(RT \sim frequency\)</span> relationship, taking into account the random differences between participants. I first go through the model fitting code bit by bit. (I then go through the output, the results.)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>lmer.all<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">lmer</span>(RT <span class="sc">~</span>  Lg.UK.CDcount <span class="sc">+</span> (Lg.UK.CDcount <span class="sc">+</span> <span class="dv">1</span><span class="sc">||</span>subjectID),</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> long.all.noNAs)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmer.all<span class="fl">.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You have seen the <code>lmer()</code> function code before but <em>practice makes perfect</em> so we shall go through the code step by step, as we did previously. This time, notice what is different versus what stays the same.</p>
+<p>First, we have a chunk of code mostly similar to what we do when we do a regression analysis.</p>
+<ol type="1">
+<li><code>lmer.all.1 &lt;- lmer(...)</code> creates a <em>linear mixed-effects model</em> object using the <code>lmer()</code> function.</li>
+<li><code>RT ~  Lg.UK.CDcount</code> is a formula expressing the model in which we estimate the fixed effect on the outcome or dependent variable <code>RT</code> (reaction time, in milliseconds) predicted <span class="math inline">\(\sim\)</span> by the independent or predictor variable <code>Lg.UK.CDcount</code> (word frequency).</li>
+<li><code>...(..., data = long.all.noNAs)</code> specifies the dataset in which you can find the variables named in the model fitting code.</li>
+<li><code>summary(lmer.all.1)</code> gets a summary of the fitted model object, showing you the results.</li>
+</ol>
+<p>Second, we have the bit that is specific to multilevel or mixed-effects models.</p>
+<ul>
+<li>We add <code>(...||subjectID)</code> to tell R about the random effects corresponding to random differences between sample groups (here, observations grouped by child) that are coded by the <code>subjectID</code> variable.</li>
+<li><code>(...1 ||subjectID)</code> says that we want to estimate random differences between sample groups (observations by child) in intercepts, where the intercept is coded by <code>1</code>.</li>
+<li><code>(Lg.UK.CDcount... ||subjectID)</code> adds random differences between sample groups (observations by child) in slopes of the frequency effect coded using the <code>Lg.UK.CDcount</code> variable name.</li>
+</ul>
+<section id="double-bar" class="level5" data-number="4.8.4.2.1">
+<h5 data-number="4.8.4.2.1" class="anchored" data-anchor-id="double-bar"><span class="header-section-number">4.8.4.2.1</span> What does || mean?</h5>
+<p>I want you to notice something that looks like nothing much: <code>||</code>. We are going to need to defer until later a (necessary) discussion of exactly why we need the two double lines. In short, the use of <code>||</code> asks R to fit a model in which we estimate random effects associated with</p>
+<p>I do this because otherwise the model I specify will not converge. We shall need to discuss these things: <strong>convergence</strong>, and failures to converge; as well as <strong>random effects specification</strong> and simplification. We will discuss random effects covariance in Section @ref(variance-covariance). For now, the most important lesson is learnt by seeing how the analysis approach we saw last week can be extended to examining the effects of experimental variables in data from repeated measures design studies.</p>
+</section>
+</section>
+<section id="lmer-results" class="level4" data-number="4.8.4.3">
+<h4 data-number="4.8.4.3" class="anchored" data-anchor-id="lmer-results"><span class="header-section-number">4.8.4.3</span> Reading the lmer() results</h4>
+<p>The <code>lmer()</code> model code we discussed in Section @ref(lmer-first) gives us the following output.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML ['lmerMod']
+Formula: RT ~ Lg.UK.CDcount + ((1 | subjectID) + (0 + Lg.UK.CDcount |  
+    subjectID))
+   Data: long.all.noNAs
+
+REML criterion at convergence: 117805.3
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.7839 -0.5568 -0.1659  0.3040 12.4850 
+
+Random effects:
+ Groups      Name          Variance Std.Dev.
+ subjectID   (Intercept)   87575    295.93  
+ subjectID.1 Lg.UK.CDcount  2657     51.55  
+ Residual                  23734    154.06  
+Number of obs: 9085, groups:  subjectID, 61
+
+Fixed effects:
+              Estimate Std. Error t value
+(Intercept)    950.913     39.216  24.248
+Lg.UK.CDcount  -67.980      7.092  -9.586
+
+Correlation of Fixed Effects:
+            (Intr)
+Lg.UK.CDcnt -0.093</code></pre>
+</div>
+</div>
+<p>We discussed the major elements of the results output last week. We expand on that discussion, a little, here.</p>
+<p>This is where you can see information about the error variance terms estimated by the model.</p>
+<p>The information is listed in four columns: 1. <code>Groups</code>; 2. <code>Name</code>; 3. <code>Variance</code>; and 4. <code>Std.Dev.</code> You will recall that we have talked about how observations can be grouped by participant (because we have multiple response observations for each person in the study) just as previously we talked about how observations could be grouped by class (because we saw that children were nested under class). That is what we mean when we refer to <code>Groups</code>, we are identifying the grouping variables that give hierarchical structure to the data. The <code>Name</code> lists whether the estimate we are looking at corresponds to, here, random differences between participants in intercepts (listed as <code>(Intercept)</code>), or in slopes (listed as <code>Lg.UK.CDcount</code>). As we discuss later, in Section @ref(variance-covariance), mixed-effects models estimate the spread in random differences. We are not interested in the specific differences in intercept or slope between specific individuals. What we want is to be able to take into account the variance associated with those differences.</p>
+<p>Thus, we see in the <code>Random Effects</code> section, the variances associated with:</p>
+<p>We do not usually discuss the specific variance estimates in research reports. However, the relative size of the variances does provide useful information (see also Meteyard &amp; Davies, 2020), as we shall see when we discuss the different estimates we get when we include a random effect due to differences between items (Section @ref(random-effect-items)).</p>
+<p>In this model, we see estimates of the fixed effects of the intercept and the slope of the <code>RT ~ Lg.UK.CDcount</code> model. We discuss these estimates next.</p>
+</section>
+</section>
+<section id="is-there-a-difference-between-linear-model-and-linear-mixed-effects-model-results" class="level3" data-number="4.8.5">
+<h3 data-number="4.8.5" class="anchored" data-anchor-id="is-there-a-difference-between-linear-model-and-linear-mixed-effects-model-results"><span class="header-section-number">4.8.5</span> Is there a difference between linear model and linear mixed-effects model results?</h3>
+<p>Recall that the linear model yields the estimate for the frequency effect on reading RT such that RT decreases by about 53 ms for unit increase in log word frequency (<span class="math inline">\(\beta = -53.375\)</span>). Now, when we have taken random differences between participants into account, we see that the estimate of the effect <strong>for the mixed-effects model</strong> is <span class="math inline">\(\beta = -67.980\)</span>. This is a noteworthy difference in our estimate for the effect. As we saw last, we see, again, that taking into account random differences has an impact on results.</p>
+<p>Which coefficient estimate should you trust? Well, it is obvious that the linear model and the linear mixed-effects model estimate are relatively similar. However, it is also obvious that the linear model makes an assumption – the <em>assumption of independence of observations</em> – that does not make sense theoretically (we can readily expect that reading responses will be similar within a child) and does not make sense empirically (responses clearly differ between children, Figure @ref(fig:freqperchildlm)). Thus, I think we have good grounds for supposing that the linear mixed-effects model estimate for the frequency effect is likely to be closer to the true underlying population effect (whatever that might be).</p>
+<p>That being said, it is important to remember, in this discussion, that whatever estimate we can produce is the estimate we can produce <em>given</em> the sample of words we used, the measurement of reading RT we were able to make, and the estimate of word frequency we were able to collect. How far our estimate actually generalizes to the wider population is not something we can settle in the context of a single study.</p>
+<p>Further, we have not finished in our consideration of the random effects that the account should include. We need to do more work by thinking about the differences between stimuli (Section @ref(fixed-fallacy)).</p>
+<section id="why-arent-there-p-values" class="level4" data-number="4.8.5.1">
+<h4 data-number="4.8.5.1" class="anchored" data-anchor-id="why-arent-there-p-values"><span class="header-section-number">4.8.5.1</span> Why aren’t there p-values?</h4>
+<p>We will come back to this but note that if <span class="math inline">\(t &gt; 2\)</span> we can suppose that an effect is significant at the <span class="math inline">\(.05\)</span> significance level.</p>
+</section>
+</section>
+<section id="BLUPS" class="level3" data-number="4.8.6">
+<h3 data-number="4.8.6" class="anchored" data-anchor-id="BLUPS"><span class="header-section-number">4.8.6</span> What we estimate when we estimate random effects</h3>
+<p>We have said that we can incorporate, in a mixed-effects model, <strong>fixed effects</strong> (e.g., the average frequency effect) and <strong>random effects</strong>, error variance due to unexplained differences between participants in intercepts and in frequency effects:</p>
+<p><span class="math display">\[\begin{equation}
+Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + e_{ij}
+\end{equation}\]</span></p>
+<p>So we distinguish:</p>
+<ul>
+<li>the average intercept <span class="math inline">\(\gamma_0\)</span> and differences between <span class="math inline">\(i\)</span> children in the intercept <span class="math inline">\(U_{0i}\)</span>;</li>
+<li>the average effect of the explanatory variable frequency <span class="math inline">\(\gamma_1X_j\)</span> and differences between <span class="math inline">\(i\)</span> participants in the slope <span class="math inline">\(U_{1i}X_j\)</span>.</li>
+</ul>
+<p>When we think about the differences between participants (or between the units of any grouping variable), in intercepts or in slopes, we should understand that for the mixed-effects model, the differences are:</p>
+<ul>
+<li>random;</li>
+<li>should be normally distributed;</li>
+<li>and are distributed around the population or average fixed effects.</li>
+</ul>
+<p>We should understand that the mixed-effects model sees the differences between participants <strong>relative to the fixed effect intercept or slope</strong>, that is, relative to the population level or average effects. We can illustrate this by plotting, in Figure @ref(fig:BLUPS-prediction), the differences as estimated (technically, predicted) by the mixed-effects model that we discussed in sections @ref(lmer-first) and @ref(lmer-results).</p>
+<p>What you can see in Figure @ref(fig:BLUPS-prediction) are distributions. The centers of the distributions are on zero (shown by a red line). For each distribution (a. and b.), that is where the model estimate of the intercept or the slope of the frequency effect is located. Spread around that central point, you see the adjustments the model makes to account for differences between participants.</p>
+<p>You can see how in Figure @ref(fig:BLUPS-prediction) (a.), some children have intercepts that are smaller than the population-level or average intercept – so their adjustments are negative (to decrease their intercepts). In comparison, some children have intercepts that are larger than the population-level or average intercept – so their adjustments are positive (to increase their intercepts). Strikingly, you can see that a few children have intercepts that are as much as 1000ms larger than the population-level or average intercept.</p>
+<p>You can see also how in Figure @ref(fig:BLUPS-prediction) (b.), some children have frequency effects (coefficients) that are smaller than the population-level or average frequency effect – so their adjustments are positive (to decrease their frequency effect, by making it <em>less</em> negative). (Remember the estimated <span class="math inline">\(\beta\)</span> coefficient for the frequency effect is negative because higher word frequency is associated with smaller RT.) In comparison, some children have frequency effects that are larger than the population-level or average frequency effect – so their adjustments are negative (to increase their frequency effect, by making it <em>more</em> negative). Strikingly, you can see that a few children have frequency effects that are as much as 200ms larger (see plot (b.) around <span class="math inline">\(x = -200\)</span>) than the population-level or average effect.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><embed src="02-mixed_files/figure-html/BLUPS-prediction-1.pdf" class="img-fluid" style="width:105.0%"></p>
+<p></p><figcaption class="figure-caption">Plot showing histograms indicating the distribution of participant adjustments to account for between-child differences in intercept or slope (known as Best Linear Unbiased Predictionss)</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>When a mixed-effects model is fitted to a dataset, its set of estimated parameters includes the coefficients for the fixed effects as well as the standard deviations for the random effects (Baayen, 2008). The individual values of the adjustments made to intercepts and slopes are calculated once the random effects have been estimated. If you read the literature on mixed-effects models, you will see that the adjustments are called Best Linear Unbiased Predictors (or BLUPs).</p>
+<section id="exercise-4" class="level4" data-number="4.8.6.1">
+<h4 data-number="4.8.6.1" class="anchored" data-anchor-id="exercise-4"><span class="header-section-number">4.8.6.1</span> Exercise</h4>
+<p>Mixed-effects modeling is hard to get used to <em>at first</em>. A bit more practice helps to show you how the different parts of the model work. We again focus on the random effects.</p>
+<p>Try out these variations and <em>look carefully</em> at the different results. Look, especially, at what happens to the part of the summary.</p>
+<p>We can <em>visualize</em> the differences between the models in a plot showing the different predictions that the different models give us. Figure @ref(fig:indiv-prediction) shows what a mixed-effects model would predict should be the effect of frequency on RT for different children in the CP study. The predictions vary depending on the nature of the random effects we specify in the model.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><embed src="02-mixed_files/figure-html/indiv-prediction-1.pdf" class="img-fluid" style="width:105.0%"></p>
+<p></p><figcaption class="figure-caption">Plot showing model predictions of the effect, for each individual, of word frequency on reading reaction time – predictions vary between models incorporating (a.) random effect of participants on intercepts only; (b.) random effect of participants on slopes only and (c.) random effect of participants on intercepts and on slopes</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can see that:</p>
+</section>
+<section id="code-tip-6" class="level4" data-number="4.8.6.2">
+<h4 data-number="4.8.6.2" class="anchored" data-anchor-id="code-tip-6"><span class="header-section-number">4.8.6.2</span> Code tip</h4>
+<p>It is very important to learn to make effective use of the warnings and error messages R can produce.</p>
+<p>Note: you do not have to just believe me when I say that is in the model code to stop a problem appearing. Experiment – and see what happens when you change the code. Try this.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>lmer.all<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">lmer</span>(RT <span class="sc">~</span>  Lg.UK.CDcount <span class="sc">+</span> (Lg.UK.CDcount <span class="sc">+</span> <span class="dv">1</span><span class="sc">|</span>subjectID),</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> long.all.noNAs)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmer.all<span class="fl">.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Do you get an error message?</p>
+<p>A very useful trick is to learn to copy the error message you get into a search engine on your web browser. Do this and you will find useful help, as here.</p>
+<p></p>
+</section>
+</section>
+</section>
+<section id="fixed-fallacy" class="level2" data-number="4.9">
+<h2 data-number="4.9" class="anchored" data-anchor-id="fixed-fallacy"><span class="header-section-number">4.9</span> Variation between stimuli: the “language as fixed-effect fallacy”</h2>
+<p>Experimental psychologists will often collect data in studies where they present some stimuli to a sample of participants (as CP did in her study). Clark (1973) showed that the appropriate analysis of experimental effects for such data requires the researcher to take into account the error variance due to unexplained or random differences between sampled participants <em>and</em> to random differences between sampled stimuli. This is true in the context of psycholinguistics but it is also true in the context of work in any field where the presented stimuli can be understood to constitute a sample from a wider population of potential stimuli (Judd, Westfall, &amp; Kenny, 2012).</p>
+<p>If we were to estimate the average latency of the responses made by different children to each word, we would see that there is considerable variation between words (Figure @ref(fig:pitemsints)). Some words elicit slower and some elicit faster responses on average. We can also see that there is, again, variation in the uncertainty of estimates, as reflected in differences in the lengths of the error bars corresponding to the standard errors of the estimates.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><embed src="02-mixed_files/figure-html/pitemsints-1.pdf" class="img-fluid" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Estimated intercepts (with SEs) calculated for each stimulus word, with coefficients ordered by average latency for each word</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In general, psychologists have been aware since Clark (1973, if not earlier) that responses to experimental stimuli can vary because of random or unexplained differences between the stimuli: whether the stimuli are words, pictures or stories, etc. And researchers have been aware that if we did not take such variation into account, we might mistakenly detect an experimental effect, for example, as a significant difference between mean response in different conditions, simply because different stimuli presented in different conditions varied in some unknown way, randomly, in relative difficulty.</p>
+<p>For many years, psychologists tried to take random differences between stimuli into account, alongside random differences between participants, using a variety of strategies with important limitations (see Baayen et al., 2008, for discussion). Clark (1973) suggested that researchers could calculate <span class="math inline">\(minF'\)</span> (not F) when doing Analyses of Variance of experimental data</p>
+<p>This involves a series of steps.</p>
+<p>Averaging data by-subjects or by-items is relatively simple. And you will often see, in the literature, psychological reports in which F1 and F2 analysis results are presented.</p>
+<p>Calculating <span class="math inline">\(minF'\)</span> is also relatively simple:</p>
+<p><span class="math display">\[\begin{equation}
+            minF' = \frac{MS_{effect}}{MS_{random-subject-effects} + MS_{random-word-differences}} = \frac{F_1F_2}{F_1 + F_2}
+\end{equation}\]</span></p>
+<p>However, after a while, psychologists stopped doing the extra step of the <span class="math inline">\(minF'\)</span> calculation (Raaijmakers et al., 1999). They carried on calculating and reporting F1 and F2 ANOVA results but, as Baayen et al.&nbsp;(2008) discuss, this approach risks a high potential false positive error rate.</p>
+<p>Psychologists also found that while the <span class="math inline">\(minF'\)</span> approach allowed them to take into account between-participant and between-stimulus differences it could not be applied where ANOVA could not be used. This stopped researchers from taking a comprehensive approach to error variance where they wanted to conduct multiple regression analyses. You will often see multiple regression analyses of by-items data, where a sample of participants has been asked to respond to a sample of stimuli, and the analysis is of the effects of stimulus properties on outcomes averaged (over participants’ responses) to the mean outcome by item. But analyzing data only by-items ensures that we lose track of participant differences. Lorch and Myers (1990) warn that analyzing only by-items mean RTs just assumes wrongly that . This approach, again, risks a higher rate of false positive errors.</p>
+<section id="include-the-random-effect-of-stimulus" class="level3" data-number="4.9.1">
+<h3 data-number="4.9.1" class="anchored" data-anchor-id="include-the-random-effect-of-stimulus"><span class="header-section-number">4.9.1</span> Include the random effect of stimulus</h3>
+<p>We now no longer need to tolerate these problems.</p>
+<p>In the context of our working example, with our analysis of the CP study data, we can build up our mixed-effects model by adding a random effect to capture the impact of unexplained differences between stimuli. We model the random effect of items on intercepts by modeling the intercept as two terms:</p>
+<p><span class="math display">\[\begin{equation}
+\beta_{0j} = \gamma_0 + W_{0j}
+\end{equation}\]</span></p>
+<ul>
+<li>where <span class="math inline">\(\gamma_0\)</span> is the average intercept and <span class="math inline">\(W_{0j}\)</span> represents the deviation, for each word, between the average intercept and the per-word intercept.</li>
+</ul>
+<p>Our model can now incorporate the additional random effect of items on intercepts:</p>
+<p><span class="math display">\[\begin{equation}
+Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + W_{0j} + e_{ij}
+\end{equation}\]</span></p>
+<p>In this model, the outcome <span class="math inline">\(Y_{ij}\)</span> is related to the average intercept <span class="math inline">\(\gamma_0\)</span> and the word frequency effect <span class="math inline">\(\gamma_1X_j\)</span> plus random effects due to unexplained differences between participants in intercepts <span class="math inline">\(U_{0i}\)</span> and the slope of the frequency effect <span class="math inline">\(U_{1i}X_j\)</span> as well as random differences between items in intercepts <span class="math inline">\(W_{0j}\)</span>, in addition to the residual term <span class="math inline">\(e_{ij}\)</span>.</p>
+<section id="random-effect-items" class="level4" data-number="4.9.1.1">
+<h4 data-number="4.9.1.1" class="anchored" data-anchor-id="random-effect-items"><span class="header-section-number">4.9.1.1</span> Fitting a mixed-effect model – now with random effects of subjects and items</h4>
+<p>We can fit a mixed-effects model of the <span class="math inline">\(RT \sim frequency\)</span> relationship, taking into account the random differences between participants <em>and now also</em> the random differences between stimulus words.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>lmer.all<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">lmer</span>(RT <span class="sc">~</span>  Lg.UK.CDcount <span class="sc">+</span> </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>                         (Lg.UK.CDcount <span class="sc">+</span> <span class="dv">1</span><span class="sc">||</span>subjectID) <span class="sc">+</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>                         (<span class="dv">1</span><span class="sc">|</span>item_name),</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> long.all.noNAs)</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmer.all<span class="fl">.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML ['lmerMod']
+Formula: RT ~ Lg.UK.CDcount + ((1 | subjectID) + (0 + Lg.UK.CDcount |  
+    subjectID)) + (1 | item_name)
+   Data: long.all.noNAs
+
+REML criterion at convergence: 116976.7
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-4.1795 -0.5474 -0.1646  0.3058 12.9485 
+
+Random effects:
+ Groups      Name          Variance Std.Dev.
+ item_name   (Intercept)     3397    58.29  
+ subjectID   Lg.UK.CDcount   3624    60.20  
+ subjectID.1 (Intercept)   112314   335.13  
+ Residual                   20704   143.89  
+Number of obs: 9085, groups:  item_name, 159; subjectID, 61
+
+Fixed effects:
+              Estimate Std. Error t value
+(Intercept)     971.07      51.87  18.723
+Lg.UK.CDcount   -72.33      10.79  -6.703
+
+Correlation of Fixed Effects:
+            (Intr)
+Lg.UK.CDcnt -0.388</code></pre>
+</div>
+</div>
+<p>This is the same mixed-effects model as the one we discussed in sections @ref(lmer-first) and @ref(lmer-results) but with one important addition.</p>
+<section id="reading-the-results" class="level5" data-number="4.9.1.1.1">
+<h5 data-number="4.9.1.1.1" class="anchored" data-anchor-id="reading-the-results"><span class="header-section-number">4.9.1.1.1</span> Reading the results</h5>
+<p>Take a look at the model results. You should notice three changes.</p>
+<p>The reduction in residual variance is one way in which we can judge how good a job the model is doing in accounting for the variance in the outcome, observed response reaction time. We can see that by adding a term to account for differences between items we can reduce the amount by which the model estimates deviate from observed outcomes. This difference in error variance is, essentially, one basis for estimating how well the model fits the data, and a basis for estimating the <em>variance explained</em> by a model in terms of the <span class="math inline">\(R^2\)</span> statistic you have seen before. We will come back to this.</p>
+</section>
+</section>
+</section>
+</section>
+<section id="variance-covariance" class="level2" data-number="4.10">
+<h2 data-number="4.10" class="anchored" data-anchor-id="variance-covariance"><span class="header-section-number">4.10</span> Variances and covariances of random effects</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><embed src="02-mixed_files/figure-html/covarp-1.pdf" class="img-fluid" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Scatterplot showing the relationship between estimated coefficients for the intercept and for the frequency effect, for each child analysed separately</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As I have said, we usually do not aim to examine the specific deviation from the average intercept or the average fixed effect slope for a participant or stimulus. We estimate just the spread of deviations by-participants or by-items. A mixed-effects model like our final model includes fixed effects corresponding to the intercept and the slope of the word frequency effect plus the variances:</p>
+<ul>
+<li><span class="math inline">\(var(U_{0i})\)</span> variance of deviations by-participants from the average intercept;</li>
+<li><span class="math inline">\(var(U_{1i}X_j)\)</span> variance of deviations by-participants from the average slope of the frequency effect;</li>
+<li><span class="math inline">\(var(W_{0j})\)</span> variance of deviations by-items from the average intercept;</li>
+<li><span class="math inline">\(var(e_{ij})\)</span> residuals, at the response level, after taking into account all other terms.</li>
+</ul>
+<p>We may expect the random effects of participants or items to covary, e.g., participants who are slow to respond may also be more susceptible to the frequency effect, as can be seen in Figure @ref(fig:covarp). Thus, we could specify the random effects of the model can incorporate terms corresponding to the covariance of random effects:</p>
+<ul>
+<li><span class="math inline">\(covar(U_{0i}, U_{1i}X_j)\)</span></li>
+</ul>
+<section id="but-remember-we-excluded-random-effects-covariance" class="level3" data-number="4.10.1">
+<h3 data-number="4.10.1" class="anchored" data-anchor-id="but-remember-we-excluded-random-effects-covariance"><span class="header-section-number">4.10.1</span> But remember we excluded random effects covariance</h3>
+<p>In Section @ref(double-bar), I noted how we used the notation to stop the model estimating the covariance between differences between participants in intercepts and in slopes. The reason I did this is that if I had requested that the model estimate the covariance the model would have failed to converge. What this means depends on understanding how mixed-effects models are estimated. We shall have to return to a development of that understanding later. For now, it is enough to note that mixed-effects models fitted with often have more difficulty with random effects covariance estimates.</p>
+</section>
+</section>
+<section id="reporting-the-results-of-a-mixed-effects-model" class="level2" data-number="4.11">
+<h2 data-number="4.11" class="anchored" data-anchor-id="reporting-the-results-of-a-mixed-effects-model"><span class="header-section-number">4.11</span> Reporting the results of a mixed-effects model</h2>
+<p>There is no official convention on what or how to report the results of a mixed-effects model. Lotte Meteyard and I suggest what psychologists should report in an article (Meteyard &amp; Davies, 2020) that has been downloaded a few thousand times so, maybe, our advice will help to influence practice.</p>
+<p>We would argue that researchers should explain what analysis they have done and, where space allows, should report both the estimates of the <strong>fixed effects</strong> and the estimates of the <strong>random effects</strong>. We think you can report the model code (maybe in an appendix, maybe in a note under a tabled summary of results).</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Coefficients</th>
+<th>Estimate</th>
+<th>SE</th>
+<th>t</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(Intercept)</td>
+<td>971.1</td>
+<td>51.9</td>
+<td>18.7</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Frequency effect</td>
+<td>-72.3</td>
+<td>10.8</td>
+<td>-6.7</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Groups</th>
+<th>Name</th>
+<th>Variance</th>
+<th>SD</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>item</td>
+<td>(Intercept)</td>
+<td>3397</td>
+<td>58.3</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>participant</td>
+<td>(Intercept)</td>
+<td>112314</td>
+<td>335.1</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>participant</td>
+<td>Frequency</td>
+<td>3624</td>
+<td>60.2</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>residual</td>
+<td></td>
+<td>20704</td>
+<td>143.9</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Note: </p>
+<p>Researchers should report their modelling in sufficient detail that their results can be reproduced by others. Barr et al.&nbsp;(2013) argued that choices about random effects structure affect the generalizability of the estimates of fixed effects. In particular, it seems sensible to examine the possibility that the slope of the effect of an explanatory variable may vary at random between participants or between stimuli. Correspondingly, researchers should report and explain their decisions about the inclusion of random effects.</p>
+<p>It is normal practice in psychology to report the p-values associated with null hypothesis significance tests of effects when reporting analysis. Performing hypothesis tests using t- or F-distributions depends on the calculation of degrees of freedom yet it is uncertain how degrees of freedom should be counted when analysing multilevel data (Baayen et al., 2008). In most software applications, however, p-values associated with fixed effects may be calculated using an approximation for denominator degrees of freedom.</p>
+<p>We will come back to how we should report the results of mixed-effects models because, here, too, we can benefit by developing our approach, in depth, step by step.</p>
+<!-- ### Random effects of items on the slopes of fixed effects -->
+<!-- I wanted to keep the discussion of the model of the CP reading study data relatively simple by ignoring effects of individual differences, like the effect of differences between participants in reading skill. -->
+<!-- And I wanted to ignore, relatedly, the random effects of items on the slopes of the fixed effects of the individual differences variables (like reading skill). -->
+<!-- For some students, this simplification is unhelpful because they need to think about random effects of subjects *and* items where the design makes that possible. -->
+<!-- So we consider the possibility, briefly, here. -->
+<!-- We can remind ourselves that, potentially, where the fixed effects of explanatory or experimental variables are manipulated within-items, we might further expand our models to incorporate random effects of items on the slopes of the fixed effects. -->
+<!-- For example, we have data on individual differences in participant age, reading skill, and other variables. -->
+<!-- We could, with these data, estimate the effect of, say, word reading skill (measured using the standardised TOWRE reading test) on performance \verb:RT: in the experimental reading task. -->
+<!-- If there is an effect of skill, of the differences between children, on reading \verb:RT: then that effect has to be understood to be a *between-subjects* effect. -->
+<!-- Thus, if we consider a scatterplot showing the relationship between reading response RT and word reading skill (Figure \@ref(fig:pskill)), for all our CP study data, then we are looking at a plot in which each point represents the RT of the response made by a participant to a word. -->
+<!-- But the x-axis location of the points relates to the different reading skill levels of different children. -->
+<!-- And this left-to-right variation in the position of the points relates only to differences between children. -->
+<!-- This is why we would understand the effect of reading skill on RT to be a *between-subjects* effect. -->
+<!-- ```{r pskill, fig.cap = "The relationship between RT and word reading skill, considered for all children, ignoring item grouping", out.width='85%', fig.width=3.5,fig.height=3.5, message = FALSE, echo=FALSE} -->
+<!-- long.all.noNAs %>% -->
+<!--   ggplot(aes(x = TOWREW_skill, y = RT)) + -->
+<!--   geom_point(alpha = .2) +  -->
+<!--   geom_smooth(method = "lm", se = FALSE, colour = "red") +  -->
+<!--   theme_bw() +  -->
+<!--   xlab("Word reading skill (TOWRE sight word test accuracy)")  -->
+<!-- ``` -->
+<!-- The effect of reading skill may be a *between-subjects* effect but it is, equally, a *within-items* effect. -->
+<!-- If you look at the experimental reading data from the perspective of the stimulus word, then we can imagine how, for each item, we have multiple observations (one for each child who responded correctly to a word). -->
+<!-- For each item, we would have data sufficient to estimate an effect of word skill because, for each item, we have multiple observations, one reading skill test score for each child, across the different children in our sample. -->
+<!-- Thus, we analyze how the slope of the reading skill effects varied, between the samples of data grouped in relation to each word. -->
+<!-- Figure \@ref(fig:pskillc5peritem) illustrates how the skill effect varies between words. -->
+<!-- ```{r pskillc5peritem, fig.cap = "The relationship between RT and word reading skill, considered separately for data for each item", out.width='95%', fig.width=10,fig.height=14, message = FALSE} -->
+<!-- long.all.noNAs %>% -->
+<!--   ggplot(aes(x = TOWREW_skill, y = RT)) + -->
+<!--   geom_point(alpha = .2) +  -->
+<!--   geom_smooth(method = "lm", se = FALSE, colour = "red") +  -->
+<!--   theme_bw() +  -->
+<!--   xlab("Word reading skill (TOWRE sight word test accuracy)") +  -->
+<!--   facet_wrap(~ item_name) -->
+<!-- ``` -->
+<!-- Figure \@ref(fig:pskillc5peritem) shows us that there are differences between words in the slope of the skill effect just as there were differences between participants in the slope of the frequency effect. -->
+<!-- Indeed, we can see that there are differences betwen items in both intercepts and in the slopes of the skill effect. -->
+<!-- As we have seen, we can incorporate these random between-item differences in a mixed-effects model by adding random effects terms to the model. -->
+<!-- We leave that potential aside, for now, in our discussion but you can experiment with the possibilities as an exercise. -->
+<!-- #### Exercise -->
+<!-- \begin{description} -->
+<!-- \item[Complicate things] Add participant attribute variables to the model -->
+<!-- \end{description} -->
+<!-- The CP study was designed to examine, in reality, the research questions: -->
+<!-- \begin{description} -->
+<!-- \item[RQ.1.] -->
+<!-- What word properties influence responses to words in a test of reading aloud? -->
+<!-- \item[RQ.2.] -->
+<!-- What participant attributes influence responses? -->
+<!-- \item[RQ.3.] -->
+<!-- Are the effects of word properties moderated by (do they interact with) the effects of participant attributes? -->
+<!-- \end{description} -->
+<!-- You can examine answers to RQ.2 by adding one or more of the participant attribute variables to the model. -->
+<!-- For example, is there an effect of age on reading RT? -->
+<!-- Is there an effect of frequency *and* an effect of reading skill? -->
+<!-- Do the effects of frequency and skill interact? -->
+<!-- An example of a model which could estimate the effects of frequency, reading skill and the interaction would be coded as: -->
+<!-- ```{r lmer-variant, eval = FALSE, purl=TRUE} -->
+<!-- lmer.all.3 <- lmer(RT ~   TOWREW_skill*Lg.UK.CDcount +  -->
+<!--                          (Lg.UK.CDcount + 1||subjectID) + -->
+<!--                          ( TOWREW_skill + 1||item_name), -->
+<!--              data = long.all.noNAs) -->
+<!-- summary(lmer.all.3) -->
+<!-- ``` -->
+<!-- What does this model or models like it tell you about the factors that influence performance in reading in children? -->
+<!-- ### Which fixed effects can be associated with random differences of subjects or items in slopes? {#id:which-random} -->
+<!-- This brings us to a question that often comes up: Which fixed effects can be associated with random effects of subjects (or items) on slopes? -->
+<!-- We discuss this question in the next chapter in the context of a debate in the literature concerning the selection of appropriate (in terms of Type I or II error rates) random effects structures (Barr et al., 2013; Matuschek et al., 2017). -->
+<!-- Here, the way we should address the question focuses on the most basic answer: what is possible or sensible? -->
+<!-- 1. Let's say that we took a sample of participants, and showed each (and all) of them a sample of words, recording the response of each subject to each stimulus item (as the outcome e.g. RT). -->
+<!-- 2. Let's then say that we want to estimate the (fixed) effects of explanatory variables like the differences between words in frequency, or the differences between individuals in skill. -->
+<!-- 3. We can expect to fit a model with fixed effects $RT \sim frequency + skill$. -->
+<!-- 4. And we can readily expect to fit a model with random effects, at least, the effects associated with random differences between sampled subjects or stimuli in intercepts $Y_{ij} = U_{0i} + W_{0j} + e_{ij}$ alongside trial-level residuals. -->
+<!-- 5. What about random effects of subjects (or items) on the slopes of the fixed effects (of frequency or skill)? -->
+<!-- If you can estimate the slope of a (fixed) effect given data you have for a sampling unit (subject, item) *then* you can specify a random effect of sampling units on the slope of the fixed effect. -->
+<!-- In the context of our running example, you can imagine that you *can* estimate the slope of the word frequency effect for each child but you *cannot* estimate the slope of the child reading skill effect for each child. -->
+<!-- You *can* estimate the slope of the child reading skill effect for each item but you *cannot* estimate the slope of the word frequency effect effect for each item. -->
+<!-- Why **cannot* we estimate the random effect of subjects on the child reading skill effect, or the random effect of items on the word frequency effect? -->
+<!-- Let's plot the data. -->
+<!-- First, let's try to plot the effect of subjects on the child reading skill effect. -->
+<!-- ```{r pskillc5perchild, fig.cap = "RT vs. word reading skill, considered separately for data for each child", out.width='100%', fig.width=7,fig.height=9} -->
+<!-- pfreq <- ggplot(data = long.all.noNAs, aes(x = TOWREW_skill, y = RT)) -->
+<!-- pfreq + geom_point(alpha = .2) + geom_smooth(method = "lm", se = FALSE, size = 1.5, colour = "red") +  -->
+<!--   theme_bw() +  -->
+<!--   xlab("word reading skill (TOWRE sight word test accuracy)") +  -->
+<!--   facet_wrap(~ subjectID) -->
+<!-- ``` -->
+<!-- Now let's try to plot the effect of items on the word frequency effect. -->
+<!-- ```{r pfreqc5peritem, fig.cap = "RT vs. word frequency, considered separately for data for each item", out.width='100%', fig.width=7,fig.height=9} -->
+<!-- pfreq <- ggplot(data = long.all.noNAs, aes(x = Lg.UK.CDcount, y = RT)) -->
+<!-- pfreq + geom_point(alpha = .2) + geom_smooth(method = "lm", se = FALSE, size = 1.5, colour = "red") +  -->
+<!--   theme_bw() +  -->
+<!--   xlab("word frequency (Lg.UK.CDcount)") +  -->
+<!--   facet_wrap(~ item_name) -->
+<!-- ``` -->
+<!-- The plots show that it does not make sense to try to estimate the effect of reading skill for each child or of frequency for each word. -->
+<!-- You have one reading skill value for each child, thus, when you look at random differences between children, you cannot estimate how the slope of the reading skill effect varies, considering the data for each child. -->
+<!-- You have one word frequency value for each item, thus, when you look at random differences between items, you cannot estimate how the slope of the frequency effect varies, considering the data for each item. -->
+<!-- Consequently, nor does it make sense to try to examine how the slope of the effect of reading skill varies between children, or how the slope of the effect of frequency varies between words -->
+<!-- To use the jargon of our field, you can examine the random effect of unexplained differences between sampling units (subjects, items) in the slopes of fixed explanatory or experimental effects if the fixed effects are within-units *within-subjects, within-items* but not if they are between-units *between-subjects, between-items. -->
+<!-- ### Crossed random effects of subjects and items on slopes -->
+<!-- We *can* allow ourselves to envisage a model including both the fixed effects of word frequency and of child reading skill, and the random effects of between-subjects or between-items differences in the fixed effects. -->
+<!-- \begin{equation} -->
+<!-- Y_{ij} = \gamma_0 + \gamma_1X_j + \gamma_2X_i + U_{0i} + U_{1i}X_j + W_{0j} + W_{1j}X_i + e_{ij} -->
+<!-- \end{equation} -->
+<!-- In this model, the outcome $Y_{ij}$ is related to: -->
+<!-- * the average intercept $\gamma_0$; -->
+<!-- * the average frequency effect $\gamma_1X_j$ where values of frequency vary for different $j$ words; -->
+<!-- * the average reading skill effect $\gamma_2X_i$ where values of skill vary for different $i$ children; -->
+<!-- plus random effects due to  -->
+<!-- * unexplained differences between children in intercepts $U_{0i}$ for $i$ children; -->
+<!-- * unexplained differences between children in the slopes of the frequency effect $U_{1i}$ for $i$ children; -->
+<!-- as well as -->
+<!-- * unexplained differences between children in intercepts $W_{0j}$ for $j$ words; -->
+<!-- * unexplained differences between children in the slopes of the skill effect $W_{1j}$ for $j$ words; -->
+<!-- We can specify a model that incorporates these terms as follows. -->
+<!-- <!-- ```{r} -->
+<!-- <!-- lmer.all.2 <- lmer(RT ~  Lg.UK.CDcount + TOWREW_skill + (Lg.UK.CDcount + 1|subjectID) + (TOWREW_skill + 1|item_name), -->
+<!-- <!--              data = long.all.noNAs) -->
+<!-- <!-- summary(lmer.all.2) -->
+<!-- <!-- ``` -->
+<!-- The model output shows that reading RTs decrease by about 67ms for unit increase in word frequency, and by about 286 for unit increase in reading skill. -->
+<!-- (Does this mean that the skill effect is bigger than the frequency effect -- well, you can expect that the effect of individual differences would be larger, but, here, it is hard to tell because frequency and skill measures are on different skills, so the effects estimates are hard to compare.) -->
+<!-- In addition, the output shows the variances associated with random differences between subjects or between items in intercepts, as well as random differences between subjects in the slope of the frequency effect, and random differences between items in the slope of the reading skill effect. -->
+<!-- Lastly, we can see the covariances (shown as correlations) associated with the random intercepts variances and the random slopes variances. -->
+<!-- (We might be troubled by the high correlations, and we would be right to be (Bates et al., 2015); we discuss this kind of concern in the next chapter.) -->
+</section>
+<section id="conclusions" class="level2" data-number="4.12">
+<h2 data-number="4.12" class="anchored" data-anchor-id="conclusions"><span class="header-section-number">4.12</span> Conclusions</h2>
+<p>A large proportion of psychological studies involves scenarios in which the researcher samples both participants and some kind of stimuli. Often, the researcher will present the stimuli to the participants for response in some version of a range of possible designs: all participants see and respond to all stimuli; participants respond to different sub-sets of stimuli in different conditions (or in different groups) but they see and respond to all stimuli in a sub-set; participants are allocated to respond to stimulus sub-sets according to a counter balancing scheme (e.g., through the use of Latin squares). Whatever version of this scenario, <em>if</em> participants are responding to multiple stimuli and <em>if</em> multiple partcipants respond to each stimulus, then the data will have a multilevel structure such that each observation can be grouped both by participant and by stimulus. We are interested in taking into account the random effects associated with unexplained or random differences between participants or between stimuli. We often discuss the accounting of these effects in terms of the estimation of error variances associated with the random differences, calling the effects of the differences <em>random effects</em>. Where we have to deal with both samples of participants and samples of stimuli, we can talk about <em>crossed random effects</em>.</p>
+<p>The terms are not that important. The insight is: in general, in experimental psychological science, when we do data analysis, if we want to estimate effects of experimental variables more accurately then our models need to incorporate terms to capture the impact on observed outcomes of sampled participants and sampled stimuli. Historically, we have, as a field, learned to take into account these sampling effects. Now, and most likely, more and more commonly in the future, we are learning to use multilevel or mixed-effects models to do this.</p>
+<section id="summary" class="level3" data-number="4.12.1">
+<h3 data-number="4.12.1" class="anchored" data-anchor-id="summary"><span class="header-section-number">4.12.1</span> Summary</h3>
+<p>We discussed the way that data are structured when they come from studies with repeated measures designs. Critically, we examined data from a common study design where a sample of stimulus items are presented for response to members of a participant sample. This means that each observation can be grouped by participant and, also, by stimulus. The possibility that observations can be grouped means that the data have a multilevel structure. The multilevel structure requires the use of linear mixed-effects models when we seek to estimate the effects of experimental variables. The fact that data can be grouped both by participant and by stimulus means that the model can incorporate random effects to capture random between-participant differences as well as between-stimulus differences. The use of mixed-effects models has meant that psychologists no longer need to adopt compromise solutions which have important limitations, like by-items and by-subjects analyses.</p>
+<p>We reviewed the ways that experimental data can be untidy. And we outlined the steps that may be required to process untidy data into a tidy format suitable for analysis. As is typical for the data analysis we need to do for experimental psychological science, getting data ready for analysis requires a series of steps including: access; import; restructure; select variables; and filter observations.</p>
+<p>We then developed a mixed-effects model to answer the research question:</p>
+<p>Our analysis focused on the relationship between reading response reaction time (RT, in ms) and the predictor word frequency. We examined how the effect of word frequency was estimated in a linear model ignoring the multilevel structure and then in mixed-effects models which incorporated terms to capture variance associated with random differences between participants in intercepts or in the slope of the frequency effect, and between items in intercepts.</p>
+<p>We saw that estimates of the frequency effect differed between different models.</p>
+<p>We considered the possibility of within-items effects.</p>
+</section>
+<section id="useful-functions" class="level3" data-number="4.12.2">
+<h3 data-number="4.12.2" class="anchored" data-anchor-id="useful-functions"><span class="header-section-number">4.12.2</span> Useful functions</h3>
+<p>We used a number of functions to tidy, visualize and analyze the CP study data.</p>
+<p>We used the function to get model results for both linear models and for the mulilevel or liner mixed-effects model.</p>
+</section>
+</section>
+<section id="r-code-and-data-file-access-for-the-class" class="level2" data-number="4.13">
+<h2 data-number="4.13" class="anchored" data-anchor-id="r-code-and-data-file-access-for-the-class"><span class="header-section-number">4.13</span> R code and data file access for the class</h2>
+<p>Activities in the class that goes with this chapter are associated with the following data file and .R code file:</p>
+<p>A pre-tidied version of the CP study data is available as:</p>
+<p>You can get these materials by going to the 402 Moodle folder for week 18, and downloading the .zip (compressed) folder labeled <strong>PSYC402-01-multilevel-resources</strong></p>
+<p>Or, you can download the same folder by clicking on the link:</p>
+<p></p>
+<p>Run the code in the .R file to reproduce the results presented in this chapter and in the slides.</p>
+</section>
+<section id="references" class="level2" data-number="4.14">
+<h2 data-number="4.14" class="anchored" data-anchor-id="references"><span class="header-section-number">4.14</span> References</h2>
+<!-- -- note also the web resources: -->
+<!-- https://bbolker.github.io/morelia_2018/notes/mixedlab.html -->
+<!-- https://cran.microsoft.com/snapshot/2017-08-01/web/packages/sjPlot/vignettes/sjplmer.html -->
+<!-- -- sjplmer maybe superseded by: -->
+<!-- https://stackoverflow.com/questions/13847936/plot-random-effects-from-lmer-lme4-package-using-qqmath-or-dotplot-how-to-mak -->
+<!-- https://cran.r-project.org/web/packages/merTools/vignettes/merToolsIntro.html -->
+<!-- https://stackoverflow.com/questions/27787875/options-for-caterpillar-plots-in-lme4-grouping-by-factor-to-visually-identify-t -->
+<section id="recommended-reading" class="level3" data-number="4.14.1">
+<h3 data-number="4.14.1" class="anchored" data-anchor-id="recommended-reading"><span class="header-section-number">4.14.1</span> Recommended reading</h3>
+<p>Snijders and Bosker (2012) present a helpful overview of multilevel modelling. Baayen et al.&nbsp;(2008; see, also, Barr et al., 2013; Judd et al., 2012) discuss mixed-effects models with crossed random effects. Readers familiar with the book will see that I rely on it to construct the formal presentation of the models.</p>
+<p>I wrote a tutorial article on mixed-effects models with Lotte Meteyard. We discuss how important the approach now is for psychological science, what researchers worry about when they use it, and what they should do and report when they use the method/</p>
+<p>Meteyard, L., &amp; Davies, R.A.I. (2020). Best practice guidance for linear mixed-effects models in psychological science, <em>Journal of Memory and Language</em>, 112, 104092, </p>
+</section>
+<section id="references-list" class="level3" data-number="4.14.2">
+<h3 data-number="4.14.2" class="anchored" data-anchor-id="references-list"><span class="header-section-number">4.14.2</span> References list</h3>
+<p>Baayen, R. H., Davidson, D. J., &amp; Bates, D. M. (2008). Mixed-effects modeling with crossed random effects for subjects and items. <em>Journal of Memory and Language</em>, 59, 390-412.</p>
+<p>Barr, D. J., Levy, R., Scheepers, C., &amp; Tily, H. J. (2013). Random effects structure for confirmatory hypothesis testing: Keep it maximal. <em>Journal of Memory and Language</em>, 68, 255-278.</p>
+<p>Davies, R. A., Arnell, R., Birchenough, J. M., Grimmond, D., &amp; Houlson, S. (2017). Reading through the life span: Individual differences in psycholinguistic effects. <em>Journal of Experimental Psychology: Learning, Memory, and Cognition</em>, 43, 1298.</p>
+<p>Judd, C. M., Westfall, J., &amp; Kenny, D. A. (2012). Treating stimuli as a random factor in social psychology: a new and comprehensive solution to a pervasive but largely ignored problem. <em>Journal of Personality and Social Psychology</em>, 103, 54.</p>
+<p>Lorch, R. F., Jr., &amp; Myers, J. L. (1990). Regression analyses of repeated measures data in cognitive research. <em>Journal of Experimental Psychology: Learning, Memory, and Cognition</em>, 16, 149–157. http://dx.doi.org/ 10.1037/0278-7393.16.1.149</p>
+<p>Raaijmakers, J. G., Schrijnemakers, J. M., &amp; Gremmen, F. (1999). How to deal with “the language-as-fixed-effect fallacy”: Common misconceptions and alternative solutions. <em>Journal of Memory and Language</em>, 41, 416-426.</p>
+<p>Snijders, T.A., &amp; Bosker, R.J. (2012). <em>Multilevel analysis (2nd Edition)</em>. London, UK: Sage.</p>
+<p>Steegen, S., Tuerlinckx, F., Gelman, A., &amp; Vanpaemel, W. (2016). Increasing transparency through a multiverse analysis. <em>Perspectives on Psychological Science</em>, 11, 702-712.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./01-multilevel.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to multilevel data</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./03-mixed.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">03-mixed.html</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

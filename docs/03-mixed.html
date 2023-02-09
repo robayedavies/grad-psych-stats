@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.189">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Psychological data analysis for graduate students - 5&nbsp; Developing linear mixed-effects models</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./04-glmm.html" rel="next">
+<link href="./02-mixed.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Developing linear mixed-effects models</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Psychological data analysis for graduate students</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">Making the most of R</span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./knowledge-ecosystem.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R knowledge</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data visualization</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">Models</span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-multilevel.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to multilevel data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-mixed.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to linear mixed-effects models</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-mixed.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Developing linear mixed-effects models</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-glmm.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">04-glmm.html</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">Writing research reports</span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction: the why</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./what.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">What</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./how.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">How</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">End</span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#motivations-to-grow-in-sophistication" id="toc-motivations-to-grow-in-sophistication" class="nav-link active" data-scroll-target="#motivations-to-grow-in-sophistication"><span class="toc-section-number">5.1</span>  Motivations: to grow in sophistication</a></li>
+  <li><a href="#key-ideas" id="toc-key-ideas" class="nav-link" data-scroll-target="#key-ideas"><span class="toc-section-number">5.2</span>  The key idea to get us started</a></li>
+  <li><a href="#targets" id="toc-targets" class="nav-link" data-scroll-target="#targets"><span class="toc-section-number">5.3</span>  Targets</a></li>
+  <li><a href="#study-guide" id="toc-study-guide" class="nav-link" data-scroll-target="#study-guide"><span class="toc-section-number">5.4</span>  Study guide</a></li>
+  <li><a href="#ML-study" id="toc-ML-study" class="nav-link" data-scroll-target="#ML-study"><span class="toc-section-number">5.5</span>  The data we will work with: ML word recognition study</a>
+  <ul class="collapse">
+  <li><a href="#research-hypotheses" id="toc-research-hypotheses" class="nav-link" data-scroll-target="#research-hypotheses"><span class="toc-section-number">5.5.1</span>  Research hypotheses</a></li>
+  <li><a href="#access" id="toc-access" class="nav-link" data-scroll-target="#access"><span class="toc-section-number">5.5.2</span>  Locate and download the data file</a></li>
+  </ul></li>
+  <li><a href="#tidy-the-data" id="toc-tidy-the-data" class="nav-link" data-scroll-target="#tidy-the-data"><span class="toc-section-number">5.6</span>  Tidy the data</a>
+  <ul class="collapse">
+  <li><a href="#import" id="toc-import" class="nav-link" data-scroll-target="#import"><span class="toc-section-number">5.6.1</span>  Read-in the data file using read_csv</a></li>
+  <li><a href="#examine-the-distribution-of-raw-rt-data-using-density-plots" id="toc-examine-the-distribution-of-raw-rt-data-using-density-plots" class="nav-link" data-scroll-target="#examine-the-distribution-of-raw-rt-data-using-density-plots"><span class="toc-section-number">5.6.2</span>  Examine the distribution of raw RT data using density plots</a></li>
+  <li><a href="#filter" id="toc-filter" class="nav-link" data-scroll-target="#filter"><span class="toc-section-number">5.6.3</span>  Filter observations</a></li>
+  <li><a href="#transform" id="toc-transform" class="nav-link" data-scroll-target="#transform"><span class="toc-section-number">5.6.4</span>  Select or transform the variables: the log10 transformation of RT</a></li>
+  <li><a href="#data-tidying-conclusions" id="toc-data-tidying-conclusions" class="nav-link" data-scroll-target="#data-tidying-conclusions"><span class="toc-section-number">5.6.5</span>  Data tidying – conclusions</a></li>
+  </ul></li>
+  <li><a href="#crossed-random" id="toc-crossed-random" class="nav-link" data-scroll-target="#crossed-random"><span class="toc-section-number">5.7</span>  Repeated measures designs and crossed random effects</a></li>
+  <li><a href="#working-with-mixed-effects-models" id="toc-working-with-mixed-effects-models" class="nav-link" data-scroll-target="#working-with-mixed-effects-models"><span class="toc-section-number">5.8</span>  Working with mixed-effects models</a>
+  <ul class="collapse">
+  <li><a href="#use-facetting-in-ggplot-to-examine-data-by-person" id="toc-use-facetting-in-ggplot-to-examine-data-by-person" class="nav-link" data-scroll-target="#use-facetting-in-ggplot-to-examine-data-by-person"><span class="toc-section-number">5.8.1</span>  Use facetting in ggplot to examine data by person</a></li>
+  <li><a href="#approximations-to-linear-mixed-effects-models-complete-pooling" id="toc-approximations-to-linear-mixed-effects-models-complete-pooling" class="nav-link" data-scroll-target="#approximations-to-linear-mixed-effects-models-complete-pooling"><span class="toc-section-number">5.8.2</span>  Approximations to Linear Mixed-effects models: complete pooling</a></li>
+  <li><a href="#approximations-to-linear-mixed-effects-models-no-pooling" id="toc-approximations-to-linear-mixed-effects-models-no-pooling" class="nav-link" data-scroll-target="#approximations-to-linear-mixed-effects-models-no-pooling"><span class="toc-section-number">5.8.3</span>  Approximations to Linear Mixed-effects models: no pooling</a></li>
+  </ul></li>
+  <li><a href="#the-linear-mixed-effects-model" id="toc-the-linear-mixed-effects-model" class="nav-link" data-scroll-target="#the-linear-mixed-effects-model"><span class="toc-section-number">5.9</span>  The linear mixed-effects model</a>
+  <ul class="collapse">
+  <li><a href="#fixed-and-random-effects" id="toc-fixed-and-random-effects" class="nav-link" data-scroll-target="#fixed-and-random-effects"><span class="toc-section-number">5.9.1</span>  Fixed and random effects</a></li>
+  <li><a href="#variance-and-covariance" id="toc-variance-and-covariance" class="nav-link" data-scroll-target="#variance-and-covariance"><span class="toc-section-number">5.9.2</span>  Variance and covariance</a></li>
+  <li><a href="#random-effects-of-differences-between-stimuli" id="toc-random-effects-of-differences-between-stimuli" class="nav-link" data-scroll-target="#random-effects-of-differences-between-stimuli"><span class="toc-section-number">5.9.3</span>  Random effects of differences between stimuli</a></li>
+  <li><a href="#a-model-including-random-effects-of-differences-between-stimuli-as-well-as-participants" id="toc-a-model-including-random-effects-of-differences-between-stimuli-as-well-as-participants" class="nav-link" data-scroll-target="#a-model-including-random-effects-of-differences-between-stimuli-as-well-as-participants"><span class="toc-section-number">5.9.4</span>  A model including random effects of differences between stimuli as well as participants</a></li>
+  <li><a href="#fitting-a-mixed-effect-model-using-lmer" id="toc-fitting-a-mixed-effect-model-using-lmer" class="nav-link" data-scroll-target="#fitting-a-mixed-effect-model-using-lmer"><span class="toc-section-number">5.9.5</span>  Fitting a mixed-effect model using lmer()</a></li>
+  </ul></li>
+  <li><a href="#mixed-effects-models-partial-pooling-and-shrinkage-or-regularisation-of-estimates" id="toc-mixed-effects-models-partial-pooling-and-shrinkage-or-regularisation-of-estimates" class="nav-link" data-scroll-target="#mixed-effects-models-partial-pooling-and-shrinkage-or-regularisation-of-estimates"><span class="toc-section-number">5.10</span>  Mixed-effects models, partial pooling, and shrinkage or regularisation of estimates</a>
+  <ul class="collapse">
+  <li><a href="#overfitting" id="toc-overfitting" class="nav-link" data-scroll-target="#overfitting"><span class="toc-section-number">5.10.1</span>  Overfitting</a></li>
+  <li><a href="#partial-pooling-shrinkage-or-borrowing-strength" id="toc-partial-pooling-shrinkage-or-borrowing-strength" class="nav-link" data-scroll-target="#partial-pooling-shrinkage-or-borrowing-strength"><span class="toc-section-number">5.10.2</span>  Partial pooling: shrinkage or borrowing strength</a></li>
+  </ul></li>
+  <li><a href="#estimation-methods-an-intuitive-account-of-estimation-in-mixed-effects-models" id="toc-estimation-methods-an-intuitive-account-of-estimation-in-mixed-effects-models" class="nav-link" data-scroll-target="#estimation-methods-an-intuitive-account-of-estimation-in-mixed-effects-models"><span class="toc-section-number">5.11</span>  Estimation methods – An intuitive account of estimation in mixed-effects models</a>
+  <ul class="collapse">
+  <li><a href="#convergence-problems" id="toc-convergence-problems" class="nav-link" data-scroll-target="#convergence-problems"><span class="toc-section-number">5.11.1</span>  Convergence problems</a></li>
+  </ul></li>
+  <li><a href="#fitting-and-evaluating-linear-mixed-effects-models" id="toc-fitting-and-evaluating-linear-mixed-effects-models" class="nav-link" data-scroll-target="#fitting-and-evaluating-linear-mixed-effects-models"><span class="toc-section-number">5.12</span>  Fitting and evaluating Linear Mixed-effects models</a>
+  <ul class="collapse">
+  <li><a href="#model-comparison-approach" id="toc-model-comparison-approach" class="nav-link" data-scroll-target="#model-comparison-approach"><span class="toc-section-number">5.12.1</span>  Model comparison approach</a></li>
+  <li><a href="#model-comparison-using-information-criteria-aic-and-bic" id="toc-model-comparison-using-information-criteria-aic-and-bic" class="nav-link" data-scroll-target="#model-comparison-using-information-criteria-aic-and-bic"><span class="toc-section-number">5.12.2</span>  Model comparison using information criteria, AIC and BIC</a></li>
+  <li><a href="#LRT" id="toc-LRT" class="nav-link" data-scroll-target="#LRT"><span class="toc-section-number">5.12.3</span>  Model comparison using the Likelihood Ratio Test</a></li>
+  </ul></li>
+  <li><a href="#modeling-steps-recommendations" id="toc-modeling-steps-recommendations" class="nav-link" data-scroll-target="#modeling-steps-recommendations"><span class="toc-section-number">5.13</span>  Modeling steps recommendations</a>
+  <ul class="collapse">
+  <li><a href="#maximum-likelihood-and-restricted-maximum-likelihood" id="toc-maximum-likelihood-and-restricted-maximum-likelihood" class="nav-link" data-scroll-target="#maximum-likelihood-and-restricted-maximum-likelihood"><span class="toc-section-number">5.13.1</span>  Maximum Likelihood and Restricted Maximum Likelihood</a></li>
+  <li><a href="#anova" id="toc-anova" class="nav-link" data-scroll-target="#anova"><span class="toc-section-number">5.13.2</span>  Comparing models of varying random effects but constant fixed effects</a></li>
+  <li><a href="#evaluating-random-effects-of-subjects-or-items-on-slopes" id="toc-evaluating-random-effects-of-subjects-or-items-on-slopes" class="nav-link" data-scroll-target="#evaluating-random-effects-of-subjects-or-items-on-slopes"><span class="toc-section-number">5.13.3</span>  Evaluating random effects of subjects or items on slopes</a></li>
+  <li><a href="#p-values" id="toc-p-values" class="nav-link" data-scroll-target="#p-values"><span class="toc-section-number">5.13.4</span>  Effects estimates and or p-values</a></li>
+  </ul></li>
+  <li><a href="#reporting-results" id="toc-reporting-results" class="nav-link" data-scroll-target="#reporting-results"><span class="toc-section-number">5.14</span>  Reporting results</a>
+  <ul class="collapse">
+  <li><a href="#reporting-comparisons-of-ml-and-reml-models" id="toc-reporting-comparisons-of-ml-and-reml-models" class="nav-link" data-scroll-target="#reporting-comparisons-of-ml-and-reml-models"><span class="toc-section-number">5.14.1</span>  Reporting comparisons of ML and REML models</a></li>
+  <li><a href="#reporting-the-model-summary" id="toc-reporting-the-model-summary" class="nav-link" data-scroll-target="#reporting-the-model-summary"><span class="toc-section-number">5.14.2</span>  Reporting the model: summary</a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="toc-section-number">5.15</span>  Summary</a>
+  <ul class="collapse">
+  <li><a href="#useful-functions" id="toc-useful-functions" class="nav-link" data-scroll-target="#useful-functions"><span class="toc-section-number">5.15.1</span>  Useful functions</a></li>
+  </ul></li>
+  <li><a href="#r-code-and-data-file-access-for-the-class" id="toc-r-code-and-data-file-access-for-the-class" class="nav-link" data-scroll-target="#r-code-and-data-file-access-for-the-class"><span class="toc-section-number">5.16</span>  R code and data file access for the class</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="toc-section-number">5.17</span>  References</a>
+  <ul class="collapse">
+  <li><a href="#recommended-reading" id="toc-recommended-reading" class="nav-link" data-scroll-target="#recommended-reading"><span class="toc-section-number">5.17.1</span>  Recommended reading</a></li>
+  <li><a href="#a-very-useful-faq" id="toc-a-very-useful-faq" class="nav-link" data-scroll-target="#a-very-useful-faq"><span class="toc-section-number">5.17.2</span>  A <em>very</em> useful FAQ</a></li>
+  <li><a href="#references-list" id="toc-references-list" class="nav-link" data-scroll-target="#references-list"><span class="toc-section-number">5.17.3</span>  References list</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Developing linear mixed-effects models</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="motivations-to-grow-in-sophistication" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="motivations-to-grow-in-sophistication"><span class="header-section-number">5.1</span> Motivations: to grow in sophistication</h2>
+<p>Linear mixed-effects models are important, interesting, and sometimes challenging. We have worked through two chapters in which we have looked at three things: why multilevel or mixed-effects models are needed; what they can do; and what they involve.</p>
+<p>We have learnt:</p>
+<p>We now need to develop our understanding and skills further.</p>
+<p>We have specified, run and looked at the results of mixed-effects models. We now need to examine some of the complexities that we may need to face when we are involved in mixed-effects modeling.</p>
+<p>Our approach will continue to depend on verbal explanation, visualization and a practical code-based approach to the modeling.</p>
+</section>
+<section id="key-ideas" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="key-ideas"><span class="header-section-number">5.2</span> The key idea to get us started</h2>
+<p>This means our models work better <em>if</em> they are informed by all the data, and take into account random differences but also <em>if</em> they are not too strongly influenced by individual (participant or item) data.</p>
+</section>
+<section id="targets" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="targets"><span class="header-section-number">5.3</span> Targets</h2>
+<p>We are probably now at a stage, in the development of our skills and understanding, where we can be more specific about our targets for learning: what capacities or abilities we want to have by the time we complete the course. I have held back specifying the targets in this way because, first, we had to learn the basic vocabulary. Now that we have done that, we can lay out the targets against which we can assess the progression of our learning.</p>
+<p>We have three components of the capacity we seek to develop. These components include the capacity to understand mixed-effects models, the capacity to work with them practically in R, and the capacity to present the results.</p>
+<p>The truth is that development of skills and understanding in relation to each component will travel at different speeds, for different people, and within any person for different components. For example, I learnt to code and report mixed-effects models as soon as I learnt to recognize the situations where they were required. But it took me longer to understand what the models are, and what they involve. Other people will follow different developmental trajectories.</p>
+<p>I think it is also true that our internal evaluation of our understanding will not exactly match the evaluation that comes from external assessment. In other words, we might not be satisfied with our understanding but, still, our understanding might be satisfactory. It might be that we can learn to say in words what mixed-effects models are or involve, or what their results mean, <em>very effectively</em> even if we remain unsure about our understanding. For these reasons, I specify what we are aiming to develop in terms of what we can <em>do</em>.</p>
+<p>We want to develop the capacity to <strong>understand</strong> mixed-effects models, the capacity to:</p>
+<p>We want to develop the capacity to work practically in R with mixed-effects models, the capacity to:</p>
+<p>We want to develop the capacity to talk about and present the results of mixed-effects models, the capacity to:</p>
+</section>
+<section id="study-guide" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="study-guide"><span class="header-section-number">5.4</span> Study guide</h2>
+<p>You will see that in the references list at the end, I have recommended some papers that I think provide particularly useful or readable introductions to Linear Mixed-effects Models.</p>
+</section>
+<section id="ML-study" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="ML-study"><span class="header-section-number">5.5</span> The data we will work with: ML word recognition study</h2>
+<p>This week, we will be working with the <strong>ML word recognition study</strong> dataset. The focus of our interest is on the ways in which participant attributes (like age) or word properties (like frequency) influence the speed of response in a task measuring the ability to recognize visually presented English words.</p>
+<p>ML examined visual word recognition in younger and older adults using the lexical decision task. Lexical decision is a very popular technique for examining word recognition, especially in adults. While not every MSc Psychology student will be interested in word recognition, or reading, everyone should understand that tasks like lexical decision are similar to a range of other tasks used in experimental psychological science. The critical features of the study are that we have an outcome – a decision response – observed multiple times (for each stimulus) for each participant. We shall be analyzing the speed of response, reaction time (RT), measured in milliseconds (ms).</p>
+<p>Notice that where we analyze the effects of participant attributes on recognition response RTs, those attributes are recorded using a mix of survey questions (about age, etc.) and standardized ability tests. Taking individuals’ scores on standardized ability tests in order to analyze the performance of the same individuals in some experimental task is a <em>very</em> important feature of psychological research in many fields.</p>
+<p>In the lexical decision task, participants completed a series of 320 trials. In each trial, they were presented with a stimulus, a string of letters, that was either a real word (e.g., ‘car’) or a made-up or non-word (e.g., ‘cas’). There were 160 word and 160 non-word stimuli. Each stimulus was presented one at a time on a computer screen. Participants were required to respond to the stimulus by pressing a button to indicate either that they thought the stimulus was a word (they knew) or that they thought it was a non-word. Each sequence of events, in which a stimulus was presented and a response was recorded, is known as a <em>trial</em>. The critical outcome measure was the reaction time of each response: the interval of time from the moment the stimulus was first presented (the stimulus onset) to the moment the response was made (the response onset).</p>
+<p>The total number of participants for this study was 39, including a group of younger adults and a group of older adults. Information was collected about the participants’ age, education and gender. In addition, participants were asked to complete ability measures (TOWRE sight word and phonemic tests, Torgesen et al., 1999) and a measure of reading experience (Author Recognition Test, ART, Masterson &amp; Hayes, 2007).</p>
+<p>In summary, ML collected data on: lexical decision task response reaction times (RTs) and accuracy; information on lexical decision stimulus items, including variables like the length or frequency of words (values taken from the English Lexicon Project, Balota et al., 2007); and information on participants, including age, reading ability and reading experience.</p>
+<p>The ML study data includes the following variables that we will work with (as well as some you can ignore):</p>
+<p><em>Identifying variables</em></p>
+<ul>
+<li>subjectID – identifying code for participants</li>
+<li>item_name – words presented as stimuli</li>
+<li>item_number – identifying code for words presented</li>
+</ul>
+<p><em>Response variables</em></p>
+<ul>
+<li>RT – response reaction time (ms), for responses to words</li>
+</ul>
+<p><em>Subject variables</em></p>
+<ul>
+<li>Age – in years</li>
+<li>Gender – coded M (male), F (female)</li>
+<li>TOWRE_wordacc – word reading skill, words read correctly (out of 104)</li>
+<li>TOWRE_nonwordacc – nonword reading skill, nonwords (made up words) read correctly (out of 63)</li>
+<li>ART_HRminusFR – reading experience score</li>
+</ul>
+<p><em>Item variables</em></p>
+<ul>
+<li><p>Length – word length, in letters</p></li>
+<li><p>Ortho_N – orthographic neighbourhood size, how many other words in English a stimulus word looks like</p></li>
+<li><p>OLD – orthographic Levenshtein distance, how many letter edits (addition, deletion or substitution) it would take to make a stimulus word look like another English word (a measure of orthographic neighbourhood) (Yarkoni et al., 2008)</p></li>
+<li><p>BG_Sum, BG_Mean, BG_Freq_By_Pos – measures of how common are pairs of letters that compose stimulus words</p></li>
+<li><p>SUBTLWF, LgSUBTLWF, SUBTLCD, LgSUBTLCD – measures of how common stimulus words are, taken from the SUBTLEX corpus analysis of word frequency (Brysbaert and New, 2009)</p></li>
+</ul>
+<section id="research-hypotheses" class="level3" data-number="5.5.1">
+<h3 data-number="5.5.1" class="anchored" data-anchor-id="research-hypotheses"><span class="header-section-number">5.5.1</span> Research hypotheses</h3>
+<p>Instead of posing a simple and general research question, we shall orient our work around a set of quite specific predictions. ML hypothesized:</p>
+</section>
+<section id="access" class="level3" data-number="5.5.2">
+<h3 data-number="5.5.2" class="anchored" data-anchor-id="access"><span class="header-section-number">5.5.2</span> Locate and download the data file</h3>
+<p>The data file can be downloaded as part of the .zip folder labelled <strong>PSYC402-03-mixed-resources</strong>.</p>
+<p>You can download the folder from the Moodle section corresponding to this chapter:</p>
+<p></p>
+<p>Or you can download the folder directly from:</p>
+<p></p>
+<p>The data are held in one file:</p>
+<p>The file is a <em>comma separated values</em> file and can be opened in Excel.</p>
+</section>
+</section>
+<section id="tidy-the-data" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="tidy-the-data"><span class="header-section-number">5.6</span> Tidy the data</h2>
+<p>In previous classes, we have needed to combine information about responses with information about participant attributes or stimulus properties, and we have needed to restructure the data so that they are in a tidy format. For this class, many steps in the process of data tidying were completed previously. Thus, we only need to perform steps 1, 3 and 4 of the usual process:</p>
+<ol type="1">
+<li>Import the data or read the data into R, see Section @ref(import)</li>
+<li>Restructure the data</li>
+<li>Select or transform variables, see Section @ref(transform)</li>
+<li>Filter observations, see Section @ref(filter)</li>
+</ol>
+<p>We are going to first filter the observations, then transform the outcome variable. We will explain why we have to do this as we proceed.</p>
+<p>We will use <code>tidyverse</code> library functions to do this work, as usual.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="import" class="level3" data-number="5.6.1">
+<h3 data-number="5.6.1" class="anchored" data-anchor-id="import"><span class="header-section-number">5.6.1</span> Read-in the data file using read_csv</h3>
+<p>I am going to assume you have downloaded the data file, and that you know where it is. We use <code>read_csv</code> to read one file into R.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ML.all <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"subjects.behaviour.words-310114.csv"</span>, <span class="at">na =</span> <span class="st">"-999"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The data file <code>subjects.behaviour.words-310114.csv</code> holds all the data about everything (behaviour, participants, stimuli) we need for our analysis exercises in one big dataset.</p>
+<p>It is always a good idea to first <strong>inspect what you have got</strong> when you read a data file in to R, before you do anything more demanding.</p>
+<p>You can inspect the first few rows of the dataset using <code>head()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ML.all)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 25
+  item_number subjectID Test    Age Years…¹ Gender TOWRE…² TOWRE…³ ART_H…⁴    RT
+        &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
+1           1 GB9       ALT      21      11 F           78      41      18  369.
+2           1 NH1       TAL      52      18 M           78      56      33  725.
+3           1 A15       LTA      21      16 F           95      57       9  484.
+4           1 B18       TLA      69      11 M           85      54      10  518.
+5           1 TC14      LAT      21      16 M           97      56       7  621.
+6           1 B15       LTA      47      18 M          104      63      38  487.
+# … with 15 more variables: COT &lt;dbl&gt;, Subject &lt;chr&gt;, Trial.order &lt;dbl&gt;,
+#   item_name &lt;chr&gt;, Length &lt;dbl&gt;, Ortho_N &lt;dbl&gt;, BG_Sum &lt;dbl&gt;, BG_Mean &lt;dbl&gt;,
+#   BG_Freq_By_Pos &lt;dbl&gt;, item_type &lt;chr&gt;, SUBTLWF &lt;dbl&gt;, LgSUBTLWF &lt;dbl&gt;,
+#   SUBTLCD &lt;dbl&gt;, LgSUBTLCD &lt;dbl&gt;, OLD &lt;dbl&gt;, and abbreviated variable names
+#   ¹​Years_in_education, ²​TOWRE_wordacc, ³​TOWRE_nonwordacc, ⁴​ART_HRminusFR</code></pre>
+</div>
+</div>
+<p>You can examine all the variables using <code>summary()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ML.all)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  item_number      subjectID             Test                Age       
+ Min.   :  1.00   Length:5440        Length:5440        Min.   :16.00  
+ 1st Qu.: 40.75   Class :character   Class :character   1st Qu.:21.00  
+ Median : 80.50   Mode  :character   Mode  :character   Median :21.00  
+ Mean   : 80.50                                         Mean   :36.94  
+ 3rd Qu.:120.25                                         3rd Qu.:53.00  
+ Max.   :160.00                                         Max.   :73.00  
+ Years_in_education    Gender          TOWRE_wordacc    TOWRE_nonwordacc
+ Min.   :11.00      Length:5440        Min.   : 68.00   Min.   :16.00   
+ 1st Qu.:13.00      Class :character   1st Qu.: 84.00   1st Qu.:50.00   
+ Median :16.00      Mode  :character   Median : 93.00   Median :55.50   
+ Mean   :14.94                         Mean   : 91.24   Mean   :52.41   
+ 3rd Qu.:16.00                         3rd Qu.: 98.00   3rd Qu.:57.00   
+ Max.   :19.00                         Max.   :104.00   Max.   :63.00   
+ ART_HRminusFR         RT               COT            Subject         
+ Min.   : 1.00   Min.   :-2000.0   Min.   :  50094   Length:5440       
+ 1st Qu.: 7.00   1st Qu.:  498.1   1st Qu.: 297205   Class :character  
+ Median :11.00   Median :  577.6   Median : 552854   Mode  :character  
+ Mean   :15.15   Mean   :  565.3   Mean   : 575780                     
+ 3rd Qu.:21.00   3rd Qu.:  677.4   3rd Qu.: 810108                     
+ Max.   :43.00   Max.   : 1978.4   Max.   :1583651                     
+  Trial.order     item_name             Length       Ortho_N      
+ Min.   : 21.0   Length:5440        Min.   :3.0   Min.   : 0.000  
+ 1st Qu.:100.8   Class :character   1st Qu.:4.0   1st Qu.: 3.000  
+ Median :180.5   Mode  :character   Median :4.0   Median : 6.000  
+ Mean   :180.5                      Mean   :4.3   Mean   : 7.069  
+ 3rd Qu.:260.2                      3rd Qu.:5.0   3rd Qu.:11.000  
+ Max.   :340.0                      Max.   :6.0   Max.   :24.000  
+     BG_Sum          BG_Mean       BG_Freq_By_Pos   item_type        
+ Min.   :  3.00   Min.   :  1.00   Min.   :  1.0   Length:5440       
+ 1st Qu.: 81.75   1st Qu.: 67.75   1st Qu.: 74.5   Class :character  
+ Median :151.50   Median :153.50   Median :158.0   Mode  :character  
+ Mean   :155.89   Mean   :153.82   Mean   :149.6                     
+ 3rd Qu.:234.75   3rd Qu.:239.25   3rd Qu.:227.0                     
+ Max.   :314.00   Max.   :316.00   Max.   :295.0                     
+    SUBTLWF          LgSUBTLWF        SUBTLCD        LgSUBTLCD    
+ Min.   :   0.57   Min.   :1.477   Min.   : 0.32   Min.   :1.447  
+ 1st Qu.:  17.36   1st Qu.:2.947   1st Qu.: 6.67   1st Qu.:2.748  
+ Median :  69.30   Median :3.549   Median :23.64   Median :3.298  
+ Mean   : 442.01   Mean   :3.521   Mean   :36.52   Mean   :3.137  
+ 3rd Qu.: 290.70   3rd Qu.:4.171   3rd Qu.:65.24   3rd Qu.:3.739  
+ Max.   :6161.41   Max.   :5.497   Max.   :99.70   Max.   :3.922  
+      OLD       
+ Min.   :1.000  
+ 1st Qu.:1.288  
+ Median :1.550  
+ Mean   :1.512  
+ 3rd Qu.:1.750  
+ Max.   :2.050  </code></pre>
+</div>
+</div>
+<p>The summary shows some features of the dataset, or of how R interprets the dataset, that are of immediate interest to us, though we do not necessarily have to do anything about them.</p>
+<ol type="1">
+<li>We can see statistical summaries – showing the mean, median, minimum and maximum, etc. – of numeric variables like the outcome variable <code>RT</code>, or candidate predictor variables like <code>LgSUBTLCD</code>, a measure of the frequency of occurrence of words.</li>
+<li>We can see statistical summaries, also, of variables that comprise number values but which we do not want to be treated as numbers, e.g., the word stimulus coding variable <code>item_number</code>.</li>
+<li>We can see that some variables are simply listed as <code>Class: character</code>. That tells us that one or more values in the columns in the datasheet that correspond to these variables are words or strings of letters or alphanumeric characters.</li>
+<li>There is no sign of the presence of missing values in this dataset, no counts of <code>NAs</code>.</li>
+</ol>
+<p>We do not really want R to treat a coding variable like <code>item_number</code> as numeric: it functions as a categorical or nominal variable, a factor. And we want R to treat coding variables like <code>subjectID</code> as factors. In previous chapters, we have ensured that R handles variables exactly as we require using either coercion i.e.&nbsp;using something like an <code>as.factor()</code> function call or, at the read-in stage, using <code>col_types()</code> specification. We are going to do neither here because we don’t have to do this work; not doing it will have no impact on our analyses at this point.</p>
+<p>What we <strong>do need to do</strong> is deal with a problem that is already apparent in the summary statistics: we can see that <code>RT</code> includes values as low as <code>-2000</code>. That can’t be right.</p>
+</section>
+<section id="examine-the-distribution-of-raw-rt-data-using-density-plots" class="level3" data-number="5.6.2">
+<h3 data-number="5.6.2" class="anchored" data-anchor-id="examine-the-distribution-of-raw-rt-data-using-density-plots"><span class="header-section-number">5.6.2</span> Examine the distribution of raw RT data using density plots</h3>
+<p>We should examine the distribution of the outcome variable, lexical decision response reaction time (RT in ms). Observations about variable value distributions are a part of <em>Exploratory Data Analysis</em> and serve to catch errors in the dataset (e.g.&nbsp;incorrectly recorded scores) but also to inform the researcher’s understanding of their own data.</p>
+<p>We shall examine the distribution of the outcome variable, lexical decision response reaction time (RT in ms), using density plots. An alternative method would be to use histograms. I choose to use density plots because they allow the easy comparison of the distributions of values of a continuous numeric variable like reaction time. A density plot shows a curve. You can say that the density corresponds to the height of the curve for a given value of the variable being depicted, and that it is related to the probability of observing values of the variable within some range of values (Howell, 2014).</p>
+<!-- % howell/p.124 density is not synonymous with probability -- best thought of as the height of the curve at different values of x given infinite differences -->
+<!-- % -- it does not make sense to talk about the probability of any specific outcome -->
+<!-- % it does make sense to talk about the the probability of obtaining a score falling within some interval -->
+<!-- %if we arbitrarily define the total area under the curve to = 1 then the shaded band capturing points falling within a-b -->
+<!-- %will = the prob that randomly selected obs will have values in that range -->
+<!-- %-- with calculus if we knew the form of the equation that describes this distribution we would simply need to integrate the function -->
+<!-- %over the interval a-b -->
+<!-- % -->
+<!-- % %chang/pp.124 -- a kernel density curve is an estimate of the population distribution given the sample data                   -->
+<!-- % %-- the amount of smoothing depends on the kernel bandwidth                   -->
+<!-- % %-- the larger the bandwidth the more smoothing there is  -->
+<p>Getting a density plot of RTs of responses is easy in <code>ggplot()</code>.</p>
+<div class="cell" data-layout-align="center" data-hash="03-mixed_cache/html/rt-all-density_11bdabd6eb4b9d8d8fdff43e8581a4dd">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ML.all <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> RT)) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">size=</span><span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rug</span>(<span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Raw RT"</span>) <span class="sc">+</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><embed src="03-mixed_files/figure-html/rt-all-density-1.pdf" class="img-fluid" style="width:55.0%"></p>
+<p></p><figcaption class="figure-caption">Density plot showing word recognition reaction time, correct and incorrect responses</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The code delivers a plot (Figure @ref(fig:rt-all-density)) showing three peaks in the distribution of RT values. You can see that there is a peak of RT observations around 500-1000ms, another smaller peak around -500ms, and a third smaller peak around -2000ms.</p>
+<p>The density plot shows the reaction times recorded for participants’ button press `yes’ responses to word stimuli in the lexical decision task. The peaks of negative RTs represent observations that are impossible. Remember that reaction time, in a task like lexical decision, represents the interval in time between the onset of a task stimulus (in lexical decision, a word or a nonword) and the onset of the response (the button press to indicate the lexical decision). We cannot have negative time intervals. The explanation is that ML collected her data using DMDX (Forster &amp; Forster, 2003). DMDX records the reaction times for incorrect responses as <em>negative RTs</em>.</p>
+<section id="code-tip" class="level4" data-number="5.6.2.1">
+<h4 data-number="5.6.2.1" class="anchored" data-anchor-id="code-tip"><span class="header-section-number">5.6.2.1</span> Code tip</h4>
+<p>The code to produce Figure @ref(fig:rt-all-density) works in a series of steps.</p>
+<ol type="1">
+<li><code>ML.all %&gt;%</code> takes the dataset, from the ML study, that we have read in to the R workspace and pipes it to the visualization code, next.</li>
+<li><code>ggplot(aes(x = RT)) +</code> creates a plot object in which the x-axis variable is specified as <code>RT</code>. The values of this variable will be mapped to geometric objects, i.e.&nbsp;plot features, that you can see, next.</li>
+<li><code>geom_density(size=1.5) +</code> first displays the distribution of values in the variable <code>RT</code> as a density curve. The argument <code>size=1.5</code> tells R to make the line <span class="math inline">\(1.5 \times\)</span> the thickness of the line used by default to show variation in density. Some further information is added to the plot, next.</li>
+<li><code>geom_rug(alpha = .2) +</code> with a command that tells R to add a rug plot below the density curve.</li>
+<li><code>ggtitle("Raw RT")</code> makes a plot title.</li>
+</ol>
+<p>Notice that beneath the curve of the density plot, you can see a series of vertical lines. Each line represents the x-axis location of an RT observation in the ML study data set. This <em>rug plot</em> represents the distribution of RT observations in one dimension.</p>
+<ul>
+<li><code>geom_rug()</code> draws a vertical line at each location on the x-axis that we observe a value of the variable, RT, named in <code>aes(x = RT)</code>.</li>
+<li><code>geom_rug(alpha = .2)</code> reduces the opacity of each line to ensure the reader can see how the RT observations are denser in some places than others.</li>
+</ul>
+<p>You can see that we have many more observations of RTs from around 250ms to 1250ms, where the rug of lines is thickest, under the peak of the density plot. This indicates what the two kinds of plots are doing.</p>
+</section>
+<section id="exercise" class="level4" data-number="5.6.2.2">
+<h4 data-number="5.6.2.2" class="anchored" data-anchor-id="exercise"><span class="header-section-number">5.6.2.2</span> Exercise</h4>
+<p>You should try out alternative visualisation methods to reveal the patterns in the distribution of variables in the ML dataset (or in your own data).</p>
+<p>Take a look at the <code>geoms</code> documented in:</p>
+<p></p>
+<p>Would a histogram or a frequency polygon provide a more informative view?</p>
+<p></p>
+<p>What about a dotplot?</p>
+<p></p>
+</section>
+</section>
+<section id="filter" class="level3" data-number="5.6.3">
+<h3 data-number="5.6.3" class="anchored" data-anchor-id="filter"><span class="header-section-number">5.6.3</span> Filter observations</h3>
+<p>The density plot shows us that the raw ML lexical decision <code>RT</code> variable includes negative RT values corresponding to incorrect response. These have to be removed. We can do this quite efficiently by creating a subset of the original “raw” data, defined according to the RT variable using the <code>tidyverse</code> library <code>filter()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct <span class="ot">&lt;-</span> <span class="fu">filter</span>(ML.all, RT <span class="sc">&gt;=</span> <span class="dv">200</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>After we have removed negative (error) RTs, we check that the sizes of the datasets – their length, in other words, the number of rows – matches our expectations. We do this to make sure that we did the filter operation correctly.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(ML.all<span class="sc">$</span>RT)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5440</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(ML.all.correct<span class="sc">$</span>RT)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5257</code></pre>
+</div>
+</div>
+<p>If you run the <code>length()</code> function calls then you should see that the <em>length</em> or number of observations or rows in the <code>ML.all.correct</code> dataset should be smaller than the number of observations in the <code>ML.all</code> dataset.</p>
+<p>Having obtained a new data frame with data on just those trials where responses were correct, we can plot the distribution of RTs for just the correct responses (Figure @ref(fig:rt-correct-density)).</p>
+<div class="cell" data-hash="03-mixed_cache/html/rt-correct-density_df951e70f60e3991bdc07bc7e8cc3dea">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> RT)) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">size=</span><span class="fl">1.5</span>) <span class="sc">+</span> </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rug</span>(<span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Correct RTs"</span>) <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><embed src="03-mixed_files/figure-html/rt-correct-density-1.pdf" class="img-fluid" style="width:55.0%"></p>
+<p></p><figcaption class="figure-caption">Density plot showing word recognition reaction time, correct responses only</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="code-tip-1" class="level4" data-number="5.6.3.1">
+<h4 data-number="5.6.3.1" class="anchored" data-anchor-id="code-tip-1"><span class="header-section-number">5.6.3.1</span> Code tip</h4>
+<p>The filter code is written to subset the data by rows using a condition on the values of the RT variable.</p>
+<p><code>ML.all.correct &lt;- filter(ML.all, RT &gt;= 200)</code> works as follows.</p>
+<ol type="1">
+<li><code>ML.all.correct &lt;- filter(ML.all ...)</code> creates a new dataset with a new name <code>ML.all.correct</code> from the old dataset <code>ML.all</code> using the <code>filter()</code> function.</li>
+<li><code>filter(... RT &gt;= 200)</code> specifies an argument for the <code>filter()</code> function. In effect, we are asking R to look at every value in the <code>RT</code> column. R will do a check through the <code>ML.all</code> dataset, row by row. <em>If</em> a row includes an RT that is greater than or equal to 200 <em>then</em> that row will be included in the new dataset <code>ML.all.correct</code>. <em>But if</em> a row includes an RT that is less than 200, then that row will not be included. We express this condition as <code>RT &gt;= 200</code>.</li>
+</ol>
+<p>The <code>length()</code> function will count the elements in whatever object is specified as an argument in the function call. This means that if you put a variable name into the function as in <code>length(dataset$variable)</code> it will count how long that variable is – how many rows there are in the column. If that variable happens to be, as here, part of a dataset, the same calculation will tell you how many rows there are in the dataset as a whole.</p>
+<p>If you just enter <code>length(dataset)</code>, naming some dataset, then the function will return a count of the number of columns in the dataset.</p>
+</section>
+<section id="exercise-1" class="level4" data-number="5.6.3.2">
+<h4 data-number="5.6.3.2" class="anchored" data-anchor-id="exercise-1"><span class="header-section-number">5.6.3.2</span> Exercise</h4>
+<ol type="1">
+<li>Change the threshold for including RTs from <code>RT &gt;= 200</code> to something else: you can change the number, or you can change the operators from <code>&gt;=</code> to a different comparison.</li>
+<li>Can you assess what impact the change has? Note that you can count the number of observations (rows) in a dataset using e.g.&nbsp;<code>length()</code>.</li>
+</ol>
+</section>
+<section id="filtering-observations-as-a-decision-in-the-psychological-research-workflow" class="level4" data-number="5.6.3.3">
+<h4 data-number="5.6.3.3" class="anchored" data-anchor-id="filtering-observations-as-a-decision-in-the-psychological-research-workflow"><span class="header-section-number">5.6.3.3</span> Filtering observations as a decision in the psychological research workflow</h4>
+<p>I choose to filter out or not only error responses (where <span class="math inline">\(RT &lt; 0ms\)</span>) but also short reaction times (where <span class="math inline">\(RT &lt; 200ms\)</span>). I think that any response in the lexical decision task that is recorded as less than 200ms cannot possibly represent a real word recognition response. Participants who complete experimental psychological tasks can and do press the button before they have time to engage the psychological processes (like word recognition) that the tasks we administer are designed to probe (like lexical decision). There is some relevant literature that concerns the speed at which neural word recognition processes operate. However, I think you should note that the threshold I am setting for exclusion, here, is essentially <em>arbitrary</em>. If you think about it, I could have set the threshold at any number from <span class="math inline">\(100-300ms\)</span> or some other range. What is guiding me is experience but other researchers will have different experiences and set different thresholds. <em>This</em> is why using exclusion criteria to remove data is problematic.</p>
+<p>Filtering or re-coding observations is an important element of the research workflow in psychological science. How we do or do not remove observations from original data may have an impact on our results (as explored by Steegen et al., 2016). It is important, therefore, that we learn how to do this reproducibly using, for example, R scripts that we can share with our research reports. I would argue that, at minimum, a researcher should report their research including:</p>
+<ul>
+<li>What exclusion criteria they use to remove data, explaining why.</li>
+<li>Report analyses with and without exclusions, to indicate if their results are sensitive to their decisions.</li>
+</ul>
+<p>You can read further information about the practicalities of using R to do filtering here:</p>
+<p></p>
+<p>I very much recommend reading the discussion by Steegen et al.&nbsp;(2016) of the impacts of researcher choices in dataset construction analysis results.Don</p>
+</section>
+</section>
+<section id="transform" class="level3" data-number="5.6.4">
+<h3 data-number="5.6.4" class="anchored" data-anchor-id="transform"><span class="header-section-number">5.6.4</span> Select or transform the variables: the log10 transformation of RT</h3>
+<p>Figure @ref(fig:rt-correct-density) shows that we have successfully removed all errors (negative RTs) but now we see how skewed the RT distribution is. Note the <em>long tail</em> of longer RTs.</p>
+<p>Most researchers assume that participants – healthy young adults – take about 500-1000ms to perform the task and that values outside that range correspond to either fast guesses (RTs that are too short) or to distracted or tired or bored responses (RTs that are too long). In theory, the lexical decision task should be probing automatic cognitive processes, measuring the steps from perception to visual word recognition in the time interval between the moment the stimulus is first shown and the moment the button is pressed by the participant to indicate a response. Thus, it might seem natural to exclude extreme RT values which might correspond not to automatic cognitive processes but to unknowable distraction events or boredom and inattention. However, we shall complete no further data exclusions.</p>
+<p>For now, we can look at a commonly used method to deal with the skew that we typically see when we examine reaction time distributions. RT distributions are usually skewed with a long tail of longer RTs. You can always take longer to press the button but there is a limit to how much faster you can make your response.</p>
+<p>Generally, we assume that departures from a model’s predictions about our observations (the linear model residuals) are normally distributed, and we often assume that the relationship between outcome and predictor variables is linear (Cohen, Cohen, Aiken, &amp; West, 2003). We can ensure that our data are compliant with both assumptions by transforming the RT distribution.</p>
+<p>It is not <em>cheating</em> to transform variables. Transformations of data variables can be helpful for a variety of reasons in the analysis of psychological data (Cohen et al., 2003; Gelman &amp; Hill, 2006). I do recommend, however, that you are careful to report what transformations you use, and why you do them.</p>
+<p>Psychology researchers often take the log (often log base 10) of RT values before performing an analysis. Transforming RTs to the log base 10 of RT values has the effect of correcting the skew – bringing the larger RTs ‘closer’ (e.g., <span class="math inline">\(1000 = 3\)</span> in log10) to those near the middle which do not change as much (e.g.&nbsp;<span class="math inline">\(500 = 2.7\)</span> in log10).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct<span class="sc">$</span>logrt <span class="ot">&lt;-</span> <span class="fu">log10</span>(ML.all.correct<span class="sc">$</span>RT)            </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can see the effect of the transformation if we plot the log10 transformed RTs (see Figure @ref(fig:rt-correct-log-density)). We arrive at a distribution that more closely approximates the normal distribution.</p>
+<div class="cell" data-hash="03-mixed_cache/html/rt-correct-log-density_22ae5c021cd9ba7fb325065a49b9838b">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> logrt)) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span> </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rug</span>(<span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Correct log10 RTs"</span>) <span class="sc">+</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><embed src="03-mixed_files/figure-html/rt-correct-log-density-1.pdf" class="img-fluid" style="width:55.0%"></p>
+<p></p><figcaption class="figure-caption">Density plot showing log10 transformed reaction time, correct responses only</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="code-tip-2" class="level5" data-number="5.6.4.0.1">
+<h5 data-number="5.6.4.0.1" class="anchored" data-anchor-id="code-tip-2"><span class="header-section-number">5.6.4.0.1</span> Code tip</h5>
+<p>The <code>log10()</code> function works as follows:-</p>
+<ol type="1">
+<li><code>ML.all.correct$logrt &lt;- log10(...)</code> creates a a new variable <code>logrt</code>, adding it to the <code>ML.all.correct</code> dataset. The variable is created using the transformation function <code>log10()</code>.</li>
+<li><code>log10(ML.all.correct$RT)</code> creates a the new variable by transforming (to log10) the values of the old variable, <code>RT</code>.</li>
+</ol>
+<p>There are other log transformation functions and we often see researchers using the natural log instead of the log base 10.</p>
+<p></p>
+</section>
+</section>
+<section id="data-tidying-conclusions" class="level3" data-number="5.6.5">
+<h3 data-number="5.6.5" class="anchored" data-anchor-id="data-tidying-conclusions"><span class="header-section-number">5.6.5</span> Data tidying – conclusions</h3>
+<p>Even when data have been structured appropriately, we will still, often, need to do some tidying before we can do an analysis. Most research work involving quantitative evidence requires a <em>big</em> chunk of data tidying or other processing before you get to the statistics.</p>
+<p>Our data are now ready for analysis.</p>
+</section>
+</section>
+<section id="crossed-random" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="crossed-random"><span class="header-section-number">5.7</span> Repeated measures designs and crossed random effects</h2>
+<p>As we saw in the <strong>Introduction to mixed-effects models</strong>, many Psychologists conduct studies where it is not sensible to think of observations as being nested (Baayen et al., 2008). In this chapter, we turn to the <strong>ML word recognition study</strong> dataset, which has a structure similar to the CP study data we worked with previously. Again, the core concern is that the data come from a study with a <strong>repeated-measures design</strong> where the experimenter presented multiple stimuli for response to each participant, for several participants, so that we have multiple observations for each participant and multiple observations for each stimulus. Getting practice with this kind of data will help you to easily recognize what you have got when you see it in your own work.</p>
+<p>ML asked all participants in a sample of people to read a selection of words (a sample of words from the language). For each participant, we will have multiple observations and these observations will not be independent. One participant will tend to be slower or less accurate compared to another. Her responses may be more or less susceptible to the effects of the experimental variables. The lowest trial-level observations can be grouped with respect to participants. However, the data can also be grouped by stimuli. For each stimulus word, there are multiple observations and these observations will not be independent. One stimulus may prove to be more challenging to all participants compared to another, eliciting slower or less accurate responses on average. In addition, if there are within-items effects, we may ask if the impact of those within-items effects is more prominent, stronger, among responses to some items compared to others. Given this common <em>repeated-measures</em> design, we can analyse the outcome variable in relation to:</p>
+</section>
+<section id="working-with-mixed-effects-models" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="working-with-mixed-effects-models"><span class="header-section-number">5.8</span> Working with mixed-effects models</h2>
+<p>We are going to respond to the multilevel (or crossed random effects) structure in the data by using linear mixed-effects models to analyze the data. This week, we are going to look at what mixed-effects models do from a <strong>new perspective</strong>.</p>
+<p>Our concern will be with different ways of thinking about why mixed-effects models are superior to linear models where data have a multilevel structure. Mixed-effects models tend to be more accurate in this (very common) situation because of what is called <em>partial pooling</em> and <em>shrinkage</em> or <em>regularization</em>. We use our practical example to explore these ideas.</p>
+<section id="use-facetting-in-ggplot-to-examine-data-by-person" class="level3" data-number="5.8.1">
+<h3 data-number="5.8.1" class="anchored" data-anchor-id="use-facetting-in-ggplot-to-examine-data-by-person"><span class="header-section-number">5.8.1</span> Use facetting in ggplot to examine data by person</h3>
+<p>To get started, we can examine – for each individual separately – the distribution of log RT observations, in Figure @ref(fig:rt-correct-log-den-by-subj).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(subjectID) <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mean_logrt =</span> <span class="fu">mean</span>(logrt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">subjectID =</span> <span class="fu">fct_reorder</span>(subjectID, mean_logrt)) <span class="sc">%&gt;%</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> logrt)) <span class="sc">+</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">size =</span> <span class="fl">1.25</span>) <span class="sc">+</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> subjectID) <span class="sc">+</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">2.778807</span>, <span class="at">colour =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="fl">2.5</span>,<span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Plot showing distribution of logRT for each participant; red line shows mean log10 RT"</span>) <span class="sc">+</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><embed src="03-mixed_files/figure-html/rt-correct-log-den-by-subj-1.pdf" class="img-fluid" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Density plot showing log10 transformed reaction time, correct responses, separately for each participant</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Figure @ref(fig:rt-correct-log-den-by-subj) shows that RT distributions vary considerably between people. The plot imposes a dashed red line to indicate where the mean log10 RT is, calculated over all observations in the dataset. The plot shows the distribution of log RT for each participant, as a density drawn separately for each person. The individual plots are ordered by the mean log RT calculated per person, so plots appear in order from the fastest to the slowest.</p>
+<p>The grid of plots illustrates some interesting features about the data in the ML study sample. You can see how the distribution of log RT varies between individuals: some people show widely spread reaction times; some people show quite tight or narrow distributions. You can see how the shapes of the distributions varies: some people show skew; others do not. I do not see that the variation in the shapes of the distributions is related to the average speed of the person’s responses.</p>
+<p>I think the key message of the plot is that some distributions are wider (RTs are more spread out) than others. We might be concerned that people who present more variable reaction times (wider distributions) may be associated with less reliable estimates of their average response speed, or of the impact of word attributes (like word frequency) on their response speed.</p>
+<section id="code-tip-3" class="level4" data-number="5.8.1.1">
+<h4 data-number="5.8.1.1" class="anchored" data-anchor-id="code-tip-3"><span class="header-section-number">5.8.1.1</span> Code tip</h4>
+<p>The plotting code progresses through a series of steps. This example demonstrates how you can combine data tidying and plotting steps in a single sequence, using <code>tidyverse</code> functions and the <code>%&gt;%</code> pipe, so I will take the time to explain what is going on.</p>
+<p>My aim is to create a grid of individual plots, showing the distribution of log RTs for each participant, so that the plots are presented in order, from the fastest participant to the slowest. Take a look at the plotting code. We can explain how it works, step by step.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(subjectID) <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mean_logrt =</span> <span class="fu">mean</span>(logrt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">subjectID =</span> <span class="fu">fct_reorder</span>(subjectID, mean_logrt)) <span class="sc">%&gt;%</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> logrt)) <span class="sc">+</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">size =</span> <span class="fl">1.25</span>) <span class="sc">+</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> subjectID) <span class="sc">+</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">2.778807</span>, <span class="at">colour =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="fl">2.5</span>,<span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Plot showing distribution of logRT for each participant; red line shows mean log10 RT"</span>) <span class="sc">+</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You will see that we present the distribution of RTs using <code>geom_density()</code> and that we present a separate plot for each person’s data using <code>facet_wrap()</code>. To these elements, we add some pre-processing steps to calculate the average response speed of each individual, and to reorder the dataset by those averages.</p>
+<p>It will make it easier to understand what is going on if we consider the code in chunks.</p>
+<p>First, we pre-process the data before we feed it into the plotting code.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(subjectID) <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mean_logrt =</span> <span class="fu">mean</span>(logrt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">subjectID =</span> <span class="fu">fct_reorder</span>(subjectID, mean_logrt)) <span class="sc">%&gt;%</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="1">
+<li><code>ML.all.correct %&gt;%</code> takes the selected filtered dataset <code>ML.all.correct</code> and pipes it <code>%&gt;%</code> to the next step.</li>
+<li><code>group_by(subjectID) %&gt;%</code> tells R to group the data by <code>subject ID</code>. We have a set of multiple log RT observations for each <code>subjectID</code> because each participant was asked to respond to multiple word stimuli.</li>
+<li><code>mutate(mean_logrt = mean(logrt, na.rm = TRUE))</code> next calculates and stores the mean log RT for each person. We create a new variable <code>mean_logrt</code>. We calculate the average of the set of log RTs recorded for each <code>subjectID</code> and construct the new variable <code>mean_logrt</code> from these averages. We do not need to treat the data in groups so we remove the grouping, next.</li>
+<li><code>ungroup() %&gt;%</code> having grouped the data to calculate the mean log RTs, we <code>ungroup</code> the dataset so that R can look at all observations in the next step.</li>
+<li><code>mutate(subjectID = fct_reorder(subjectID, mean_logrt)) %&gt;%</code> asks R to look at all log RT observations in the dataset, and change the top-to-bottom order of the rows. We ask R to order observations by <code>subjectID</code> so that each person’s data are listed by their average speed, from the fastest to the slowest. We then pipe these ordered data to the plotting code, next.</li>
+</ol>
+<p>If you delete or comment out these first lines, you will see that R uses just a default ordering, drawing the plot for each person in the alphabetical order of their <code>subjectID</code> codes. Try it, though don’t forget to start with <code>ML.all.correct %&gt;%</code>.</p>
+<p>Second, we draw the plots, using the data we have pre-processed.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> logrt)) <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">size =</span> <span class="fl">1.25</span>) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> subjectID) <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The key functions that create a grid of density plots are the following.</p>
+<ol type="1">
+<li><code>ggplot(aes(x = logrt))</code> tells R to work with <code>logrt</code> as the x-axis variable. We shall be plotting the distribution of <code>logrt</code>.</li>
+<li><code>geom_density(...)</code> draws a density plot to show the distribution of log RT, using a thicker line <code>size = 1.25</code></li>
+<li><code>facet_wrap(~ subjectID)</code> creates a different plot for each level of the <code>subjectID</code> factor: we want to see a separate plot for each participant.</li>
+</ol>
+<ul>
+<li><code>facet_wrap(~ subjectID)</code> works to split the dataset up by participant, with observations corresponding to each participant identified by their <code>subjectID</code>, and to then split the plotting to show the distribution of log RT separately for each participant.</li>
+</ul>
+<p>I wanted to present the plots in order of the average speed of response of participants. If you look at Figure @ref(fig:rt-correct-log-den-by-subj) you can see that the position of the peak of the log RT distribution for each participant moves, from the fastest plots where the peak is around <span class="math inline">\(log RT = 2.5\)</span> (shown from the top left of the grid), to the slowest plots where the peak is around <span class="math inline">\(log RT = 2.75\)</span> (shown towards the bottom right of the grid)</p>
+<p>We can then use further <code>ggplot</code> functions to edit the appearance of the plot, to make it more useful.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">2.778807</span>, <span class="at">colour =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="fl">2.5</span>,<span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Plot showing distribution of logRT for each participant; red line shows mean log10 RT"</span>) <span class="sc">+</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="1">
+<li><code>geom_vline(xintercept = 2.778807, colour = "red", linetype = 2)</code> draws a vertical red dashed line at the location of the mean log RT, the average of all log RTs over all participants in the dataset.</li>
+<li><code>scale_x_continuous(breaks = c(2.5,3))</code> adjusts the x-axis labeling. The <code>ggplot</code> default might draw too many x-axis labels i.e.&nbsp;showing possible log RT values as tick marks on the bottom line of the plot. I want to avoid this as sometimes all the labels can be crowded together, making them harder to read.</li>
+</ol>
+<ul>
+<li>Drawing a vertical line at the mean calculated overall is designed to help the reader (you) calibrate their comparison of the data from different people.</li>
+</ul>
+</section>
+<section id="exercises" class="level4" data-number="5.8.1.2">
+<h4 data-number="5.8.1.2" class="anchored" data-anchor-id="exercises"><span class="header-section-number">5.8.1.2</span> Exercises</h4>
+<p>It is worthwhile experimenting with example code to figure out how it works. One way you can do this is by commenting out one line of code, at a time by putting the <code>#</code> at the start of the line. If you do this, you can see what the line of code does by, effectively, asking R to ignore it.</p>
+<p>Another way you can experiment with code is by seeing what you can change and what effect the changes have.</p>
+</section>
+</section>
+<section id="approximations-to-linear-mixed-effects-models-complete-pooling" class="level3" data-number="5.8.2">
+<h3 data-number="5.8.2" class="anchored" data-anchor-id="approximations-to-linear-mixed-effects-models-complete-pooling"><span class="header-section-number">5.8.2</span> Approximations to Linear Mixed-effects models: complete pooling</h3>
+<p>As we have discussed in previous chapters, a good way to approach a mixed-effects analysis is by first estimating the effects of the experimental variables (here, frequency) using linear models, ignoring the hierarchical structure in the data. A linear model of multilevel structured data can be regarded as an <strong>approximation</strong> to the better analysis. We model the effects of interest, using all the data (hence, <em>complete pooling</em>) but ignoring the differences between participants. This means we can see something of the ‘true’ picture of our data through the linear model results but the linear model misses important information, which the mixed-effects model will include, that would improve its performance.</p>
+<p>As we saw in the last chapter, we can estimate the relationship between lexical decision RTs and word frequency using a linear model:</p>
+<p><span class="math display">\[\begin{equation}
+Y_{ij} = \beta_0 + \beta_1X_j + e_{ij}
+\end{equation}\]</span></p>
+<p>The linear model is fit in R using the function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct.lm  <span class="ot">&lt;-</span> <span class="fu">lm</span>(logrt <span class="sc">~</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                             </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                             LgSUBTLCD,     </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                           </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">data =</span> ML.all.correct)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ML.all.correct.lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = logrt ~ LgSUBTLCD, data = ML.all.correct)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.41677 -0.07083 -0.01163  0.05489  0.53411 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  2.885383   0.007117  405.41   &lt;2e-16 ***
+LgSUBTLCD   -0.033850   0.002209  -15.32   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.1095 on 5255 degrees of freedom
+Multiple R-squared:  0.04277,   Adjusted R-squared:  0.04259 
+F-statistic: 234.8 on 1 and 5255 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>We can see that, in this first analysis, the estimated effect of word frequency is <span class="math inline">\(\beta = -0.033850\)</span>. I know this looks like a very small number but you should realize that the estimates for the coefficients of fixed effects like the frequency effect are scaled according to the outcome. Here, the outcome is log10 RT, where a log10 RT of 3 equals 1000ms, and, as we can calculate in R</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log10</span>(<span class="fl">0.925</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.03385827</code></pre>
+</div>
+</div>
+<p>Also, remember that frequency is scaled in logs too, so the estimate of the coefficient tells us how log10 RT changes for unit change in log frequency. The coefficient represents the estimated change in log10 RT for unit change in log frequency <code>LgSUBTLCD</code>. So, as log frequency increases, logRT <em>decreases</em> by <span class="math inline">\(-0.033850\)</span>.</p>
+<p>In this model, all the information from all participants is analyzed. In discussions of mixed-effects analyses, we say that this is a <em>complete pooling</em> model. This is because <em>all the data have been pooled together</em>, that is, we use all observations in the sample to estimate the effect of frequency.</p>
+<p>In this model, the observations are assumed to be independent. However, we suppose that the assumption of independence is questionable given the expectation that participants will differ in their overall speed, and in the extent to which their response speed is affected by factors like word frequency.</p>
+<section id="exercises-1" class="level4" data-number="5.8.2.1">
+<h4 data-number="5.8.2.1" class="anchored" data-anchor-id="exercises-1"><span class="header-section-number">5.8.2.1</span> Exercises</h4>
+<p>The ML study data, like the CP study data, are rich with possibility. It would be useful to experiment with it.</p>
+<p>I would recommend that you both estimate the effects of variables <em>and</em> visualize the relationships between variables using scatterplots. If you combine reflection on the model estimates with evaluation of what the plots show you then you will be able to see how reading model results and reading plots can reveal the correspondences between the two ways of looking at your data.</p>
+</section>
+</section>
+<section id="approximations-to-linear-mixed-effects-models-no-pooling" class="level3" data-number="5.8.3">
+<h3 data-number="5.8.3" class="anchored" data-anchor-id="approximations-to-linear-mixed-effects-models-no-pooling"><span class="header-section-number">5.8.3</span> Approximations to Linear Mixed-effects models: no pooling</h3>
+<p>We can examine variation between participants by analyzing the data for each participant’s responses separately, fitting a <em>different</em> linear model of the effect of word frequency on lexical decision RTs for each participant <em>separately</em>. Figure @ref(fig:no-vs-complete) presents a grid or trellis of plots, one plot per person. In each plot, you can see points corresponding to the log RT of each response made by a participant to a stimulus word. In all plots, the pink or red line represents the <em>complete pooling</em> model estimate of the effect of frequency on response RTs. The line is the same for each participant because there is only one estimated effect, based on all data for all participants. In addition, in each plot, you can see a green line. You can see that the line varies between participants. This represents the effect of frequency estimated using just the data for each participant, analyzed separately. These are the <em>no pooling</em> estimates. We call them the no pooling estimates because each is based just on the data from one participant.</p>
+<p>Note: I was able to produce the plot in Figure @ref(fig:no-vs-complete) thanks to this helpful blog post by TJ Mahr:</p>
+<p></p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><embed src="03-mixed_files/figure-html/no-vs-complete-1.pdf" class="img-fluid" style="width:95.0%"></p>
+<p></p><figcaption class="figure-caption">Plot showing the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant; red-pink line shows the complete pooling estimate, blue-green line shows the no-pooling estimate</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Figure @ref(fig:no-vs-complete) reveals substantial differences between participants in both average response speed and the frequency effect, alongside variation in standard errors. We can predict variation in standard errors between participants given, also, the differences between participants in the spread of log RT, illustrated by Figure @ref(fig:rt-correct-log-den-by-subj). Basically, where the distribution of log RT is more widely spread out, for any one participant, there it will be harder for us to estimate with certainty the mean or the sources of variance for the participant’s response speed.</p>
+<p>You will notice that the <em>no pooling</em> and <em>complete pooling</em> estimates tend to be quite similar. But for some participants more than others there is variation between the estimates.</p>
+<p>You can reflect that the <em>complete pooling</em> is unsatisfactory because it ignores the variation between the participants: some people <em>are</em> slower than others; some people <em>do</em> show a larger frequency effect than others. You can also reflect that the <em>no pooling</em> is unsatisfactory because it ignores the similarities between the participants. While there <em>is</em> variation between participants there is also similarity across the group so that the effect of frequency is similar between participants. What we need is an analytic method that is capable of <em>both</em> estimating the overall average population-level effect (here, of word frequency) and taking into account the differences between sampling units (here, participants). <strong>That method is linear mixed-effects modeling.</strong></p>
+<!-- \newpage -->
+</section>
+</section>
+<section id="the-linear-mixed-effects-model" class="level2" data-number="5.9">
+<h2 data-number="5.9" class="anchored" data-anchor-id="the-linear-mixed-effects-model"><span class="header-section-number">5.9</span> The linear mixed-effects model</h2>
+<section id="fixed-and-random-effects" class="level3" data-number="5.9.1">
+<h3 data-number="5.9.1" class="anchored" data-anchor-id="fixed-and-random-effects"><span class="header-section-number">5.9.1</span> Fixed and random effects</h3>
+<p>As you have seen before, we can account for the variation – the differences between participants in intercepts and slopes. First, we model the intercept as two terms:</p>
+<p><span class="math display">\[\begin{equation}
+\beta_{0i} = \gamma_0 + U_{0i}
+\end{equation}\]</span></p>
+<p>We can model the frequency effect as two terms:</p>
+<p><span class="math display">\[\begin{equation}
+\beta_{1i} = \gamma_1 + U_{1i}
+\end{equation}\]</span></p>
+<p>We can then incorporate in a single model the <strong>fixed effects</strong> due to the average intercept and the average frequency effect, as well as the <strong>random effects</strong>, error variance due to unexplained differences between participants in intercepts and in frequency effects:</p>
+<p><span class="math display">\[\begin{equation}
+Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + e_{ij}
+\end{equation}\]</span></p>
+<ul>
+<li>where the outcome <span class="math inline">\(Y_{ij}\)</span> is related to …</li>
+<li>the average intercept <span class="math inline">\(\gamma_0\)</span> and differences between <span class="math inline">\(i\)</span> participants in the intercept <span class="math inline">\(U_{0i}\)</span>;</li>
+<li>the average effect of the explanatory variable frequency <span class="math inline">\(\gamma_1X_j\)</span> and differences between <span class="math inline">\(i\)</span> participants in the slope <span class="math inline">\(U_{1i}X_j\)</span>;</li>
+<li>in addition to residual error variance <span class="math inline">\(e_{ij}\)</span>.</li>
+</ul>
+</section>
+<section id="variance-and-covariance" class="level3" data-number="5.9.2">
+<h3 data-number="5.9.2" class="anchored" data-anchor-id="variance-and-covariance"><span class="header-section-number">5.9.2</span> Variance and covariance</h3>
+<p>As we first saw in the last chapter, in conducting mixed-effects analyses, we do not aim to examine the specific deviation (here, for each participant) from the average intercept or the average effect or slope. We estimate just the spread of deviations by-participants. A mixed-effects model like our final model actually includes fixed effects corresponding to the intercept and the slope of the word frequency effect plus the variances:</p>
+<p>We may expect the random effects of participants or items to covary, e.g., participants who are slow to respond may also be more susceptible to the frequency effect. Thus our specification of the random effects of the model can incorporate terms corresponding to the covariance of random effects:</p>
+<!-- Thus, we can incorporate in a single model the \emph{fixed effects} due to the average intercept and the average frequency effect, as well as the \emph{random effects}, error variance due to unexplained differences between participants in intercepts and in frequency effects: -->
+<!-- \begin{equation} -->
+<!-- Y_{ij} = \gamma_{0} + \gamma_{1}X_j + U_{0i}+ U_{1i}X_j + e_{ij} -->
+<!-- \end{equation} -->
+<!-- \begin{itemize} -->
+<!-- \item -->
+<!-- where the outcome $Y_{ij}$ is related to ... -->
+<!-- \item -->
+<!-- the average intercept $\gamma_0$ and differences between $i$ participants in the intercept $U_{0i}$; -->
+<!-- \item -->
+<!-- the average effect of the explanatory variable frequency $\gamma_{1}X_j$ and differences between $i$ participants in the slope $U_{1i}X_j$; -->
+<!-- \item -->
+<!-- in addition to residual error variance $e_{ij}$. -->
+<!-- \end{itemize} -->
+</section>
+<section id="random-effects-of-differences-between-stimuli" class="level3" data-number="5.9.3">
+<h3 data-number="5.9.3" class="anchored" data-anchor-id="random-effects-of-differences-between-stimuli"><span class="header-section-number">5.9.3</span> Random effects of differences between stimuli</h3>
+<p>As we know, some words elicit slower and some elicit faster responses on average. As we discussed in the last chapter, if we did not take such variation into account, we might spuriously identify an experimental effect actually due just to unexplained between-items differences in intercepts (Clark, 1973; Raaijmakers et al., 1999), committing an error: <em>The language as fixed effect fallacy</em>.</p>
+<p>We can model the random effect of items on intercepts by modeling the intercept as two terms:</p>
+<p><span class="math inline">\(\beta_{0j} = \gamma_0 + W_{0j}\)</span></p>
+<p>Note that I ignore the possibility, for now, of differences between items in the slopes of fixed effects but I <em>do</em> come back to this.</p>
+<p>Remember that the <em>The language as fixed effect fallacy</em> implies that thinking about the random effects of stimulus differences applies only when we are looking at experiments about language. But you should remember that we need to think about the impact of random differences between stimuli whenever we present samples of stimuli to participants, and we collect observations about multiple responses for each stimulus. This is true whatever the nature of the stimuli.</p>
+</section>
+<section id="a-model-including-random-effects-of-differences-between-stimuli-as-well-as-participants" class="level3" data-number="5.9.4">
+<h3 data-number="5.9.4" class="anchored" data-anchor-id="a-model-including-random-effects-of-differences-between-stimuli-as-well-as-participants"><span class="header-section-number">5.9.4</span> A model including random effects of differences between stimuli as well as participants</h3>
+<p>Our model can <em>now</em> incorporate the random effects of participants as well as items:</p>
+<p><span class="math inline">\(Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + W_{0j} + e_{ij}\)</span></p>
+<p>In this model, the outcome <span class="math inline">\(Y_{ij}\)</span> is related to the average intercept <span class="math inline">\(\gamma_0\)</span> and the word frequency effect <span class="math inline">\(\gamma_1X_j\)</span> plus random effects due to unexplained differences between participants in intercepts <span class="math inline">\(U_{0i}\)</span> and the slope of the frequency effect <span class="math inline">\(U_{1i}X_j\)</span> as well as random differences between items in intercepts <span class="math inline">\(W_{0j}\)</span>, in addition to the residual term <span class="math inline">\(e_{ij}\)</span>.</p>
+</section>
+<section id="fitting-a-mixed-effect-model-using-lmer" class="level3" data-number="5.9.5">
+<h3 data-number="5.9.5" class="anchored" data-anchor-id="fitting-a-mixed-effect-model-using-lmer"><span class="header-section-number">5.9.5</span> Fitting a mixed-effect model using lmer()</h3>
+<p>We fit a mixed-effects model of the <span class="math inline">\(logrt \sim frequency\)</span> relationship using the <code>lmer()</code> function, taking into account:</p>
+<p>The model syntax corresponds to the statistical formula and the code is written as:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct.lmer  <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                           LgSUBTLCD <span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>                           (LgSUBTLCD <span class="sc">+</span> <span class="dv">1</span><span class="sc">|</span>subjectID) <span class="sc">+</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>                           (<span class="dv">1</span><span class="sc">|</span>item_name),</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> ML.all.correct)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ML.all.correct.lmer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>As will now be getting familiar, the code works as follows:</p>
+<p>If you run the model code as written then you would see the following results.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML ['lmerMod']
+Formula: logrt ~ LgSUBTLCD + (LgSUBTLCD + 1 | subjectID) + (1 | item_name)
+   Data: ML.all.correct
+
+REML criterion at convergence: -9868.1
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.6307 -0.6324 -0.1483  0.4340  5.6132 
+
+Random effects:
+ Groups    Name        Variance  Std.Dev. Corr 
+ item_name (Intercept) 0.0003268 0.01808       
+ subjectID (Intercept) 0.0054212 0.07363       
+           LgSUBTLCD   0.0002005 0.01416  -0.63
+ Residual              0.0084333 0.09183       
+Number of obs: 5257, groups:  item_name, 160; subjectID, 34
+
+Fixed effects:
+             Estimate Std. Error t value
+(Intercept)  2.887997   0.015479 186.577
+LgSUBTLCD   -0.034471   0.003693  -9.333
+
+Correlation of Fixed Effects:
+          (Intr)
+LgSUBTLCD -0.764</code></pre>
+</div>
+</div>
+<p>In these results, we see:</p>
+<section id="why-arent-there-p-values" class="level4" data-number="5.9.5.1">
+<h4 data-number="5.9.5.1" class="anchored" data-anchor-id="why-arent-there-p-values"><span class="header-section-number">5.9.5.1</span> Why aren’t there p-values?</h4>
+<p>We will come back to this, see Section @ref(p-values). However, note that if <span class="math inline">\(t &gt;= 2\)</span> we can suppose that (for a large dataset) an effect is significant at the <span class="math inline">\(.05\)</span> significance level.</p>
+<!-- \newpage -->
+</section>
+</section>
+</section>
+<section id="mixed-effects-models-partial-pooling-and-shrinkage-or-regularisation-of-estimates" class="level2" data-number="5.10">
+<h2 data-number="5.10" class="anchored" data-anchor-id="mixed-effects-models-partial-pooling-and-shrinkage-or-regularisation-of-estimates"><span class="header-section-number">5.10</span> Mixed-effects models, partial pooling, and shrinkage or regularisation of estimates</h2>
+<p>What is the impact of the incorporation of random effects – the variance and covariance terms – in mixed-effects models? Mixed-effects models can be understood, in general, as a method to compromise between ignoring the differences between groups (here, participants constitute groups of data) as in or focusing entirely on each group (participant) as in (Gelman &amp; Hill, 2006). In this discussion, I am going to refer to the differences between participants but you can assume that the lesson applies generally to any situation in which you have different units in a multilevel structured dataset in which the units correspond to groups or clusters of data, as in the multiple observations recorded for each participant in the ML dataset.</p>
+<section id="overfitting" class="level3" data-number="5.10.1">
+<h3 data-number="5.10.1" class="anchored" data-anchor-id="overfitting"><span class="header-section-number">5.10.1</span> Overfitting</h3>
+<p>The problem with ignoring the differences between groups (participants), as in the <em>complete pooling</em> model (here, the linear model), has been obvious when we examined the differences between participants (or between classes) in slopes and intercepts in previous weeks. The problem with focusing entirely on each participant, as in the <em>no pooling</em> model, has not been made apparent in our discussion yet.</p>
+<p>If we analyze each participant separately then we will get, for each participant, for our model of the frequency effect, the per-participant estimate of the intercept and the per-participant estimate of the slope of the frequency effect. These no-pooling estimates will tend to exaggerate or overstate the differences between participants (Gelman &amp; Hill, 2006). By basing the estimates on just the data for a person, in each per-participant analysis, the no-pooling approach the data. You could say that the no-pooling approach gives us estimates that depend too much on the sample of data we have got, and are unlikely to be similar to the estimates we would see in other samples in future studies. The no-pooling estimates are influenced by the data we are currently analyzing.</p>
+</section>
+<section id="partial-pooling-shrinkage-or-borrowing-strength" class="level3" data-number="5.10.2">
+<h3 data-number="5.10.2" class="anchored" data-anchor-id="partial-pooling-shrinkage-or-borrowing-strength"><span class="header-section-number">5.10.2</span> Partial pooling: shrinkage or borrowing strength</h3>
+<p>If we look closely at Figure @ref(fig:no-vs-complete), we can see that there are similarities as well as differences between participants. Our analysis must take both into account.</p>
+<p>What happens in mixed-effects models is that we pool information, calculating the estimates for each participant, in part based on the information we have for the whole sample (all participants, in complete pooling), in part based on the information we have about the specific participant (one participant, in no pooling). Thus, for example, the estimated intercept for a participant in a mixed-effects model is given by the weighted average of:</p>
+<p>The weighted average will reflect our relative level of information about the participant’s responses compared to how much information we have about all participants’ responses.</p>
+<p>To make sense of what this means, think about the differences between participants in how much reliable information we can have, given our sample, about their average level of response speed or about how they are affected by experimental variables. Think back to my comments about Figure @ref(fig:rt-correct-log-den-by-subj), about the differences between participants in how spread out the distributions of their log RT values are. Recall that I said that where participants’ responses are more spread out – just as where we have less observations for some participants than for others – we shall inevitably have less certainty about our estimates for the effects that influence their performance if we base our account on just their data. Mixed-effects models perform better – as prediction models – than <em>no pooling</em> approaches because they are not relying, for any participant, on just their sometimes unreliable data.</p>
+<p>We can look again at a plot showing the data for each participant. Figure @ref(fig:no-vs-complete-vs-partial) presents a grid or trellis of plots, one plot per person. In each plot, you can see points corresponding to the RT of each response made by a participant to a stimulus word. In all plots, the pink line represents the <em>complete pooling</em> data model estimate of the effect of frequency on response RTs. In each plot, the green line represents the effect of frequency estimated using just the data for each participant, the <em>no pooling</em> estimates. Now, we also see blue lines that represent the mixed-effects model <em>partial pooling</em> estimates.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><embed src="03-mixed_files/figure-html/no-vs-complete-vs-partial-1.pdf" class="img-fluid" style="width:95.0%"></p>
+<p></p><figcaption class="figure-caption">Plot showing the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant; pink line shows the complete pooling estimate green line shows the no-pooling estimate; and blue line shows the linear mixed-effects model partial pooling estimate</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>It is quite difficult to identify, in this sample, where the partial pooling and no pooling estimates differ. We can focus on a few clear examples. Figure @ref(fig:no-vs-complete-vs-partial-zoom) presents a grid of plots for just four participants. I have picked some extreme examples but the plot illustrates how: (1.) for some participants e.g.&nbsp; all estimates are practically identical; (2.) for some participants the no-pooling and complete-pooling estimates are really quite different and (3.) for some participants the no-pooling and partial-pooling estimates are quite different.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><embed src="03-mixed_files/figure-html/no-vs-complete-vs-partial-zoom-1.pdf" class="img-fluid" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Plot showing the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant – for participants AA1, EB5, JL3 and JP3; pink line shows the complete pooling estimate green line shows the no-pooling estimate; and blue line shows the linear mixed-effects model partial pooling estimate</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In general, partial pooling will apply both to estimates of intercepts and to estimates of the slopes of fixed effects like the influence of word frequency in reaction time. Likewise, if we consider this idea in general, we can see how it should work whether we are talking about groups or clusters of data grouped by participant or by stimulus or by school or class or clinic </p>
+<p>Formally, whether an estimate for a participant (in our example) is pulled more or less towards the overall estimate will depend not just on the number of data-points we have for that person. The optimal combined estimate for a participant is termed the ‘estimate’ and the weighting – the extent to which the per-participant ‘estimate’ depends on the participant’s data or the overall data – depends on the reliability of the estimate (of the intercept or the frequency effect) given by analyzing that participant’s data (Snijders &amp; Bosker, 2012). If you think about it, smaller samples – e.g.&nbsp;where a participant completed less correct responses – will give you less reliable estimates (and so will samples that show more variation).</p>
+<p>What we are looking at, here, is a form of in which we use all the sources of information we can to ensure we take into account the variability in the data while not getting over-excited by extreme differences (McElreath, 2015). We want to see estimates pulled towards an overall average where we have little data or unreliable estimates. We can see how strongly estimates can be shrunk in a plot like Figure @ref(fig:shrinkage).</p>
+<p>Figure @ref(fig:shrinkage) illustrates the shrinkage effect. I plotted a scatterplot of intercept and slope parameters from each model (models with different kinds of pooling), and connect estimates for the same participant. The plot uses arrows to connect the different estimates for each participant, different estimates from no-pooling (per-participant) compared to partial-pooling (mixed-effects) models. The plot shows how more extreme estimates are shrunk towards the global average estimate.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><embed src="03-mixed_files/figure-html/shrinkage-1.pdf" class="img-fluid" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Plot illustrating shrinkage: big green and pink points show the complete pooling and partial pooling (average) estimates for the slope and intercept; orange and purple points show the no pooling (orange) and partial pooling (purple) estimates for each person; estimates for a person are connected by arrows to show the direction towards which no pooling estimates are pulled or shrunk</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can see how estimates are pulled towards the average intercept and frequency effect estimates. The shrinkage effect is stronger for more extreme estimates like . It is weaker for estimates more (realistically) like the overall group estimates like .</p>
+</section>
+</section>
+<section id="estimation-methods-an-intuitive-account-of-estimation-in-mixed-effects-models" class="level2" data-number="5.11">
+<h2 data-number="5.11" class="anchored" data-anchor-id="estimation-methods-an-intuitive-account-of-estimation-in-mixed-effects-models"><span class="header-section-number">5.11</span> Estimation methods – An intuitive account of estimation in mixed-effects models</h2>
+<p>Before we move on, we can think briefly about how the mixed-effects models are estimated (Snijders &amp; Bosker, 2012). Where do the numbers come from? I am happy to stick to a fairly non-technical intuitive explanation of the computation of LMEs but others, wishing to understand things more deeply, can find computational details in Pinheiro &amp; Bates (2000), among other places. Mixed-effects models are estimated </p>
+<!-- %Snijders and boskers/p. 89             -->
+<p>In mixed-effects models, the things that are estimated are the fixed effects (the intercept, the slope of the frequency effect, in our example), along with the variance and correlation terms associated with the random effects. Previously, I referred to the partial-pooling mixed-effects ‘estimates’ of the intercept or the frequency effect for each person, using the quotation marks because, strictly, these estimates are actually predictions, <em>Best Unbiased Linear Predictions (BLUPs)</em>, based on the estimates of the fixed and random effects.</p>
+<section id="convergence-problems" class="level3" data-number="5.11.1">
+<h3 data-number="5.11.1" class="anchored" data-anchor-id="convergence-problems"><span class="header-section-number">5.11.1</span> Convergence problems</h3>
+<p>Mostly, our main concern, in working with mixed-effects models, is over what effects we should include, what model we should specify. But we should prepare for the fact sometimes happens that models <em>fail to converge</em>, which is to say, the model fitting algorithm fails to settle on some set of parameter estimates but has reached the limit in the number of iterations over which it has attempted to find a satisfactory set of estimates. In my experience, convergence problems do arise, typically, if one is analyzing categorical outcome data (e.g accuracy) where there may be not enough observations to distinguish satisfactory estimates given a quite complex hypothesized model. In other words, you might run into convergence problems but it will not happen often and only where you are already dealing with quite a complex situation. We take a look at this concern in more depth, in the next chapter (but see Jaeger, 2008, for a discussion of <strong>Generalized Linear Mixed-effects models, GLMMs</strong>; see Baayen, 2008, for a how-to guide). We need to start preparing our understanding now.</p>
+</section>
+</section>
+<section id="fitting-and-evaluating-linear-mixed-effects-models" class="level2" data-number="5.12">
+<h2 data-number="5.12" class="anchored" data-anchor-id="fitting-and-evaluating-linear-mixed-effects-models"><span class="header-section-number">5.12</span> Fitting and evaluating Linear Mixed-effects models</h2>
+<p>Up to this point, we have discussed the empirical or conceptual reasons we should expect to take into account, in our model, the effects on the outcome due to systematic differences in the experimental variables, e.g., in stimulus word frequency frequency, or to random differences between participants or between stimuli. We can now think about how we should statistically evaluate the relative usefulness of these different fixed effects or random effects, where usefulness is judged in relation to our capacity to explain outcome variance, or to improve model fit to sample data. We shall take an approach that follows the approach set out by Baayen, Bates and others (Baayen et al., 2008; Bates et al., 2015; Matuschek et al., 2017).</p>
+<p>In this approach, we shall look at the choices that psychology researchers have to make. Researchers using statistical models are always faced with choices. As we have seen, these choices begin even before we start to do analyses, as when we make decisions about dataset construction (Steegen et al., 2016). The need to make choices is always present for all the kinds of models we work with. This may not always be obvious because, for example, in using some data analysis software, researchers may rely on defaults with limited indication that that is what they are doing. Just because we are making choices does not mean we are operating subjectively in a non-scientific fashion, rather, provided we work in an appropriate mode of transparency or reflectiveness, it means we are working with an awareness of our options and the context for the data analysis (see discussion in Gelman &amp; Hennig, 2017).</p>
+<section id="model-comparison-approach" class="level3" data-number="5.12.1">
+<h3 data-number="5.12.1" class="anchored" data-anchor-id="model-comparison-approach"><span class="header-section-number">5.12.1</span> Model comparison approach</h3>
+<p>It is very common to see researchers using a process of model comparison to try to identify an account for their data in terms of estimates of fixed and random effects. A few key concepts are relevant to taking this approach effectively.</p>
+<p>We will focus on building a series of models up to the most complex model supported by the data.<br>
+What does <em>model complexity</em> mean here? I am talking about something like the difference between a model including just main effects (simpler) and a model including both main effects and the interaction between the effects (more complex) or a model included just fixed effects (simpler) and a model including fixed effects as well as random effects (more complex).</p>
+<p>Researchers may engage in comparing models to examine if one or more random effects should be included in their linear mixed-effects model. They may not be sure if they should include all random effects, that is, all random effects that could be included, given a range of grouping variables, like participant, class or stimulus, and given a range of possible effects, such as whether slopes or intercepts might vary.</p>
+<p>Researchers may do model comparison to check if adding the effect of an experimental variable is justified. Maybe they are conducting an exploratory study in which they want to investigate if using some measurement variable helps to explain variation in the outcome. Perhaps they are conducting an experimental study in which they want to test if the experimental manipulation, or the difference between conditions, has an impact on the outcome.</p>
+<p>Across these scenarios, we can test if an effect <em>should be included</em> or if its inclusion in a model <em>is justified</em> by comparing models with versus without the term that corresponds to the effect. In some studies, researchers conduct model comparisons like this in order to obtain null hypothesis significance tests for the effects of the experimental variables. Typically, the model comparisons are focused on whether some measurement of model fit is or is not different when we do versus do not include the effect in question in the model.</p>
+<section id="exercise-model-comparison-questions" class="level4" data-number="5.12.1.1">
+<h4 data-number="5.12.1.1" class="anchored" data-anchor-id="exercise-model-comparison-questions"><span class="header-section-number">5.12.1.1</span> Exercise – Model comparison questions</h4>
+<p>As our discussion progresses, I think it would be helpful to reflect on some of the questions that you may be asking yourself.</p>
+<p>You might well ask yourself: if we engage in a bunch of comparisons to check if we should or should not include a variable, isn’t this just exploiting <em>researcher degrees of freedom</em>? Or, you might ask: if we are conducting multiple tests on the same data, aren’t we running the risk of raising the Type I error (false positive) rate because we are doing <em>multiple comparisons</em>? I think these are good questions but, here, my task is to explain what people do, why they do it, and how it helps in your data analysis.</p>
+<p>So you are looking at models with varying fixed effects (fitted using ML) or models with varying random effects (fitted using REML). How do you decide which model is better? Some researchers argue that trying to decide which model is better or best is inappropriate (see e.g.&nbsp;Gelman et al., 2014) – all models are wrong (that is, all are approximations to the data, given your assumptions), but some are more useful than others (explain or predict outcomes better, depending on your criteria, and the cost-benefit analysis). In this class, I will explain the model comparison process while acknowledging this point, because researchers are increasingly using model comparison techniques to evaluate the relative usefulness of different alternate models.</p>
+</section>
+</section>
+<section id="model-comparison-using-information-criteria-aic-and-bic" class="level3" data-number="5.12.2">
+<h3 data-number="5.12.2" class="anchored" data-anchor-id="model-comparison-using-information-criteria-aic-and-bic"><span class="header-section-number">5.12.2</span> Model comparison using information criteria, AIC and BIC</h3>
+<p>You will often encounter, in the psychological research literature, Information Criteria statistics like BIC: they are understood within an approach: <em>Information-theoretic methods</em>. They are grounded in the insight that you have reality and then you have approximating models. The distance between a model and reality corresponds to the information lost when we use a model to approximate reality. Information criteria – AIC or BIC – are estimates of <em>information loss</em>. The process of model selection aims to minimize information loss.</p>
+<p>I will not discuss information criteria methods of model evaluation in detail here, because psychologists frequently use the Likelihood Ratio Test method (Meteyard &amp; Davies, 2020), see following, but take a look at, e.g., Burnham and Anderson (2004) for a readable discussion, if you are interested. However, you should have some idea of what information criteria statistics (like AIC and BIC mean) because you will see these statistics in the outputs from model comparisons using the <code>anova()</code> function, which we shall review a bit later (Section @ref(LRT)).</p>
+<p>In summary, Akaike showed you could estimate information loss in terms of the likelihood of the model given the data – Akaike Information Criteria, <em>AIC</em>:</p>
+<!-- % % burnham & anderson 2001/p.3 -->
+<!-- % % baguleypp. 402 -- -->
+<!-- % -->
+<p><span class="math display">\[\begin{equation}
+AIC = -2ln(l) + 2k
+\end{equation}\]</span></p>
+<p>You want a more likely model – less information loss, closer to reality – you want more negative or lower AIC. You can identify models that are more likely – closer to reality – with models with less wide errors, i.e.&nbsp;smaller residuals.</p>
+<p>You could better approximate reality by including lots of predictors, specifying a more complex model. Models with more parameters may fit the data better but some of those effects may be spurious. Adding <span class="math inline">\(+ 2k\)</span> penalizes complexity, speaking crudely, and so helps us to focus on the more parsimonious less complex model that best fits the data.</p>
+<p>Schwartz proposed an alternative estimate – Bayesian Information Criteria: <em>BIC</em>:</p>
+<!-- % % burnham & anderson 2001/p.3 -->
+<!-- % % baguleypp. 402 -- -->
+<p><span class="math display">\[\begin{equation}
+BIC = -2ln(l) + kln(N)
+\end{equation}\]</span></p>
+<p>So AIC and BIC differ in the second term. A deeper difference is that AIC estimates information loss when the true model may not be among the models being considered while BIC assumes that the true model is within the set of models being considered.</p>
+<p>At this point we just need to think about <em>Model selection and judgment</em> using AIC and BIC.</p>
+<!-- % % burnham & anderson 2001/p.3 -->
+<p>AIC and BIC should move in the same direction. They usually will. AIC will tend to allow more complex models and that may be necessary when the researcher is engaged in a more exploratory study or wants more accurate predictions (that would be better supported by maximising the information going into the model). Using the BIC will tend to favour simpler models and that may be necessary when the researcher seeks models that replicate over the long run. Maybe a simpler model will less likely include predictors estimated because they are needed to fit noise or random outcome variation.</p>
+</section>
+<section id="LRT" class="level3" data-number="5.12.3">
+<h3 data-number="5.12.3" class="anchored" data-anchor-id="LRT"><span class="header-section-number">5.12.3</span> Model comparison using the Likelihood Ratio Test</h3>
+<p>Pinheiro &amp; Bates (2000; see also Barr et al., 2013; Matuschek et al., 2017) recommend that models of varying predictor sets can be compared using Likelihood Ratio Test comparison (LRTs) where the simple model is <em>nested</em> inside the more complex model. This means, the predictors in the simpler model are a subset of the predictors in the more complex model. For example, you might have just main effects in the simpler model but both main and interaction effects in the more complex model. Or, in another example, you might have just random effects of subjects or items on intercepts in the simpler model but both random effects on intercepts and random effects on slopes of fixed effects in the more complex model.</p>
+<p>When you compare models using the <em>Likelihood ratio test, LRT</em>, you are comparing alternate models of the <em>same data</em>.</p>
+<p>Barr et al.&nbsp;(2013) note that we can compare models varying in the fixed effects (but constant in the random effects) or models varying in the random effects (but constant in the fixed effects) using LRTs. I have frequently reported model comparisons using the <em>Likelihood ratio test, LRT</em>. In part, this is for analytic reasons: I can compare simple and complex models getting multiple information criteria statistics for the models being compared in one function call, <code>anova([model1], [model2]</code>. In part, it is for social pragmatic reasons: the LRT comparison yields a significance p-value so that I can say, using the comparison, something like “The more complex model provided a significantly better fit to observation (LRT comparison, p <span class="math inline">\(=\)</span> ”.</p>
+<p>In a <em>Likelihood ratio test, LRT</em>, the test statistic is the comparison of the likelihood of the simpler model with the more complex model. Fortunately for us, we can R to calculate the model likelihood and do the model comparison (Section @ref(anova)).</p>
+<p>The comparison of models works by division: we divide the likelihood of the more complex model by the likelihood of the simpler model, calculating a <em>likelihood ratio</em>.</p>
+<p><span class="math display">\[\begin{equation}
+\chi^2 = 2log\frac{likelihood-complex}{likelihood-simple}
+\end{equation}\]</span></p>
+<p>The likelihood ratio is compared to the <span class="math inline">\(\chi^2\)</span> distribution for a significance test In this significance test, we assume the null hypothesis that the simpler model is adequate as an account of the outcome variance. We calculate the p-value for the significance test using a number for the degrees of freedom equal to the difference in the number of parameters of the models being compared.</p>
+</section>
+</section>
+<section id="modeling-steps-recommendations" class="level2" data-number="5.13">
+<h2 data-number="5.13" class="anchored" data-anchor-id="modeling-steps-recommendations"><span class="header-section-number">5.13</span> Modeling steps recommendations</h2>
+<p>How should you proceed when you decide to use mixed-effects models? I think the answer to that question depends on whether you are doing a study that is <strong>confirmatory</strong> or <strong>exploratory</strong>.</p>
+<p>In short, <em>if</em> you have <strong>pre-registered</strong> the design of your study and, as part of that registration, you recorded the hypotheses you plan to test, and the analysis method you plan to use to test your hypotheses, then the answer is simple: <strong>fit the model you said you were going to use</strong>.</p>
+<p>But <em>if</em> you are doing an <strong>exploratory</strong> study, then you will need to make some choices, in part, depending on the nature of the sample you are working with, and other aspects of the research context, but it will help to <strong>keep things simple</strong>. These days, if you have not pre-registered your analysis plans, you are practically-speaking engaged in exploratory work.</p>
+<p>In an exploratory study, I would keep things simple by comparing a series of models, fitted with different sets of predictor variables (fixed effects). (Note: if you are running mixed-effects models in R you cannot run <code>lmer()</code> models with just fixed effects.) What I do is this: for a dataset like the ML study data, where the data were collected using a repeated-measures design, so that all participants saw all stimuli, and both participants and stimuli were sampled (from the wider populations of readers or words), I would run a series of models so that the different models have varying sets of fixed effects but all models in the series have the same random effects: the random effects of subjects and items on intercepts.</p>
+<p>In my experience, the estimates (and associated significance levels) associated with fixed effects can vary quite a bit depending on what other variables are included in the model. This has led me to take an approach where I am <em>not</em> varying too much how predictors are included in the model. As noted, this won’t really apply if you are doing an <em>confirmatory</em> study in which you are obliged to include the manipulated variables. However, if you are doing something a bit more <em>exploratory</em> then you might have to think about the kinds of predictors you include in your model, and how or when you include them.</p>
+<p>In what order should you examine the usefulness of different sets of fixed effects? This is a difficult question to answer and the difficulty is one reason why I think we need to be cautious when we engage in model comparison to try to get to a model of our data. My advice would be to plan out in advance a sequence of model comparisons. You should begin with simpler models with fewer effects. You should begin with those effects whose impacts are well established and well understood by you. If there is a whole set of well established effects typically included in an analysis in the field in which you are working, it might be sensible to include all the effects in a single step. Then, I would use subsequent incremental steps to increase model complexity by adding effects that are theoretically justified, i.e., hypothesized, but which may be new, or may depend on the experimental manipulation you are testing out.</p>
+<p>Having established a model with some set of sensible fixed effects (guided by information criteria or LRT statistics), I would then turn my attention to the random effects component of the model. As noted, we may expect to see random differences between subjects (and possibly between items) in both the level of average performance – random effects of subjects or items on intercepts – and in the slopes of fixed effects – random effects of subjects or items on slopes. What I do is this: for a dataset like ML’s, I examine firstly if both random effects of subjects <em>and</em> items on intercepts are required. I then check if random effects of subjects or items on slopes are <em>additionally</em> required in the model.</p>
+<p>The distinction between <em>exploratory</em> and <em>confirmatory</em> studies breaks down, in my experience, when we start thinking about what random effects should be included in a model (see Barr et al., 2013; Matuschek et al., 2017, for an interesting discussion, and contrasting approaches).</p>
+<section id="maximum-likelihood-and-restricted-maximum-likelihood" class="level3" data-number="5.13.1">
+<h3 data-number="5.13.1" class="anchored" data-anchor-id="maximum-likelihood-and-restricted-maximum-likelihood"><span class="header-section-number">5.13.1</span> Maximum Likelihood and Restricted Maximum Likelihood</h3>
+<p>Before we go any further, we need to briefly discuss one key choice that we face in working with mixed-effects models. This concerns the difference between Restricted Maximum Likelihood (REML) and Maximum Likelihood (ML) estimation methods. Both methods are iterative.<br>
+The <code>lmer()</code> function has defaults, like any analysis function, so we often do not need to make the choice explicit. We do when we compare models that vary in fixed effects, or in random effects.</p>
+<!-- % pinheiro & bates 2000 / p.76 -->
+<!-- % snijders & boskers p.60 -->
+<!-- % snijders & boskers p.89 -->
+</section>
+<section id="anova" class="level3" data-number="5.13.2">
+<h3 data-number="5.13.2" class="anchored" data-anchor-id="anova"><span class="header-section-number">5.13.2</span> Comparing models of varying random effects but constant fixed effects</h3>
+<!-- % In the following, I discuss code that is set out in the -->
+<!-- % \verb:402-class-6-210217-200218.R:. -->
+<p>As noted, it is recommended (Pinheiro &amp; Bates, 2000) that we compare models of varying random effects using Restricted Maximum Likelihood (REML) fitting. We might be comparing different models with different sets of random effects if we are in the process of working out whether our model should include random intercepts and random slopes, that is, model parameters accounting for random differences between subjects or between items in the average level of performance or in the slope of the fixed effects. I think it is sensible to build up model complexity in the random component so that we are working through a series of model comparisons, comparing more simple with more complex models where the more complex model includes the same terms as the simpler model but adds some more.</p>
+<p>In analyzing the effect of frequency on log RT for the ML study data, we can examine whether the random effects of subjects or of items on intercepts are necessary. Then we can examine if we should take into account random effects of subjects on the slope of the fixed effect of frequency, in addition to the random effects on intercepts.</p>
+<p>To begin with, we can look at a simpler model. We can run model with just the fixed effects of intercept and frequency, and the random effects of participants or items on intercepts only. We exclude the specification for the random effect of participants on the slope of the frequency effect. We use REML fitting, as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct.lmer.REML.si  <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span> LgSUBTLCD <span class="sc">+</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>                                    </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                                          (<span class="dv">1</span><span class="sc">|</span>subjectID) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>item_name),</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> ML.all.correct, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ML.all.correct.lmer.REML.si)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML ['lmerMod']
+Formula: logrt ~ LgSUBTLCD + (1 | subjectID) + (1 | item_name)
+   Data: ML.all.correct
+
+REML criterion at convergence: -9845.1
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.5339 -0.6375 -0.1567  0.4364  5.5851 
+
+Random effects:
+ Groups    Name        Variance  Std.Dev.
+ item_name (Intercept) 0.0003204 0.01790 
+ subjectID (Intercept) 0.0032650 0.05714 
+ Residual              0.0085285 0.09235 
+Number of obs: 5257, groups:  item_name, 160; subjectID, 34
+
+Fixed effects:
+             Estimate Std. Error t value
+(Intercept)  2.887697   0.013253   217.9
+LgSUBTLCD   -0.034390   0.002774   -12.4
+
+Correlation of Fixed Effects:
+          (Intr)
+LgSUBTLCD -0.658</code></pre>
+</div>
+</div>
+<p>Notice:</p>
+<p>Following Baayen (2008) we can then run a series of models with just one random effect. Firstly, just the random effect of items on intercepts:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct.lmer.REML.i  <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>       LgSUBTLCD <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>item_name),</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> ML.all.correct, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ML.all.correct.lmer.REML.i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML ['lmerMod']
+Formula: logrt ~ LgSUBTLCD + (1 | item_name)
+   Data: ML.all.correct
+
+REML criterion at convergence: -8337
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.7324 -0.6455 -0.1053  0.4944  4.8970 
+
+Random effects:
+ Groups    Name        Variance  Std.Dev.
+ item_name (Intercept) 0.0002364 0.01537 
+ Residual              0.0117640 0.10846 
+Number of obs: 5257, groups:  item_name, 160
+
+Fixed effects:
+             Estimate Std. Error t value
+(Intercept)  2.886765   0.009047  319.07
+LgSUBTLCD   -0.034206   0.002811  -12.17
+
+Correlation of Fixed Effects:
+          (Intr)
+LgSUBTLCD -0.977</code></pre>
+</div>
+</div>
+<p>Secondly, just the random effect of subjects on intercepts:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct.lmer.REML.s  <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>       LgSUBTLCD <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>subjectID),</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> ML.all.correct, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ML.all.correct.lmer.REML.s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML ['lmerMod']
+Formula: logrt ~ LgSUBTLCD + (1 | subjectID)
+   Data: ML.all.correct
+
+REML criterion at convergence: -9786.3
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.5843 -0.6443 -0.1589  0.4434  5.5266 
+
+Random effects:
+ Groups    Name        Variance Std.Dev.
+ subjectID (Intercept) 0.003275 0.05723 
+ Residual              0.008837 0.09401 
+Number of obs: 5257, groups:  subjectID, 34
+
+Fixed effects:
+             Estimate Std. Error t value
+(Intercept)  2.885751   0.011561  249.60
+LgSUBTLCD   -0.033888   0.001897  -17.87
+
+Correlation of Fixed Effects:
+          (Intr)
+LgSUBTLCD -0.517</code></pre>
+</div>
+</div>
+<p>If we now run Likelihood Ratio Test comparisons of these models, we are effectively examining if one of the random effects can be dispensed with: if its inclusion makes no difference to the likelihood of the model then it is not needed. Is the random effect of subjects on intercepts justified? Compare models, first, with versus without the random effect of subjects on intercepts. Then compare models with versus without the random effect of items on intercepts.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ML.all.correct.lmer.REML.si, ML.all.correct.lmer.REML.i, <span class="at">refit =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ML.all.correct.lmer.REML.si, ML.all.correct.lmer.REML.s, <span class="at">refit =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="code-tip-4" class="level4" data-number="5.13.2.1">
+<h4 data-number="5.13.2.1" class="anchored" data-anchor-id="code-tip-4"><span class="header-section-number">5.13.2.1</span> Code tip</h4>
+<p>We compare models using the function. We can list as many models as we like for comparison.</p>
+<p>Notice:</p>
+<p>Pinheiro &amp; Bates (2000) advised that if one is fitting models with random effects the estimates are more accurate if the models are fitted using restricted maximum likelihood, that is achieved in the function call by adding the argument . Pinheiro &amp; Bates (2000; see e.g.&nbsp;pp.82- ) recommended that if you compare models with the same fixed effects but varying random effects the models should be fitted using restricted maximum likelihood. We can do this for the foregoing series of models but what you will notice is that when we run the function call, without the argument, we get the warning . Why? it’s basically about stopping users from comparing REML-fitted models with varying fixed effects see e.g.</p>
+<p></p>
+<p>As Ben Bolker points out, in …</p>
+<p></p>
+<p>… analyses of simulated data analyses suggest that it does not make much difference whether we use REML or ML when we are comparing models with the same fixed effects but varying random effects. But it does matter that we fit models using ML when we are comparing models with the same random effects but differing fixed effects.</p>
+<p>When we run the function call, it can be seen that the random effects of subjects on intercepts is required.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ML.all.correct.lmer.REML.si, ML.all.correct.lmer.REML.i, <span class="at">refit =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Data: ML.all.correct
+Models:
+ML.all.correct.lmer.REML.i: logrt ~ LgSUBTLCD + (1 | item_name)
+ML.all.correct.lmer.REML.si: logrt ~ LgSUBTLCD + (1 | subjectID) + (1 | item_name)
+                            npar     AIC     BIC logLik deviance  Chisq Df
+ML.all.correct.lmer.REML.i     4 -8329.0 -8302.7 4168.5  -8337.0          
+ML.all.correct.lmer.REML.si    5 -9835.1 -9802.3 4922.6  -9845.1 1508.1  1
+                            Pr(&gt;Chisq)    
+ML.all.correct.lmer.REML.i                
+ML.all.correct.lmer.REML.si  &lt; 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+If you look at the results of the model comparison then you should notice:
+<p>You can say that the comparison of a model with versus a model without the random effect of participants on intercepts shows that the inclusion of the random effect of participants on intercepts is <em>warranted by a significant difference in model fit</em>. Notice I highlight the language you can use in your reporting.</p>
+<p>The second model comparison shows that the random effects of items on intercepts is also justified.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ML.all.correct.lmer.REML.si, ML.all.correct.lmer.REML.s, <span class="at">refit =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Data: ML.all.correct
+Models:
+ML.all.correct.lmer.REML.s: logrt ~ LgSUBTLCD + (1 | subjectID)
+ML.all.correct.lmer.REML.si: logrt ~ LgSUBTLCD + (1 | subjectID) + (1 | item_name)
+                            npar     AIC     BIC logLik deviance  Chisq Df
+ML.all.correct.lmer.REML.s     4 -9778.3 -9752.0 4893.2  -9786.3          
+ML.all.correct.lmer.REML.si    5 -9835.1 -9802.3 4922.6  -9845.1 58.825  1
+                            Pr(&gt;Chisq)    
+ML.all.correct.lmer.REML.s                
+ML.all.correct.lmer.REML.si  1.723e-14 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+If you look at the results of the model comparison then you should notice:
+<p>You can say that the comparison of a model with versus a model without the random effect of items on intercepts shows that the inclusion of the random effect of items on intercepts is warranted by a significant difference in model fit.</p>
+<p>I would conclude that both random effects of subjects and items on intercepts are required. We can draw this conclusion because the difference between the model including just the random effect of items on intercepts , or the model including just the random effect of subjects on intercepts , compared to the model including both the random effect of items on intercepts and of subjects on intercepts is significant. This tells us that the absence of the term accounting for the random effect of subjects on intercepts is associated with a significant decrease in model fit to data, in model likelihood.</p>
+</section>
+</section>
+<section id="evaluating-random-effects-of-subjects-or-items-on-slopes" class="level3" data-number="5.13.3">
+<h3 data-number="5.13.3" class="anchored" data-anchor-id="evaluating-random-effects-of-subjects-or-items-on-slopes"><span class="header-section-number">5.13.3</span> Evaluating random effects of subjects or items on slopes</h3>
+<p>We should next consider whether it is justified or warranted to include in our model a term capturing the random effect of participants in the slope of the frequency effect. Of course, we have seen how in theory it seems to make sense to include this effect. Some researchers might ask: does the inclusion of the random effect seem justified by improved model fit to data?</p>
+<p>I should acknowledge, here, that there is an on-going discussion over what random effects should be included in mixed-effects models (see Meteyard &amp; Davies, 2020, for a discussion). The discussion can be seen from a number of different perspectives. Key articles include those published by Bates et al.&nbsp;(2015), Barr et al.&nbsp;(2013), and Matuschek et al.&nbsp;(2017). You could be advised that a mixed-effects model should include all random effects that make sense a priori, so, the random effects of participants on intercepts and on the slopes of all fixed effects that are in your model (variances and covariances) as well as all the random effects of items on intercepts and on slopes. This is characterized as the <em>keep it maximal</em> approach, associated with Barr et al.&nbsp;(2013) though the discussion in that article is more nuanced than this sounds. Or, you could be advised that a mixed-effects model should only include those random effects that appear to be justified or warranted by their usefulness in accounting for the data. In practice, this may mean, you should include only those random effects that appear justified by improved model fit to data, as indicated by a model comparison (see e.g.&nbsp;Bates et al., 2015; Matuschek et al., 2017).</p>
+<p>I think, in practice, that maximal models can run into convergence problems. This means that many researchers adopt an approach which you could call:</p>
+<p>I think it makes sense to account for all the potential random variation that you can predict should have an impact. This is not really a matter of whether a more complex model fits the data better or (as Barr et al., 2013, discuss) more complex models with more comprehensive random effects appear to control the Type I (false positive) error rate better (but, as Matuschek et al., 2017) argue, at the cost of increasing the Type II (false negative) error rate. I would argue that it is more because you should try to account for what you observe with the information available to you.</p>
+<p>In practice you may have insufficient data or inadequate measures to enable you to fit a model that converges with all the random effects, or to enable you to fit a model that converges that can estimate what may, in fact, be very small random effects variances or covariances. But this is why some researchers are moving to adopt <em>Bayesian</em> mixed-effects modeling methods, as discussed by the developmental Psychologist, Michael Frank, for example, here:</p>
+<p></p>
+<p>And as exemplified by my work here:</p>
+<p></p>
+<p>But this discussion raises a question.</p>
+<!-- My advice is this. -->
+<!-- \begin{itemize} -->
+<!--    \item -->
+<!--    It makes sense to allow for variation in the effects of variables that are manipulated \emph{within-subjects} -->
+<!--    \item -->
+<!--    If everyone sees the same words and you are testing the effect of word attributes then the effects of those variables are \emph{within-subjects} -->
+<!--    \item -->
+<!--    Consider: you have several observations for a person, \emph{within} the variation in RT for that person the relative frequency of a word may or may not be associated with change in the RTs of their responses -->
+<!--    \item -->
+<!--    What about effects that may vary \emph{within-items}? -->
+<!--    \begin{itemize} -->
+<!--    \item -->
+<!--    Evidently, it would not make sense to consider the random effect of items on the slope of the effect of frequency -- how could we ask if words vary in their sensitivity to a frequency effect? -->
+<!--    \item -->
+<!--    But consider: if you were testing the response of participants to words presented under different priming conditions -- there you might sensibly examine the random effect of items on the slope of the priming effect -->
+<!--    \end{itemize} -->
+<!--    \end{itemize} -->
+<p>Examine the utility of random effects by comparing models with the same fixed effects but varying random effects. You can add a fixed effect term inside the specification of random effects to examine random slopes, as we saw earlier in this chapter.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct.lmer.REML.slopes  <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span> LgSUBTLCD <span class="sc">+</span> </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>                                           </span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>                                                (LgSUBTLCD <span class="sc">+</span> <span class="dv">1</span><span class="sc">|</span>subjectID) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>item_name),</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> ML.all.correct, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And as before, we can use to check whether the increase in model complexity associated with the addition of random slopes terms is justified by an increase in model fit to data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ML.all.correct.lmer.REML.si, ML.all.correct.lmer.REML.slopes, <span class="at">refit =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Data: ML.all.correct
+Models:
+ML.all.correct.lmer.REML.si: logrt ~ LgSUBTLCD + (1 | subjectID) + (1 | item_name)
+ML.all.correct.lmer.REML.slopes: logrt ~ LgSUBTLCD + (LgSUBTLCD + 1 | subjectID) + (1 | item_name)
+                                npar     AIC     BIC logLik deviance  Chisq Df
+ML.all.correct.lmer.REML.si        5 -9835.1 -9802.3 4922.6  -9845.1          
+ML.all.correct.lmer.REML.slopes    7 -9854.1 -9808.1 4934.0  -9868.1 22.934  2
+                                Pr(&gt;Chisq)    
+ML.all.correct.lmer.REML.si                   
+ML.all.correct.lmer.REML.slopes  1.047e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Inspection of the results shows us that, in fact, adjusting the model to include random effects of subjects in the slopes of the fixed effects due to differences in word frequency improve model fit to data. We can say that the inclusion of the random effect is The model with the random slopes is a better model of the data ML observed.</p>
+<!-- #### A refresher on scientific notation -->
+<!-- R will sometimes provide results in scientific notation. You can find information on how to read such numbers anywhere but there are some nice tutorials here: -->
+<!-- \url{http://www.chem.tamu.edu/class/fyp/mathrev/mr-scnot.html} -->
+<!-- So I quote: -->
+<!-- \begin{quotation} -->
+<!-- Scientific notation is the way that scientists easily handle very large numbers or very small numbers. For example, instead of writing 0.0000000056, we write $5.6 * 10-9$. So, how does this work? -->
+<!-- We can think of $5.6 * 10-9$ as the product of two numbers: 5.6 (the digit term) and 10-9 (the exponential term). -->
+<!-- As you can see, the exponent of 10 is the number of places the decimal point must be shifted to give the number in long form. A positive exponent shows that the decimal point is shifted that number of places to the right. A negative exponent shows that the decimal point is shifted that number of places to the left. -->
+<!-- \end{quotation} -->
+<!-- \dots which means, if you are reading something like $p = 2 * 10^-16$ then the negative sign in the $10^-16$ tells you you are looking at small number i.e. not 2.0 but 0.0000000000000002. I hope I didn't miscount the zeroes -- the 2 should be 15 zeroes behind the decimal place -- but then that's why we use scientific notation. -->
+</section>
+<section id="p-values" class="level3" data-number="5.13.4">
+<h3 data-number="5.13.4" class="anchored" data-anchor-id="p-values"><span class="header-section-number">5.13.4</span> Effects estimates and or p-values</h3>
+<p>If you look at the fixed effects summary, you can see that we do not get p-values by default. Bates and colleagues (see online lmer discussions, which you will find if you search for “Bates, Bolker, lmer, p-values”) have basically decided that because it is not really sensible to estimate the residual degrees of freedom for a model in terms of the number of observations, given that the number of observations concerns one level of a multilevel dataset that might also include some number of subjects, some number of items, then one cannot (without such degrees of freedom) accurately calculate p-values to go with the t-tests on the coefficients estimates, therefore they don’t.</p>
+<!-- Of course, moving away from the automatic generation of p-values (i.e. significance tests) of model estimates is consistent with the good practice advised by Psychological researchers like Cumming (2014) and the board of the journal Psychological Science. -->
+<!-- The issues are explained well by Baayen et al. (2008; p. 7 of .pdf) so I shall quote them at length: -->
+<!-- \begin{quotation} -->
+<!-- The temptation to perform hypothesis tests using t-distributions or F-distributions based on certain approximations of the degrees of freedom in these distributions persists. An exact calculation can be derived for certain models with a comparatively simple structure applied to exactly balanced data sets, such as occur in text books. In real-world studies the data often end up unbalanced, especially in observational studies but even in designed experiments where missing data can and do occur, and the models can be quite complicated. The simple formulas for the degrees of freedom for inferences based on t or F-distributions do not apply in such cases. In fact, the pivotal quantities for such hypothesis tests do not even have t or F-distributions in such cases so trying to determine the `correct' value of the degrees of freedom to apply is meaningless. \dots -->
+<!-- It is not even obvious how to count the number of parameters in a mixed-effects model. Suppose we have 1000 subjects, each exposed to 200 items chosen from a pool of 10000 potential items. If we model the effect of subject and item as independent random effects we add two variance components to the model. At the estimated parameter values we can evaluate 1000 predictors of the random effects for subject and 10000 predictors of the random effects for item. Did we only add two parameters to the model when we incorporated these 11000 random effects? Or should we say that we added several thousand parameters that are adjusted to help explain the observed variation in the data? It is overly simplistic to say that thousands of random effects amount to only two parameters. However, because of the shrinkage effect in the evaluation of the random effects, each random effect does not represent an independent parameter. -->
+<!-- \end{quotation} -->
+<!-- In short, p-values calculated from t-tests of effect estimates \emph{as if} the degrees of freedom for the test should be calculated in terms of the number of observations do not make sense.  -->
+<!-- I am not sure but I think that this is what the SPSS mixed-effects models procedure \emph{does do}; it is worth bearing in mind that the p-values for t-tests on effects estimates for mixed-effects models are, if calculated as outlined, likely to be anti-conservative -- so that you find effects that are not really there -- but the difference may not amount to much if, as here, for the ML data set, you actually do have a lot of observations, both lowest-level raw RT observations, as well as many participants and many stimulus items. -->
+<p>While this makes sense to me (see comments earlier on Bayesian methods), Psychologists will need p-values. This is now relatively easy. We can run mixed-effects models with p-values from significance tests on the estimates of the fixed effects coefficients using the .</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>ML.all.correct.lmer.REML.slopes  <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span> LgSUBTLCD <span class="sc">+</span> </span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>                                           </span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>                                                (LgSUBTLCD <span class="sc">+</span> <span class="dv">1</span><span class="sc">|</span>subjectID) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>item_name),</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> ML.all.correct, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ML.all.correct.lmer.REML.slopes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: logrt ~ LgSUBTLCD + (LgSUBTLCD + 1 | subjectID) + (1 | item_name)
+   Data: ML.all.correct
+
+REML criterion at convergence: -9868.1
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.6307 -0.6324 -0.1483  0.4340  5.6132 
+
+Random effects:
+ Groups    Name        Variance  Std.Dev. Corr 
+ item_name (Intercept) 0.0003268 0.01808       
+ subjectID (Intercept) 0.0054212 0.07363       
+           LgSUBTLCD   0.0002005 0.01416  -0.63
+ Residual              0.0084333 0.09183       
+Number of obs: 5257, groups:  item_name, 160; subjectID, 34
+
+Fixed effects:
+             Estimate Std. Error        df t value Pr(&gt;|t|)    
+(Intercept)  2.887997   0.015479 47.782839 186.577  &lt; 2e-16 ***
+LgSUBTLCD   -0.034471   0.003693 60.338787  -9.333 2.59e-13 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+          (Intr)
+LgSUBTLCD -0.764</code></pre>
+</div>
+</div>
+<p>Basically, the call to access the <code>lmerTest</code> library ensures that when we run the <code>lmer()</code> function we get a calculation of an approximation to the denominator degrees of freedom that enables the calculation of the p-value for the t-test for the fixed effects coefficient. An alternative, as I have noted (Section @ref(LRT)) is to compare models with versus without the effect of interest.</p>
+<section id="exercises-2" class="level4" data-number="5.13.4.1">
+<h4 data-number="5.13.4.1" class="anchored" data-anchor-id="exercises-2"><span class="header-section-number">5.13.4.1</span> Exercises</h4>
+<p>It will be useful for you to examine model comparisons with a different set of models for the same data.</p>
+<p>You could try to run a series of models in which the fixed effects variable is something different, for example, the effect of word or the effect of orthographic neighbourhood size .</p>
+<!-- I would focus on comparing models like these: -->
+<!-- ```{r eval=FALSE} -->
+<!-- ML.all.correct.lmer.REML.slopes  <- lmer(logrt ~ Length +  -->
+<!--                                                 (Length + 1|subjectID) + (1|item_name), -->
+<!--        data = ML.all.correct, REML = TRUE) -->
+<!-- summary(ML.all.correct.lmer.REML.slopes) -->
+<!-- # -->
+<!-- ML.all.correct.lmer.REML.si  <- lmer(logrt ~ Length +  -->
+<!--                                                 (1|subjectID) + (1|item_name), -->
+<!--        data = ML.all.correct, REML = TRUE) -->
+<!-- summary(ML.all.correct.lmer.REML.si) -->
+<!-- # -->
+<!-- ML.all.correct.lmer.REML.is  <- lmer(logrt ~ Length +  -->
+<!--                                                 (1|item_name), -->
+<!--        data = ML.all.correct, REML = TRUE) -->
+<!-- summary(ML.all.correct.lmer.REML.i) -->
+<!-- ML.all.correct.lmer.REML.s  <- lmer(logrt ~ Length +  -->
+<!--                                                 (1|subjectID), -->
+<!--        data = ML.all.correct, REML = TRUE) -->
+<!-- summary(ML.all.correct.lmer.REML.s) -->
+<!-- ``` -->
+<p>I would consider the model comparisons in the sequence shown in the foregoing, one pair of models at a time, to keep it simple. When you look at the model comparison, ask: is the difference between the models a piece of complexity (an effect) whose inclusion in the more complex model is justified or warranted by improved model fit to data?</p>
+</section>
+</section>
+</section>
+<section id="reporting-results" class="level2" data-number="5.14">
+<h2 data-number="5.14" class="anchored" data-anchor-id="reporting-results"><span class="header-section-number">5.14</span> Reporting results</h2>
+<section id="reporting-comparisons-of-ml-and-reml-models" class="level3" data-number="5.14.1">
+<h3 data-number="5.14.1" class="anchored" data-anchor-id="reporting-comparisons-of-ml-and-reml-models"><span class="header-section-number">5.14.1</span> Reporting comparisons of ML and REML models</h3>
+<p>If you look at an example mixed-effects analysis report, like Davies et al.&nbsp;(2013), you can see a few features of the reporting:</p>
+<p>Notice also that I try to standardisz the language and structure of the paragraphs – that kind of repetition or rhythm helps the reader, I think, by making what is not repeated – the model specifications – more apparent. Your style may differ, however, and that’s alright.</p>
+<p>I want you to notice something more, concerning the predictors included in each different model:</p>
+<p>Finally, you can see that I report model comparisons in terms of Likelihood ratio test comparisons, firstly, considering the basis for selecting one model out of the models varying in fixed effects:</p>
+<p>then I report the selection of models varying in random effects:</p>
+</section>
+<section id="reporting-the-model-summary" class="level3" data-number="5.14.2">
+<h3 data-number="5.14.2" class="anchored" data-anchor-id="reporting-the-model-summary"><span class="header-section-number">5.14.2</span> Reporting the model: summary</h3>
+<p>You should include in your report:</p>
+<p>I like to present the final model summary in a table that is structured like a multiple regression model summary table showing the random and the fixed effects.</p>
+</section>
+</section>
+<section id="summary" class="level2" data-number="5.15">
+<h2 data-number="5.15" class="anchored" data-anchor-id="summary"><span class="header-section-number">5.15</span> Summary</h2>
+<p>We examined another example of data from a repeated measures design study, this time, from a study involving adults responding to the lexical decision task, the ML study dataset.</p>
+<p>We explored in more depth why linear mixed-effects models are more effective than other kinds of models when we are analyzing data with multilevel or crossed random effects structure. We discussed the critical ideas: pooling, and shrinkage. And we looked at how mixed-effects models employ partial-pooling so as to be more effective than alternative approaches dependent on complete pooling or no pooling estimates. Mixed-effects models work better because they use both information from the whole dataset and information about each group (item or participant). This ensures that model estimates take into account random differences but are regularized so that they are not dominated by less reliable group-level information.</p>
+<p>We considered, briefly, how mixed-effects models are estimated. Then we examined, in depth, how mixed-effects models are fitted, compared and evaluated. The model comparison approach was set out, and we looked at both practical steps and at some of the tricky questions that, in practice, psychologists are learning to deal with.</p>
+<p>We discussed how to compare models with varying random or fixed effects. We focused, especially, on the comparison of models with varying random effects. Methods for model comparison, including the use of information criteria and the Likelihood Ratio Test, were considered.</p>
+<p>We discussed p-values, questions about calculating them, and a simple method for getting them when we need to report significance tests. The final discussion concerned how mixed-effects models should be reported.</p>
+<section id="useful-functions" class="level3" data-number="5.15.1">
+<h3 data-number="5.15.1" class="anchored" data-anchor-id="useful-functions"><span class="header-section-number">5.15.1</span> Useful functions</h3>
+<p>We used two functions to fit and evaluate mixed-effects models.</p>
+<p>We used the library to get significance tests for coefficient estimates of fixed effects.</p>
+</section>
+</section>
+<section id="r-code-and-data-file-access-for-the-class" class="level2" data-number="5.16">
+<h2 data-number="5.16" class="anchored" data-anchor-id="r-code-and-data-file-access-for-the-class"><span class="header-section-number">5.16</span> R code and data file access for the class</h2>
+<p>Activities in the class that goes with this chapter are associated with the following data file and .R code file:</p>
+<p>The data and .R workbook files can be downloaded as part of the .zip folder labelled <strong>PSYC402-03-mixed-resources</strong>.</p>
+<p>You can download the folder from the Moodle section corresponding to this chapter:</p>
+<p></p>
+<p>Or you can download the folder directly from:</p>
+<p></p>
+<p>Run the code in the .R file to reproduce the results presented in this chapter and in the slides.</p>
+</section>
+<section id="references" class="level2" data-number="5.17">
+<h2 data-number="5.17" class="anchored" data-anchor-id="references"><span class="header-section-number">5.17</span> References</h2>
+<section id="recommended-reading" class="level3" data-number="5.17.1">
+<h3 data-number="5.17.1" class="anchored" data-anchor-id="recommended-reading"><span class="header-section-number">5.17.1</span> Recommended reading</h3>
+<p>Snijders and Bosker (2012) present a helpful overview of multilevel modelling. Baayen et al.&nbsp;(2008; see, also, Barr et al., 2013; Judd et al., 2012) discuss mixed-effects models with crossed random effects.</p>
+<p>I wrote a tutorial article on mixed-effects models with Lotte Meteyard. We discuss how important the approach now is for psychological science, what researchers worry about when they use it, and what they should do and report when they use the method/</p>
+<p>Meteyard, L., &amp; Davies, R.A.I. (2020). Best practice guidance for linear mixed-effects models in psychological science, <em>Journal of Memory and Language</em>, 112, 104092, </p>
+</section>
+<section id="a-very-useful-faq" class="level3" data-number="5.17.2">
+<h3 data-number="5.17.2" class="anchored" data-anchor-id="a-very-useful-faq"><span class="header-section-number">5.17.2</span> A <em>very</em> useful FAQ</h3>
+<p>Can be found here:</p>
+<p></p>
+</section>
+<section id="references-list" class="level3" data-number="5.17.3">
+<h3 data-number="5.17.3" class="anchored" data-anchor-id="references-list"><span class="header-section-number">5.17.3</span> References list</h3>
+<p>Baayen, R. H. (2008). . CUP.</p>
+<p>Baayen, R. H., Davidson, D. J., &amp; Bates, D. M. (2008). Mixed-effects modeling with crossed random effects for subjects and items. <em>Journal of Memory and Language</em>, 59, 390-412.</p>
+<p>Balota, D. A., Yap, M. J., Hutchison, K. A., Cortese, M. J., Kessler, B., Loftis, B., . . . Treiman, R. (2007). The English lexicon project. <em>Behavior Research Methods</em>, 39, 445– 459. http://dx.doi.org/10.3758/BF03193014</p>
+<p>Barr, D. J., Levy, R., Scheepers, C., &amp; Tily, H. J. (2013). Random effects structure for confirmatory hypothesis testing: Keep it maximal. <em>Journal of Memory and Language</em>, 68, 255-278.</p>
+<p>Bates, D., Kliegl, R., Vasishth, S., &amp; Baayen, H. (2015). Parsimonious mixed models. <em>arXiv preprint</em> arXiv:1506.04967.</p>
+<p>Burnham, K. P., &amp; Anderson, D. R. (2004). Multimodel inference: Understanding AIC and BIC in model selection. <em>Sociological Methods &amp; Research</em>, 33, 261–304.</p>
+<p>Forster, K. I., &amp; Forster, J. C. (2003). DMDX: A windows display program with millisecond accuracy. <em>Behavior Research Methods, Instruments &amp; Computers</em>, 35, 116–124. http://dx.doi.org/10.3758/BF03195503</p>
+<p>Gelman, A. (2014). The Connection Between Varying Treatment Effects and the Crisis of Unreplicable Research: A Bayesian Perspective. , DOI: 0149206314525208.</p>
+<p>Gelman, A., &amp; Hennig, C. (2017). Beyond subjective and objective in statistics. <em>Journal of the Royal Statistical Society</em>, 180, 967-1033.</p>
+<p>Gelman, A., &amp; Hill, J. (2006). <em>Data analysis using regression and multilevel/hierarchical models</em>. New York, NY: Cambridge University Press. http://dx.doi.org/10.1017/CBO9780511790942</p>
+<p>Howell, D. C. (2004). <em>Fundamental statistics for the behavioural sciences 5th ed</em>. Belmont: Thomson Brookes/Cole.</p>
+<p>Judd, C. M., Westfall, J., &amp; Kenny, D. A. (2012). Treating stimuli as a random factor in social psychology: a new and comprehensive solution to a pervasive but largely ignored problem. <em>Journal of Personality and Social Psychology</em>, 103, 54.</p>
+<p>Masterson, J., &amp; Hayes, M. (2007). Development and data for UK versions of an author and title recognition test for adults. <em>Journal of Research in Reading</em>, 30, 212–219. http://dx.doi.org/10.1111/j.1467-9817.2006 .00320.x</p>
+<p>Matuschek, H., Kliegl, R., Vasishth, S., Baayen, H., &amp; Bates, D. (2017). Balancing Type I error and power in linear mixed models. <em>Journal of Memory and Language</em>, 94, 305-315.</p>
+<p>Pinheiro, J. C., &amp; Bates, D. M. (2000). <em>Mixed-effects models in S and S-PLUS</em>. New York, NY: Springer-Verlag.</p>
+<p>Raaijmakers, J. G., Schrijnemakers, J. M., &amp; Gremmen, F. (1999). How to deal with “the language-as-fixed-effect fallacy”: Common misconceptions and alternative solutions. <em>Journal of Memory and Language</em>, 41, 416-426.</p>
+<p>Snijders, T.A., &amp; Bosker, R.J. (2012). <em>Multilevel analysis (2nd Edition)</em>. London, UK: Sage.</p>
+<p>Steegen, S., Tuerlinckx, F., Gelman, A., &amp; Vanpaemel, W. (2016). Increasing transparency through a multiverse analysis. <em>Perspectives on Psychological Science</em>, 11, 702-712.</p>
+<p>Torgesen, J. K., Wagner, R. K., &amp; Rashotte, C. A. (1999). <em>TOWRE Test of word reading efficiency</em>. Austin, TX: Pro-ed.</p>
+<!-- -- superfluous materials -- -->
+<!-- -- see also: -->
+<!-- PG-methods-class-eight.Rnw -->
+<!-- 2021-02-14-intro-mixed-effects.Rmd -- commented out parts at the end -->
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./02-mixed.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to linear mixed-effects models</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./04-glmm.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">04-glmm.html</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
