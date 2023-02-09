@@ -140,80 +140,69 @@ View(BAFACALO_DATASET)
 
 Or you can use the `head()` function to see the top few rows of the dataset.
 
-\small
-
 ```{r headcheck-wide}
 head(BAFACALO_DATASET, n = 2)
 ```
 
-\normalsize
-
 You can check for yourself that each row holds data about a child, including their participant identity code, as well as information about their parents, household, gender, age, school class, and their grades on end-of-year subject attainment (e.g., how well they did in English language).
 
-There are many more variables in the dataset than we need for our exercises, and a summary would fill pages of this chapter. You can see for yourself if you inspect the dataset using
+There are many more variables in the dataset than we need for our exercises, and a summary would fill pages. You can see for yourself if you inspect the dataset using
 
-```{r not-summary-rdata, eval=FALSE}
+```{r not-summary-rdata}
+#| eval: false
 summary(BAFACALO_DATASET)
 ```
 
-## Tidy the data
+## Tidy the data {#sec-multi-data-tidy}
 
 When you inspect the file, you will see that it includes a large number of variables, but we only really care about those we will use in our exercises:
 
-```{=tex}
-\begin{itemize}
-\item
-\verb:participant_id: the participant identity code for each child
-\item
-\verb:class_number: the class identity code for the school class for each child
-\item
-\verb:portuguese:, \verb:english:, \verb:math:, \verb:physics: the score for each child in subject class attainment measures
-\end{itemize}
-```
+- `participant_id` the participant identity code for each child
+- `class_number` the class identity code for the school class for each child
+- `portuguese`, `english`, `math`, and `physics` the score for each child in subject class attainment measures
+
 You can see that I am not explaining the variables in great depth. For our aims, we do not need more detailed information but please do read the data article if you wish to find out more.
 
 We need to tidy the data before we can get to the analysis parts of this chapter. We are going to:
 
-```{=tex}
-\begin{enumerate}
-\item
-Select the variables we want to work with;
-\item
-Filter out missing values, if any are present;
-\item
-And make sure R knows how we want each variable to be identified; what type the variable should have.
-\end{enumerate}
-```
+1. Select the variables we want to work with;
+2. Filter out missing values, if any are present;
+3. And make sure R knows how we want each variable to be identified; what type the variable should have.
+
 We shall need the `tidyverse` library of functions.
 
-```{r libtidyverse, eval = FALSE}
-
+```{r libtidyverse}
+#| eval: false
 library(tidyverse)
-
 ```
 
-### Select the variables
+### Select the variables {#sec-multi-data-select}
 
-We can start by selecting the variables we want, which include those named here, ignoring all the rest. We take the `BAFACALO_DATASET`. We then use the `select()` function to select the variables we want. And, lastly, we inspect the data using `summary()`.
+We can start by selecting the variables we want, which include those named here, ignoring all the rest. We take the `BAFACALO_DATASET`. We then use the `select()` function to select the variables we want.
 
 ```{r select.brazil}
-
 brazil <- BAFACALO_DATASET %>%
                     select(
                       class_number, participant_id,
                       portuguese, english, math, physics
                       )
-# inspect
+```
+
+Inspect the data to see what you have.
+
+```{r includes-missing}
 summary(brazil)
 ```
 
-#### Code tip
+::: callout: tip
+Notice the code is written to create the new selected dataset and, at the same time, gave it a more usable (shorter) name, with `brazil <- BAFACALO_DATASET ...`
+:::
 
-Notice the code is written to create the new selected dataset and, at the same time, gave it a more usable (shorter) name, with \verb:brazil \\\\\\\<- BAFACALO_DATASET %\\\\\\\>%:::::::::::::::::::::::::::
+### Remove missing values {#sec-multi-data-remove-na}
 
-### Remove missing values
+If you look at the results of the selection, you can see that there are missing values, written as e.g. `NA's 62` at the bottom of each summary of each variable (if a variable column includes missing values). (Remember that in R `NA` means "not available" i.e. missing.) 
 
-If you look at the results of the selection, you can see that there are missing values, written as e.g. `NA's 62` at the bottom of each summary of each variable (if a variable column includes missing values). (Remember that in R `NA` means "not available" i.e. missing.) We will need to get rid of the missing values. It is simpler to do this at the start rather than wait for an error message, later, when some arithmetic function tells us it cannot give us a result because there are `NAs` present.
+We will need to get rid of the missing values. It is simpler to do this at the start rather than wait for an error message, later, when some arithmetic function tells us it cannot give us a result because there are `NAs` present.
 
 We can get rid of the missing values using `na.omit()`
 
@@ -224,7 +213,6 @@ brazil <- na.omit(brazil)
 If you then look at a summary of the data again then you will see that the `NAs` are gone.
 
 ```{r no-missing}
-# inspect
 summary(brazil)
 ```
 
