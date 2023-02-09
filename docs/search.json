@@ -565,5 +565,12 @@
     "title": "3  Introduction to multilevel data",
     "section": "3.1 Motivations",
     "text": "3.1 Motivations\nThis week, we shall start to develop skills in using a method or approach that is essential in modern data analysis: multilevel modeling. We are going to invest four weeks in working on this approach. This investment is designed to give you a specific, important, advantage in your work as a psychologist, or as someone who produces or consumes psychological research."
+  },
+  {
+    "objectID": "03-mixed.html#motivations-to-grow-in-sophistication",
+    "href": "03-mixed.html#motivations-to-grow-in-sophistication",
+    "title": "5  Developing linear mixed-effects models",
+    "section": "5.1 Motivations: to grow in sophistication",
+    "text": "5.1 Motivations: to grow in sophistication\nLinear mixed-effects models are important, interesting, and sometimes challenging. We have worked through two chapters in which we have looked at three things: why multilevel or mixed-effects models are needed; what they can do; and what they involve.\nWe have learnt:\nWe now need to develop our understanding and skills further.\nWe have specified, run and looked at the results of mixed-effects models. We now need to examine some of the complexities that we may need to face when we are involved in mixed-effects modeling.\nOur approach will continue to depend on verbal explanation, visualization and a practical code-based approach to the modeling."
   }
 ]

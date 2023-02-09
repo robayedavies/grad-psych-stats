@@ -1,10 +1,16 @@
 # Introduction to Generalized Linear Mixed-effects Models
 
-```{r setup, include = FALSE}
-
-knitr::opts_chunk$set(dev = 'pdf')
-library("tidyverse")
-
+```{r libraries-hide}
+#| warning: false
+#| echo: false
+library(broom)
+library(gridExtra)
+library(here)
+library(lme4)
+library(memisc)
+library(patchwork)
+library(sjPlot)
+library(tidyverse)
 ```
 
 ```{r read-data, warning=FALSE, message=FALSE, echo=FALSE}

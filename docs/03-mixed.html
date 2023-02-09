@@ -330,6 +330,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
+<div class="cell">
+
+</div>
 <section id="motivations-to-grow-in-sophistication" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="motivations-to-grow-in-sophistication"><span class="header-section-number">5.1</span> Motivations: to grow in sophistication</h2>
 <p>Linear mixed-effects models are important, interesting, and sometimes challenging. We have worked through two chapters in which we have looked at three things: why multilevel or mixed-effects models are needed; what they can do; and what they involve.</p>
@@ -529,7 +532,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- % %-- the amount of smoothing depends on the kernel bandwidth                   -->
 <!-- % %-- the larger the bandwidth the more smoothing there is  -->
 <p>Getting a density plot of RTs of responses is easy in <code>ggplot()</code>.</p>
-<div class="cell" data-layout-align="center" data-hash="03-mixed_cache/html/rt-all-density_11bdabd6eb4b9d8d8fdff43e8581a4dd">
+<div class="cell" data-layout-align="center" data-hash="03-mixed_cache/html/rt-all-density_9cde8173c991b72bcb0e6d468bf15eb4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ML.all <span class="sc">%&gt;%</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> RT)) <span class="sc">+</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">size=</span><span class="fl">1.5</span>) <span class="sc">+</span></span>
@@ -539,7 +542,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><embed src="03-mixed_files/figure-html/rt-all-density-1.pdf" class="img-fluid" style="width:55.0%"></p>
+<p><img src="03-mixed_files/figure-html/rt-all-density-1.png" class="img-fluid figure-img" style="width:55.0%"></p>
 <p></p><figcaption class="figure-caption">Density plot showing word recognition reaction time, correct and incorrect responses</figcaption><p></p>
 </figure>
 </div>
@@ -594,7 +597,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>If you run the <code>length()</code> function calls then you should see that the <em>length</em> or number of observations or rows in the <code>ML.all.correct</code> dataset should be smaller than the number of observations in the <code>ML.all</code> dataset.</p>
 <p>Having obtained a new data frame with data on just those trials where responses were correct, we can plot the distribution of RTs for just the correct responses (Figure @ref(fig:rt-correct-density)).</p>
-<div class="cell" data-hash="03-mixed_cache/html/rt-correct-density_df951e70f60e3991bdc07bc7e8cc3dea">
+<div class="cell" data-hash="03-mixed_cache/html/rt-correct-density_d4de9d564bfc50d45799c67dcfc33a07">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct <span class="sc">%&gt;%</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> RT)) <span class="sc">+</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">size=</span><span class="fl">1.5</span>) <span class="sc">+</span> </span>
@@ -604,7 +607,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><embed src="03-mixed_files/figure-html/rt-correct-density-1.pdf" class="img-fluid" style="width:55.0%"></p>
+<p><img src="03-mixed_files/figure-html/rt-correct-density-1.png" class="img-fluid figure-img" style="width:55.0%"></p>
 <p></p><figcaption class="figure-caption">Density plot showing word recognition reaction time, correct responses only</figcaption><p></p>
 </figure>
 </div>
@@ -653,7 +656,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct<span class="sc">$</span>logrt <span class="ot">&lt;-</span> <span class="fu">log10</span>(ML.all.correct<span class="sc">$</span>RT)            </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can see the effect of the transformation if we plot the log10 transformed RTs (see Figure @ref(fig:rt-correct-log-density)). We arrive at a distribution that more closely approximates the normal distribution.</p>
-<div class="cell" data-hash="03-mixed_cache/html/rt-correct-log-density_22ae5c021cd9ba7fb325065a49b9838b">
+<div class="cell" data-hash="03-mixed_cache/html/rt-correct-log-density_6c5e6a00e38eed22bdfd5516ac8ee522">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct <span class="sc">%&gt;%</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> logrt)) <span class="sc">+</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span> </span>
@@ -663,7 +666,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><embed src="03-mixed_files/figure-html/rt-correct-log-density-1.pdf" class="img-fluid" style="width:55.0%"></p>
+<p><img src="03-mixed_files/figure-html/rt-correct-log-density-1.png" class="img-fluid figure-img" style="width:55.0%"></p>
 <p></p><figcaption class="figure-caption">Density plot showing log10 transformed reaction time, correct responses only</figcaption><p></p>
 </figure>
 </div>
@@ -714,7 +717,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><embed src="03-mixed_files/figure-html/rt-correct-log-den-by-subj-1.pdf" class="img-fluid" style="width:100.0%"></p>
+<p><img src="03-mixed_files/figure-html/rt-correct-log-den-by-subj-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <p></p><figcaption class="figure-caption">Density plot showing log10 transformed reaction time, correct responses, separately for each participant</figcaption><p></p>
 </figure>
 </div>
@@ -863,7 +866,7 @@ F-statistic: 234.8 on 1 and 5255 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><embed src="03-mixed_files/figure-html/no-vs-complete-1.pdf" class="img-fluid" style="width:95.0%"></p>
+<p><img src="03-mixed_files/figure-html/no-vs-complete-1.png" class="img-fluid figure-img" style="width:95.0%"></p>
 <p></p><figcaption class="figure-caption">Plot showing the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant; red-pink line shows the complete pooling estimate, blue-green line shows the no-pooling estimate</figcaption><p></p>
 </figure>
 </div>
@@ -1007,7 +1010,7 @@ LgSUBTLCD -0.764</code></pre>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><embed src="03-mixed_files/figure-html/no-vs-complete-vs-partial-1.pdf" class="img-fluid" style="width:95.0%"></p>
+<p><img src="03-mixed_files/figure-html/no-vs-complete-vs-partial-1.png" class="img-fluid figure-img" style="width:95.0%"></p>
 <p></p><figcaption class="figure-caption">Plot showing the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant; pink line shows the complete pooling estimate green line shows the no-pooling estimate; and blue line shows the linear mixed-effects model partial pooling estimate</figcaption><p></p>
 </figure>
 </div>
@@ -1018,7 +1021,7 @@ LgSUBTLCD -0.764</code></pre>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><embed src="03-mixed_files/figure-html/no-vs-complete-vs-partial-zoom-1.pdf" class="img-fluid" style="width:100.0%"></p>
+<p><img src="03-mixed_files/figure-html/no-vs-complete-vs-partial-zoom-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <p></p><figcaption class="figure-caption">Plot showing the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant – for participants AA1, EB5, JL3 and JP3; pink line shows the complete pooling estimate green line shows the no-pooling estimate; and blue line shows the linear mixed-effects model partial pooling estimate</figcaption><p></p>
 </figure>
 </div>
@@ -1032,7 +1035,7 @@ LgSUBTLCD -0.764</code></pre>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><embed src="03-mixed_files/figure-html/shrinkage-1.pdf" class="img-fluid" style="width:100.0%"></p>
+<p><img src="03-mixed_files/figure-html/shrinkage-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <p></p><figcaption class="figure-caption">Plot illustrating shrinkage: big green and pink points show the complete pooling and partial pooling (average) estimates for the slope and intercept; orange and purple points show the no pooling (orange) and partial pooling (purple) estimates for each person; estimates for a person are connected by arrows to show the direction towards which no pooling estimates are pulled or shrunk</figcaption><p></p>
 </figure>
 </div>

@@ -309,6 +309,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 
 </div>
+<div class="cell">
+
+</div>
 <p>We have been discussing how we can use Linear Mixed-effects models to analyze multilevel structured data, the kind of data that we commonly acquire in experimental psychological studies, for example, when our studies have repeated measures designs. The use of Linear Mixed-effects models is appropriate where the outcome variable is a continuous numeric variable like reaction time. In this chapter, we extend our understanding and skills by moving to examine data where the outcome variable is categorical: this is a context that requires the use of <strong>Generalized Linear Mixed-effects Models (GLMMs)</strong>.</p>
 <p>We will begin by looking at the motivations for using GLMMs. We will then look at a practical example of a GLMM analysis, in an exploration in which we shall reveal some of the challenges that can arise in such work. The R code to do the modeling is very similar to the code we have used before. The way we can understand the models is also similar but <em>with one critical difference</em>. We start to understand that difference here.</p>
 <section id="key-ideas" class="level2" data-number="6.1">
@@ -332,7 +335,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><embed src="04-glmm_files/figure-html/word-learning-lm-per-subject-for-report-1.pdf" class="img-fluid" style="width:100.0%"></p>
+<p><img src="04-glmm_files/figure-html/word-learning-lm-per-subject-for-report-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <p></p><figcaption class="figure-caption">Monaghan et al.&nbsp;(2015) artificial word learning study: plot showing the proportion of responses correct for each participant, in each of 12 blocks of 24 learning trials, in each learning condition; each grey line shows the linear model prediction of the proportion correct, for each person, by learning block, in each condition; black lines show the average prediction of the proportion correct, by learning block, in each condition. The position of points has been jittered.</figcaption><p></p>
 </figure>
 </div>
@@ -573,7 +576,7 @@ ln\frac{p}{1-p} = logitp = \beta_0 + \beta_1X_1 \dots
 <h3 data-number="6.7.2" class="anchored" data-anchor-id="recode"><span class="header-section-number">6.7.2</span> Code categorical factors</h3>
 <p>The data are tidy but we need to do a bit of work, before we can run any analyses, to fix the coding of the categorical predictor (or independent) variables, the factors Orthography, Instructions, and Time. By default, R will observations at different levels of a factor. So, for a factor or a categorical variable like <code>Orthography</code> (present, absent), R will code one level name e.g.&nbsp; as 0 and the other e.g.&nbsp; as 1. The 0-coded level is termed the , which you could call the baseline level, and by default R will code the level with the name appearing earlier in the alphabet as the reference level.</p>
 <p>All this is usually not important. When you specify a model in R where you are asking to estimate the effect of a categorical variable like <code>Orthography</code> (present, absent) then, by default, what you will get is an estimate of the average difference in outcome, when all other factors are set to zero, estimated as the difference in outcomes comparing the reference level and the other level or levels of the factor. This will be presented, for example, like the output shown following, for a Generalized Linear Model (i.e., a logistic regression) analysis of the effect of Orthography condition, ignoring the random effects:</p>
-<div class="cell" data-hash="04-glmm_cache/html/summary-glm_63f9f90fcd7967cc1885b722cf19d8c1">
+<div class="cell" data-hash="04-glmm_cache/html/summary-glm_9f79581c4fe938b940b2ef6d6c62a932">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">glm</span>(Score <span class="sc">~</span> Orthography, <span class="at">family =</span> <span class="st">"binomial"</span>, <span class="at">data =</span> long.orth))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -836,7 +839,7 @@ Orthgr2:C_H -0.027  0.001  0.179  0.000 -0.035 -0.007</code></pre>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><embed src="04-glmm_files/figure-html/sjplot-orthography-1.pdf" class="img-fluid" style="width:95.0%"></p>
+<p><img src="04-glmm_files/figure-html/sjplot-orthography-1.png" class="img-fluid figure-img" style="width:95.0%"></p>
 <p></p><figcaption class="figure-caption">Effect of orthography condition (present versus absent) on probability of a response being correct</figcaption><p></p>
 </figure>
 </div>
@@ -1111,7 +1114,7 @@ boundary (singular) fit: see help('isSingular')</code></pre>
 <section id="random-effects-of-subjects-and-stimulus-words-on-the-slope-of-the-orthography-effect" class="level4" data-number="6.9.1.2">
 <h4 data-number="6.9.1.2" class="anchored" data-anchor-id="random-effects-of-subjects-and-stimulus-words-on-the-slope-of-the-orthography-effect"><span class="header-section-number">6.9.1.2</span> Random effects of subjects and stimulus words on the slope of the Orthography effect</h4>
 <p>In our second model, we change the random effects terms so that we can account for the random effects of participants and of items on intercepts as well as on the slopes of the Orthography effect. (The Orthography effect is both within-subjects and within-items.)</p>
-<div class="cell" data-information="false" data-hash="04-glmm_cache/html/orth-2-glmer_83d3f172135fdaa18a35f55ad60bc98c">
+<div class="cell" data-information="false" data-hash="04-glmm_cache/html/orth-2-glmer_e5a54126149ecba17b83e3e04a3cdb63">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>long.orth.<span class="fl">2.</span>glmer <span class="ot">&lt;-</span> <span class="fu">glmer</span>(Score <span class="sc">~</span> </span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>                             Time <span class="sc">+</span> Orthography <span class="sc">+</span> Instructions <span class="sc">+</span> zConsistency_H <span class="sc">+</span> </span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>                             </span>
@@ -1150,7 +1153,7 @@ boundary (singular) fit: see help('isSingular')</code></pre>
 <section id="random-effects-of-subjects-and-stimulus-words-on-the-slope-of-the-instructions-effect" class="level4" data-number="6.9.1.3">
 <h4 data-number="6.9.1.3" class="anchored" data-anchor-id="random-effects-of-subjects-and-stimulus-words-on-the-slope-of-the-instructions-effect"><span class="header-section-number">6.9.1.3</span> Random effects of subjects and stimulus words on the slope of the Instructions effect</h4>
 <p>Next we can add to take into account random differences between words in the slope of this effect. We show the results for this model as they are instructive.</p>
-<div class="cell" data-hash="04-glmm_cache/html/orth-3-glmer_6b0168aafa2fcc3593f77974b277e90a">
+<div class="cell" data-hash="04-glmm_cache/html/orth-3-glmer_a0209cd36a1c2aa0fbb24a279aafc9b1">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>long.orth.<span class="fl">3.</span>glmer <span class="ot">&lt;-</span> <span class="fu">glmer</span>(Score <span class="sc">~</span> </span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>                             Time <span class="sc">+</span> Orthography <span class="sc">+</span> Instructions <span class="sc">+</span> zConsistency_H <span class="sc">+</span> </span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>                             </span>
@@ -1234,7 +1237,7 @@ Orthgr2:C_H -0.030  0.002  0.182  0.002 -0.026 -0.018</code></pre>
 <section id="random-effects-of-subjects-on-the-slope-of-the-consistency-effect" class="level4" data-number="6.9.1.5">
 <h4 data-number="6.9.1.5" class="anchored" data-anchor-id="random-effects-of-subjects-on-the-slope-of-the-consistency-effect"><span class="header-section-number">6.9.1.5</span> Random effects of subjects on the slope of the consistency effect</h4>
 <p>Next we see if we can add <code>zConsistency_H</code>.</p>
-<div class="cell" data-hash="04-glmm_cache/html/orth-4-a-glmer_1a13422a146361e9ca2f7a93ea9508c5">
+<div class="cell" data-hash="04-glmm_cache/html/orth-4-a-glmer_00d41764ff87f4152dddb3eb96de69be">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>long.orth.<span class="fl">4.</span>a.glmer <span class="ot">&lt;-</span> <span class="fu">glmer</span>(Score <span class="sc">~</span> </span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>                             Time <span class="sc">+</span> Orthography <span class="sc">+</span> Instructions <span class="sc">+</span> zConsistency_H <span class="sc">+</span> </span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>                             </span>
@@ -1312,7 +1315,7 @@ boundary (singular) fit: see help('isSingular')</code></pre>
 <section id="random-effects-of-subjects-and-stimulus-words-on-the-slope-of-the-time-effect" class="level4" data-number="6.9.1.6">
 <h4 data-number="6.9.1.6" class="anchored" data-anchor-id="random-effects-of-subjects-and-stimulus-words-on-the-slope-of-the-time-effect"><span class="header-section-number">6.9.1.6</span> Random effects of subjects and stimulus words on the slope of the time effect</h4>
 <p>What about the random effects of participants or of words on the slope of the effect of Time?</p>
-<div class="cell" data-hash="04-glmm_cache/html/orth-4-b-glmer_6ac713281cb676cd3d72fbf9cb2ffb78">
+<div class="cell" data-hash="04-glmm_cache/html/orth-4-b-glmer_4f4edcceda6e6f46d0346a63df5006f0">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>long.orth.<span class="fl">4.</span>b.glmer <span class="ot">&lt;-</span> <span class="fu">glmer</span>(Score <span class="sc">~</span> </span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>                             Time <span class="sc">+</span> Orthography <span class="sc">+</span> Instructions <span class="sc">+</span> zConsistency_H <span class="sc">+</span> </span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>                             </span>

@@ -311,6 +311,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
+<div class="cell">
+
+</div>
 <section id="crossed-random" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="crossed-random"><span class="header-section-number">4.1</span> Motivations: repeated measures designs and crossed random effects</h2>
 <p>In the <strong>Introduction to multilevel data</strong>, we looked at a multilevel structured dataset in which there are observations about children’s grades, and it is evident that those children can be grouped by or under classes. As we discussed, this kind of data structure will come from studies with a very common design in which the researcher recorded observations about a sample of children who are members of a sample of classes. In working with these kind of data, it is common to say that the observations of children’s grades are <em>nested</em> within classes in a hierarchy.</p>
@@ -877,7 +880,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="linear-model-for-multilevel-data-ignoring-the-hierarchical-structure" class="level3" data-number="4.8.2">
 <h3 data-number="4.8.2" class="anchored" data-anchor-id="linear-model-for-multilevel-data-ignoring-the-hierarchical-structure"><span class="header-section-number">4.8.2</span> Linear model for multilevel data – ignoring the hierarchical structure</h3>
 <p>We begin by asking if reading reaction time (RT) varies in association with word frequency. A scatterplot shows that response latencies decrease with increasing word frequency (Figure @ref(fig:pfreqc5)).</p>
-<div class="cell" data-layout-align="center" data-hash="02-mixed_cache/html/pfreqc5_ae7f3d926519df0aa1104a92679984ae">
+<div class="cell" data-layout-align="center" data-hash="02-mixed_cache/html/pfreqc5_0357849e1d164d0e7e4d71486a19ce6d">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>long.all.noNAs <span class="sc">%&gt;%</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Lg.UK.CDcount, <span class="at">y =</span> RT)) <span class="sc">+</span></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span> </span>
@@ -887,7 +890,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><embed src="02-mixed_files/figure-html/pfreqc5-1.pdf" class="img-fluid" style="width:65.0%"></p>
+<p><img src="02-mixed_files/figure-html/pfreqc5-1.png" class="img-fluid figure-img" style="width:65.0%"></p>
 <p></p><figcaption class="figure-caption">Reading reaction time compared to word frequency, all data</figcaption><p></p>
 </figure>
 </div>
@@ -953,7 +956,7 @@ F-statistic: 302.8 on 1 and 9083 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><embed src="02-mixed_files/figure-html/freqperchildtrellis-1.pdf" class="img-fluid" style="width:95.0%"></p>
+<p><img src="02-mixed_files/figure-html/freqperchildtrellis-1.png" class="img-fluid figure-img" style="width:95.0%"></p>
 <p></p><figcaption class="figure-caption">RT vs.&nbsp;word frequency, considered separately for data for each child</figcaption><p></p>
 </figure>
 </div>
@@ -969,7 +972,7 @@ F-statistic: 302.8 on 1 and 9083 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><embed src="02-mixed_files/figure-html/freqperchildlm-1.pdf" class="img-fluid" style="width:95.0%"></p>
+<p><img src="02-mixed_files/figure-html/freqperchildlm-1.png" class="img-fluid figure-img" style="width:95.0%"></p>
 <p></p><figcaption class="figure-caption">Estimated intercepts and frequency effect slopes (with SEs) calculated for each child analysed separately, with point estimates presented in order of size</figcaption><p></p>
 </figure>
 </div>
@@ -1115,7 +1118,7 @@ Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + e_{ij}
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><embed src="02-mixed_files/figure-html/BLUPS-prediction-1.pdf" class="img-fluid" style="width:105.0%"></p>
+<p><img src="02-mixed_files/figure-html/BLUPS-prediction-1.png" class="img-fluid figure-img" style="width:105.0%"></p>
 <p></p><figcaption class="figure-caption">Plot showing histograms indicating the distribution of participant adjustments to account for between-child differences in intercept or slope (known as Best Linear Unbiased Predictionss)</figcaption><p></p>
 </figure>
 </div>
@@ -1131,7 +1134,7 @@ Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + e_{ij}
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><embed src="02-mixed_files/figure-html/indiv-prediction-1.pdf" class="img-fluid" style="width:105.0%"></p>
+<p><img src="02-mixed_files/figure-html/indiv-prediction-1.png" class="img-fluid figure-img" style="width:105.0%"></p>
 <p></p><figcaption class="figure-caption">Plot showing model predictions of the effect, for each individual, of word frequency on reading reaction time – predictions vary between models incorporating (a.) random effect of participants on intercepts only; (b.) random effect of participants on slopes only and (c.) random effect of participants on intercepts and on slopes</figcaption><p></p>
 </figure>
 </div>
@@ -1164,7 +1167,7 @@ Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + e_{ij}
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><embed src="02-mixed_files/figure-html/pitemsints-1.pdf" class="img-fluid" style="width:100.0%"></p>
+<p><img src="02-mixed_files/figure-html/pitemsints-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <p></p><figcaption class="figure-caption">Estimated intercepts (with SEs) calculated for each stimulus word, with coefficients ordered by average latency for each word</figcaption><p></p>
 </figure>
 </div>
@@ -1251,7 +1254,7 @@ Lg.UK.CDcnt -0.388</code></pre>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><embed src="02-mixed_files/figure-html/covarp-1.pdf" class="img-fluid" style="width:80.0%"></p>
+<p><img src="02-mixed_files/figure-html/covarp-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <p></p><figcaption class="figure-caption">Scatterplot showing the relationship between estimated coefficients for the intercept and for the frequency effect, for each child analysed separately</figcaption><p></p>
 </figure>
 </div>
