@@ -13,27 +13,28 @@ library(sjPlot)
 library(tidyverse)
 ```
 
-## Motivations
+## Motivations {#sec-multilevel-motivations}
 
 This week, we shall start to develop skills in using a method or approach that is essential in modern data analysis: *multilevel modeling*.
 We are going to invest four weeks in working on this approach.
 This investment is designed to give you a specific, important, advantage in your work as a psychologist, or as someone who produces or consumes psychological research.
 
-\begin{description}
-\item[Multilevel models: why do we need to do this?]
-Four weeks is a lot of time to spend on one method.
-\end{description}
+::: callout-advice
+Multilevel models: *why* do we need to do this?
+- Four weeks is a lot of time to spend on one method.
+:::
 
 It is now clear that someone who works in psychological research *has* to know about multilevel or hierarchically structured data, and has to know how to apply multilevel models (or mixed-effects models).
-Growth in the popularity of these kinds of analysis has been very very rapid, as can be seen in Figure \@ref(fig:meteyard-davies-2020-fig-5-lme-growth).
+Growth in the popularity of these kinds of analysis has been very very rapid, as can be seen in Figure @fig-meteyard-davies-2020-fig-5-lme-growth.
 It is now, effectively, the standard or default method for professional data analysis in most areas of psychological and other social or clinical sciences (or it soon will be).
 There are good reasons for this (Baayen, Davidson, \& Bates, 2008).
 
-```{r meteyard-davies-2020-fig-5-lme-growth, echo=FALSE, fig.cap="Number of Pubmed citations for ‘Linear Mixed Models’ by year. Generated using the tool available at http://dan.corlan.net/medline-trend.html, entering “Linear Mixed Models” as the phrase search term and using data from 2000 to 2018, from Meteyard and Davies (2020) -- used without permission", out.width = '60%', fig.align='center'}
+![Number of Pubmed citations for ‘Linear Mixed Models’ by year. Generated using the tool available at http://dan.corlan.net/medline-trend.html, entering “Linear Mixed Models” as the phrase search term and using data from 2000 to 2018, from Meteyard and Davies (2020) -- used without permission](meteyard-davies-2020-fig-5-lme-growth.png){#fig-meteyard-davies-2020-fig-5-lme-growth}
 
-knitr::include_graphics("meteyard-davies-2020-fig-5-lme-growth.png")
-
-```
+# ```{r meteyard-davies-2020-fig-5-lme-growth, echo=FALSE, fig.cap="Number of Pubmed citations for ‘Linear Mixed Models’ by year. Generated using the tool available at http://dan.corlan.net/medline-trend.html, entering “Linear Mixed Models” as the phrase search term and using data from 2000 to 2018, from Meteyard and Davies (2020) -- used without permission", out.width = '60%', fig.align='center'}
+# 
+# knitr::include_graphics("meteyard-davies-2020-fig-5-lme-growth.png")
+# ```
 
 We continue to teach ANOVA and multiple regression (linear models) in our courses because the research literature is full of the results of analyses done using these methods and because many psychologists continue to use these methods in their research.
 However, there is increasingly wide-spread recognition that these classical methods have serious problems when applied to data with hierarchical structure.
