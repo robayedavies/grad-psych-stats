@@ -337,15 +337,15 @@ If a researcher tests participants belonging to different groups, e.g., records 
 //| fig-width: 5
 //| label: fig-hierarchy
 //| fig-cap: Multilevel or hierarchically structured data
-//| fig-alt: The diagram shows a hierarchy of nodes. At the top, node school has arrows down to nodes class.1 and class.2. Nodes class.1 and class.2 are on the same level. class.1 has arrows to nodes child.1, child.2 and child.3. class.2 has arrows to nodes child.4, child.5 and child.6. 
+//| fig-alt: The diagram shows a hierarchy of nodes. At the top, node school A has arrows down to nodes class B1 and class B2. Nodes class B1 and class B2 are on the same level. Class B1 has arrows to nodes child C1, C2 and C3. Class B2 has arrows to nodes child C4, C5 and C6. 
 
 digraph D {
 
-  school -> {class.1, class.2}
+  A -> {B1, B2}
   
-  class.1 -> {child.1, child.2, child.3}
+  B1 -> {C1, C2, C3}
 
-  class.2 -> {child.4, child.5, child.6}
+  B2 -> {C4, C5, C6}
 
 }
 ```
