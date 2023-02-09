@@ -423,6 +423,7 @@ Important
 <li><strong>concepts</strong> – how data can have multilevel structures and what this requires in models</li>
 <li><strong>skills</strong> – where skills comprise the capacity to</li>
 </ol>
+<!-- -->
 <ol type="i">
 <li>use visualization to examine observations within groups</li>
 <li>run linear models over all data and within each class</li>
@@ -697,9 +698,9 @@ Important
 </section>
 <section id="sec-multilevel-models-utility" class="level3" data-number="3.9.2">
 <h3 data-number="3.9.2" class="anchored" data-anchor-id="sec-multilevel-models-utility"><span class="header-section-number">3.9.2</span> Multilevel models – why they are more used and more useful than traditional methods</h3>
-<p>The utility of <strong>multilevel models</strong> to analyze <strong>multilevel data</strong> or hierarchically structured data is well established in education. In educational research, we often need to think about effects of interventions or correlations in the context of observing children in classes, schools or districts, perhaps over time or at different time points. This means that many of the critical textbooks present examples that are based on educational research data (Bryk &amp; Raudenbush, 1992; Goldstein, 2011; Kreft &amp; de Leeuw, 1998; Snijders &amp; Bosker, 2012).</p>
+<p>The utility of <strong>multilevel models</strong> to analyze <strong>multilevel data</strong> or hierarchically structured data is well established in education. In educational research, we often need to think about effects of interventions or correlations in the context of observing children in classes, schools or districts, perhaps over time or at different time points. This means that many of the critical textbooks present examples that are based on educational research data <span class="citation" data-cites="raudenbush2002hierarchical Goldstein1995a kreft1998 Snijders2004a">(<a href="references.html#ref-Goldstein1995a" role="doc-biblioref">Goldstein, 1995</a>; <a href="references.html#ref-kreft1998" role="doc-biblioref">Kreft &amp; Leeuw, 1998</a>; <a href="references.html#ref-raudenbush2002hierarchical" role="doc-biblioref">Raudenbush &amp; Bryk, 2002</a>; <a href="references.html#ref-Snijders2004a" role="doc-biblioref">Snijders &amp; Bosker, 2004</a>)</span>.</p>
 <p>Multilevel models are growing in popularity in Psychology as well as in Education because they can be used to account for systematic and random sources of variance in observed outcomes when data are hierarchically structured. A hierarchical structure is present in data when a researcher: tests participants who belong to different groups like classes, clinics or schools; presents a sample of stimuli to each member of a sample of participants; or makes repeated observations for each participant over a series of test occasions.</p>
-<p>In these circumstances, the application of traditional analytic methods has typically required the researcher to aggregate their data (e.g., averaging the responses made by a participant to different stimuli) or to ignore the hierarchical structure in their data, (e.g., analyzing the responses made by some pupils while ignoring the fact that the pupils were tested in different classes). But the application of traditional analysis approaches (e.g., regression, ANOVA) to multilevel structured data extracts scientific costs (Baayen et al., 2008; Barr, Levy, Scheepers, &amp; Tily, 2013).</p>
+<p>In these circumstances, the application of traditional analytic methods has typically required the researcher to aggregate their data (e.g., averaging the responses made by a participant to different stimuli) or to ignore the hierarchical structure in their data, (e.g., analyzing the responses made by some pupils while ignoring the fact that the pupils were tested in different classes). But the application of traditional analysis approaches (e.g., regression, ANOVA) to multilevel structured data extracts scientific costs <span class="citation" data-cites="Baayen2008 barr2013">(<a href="references.html#ref-Baayen2008" role="doc-biblioref">Baayen et al., 2008</a>; <a href="references.html#ref-barr2013" role="doc-biblioref">Barr et al., 2013</a>)</span>.</p>
 <p>Ignoring structure by ignoring or averaging over sources of variability like differences between classes, participants, or stimulus items can mean that analyses are less sensitive because they fail to fully account for error variance. Where differences between classes, participants or stimuli include variation in the impact of experimental variables, e.g., individual differences in response to an experimental manipulation, the application of traditional methods can be associated with an increased risk of false positives in discovery. Yet these costs need no longer be suffered because the capacity to perform multilevel modeling is now readily accessible.</p>
 </section>
 <section id="sec-multilevel-practical-application" class="level3" data-number="3.9.3">
@@ -1133,7 +1134,7 @@ Tip
 </div>
 <section id="sec-multi-discussion-two-step" class="level4" data-number="3.9.9.1">
 <h4 data-number="3.9.9.1" class="anchored" data-anchor-id="sec-multi-discussion-two-step"><span class="header-section-number">3.9.9.1</span> Discussion: slopes-as-outcomes analyses as a common approach</h4>
-<p>The ‘slopes-as-outcomes’ approach is quite common and can be found in a number of papers in the psychological and educational research literatures. An influential example can be found in Balota et al.’s (2004) of the analysis of psycholinguistic effects in older and younger adults. Balota et al.&nbsp;(2004) wanted to examine if or how effects of variables like word frequency, on reading response latencies, were different in different age groups. To do this, they first estimated the effect of the (word-level) psycholinguistic variables in separate linear model (multple regressions) for each adult. They then took the estimated coefficients as the dependent variable (slopes-as-outcomes) for a second analysis in which they tested the effect of age group on variation in the estimated coefficients (see Lorch &amp; Myers, 1990, for a discussion of the approach).</p>
+<p>The ‘slopes-as-outcomes’ approach is quite common and can be found in a number of papers in the psychological and educational research literatures. An influential example can be found in the report by <span class="citation" data-cites="balota2004">Balota et al. (<a href="references.html#ref-balota2004" role="doc-biblioref">2004</a>)</span> of their analysis of psycholinguistic effects in older and younger adults. <span class="citation" data-cites="balota2004">Balota et al. (<a href="references.html#ref-balota2004" role="doc-biblioref">2004</a>)</span> wanted to examine if or how effects of variables like word frequency, on reading response latencies, were different in different age groups. To do this, they first estimated the effect of the (word-level) psycholinguistic variables in separate linear model (multple regressions) for each adult. They then took the estimated coefficients as the dependent variable (slopes-as-outcomes) for a second analysis in which they tested the effect of age group on variation in the estimated coefficients (see <span class="citation" data-cites="Lorch1990a">Lorch &amp; Myers (<a href="references.html#ref-Lorch1990a" role="doc-biblioref">1990</a>)</span> for a discussion of the approach).</p>
 <p>You may be asked to do this. I would advise you against it because there is a better way, as we see next.</p>
 </section>
 </section>
@@ -1400,11 +1401,29 @@ Note
 <div id="ref-Baayen2008" class="csl-entry" role="doc-biblioentry">
 Baayen, R. H., Davidson, D. J., &amp; Bates, D. M. (2008). Mixed-effects modeling with crossed random effects for subjects and items. <em>Journal of Memory and Language</em>, <em>59</em>(4), 390–412. <a href="https://doi.org/10.1016/j.jml.2007.12.005">https://doi.org/10.1016/j.jml.2007.12.005</a>
 </div>
+<div id="ref-balota2004" class="csl-entry" role="doc-biblioentry">
+Balota, D. A., Cortese, M. J., Sergent-Marshall, S. D., Spieler, D. H., &amp; Yap, M. J. (2004). Visual Word Recognition of Single-Syllable Words. <em>Journal of Experimental Psychology: General</em>, <em>133</em>(2), 283–316. <a href="https://doi.org/10.1037/0096-3445.133.2.283">https://doi.org/10.1037/0096-3445.133.2.283</a>
+</div>
+<div id="ref-barr2013" class="csl-entry" role="doc-biblioentry">
+Barr, D. J., Levy, R., Scheepers, C., &amp; Tily, H. J. (2013). Random effects structure for confirmatory hypothesis testing: Keep it maximal. <em>Journal of Memory and Language</em>, <em>68</em>(3), 255–278. <a href="https://doi.org/10.1016/j.jml.2012.11.001">https://doi.org/10.1016/j.jml.2012.11.001</a>
+</div>
+<div id="ref-Goldstein1995a" class="csl-entry" role="doc-biblioentry">
+Goldstein, H. (1995). <em>Multilevel statistical models</em>. Edward Arnold.
+</div>
 <div id="ref-golino2014" class="csl-entry" role="doc-biblioentry">
 Golino, H., &amp; Gomes, C. (2014). Psychology data from the <span>“</span>BAFACALO project: The Brazilian Intelligence Battery based on two state-of-the-art models <span></span> Carroll<span>’</span>s Model and the CHC model<span>”</span>. <em>Journal of Open Psychology Data</em>, <em>2</em>(1), e6. <a href="https://doi.org/10.5334/jopd.af">https://doi.org/10.5334/jopd.af</a>
 </div>
 <div id="ref-kreft1998" class="csl-entry" role="doc-biblioentry">
 Kreft, I., &amp; Leeuw, J. de. (1998). <em>Introducing multilevel modeling</em> (D. Wright, Ed.). Sage Publications.
+</div>
+<div id="ref-Lorch1990a" class="csl-entry" role="doc-biblioentry">
+Lorch, R. F., &amp; Myers, J. L. (1990). Regression analyses of repeated measures data in cognitive research. <em>Journal of Experimental Psychology: Learning, Memory and Cognition</em>, <em>16</em>(1), 149–157.
+</div>
+<div id="ref-raudenbush2002hierarchical" class="csl-entry" role="doc-biblioentry">
+Raudenbush, S. W., &amp; Bryk, A. S. (2002). <em>Hierarchical linear models: Applications and data analysis methods</em> (Vol. 1). sage.
+</div>
+<div id="ref-Snijders2004a" class="csl-entry" role="doc-biblioentry">
+Snijders, T. A. B., &amp; Bosker, R. J. (2004). <em>Multilevel analysis: An introduction to basic and advanced multilevel modeling</em>. Sage Publications Ltd.
 </div>
 </div>
 </section>
