@@ -9,19 +9,19 @@ book:
   date: "2023-02-08"
   chapters:
     - index.qmd
-    - part: "Making the most of R"
+    - part: "MAKING THE MOST OF R"
     - knowledge-ecosystem.qmd
     - visualization.qmd
-    - part: "Models"
+    - part: "MODELS"
     - 01-multilevel.qmd
     - 02-mixed.qmd
     - 03-mixed.qmd
     - 04-glmm.qmd
-    - part: "Writing research reports"
+    - part: "WRITING ABOUT RESEARCH"
     - intro.qmd
     - what.qmd
     - how.qmd
-    - part: "End"
+    - part: "END"
     - summary.qmd
     - references.qmd
       
