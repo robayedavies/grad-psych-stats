@@ -397,7 +397,7 @@ Because I say that we are interested in predicting English grades then, by conve
 
 I have added a line using `geom_smooth()` in red to indicate the trend of the potential association between variation in Portuguese grades and variation in English grades.
 
-Figure @fig-brazil-all suggests that children with higher grades in Portuguese tend, on average, to also have higher grades in English.
+@fig-brazil-all suggests that children with higher grades in Portuguese tend, on average, to also have higher grades in English.
 
 #### Exercise -- edit plots {#sec-multi-exx-edit-plots}
 
