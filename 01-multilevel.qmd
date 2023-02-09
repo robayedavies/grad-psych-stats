@@ -1,4 +1,4 @@
-# Introduction to multilevel data
+# Introduction to multilevel data {#sec-intro-multilevel}
 
 ```{r libraries-hide}
 #| warning: false
