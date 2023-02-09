@@ -563,7 +563,7 @@ In practice, we could capture the variation between classes by performing a **tw
 -   First, we estimate the coefficient of the 'Portuguese' effect for each class separately. We do multiple (per-class) analyses. In each of these analyses, we estimate the coefficient looking only at the data for one class.
 -   Second, we can take those per-class coefficients as the outcome variable in a 'slopes-as-outcomes analysis' to examine if the per-class estimates of the experimental effect are reliably different from zero or, more usefully, if the per-class estimates vary in relation to some explanatory variable like teacher skill.
 
-The problem with the approach is apparent in @fig-pointclass. @fig-pointclass shows the estimated intercept and coefficient of the slope of the 'Portuguese' effect for each class, when we have analyzed the data for each class in a separate linear model.
+The problem with the approach is apparent in @fig-pointclass: the figure shows the estimated intercept and coefficient of the slope of the 'Portuguese' effect for each class, when we have analyzed the data for each class in a separate linear model.
 
 The estimate for each class is shown as a black dot. The standard error of the estimate is shown as a black vertical line, shown above and below a point.
 
