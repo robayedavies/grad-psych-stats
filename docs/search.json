@@ -606,7 +606,7 @@
     "href": "01-multilevel.html#sec-multi-targets",
     "title": "3  Introduction to multilevel data",
     "section": "3.5 Targets",
-    "text": "3.5 Targets\nOur learning objectives include the development of key concepts and skills.\n\nconcepts – multilevel data and multilevel modeling\nskills\n\nvisualization – examine data within classes (sampling groups)\n\n\nrun linear models over all data and within each class\n\n\nuse the lmer() function to fit models of multilevel data\n\n\nWe are just getting started. Our plan will be to build depth and breadth in understanding as we progress over the next few weeks."
+    "text": "3.5 Targets\nOur learning objectives include the development of key concepts and skills.\n\nconcepts – multilevel data and multilevel modeling\nskills\n\n\nvisualization – examine data within classes (sampling groups)\nrun linear models over all data and within each class\nuse the lmer() function to fit models of multilevel data\n\nWe are just getting started. Our plan will be to build depth and breadth in understanding as we progress over the next few weeks."
   },
   {
     "objectID": "01-multilevel.html#sec-multi-guide",
