@@ -15,7 +15,7 @@ library(tidyverse)
 
 ## Motivations {#sec-multi-motivations}
 
-This week, we shall start to develop skills in using a method or approach that is essential in modern data analysis: *multilevel modeling*. We are going to invest four weeks in working on this approach. This investment is designed to give you a specific, important, advantage in your work as a psychologist, or as someone who produces or consumes psychological research.
+In this chapter, we shall start to develop skills in using a method or approach that is essential in modern data analysis: *multilevel modeling*. We are going to invest four weeks in working on this approach. This investment is designed to give you a specific, important, advantage in your work as a psychologist, or as someone who produces or consumes psychological research.
 
 ::: callout-note
 Multilevel models: *why* do we need to do this? - Four weeks is a lot of time to spend on one method.
@@ -36,7 +36,7 @@ Multilevel models are also known as hierarchical models or linear mixed-effects 
 I will only use the terms *multilevel* or *linear mixed-effects* models.
 
 ::: callout-warning
--   This week, we emphasize the multilevel perspective but, to anticipate future development, we will come to think in terms of *mixed-effects models*.
+-   In this chapter, we emphasize the multilevel perspective but, to anticipate future development, we will come to think in terms of *mixed-effects models*.
 :::
 
 ## Challenges {#sec-multi-challenges}
@@ -76,9 +76,7 @@ We are *not* going to take a mathematical approach to learning about multilevel 
 Our learning objectives include the development of key concepts and skills.
 
 1.  **concepts** -- how data can have multilevel structures and what this requires in models
-2.  **skills**
-
-<!-- -->
+2.  **skills** -- where skills comprise the capacity to
 
 i.  use visualization to examine observations within groups
 ii. run linear models over all data and within each class
@@ -118,7 +116,7 @@ The file is located in a .zip folder called `data-01-multilevel`. The data file 
 -   `01-multilevel-workbook.R` the workbook you will need to do the practical exercises.
 -   `01-multilevel-workbook-answers.R` with answers to questions and code for exercises.
 
-### Read in the data file -- so that you can access the data -- by using the load() function {#sec-multi-data-load}
+### Read in the data file using the load() function {#sec-multi-data-load}
 
 You can read the `BAFACALO_DATASET.RData` file into the R workspace or environment using the following code.
 
@@ -157,9 +155,9 @@ summary(BAFACALO_DATASET)
 
 When you inspect the file, you will see that it includes a large number of variables, but we only really care about those we will use in our exercises:
 
--   `participant_id` the participant identity code for each child
--   `class_number` the class identity code for the school class for each child
--   `portuguese`, `english`, `math`, and `physics` the score for each child in subject class attainment measures
+-   `participant_id` gives the participant identity code for each child;
+-   `class_number` gives the class identity code for the school class for each child;
+-   and values in `portuguese`, `english`, `math`, and `physics` columns give the score for each child in subject class attainment measures.
 
 You can see that I am not explaining the variables in great depth. For our aims, we do not need more detailed information but please do read the data article if you wish to find out more.
 
@@ -188,19 +186,23 @@ brazil <- BAFACALO_DATASET %>%
                       )
 ```
 
+::: callout-tip
+Notice the code is written to create the new selected dataset and, at the same time, gave it a more usable (shorter) name, with `brazil <- BAFACALO_DATASET ...`
+:::
+
 Inspect the data to see what you have.
 
 ```{r includes-missing}
 summary(brazil)
 ```
 
-::: callout-tip
-Notice the code is written to create the new selected dataset and, at the same time, gave it a more usable (shorter) name, with `brazil <- BAFACALO_DATASET ...`
-:::
-
 ### Remove missing values {#sec-multi-data-remove-na}
 
-If you look at the results of the selection, you can see that there are missing values, written as e.g. `NA's 62` at the bottom of each summary of each variable (if a variable column includes missing values). (Remember that in R `NA` means "not available" i.e. missing.)
+If you look at the results of the selection, you can see that there are missing values, written as e.g. `NA's 62` at the bottom of each summary of each variable (if a variable column includes missing values). 
+
+::: callout-tip
+Remember that in R `NA` means "not available" i.e. missing.
+:::
 
 We will need to get rid of the missing values. It is simpler to do this at the start rather than wait for an error message, later, when some arithmetic function tells us it cannot give us a result because there are `NAs` present.
 
@@ -216,9 +218,11 @@ If you then look at a summary of the data again then you will see that the `NAs`
 summary(brazil)
 ```
 
-### Getting R to treat a variable as a type object of the kind required -- using the as...() family of functions {#sec-multi-data-coerce}
+### Getting R to treat a variable as an object of the type required using the `as...()` family of functions {#sec-multi-data-coerce}
 
-But if you look closely at the output from `summary(brazil)` you will see that the `portuguese` and `english` variables are summarized in the way that R summarizes factors. When you ask R to summarize factors, R gives you a count of the number of observations associated with each factor level, that is, each category in each variable. Here, it is treating a grade score like $100$ in `english` as a category (like you might treat $dog$ as a category of pets), and you can see that the count shows you that 17 children were recorded as having scored 100 in their class. We do not want numeric variables like subject grades (e.g. children's grades in English) treated as categorical variables, factors.
+But if you look closely at the output from `summary(brazil)` you will see that the `portuguese` and `english` variables are summarized in the way that R summarizes factors. 
+
+When you ask R to summarize factors, R gives you a count of the number of observations associated with each factor level, that is, each category in each variable. Here, it is treating a grade score like $100$ in `english` as a category (like you might treat $dog$ as a category of pets), and you can see that the count shows you that 17 children were recorded as having scored 100 in their class. We do not want numeric variables like subject grades (e.g. children's grades in English) treated as categorical variables, factors.
 
 You can also see that R gives you a numeric summary of the recorded values in the `participant_id` variable. This makes no sense because the identity code numbers are (presumably) assigned at random so identity numbers provide no useful numeric information for us. We do not want this either.
 
@@ -245,7 +249,7 @@ brazil <- brazil %>%
          across(c(class_number, participant_id), as.factor)) 
 ```
 
-If you now look at the summary of the data, you can see that R will give you mean etc. for the subject or class score variables, showing that it is now treating them as numeric variables. In comparison, R gives you counts of the numbers of observations for each level (category) of categorical or nominal variables like `participant_id`.
+If you now look at the summary of the data, you can see that R will give you mean etc. for the subject class score variables e.g. `english`, showing that it is now treating them as numeric variables. In comparison, R gives you counts of the numbers of observations for each level (category) of categorical or nominal variables like `participant_id`.
 
 ```{r coerced}
 summary(brazil)
@@ -253,11 +257,13 @@ summary(brazil)
 
 #### Coercion: a quick lesson {#sec-multi-coercion}
 
-R treats things like variables as vectors. A vector can be understood to be a set or list of elements, things like numbers of words.
+R treats things like variables as vectors. A vector can be understood to be a set or list of elements: things like numbers of words.
 
-R gives each vector a type (factor, numeric etc.) which helps to inform different functions how to handle that vector. Usually, R assigns type correctly but sometimes it does not. We can use what is called *coercion* to force R to assign the correct type to a variable.
+R gives each vector a **type** (factor, numeric etc.) which helps to inform different functions how to handle that vector. Usually, R assigns type correctly but sometimes it does not. We can use what is called *coercion* to force R to assign the correct type to a variable.
 
-It is more efficient to do this at the start. Normally, I would use `read_csv()` from `tidyverse` and assign type to variable using `col_types()` specification. (See [here](https://readr.tidyverse.org/) for more information and an example.) But it is useful to learn what you need to do if you need to change the way a variable is treated after you have got the data into the R environment.
+It is more efficient to do this at the start of an analysis workflow.
+
+Normally, I would use `read_csv()` from `tidyverse` and assign type to variable using `col_types()` specification. (See [here](https://readr.tidyverse.org/) for more information and an example.) But it is useful to learn what you need to do if you need to change the way a variable is treated after you have got the data into the R environment.
 
 #### Exercise -- experiment with coercion {#sec-multi-exx-coercion}
 
@@ -270,7 +276,7 @@ is.numeric(brazil$english)
 is.character(brazil$english)
 ```
 
-And you can coerce variables so that they are treated as of certain types.
+And you can coerce variables so that they are treated as having certain types.
 
 ```{r coercion-exx}
 #| eval: false
@@ -281,28 +287,32 @@ brazil$english <- as.character(brazil$english)
 
 Now try it out.
 
-1.  Test out variable type using `is...()` for some of the variables
-2.  Test out coercion -- and its results -- using `as...()` for some of the variables
-3.  Look at the results using `summary()`
+1.  Test out type for different variables using `is...()` for some of the variables.
+2.  Test out coercion -- and its results -- using `as...()` for some of the variables.
+3.  Look at the results using `summary()`.
 
-## Introduction to multilevel models {#sec-multilevel-ideas-intro}
+## Introduction to thinking about multilevel models {#sec-multilevel-ideas-intro}
 
 ### Main ideas -- Phenomena and data sets in the social sciences often have a multilevel structure {#sec-multilevel-ideas-main}
 
 We (Psychologists) often adopt *Repeated Measures* or *Clustered* designs in our studies, and these designs yield data that have a multilevel structure. Examples of research which results in data with a multilevel structure include:
 
--   Studies where we test the same people multiple times, maybe in developmental or learning longitudinal investigations;
+-   Studies where we test the same people multiple times, maybe in developmental or longitudinal investigations;
 -   Intervention, learning or treatment studies where we need to make pre- and post-treatment comparisons;
 -   Studies where we present multiple stimuli and everyone sees the same stimuli;
--   Studies that involve multi-stage sampling;
+-   Studies that involve multi-stage sampling e.g. selecting a sample of classes or schools then testing a sample of children within classes or schools; or selecting a sample of clinics then testing a sample of patients within clinics.
 
--- Finding (sample) classes or schools -- then testing (sample) children within classes or schools; -- Or finding (sample) clinics -- then testing (sample) patients within clinics.
+The key insight to keep in mind when considering the analysis of such data is that observations are clustered and are *not independent*: they are correlated. What is correlated with what?
 
-The key insight to keep in mind when considering the analysis of such data is that observations are clustered and are *not independent*. They are correlated. What is correlated with what?
+Imagine testing a number of subjects by giving them all the same test. In that test, you might present them all with the same stimuli over a series of trials, so that everybody sees the same set of stimuli. Do you think an observed response recorded for any one individual will be uncorrelated i.e. independent of that person's other responses?
 
-Imagine testing a number of subjects by giving them all the same test. In that test, you might present them all with the same stimuli over a series of trials, so that everybody sees the same set of stimuli. Do you think an observed response recorded for any one individual will be uncorrelated i.e. independent of that person's other responses? People are different and one usually finds that a slow or inaccurate subject is slow or inaccurate for most of their responses. That means that if you have information about one of their responses you can predict, in part, what the time or accuracy of one of their other responses would be. That capacity to predict one response from another is what we mean when we talk about a lack of independence.
+People are different and one usually finds that a slow or inaccurate subject is slow or inaccurate for most of their responses. That means that if you have information about one of their responses you can predict, in part, what the time or accuracy of one of their other responses would be. That capacity to predict one response from another is what we mean when we talk about a lack of independence.
 
-Alternatively, imagine going to test children in a school. Will the children in one class be more like each other than they are like children in other classes? In other words, is there an effect of class -- maybe due to the approach of the teacher, the effect of the class environment etc. -- so that outcomes for children in a class are correlated with each other? We are talking, here, about a really quite general property of data collected in certain, very widely used, designs in Psychology: the *clustering or hierarchical ordering* of data.
+Alternatively, imagine going to test children in a school. Will the children in one class be more like each other than they are like children in other classes? In other words, is there an effect of class -- maybe due to the approach of the teacher, the effect of the class environment etc. -- so that outcomes for children in a class are correlated with each other? 
+
+::: callout-important
+We are talking, here, about a really quite general property of data collected in certain, very widely used, designs in Psychology: the *clustering or hierarchical ordering* of data.
+:::
 
 This week, we will see that we must deal with the dependence of observations within a class, where the observed responses were made about the different pupils tested in a class, for a number of different classes.
 
