@@ -300,7 +300,7 @@ We (Psychologists) often adopt *Repeated Measures* or *Clustered* designs in our
 -   Studies where we test the same people multiple times, maybe in developmental or longitudinal investigations;
 -   Intervention, learning or treatment studies where we need to make pre- and post-treatment comparisons;
 -   Studies where we present multiple stimuli and everyone sees the same stimuli;
--   Studies that involve multi-stage sampling e.g. selecting a sample of classes or schools then testing a sample of children within classes or schools; or selecting a sample of clinics then testing a sample of patients within clinics.
+-   Studies that involve multi-stage sampling e.g. selecting a sample of classes or schools then testing a sample of children within each classes or within each school.
 
 The key insight to keep in mind when considering the analysis of such data is that observations are clustered and are *not independent*: they are correlated. What is correlated with what?
 
@@ -328,12 +328,28 @@ Ignoring structure by ignoring or averaging over sources of variability like dif
 
 ### Practical applications: children sampled within classes {#sec-multilevel-practical-application}
 
-If a researcher tests participants belonging to different groups, e.g., records the educational attainment of different children recruited from different classes in a school, the test scores for the participants are observations that occupy the lowest level of a hierarchy. In multilevel modeling, those observations are understood to be nested within higher-level sampling units, here, the classes. We can say that the children are sampled from the population of children. And the classes are sampled from the population of classes. Critically, we recognize that the children's test scores are **nested within the classes**. This multi-stage sampling has important consequences, as we shall see.
+If a researcher tests participants belonging to different groups, e.g., records the educational attainment of different children recruited from different classes in a school, the test scores for the participants are observations that occupy the lowest level of a hierarchy (see @fig-hierarchy). In multilevel modeling, those observations are understood to be nested within higher-level sampling units, here, the classes. We can say that the children are sampled from the population of children. And the classes are sampled from the population of classes. Critically, we recognize that the children's test scores are **nested within the classes**. This multi-stage sampling has important consequences, as we shall see.
+
+```{dot}
+//| fig-width: 5
+//| label: fig-hierarchy
+//| fig-cap: Multilevel or hierarchically structured data
+//| fig-alt: The diagram shows a hierarchy of nodes. At the top, node school has arrows down to nodes class.1 and class.2. Nodes class.1 and class.2 are on the same level. class.1 has arrows to nodes child.1, child.2 and child.3. class.2 has arrows to nodes child.4, child.5 and child.6. 
+
+digraph D {
+
+  school -> {class.1, class.2}
+  
+  class.1 -> {child.1, child.2, child.3}
+
+  class.2 -> {child.4, child.5, child.6}
+
+}
+```
 
 We are going to be working with the school data collected by @golino2014 in Brazil, so let's take another look at that dataset. Figure @fig-golino2014 presents the first 25 rows of the selected-variables `brazil` dataset. (I have arranged the rows by class number ID.) You can see that there are multiple rows of data for each `class_number`, one row for each child, with multiple children (you can see different `participant_id` numbers). This presentation of the dataset illustrates in practical terms -- what you can actually see when you look at your data -- what multilevel structured data can look like.
 
-```{r show-arrange}
-#| echo: false
+```{r}
 #| label: fig-golino2014
 #| fig-cap: The first 25 rows of the selected-variables `brazil` dataset
 brazil %>%

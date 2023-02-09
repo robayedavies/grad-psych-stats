@@ -676,7 +676,7 @@ Tip
 <li>Studies where we test the same people multiple times, maybe in developmental or longitudinal investigations;</li>
 <li>Intervention, learning or treatment studies where we need to make pre- and post-treatment comparisons;</li>
 <li>Studies where we present multiple stimuli and everyone sees the same stimuli;</li>
-<li>Studies that involve multi-stage sampling e.g.&nbsp;selecting a sample of classes or schools then testing a sample of children within classes or schools; or selecting a sample of clinics then testing a sample of patients within clinics.</li>
+<li>Studies that involve multi-stage sampling e.g.&nbsp;selecting a sample of classes or schools then testing a sample of children within each classes or within each school.</li>
 </ul>
 <p>The key insight to keep in mind when considering the analysis of such data is that observations are clustered and are <em>not independent</em>: they are correlated. What is correlated with what?</p>
 <p>Imagine testing a number of subjects by giving them all the same test. In that test, you might present them all with the same stimuli over a series of trials, so that everybody sees the same set of stimuli. Do you think an observed response recorded for any one individual will be uncorrelated i.e.&nbsp;independent of that person’s other responses?</p>
@@ -706,9 +706,110 @@ Important
 </section>
 <section id="sec-multilevel-practical-application" class="level3" data-number="3.9.3">
 <h3 data-number="3.9.3" class="anchored" data-anchor-id="sec-multilevel-practical-application"><span class="header-section-number">3.9.3</span> Practical applications: children sampled within classes</h3>
-<p>If a researcher tests participants belonging to different groups, e.g., records the educational attainment of different children recruited from different classes in a school, the test scores for the participants are observations that occupy the lowest level of a hierarchy. In multilevel modeling, those observations are understood to be nested within higher-level sampling units, here, the classes. We can say that the children are sampled from the population of children. And the classes are sampled from the population of classes. Critically, we recognize that the children’s test scores are <strong>nested within the classes</strong>. This multi-stage sampling has important consequences, as we shall see.</p>
+<p>If a researcher tests participants belonging to different groups, e.g., records the educational attainment of different children recruited from different classes in a school, the test scores for the participants are observations that occupy the lowest level of a hierarchy (see <a href="#fig-hierarchy">Figure&nbsp;<span>3.2</span></a>). In multilevel modeling, those observations are understood to be nested within higher-level sampling units, here, the classes. We can say that the children are sampled from the population of children. And the classes are sampled from the population of classes. Critically, we recognize that the children’s test scores are <strong>nested within the classes</strong>. This multi-stage sampling has important consequences, as we shall see.</p>
+<div class="cell" data-fig-width="5">
+<div class="cell-output-display">
+<div id="fig-hierarchy" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p>
+<svg width="480" height="480" viewbox="0.00 0.00 284.35 260.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 256)">
+<title>
+D
+</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-256 280.35,-256 280.35,4 -4,4"></polygon> <!-- school --> <g id="node1" class="node">
+<title>
+school
+</title>
+<ellipse fill="none" stroke="black" cx="123" cy="-234" rx="36.5" ry="18"></ellipse> <text text-anchor="middle" x="123" y="-229.8" font-family="Times,serif" font-size="14.00">school</text> </g> <!-- class --> <g id="node2" class="node">
+<title>
+class
+</title>
+<ellipse fill="none" stroke="black" cx="65" cy="-162" rx="29.62" ry="18"></ellipse> <text text-anchor="middle" x="65" y="-157.8" font-family="Times,serif" font-size="14.00">class</text> </g> <!-- school&#45;&gt;class --> <g id="edge1" class="edge">
+<title>
+school-&gt;class
+</title>
+<path fill="none" stroke="black" d="M109.84,-217.12C102.24,-207.95 92.56,-196.26 84.13,-186.09"></path> <polygon fill="black" stroke="black" points="86.79,-183.81 77.71,-178.34 81.4,-188.27 86.79,-183.81"></polygon> </g> <!-- .1 --> <g id="node3" class="node">
+<title>
+.1
+</title>
+<ellipse fill="none" stroke="black" cx="186" cy="-162" rx="27" ry="18"></ellipse> <text text-anchor="middle" x="186" y="-157.8" font-family="Times,serif" font-size="14.00">.1</text> </g> <!-- school&#45;&gt;.1 --> <g id="edge2" class="edge">
+<title>
+school-&gt;.1
+</title>
+<path fill="none" stroke="black" d="M137.3,-217.12C145.74,-207.73 156.57,-195.7 165.87,-185.36"></path> <polygon fill="black" stroke="black" points="168.53,-187.64 172.62,-177.86 163.33,-182.96 168.53,-187.64"></polygon> </g> <!-- .2 --> <g id="node4" class="node">
+<title>
+.2
+</title>
+<ellipse fill="none" stroke="black" cx="119" cy="-90" rx="27" ry="18"></ellipse> <text text-anchor="middle" x="119" y="-85.8" font-family="Times,serif" font-size="14.00">.2</text> </g> <!-- school&#45;&gt;.2 --> <g id="edge3" class="edge">
+<title>
+school-&gt;.2
+</title>
+<path fill="none" stroke="black" d="M122.52,-215.87C121.84,-191.67 120.58,-147.21 119.77,-118.39"></path> <polygon fill="black" stroke="black" points="123.26,-118.09 119.48,-108.19 116.27,-118.28 123.26,-118.09"></polygon> </g> <!-- .1&#45;&gt;.1 --> <g id="edge4" class="edge">
+<title>
+.1-&gt;.1
+</title>
+<path fill="none" stroke="black" d="M205.9,-174.43C218.69,-177.68 231,-173.53 231,-162 231,-153.62 224.5,-149.14 216.04,-148.56"></path> <polygon fill="black" stroke="black" points="215.5,-145.1 205.9,-149.57 216.19,-152.07 215.5,-145.1"></polygon> </g> <!-- .1&#45;&gt;.2 --> <g id="edge5" class="edge">
+<title>
+.1-&gt;.2
+</title>
+<path fill="none" stroke="black" d="M172.12,-146.5C162.86,-136.83 150.53,-123.94 140.07,-113.02"></path> <polygon fill="black" stroke="black" points="142.31,-110.29 132.86,-105.49 137.25,-115.13 142.31,-110.29"></polygon> </g> <!-- child --> <g id="node5" class="node">
+<title>
+child
+</title>
+<ellipse fill="none" stroke="black" cx="246" cy="-18" rx="30.19" ry="18"></ellipse> <text text-anchor="middle" x="246" y="-13.8" font-family="Times,serif" font-size="14.00">child</text> </g> <!-- .1&#45;&gt;child --> <g id="edge6" class="edge">
+<title>
+.1-&gt;child
+</title>
+<path fill="none" stroke="black" d="M200.19,-146.44C209.19,-136.41 220.34,-122.35 227,-108 236.12,-88.35 240.92,-64.22 243.41,-46.05"></path> <polygon fill="black" stroke="black" points="246.89,-46.47 244.63,-36.11 239.94,-45.61 246.89,-46.47"></polygon> </g> <!-- .3 --> <g id="node6" class="node">
+<title>
+.3
+</title>
+<ellipse fill="none" stroke="black" cx="191" cy="-90" rx="27" ry="18"></ellipse> <text text-anchor="middle" x="191" y="-85.8" font-family="Times,serif" font-size="14.00">.3</text> </g> <!-- .1&#45;&gt;.3 --> <g id="edge7" class="edge">
+<title>
+.1-&gt;.3
+</title>
+<path fill="none" stroke="black" d="M187.24,-143.7C187.79,-135.98 188.45,-126.71 189.06,-118.11"></path> <polygon fill="black" stroke="black" points="192.56,-118.33 189.78,-108.1 185.57,-117.83 192.56,-118.33"></polygon> </g> <!-- .2&#45;&gt;child --> <g id="edge8" class="edge">
+<title>
+.2-&gt;child
+</title>
+<path fill="none" stroke="black" d="M139.12,-77.91C159.62,-66.61 191.68,-48.94 215.34,-35.9"></path> <polygon fill="black" stroke="black" points="217.2,-38.87 224.27,-30.98 213.82,-32.74 217.2,-38.87"></polygon> </g> <!-- .4 --> <g id="node7" class="node">
+<title>
+.4
+</title>
+<ellipse fill="none" stroke="black" cx="27" cy="-18" rx="27" ry="18"></ellipse> <text text-anchor="middle" x="27" y="-13.8" font-family="Times,serif" font-size="14.00">.4</text> </g> <!-- .2&#45;&gt;.4 --> <g id="edge9" class="edge">
+<title>
+.2-&gt;.4
+</title>
+<path fill="none" stroke="black" d="M101.7,-75.83C87.82,-65.27 68.14,-50.3 52.46,-38.37"></path> <polygon fill="black" stroke="black" points="54.3,-35.38 44.23,-32.11 50.07,-40.95 54.3,-35.38"></polygon> </g> <!-- .5 --> <g id="node8" class="node">
+<title>
+.5
+</title>
+<ellipse fill="none" stroke="black" cx="99" cy="-18" rx="27" ry="18"></ellipse> <text text-anchor="middle" x="99" y="-13.8" font-family="Times,serif" font-size="14.00">.5</text> </g> <!-- .2&#45;&gt;.5 --> <g id="edge10" class="edge">
+<title>
+.2-&gt;.5
+</title>
+<path fill="none" stroke="black" d="M114.16,-72.05C111.9,-64.14 109.15,-54.54 106.63,-45.69"></path> <polygon fill="black" stroke="black" points="109.91,-44.44 103.8,-35.79 103.18,-46.37 109.91,-44.44"></polygon> </g> <!-- .6 --> <g id="node9" class="node">
+<title>
+.6
+</title>
+<ellipse fill="none" stroke="black" cx="171" cy="-18" rx="27" ry="18"></ellipse> <text text-anchor="middle" x="171" y="-13.8" font-family="Times,serif" font-size="14.00">.6</text> </g> <!-- .2&#45;&gt;.6 --> <g id="edge11" class="edge">
+<title>
+.2-&gt;.6
+</title>
+<path fill="none" stroke="black" d="M130.54,-73.46C137.27,-64.4 145.9,-52.79 153.46,-42.61"></path> <polygon fill="black" stroke="black" points="156.34,-44.61 159.49,-34.49 150.72,-40.43 156.34,-44.61"></polygon> </g> </g>
+</svg>
+</p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.2: Multilevel or hierarchically structured data</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
 <p>We are going to be working with the school data collected by <span class="citation" data-cites="golino2014">Golino &amp; Gomes (<a href="references.html#ref-golino2014" role="doc-biblioref">2014</a>)</span> in Brazil, so let’s take another look at that dataset. Figure <span class="quarto-unresolved-ref">?fig-golino2014</span> presents the first 25 rows of the selected-variables <code>brazil</code> dataset. (I have arranged the rows by class number ID.) You can see that there are multiple rows of data for each <code>class_number</code>, one row for each child, with multiple children (you can see different <code>participant_id</code> numbers). This presentation of the dataset illustrates in practical terms – what you can actually see when you look at your data – what multilevel structured data can look like.</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>brazil <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">arrange</span>(<span class="fu">desc</span>(class_number)) <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   class_number participant_id portuguese english math physics
 1           M36             11         80      55   60      81
@@ -761,12 +862,12 @@ Note
 <p>Now, the first step we take in our development of understanding will be to <em>first ignore</em> the importance of the potential differences between classes.</p>
 <p>We can begin our analysis in order to address the research question by plotting the possible association between Portuguese and English grades. We shall create a scatterplot to do this, and we create the plot by running the following code and <em>ignoring group (class) membership</em>. In the following chunk of code, I pipe the <code>brazil</code> data using <code>%&gt;%</code> to <code>ggplot()</code> and then create the plot step-by-step, with each step separated by a <code>+</code> except for the last step.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>brazil <span class="sc">%&gt;%</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> portuguese, <span class="at">y =</span> english)) <span class="sc">+</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb19-4"><a href="#cb19-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">colour =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb19-5"><a href="#cb19-5"></a>  <span class="fu">xlab</span>(<span class="st">"Portuguese"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"English"</span>) <span class="sc">+</span></span>
-<span id="cb19-6"><a href="#cb19-6"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>brazil <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> portuguese, <span class="at">y =</span> english)) <span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">colour =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a>  <span class="fu">xlab</span>(<span class="st">"Portuguese"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"English"</span>) <span class="sc">+</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula 'y ~ x'</code></pre>
 </div>
@@ -774,15 +875,15 @@ Note
 <div id="fig-brazil-all" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="01-multilevel_files/figure-html/fig-brazil-all-1.png" class="img-fluid figure-img" alt="The figure shows scatterplot: each point represents the English and the Portuguese scores for one child. A red line drawn through the points indicates a trend such that higher Portuguese scores are associated with higher English scores." width="480"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3.2: Portuguese compared to English grades: each point represents the scores for one child</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.3: Portuguese compared to English grades: each point represents the scores for one child</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Remember that each child ID is associated with a pair of grades: their grade in English and their grade in Portuguese. Each point in <a href="#fig-brazil-all">Figure&nbsp;<span>3.2</span></a> represents the paired grade data for one child.</p>
+<p>Remember that each child ID is associated with a pair of grades: their grade in English and their grade in Portuguese. Each point in <a href="#fig-brazil-all">Figure&nbsp;<span>3.3</span></a> represents the paired grade data for one child.</p>
 <p>Because I say that we are interested in predicting English grades then, by convention, we map English grades to the height of the points (i.e.&nbsp;English grade differences are shown as differences on the y-axis). Because we are using Portuguese grades to do the predicting, by convention, we map Portuguese grades to the horizontal position of the points (i.e.&nbsp;Portuguese grade differences are shown as differences on the x-axis).</p>
 <p>I have added a line using <code>geom_smooth()</code> in red to indicate the trend of the potential association between variation in Portuguese grades and variation in English grades.</p>
-<p>Figure <a href="#fig-brazil-all">Figure&nbsp;<span>3.2</span></a> suggests that children with higher grades in Portuguese tend, on average, to also have higher grades in English.</p>
+<p>Figure <a href="#fig-brazil-all">Figure&nbsp;<span>3.3</span></a> suggests that children with higher grades in Portuguese tend, on average, to also have higher grades in English.</p>
 <section id="exercise-edit-plots" class="level4" data-number="3.9.4.1">
 <h4 data-number="3.9.4.1" class="anchored" data-anchor-id="exercise-edit-plots"><span class="header-section-number">3.9.4.1</span> Exercise – edit plots</h4>
 <p>Notice that when we write the code to produce the plot, we add arguments to the <code>geom_point()</code> and <code>geom_smooth()</code> function calls to adjust the appearance of the points and the smoother line. Notice, also, that we adjust the labels for the x-axis and y-axis and, finally, that we determine the overall appearance of the plot using the <code>theme_bw()</code> function call.</p>
@@ -797,7 +898,7 @@ Note
 </section>
 <section id="a-linear-model-ignores-the-multilevel-structure-in-the-data" class="level3" data-number="3.9.5">
 <h3 data-number="3.9.5" class="anchored" data-anchor-id="a-linear-model-ignores-the-multilevel-structure-in-the-data"><span class="header-section-number">3.9.5</span> A linear model ignores the multilevel structure in the data</h3>
-<p>Our plot indicates the relationship between English and Portuguese language grades, in <a href="#fig-brazil-all">Figure&nbsp;<span>3.2</span></a>, ignoring the fact that children in the sample belonged to different classes when they were tested. The plot shows us only information about the children and grades, with each point representing the observed English and Portuguese grades for each <span class="math inline">\(i\)</span> child.</p>
+<p>Our plot indicates the relationship between English and Portuguese language grades, in <a href="#fig-brazil-all">Figure&nbsp;<span>3.3</span></a>, ignoring the fact that children in the sample belonged to different classes when they were tested. The plot shows us only information about the children and grades, with each point representing the observed English and Portuguese grades for each <span class="math inline">\(i\)</span> child.</p>
 <p>Can we predict variation in English grades given information about children’s Portuguese grades? Are English grades related to Portuguese grades? We can estimate the relationship between English and Portuguese grades using a linear model in which the English grades variable is the <strong>outcome</strong> variable (or the dependent variable) and the Portuguese grades variable is the <strong>predictor</strong> or independent variable:</p>
 <p><span class="math display">\[
 y_i = \beta_0 + \beta_1X_i + e_i
@@ -810,7 +911,7 @@ y_i = \beta_0 + \beta_1X_i + e_i
 </ul>
 <p>As you have seen, the code for running a linear model corresponds transparently to the statistical model given in the formula.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(english <span class="sc">~</span> portuguese, <span class="at">data =</span> brazil))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(english <span class="sc">~</span> portuguese, <span class="at">data =</span> brazil))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -907,14 +1008,14 @@ Tip
 <p>The linear model ignores the higher-level structure, the distinction between classes. Does that matter?</p>
 <p>We can see the answer to that question if we inspect Figure @ref(fig:pporteng). We create the plot using the following chunk of code; we discuss that later, first reflecting on what the plot shows us.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>brazil <span class="sc">%&gt;%</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> portuguese, <span class="at">y =</span> english)) <span class="sc">+</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"darkgrey"</span>) <span class="sc">+</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> class_number) <span class="sc">+</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Portuguese"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"English"</span>) <span class="sc">+</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">25</span>,<span class="dv">50</span>,<span class="dv">75</span>)) <span class="sc">+</span> <span class="fu">scale_y_continuous</span>(<span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">50</span>,<span class="dv">100</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>brazil <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> portuguese, <span class="at">y =</span> english)) <span class="sc">+</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"darkgrey"</span>) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> class_number) <span class="sc">+</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Portuguese"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"English"</span>) <span class="sc">+</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">25</span>,<span class="dv">50</span>,<span class="dv">75</span>)) <span class="sc">+</span> <span class="fu">scale_y_continuous</span>(<span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">50</span>,<span class="dv">100</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1024,7 +1125,7 @@ y_{ij} = \gamma_0 + \gamma_1X_{ij} + U_{0j} + U_{1j}X_{ij} + e_{ij}
 <p>Let’s try it out.</p>
 <p>To use the <code>lmer()</code> function you need to make the <code>lme4</code> library available.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The model you are going to code will correspond to the statistical model that we have been discussing:</p>
 <span class="math display">\[\begin{equation}
@@ -1032,18 +1133,18 @@ y_{ij} = \gamma_0 + \gamma_1X_{ij} + U_{0j} + U_{1j}X_{ij} + e_{ij}
 \end{equation}\]</span>
 <p>And the code is written as follows.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>porto.lmer1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(english <span class="sc">~</span> portuguese <span class="sc">+</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                              (portuguese <span class="sc">+</span> <span class="dv">1</span><span class="sc">|</span>class_number),</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">data =</span> brazil)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>porto.lmer1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(english <span class="sc">~</span> portuguese <span class="sc">+</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>                              (portuguese <span class="sc">+</span> <span class="dv">1</span><span class="sc">|</span>class_number),</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">data =</span> brazil)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can see that the <code>lmer()</code> function call is closely similar to the <code>lm()</code> function call, with one critical exception, as I explain next.</p>
 <p>First, we have a chunk of code mostly similar to what we do when we do a regression analysis.</p>
 <p>Second, we have a bit that is specific to multilevel or mixed-effects models.</p>
 <p>If you run the model code as written – see the .R file for an example of the code – and it works then the code will be shown in the console window in R-Studio. To show the model results, you need to get a summary of the model, using the model name.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(porto.lmer1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(porto.lmer1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="exercise-fitting-linear-mixed-effects-models" class="level4" data-number="3.9.12.1">
 <h4 data-number="3.9.12.1" class="anchored" data-anchor-id="exercise-fitting-linear-mixed-effects-models"><span class="header-section-number">3.9.12.1</span> Exercise – fitting linear mixed-effects models</h4>
@@ -1055,7 +1156,7 @@ y_{ij} = \gamma_0 + \gamma_1X_{ij} + U_{0j} + U_{1j}X_{ij} + e_{ij}
 <h3 data-number="3.9.13" class="anchored" data-anchor-id="reading-the-lmer-results"><span class="header-section-number">3.9.13</span> Reading the <em>lmer</em> results</h3>
 <p>Now let’s take a look at the results.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(porto.lmer1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(porto.lmer1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML ['lmerMod']
 Formula: english ~ portuguese + (portuguese + 1 | class_number)
