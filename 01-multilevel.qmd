@@ -59,7 +59,7 @@ We cannot or should not avoid engaging with the ideas -- because we have to be a
 Multilevel models are a *general* form of linear model.
 :::
 
-Another way of saying this is: *linear models are a special form of multilevel models*. 
+Another way of saying this is: *linear models are a special form of multilevel models*.
 
 This is because linear models assume that observations are independent. We often cannot make this assumption, as we shall see. More generally, then, we do not assume that observations are independent and so we use multilevel models.
 
@@ -67,18 +67,21 @@ This is because linear models assume that observations are independent. We often
 
 We are *not* going to take a mathematical approach to learning about multilevel models. We do not have to. The approach we are going to take is:
 
-1. **verbal** -- We will talk about the main ideas in words. Sometimes, we will present formulas but that is just to save having to use *too many* words.
-2. **visual** -- We will show ourselves and each other what multilevel structure in data looks like, and what that structure means for our analyses of behaviour.
-3. **practical** -- We will use R to complete analyses, so we will learn about coding models in practice. Fortunately, through coding we can get a clear idea of what we want the models to do.
+1.  **verbal** -- We will talk about the main ideas in words. Sometimes, we will present formulas but that is just to save having to use *too many* words.
+2.  **visual** -- We will show ourselves and each other what multilevel structure in data looks like, and what that structure means for our analyses of behaviour.
+3.  **practical** -- We will use R to complete analyses, so we will learn about coding models in practice. Fortunately, through coding we can get a clear idea of what we want the models to do.
 
 ## Targets {#sec-multi-targets}
 
 Our learning objectives include the development of key concepts and skills.
 
-1. **concepts** -- multilevel data and multilevel modeling
-2. **skills**
+1.  **concepts** -- how data can have multilevel structures and what this requires in models
+2.  **skills**
 
-i. visualization -- examine data within classes (sampling groups)
+```{=html}
+<!-- -->
+```
+i.  use visualization to examine observations within groups
 ii. run linear models over all data and within each class
 iii. use the `lmer()` function to fit models of multilevel data
 
@@ -86,44 +89,38 @@ We are just getting started. Our plan will be to build depth and breadth in unde
 
 ## Study guide {#sec-multi-guide}
 
-```{=tex}
-\begin{enumerate}
-    \item
-    Read in the example data \verb:BAFACALO_DATASET.RData: and identify how the data are structured at multiple levels.
-    \item
-  Use visualizations to explore the impact of the structure.
-  \item
-    Run analyses using linear models (revision) and linear mixed-effects models (extension) code.
-    \item
-    Review readings provided.
-\end{enumerate}
-```
+1.  Read in the example data `BAFACALO_DATASET.RData` and identify how the data are structured at multiple levels.
+2.  Use visualizations to explore the impact of the structure.
+3.  Run analyses using linear models (revision) and linear mixed-effects models (extension) code.
+4.  Review readings provided.
 
-## The data we will work with: Brazilian school children {#sec-data-intro}
+## The data we will work with: Brazilian school children {#sec-multi-data-intro}
 
-This week, we will be working with data taken from a study on education outcomes in Brazilian children, reported by Golina and Gomes (2014). First, we will progress through the steps required to download and prepare the files for analysis in R.
+This week, we will be working with data taken from a study on education outcomes in Brazilian children, reported by @golino2014. First, we will progress through the steps required to download and prepare the files for analysis in R.
 
-The `BAFACALO_DATASET.RData` data were collected and shared online by Golina and Gomes (2014). Information about the background motivating the study, the methods of data collection, along with the dataset itself, can be found here:
+The `BAFACALO_DATASET.RData` data were collected and shared online by @golino2014. Information about the background motivating the study, the methods of data collection, along with the dataset itself, can be found [here](https://openpsychologydata.metajnl.com/articles/10.5334/jopd.af/).
 
-\url{https://openpsychologydata.metajnl.com/articles/10.5334/jopd.af/}
-
-Golina and Gomes (2014) collected school end-of-year subject grades for a sample of 292 children recruited from multiple classes in a school in Brazil. Here, each subject is a theme or course that children studied in school, e.g., Physics or English language, and for which each child was awarded a grade at the end of the school year. So, we have information on different children, and information about their subject grades. Children were taught in different classes but the classes appear to be units of the school organization (the information is not quite clear) not subject or course groupings. Thus, we also have information on which classes children were in when data about them were collected.
+@golino2014 collected school end-of-year subject grades for a sample of 292 children recruited from multiple classes in a school in Brazil. Here, each subject is a theme or course that children studied in school, e.g., Physics or English language, and for which each child was awarded a grade at the end of the school year. So, we have information on different children, and information about their subject grades. Children were taught in different classes but the classes appear to be units of the school organization (the information is not quite clear) not subject or course groupings. Thus, we also have information on which classes children were in when data about them were collected.
 
 The data were compiled to an .RData format file.
 
-`.RData` is R's own file format so the code you use to load and access the data for analysis is a bit simpler than you are used to. (You will have used `read.csv()` or `read_csv()`.)
+`.RData` is R's own file format so the code you use to load and access the data for analysis is a bit simpler than you are used to. (You will have used `read.csv()` or `read_csv()` previously.)
 
 In my own practice, I prefer to keep files in formats like `.csv` which can be opened and read in other software applications (like Excel), so using an `.RData` is an exception in these materials.
 
-### Locate and download the data file
+### Locate and download the data file {#sec-multi-data-download}
 
-Go to the 402 Moodle folder for week 16, find and download the `BAFACALO_DATASET.RData` file from:
+You can access the data from the link associated with the @golino2014 article [here](http://dx.doi.org/10.7910/DVN/23150).
 
-\url{https://modules.lancaster.ac.uk/course/view.php?id=34085#section-10}
+Or you can download the [data-01-multilevel.zip](files/data-01-multilevel.zip) files folder for this chapter.
 
-The file is located in a .zip folder called `PSYC402-01-multilevel-resources`. The data file is collected together with the `402-01-multilevel-workbook.R` workbook you will need to do the practical exercises.
+The file is located in a .zip folder called `data-01-multilevel`.
+The data file is collected together with the .R scripts:
 
-### Read in the data file -- so that you can access the data -- by using the load() function
+- `01-multilevel-workbook.R` the workbook you will need to do the practical exercises.
+- `01-multilevel-workbook-answers.R` with answers to questions and code for exercises.
+
+### Read in the data file -- so that you can access the data -- by using the load() function {#sec-multi-data-load}
 
 You can read the `BAFACALO_DATASET.RData` file into the R workspace or environment using the following code.
 
@@ -212,7 +209,7 @@ summary(brazil)
 
 #### Code tip
 
-Notice the code is written to create the new selected dataset and, at the same time, gave it a more usable (shorter) name, with \verb:brazil \\\<- BAFACALO_DATASET %\\\>%:::::::::
+Notice the code is written to create the new selected dataset and, at the same time, gave it a more usable (shorter) name, with \verb:brazil \\\\\\\<- BAFACALO_DATASET %\\\\\\\>%:::::::::::::::::::::::::::
 
 ### Remove missing values
 

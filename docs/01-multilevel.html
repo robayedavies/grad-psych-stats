@@ -266,10 +266,10 @@ div.csl-indent {
   <li><a href="#sec-multi-approach" id="toc-sec-multi-approach" class="nav-link" data-scroll-target="#sec-multi-approach"><span class="toc-section-number">3.4</span>  The approach we take</a></li>
   <li><a href="#sec-multi-targets" id="toc-sec-multi-targets" class="nav-link" data-scroll-target="#sec-multi-targets"><span class="toc-section-number">3.5</span>  Targets</a></li>
   <li><a href="#sec-multi-guide" id="toc-sec-multi-guide" class="nav-link" data-scroll-target="#sec-multi-guide"><span class="toc-section-number">3.6</span>  Study guide</a></li>
-  <li><a href="#sec-data-intro" id="toc-sec-data-intro" class="nav-link" data-scroll-target="#sec-data-intro"><span class="toc-section-number">3.7</span>  The data we will work with: Brazilian school children</a>
+  <li><a href="#sec-multi-data-intro" id="toc-sec-multi-data-intro" class="nav-link" data-scroll-target="#sec-multi-data-intro"><span class="toc-section-number">3.7</span>  The data we will work with: Brazilian school children</a>
   <ul class="collapse">
-  <li><a href="#locate-and-download-the-data-file" id="toc-locate-and-download-the-data-file" class="nav-link" data-scroll-target="#locate-and-download-the-data-file"><span class="toc-section-number">3.7.1</span>  Locate and download the data file</a></li>
-  <li><a href="#read-in-the-data-file-so-that-you-can-access-the-data-by-using-the-load-function" id="toc-read-in-the-data-file-so-that-you-can-access-the-data-by-using-the-load-function" class="nav-link" data-scroll-target="#read-in-the-data-file-so-that-you-can-access-the-data-by-using-the-load-function"><span class="toc-section-number">3.7.2</span>  Read in the data file – so that you can access the data – by using the load() function</a></li>
+  <li><a href="#sec-multi-data-download" id="toc-sec-multi-data-download" class="nav-link" data-scroll-target="#sec-multi-data-download"><span class="toc-section-number">3.7.1</span>  Locate and download the data file</a></li>
+  <li><a href="#sec-multi-data-load" id="toc-sec-multi-data-load" class="nav-link" data-scroll-target="#sec-multi-data-load"><span class="toc-section-number">3.7.2</span>  Read in the data file – so that you can access the data – by using the load() function</a></li>
   <li><a href="#inspect-the-data" id="toc-inspect-the-data" class="nav-link" data-scroll-target="#inspect-the-data"><span class="toc-section-number">3.7.3</span>  Inspect the data</a></li>
   </ul></li>
   <li><a href="#tidy-the-data" id="toc-tidy-the-data" class="nav-link" data-scroll-target="#tidy-the-data"><span class="toc-section-number">3.8</span>  Tidy the data</a>
@@ -422,11 +422,12 @@ Warning
 <h2 data-number="3.5" class="anchored" data-anchor-id="sec-multi-targets"><span class="header-section-number">3.5</span> Targets</h2>
 <p>Our learning objectives include the development of key concepts and skills.</p>
 <ol type="1">
-<li><strong>concepts</strong> – multilevel data and multilevel modeling</li>
+<li><strong>concepts</strong> – how data can have multilevel structures and what this requires in models</li>
 <li><strong>skills</strong></li>
 </ol>
+<!-- -->
 <ol type="i">
-<li>visualization – examine data within classes (sampling groups)</li>
+<li>use visualization to examine observations within groups</li>
 <li>run linear models over all data and within each class</li>
 <li>use the <code>lmer()</code> function to fit models of multilevel data</li>
 </ol>
@@ -434,25 +435,33 @@ Warning
 </section>
 <section id="sec-multi-guide" class="level2" data-number="3.6">
 <h2 data-number="3.6" class="anchored" data-anchor-id="sec-multi-guide"><span class="header-section-number">3.6</span> Study guide</h2>
-
+<ol type="1">
+<li>Read in the example data <code>BAFACALO_DATASET.RData</code> and identify how the data are structured at multiple levels.</li>
+<li>Use visualizations to explore the impact of the structure.</li>
+<li>Run analyses using linear models (revision) and linear mixed-effects models (extension) code.</li>
+<li>Review readings provided.</li>
+</ol>
 </section>
-<section id="sec-data-intro" class="level2" data-number="3.7">
-<h2 data-number="3.7" class="anchored" data-anchor-id="sec-data-intro"><span class="header-section-number">3.7</span> The data we will work with: Brazilian school children</h2>
-<p>This week, we will be working with data taken from a study on education outcomes in Brazilian children, reported by Golina and Gomes (2014). First, we will progress through the steps required to download and prepare the files for analysis in R.</p>
-<p>The <code>BAFACALO_DATASET.RData</code> data were collected and shared online by Golina and Gomes (2014). Information about the background motivating the study, the methods of data collection, along with the dataset itself, can be found here:</p>
-<p></p>
-<p>Golina and Gomes (2014) collected school end-of-year subject grades for a sample of 292 children recruited from multiple classes in a school in Brazil. Here, each subject is a theme or course that children studied in school, e.g., Physics or English language, and for which each child was awarded a grade at the end of the school year. So, we have information on different children, and information about their subject grades. Children were taught in different classes but the classes appear to be units of the school organization (the information is not quite clear) not subject or course groupings. Thus, we also have information on which classes children were in when data about them were collected.</p>
+<section id="sec-multi-data-intro" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="sec-multi-data-intro"><span class="header-section-number">3.7</span> The data we will work with: Brazilian school children</h2>
+<p>This week, we will be working with data taken from a study on education outcomes in Brazilian children, reported by <span class="citation" data-cites="golino2014">Golino &amp; Gomes (<a href="references.html#ref-golino2014" role="doc-biblioref">2014</a>)</span>. First, we will progress through the steps required to download and prepare the files for analysis in R.</p>
+<p>The <code>BAFACALO_DATASET.RData</code> data were collected and shared online by <span class="citation" data-cites="golino2014">Golino &amp; Gomes (<a href="references.html#ref-golino2014" role="doc-biblioref">2014</a>)</span>. Information about the background motivating the study, the methods of data collection, along with the dataset itself, can be found <a href="https://openpsychologydata.metajnl.com/articles/10.5334/jopd.af/">here</a>.</p>
+<p><span class="citation" data-cites="golino2014">Golino &amp; Gomes (<a href="references.html#ref-golino2014" role="doc-biblioref">2014</a>)</span> collected school end-of-year subject grades for a sample of 292 children recruited from multiple classes in a school in Brazil. Here, each subject is a theme or course that children studied in school, e.g., Physics or English language, and for which each child was awarded a grade at the end of the school year. So, we have information on different children, and information about their subject grades. Children were taught in different classes but the classes appear to be units of the school organization (the information is not quite clear) not subject or course groupings. Thus, we also have information on which classes children were in when data about them were collected.</p>
 <p>The data were compiled to an .RData format file.</p>
-<p><code>.RData</code> is R’s own file format so the code you use to load and access the data for analysis is a bit simpler than you are used to. (You will have used <code>read.csv()</code> or <code>read_csv()</code>.)</p>
+<p><code>.RData</code> is R’s own file format so the code you use to load and access the data for analysis is a bit simpler than you are used to. (You will have used <code>read.csv()</code> or <code>read_csv()</code> previously.)</p>
 <p>In my own practice, I prefer to keep files in formats like <code>.csv</code> which can be opened and read in other software applications (like Excel), so using an <code>.RData</code> is an exception in these materials.</p>
-<section id="locate-and-download-the-data-file" class="level3" data-number="3.7.1">
-<h3 data-number="3.7.1" class="anchored" data-anchor-id="locate-and-download-the-data-file"><span class="header-section-number">3.7.1</span> Locate and download the data file</h3>
-<p>Go to the 402 Moodle folder for week 16, find and download the <code>BAFACALO_DATASET.RData</code> file from:</p>
-<p></p>
-<p>The file is located in a .zip folder called <code>PSYC402-01-multilevel-resources</code>. The data file is collected together with the <code>402-01-multilevel-workbook.R</code> workbook you will need to do the practical exercises.</p>
+<section id="sec-multi-data-download" class="level3" data-number="3.7.1">
+<h3 data-number="3.7.1" class="anchored" data-anchor-id="sec-multi-data-download"><span class="header-section-number">3.7.1</span> Locate and download the data file</h3>
+<p>You can access the data from the link associated with the <span class="citation" data-cites="golino2014">Golino &amp; Gomes (<a href="references.html#ref-golino2014" role="doc-biblioref">2014</a>)</span> article <a href="http://dx.doi.org/10.7910/DVN/23150">here</a>.</p>
+<p>Or you can download the <a href="files/data-01-multilevel.zip">data-01-multilevel.zip</a> files folder for this chapter.</p>
+<p>The file is located in a .zip folder called <code>data-01-multilevel</code>. The data file is collected together with the .R scripts:</p>
+<ul>
+<li><code>01-multilevel-workbook.R</code> the workbook you will need to do the practical exercises.</li>
+<li><code>01-multilevel-workbook-answers.R</code> with answers to questions and code for exercises.</li>
+</ul>
 </section>
-<section id="read-in-the-data-file-so-that-you-can-access-the-data-by-using-the-load-function" class="level3" data-number="3.7.2">
-<h3 data-number="3.7.2" class="anchored" data-anchor-id="read-in-the-data-file-so-that-you-can-access-the-data-by-using-the-load-function"><span class="header-section-number">3.7.2</span> Read in the data file – so that you can access the data – by using the load() function</h3>
+<section id="sec-multi-data-load" class="level3" data-number="3.7.2">
+<h3 data-number="3.7.2" class="anchored" data-anchor-id="sec-multi-data-load"><span class="header-section-number">3.7.2</span> Read in the data file – so that you can access the data – by using the load() function</h3>
 <p>You can read the <code>BAFACALO_DATASET.RData</code> file into the R workspace or environment using the following code.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"BAFACALO_DATASET.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -659,7 +668,7 @@ Warning
 </div>
 <section id="code-tip" class="level4" data-number="3.8.1.1">
 <h4 data-number="3.8.1.1" class="anchored" data-anchor-id="code-tip"><span class="header-section-number">3.8.1.1</span> Code tip</h4>
-<p>Notice the code is written to create the new selected dataset and, at the same time, gave it a more usable (shorter) name, with ::::::::</p>
+<p>Notice the code is written to create the new selected dataset and, at the same time, gave it a more usable (shorter) name, with ::::::::::::::::::::::::::</p>
 </section>
 </section>
 <section id="remove-missing-values" class="level3" data-number="3.8.2">
@@ -1166,6 +1175,9 @@ portuguese -0.943</code></pre>
 <div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography" style="display: none">
 <div id="ref-Baayen2008" class="csl-entry" role="doc-biblioentry">
 Baayen, R. H., Davidson, D. J., &amp; Bates, D. M. (2008). Mixed-effects modeling with crossed random effects for subjects and items. <em>Journal of Memory and Language</em>, <em>59</em>(4), 390–412. <a href="https://doi.org/10.1016/j.jml.2007.12.005">https://doi.org/10.1016/j.jml.2007.12.005</a>
+</div>
+<div id="ref-golino2014" class="csl-entry" role="doc-biblioentry">
+Golino, H., &amp; Gomes, C. (2014). Psychology data from the <span>“</span>BAFACALO project: The Brazilian Intelligence Battery based on two state-of-the-art models <span></span> Carroll<span>’</span>s Model and the CHC model<span>”</span>. <em>Journal of Open Psychology Data</em>, <em>2</em>(1), e6. <a href="https://doi.org/10.5334/jopd.af">https://doi.org/10.5334/jopd.af</a>
 </div>
 <div id="ref-kreft1998" class="csl-entry" role="doc-biblioentry">
 Kreft, I., &amp; Leeuw, J. de. (1998). <em>Introducing multilevel modeling</em> (D. Wright, Ed.). Sage Publications.
