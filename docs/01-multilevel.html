@@ -283,12 +283,12 @@ div.csl-indent {
   <li><a href="#sec-multilevel-ideas-main" id="toc-sec-multilevel-ideas-main" class="nav-link" data-scroll-target="#sec-multilevel-ideas-main"><span class="toc-section-number">3.9.1</span>  Main ideas – Phenomena and data sets in the social sciences often have a multilevel structure</a></li>
   <li><a href="#sec-multilevel-models-utility" id="toc-sec-multilevel-models-utility" class="nav-link" data-scroll-target="#sec-multilevel-models-utility"><span class="toc-section-number">3.9.2</span>  Multilevel models – why they are more used and more useful than traditional methods</a></li>
   <li><a href="#sec-multilevel-practical-application" id="toc-sec-multilevel-practical-application" class="nav-link" data-scroll-target="#sec-multilevel-practical-application"><span class="toc-section-number">3.9.3</span>  Practical applications: children sampled within classes</a></li>
-  <li><a href="#to-understand-the-application-of-multilevel-models-first-we-ignore-the-multilevel-structure-in-the-data" id="toc-to-understand-the-application-of-multilevel-models-first-we-ignore-the-multilevel-structure-in-the-data" class="nav-link" data-scroll-target="#to-understand-the-application-of-multilevel-models-first-we-ignore-the-multilevel-structure-in-the-data"><span class="toc-section-number">3.9.4</span>  To understand the application of multilevel models: first, we ignore the multilevel structure in the data</a></li>
-  <li><a href="#a-linear-model-ignores-the-multilevel-structure-in-the-data" id="toc-a-linear-model-ignores-the-multilevel-structure-in-the-data" class="nav-link" data-scroll-target="#a-linear-model-ignores-the-multilevel-structure-in-the-data"><span class="toc-section-number">3.9.5</span>  A linear model ignores the multilevel structure in the data</a></li>
-  <li><a href="#notation" id="toc-notation" class="nav-link" data-scroll-target="#notation"><span class="toc-section-number">3.9.6</span>  Notation</a></li>
-  <li><a href="#can-we-really-ignore-the-multilevel-structure" id="toc-can-we-really-ignore-the-multilevel-structure" class="nav-link" data-scroll-target="#can-we-really-ignore-the-multilevel-structure"><span class="toc-section-number">3.9.7</span>  Can we really ignore the multilevel structure?</a></li>
-  <li><a href="#linear-models-for-multilevel-data-dealing-with-the-hierarchical-structure" id="toc-linear-models-for-multilevel-data-dealing-with-the-hierarchical-structure" class="nav-link" data-scroll-target="#linear-models-for-multilevel-data-dealing-with-the-hierarchical-structure"><span class="toc-section-number">3.9.8</span>  Linear models for multilevel data – dealing with the hierarchical structure</a></li>
-  <li><a href="#two-step-or-slopes-as-outcomes-linear-models-as-approximations-to-the-linear-mixed-effects-or-multilevel-modeling-approach" id="toc-two-step-or-slopes-as-outcomes-linear-models-as-approximations-to-the-linear-mixed-effects-or-multilevel-modeling-approach" class="nav-link" data-scroll-target="#two-step-or-slopes-as-outcomes-linear-models-as-approximations-to-the-linear-mixed-effects-or-multilevel-modeling-approach"><span class="toc-section-number">3.9.9</span>  Two-step or slopes-as-outcomes linear models as approximations to the Linear Mixed-effects or Multilevel modeling approach</a></li>
+  <li><a href="#sec-multilevel-ignore" id="toc-sec-multilevel-ignore" class="nav-link" data-scroll-target="#sec-multilevel-ignore"><span class="toc-section-number">3.9.4</span>  To understand the application of multilevel models: first, we ignore the multilevel structure in the data</a></li>
+  <li><a href="#sec-multi-lm-ignore" id="toc-sec-multi-lm-ignore" class="nav-link" data-scroll-target="#sec-multi-lm-ignore"><span class="toc-section-number">3.9.5</span>  A linear model ignores the multilevel structure in the data</a></li>
+  <li><a href="#sec-multi-notation" id="toc-sec-multi-notation" class="nav-link" data-scroll-target="#sec-multi-notation"><span class="toc-section-number">3.9.6</span>  Notation</a></li>
+  <li><a href="#sec-multi-plot-lattice" id="toc-sec-multi-plot-lattice" class="nav-link" data-scroll-target="#sec-multi-plot-lattice"><span class="toc-section-number">3.9.7</span>  Can we really ignore the multilevel structure?</a></li>
+  <li><a href="#sec-multi-lm-address" id="toc-sec-multi-lm-address" class="nav-link" data-scroll-target="#sec-multi-lm-address"><span class="toc-section-number">3.9.8</span>  Linear models for multilevel data – dealing with the hierarchical structure</a></li>
+  <li><a href="#sec-multi-lm-two-step" id="toc-sec-multi-lm-two-step" class="nav-link" data-scroll-target="#sec-multi-lm-two-step"><span class="toc-section-number">3.9.9</span>  Two-step or slopes-as-outcomes linear models as approximations to the Linear Mixed-effects or Multilevel modeling approach</a></li>
   <li><a href="#multilevel-models" id="toc-multilevel-models" class="nav-link" data-scroll-target="#multilevel-models"><span class="toc-section-number">3.9.10</span>  Multilevel models</a></li>
   <li><a href="#how-should-we-think-about-the-differences-between-the-classes" id="toc-how-should-we-think-about-the-differences-between-the-classes" class="nav-link" data-scroll-target="#how-should-we-think-about-the-differences-between-the-classes"><span class="toc-section-number">3.9.11</span>  How should we think about the differences between the classes?</a></li>
   <li><a href="#fitting-a-multilevel-model-using-the-lmer-function" id="toc-fitting-a-multilevel-model-using-the-lmer-function" class="nav-link" data-scroll-target="#fitting-a-multilevel-model-using-the-lmer-function"><span class="toc-section-number">3.9.12</span>  Fitting a multilevel model using the lmer() function</a></li>
@@ -840,9 +840,9 @@ child
 </div>
 </div>
 </section>
-<section id="to-understand-the-application-of-multilevel-models-first-we-ignore-the-multilevel-structure-in-the-data" class="level3" data-number="3.9.4">
-<h3 data-number="3.9.4" class="anchored" data-anchor-id="to-understand-the-application-of-multilevel-models-first-we-ignore-the-multilevel-structure-in-the-data"><span class="header-section-number">3.9.4</span> To understand the application of multilevel models: first, we ignore the multilevel structure in the data</h3>
-<p>Recognizing that the children’s data are observed within classes means that, when we examine the factors that influence variance in observed outcomes, we need to take into account the fact that the children can be grouped by (or under) the class they were in when their grades were recorded. We can develop an understanding of what this means by moving through a series of steps.</p>
+<section id="sec-multilevel-ignore" class="level3" data-number="3.9.4">
+<h3 data-number="3.9.4" class="anchored" data-anchor-id="sec-multilevel-ignore"><span class="header-section-number">3.9.4</span> To understand the application of multilevel models: first, we ignore the multilevel structure in the data</h3>
+<p>Recognizing that the children’s scores data are observed within classes means that, when we examine the factors that influence variance in observed outcomes, we need to take into account the fact that the children can be grouped by (or under) the class they were in when their grades were recorded. We can develop an understanding of what this means by moving through a series of steps.</p>
 <p>To illustrate the understanding we need to develop, we analyze the end-of-year school subject grades for the sample of 292 children studied by <span class="citation" data-cites="golino2014">Golino &amp; Gomes (<a href="references.html#ref-golino2014" role="doc-biblioref">2014</a>)</span>. With these data, we can examine whether differences between children in their Portuguese language grades predicts differences in their English language grades. (We do not have a theoretical reason to make this prediction though it does not seem unreasonable.) Let’s make this our research question.</p>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -860,7 +860,7 @@ Note
 </div>
 </div>
 <p>Now, the first step we take in our development of understanding will be to <em>first ignore</em> the importance of the potential differences between classes.</p>
-<p>We can begin our analysis in order to address the research question by plotting the possible association between Portuguese and English grades. We shall create a scatterplot to do this, and we create the plot by running the following code and <em>ignoring group (class) membership</em>. In the following chunk of code, I pipe the <code>brazil</code> data using <code>%&gt;%</code> to <code>ggplot()</code> and then create the plot step-by-step, with each step separated by a <code>+</code> except for the last step.</p>
+<p>We can begin our analysis in order to address the research question by plotting the possible association between Portuguese and English grades. We shall create a scatterplot to do this, and we create the plot by running the following code and <em>ignoring group (class) membership</em>. In the following chunk of code, I pipe the <code>brazil</code> data using <code>%&gt;%</code> to <code>ggplot()</code> and then create the plot step-by-step, with each <code>ggplot()</code> step separated by a <code>+</code> except for the last step.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>brazil <span class="sc">%&gt;%</span></span>
 <span id="cb20-2"><a href="#cb20-2"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> portuguese, <span class="at">y =</span> english)) <span class="sc">+</span></span>
@@ -884,22 +884,22 @@ Note
 <p>Because I say that we are interested in predicting English grades then, by convention, we map English grades to the height of the points (i.e.&nbsp;English grade differences are shown as differences on the y-axis). Because we are using Portuguese grades to do the predicting, by convention, we map Portuguese grades to the horizontal position of the points (i.e.&nbsp;Portuguese grade differences are shown as differences on the x-axis).</p>
 <p>I have added a line using <code>geom_smooth()</code> in red to indicate the trend of the potential association between variation in Portuguese grades and variation in English grades.</p>
 <p>Figure <a href="#fig-brazil-all">Figure&nbsp;<span>3.3</span></a> suggests that children with higher grades in Portuguese tend, on average, to also have higher grades in English.</p>
-<section id="exercise-edit-plots" class="level4" data-number="3.9.4.1">
-<h4 data-number="3.9.4.1" class="anchored" data-anchor-id="exercise-edit-plots"><span class="header-section-number">3.9.4.1</span> Exercise – edit plots</h4>
+<section id="sec-multi-exx-edit-plots" class="level4" data-number="3.9.4.1">
+<h4 data-number="3.9.4.1" class="anchored" data-anchor-id="sec-multi-exx-edit-plots"><span class="header-section-number">3.9.4.1</span> Exercise – edit plots</h4>
 <p>Notice that when we write the code to produce the plot, we add arguments to the <code>geom_point()</code> and <code>geom_smooth()</code> function calls to adjust the appearance of the points and the smoother line. Notice, also, that we adjust the labels for the x-axis and y-axis and, finally, that we determine the overall appearance of the plot using the <code>theme_bw()</code> function call.</p>
 <p>Do the following exercises to practice your <code>ggplot()</code> skills</p>
 <ol type="1">
 <li>Change the x and y variables to <code>math</code> and <code>physics</code></li>
 <li>Change the theme from <code>theme_bw()</code> to something different</li>
-<li>Change the appearance of the points, try different colour, shape, size</li>
+<li>Change the appearance of the points, try different colours, shapes or sizes.</li>
 </ol>
 <p>Further information to help you try out coding options can be found <a href="https://ggplot2.tidyverse.org/reference/geom_point.html">here, on scatterplots</a>, and <a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">here, on themes</a>.</p>
 </section>
 </section>
-<section id="a-linear-model-ignores-the-multilevel-structure-in-the-data" class="level3" data-number="3.9.5">
-<h3 data-number="3.9.5" class="anchored" data-anchor-id="a-linear-model-ignores-the-multilevel-structure-in-the-data"><span class="header-section-number">3.9.5</span> A linear model ignores the multilevel structure in the data</h3>
+<section id="sec-multi-lm-ignore" class="level3" data-number="3.9.5">
+<h3 data-number="3.9.5" class="anchored" data-anchor-id="sec-multi-lm-ignore"><span class="header-section-number">3.9.5</span> A linear model ignores the multilevel structure in the data</h3>
 <p>Our plot indicates the relationship between English and Portuguese language grades, in <a href="#fig-brazil-all">Figure&nbsp;<span>3.3</span></a>, ignoring the fact that children in the sample belonged to different classes when they were tested. The plot shows us only information about the children and grades, with each point representing the observed English and Portuguese grades for each <span class="math inline">\(i\)</span> child.</p>
-<p>Can we predict variation in English grades given information about children’s Portuguese grades? Are English grades related to Portuguese grades? We can estimate the relationship between English and Portuguese grades using a linear model in which the English grades variable is the <strong>outcome</strong> variable (or the dependent variable) and the Portuguese grades variable is the <strong>predictor</strong> or independent variable:</p>
+<p>Can we predict variation in English grades given information about child Portuguese grades? Are English grades related to Portuguese grades? We can estimate the relationship between English and Portuguese grades using a linear model in which the English grades variable is the <strong>outcome</strong> variable (or the dependent variable) and the Portuguese grades variable is the <strong>predictor</strong> or independent variable:</p>
 <p><span class="math display">\[
 y_i = \beta_0 + \beta_1X_i + e_i
 \]</span></p>
@@ -969,8 +969,8 @@ Tip
 <p>I do this to give an example of the way in which code can be varied. Also, to show you how one function can be embedded inside another.</p>
 </div>
 </div>
-<section id="exercise-fit-a-different-linear-model" class="level4" data-number="3.9.5.1">
-<h4 data-number="3.9.5.1" class="anchored" data-anchor-id="exercise-fit-a-different-linear-model"><span class="header-section-number">3.9.5.1</span> Exercise – fit a different linear model</h4>
+<section id="sec-multi-exx-lm-ignore" class="level4" data-number="3.9.5.1">
+<h4 data-number="3.9.5.1" class="anchored" data-anchor-id="sec-multi-exx-lm-ignore"><span class="header-section-number">3.9.5.1</span> Exercise – fit a different linear model</h4>
 <p>Do the following exercises to practice your <code>lm()</code> skills</p>
 <ol type="1">
 <li>Change the outcome and predictor variables to <code>math</code> and <code>physics</code></li>
@@ -978,116 +978,179 @@ Tip
 </ol>
 </section>
 </section>
-<section id="notation" class="level3" data-number="3.9.6">
-<h3 data-number="3.9.6" class="anchored" data-anchor-id="notation"><span class="header-section-number">3.9.6</span> Notation</h3>
+<section id="sec-multi-notation" class="level3" data-number="3.9.6">
+<h3 data-number="3.9.6" class="anchored" data-anchor-id="sec-multi-notation"><span class="header-section-number">3.9.6</span> Notation</h3>
 <p>In the following discussion, I will present some model formulas as equations. I am not doing that because the discussion is going to consider the modeling in terms of the underlying mathematics. I am doing it with the aim of clarifying how quantities – observed, estimated or predicted – add up, in terms of the linear and then the linear mixed-effects model.</p>
 <ol type="1">
-<li>I am going to refer to the dependent or outcome variable (e.g., school grade), <span class="math inline">\(y\)</span></li>
-<li>and to explanatory or experimental or independent variables (e.g., language skill) as <span class="math inline">\(X\)</span></li>
+<li>I am going to refer to the dependent or outcome variable (e.g., school grade) as <span class="math inline">\(y\)</span>,</li>
+<li>and to explanatory or experimental or independent variables (e.g., language skill) as <span class="math inline">\(X\)</span>.</li>
 <li>Models shall be fitted to estimate the coefficients, written <span class="math inline">\(\beta\)</span>, of the effects of the explanatory variables on the outcome variable</li>
-<li>To distinguish the different coefficients of the different effects, I am going to number the coefficients so</li>
+<li>To distinguish the different coefficients of the different effects, I am going to number the coefficients so …</li>
 </ol>
 <ul>
-<li><span class="math inline">\(\beta_0\)</span> is the coefficient of the intercept</li>
-<li><span class="math inline">\(\beta_1\)</span> will be the coefficient of the effect of a first explanatory variable: in the Brazilian schools example, the coefficient of the effect of Portuguese language skill</li>
+<li><span class="math inline">\(\beta_0\)</span> is the coefficient of the intercept;</li>
+<li><span class="math inline">\(\beta_1\)</span> will be the coefficient of the effect of a first explanatory variable: in the Brazilian schools example, the coefficient of the effect of variation in Portuguese language skill on variation in English language scores.</li>
 </ul>
 <p>To make it clear that each observation can be understood as part of a complex multilevel or crossed random effects structure, I am going to use indices as subscripts for variables.</p>
 <ol type="1">
-<li>I will, here, index individual participants (children) with <span class="math inline">\(i\)</span></li>
-<li>I will index (in the Brazilian schools example) index classes in which children were tested with <span class="math inline">\(j\)</span></li>
+<li>I will, here, index individual participants (children) using <span class="math inline">\(i\)</span>;</li>
+<li>I will index index classes in which children were tested using <span class="math inline">\(j\)</span>.</li>
 </ol>
 <p>Thus, in the Brazilian schools example, we shall see that we are concerned with observations about children’s school grades, where children are sampled as individuals <em>nested</em> in samples of classes. We will examine how an outcome variable (English language grade) is related to a predictor variable (Portuguese language grade) such that:</p>
 <ul>
-<li><span class="math inline">\(y_{ij}\)</span> is the outcome English language grade recorded for each child <span class="math inline">\(i\)</span> in each class <span class="math inline">\(j\)</span></li>
-<li>while <span class="math inline">\(X_{ij}\)</span> represents the explanatory variable, see following, the Portuguese language grade</li>
-<li>it is subscripted <span class="math inline">\(_{ij}\)</span> because values of the variable depend upon child identity, and children are identified as child <span class="math inline">\(i\)</span> in class <span class="math inline">\(j\)</span> to represent the multilevel structure of the data</li>
+<li><span class="math inline">\(y_{ij}\)</span> is the outcome English language grade recorded for each child <span class="math inline">\(i\)</span> in each class <span class="math inline">\(j\)</span>;</li>
+<li>while <span class="math inline">\(X_{ij}\)</span> represents the explanatory variable, see following, the Portuguese language grade.</li>
 </ul>
+<p><span class="math inline">\(X_{ij}\)</span> is subscripted <span class="math inline">\(_{ij}\)</span> because values of the variable depend upon child identity, and children are identified as child <span class="math inline">\(i\)</span> in class <span class="math inline">\(j\)</span> to represent the multilevel structure of the data</p>
 </section>
-<section id="can-we-really-ignore-the-multilevel-structure" class="level3" data-number="3.9.7">
-<h3 data-number="3.9.7" class="anchored" data-anchor-id="can-we-really-ignore-the-multilevel-structure"><span class="header-section-number">3.9.7</span> Can we really ignore the multilevel structure?</h3>
-<p>The linear model ignores the higher-level structure, the distinction between classes. Does that matter?</p>
-<p>We can see the answer to that question if we inspect Figure @ref(fig:pporteng). We create the plot using the following chunk of code; we discuss that later, first reflecting on what the plot shows us.</p>
+<section id="sec-multi-plot-lattice" class="level3" data-number="3.9.7">
+<h3 data-number="3.9.7" class="anchored" data-anchor-id="sec-multi-plot-lattice"><span class="header-section-number">3.9.7</span> Can we really ignore the multilevel structure?</h3>
+<p>The linear model ignores the higher-level structure, the distinction between classes: <strong>does this matter?</strong></p>
+<p>We can see the answer to that question if we inspect <a href="#fig-porteng-class">Figure&nbsp;<span>3.4</span></a>. We create the plot using the following chunk of code; we discuss that later, first reflecting on what the plot shows us.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>brazil <span class="sc">%&gt;%</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> portuguese, <span class="at">y =</span> english)) <span class="sc">+</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"darkgrey"</span>) <span class="sc">+</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> class_number) <span class="sc">+</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Portuguese"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"English"</span>) <span class="sc">+</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">25</span>,<span class="dv">50</span>,<span class="dv">75</span>)) <span class="sc">+</span> <span class="fu">scale_y_continuous</span>(<span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">50</span>,<span class="dv">100</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>brazil <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> portuguese, <span class="at">y =</span> english)) <span class="sc">+</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a><span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"darkgrey"</span>) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> class_number) <span class="sc">+</span></span>
+<span id="cb24-6"><a href="#cb24-6"></a>  <span class="fu">xlab</span>(<span class="st">"Portuguese"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"English"</span>) <span class="sc">+</span></span>
+<span id="cb24-7"><a href="#cb24-7"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb24-8"><a href="#cb24-8"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">25</span>,<span class="dv">50</span>,<span class="dv">75</span>)) <span class="sc">+</span> <span class="fu">scale_y_continuous</span>(<span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">50</span>,<span class="dv">100</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula 'y ~ x'</code></pre>
+</div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div id="fig-porteng-class" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="01-multilevel_files/figure-html/pporteng-1.png" class="img-fluid figure-img" style="width:150.0%"></p>
-<p></p><figcaption class="figure-caption">Plot of child grades, comparing English with Portuguese grades, shown separately for each school class</figcaption><p></p>
+<p><img src="01-multilevel_files/figure-html/fig-porteng-class-1.png" class="img-fluid figure-img" alt="The figure shows a grid of scatterplots: each point represents the English and the Portuguese scores for one child. There are separate scatterplots showing the potential association between child English versus Portuguese scores for different children in different clases. A line indicates the trend for the association in each class. Trends vary betwen classes." width="768"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.4: Plot of child grades, comparing English with Portuguese grades, shown separately for each school class</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Figure @ref(fig:pporteng) presents a different scatterplot to show the relationship between children’s Portuguese and English grades for the children in each different class. We can see that the relationship between Portuguese and English grades is (roughly) similar across classes: in general, children with higher Portuguese grades also tend to have higher English grades. However, Figure @ref(fig:pporteng) makes it obvious that there are important differences between classes. We can see that the slope of the best fit line (shown in black) varies between classes. And we can see that the intercept (where the line meets the y-axis) also varies between classes. Further, we can see that in some classes, there is no relationship or a negative relationship between Portuguese and English grades.</p>
+<p><a href="#fig-porteng-class">Figure&nbsp;<span>3.4</span></a> presents a grid of scatterplots, with a different scatterplot to show the relationship between children’s Portuguese and English grades for the children in each different class. We can see that the relationship between Portuguese and English grades is (roughly) similar across classes: in general, children with higher Portuguese grades also tend to have higher English grades. However, <a href="#fig-porteng-class">Figure&nbsp;<span>3.4</span></a> makes it obvious that there are important differences between classes.</p>
+<p>We can see that the slope of the best fit line (shown in black) varies between classes. And we can see that the intercept (where the line meets the y-axis) also varies between classes. Further, we can see that in some classes, there is no relationship or a negative relationship between Portuguese and English grades.</p>
 <p>Critically, we can see that classes differ in how much data we have for each. For some classes, we have many observations (e.g., M11) and for other classes we have few or one observation (e.g., M22, with one child). We know, in advance, that variation in sample size will be associated with variation in the uncertainty we have about the estimated relationship between Portuguese and English grades. You will remember that the Central Limit Theorem allows us to calculate the standard error of an estimate like the mean, given the sample size, and that the standard error is an index of our uncertainty of the estimate.</p>
-<section id="code-tip-facetting-creating-grids-of-plots" class="level4" data-number="3.9.7.1">
-<h4 data-number="3.9.7.1" class="anchored" data-anchor-id="code-tip-facetting-creating-grids-of-plots"><span class="header-section-number">3.9.7.1</span> Code tip – facetting – creating grids of plots</h4>
-<p>As you have seen, you can ask <code>ggplot()</code> to print a separate plot for each sub-group in a dataset. To produce Figure @ref(fig:pporteng), we ask for a separate plot of the <span class="math inline">\(english ~ portuguese\)</span> relationship, one plot for each class. Notice that in the code, the key expression is <code>facet_wrap(~ class_number)</code> This means</p>
-<p>The production of a grid of plots is a useful method for comparing patterns between data sub-sets or groups.</p>
-<p>You can see more information about <code>facet_wrap()</code> here:</p>
-<p></p>
-</section>
-<section id="code-tip-adjusting-scales" class="level4" data-number="3.9.7.2">
-<h4 data-number="3.9.7.2" class="anchored" data-anchor-id="code-tip-adjusting-scales"><span class="header-section-number">3.9.7.2</span> Code tip – adjusting scales</h4>
-<p>Notice that in these plots I modified the axes, to show x-axis and y-axis ticks at specific locations using scale functions. The tick is the notch or short line where we show the numbers on the axes.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Facetting</strong> – notice that, in the plotting code, the key expression is <code>facet_wrap(~ class_number)</code> This means:</p>
+<ol type="1">
+<li>The <code>class_number</code> variable is a factor: we ask R to check the summary for the dataframe, and that factor codes what class a child is in.</li>
+<li>The <code>facet_wrap(...)</code> function then asks R to produce separate plots for each <em>facet</em> for the data – the word facet means face or aspect.</li>
+<li>We use the formula <code>facet_wrap(~ ...)</code> to ask R to split the data up by using the classification information in the named variable, here <code>class_number</code>.</li>
+</ol>
+</div>
+</div>
+<p>The production of a grid or lattice of plots is a useful method for comparing patterns between data sub-sets or groups. You can see more information about <code>facet_wrap()</code> <a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">here</a></p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Adjusting scales</strong> – notice that in these plots I modified the axes to show x-axis and y-axis ticks at specific locations using scale functions. The tick is the notch or short line where we show the numbers on the axes.</p>
+<ol type="1">
+<li><code>scale_x_continuous(breaks=c(25,50,75))</code> means: set the x-axis ticks at 25, 50 and 75, defined using a vector <code>c()</code> of values</li>
+<li><code>scale_y_continuous(breaks=c(0,50,100))</code> means: set the y-axis ticks at 0, 50, 100, defined using a vector of values.</li>
+</ol>
+</div>
+</div>
 <p>It can be useful to adjust the ticks on axes, where other plot production factors cause crowding of labels.</p>
-<p>You can see more information on scales here:</p>
-<p></p>
+<p>You can see more information on scales <a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">here</a>.</p>
+<section id="sec-multi-exx-edit-scale-facet" class="level4" data-number="3.9.7.1">
+<h4 data-number="3.9.7.1" class="anchored" data-anchor-id="sec-multi-exx-edit-scale-facet"><span class="header-section-number">3.9.7.1</span> Exercise – edit plots</h4>
+<p>Do the following exercises to practice your `facet_wrap(): skills</p>
+<ol type="1">
+<li>Change the x and y variables to <code>math</code> and <code>physics</code>.</li>
+<li>Experiment with showing the differences between classes in a different way: instead of using <code>facet_wrap()</code> in <code>aes()</code> add <code>colour = class_number</code>: what happens?</li>
+</ol>
 </section>
-<section id="exercise-edit-plots-1" class="level4" data-number="3.9.7.3">
-<h4 data-number="3.9.7.3" class="anchored" data-anchor-id="exercise-edit-plots-1"><span class="header-section-number">3.9.7.3</span> Exercise – edit plots</h4>
-<p>Do the following exercises to practice your skills</p>
 </section>
-</section>
-<section id="linear-models-for-multilevel-data-dealing-with-the-hierarchical-structure" class="level3" data-number="3.9.8">
-<h3 data-number="3.9.8" class="anchored" data-anchor-id="linear-models-for-multilevel-data-dealing-with-the-hierarchical-structure"><span class="header-section-number">3.9.8</span> Linear models for multilevel data – dealing with the hierarchical structure</h3>
-<p>Figure @ref(fig:pporteng) shows that there is variation between classes in both the average English grade, shown as differences in the y-axis intercept, and the ‘effect’ of Portuguese language skill, shown as differences in the slope of the best fit line for the predicted relationship between Portuguese and English grades. We put ‘effect’ in quotes to signal the fact that we do not wish to assert a causal relation. The interpretation of the results of the linear model assumes those results are valid provided that the observations are independent, among other things. We can see that we cannot make the assumption of independence because individuals in classes with high average English grades are more likely to have higher English grades.</p>
+<section id="sec-multi-lm-address" class="level3" data-number="3.9.8">
+<h3 data-number="3.9.8" class="anchored" data-anchor-id="sec-multi-lm-address"><span class="header-section-number">3.9.8</span> Linear models for multilevel data – dealing with the hierarchical structure</h3>
+<p><a href="#fig-porteng-class">Figure&nbsp;<span>3.4</span></a> shows that there is variation between classes in both the average English grade, shown as differences in the y-axis intercept, and the ‘effect’ of Portuguese language skill, shown as differences in the slope of the best fit line for the predicted relationship between Portuguese and English grades.</p>
+<p>We put ‘effect’ in quotes to signal the fact that we do not wish to assert a causal relation. The interpretation of the results of the linear model assumes those results are valid provided that the observations are independent, among other things. We can see that we cannot make the assumption of independence because individuals in classes with high average English grades are more likely to have higher English grades.</p>
 <p>We can represent in our analysis the information we have about hierarchical structure in the data (child within class) by allowing the regression coefficients to vary between groups. We therefore modify the subscripting to take into account the fact that we must distinguish which child <span class="math inline">\(i\)</span> and which class <span class="math inline">\(j\)</span> we are examining, adapting our model to:</p>
-<span class="math display">\[\begin{equation}
+<p><span class="math display">\[
 y_{ij} = \beta_{0j} + \beta_{1j}X_{ij} + e_{ij}
-\end{equation}\]</span>
+\]</span></p>
+<ul>
+<li>where <span class="math inline">\(y_{ij}\)</span> represents the outcome measure, the English grade for each <span class="math inline">\(i\)</span> child in each <span class="math inline">\(j\)</span> class;</li>
+<li><span class="math inline">\(\beta_{0j}\)</span> represents the average grade, different in different classes;</li>
+<li><span class="math inline">\(\beta_{1j}X_{ij}\)</span> represents the variation in <span class="math inline">\(X\)</span> the Portuguese grade for each <span class="math inline">\(i\)</span> child in <span class="math inline">\(j\)</span> class, with the effect of that variation estimated as the coefficient <span class="math inline">\(\beta_{1j}\)</span>, different in different classes;</li>
+<li>and <span class="math inline">\(e_{ij}\)</span> represents differences between observed and predicted English grades for each <span class="math inline">\(i\)</span> child in <span class="math inline">\(j\)</span> class.</li>
+</ul>
 </section>
-<section id="two-step-or-slopes-as-outcomes-linear-models-as-approximations-to-the-linear-mixed-effects-or-multilevel-modeling-approach" class="level3" data-number="3.9.9">
-<h3 data-number="3.9.9" class="anchored" data-anchor-id="two-step-or-slopes-as-outcomes-linear-models-as-approximations-to-the-linear-mixed-effects-or-multilevel-modeling-approach"><span class="header-section-number">3.9.9</span> Two-step or slopes-as-outcomes linear models as approximations to the Linear Mixed-effects or Multilevel modeling approach</h3>
+<section id="sec-multi-lm-two-step" class="level3" data-number="3.9.9">
+<h3 data-number="3.9.9" class="anchored" data-anchor-id="sec-multi-lm-two-step"><span class="header-section-number">3.9.9</span> Two-step or slopes-as-outcomes linear models as approximations to the Linear Mixed-effects or Multilevel modeling approach</h3>
 <p>In practice, we could capture the variation between classes by performing a <strong>two-step analysis</strong>.</p>
 <ul>
-<li>First, we estimate the coefficient of the ‘Portuguese’ effect for each class analysed separately.</li>
+<li>First, we estimate the coefficient of the ‘Portuguese’ effect for each class separately. We do multiple (per-class) analyses. In each of these analyses, we estimate the coefficient looking only at the data for one class.</li>
 <li>Second, we can take those per-class coefficients as the outcome variable in a ‘slopes-as-outcomes analysis’ to examine if the per-class estimates of the experimental effect are reliably different from zero or, more usefully, if the per-class estimates vary in relation to some explanatory variable like teacher skill.</li>
 </ul>
-<p>The problem with the approach is apparent in Figure @ref(fig:pointclass). Figure @ref(fig:pointclass) shows the estimated intercept and coefficient of the slope of the ‘Portuguese’ effect for each class, when we have analyzed the data for each class in a separate linear model. The estimate for each class is shown as a black dot. The standard error of the estimate is shown as a black vertical line, shown above and below a point. You can say that where there is a longer line there we have more uncertainty about the location of the estimate.</p>
-<p>The critical point is that <strong>the standard errors vary</strong> a lot between classes. In some classes, the standard error is small (the black line is short) so we can maybe have more certainty over the estimated intercept or slope for those classes. In other classes, the standard error is large (the black line is long) so we can maybe have less certainty over the estimated intercept or slope for those classes. The <strong>key idea</strong> here is that standard errors vary widely between classes but the two-step modeling approach, while it can take into account the between-class differences in estimates, cannot account for the variation in the standard errors about those estimates.</p>
-<section id="code-tip" class="level4" data-number="3.9.9.1">
-<h4 data-number="3.9.9.1" class="anchored" data-anchor-id="code-tip"><span class="header-section-number">3.9.9.1</span> Code tip</h4>
-<p>Notice that the code I used fits a separate model for each class, and then plots the per-class estimates of intercepts and slopes of the <span class="math inline">\(english \sim portuguese\)</span> relationship. You can check out the code for yourself in the <strong>how-to.R</strong> for this week.</p>
+<p>The problem with the approach is apparent in <a href="#fig-pointclass">Figure&nbsp;<span>3.5</span></a>. <a href="#fig-pointclass">Figure&nbsp;<span>3.5</span></a> shows the estimated intercept and coefficient of the slope of the ‘Portuguese’ effect for each class, when we have analyzed the data for each class in a separate linear model.</p>
+<p>The estimate for each class is shown as a black dot. The standard error of the estimate is shown as a black vertical line, shown above and below a point.</p>
+<p>You can say that where there is a longer line there we have more uncertainty about the location of the estimate. Notice that <strong>the standard errors vary</strong> a lot between classes. In some classes, the standard error is small (the black line is short) so we can maybe have more certainty over the estimated intercept or slope for those classes. In other classes, the standard error is large (the black line is long) so we can maybe have less certainty over the estimated intercept or slope for those classes.</p>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <strong>key idea</strong> here is that standard errors vary widely between classes but the two-step modeling approach, while it can take into account the between-class differences in estimates, cannot account for the variation in the standard errors about those estimates.</p>
+</div>
+</div>
 <div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing missing values (geom_segment).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing missing values (geom_segment).</code></pre>
+</div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div id="fig-pointclass" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="01-multilevel_files/figure-html/pointclass-1.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption">Plot showing the estimated intercept and coefficient of the slope of the Portuguese effect for each class analysed separately</figcaption><p></p>
+<p><img src="01-multilevel_files/figure-html/fig-pointclass-1.png" class="img-fluid figure-img" alt="The figure shows a grid of two scatterplots. The plots are generated by estimating the slope of the association between English scores (as outcome) and Portuguese scores (as predictor), using linear models fitted separately for data on children in different classes. On the left, we show variation between classes in the estimate for the intercept (shown as dots) and associated standard error (shown as lines), on the right we show variation betwen classes in the estimate for the slope and the associated standard error." width="768"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.5: Plot showing the estimated intercept and coefficient of the slope of the Portuguese effect for each class analysed separately</figcaption><p></p>
 </figure>
 </div>
 </div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="01-multilevel_files/figure-html/pointclass-2.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption">Plot showing the estimated intercept and coefficient of the slope of the Portuguese effect for each class analysed separately</figcaption><p></p>
-</figure>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
 </div>
 </div>
+<div class="callout-body-container callout-body">
+<p>Notice that the code I used fits a separate model for each class, and then plots the per-class estimates of intercepts and slopes of the <span class="math inline">\(english \sim portuguese\)</span> relationship.</p>
 </div>
-</section>
-<section id="discussion-slopes-as-outcomes-analyses-as-a-common-approach" class="level4" data-number="3.9.9.2">
-<h4 data-number="3.9.9.2" class="anchored" data-anchor-id="discussion-slopes-as-outcomes-analyses-as-a-common-approach"><span class="header-section-number">3.9.9.2</span> Discussion: slopes-as-outcomes analyses as a common approach</h4>
-<p>The ‘slopes-as-outcomes’ approach is quite common and can be found in a number of papers in the psychological and educational research literatures, e.g., in Balota et al.’s (2004) of the analysis of psycholinguistic effects in older and younger adults. Balota et al.&nbsp;(2004) wanted to examine if or how effects of variables like word frequency, on reading response latencies, were different in different age groups. To do this, they first estimated the effect of the (word-level) psycholinguistic variables in separate linear model (multple regressions) for each adult. They then took the estimated coefficients as the dependent variable (slopes-as-outcomes) for a second analysis in which they tested the effect of age group on variation in the estimated coefficients (see Lorch &amp; Myers, 1990, for a discussion of the approach).</p>
+</div>
+<section id="sec-multi-discussion-two-step" class="level4" data-number="3.9.9.1">
+<h4 data-number="3.9.9.1" class="anchored" data-anchor-id="sec-multi-discussion-two-step"><span class="header-section-number">3.9.9.1</span> Discussion: slopes-as-outcomes analyses as a common approach</h4>
+<p>The ‘slopes-as-outcomes’ approach is quite common and can be found in a number of papers in the psychological and educational research literatures. An influential example can be found in Balota et al.’s (2004) of the analysis of psycholinguistic effects in older and younger adults. Balota et al.&nbsp;(2004) wanted to examine if or how effects of variables like word frequency, on reading response latencies, were different in different age groups. To do this, they first estimated the effect of the (word-level) psycholinguistic variables in separate linear model (multple regressions) for each adult. They then took the estimated coefficients as the dependent variable (slopes-as-outcomes) for a second analysis in which they tested the effect of age group on variation in the estimated coefficients (see Lorch &amp; Myers, 1990, for a discussion of the approach).</p>
 <p>You may be asked to do this. I would advise you against it because there is a better way, as we see next.</p>
 </section>
 </section>
@@ -1125,7 +1188,7 @@ y_{ij} = \gamma_0 + \gamma_1X_{ij} + U_{0j} + U_{1j}X_{ij} + e_{ij}
 <p>Let’s try it out.</p>
 <p>To use the <code>lmer()</code> function you need to make the <code>lme4</code> library available.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The model you are going to code will correspond to the statistical model that we have been discussing:</p>
 <span class="math display">\[\begin{equation}
@@ -1133,18 +1196,18 @@ y_{ij} = \gamma_0 + \gamma_1X_{ij} + U_{0j} + U_{1j}X_{ij} + e_{ij}
 \end{equation}\]</span>
 <p>And the code is written as follows.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>porto.lmer1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(english <span class="sc">~</span> portuguese <span class="sc">+</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>                              (portuguese <span class="sc">+</span> <span class="dv">1</span><span class="sc">|</span>class_number),</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">data =</span> brazil)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>porto.lmer1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(english <span class="sc">~</span> portuguese <span class="sc">+</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                              (portuguese <span class="sc">+</span> <span class="dv">1</span><span class="sc">|</span>class_number),</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">data =</span> brazil)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can see that the <code>lmer()</code> function call is closely similar to the <code>lm()</code> function call, with one critical exception, as I explain next.</p>
 <p>First, we have a chunk of code mostly similar to what we do when we do a regression analysis.</p>
 <p>Second, we have a bit that is specific to multilevel or mixed-effects models.</p>
 <p>If you run the model code as written – see the .R file for an example of the code – and it works then the code will be shown in the console window in R-Studio. To show the model results, you need to get a summary of the model, using the model name.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(porto.lmer1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(porto.lmer1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="exercise-fitting-linear-mixed-effects-models" class="level4" data-number="3.9.12.1">
 <h4 data-number="3.9.12.1" class="anchored" data-anchor-id="exercise-fitting-linear-mixed-effects-models"><span class="header-section-number">3.9.12.1</span> Exercise – fitting linear mixed-effects models</h4>
@@ -1156,7 +1219,7 @@ y_{ij} = \gamma_0 + \gamma_1X_{ij} + U_{0j} + U_{1j}X_{ij} + e_{ij}
 <h3 data-number="3.9.13" class="anchored" data-anchor-id="reading-the-lmer-results"><span class="header-section-number">3.9.13</span> Reading the <em>lmer</em> results</h3>
 <p>Now let’s take a look at the results.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(porto.lmer1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(porto.lmer1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML ['lmerMod']
 Formula: english ~ portuguese + (portuguese + 1 | class_number)
@@ -1216,7 +1279,7 @@ portuguese -0.943</code></pre>
 <h3 data-number="3.10.2" class="anchored" data-anchor-id="useful-functions"><span class="header-section-number">3.10.2</span> Useful functions</h3>
 <p>We used functions to read-in the libraries of functions we needed.</p>
 <p>We used some new functions, or focused on functions we have seen before but not discussed</p>
-<p>We used the function to get model results for both linear models and for the mulilevel or liner mixed-effects model.</p>
+<p>We used the `summary(): function to get model results for both linear models and for the mulilevel or liner mixed-effects model.</p>
 </section>
 </section>
 <section id="r-code-and-data-file-access-for-the-class" class="level2" data-number="3.11">

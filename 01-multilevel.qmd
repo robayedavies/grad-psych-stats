@@ -357,9 +357,9 @@ brazil %>%
                  head(n = 25)
 ```
 
-### To understand the application of multilevel models: first, we ignore the multilevel structure in the data
+### To understand the application of multilevel models: first, we ignore the multilevel structure in the data {#sec-multilevel-ignore}
 
-Recognizing that the children's data are observed within classes means that, when we examine the factors that influence variance in observed outcomes, we need to take into account the fact that the children can be grouped by (or under) the class they were in when their grades were recorded. We can develop an understanding of what this means by moving through a series of steps.
+Recognizing that the children's scores data are observed within classes means that, when we examine the factors that influence variance in observed outcomes, we need to take into account the fact that the children can be grouped by (or under) the class they were in when their grades were recorded. We can develop an understanding of what this means by moving through a series of steps.
 
 To illustrate the understanding we need to develop, we analyze the end-of-year school subject grades for the sample of 292 children studied by @golino2014. With these data, we can examine whether differences between children in their Portuguese language grades predicts differences in their English language grades. (We do not have a theoretical reason to make this prediction though it does not seem unreasonable.) Let's make this our research question.
 
@@ -369,7 +369,7 @@ To illustrate the understanding we need to develop, we analyze the end-of-year s
 
 Now, the first step we take in our development of understanding will be to *first ignore* the importance of the potential differences between classes.
 
-We can begin our analysis in order to address the research question by plotting the possible association between Portuguese and English grades. We shall create a scatterplot to do this, and we create the plot by running the following code and *ignoring group (class) membership*. In the following chunk of code, I pipe the `brazil` data using `%>%` to `ggplot()` and then create the plot step-by-step, with each step separated by a `+` except for the last step.
+We can begin our analysis in order to address the research question by plotting the possible association between Portuguese and English grades. We shall create a scatterplot to do this, and we create the plot by running the following code and *ignoring group (class) membership*. In the following chunk of code, I pipe the `brazil` data using `%>%` to `ggplot()` and then create the plot step-by-step, with each `ggplot()` step separated by a `+` except for the last step.
 
 ```{r}
 #| label: fig-brazil-all
@@ -395,7 +395,7 @@ I have added a line using `geom_smooth()` in red to indicate the trend of the po
 
 Figure @fig-brazil-all suggests that children with higher grades in Portuguese tend, on average, to also have higher grades in English.
 
-#### Exercise -- edit plots
+#### Exercise -- edit plots {#sec-multi-exx-edit-plots}
 
 Notice that when we write the code to produce the plot, we add arguments to the `geom_point()` and `geom_smooth()` function calls to adjust the appearance of the points and the smoother line. Notice, also, that we adjust the labels for the x-axis and y-axis and, finally, that we determine the overall appearance of the plot using the `theme_bw()` function call.
 
@@ -403,15 +403,15 @@ Do the following exercises to practice your `ggplot()` skills
 
 1. Change the x and y variables to `math` and `physics`
 2. Change the theme from `theme_bw()` to something different
-3. Change the appearance of the points, try different colour, shape, size
+3. Change the appearance of the points, try different colours, shapes or sizes.
 
 Further information to help you try out coding options can be found [here, on scatterplots](https://ggplot2.tidyverse.org/reference/geom_point.html), and [here, on themes](https://ggplot2.tidyverse.org/reference/ggtheme.html).
 
-### A linear model ignores the multilevel structure in the data
+### A linear model ignores the multilevel structure in the data {#sec-multi-lm-ignore}
 
 Our plot indicates the relationship between English and Portuguese language grades, in @fig-brazil-all, ignoring the fact that children in the sample belonged to different classes when they were tested. The plot shows us only information about the children and grades, with each point representing the observed English and Portuguese grades for each $i$ child.
 
-Can we predict variation in English grades given information about children's Portuguese grades? Are English grades related to Portuguese grades? We can estimate the relationship between English and Portuguese grades using a linear model in which the English grades variable is the **outcome** variable (or the dependent variable) and the Portuguese grades variable is the **predictor** or independent variable:
+Can we predict variation in English grades given information about child Portuguese grades? Are English grades related to Portuguese grades? We can estimate the relationship between English and Portuguese grades using a linear model in which the English grades variable is the **outcome** variable (or the dependent variable) and the Portuguese grades variable is the **predictor** or independent variable:
 
 $$
 y_i = \beta_0 + \beta_1X_i + e_i
@@ -447,44 +447,50 @@ Notice: here, I have dispensed with the creation of a model object by name. The 
 I do this to give an example of the way in which code can be varied. Also, to show you how one function can be embedded inside another.
 :::
 
-#### Exercise -- fit a different linear model
+#### Exercise -- fit a different linear model {#sec-multi-exx-lm-ignore}
 
 Do the following exercises to practice your `lm()` skills
 
 1. Change the outcome and predictor variables to `math` and `physics`
 2. What do the results tell you about the relationship between maths and physics ability?
 
-### Notation
+### Notation {#sec-multi-notation}
 
 In the following discussion, I will present some model formulas as equations. I am not doing that because the discussion is going to consider the modeling in terms of the underlying mathematics. I am doing it with the aim of clarifying how quantities -- observed, estimated or predicted -- add up, in terms of the linear and then the linear mixed-effects model.
 
-1. I am going to refer to the dependent or outcome variable (e.g., school grade), $y$
-2. and to explanatory or experimental or independent variables (e.g., language skill) as $X$
+1. I am going to refer to the dependent or outcome variable (e.g., school grade) as $y$,
+2. and to explanatory or experimental or independent variables (e.g., language skill) as $X$.
 3. Models shall be fitted to estimate the coefficients, written $\beta$, of the effects of the explanatory variables on the outcome variable
-4. To distinguish the different coefficients of the different effects, I am going to number the coefficients so
+4. To distinguish the different coefficients of the different effects, I am going to number the coefficients so ...
 
-- $\beta_0$ is the coefficient of the intercept
-- $\beta_1$ will be the coefficient of the effect of a first explanatory variable: in the Brazilian schools example, the coefficient of the effect of Portuguese language skill
+- $\beta_0$ is the coefficient of the intercept;
+- $\beta_1$ will be the coefficient of the effect of a first explanatory variable: in the Brazilian schools example, the coefficient of the effect of variation in Portuguese language skill on variation in English language scores.
 
 To make it clear that each observation can be understood as part of a complex multilevel or crossed random effects structure, I am going to use indices as subscripts for variables.
 
-1. I will, here, index individual participants (children) with $i$
-2. I will index (in the Brazilian schools example) index classes in which children were tested with $j$
+1. I will, here, index individual participants (children) using $i$;
+2. I will index index classes in which children were tested using $j$.
 
 Thus, in the Brazilian schools example, we shall see that we are concerned with observations about children's school grades, where children are sampled as individuals *nested* in samples of classes. We will examine how an outcome variable (English language grade) is related to a predictor variable (Portuguese language grade) such that:
 
-- $y_{ij}$ is the outcome English language grade recorded for each child $i$ in each class $j$
-- while $X_{ij}$ represents the explanatory variable, see following, the Portuguese language grade
-- it is subscripted $_{ij}$ because values of the variable depend upon child identity, and children are identified as child $i$ in class $j$ to represent the multilevel structure of the data
+- $y_{ij}$ is the outcome English language grade recorded for each child $i$ in each class $j$;
+- while $X_{ij}$ represents the explanatory variable, see following, the Portuguese language grade.
 
-### Can we really ignore the multilevel structure?
+$X_{ij}$ is subscripted $_{ij}$ because values of the variable depend upon child identity, and children are identified as child $i$ in class $j$ to represent the multilevel structure of the data
 
-The linear model ignores the higher-level structure, the distinction between classes. Does that matter?
+### Can we really ignore the multilevel structure? {#sec-multi-plot-lattice}
 
-We can see the answer to that question if we inspect Figure \@ref(fig:pporteng). We create the plot using the following chunk of code; we discuss that later, first reflecting on what the plot shows us.
+The linear model ignores the higher-level structure, the distinction between classes: **does this matter?**
 
-```{r pporteng, fig.cap = 'Plot of child grades, comparing English with Portuguese grades, shown separately for each school class', warning=FALSE, message=FALSE, fig.height = 8, fig.width = 6, out.width='150%'}
+We can see the answer to that question if we inspect @fig-porteng-class. We create the plot using the following chunk of code; we discuss that later, first reflecting on what the plot shows us.
 
+```{r}
+#| label: fig-porteng-class
+#| fig-cap: "Plot of child grades, comparing English with Portuguese grades, shown separately for each school class"
+#| fig-alt: "The figure shows a grid of scatterplots: each point represents the English and the Portuguese scores for one child. There are separate scatterplots showing the potential association between child English versus Portuguese scores for different children in different clases. A line indicates the trend for the association in each class. Trends vary betwen classes."
+#| code-line-numbers: true
+#| fig-height: 8
+#| fig-width: 8
 brazil %>%
 ggplot(aes(x = portuguese, y = english)) +
 geom_point(colour = "darkgrey") +
@@ -493,105 +499,87 @@ geom_point(colour = "darkgrey") +
   xlab("Portuguese") + ylab("English") +
   theme_bw() +
   scale_x_continuous(breaks=c(25,50,75)) + scale_y_continuous(breaks=c(0,50,100))
-
 ```
 
-Figure \@ref(fig:pporteng) presents a different scatterplot to show the relationship between children's Portuguese and English grades for the children in each different class. We can see that the relationship between Portuguese and English grades is (roughly) similar across classes: in general, children with higher Portuguese grades also tend to have higher English grades. However, Figure \@ref(fig:pporteng) makes it obvious that there are important differences between classes. We can see that the slope of the best fit line (shown in black) varies between classes. And we can see that the intercept (where the line meets the y-axis) also varies between classes. Further, we can see that in some classes, there is no relationship or a negative relationship between Portuguese and English grades.
+@fig-porteng-class presents a grid of scatterplots, with a different scatterplot to show the relationship between children's Portuguese and English grades for the children in each different class. We can see that the relationship between Portuguese and English grades is (roughly) similar across classes: in general, children with higher Portuguese grades also tend to have higher English grades. However, @fig-porteng-class makes it obvious that there are important differences between classes.
+
+We can see that the slope of the best fit line (shown in black) varies between classes. And we can see that the intercept (where the line meets the y-axis) also varies between classes. Further, we can see that in some classes, there is no relationship or a negative relationship between Portuguese and English grades.
 
 Critically, we can see that classes differ in how much data we have for each. For some classes, we have many observations (e.g., M11) and for other classes we have few or one observation (e.g., M22, with one child). We know, in advance, that variation in sample size will be associated with variation in the uncertainty we have about the estimated relationship between Portuguese and English grades. You will remember that the Central Limit Theorem allows us to calculate the standard error of an estimate like the mean, given the sample size, and that the standard error is an index of our uncertainty of the estimate.
 
-#### Code tip -- facetting -- creating grids of plots
+::: callout-tip
+**Facetting** -- notice that, in the plotting code, the key expression is `facet_wrap(~ class_number)` This means:
 
-As you have seen, you can ask `ggplot()` to print a separate plot for each sub-group in a dataset. To produce Figure \@ref(fig:pporteng), we ask for a separate plot of the $english ~ portuguese$ relationship, one plot for each class. Notice that in the code, the key expression is `facet_wrap(~ class_number)` This means
+1. The `class_number` variable is a factor: we ask R to check the summary for the dataframe, and that factor codes what class a child is in.
+2. The `facet_wrap(...)` function then asks R to produce separate plots for each *facet* for the data -- the word facet means face or aspect.
+3. We use the formula `facet_wrap(~ ...)` to ask R to split the data up by using the classification information in the named variable, here `class_number`.
+:::
 
-```{=tex}
-\begin{itemize}
-\item
-The \verb:class_number: variable is a factor, check the summary for the dataframe, and that factor codes what class a child is in.
-\item
-The \verb:facet_wrap(...): function call asks ggplot to produce separate plots for each \emph{facet} for the data -- the word facet means face or aspect.
-\item
-We use the formula \verb:facet_wrap(~ ...): to ask ggplot to split the data up by using the classification information in the named variable, here \verb:class_number:.
-\end{itemize}
-```
-The production of a grid of plots is a useful method for comparing patterns between data sub-sets or groups.
+The production of a grid or lattice of plots is a useful method for comparing patterns between data sub-sets or groups.
+You can see more information about `facet_wrap()` [here](https://ggplot2.tidyverse.org/reference/facet_wrap.html)
 
-You can see more information about `facet_wrap()` here:
+::: callout-tip
+**Adjusting scales** -- notice that in these plots I modified the axes to show x-axis and y-axis ticks at specific locations using scale functions. The tick is the notch or short line where we show the numbers on the axes.
 
-\url{https://ggplot2.tidyverse.org/reference/facet_wrap.html}
+1. `scale_x_continuous(breaks=c(25,50,75))` means: set the x-axis ticks at 25, 50 and 75, defined using a vector `c()` of values
+2. `scale_y_continuous(breaks=c(0,50,100))` means: set the y-axis ticks at 0, 50, 100, defined using a vector of values.
+:::
 
-#### Code tip -- adjusting scales
-
-Notice that in these plots I modified the axes, to show x-axis and y-axis ticks at specific locations using scale functions. The tick is the notch or short line where we show the numbers on the axes.
-
-```{=tex}
-\begin{itemize}
-\item
-\verb:scale_x_continuous(breaks=c(25,50,75)): means: set the x-axis ticks at 25, 50 and 75, defined using a vector \verb:c(): of values
-\item
-\verb:scale_y_continuous(breaks=c(0,50,100)): means: set the y-axis ticks at 0, 50, 100, defined using a vector of values
-\end{itemize}
-```
 It can be useful to adjust the ticks on axes, where other plot production factors cause crowding of labels.
 
-You can see more information on scales here:
+You can see more information on scales [here](https://ggplot2.tidyverse.org/reference/scale_continuous.html).
 
-\url{https://ggplot2.tidyverse.org/reference/scale_continuous.html}
+#### Exercise -- edit plots {#sec-multi-exx-edit-scale-facet}
 
-#### Exercise -- edit plots
+Do the following exercises to practice your `facet_wrap(): skills
 
-Do the following exercises to practice your \verb:facet_wrap(): skills
+1. Change the x and y variables to `math` and `physics`.
+2. Experiment with showing the differences between classes in a different way: instead of using `facet_wrap()` in `aes()` add `colour = class_number`: what happens?
 
-```{=tex}
-\begin{enumerate}
-\item
-Change the x and y variables to \verb:math: and \verb:physics:
-\item
-Experiment with showing the differences between classes in a different way: instead of using \verb:facet_wrap(): in \verb:aes(): add \verb:colour = class_number: -- what happens?
-\end{enumerate}
-```
-### Linear models for multilevel data -- dealing with the hierarchical structure
+### Linear models for multilevel data -- dealing with the hierarchical structure {#sec-multi-lm-address}
 
-Figure \@ref(fig:pporteng) shows that there is variation between classes in both the average English grade, shown as differences in the y-axis intercept, and the 'effect' of Portuguese language skill, shown as differences in the slope of the best fit line for the predicted relationship between Portuguese and English grades. We put 'effect' in quotes to signal the fact that we do not wish to assert a causal relation. The interpretation of the results of the linear model assumes those results are valid provided that the observations are independent, among other things. We can see that we cannot make the assumption of independence because individuals in classes with high average English grades are more likely to have higher English grades.
+@fig-porteng-class shows that there is variation between classes in both the average English grade, shown as differences in the y-axis intercept, and the 'effect' of Portuguese language skill, shown as differences in the slope of the best fit line for the predicted relationship between Portuguese and English grades.
+
+We put 'effect' in quotes to signal the fact that we do not wish to assert a causal relation. The interpretation of the results of the linear model assumes those results are valid provided that the observations are independent, among other things. We can see that we cannot make the assumption of independence because individuals in classes with high average English grades are more likely to have higher English grades.
 
 We can represent in our analysis the information we have about hierarchical structure in the data (child within class) by allowing the regression coefficients to vary between groups. We therefore modify the subscripting to take into account the fact that we must distinguish which child $i$ and which class $j$ we are examining, adapting our model to:
 
-```{=tex}
-\begin{equation}
+$$
 y_{ij} = \beta_{0j} + \beta_{1j}X_{ij} + e_{ij}
-\end{equation}
-```
-```{=tex}
-\begin{itemize}
-\item
-where $y_{ij}$ represents the outcome measure, the English grade for each $i$ child in each $j$ class
-\item
-$\beta_{0j}$ represents the average grade, different in different classes
-\item
-$\beta_{1j}X_{ij}$ represents the variation in $X$ the Portuguese grade for each $i$ child in $j$ class, with the effect of that variation estimated as the coefficient $\beta_{1j}$, different in different classes
-\item
-and $e_{ij}$ represents differences between observed and predicted English grades for each $i$ child in $j$ class
-\end{itemize}
-```
-### Two-step or slopes-as-outcomes linear models as approximations to the Linear Mixed-effects or Multilevel modeling approach
+$$
+
+- where $y_{ij}$ represents the outcome measure, the English grade for each $i$ child in each $j$ class;
+- $\beta_{0j}$ represents the average grade, different in different classes;
+- $\beta_{1j}X_{ij}$ represents the variation in $X$ the Portuguese grade for each $i$ child in $j$ class, with the effect of that variation estimated as the coefficient $\beta_{1j}$, different in different classes;
+- and $e_{ij}$ represents differences between observed and predicted English grades for each $i$ child in $j$ class.
+
+### Two-step or slopes-as-outcomes linear models as approximations to the Linear Mixed-effects or Multilevel modeling approach {#sec-multi-lm-two-step}
 
 In practice, we could capture the variation between classes by performing a **two-step analysis**.
 
--   First, we estimate the coefficient of the 'Portuguese' effect for each class analysed separately.
+-   First, we estimate the coefficient of the 'Portuguese' effect for each class separately. We do multiple (per-class) analyses. In each of these analyses, we estimate the coefficient looking only at the data for one class.
 -   Second, we can take those per-class coefficients as the outcome variable in a 'slopes-as-outcomes analysis' to examine if the per-class estimates of the experimental effect are reliably different from zero or, more usefully, if the per-class estimates vary in relation to some explanatory variable like teacher skill.
 
-The problem with the approach is apparent in Figure \@ref(fig:pointclass). Figure \@ref(fig:pointclass) shows the estimated intercept and coefficient of the slope of the 'Portuguese' effect for each class, when we have analyzed the data for each class in a separate linear model. The estimate for each class is shown as a black dot. The standard error of the estimate is shown as a black vertical line, shown above and below a point. You can say that where there is a longer line there we have more uncertainty about the location of the estimate.
+The problem with the approach is apparent in @fig-pointclass. 
+@fig-pointclass shows the estimated intercept and coefficient of the slope of the 'Portuguese' effect for each class, when we have analyzed the data for each class in a separate linear model. 
 
-The critical point is that **the standard errors vary** a lot between classes. In some classes, the standard error is small (the black line is short) so we can maybe have more certainty over the estimated intercept or slope for those classes. In other classes, the standard error is large (the black line is long) so we can maybe have less certainty over the estimated intercept or slope for those classes. The **key idea** here is that standard errors vary widely between classes but the two-step modeling approach, while it can take into account the between-class differences in estimates, cannot account for the variation in the standard errors about those estimates.
+The estimate for each class is shown as a black dot. The standard error of the estimate is shown as a black vertical line, shown above and below a point. 
 
-#### Code tip
+You can say that where there is a longer line there we have more uncertainty about the location of the estimate.
+Notice that **the standard errors vary** a lot between classes. 
+In some classes, the standard error is small (the black line is short) so we can maybe have more certainty over the estimated intercept or slope for those classes. In other classes, the standard error is large (the black line is long) so we can maybe have less certainty over the estimated intercept or slope for those classes. 
 
-Notice that the code I used fits a separate model for each class, and then plots the per-class estimates of intercepts and slopes of the $english \sim portuguese$ relationship. You can check out the code for yourself in the **how-to.R** for this week.
+::: callout-important
+The **key idea** here is that standard errors vary widely between classes but the two-step modeling approach, while it can take into account the between-class differences in estimates, cannot account for the variation in the standard errors about those estimates.
+:::
 
-```{r pointclass, echo=FALSE, warning=FALSE, message=FALSE, fig.cap = 'Plot showing the estimated intercept and coefficient of the slope of the Portuguese effect for each class analysed separately', fig.height = 4, fig.width = 5, fig.show = 'hold', out.width = '50%'}
-
-library(broom)
-
+```{r}
+#| label: fig-pointclass
+#| fig-cap: "Plot showing the estimated intercept and coefficient of the slope of the Portuguese effect for each class analysed separately"
+#| fig-alt: "The figure shows a grid of two scatterplots. The plots are generated by estimating the slope of the association between English scores (as outcome) and Portuguese scores (as predictor), using linear models fitted separately for data on children in different classes. On the left, we show variation between classes in the estimate for the intercept (shown as dots) and associated standard error (shown as lines), on the right we show variation betwen classes in the estimate for the slope and the associated standard error."
+#| echo: false
+#| fig-height: 4
+#| fig-width: 8
 brazlm <- brazil %>%
           group_by(class_number) %>%
           do(tidy(lm(english ~ portuguese, data=.)))
@@ -601,23 +589,33 @@ brazlm$term <- as.factor(brazlm$term)
 brazlmint <- filter(brazlm, term == '(Intercept)')
 brazlmport <- filter(brazlm, term == 'portuguese')
 
-pbrazlmint <- ggplot(brazlmint, aes(x = class_number, y = estimate, ymin = estimate - std.error, ymax = estimate + std.error))
-pbrazlmint + geom_point() + geom_linerange() + theme_bw() +
+pbrazlmint <- ggplot(brazlmint, 
+                     aes(x = class_number, y = estimate, 
+                         ymin = estimate - std.error, ymax = estimate + std.error)) +
+  geom_point() + geom_linerange() + theme_bw() +
   ggtitle("Intercept") +
   ylab("Estimated coefficient +/- SE") + xlab("Class") +
   theme(axis.title.y = element_text(size = 10), axis.text.x = element_blank(), panel.grid = element_blank())
 
-pbrazlmport <- ggplot(brazlmport, aes(x = class_number, y = estimate, ymin = estimate - std.error, ymax = estimate + std.error))
-pbrazlmport + geom_point() + geom_linerange() + theme_bw() +
+pbrazlmport <- ggplot(brazlmport, 
+                      aes(x = class_number, y = estimate, 
+                          ymin = estimate - std.error, ymax = estimate + std.error)) +
+  geom_point() + geom_linerange() + theme_bw() +
   ggtitle("Portuguese effect") +
   ylab("Estimated coefficient +/- SE") + xlab("Class") +
   theme(axis.title.y = element_text(size = 10), axis.text.x = element_blank(), panel.grid = element_blank())
 
+pbrazlmint + pbrazlmport
 ```
 
-#### Discussion: slopes-as-outcomes analyses as a common approach
+::: callout-tip
+Notice that the code I used fits a separate model for each class, and then plots the per-class estimates of intercepts and slopes of the $english \sim portuguese$ relationship.
+:::
 
-The 'slopes-as-outcomes' approach is quite common and can be found in a number of papers in the psychological and educational research literatures, e.g., in Balota et al.'s (2004) of the analysis of psycholinguistic effects in older and younger adults. Balota et al. (2004) wanted to examine if or how effects of variables like word frequency, on reading response latencies, were different in different age groups. To do this, they first estimated the effect of the (word-level) psycholinguistic variables in separate linear model (multple regressions) for each adult. They then took the estimated coefficients as the dependent variable (slopes-as-outcomes) for a second analysis in which they tested the effect of age group on variation in the estimated coefficients (see Lorch & Myers, 1990, for a discussion of the approach).
+#### Discussion: slopes-as-outcomes analyses as a common approach {#sec-multi-discussion-two-step}
+
+The 'slopes-as-outcomes' approach is quite common and can be found in a number of papers in the psychological and educational research literatures.
+An influential example can be found in Balota et al.'s (2004) of the analysis of psycholinguistic effects in older and younger adults. Balota et al. (2004) wanted to examine if or how effects of variables like word frequency, on reading response latencies, were different in different age groups. To do this, they first estimated the effect of the (word-level) psycholinguistic variables in separate linear model (multple regressions) for each adult. They then took the estimated coefficients as the dependent variable (slopes-as-outcomes) for a second analysis in which they tested the effect of age group on variation in the estimated coefficients (see Lorch & Myers, 1990, for a discussion of the approach).
 
 You may be asked to do this. I would advise you against it because there is a better way, as we see next.
 
@@ -742,15 +740,15 @@ First, we have a chunk of code mostly similar to what we do when we do a regress
 ```{=tex}
 \begin{itemize}
 \item
-\verb:porto.lmer1 <- lmer(...): creates a \emph{linear mixed-effects model} object using the \verb:lmer(): function.
+`porto.lmer1 <- lmer(...): creates a \emph{linear mixed-effects model} object using the `lmer(): function.
 \item
-\verb:english ~ portuguese: is a formula expressing the model in which we estimate the fixed effect on the outcome or dependent variable \verb:english: (English grades) predicted $\sim$ by the independent or predictor variable \verb:portuguese: (Portuguese grades).
+`english ~ portuguese: is a formula expressing the model in which we estimate the fixed effect on the outcome or dependent variable `english: (English grades) predicted $\sim$ by the independent or predictor variable `portuguese: (Portuguese grades).
 \item
-If there were more terms in the model, the terms would be added in series separated as variable names separated by \verb:+: sum symbols.
+If there were more terms in the model, the terms would be added in series separated as variable names separated by `+: sum symbols.
 \item
-\verb:...(..., data = brazil): specifies the dataset in which you can find the variables named in the model fitting code.
+`...(..., data = brazil): specifies the dataset in which you can find the variables named in the model fitting code.
 \item
-\verb:summary(porto.lmer1): gets a summary of the fitted model object.
+`summary(porto.lmer1): gets a summary of the fitted model object.
 \end{itemize}
 ```
 Second, we have a bit that is specific to multilevel or mixed-effects models.
@@ -758,11 +756,11 @@ Second, we have a bit that is specific to multilevel or mixed-effects models.
 ```{=tex}
 \begin{itemize}
 \item
-Critically, we add \verb:(...|class_number): to tell R about the random effects corresponding to random differences between sample groups (classes) coded by the \verb:class_number: variable.
+Critically, we add `(...|class_number): to tell R about the random effects corresponding to random differences between sample groups (classes) coded by the `class_number: variable.
 \item
-\verb:(...1 |class_number): says that we want to estimate random differences between sample groups (classes) in intercepts coded \verb:1:.
+`(...1 |class_number): says that we want to estimate random differences between sample groups (classes) in intercepts coded `1:.
 \item
-\verb:(portuguese... |class_number):: adds random differences between sample groups (classes) in slopes of the portuguese effect coded by using the \verb:portuguese: variable name.
+`(portuguese... |class_number):: adds random differences between sample groups (classes) in slopes of the portuguese effect coded by using the `portuguese: variable name.
 \end{itemize}
 ```
 If you run the model code as written -- see the .R file for an example of the code -- and it works then the code will be shown in the console window in R-Studio. To show the model results, you need to get a summary of the model, using the model name.
@@ -778,14 +776,14 @@ Mixed-effects model code is hard to get used to *at first*. A bit of practice he
 ```{=tex}
 \begin{enumerate}
 \item
-Change the outcome (from \verb:english:) and the predictor (from \verb:portuguese:) -- this is about changing the fixed effect part of the model.
+Change the outcome (from `english:) and the predictor (from `portuguese:) -- this is about changing the fixed effect part of the model.
 \item
 Vary the random effects part of the model.
 \begin{enumerate}
 \item
-Change it from \verb:(portuguese + 1 | class_number): to \verb:(1 | class_number): -- what you are doing is asking R to ignore the differences in the slope of the effect of Portuguese grades.
+Change it from `(portuguese + 1 | class_number): to `(1 | class_number): -- what you are doing is asking R to ignore the differences in the slope of the effect of Portuguese grades.
 \item
-Change it from \verb:(portuguese + 1 | class_number): to \verb:(portuguese + 0 | class_number): -- what you are doing is asking R to ignore the differences in the intercept.
+Change it from `(portuguese + 1 | class_number): to `(portuguese + 0 | class_number): -- what you are doing is asking R to ignore the differences in the intercept.
 \end{enumerate}
 \end{enumerate}
 ```
@@ -804,11 +802,11 @@ Notice that the output has a number of elements.
 ```{=tex}
 \begin{itemize}
 \item
-First, we see information about the function used to fit the model, and the model object created by the \verb:lmer(): function call.
+First, we see information about the function used to fit the model, and the model object created by the `lmer(): function call.
 \item
-Then, we see the model formula \verb:english ~ portuguese + (portuguese + 1 | class_number):.
+Then, we see the model formula `english ~ portuguese + (portuguese + 1 | class_number):.
 \item
-Then, we see \verb:REML criterion at convergence: about the model fitting process, which we can usually ignore.
+Then, we see `REML criterion at convergence: about the model fitting process, which we can usually ignore.
 \item
 Then, we see information about the distribution of the model residuals.
 \item
@@ -817,7 +815,7 @@ Then, we see information about the error terms estimated (technically, predicted
 \item
 Residuals, just like a linear model plus error terms specific to multilevel or mixed-effects models, group-level residuals:
 \item
-differences between the average intercept and, here, the intercept (average \verb:english: score) per class;
+differences between the average intercept and, here, the intercept (average `english: score) per class;
 \item
 and differences between the average slope capturing the $english \sim portuguese$ relationship and the slope (of the effect) per class.
 \end{itemize}
@@ -888,14 +886,14 @@ We used some new functions, or focused on functions we have seen before but not 
 ```{=tex}
 \begin{itemize}
 \item
-We used \verb:load(): to load an \verb:.RData: file into R workspace
+We used `load(): to load an `.RData: file into R workspace
 \item
-For visualization, we used \verb:facet_wrap(): to show plots of the relationship between English and Portuguese scores in each class separately
+For visualization, we used `facet_wrap(): to show plots of the relationship between English and Portuguese scores in each class separately
 \item
-We used \verb:lmer(): to fit a multilevel model
+We used `lmer(): to fit a multilevel model
 \end{itemize}
 ```
-We used the \verb:summary(): function to get model results for both linear models and for the mulilevel or liner mixed-effects model.
+We used the `summary(): function to get model results for both linear models and for the mulilevel or liner mixed-effects model.
 
 ## R code and data file access for the class
 
