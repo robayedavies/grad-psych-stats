@@ -17,7 +17,7 @@ library(tidyverse)
 
 This week, we shall start to develop skills in using a method or approach that is essential in modern data analysis: *multilevel modeling*. We are going to invest four weeks in working on this approach. This investment is designed to give you a specific, important, advantage in your work as a psychologist, or as someone who produces or consumes psychological research.
 
-::: callout-advice
+::: callout-note
 Multilevel models: *why* do we need to do this? - Four weeks is a lot of time to spend on one method.
 :::
 
@@ -35,8 +35,8 @@ Multilevel models are also known as hierarchical models or linear mixed-effects 
 
 I will only use the terms *multilevel* or *linear mixed-effects* models.
 
-::: callout-tip
--   This week, we emphasize the multilevel perspective But, to anticipate future development, we will come to think in terms of mixed-effects models.
+::: callout-warning
+-   This week, we emphasize the multilevel perspective but, to anticipate future development, we will come to think in terms of *mixed-effects models*.
 :::
 
 ## Challenges {#sec-multi-challenges}
@@ -55,7 +55,7 @@ We cannot or should not avoid engaging with the ideas -- because we have to be a
 
 ## The key idea to get us started
 
-::: callout-warning
+::: callout-important
 Multilevel models are a *general* form of linear model.
 :::
 
@@ -78,9 +78,8 @@ Our learning objectives include the development of key concepts and skills.
 1.  **concepts** -- how data can have multilevel structures and what this requires in models
 2.  **skills**
 
-```{=html}
 <!-- -->
-```
+
 i.  use visualization to examine observations within groups
 ii. run linear models over all data and within each class
 iii. use the `lmer()` function to fit models of multilevel data
@@ -114,11 +113,10 @@ You can access the data from the link associated with the @golino2014 article [h
 
 Or you can download the [data-01-multilevel.zip](files/data-01-multilevel.zip) files folder for this chapter.
 
-The file is located in a .zip folder called `data-01-multilevel`.
-The data file is collected together with the .R scripts:
+The file is located in a .zip folder called `data-01-multilevel`. The data file is collected together with the .R scripts:
 
-- `01-multilevel-workbook.R` the workbook you will need to do the practical exercises.
-- `01-multilevel-workbook-answers.R` with answers to questions and code for exercises.
+-   `01-multilevel-workbook.R` the workbook you will need to do the practical exercises.
+-   `01-multilevel-workbook-answers.R` with answers to questions and code for exercises.
 
 ### Read in the data file -- so that you can access the data -- by using the load() function {#sec-multi-data-load}
 
@@ -159,17 +157,17 @@ summary(BAFACALO_DATASET)
 
 When you inspect the file, you will see that it includes a large number of variables, but we only really care about those we will use in our exercises:
 
-- `participant_id` the participant identity code for each child
-- `class_number` the class identity code for the school class for each child
-- `portuguese`, `english`, `math`, and `physics` the score for each child in subject class attainment measures
+-   `participant_id` the participant identity code for each child
+-   `class_number` the class identity code for the school class for each child
+-   `portuguese`, `english`, `math`, and `physics` the score for each child in subject class attainment measures
 
 You can see that I am not explaining the variables in great depth. For our aims, we do not need more detailed information but please do read the data article if you wish to find out more.
 
 We need to tidy the data before we can get to the analysis parts of this chapter. We are going to:
 
-1. Select the variables we want to work with;
-2. Filter out missing values, if any are present;
-3. And make sure R knows how we want each variable to be identified; what type the variable should have.
+1.  Select the variables we want to work with;
+2.  Filter out missing values, if any are present;
+3.  And make sure R knows how we want each variable to be identified; what type the variable should have.
 
 We shall need the `tidyverse` library of functions.
 
@@ -202,7 +200,7 @@ Notice the code is written to create the new selected dataset and, at the same t
 
 ### Remove missing values {#sec-multi-data-remove-na}
 
-If you look at the results of the selection, you can see that there are missing values, written as e.g. `NA's 62` at the bottom of each summary of each variable (if a variable column includes missing values). (Remember that in R `NA` means "not available" i.e. missing.) 
+If you look at the results of the selection, you can see that there are missing values, written as e.g. `NA's 62` at the bottom of each summary of each variable (if a variable column includes missing values). (Remember that in R `NA` means "not available" i.e. missing.)
 
 We will need to get rid of the missing values. It is simpler to do this at the start rather than wait for an error message, later, when some arithmetic function tells us it cannot give us a result because there are `NAs` present.
 
@@ -218,17 +216,13 @@ If you then look at a summary of the data again then you will see that the `NAs`
 summary(brazil)
 ```
 
-### Getting R to treat a variable as a type object of the kind required -- using the as.numeric() function {#sec-multi-data-coerce}
+### Getting R to treat a variable as a type object of the kind required -- using the as...() family of functions {#sec-multi-data-coerce}
 
-But if you look closely at the output from `summary(brazil)` you will see that the `portuguese` and `english` variables are summarized in the way that R summarizes factors. 
-When you ask R to summarize factors, R gives you a count of the number of observations associated with each factor level, that is, each category in each variable. Here, it is treating a grade score like $100$ in `english` as a category (like you might treat $dog$ as a category of pets), and you can see that the count shows you that 17 children were recorded as having scored 100 in their class. We do not want numeric variables like subject grades (e.g. children's grades in English) treated as categorical variables, factors.
+But if you look closely at the output from `summary(brazil)` you will see that the `portuguese` and `english` variables are summarized in the way that R summarizes factors. When you ask R to summarize factors, R gives you a count of the number of observations associated with each factor level, that is, each category in each variable. Here, it is treating a grade score like $100$ in `english` as a category (like you might treat $dog$ as a category of pets), and you can see that the count shows you that 17 children were recorded as having scored 100 in their class. We do not want numeric variables like subject grades (e.g. children's grades in English) treated as categorical variables, factors.
 
 You can also see that R gives you a numeric summary of the recorded values in the `participant_id` variable. This makes no sense because the identity code numbers are (presumably) assigned at random so identity numbers provide no useful numeric information for us. We do not want this either.
 
-We want R to treat the educational attainment scores as numbers.
-We can do this using the `as.numeric()` function.
-We want R to treat the class and participant identity numbers as factors (categorical variables).
-We can do this using the `as.factor()` function.
+We want R to treat the educational attainment scores as numbers. We can do this using the `as.numeric()` function. We want R to treat the class and participant identity numbers as factors (categorical variables). We can do this using the `as.factor()` function.
 
 We could do this one variable at a time.
 
@@ -243,13 +237,12 @@ brazil$class_number <- as.factor(brazil$class_number)
 brazil$participant_id <- as.factor(brazil$participant_id)
 ```
 
-But it is simpler and more efficient in `tidyverse` style.
-([Here](https://stackoverflow.com/questions/43917904/how-to-change-column-data-type-of-a-tibble-with-least-typing) is how I figured this out.)
+But it is simpler and more efficient in `tidyverse` style. (You can see a discussion [here](https://stackoverflow.com/questions/43917904/how-to-change-column-data-type-of-a-tibble-with-least-typing) that helped me to figure this out.)
 
-```{r-tidy-coercion}
+```{r tidy-coercion}
 brazil <- brazil %>%
-  mutate(across(portuguese, english, math, physics, as.integer),
-         across(class_number, participant_id, as.factor)) 
+  mutate(across(c(portuguese, english, math, physics), as.integer),
+         across(c(class_number, participant_id), as.factor)) 
 ```
 
 If you now look at the summary of the data, you can see that R will give you mean etc. for the subject or class score variables, showing that it is now treating them as numeric variables. In comparison, R gives you counts of the numbers of observations for each level (category) of categorical or nominal variables like `participant_id`.
@@ -258,23 +251,20 @@ If you now look at the summary of the data, you can see that R will give you mea
 summary(brazil)
 ```
 
-#### Coercion: a quick lesson
+#### Coercion: a quick lesson {#sec-multi-coercion}
 
 R treats things like variables as vectors. A vector can be understood to be a set or list of elements, things like numbers of words.
 
 R gives each vector a type (factor, numeric etc.) which helps to inform different functions how to handle that vector. Usually, R assigns type correctly but sometimes it does not. We can use what is called *coercion* to force R to assign the correct type to a variable.
 
-It is more efficient to do this at the start. Normally, I would use `read_csv()` from `tidyverse` and assign type to variable using `col_types()` specification. See here for more information and an example:
+It is more efficient to do this at the start. Normally, I would use `read_csv()` from `tidyverse` and assign type to variable using `col_types()` specification. (See [here](https://readr.tidyverse.org/) for more information and an example.) But it is useful to learn what you need to do if you need to change the way a variable is treated after you have got the data into the R environment.
 
-\url{https://readr.tidyverse.org/}
-
-But it is useful to learn what you need to do if you need to change the way a variable is treated after you have got the data into the R environment.
-
-#### Exercise -- experiment with coercion
+#### Exercise -- experiment with coercion {#sec-multi-exx-coercion}
 
 In R, there are a family of functions that work together. You can test whether a variable (a vector, technically) is or is not a certain type using the `is.[something]` function. For example:
 
-```{r coerce-exx, eval=FALSE}
+```{r coerce-exx}
+#| eval: false
 is.factor(brazil$english)
 is.numeric(brazil$english)
 is.character(brazil$english)
@@ -282,46 +272,32 @@ is.character(brazil$english)
 
 And you can coerce variables so that they are treated as of certain types.
 
-```{r coercion-exx, eval=FALSE}
+```{r coercion-exx}
+#| eval: false
 brazil$english <- as.factor(brazil$english)
 brazil$english <- as.numeric(brazil$english)
 brazil$english <- as.character(brazil$english)
 ```
 
-```{=tex}
-\begin{enumerate}
-\item
-Test out variable type using \verb:is...(): for some of the variables
-\item
-Test out coercion -- and its results -- using \verb:as...(): for some of the variables
-\item
-Look at the results using \verb:summary():
-\end{enumerate}
-```
-## Introduction to multilevel models
+Now try it out.
 
-### Main ideas -- Phenomena and data sets in the social sciences often have a multilevel structure
+1.  Test out variable type using `is...()` for some of the variables
+2.  Test out coercion -- and its results -- using `as...()` for some of the variables
+3.  Look at the results using `summary()`
+
+## Introduction to multilevel models {#sec-multilevel-ideas-intro}
+
+### Main ideas -- Phenomena and data sets in the social sciences often have a multilevel structure {#sec-multilevel-ideas-main}
 
 We (Psychologists) often adopt *Repeated Measures* or *Clustered* designs in our studies, and these designs yield data that have a multilevel structure. Examples of research which results in data with a multilevel structure include:
 
-```{=tex}
-\begin{itemize}
-\item
-Studies where we test the same people multiple times, maybe in developmental or learning longitudinal investigations;
-\item
-Intervention, learning or treatment studies where we need to make pre- and post-treatment comparisons;
-\item
-Studies where we present multiple stimuli and everyone sees the same stimuli;
-\item
-Studies that involve multi-stage sampling;
-\begin{itemize}
-\item
-Finding (sample) classes or schools -- then testing (sample) children within classes or schools;
-\item
-Or finding (sample) clinics -- then testing (sample) patients within clinics.
-\end{itemize}
-\end{itemize}
-```
+-   Studies where we test the same people multiple times, maybe in developmental or learning longitudinal investigations;
+-   Intervention, learning or treatment studies where we need to make pre- and post-treatment comparisons;
+-   Studies where we present multiple stimuli and everyone sees the same stimuli;
+-   Studies that involve multi-stage sampling;
+
+-- Finding (sample) classes or schools -- then testing (sample) children within classes or schools; -- Or finding (sample) clinics -- then testing (sample) patients within clinics.
+
 The key insight to keep in mind when considering the analysis of such data is that observations are clustered and are *not independent*. They are correlated. What is correlated with what?
 
 Imagine testing a number of subjects by giving them all the same test. In that test, you might present them all with the same stimuli over a series of trials, so that everybody sees the same set of stimuli. Do you think an observed response recorded for any one individual will be uncorrelated i.e. independent of that person's other responses? People are different and one usually finds that a slow or inaccurate subject is slow or inaccurate for most of their responses. That means that if you have information about one of their responses you can predict, in part, what the time or accuracy of one of their other responses would be. That capacity to predict one response from another is what we mean when we talk about a lack of independence.
@@ -330,7 +306,7 @@ Alternatively, imagine going to test children in a school. Will the children in 
 
 This week, we will see that we must deal with the dependence of observations within a class, where the observed responses were made about the different pupils tested in a class, for a number of different classes.
 
-### Multilevel models -- why they are more used and more useful than traditional methods
+### Multilevel models -- why they are more used and more useful than traditional methods {#sec-multilevel-models-utility}
 
 The utility of **multilevel models** to analyze **multilevel data** or hierarchically structured data is well established in education. In educational research, we often need to think about effects of interventions or correlations in the context of observing children in classes, schools or districts, perhaps over time or at different time points. This means that many of the critical textbooks present examples that are based on educational research data (Bryk & Raudenbush, 1992; Goldstein, 2011; Kreft & de Leeuw, 1998; Snijders & Bosker, 2012).
 
@@ -340,21 +316,16 @@ In these circumstances, the application of traditional analytic methods has typi
 
 Ignoring structure by ignoring or averaging over sources of variability like differences between classes, participants, or stimulus items can mean that analyses are less sensitive because they fail to fully account for error variance. Where differences between classes, participants or stimuli include variation in the impact of experimental variables, e.g., individual differences in response to an experimental manipulation, the application of traditional methods can be associated with an increased risk of false positives in discovery. Yet these costs need no longer be suffered because the capacity to perform multilevel modeling is now readily accessible.
 
-### Practical applications: children sampled within classes
+### Practical applications: children sampled within classes {#sec-multilevel-practical-application}
 
-```{r SB12multistage, echo=FALSE, fig.cap="Snijders and Bosker (2012) Multistage sample -- used without permission", out.width = '55%', fig.align='center'}
+If a researcher tests participants belonging to different groups, e.g., records the educational attainment of different children recruited from different classes in a school, the test scores for the participants are observations that occupy the lowest level of a hierarchy. In multilevel modeling, those observations are understood to be nested within higher-level sampling units, here, the classes. We can say that the children are sampled from the population of children. And the classes are sampled from the population of classes. Critically, we recognize that the children's test scores are **nested within the classes**. This multi-stage sampling has important consequences, as we shall see.
 
-knitr::include_graphics("LME-multistage-sample-snijders-fig2-1.png")
+We are going to be working with the school data collected by @golino2014 in Brazil, so let's take another look at that dataset. Figure @fig-golino2014 presents the first 25 rows of the selected-variables `brazil` dataset. (I have arranged the rows by class number ID.) You can see that there are multiple rows of data for each `class_number`, one row for each child, with multiple children (you can see different `participant_id` numbers). This presentation of the dataset illustrates in practical terms -- what you can actually see when you look at your data -- what multilevel structured data can look like.
 
-```
-
-If a researcher tests participants belonging to different groups, e.g., records the educational attainment of different children recruited from different classes in a school, the test scores for the participants are observations that occupy the lowest level of a hierarchy. In multilevel modeling, those observations are understood to be nested within higher-level sampling units, here, the classes. We can say that the children are sampled from the population of children. And the classes are sampled from the population of classes. Critically, we recognize that the children's test scores are **nested within the classes**.
-
-Figure \@ref(fig:SB12multistage) presents a schematic of this kind of multi-stage sampling (from Snijders and Bosker, 2012). What the figure shows you is that psychologists often first sample groups (shown as big rectangles or squares) like schools or classes and then sample individuals within the groups (shown as small circles or squares). This multi-stage sampling has important consequences, as we shall see.
-
-We are going to be working with the school data collected by Golino and Gomes (2014) in Brazil, so let's take another look at that dataset. Figure \@ref(fig:SB12multistage) presents the first 25 rows of the selected-variables `brazil` dataset. (I have arranged the rows by class number ID.) You can see that there are multiple rows of data for each `class_number`, one row for each child, with multiple children (you can see different `participant_id` numbers). This presentation of the dataset illustrates in practical terms -- what you can actually see when you look at your data -- what the schematic Figure \@ref(fig:SB12multistage) shows in conceptual terms.
-
-```{r show-arrange, echo = FALSE}
+```{r show-arrange}
+#| echo: false
+#| label: fig-golino2014
+#| fig-cap: The first 25 rows of the selected-variables `brazil` dataset
 brazil %>%
        arrange(desc(class_number)) %>%
                  head(n = 25)
@@ -364,19 +335,23 @@ brazil %>%
 
 Recognizing that the children's data are observed within classes means that, when we examine the factors that influence variance in observed outcomes, we need to take into account the fact that the children can be grouped by (or under) the class they were in when their grades were recorded. We can develop an understanding of what this means by moving through a series of steps.
 
-To illustrate the understanding we need to develop, we analyze the end-of-year school subject grades for the sample of 292 children studied by Golino and Gomes (2014). With these data, we can examine whether differences between children in their Portuguese language grades predicts differences in their English language grades. (We don't have a theoretical reason to make this prediction though it does not seem unreasonable.) Let's make this our research question.
+To illustrate the understanding we need to develop, we analyze the end-of-year school subject grades for the sample of 292 children studied by @golino2014. With these data, we can examine whether differences between children in their Portuguese language grades predicts differences in their English language grades. (We do not have a theoretical reason to make this prediction though it does not seem unreasonable.) Let's make this our research question.
 
-```{=tex}
-\begin{description}
-\item[Research question] Does Portuguese grade predict English grade?
-\end{description}
-```
+::: callout-note
+- Research question: Does Portuguese grade predict English grade?
+:::
+
 Now, the first step we take in our development of understanding will be to *first ignore* the importance of the potential differences between classes.
 
 We can begin our analysis in order to address the research question by plotting the possible association between Portuguese and English grades. We shall create a scatterplot to do this, and we create the plot by running the following code and *ignoring group (class) membership*. In the following chunk of code, I pipe the `brazil` data using `%>%` to `ggplot()` and then create the plot step-by-step, with each step separated by a `+` except for the last step.
 
-```{r brazil-all, message = FALSE, fig.cap='Portuguese compared to English grades: each point represents the scores for one child', fig.width=5, fig.height=5, out.width = "60%", fig.align='center', cache = TRUE}
-
+```{r}
+#| label: fig-brazil-all
+#| fig-cap: "Portuguese compared to English grades: each point represents the scores for one child"
+#| fig-alt: "The figure shows scatterplot: each point represents the English and the Portuguese scores for one child. A red line drawn through the points indicates a trend such that higher Portuguese scores are associated with higher English scores."
+#| code-line-numbers: true
+#| fig-height: 5
+#| fig-width: 5
 brazil %>%
 ggplot(aes(x = portuguese, y = english)) +
   geom_point(colour = "black", size = 3, alpha = .5) +
@@ -386,13 +361,13 @@ ggplot(aes(x = portuguese, y = english)) +
 
 ```
 
-Remember that each child ID is associated with a pair of grades: their grade in English and their grade in Portuguese. Each point in Figure \@ref(fig:brazil-all) represents the paired grade data for one child.
+Remember that each child ID is associated with a pair of grades: their grade in English and their grade in Portuguese. Each point in @fig-brazil-all represents the paired grade data for one child.
 
 Because I say that we are interested in predicting English grades then, by convention, we map English grades to the height of the points (i.e. English grade differences are shown as differences on the y-axis). Because we are using Portuguese grades to do the predicting, by convention, we map Portuguese grades to the horizontal position of the points (i.e. Portuguese grade differences are shown as differences on the x-axis).
 
 I have added a line using `geom_smooth()` in red to indicate the trend of the potential association between variation in Portuguese grades and variation in English grades.
 
-Figure \@ref(fig:brazil-all) suggests that children with higher grades in Portuguese tend, on average, to also have higher grades in English.
+Figure @fig-brazil-all suggests that children with higher grades in Portuguese tend, on average, to also have higher grades in English.
 
 #### Exercise -- edit plots
 
@@ -400,35 +375,22 @@ Notice that when we write the code to produce the plot, we add arguments to the 
 
 Do the following exercises to practice your `ggplot()` skills
 
-```{=tex}
-\begin{enumerate}
-\item
-Change the x and y variables to \verb:math: and \verb:physics:
-\item
-Change the theme from \verb:theme_bw(): to something different
-\item
-Change the appearance of the points, try different colour, shape, size
-\end{enumerate}
-```
-Further information to help you try out coding options can be found here (on scatterplots):
+1. Change the x and y variables to `math` and `physics`
+2. Change the theme from `theme_bw()` to something different
+3. Change the appearance of the points, try different colour, shape, size
 
-\url{https://ggplot2.tidyverse.org/reference/geom_point.html}
-
-and here (on themes):
-
-\url{https://ggplot2.tidyverse.org/reference/ggtheme.html}
+Further information to help you try out coding options can be found [here, on scatterplots](https://ggplot2.tidyverse.org/reference/geom_point.html), and [here, on themes](https://ggplot2.tidyverse.org/reference/ggtheme.html).
 
 ### A linear model ignores the multilevel structure in the data
 
-Our plot indicates the relationship between English and Portuguese language grades, in Figure \@ref(fig:brazil-all), ignoring the fact that children in the sample belonged to different classes when they were tested. The plot shows us only information about the children and grades, with each point representing the observed English and Portuguese grades for each $i$ child.
+Our plot indicates the relationship between English and Portuguese language grades, in @fig-brazil-all, ignoring the fact that children in the sample belonged to different classes when they were tested. The plot shows us only information about the children and grades, with each point representing the observed English and Portuguese grades for each $i$ child.
 
 Can we predict variation in English grades given information about children's Portuguese grades? Are English grades related to Portuguese grades? We can estimate the relationship between English and Portuguese grades using a linear model in which the English grades variable is the **outcome** variable (or the dependent variable) and the Portuguese grades variable is the **predictor** or independent variable:
 
-```{=tex}
-\begin{equation}
+$$
 y_i = \beta_0 + \beta_1X_i + e_i
-\end{equation}
-```
+$$
+
 -   where $y_i$ represents the English grade for each $i$ child;
 -   $\beta_0$ represents the intercept, the outcome value obtained if values of the explanatory variable are zero;
 -   $\beta_1$ represents the effect of variation in $X_i$ the Portuguese grade for each child, with the effect of that variation estimated as the the rate of change in English grade for unit change in Portuguese grade;
@@ -437,90 +399,58 @@ y_i = \beta_0 + \beta_1X_i + e_i
 As you have seen, the code for running a linear model corresponds transparently to the statistical model given in the formula.
 
 ```{r brazil.lm}
-
 summary(lm(english ~ portuguese, data = brazil))
-
 ```
 
 The linear model yields the estimate that for unit increase in Portuguese grade there is an associated increase of about .47 in English grade, on average (for the model, $F(1, 228) = 35, p < .001; adj. R^2 = .13$). So, we have a preliminary answer to our research question.
 
-```{=tex}
-\begin{description}
-\item[Research question]
-Does Portuguese grade predict English grade?
-\item[Result]
-Our analysis shows that children who score one grade higher in their Portuguese class (e.g., 61 compared to 60) tended to score .47 of a grade higher in their English class.
-\end{description}
-```
+
+::: callout-note
+- Research question: Does Portuguese grade predict English grade?
+- Result: Our analysis shows that children who score one grade higher in their Portuguese class (e.g., 61 compared to 60) tended to score .47 of a grade higher in their English class.
+:::
+
 We shall see that we will need to revise this estimate when we do an analysis that *does* take school class differences into account.
 
-#### Code tip
-
+::: callout-tip
 Notice: here, I have dispensed with the creation of a model object by name. The model is estimated anyway, and I have embedded the `lm()` function call within a `summary()` function so that I am asking R to do two things:
 
 1.  `lm()` fit a linear model
 2.  `summary()` print out a summary of the fitted model object
 
 I do this to give an example of the way in which code can be varied. Also, to show you how one function can be embedded inside another.
+:::
 
 #### Exercise -- fit a different linear model
 
 Do the following exercises to practice your `lm()` skills
 
-```{=tex}
-\begin{enumerate}
-\item
-Change the outcome and predictor variables to \verb:math: and \verb:physics:
-\item
-What do the results tell you about the relationship between maths and physics ability?
-\end{enumerate}
-```
+1. Change the outcome and predictor variables to `math` and `physics`
+2. What do the results tell you about the relationship between maths and physics ability?
+
 ### Notation
 
 In the following discussion, I will present some model formulas as equations. I am not doing that because the discussion is going to consider the modeling in terms of the underlying mathematics. I am doing it with the aim of clarifying how quantities -- observed, estimated or predicted -- add up, in terms of the linear and then the linear mixed-effects model.
 
-```{=tex}
-\begin{enumerate}
-\item
-I am going to refer to the dependent or outcome variable (e.g., school grade), $y$
-\item
-and to explanatory or experimental or independent variables (e.g., language skill) as $X$
-\item
-Models shall be fitted to estimate the coefficients, written $\beta$, of the effects of the explanatory variables on the outcome variable
-\item
-To distinguish the different coefficients of the different effects, I am going to number the coefficients so
-\begin{itemize}
-\item
-$\beta_0$ is the coefficient of the intercept
-\item
-$\beta_1$ will be the coefficient of the effect of a first explanatory variable: in the Brazilian schools example, the coefficient of the effect of Portuguese language skill
-\end{itemize}
-\end{enumerate}
-```
+1. I am going to refer to the dependent or outcome variable (e.g., school grade), $y$
+2. and to explanatory or experimental or independent variables (e.g., language skill) as $X$
+3. Models shall be fitted to estimate the coefficients, written $\beta$, of the effects of the explanatory variables on the outcome variable
+4. To distinguish the different coefficients of the different effects, I am going to number the coefficients so
+
+- $\beta_0$ is the coefficient of the intercept
+- $\beta_1$ will be the coefficient of the effect of a first explanatory variable: in the Brazilian schools example, the coefficient of the effect of Portuguese language skill
+
 To make it clear that each observation can be understood as part of a complex multilevel or crossed random effects structure, I am going to use indices as subscripts for variables.
 
-```{=tex}
-\begin{enumerate}
-\item
-I will, here, index individual participants (children) with $i$
-\item
-I will index (in the Brazilian schools example) index classes in which children were tested with $j$
-\end{enumerate}
-```
+1. I will, here, index individual participants (children) with $i$
+2. I will index (in the Brazilian schools example) index classes in which children were tested with $j$
+
 Thus, in the Brazilian schools example, we shall see that we are concerned with observations about children's school grades, where children are sampled as individuals *nested* in samples of classes. We will examine how an outcome variable (English language grade) is related to a predictor variable (Portuguese language grade) such that:
 
-```{=tex}
-\begin{enumerate}
-\item
-$y_{ij}$ is the outcome English language grade recorded for each child $i$ in each class $j$
-\item
-while $X_{ij}$ represents the explanatory variable, see following, the Portuguese language grade
-\begin{itemize}
-\item
-it is subscripted $_{ij}$ because values of the variable depend upon child identity, and children are identified as child $i$ in class $j$ to represent the multilevel structure of the data
-\end{itemize}
-\end{enumerate}
-```
+- $y_{ij}$ is the outcome English language grade recorded for each child $i$ in each class $j$
+- while $X_{ij}$ represents the explanatory variable, see following, the Portuguese language grade
+- it is subscripted $_{ij}$ because values of the variable depend upon child identity, and children are identified as child $i$ in class $j$ to represent the multilevel structure of the data
+
 ### Can we really ignore the multilevel structure?
 
 The linear model ignores the higher-level structure, the distinction between classes. Does that matter?

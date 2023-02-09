@@ -276,13 +276,13 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#sec-multi-data-select" id="toc-sec-multi-data-select" class="nav-link" data-scroll-target="#sec-multi-data-select"><span class="toc-section-number">3.8.1</span>  Select the variables</a></li>
   <li><a href="#sec-multi-data-remove-na" id="toc-sec-multi-data-remove-na" class="nav-link" data-scroll-target="#sec-multi-data-remove-na"><span class="toc-section-number">3.8.2</span>  Remove missing values</a></li>
-  <li><a href="#getting-r-to-treat-a-variable-as-a-type-object-of-the-kind-required-using-the-as.numeric-function" id="toc-getting-r-to-treat-a-variable-as-a-type-object-of-the-kind-required-using-the-as.numeric-function" class="nav-link" data-scroll-target="#getting-r-to-treat-a-variable-as-a-type-object-of-the-kind-required-using-the-as.numeric-function"><span class="toc-section-number">3.8.3</span>  Getting R to treat a variable as a type object of the kind required – using the as.numeric() function</a></li>
+  <li><a href="#sec-multi-data-coerce" id="toc-sec-multi-data-coerce" class="nav-link" data-scroll-target="#sec-multi-data-coerce"><span class="toc-section-number">3.8.3</span>  Getting R to treat a variable as a type object of the kind required – using the as…() family of functions</a></li>
   </ul></li>
-  <li><a href="#introduction-to-multilevel-models" id="toc-introduction-to-multilevel-models" class="nav-link" data-scroll-target="#introduction-to-multilevel-models"><span class="toc-section-number">3.9</span>  Introduction to multilevel models</a>
+  <li><a href="#sec-multilevel-ideas-intro" id="toc-sec-multilevel-ideas-intro" class="nav-link" data-scroll-target="#sec-multilevel-ideas-intro"><span class="toc-section-number">3.9</span>  Introduction to multilevel models</a>
   <ul class="collapse">
-  <li><a href="#main-ideas-phenomena-and-data-sets-in-the-social-sciences-often-have-a-multilevel-structure" id="toc-main-ideas-phenomena-and-data-sets-in-the-social-sciences-often-have-a-multilevel-structure" class="nav-link" data-scroll-target="#main-ideas-phenomena-and-data-sets-in-the-social-sciences-often-have-a-multilevel-structure"><span class="toc-section-number">3.9.1</span>  Main ideas – Phenomena and data sets in the social sciences often have a multilevel structure</a></li>
-  <li><a href="#multilevel-models-why-they-are-more-used-and-more-useful-than-traditional-methods" id="toc-multilevel-models-why-they-are-more-used-and-more-useful-than-traditional-methods" class="nav-link" data-scroll-target="#multilevel-models-why-they-are-more-used-and-more-useful-than-traditional-methods"><span class="toc-section-number">3.9.2</span>  Multilevel models – why they are more used and more useful than traditional methods</a></li>
-  <li><a href="#practical-applications-children-sampled-within-classes" id="toc-practical-applications-children-sampled-within-classes" class="nav-link" data-scroll-target="#practical-applications-children-sampled-within-classes"><span class="toc-section-number">3.9.3</span>  Practical applications: children sampled within classes</a></li>
+  <li><a href="#sec-multilevel-ideas-main" id="toc-sec-multilevel-ideas-main" class="nav-link" data-scroll-target="#sec-multilevel-ideas-main"><span class="toc-section-number">3.9.1</span>  Main ideas – Phenomena and data sets in the social sciences often have a multilevel structure</a></li>
+  <li><a href="#sec-multilevel-models-utility" id="toc-sec-multilevel-models-utility" class="nav-link" data-scroll-target="#sec-multilevel-models-utility"><span class="toc-section-number">3.9.2</span>  Multilevel models – why they are more used and more useful than traditional methods</a></li>
+  <li><a href="#sec-multilevel-practical-application" id="toc-sec-multilevel-practical-application" class="nav-link" data-scroll-target="#sec-multilevel-practical-application"><span class="toc-section-number">3.9.3</span>  Practical applications: children sampled within classes</a></li>
   <li><a href="#to-understand-the-application-of-multilevel-models-first-we-ignore-the-multilevel-structure-in-the-data" id="toc-to-understand-the-application-of-multilevel-models-first-we-ignore-the-multilevel-structure-in-the-data" class="nav-link" data-scroll-target="#to-understand-the-application-of-multilevel-models-first-we-ignore-the-multilevel-structure-in-the-data"><span class="toc-section-number">3.9.4</span>  To understand the application of multilevel models: first, we ignore the multilevel structure in the data</a></li>
   <li><a href="#a-linear-model-ignores-the-multilevel-structure-in-the-data" id="toc-a-linear-model-ignores-the-multilevel-structure-in-the-data" class="nav-link" data-scroll-target="#a-linear-model-ignores-the-multilevel-structure-in-the-data"><span class="toc-section-number">3.9.5</span>  A linear model ignores the multilevel structure in the data</a></li>
   <li><a href="#notation" id="toc-notation" class="nav-link" data-scroll-target="#notation"><span class="toc-section-number">3.9.6</span>  Notation</a></li>
@@ -335,13 +335,13 @@ div.csl-indent {
 <section id="sec-multi-motivations" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="sec-multi-motivations"><span class="header-section-number">3.1</span> Motivations</h2>
 <p>This week, we shall start to develop skills in using a method or approach that is essential in modern data analysis: <em>multilevel modeling</em>. We are going to invest four weeks in working on this approach. This investment is designed to give you a specific, important, advantage in your work as a psychologist, or as someone who produces or consumes psychological research.</p>
-<div class="callout-advice callout callout-style-default no-icon callout-captioned">
+<div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Advice
+Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -361,18 +361,18 @@ Advice
 <h3 data-number="3.1.1" class="anchored" data-anchor-id="sec-multi-names"><span class="header-section-number">3.1.1</span> A word about names</h3>
 <p>Multilevel models are also known as hierarchical models or linear mixed-effects models or random effects models. People use these terms interchangeably. They also use the abbreviations LMMs or LMEs. Sorry about that: humans make methods, and the names we use for things do vary.</p>
 <p>I will only use the terms <em>multilevel</em> or <em>linear mixed-effects</em> models.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-warning callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Tip
+Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li>This week, we emphasize the multilevel perspective But, to anticipate future development, we will come to think in terms of mixed-effects models.</li>
+<li>This week, we emphasize the multilevel perspective but, to anticipate future development, we will come to think in terms of <em>mixed-effects models</em>.</li>
 </ul>
 </div>
 </div>
@@ -393,13 +393,13 @@ Tip
 </section>
 <section id="the-key-idea-to-get-us-started" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="the-key-idea-to-get-us-started"><span class="header-section-number">3.3</span> The key idea to get us started</h2>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-important callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Warning
+Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -476,74 +476,12 @@ Warning
 </div>
 <p>Or you can use the <code>head()</code> function to see the top few rows of the dataset.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(BAFACALO_DATASET, <span class="at">n =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  participant_id scholarity_father scholarity_mother household_income
-1              1                NA                NA               NA
-2              2                 1                 1                2
-  class_number previous_school_type sex age VZi01 VZi02 VZi03 VZi04 VZi05 VZi06
-1         &lt;NA&gt;                   NA  NA  NA     1     1     1     1     1     1
-2         &lt;NA&gt;                   NA  NA  NA     1     1     1     1     1     0
-  VZi07 VZi08 VZi09 VZi10 VZi11 VZi12 VZi13 VZi14 VZi15 VZi16 VZi17 VZi18 VZi19
-1     0     1     1     1     1     1     0     0     1     1     0     1     1
-2     0     1     1     1    NA    NA     0    NA    NA    NA    NA    NA    NA
-  VZi20 VZi21 VZi22 VZi23 VZi24 VZi25 VZi26 VZi27 VZi28 VZi29 VZi30 CFi01 CFi02
-1     0     1     1     1     1     1     0     0     1     1     1     0     0
-2    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA     0     0
-  CFi03 CFi04 CFi05 CFi06 CFi07 CFi08 CFi09 CFi10 CFi11 CFi12 CFi13 CFi14 CFi15
-1     0     0     0     0     0     0     0     0     0     0     0     0     0
-2     1     1     0    NA    NA    NA     1     0     1     0    NA    NA    NA
-  CFi16 CFi17 CFi18 CFi19 CFi20 CFi21 CFi22 CFi23 CFi24 CFi25 CFi26 CFi27 CFi28
-1     0     0     0     0     0     0     0     0     0     0     0     0     0
-2    NA     1     1     1    NA    NA    NA    NA     1     1     1     0     0
-  CFi29 CFi30 CFi31 CFi32 V1i01 V1i02 V1i03 V1i04 V1i05 V1i06 V1i07 V1i08 V1i09
-1     0     0     0     0     1     1     1     1     1     1     1     0     0
-2    NA    NA    NA    NA     0     1     0     1     1     0     0     0     0
-  V1i10 V1i11 V1i12 V1i13 V1i14 V1i15 V1i16 V1i17 V1i18 V1i19 V1i20 V1i21 V1i22
-1     1     0     1     1     1     1     0     1     1     1     0     0     0
-2     1     0     1     1     1     1     0     1     0     0     0     1     0
-  V1i23 V1i24 V2i01 V2i02 V2i03 V2i04 V2i05 V2i06 V2i07 V2i08 V2i09 V2i10 V2i11
-1     1     1     0     1     0     0    NA    NA     0     1     1     0     0
-2     1     1     0     0    NA     1    NA     0     0     1     1     1     0
-  V2i12 V2i13 V2i14 V2i15 V2i16 V2i17 V2i18 V3i01 V3i02 V3i03 V3i04 V3i05 V3i06
-1     0     0     1    NA    NA     0    NA     0     1     0     1     1     1
-2     0     0     0    NA    NA     0     1     1     0     0     1    NA     0
-  V3i07 V3i08 V3i09 V3i10 V3i11 V3i12 V3i13 V3i14 V3i15 V3i16 V3i17 V3i18
-1     1     1     0     0     0     0     0     0     1     1     0     1
-2     0     0    NA    NA     1     1     0     1     1     1     1     0
-  MA1i01 MA1i02 MA1i03 MA1i04 MA1i05 MA1i06 MA1i07 MA1i08 MA1i09 MA1i10 MA1i11
-1      0     NA      0      0     NA     NA     NA     NA     NA     NA     NA
-2     NA     NA     NA      1     NA      0     NA     NA     NA      1      0
-  MA1i12 MA1i13 MA1i14 MA1i15 MA2i01 MA2i02 MA2i03 MA2i04 MA2i05 MA2i06 MA2i07
-1      1      1     NA     NA      1     NA     NA     NA     NA     NA     NA
-2      1      0      1      0     NA      0     NA     NA     NA     NA     NA
-  MA2i08 MA2i09 MA2i10 MVi01 MViO2 MViO3 MVi02 MViO4 MViO5 MVi03 MViO6 MViO7
-1      1      0     NA     0     1     0     1    NA     1     0     1     1
-2      0      1     NA     1     0     1     0    NA     1    NA     1     1
-  MVi04 MViO8 MViO9 RGi01 RGi02 RGi03 RGi04 RGi05 RGi06 RGi07 RGi08 RGi09 RGi10
-1    NA     0     1    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA
-2     1     0    NA     1     0     0     0     1     0    NA     1    NA    NA
-  RGi11 RGi12 RGi13 RGi14 RGi15 RLi01 RLi02 RLi03 RLi04 RLi05 RLi06 RLi07 RLi08
-1    NA    NA    NA    NA    NA     1     1     1     1     0     1     1     0
-2    NA    NA    NA    NA    NA     1     1     0     1    NA     1     1     1
-  RLi09 RLi10 RLi11 RLi12 RLi13 RLi14 RLi15 RLi16 RLi17 RLi18 RLi19 RLi20 RLi21
-1     1     1     0     0     0     1     1     1     0     1     1     0     1
-2     0     0     0     0     1     0     0     1     0     1     0     0     1
-  RLi22 RLi23 RLi24 RLi25 RLi26 RLi27 RLi28 RLi29 RLi30 Ii01 Ii02 Ii03 Ii04
-1     0     1     0     0     0     1     1     1     0    1    1    1    1
-2     1     1     0     1     0     1     0     0     0   NA    1   NA    0
-  Ii05 Ii06 Ii07 Ii08 Ii09 Ii10 Ii11 Ii12 Ii13 Ii14 Ii15  N P1 P2   P3 FI1 FI2
-1    1    1    1   NA    1   NA   NA   NA   NA   NA   NA NA NA NA &lt;NA&gt;  NA  NA
-2   NA   NA    0   NA   NA   NA   NA   NA   NA   NA   NA NA NA NA &lt;NA&gt;  NA  NA
-  FF portuguese english math biology physics chimestry geography history
-1 NA       &lt;NA&gt;    &lt;NA&gt; &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;
-2 NA       &lt;NA&gt;    &lt;NA&gt; &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(BAFACALO_DATASET)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can check for yourself that each row holds data about a child, including their participant identity code, as well as information about their parents, household, gender, age, school class, and their grades on end-of-year subject attainment (e.g., how well they did in English language).</p>
 <p>There are many more variables in the dataset than we need for our exercises, and a summary would fill pages. You can see for yourself if you inspect the dataset using</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(BAFACALO_DATASET)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(BAFACALO_DATASET)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -564,21 +502,21 @@ Warning
 </ol>
 <p>We shall need the <code>tidyverse</code> library of functions.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="sec-multi-data-select" class="level3" data-number="3.8.1">
 <h3 data-number="3.8.1" class="anchored" data-anchor-id="sec-multi-data-select"><span class="header-section-number">3.8.1</span> Select the variables</h3>
 <p>We can start by selecting the variables we want, which include those named here, ignoring all the rest. We take the <code>BAFACALO_DATASET</code>. We then use the <code>select()</code> function to select the variables we want.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>brazil <span class="ot">&lt;-</span> BAFACALO_DATASET <span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">select</span>(</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                      class_number, participant_id,</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                      portuguese, english, math, physics</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                      )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>brazil <span class="ot">&lt;-</span> BAFACALO_DATASET <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">select</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                      class_number, participant_id,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                      portuguese, english, math, physics</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                      )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Inspect the data to see what you have.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(brazil)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(brazil)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  class_number participant_id     portuguese     english         math    
  M11    : 21   Min.   :  1.00   60     : 10   100    : 17   60     : 13  
@@ -598,7 +536,19 @@ Warning
  NA's   : 62  </code></pre>
 </div>
 </div>
-<p>::: callout: tip Notice the code is written to create the new selected dataset and, at the same time, gave it a more usable (shorter) name, with <code>brazil &lt;- BAFACALO_DATASET ...</code> :::</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Notice the code is written to create the new selected dataset and, at the same time, gave it a more usable (shorter) name, with <code>brazil &lt;- BAFACALO_DATASET ...</code></p>
+</div>
+</div>
 </section>
 <section id="sec-multi-data-remove-na" class="level3" data-number="3.8.2">
 <h3 data-number="3.8.2" class="anchored" data-anchor-id="sec-multi-data-remove-na"><span class="header-section-number">3.8.2</span> Remove missing values</h3>
@@ -606,11 +556,11 @@ Warning
 <p>We will need to get rid of the missing values. It is simpler to do this at the start rather than wait for an error message, later, when some arithmetic function tells us it cannot give us a result because there are <code>NAs</code> present.</p>
 <p>We can get rid of the missing values using <code>na.omit()</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>brazil <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(brazil)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>brazil <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(brazil)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>If you then look at a summary of the data again then you will see that the <code>NAs</code> are gone.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(brazil)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(brazil)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  class_number participant_id    portuguese     english         math    
  M11    : 21   Min.   :  3.0   60     : 10   100    : 17   60     : 13  
@@ -631,23 +581,30 @@ Warning
 </div>
 </div>
 </section>
-<section id="getting-r-to-treat-a-variable-as-a-type-object-of-the-kind-required-using-the-as.numeric-function" class="level3" data-number="3.8.3">
-<h3 data-number="3.8.3" class="anchored" data-anchor-id="getting-r-to-treat-a-variable-as-a-type-object-of-the-kind-required-using-the-as.numeric-function"><span class="header-section-number">3.8.3</span> Getting R to treat a variable as a type object of the kind required – using the as.numeric() function</h3>
+<section id="sec-multi-data-coerce" class="level3" data-number="3.8.3">
+<h3 data-number="3.8.3" class="anchored" data-anchor-id="sec-multi-data-coerce"><span class="header-section-number">3.8.3</span> Getting R to treat a variable as a type object of the kind required – using the as…() family of functions</h3>
 <p>But if you look closely at the output from <code>summary(brazil)</code> you will see that the <code>portuguese</code> and <code>english</code> variables are summarized in the way that R summarizes factors. When you ask R to summarize factors, R gives you a count of the number of observations associated with each factor level, that is, each category in each variable. Here, it is treating a grade score like <span class="math inline">\(100\)</span> in <code>english</code> as a category (like you might treat <span class="math inline">\(dog\)</span> as a category of pets), and you can see that the count shows you that 17 children were recorded as having scored 100 in their class. We do not want numeric variables like subject grades (e.g.&nbsp;children’s grades in English) treated as categorical variables, factors.</p>
 <p>You can also see that R gives you a numeric summary of the recorded values in the <code>participant_id</code> variable. This makes no sense because the identity code numbers are (presumably) assigned at random so identity numbers provide no useful numeric information for us. We do not want this either.</p>
-<p>We want R to treat the educational attainment scores as numbers, and we can do this using the <code>as.numeric()</code> function. We want R to treat the class and participant identity numbers as factors (categorical variables), and we can do this using the <code>as.factor()</code> function.</p>
+<p>We want R to treat the educational attainment scores as numbers. We can do this using the <code>as.numeric()</code> function. We want R to treat the class and participant identity numbers as factors (categorical variables). We can do this using the <code>as.factor()</code> function.</p>
+<p>We could do this one variable at a time.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -- change the variable types: coercion</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>brazil<span class="sc">$</span>portuguese <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(brazil<span class="sc">$</span>portuguese)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>brazil<span class="sc">$</span>english <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(brazil<span class="sc">$</span>english)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>brazil<span class="sc">$</span>math <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(brazil<span class="sc">$</span>math)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>brazil<span class="sc">$</span>physics <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(brazil<span class="sc">$</span>physics)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>brazil<span class="sc">$</span>class_number <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(brazil<span class="sc">$</span>class_number)</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>brazil<span class="sc">$</span>participant_id <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(brazil<span class="sc">$</span>participant_id)</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># -- inspect the data:</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(brazil)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>brazil<span class="sc">$</span>portuguese <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(brazil<span class="sc">$</span>portuguese)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>brazil<span class="sc">$</span>english <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(brazil<span class="sc">$</span>english)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>brazil<span class="sc">$</span>math <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(brazil<span class="sc">$</span>math)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>brazil<span class="sc">$</span>physics <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(brazil<span class="sc">$</span>physics)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>brazil<span class="sc">$</span>class_number <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(brazil<span class="sc">$</span>class_number)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>brazil<span class="sc">$</span>participant_id <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(brazil<span class="sc">$</span>participant_id)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>But it is simpler and more efficient in <code>tidyverse</code> style. (You can see a discussion <a href="https://stackoverflow.com/questions/43917904/how-to-change-column-data-type-of-a-tibble-with-least-typing">here</a> that helped me to figure this out.)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>brazil <span class="ot">&lt;-</span> brazil <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(portuguese, english, math, physics), as.integer),</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>         <span class="fu">across</span>(<span class="fu">c</span>(class_number, participant_id), as.factor)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If you now look at the summary of the data, you can see that R will give you mean etc. for the subject or class score variables, showing that it is now treating them as numeric variables. In comparison, R gives you counts of the numbers of observations for each level (category) of categorical or nominal variables like <code>participant_id</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(brazil)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  class_number participant_id   portuguese       english           math       
  M11    : 21   3      :  1    Min.   : 1.00   Min.   : 1.00   Min.   :  1.00  
@@ -667,64 +624,63 @@ Warning
                  </code></pre>
 </div>
 </div>
-<p>If you now look at the summary of the data, you can see that R will give you mean etc. for the subject or class score variables, showing that it is now treating them as numeric variables. In comparison, R gives you counts of the numbers of observations for each level (category) of categorical or nominal variables like <code>participant_id</code>.</p>
-<section id="coercion-a-quick-lesson" class="level4" data-number="3.8.3.1">
-<h4 data-number="3.8.3.1" class="anchored" data-anchor-id="coercion-a-quick-lesson"><span class="header-section-number">3.8.3.1</span> Coercion: a quick lesson</h4>
+<section id="sec-multi-coercion" class="level4" data-number="3.8.3.1">
+<h4 data-number="3.8.3.1" class="anchored" data-anchor-id="sec-multi-coercion"><span class="header-section-number">3.8.3.1</span> Coercion: a quick lesson</h4>
 <p>R treats things like variables as vectors. A vector can be understood to be a set or list of elements, things like numbers of words.</p>
 <p>R gives each vector a type (factor, numeric etc.) which helps to inform different functions how to handle that vector. Usually, R assigns type correctly but sometimes it does not. We can use what is called <em>coercion</em> to force R to assign the correct type to a variable.</p>
-<p>It is more efficient to do this at the start. Normally, I would use <code>read_csv()</code> from <code>tidyverse</code> and assign type to variable using <code>col_types()</code> specification. See here for more information and an example:</p>
-<p></p>
-<p>But it is useful to learn what you need to do if you need to change the way a variable is treated after you have got the data into the R environment.</p>
+<p>It is more efficient to do this at the start. Normally, I would use <code>read_csv()</code> from <code>tidyverse</code> and assign type to variable using <code>col_types()</code> specification. (See <a href="https://readr.tidyverse.org/">here</a> for more information and an example.) But it is useful to learn what you need to do if you need to change the way a variable is treated after you have got the data into the R environment.</p>
 </section>
-<section id="exercise-experiment-with-coercion" class="level4" data-number="3.8.3.2">
-<h4 data-number="3.8.3.2" class="anchored" data-anchor-id="exercise-experiment-with-coercion"><span class="header-section-number">3.8.3.2</span> Exercise – experiment with coercion</h4>
+<section id="sec-multi-exx-coercion" class="level4" data-number="3.8.3.2">
+<h4 data-number="3.8.3.2" class="anchored" data-anchor-id="sec-multi-exx-coercion"><span class="header-section-number">3.8.3.2</span> Exercise – experiment with coercion</h4>
 <p>In R, there are a family of functions that work together. You can test whether a variable (a vector, technically) is or is not a certain type using the <code>is.[something]</code> function. For example:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.factor</span>(brazil<span class="sc">$</span>english)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>(brazil<span class="sc">$</span>english)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>(brazil<span class="sc">$</span>english)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.factor</span>(brazil<span class="sc">$</span>english)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>(brazil<span class="sc">$</span>english)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>(brazil<span class="sc">$</span>english)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And you can coerce variables so that they are treated as of certain types.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>brazil<span class="sc">$</span>english <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(brazil<span class="sc">$</span>english)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>brazil<span class="sc">$</span>english <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(brazil<span class="sc">$</span>english)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>brazil<span class="sc">$</span>english <span class="ot">&lt;-</span> <span class="fu">as.character</span>(brazil<span class="sc">$</span>english)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>brazil<span class="sc">$</span>english <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(brazil<span class="sc">$</span>english)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>brazil<span class="sc">$</span>english <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(brazil<span class="sc">$</span>english)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>brazil<span class="sc">$</span>english <span class="ot">&lt;-</span> <span class="fu">as.character</span>(brazil<span class="sc">$</span>english)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Now try it out.</p>
+<ol type="1">
+<li>Test out variable type using <code>is...()</code> for some of the variables</li>
+<li>Test out coercion – and its results – using <code>as...()</code> for some of the variables</li>
+<li>Look at the results using <code>summary()</code></li>
+</ol>
 </section>
 </section>
 </section>
-<section id="introduction-to-multilevel-models" class="level2" data-number="3.9">
-<h2 data-number="3.9" class="anchored" data-anchor-id="introduction-to-multilevel-models"><span class="header-section-number">3.9</span> Introduction to multilevel models</h2>
-<section id="main-ideas-phenomena-and-data-sets-in-the-social-sciences-often-have-a-multilevel-structure" class="level3" data-number="3.9.1">
-<h3 data-number="3.9.1" class="anchored" data-anchor-id="main-ideas-phenomena-and-data-sets-in-the-social-sciences-often-have-a-multilevel-structure"><span class="header-section-number">3.9.1</span> Main ideas – Phenomena and data sets in the social sciences often have a multilevel structure</h3>
+<section id="sec-multilevel-ideas-intro" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="sec-multilevel-ideas-intro"><span class="header-section-number">3.9</span> Introduction to multilevel models</h2>
+<section id="sec-multilevel-ideas-main" class="level3" data-number="3.9.1">
+<h3 data-number="3.9.1" class="anchored" data-anchor-id="sec-multilevel-ideas-main"><span class="header-section-number">3.9.1</span> Main ideas – Phenomena and data sets in the social sciences often have a multilevel structure</h3>
 <p>We (Psychologists) often adopt <em>Repeated Measures</em> or <em>Clustered</em> designs in our studies, and these designs yield data that have a multilevel structure. Examples of research which results in data with a multilevel structure include:</p>
+<ul>
+<li>Studies where we test the same people multiple times, maybe in developmental or learning longitudinal investigations;</li>
+<li>Intervention, learning or treatment studies where we need to make pre- and post-treatment comparisons;</li>
+<li>Studies where we present multiple stimuli and everyone sees the same stimuli;</li>
+<li>Studies that involve multi-stage sampling;</li>
+</ul>
+<p>– Finding (sample) classes or schools – then testing (sample) children within classes or schools; – Or finding (sample) clinics – then testing (sample) patients within clinics.</p>
 <p>The key insight to keep in mind when considering the analysis of such data is that observations are clustered and are <em>not independent</em>. They are correlated. What is correlated with what?</p>
 <p>Imagine testing a number of subjects by giving them all the same test. In that test, you might present them all with the same stimuli over a series of trials, so that everybody sees the same set of stimuli. Do you think an observed response recorded for any one individual will be uncorrelated i.e.&nbsp;independent of that person’s other responses? People are different and one usually finds that a slow or inaccurate subject is slow or inaccurate for most of their responses. That means that if you have information about one of their responses you can predict, in part, what the time or accuracy of one of their other responses would be. That capacity to predict one response from another is what we mean when we talk about a lack of independence.</p>
 <p>Alternatively, imagine going to test children in a school. Will the children in one class be more like each other than they are like children in other classes? In other words, is there an effect of class – maybe due to the approach of the teacher, the effect of the class environment etc. – so that outcomes for children in a class are correlated with each other? We are talking, here, about a really quite general property of data collected in certain, very widely used, designs in Psychology: the <em>clustering or hierarchical ordering</em> of data.</p>
 <p>This week, we will see that we must deal with the dependence of observations within a class, where the observed responses were made about the different pupils tested in a class, for a number of different classes.</p>
 </section>
-<section id="multilevel-models-why-they-are-more-used-and-more-useful-than-traditional-methods" class="level3" data-number="3.9.2">
-<h3 data-number="3.9.2" class="anchored" data-anchor-id="multilevel-models-why-they-are-more-used-and-more-useful-than-traditional-methods"><span class="header-section-number">3.9.2</span> Multilevel models – why they are more used and more useful than traditional methods</h3>
+<section id="sec-multilevel-models-utility" class="level3" data-number="3.9.2">
+<h3 data-number="3.9.2" class="anchored" data-anchor-id="sec-multilevel-models-utility"><span class="header-section-number">3.9.2</span> Multilevel models – why they are more used and more useful than traditional methods</h3>
 <p>The utility of <strong>multilevel models</strong> to analyze <strong>multilevel data</strong> or hierarchically structured data is well established in education. In educational research, we often need to think about effects of interventions or correlations in the context of observing children in classes, schools or districts, perhaps over time or at different time points. This means that many of the critical textbooks present examples that are based on educational research data (Bryk &amp; Raudenbush, 1992; Goldstein, 2011; Kreft &amp; de Leeuw, 1998; Snijders &amp; Bosker, 2012).</p>
 <p>Multilevel models are growing in popularity in Psychology as well as in Education because they can be used to account for systematic and random sources of variance in observed outcomes when data are hierarchically structured. A hierarchical structure is present in data when a researcher: tests participants who belong to different groups like classes, clinics or schools; presents a sample of stimuli to each member of a sample of participants; or makes repeated observations for each participant over a series of test occasions.</p>
 <p>In these circumstances, the application of traditional analytic methods has typically required the researcher to aggregate their data (e.g., averaging the responses made by a participant to different stimuli) or to ignore the hierarchical structure in their data, (e.g., analyzing the responses made by some pupils while ignoring the fact that the pupils were tested in different classes). But the application of traditional analysis approaches (e.g., regression, ANOVA) to multilevel structured data extracts scientific costs (Baayen et al., 2008; Barr, Levy, Scheepers, &amp; Tily, 2013).</p>
 <p>Ignoring structure by ignoring or averaging over sources of variability like differences between classes, participants, or stimulus items can mean that analyses are less sensitive because they fail to fully account for error variance. Where differences between classes, participants or stimuli include variation in the impact of experimental variables, e.g., individual differences in response to an experimental manipulation, the application of traditional methods can be associated with an increased risk of false positives in discovery. Yet these costs need no longer be suffered because the capacity to perform multilevel modeling is now readily accessible.</p>
 </section>
-<section id="practical-applications-children-sampled-within-classes" class="level3" data-number="3.9.3">
-<h3 data-number="3.9.3" class="anchored" data-anchor-id="practical-applications-children-sampled-within-classes"><span class="header-section-number">3.9.3</span> Practical applications: children sampled within classes</h3>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="LME-multistage-sample-snijders-fig2-1.png" class="img-fluid figure-img" style="width:55.0%"></p>
-<p></p><figcaption class="figure-caption">Snijders and Bosker (2012) Multistage sample – used without permission</figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-<p>If a researcher tests participants belonging to different groups, e.g., records the educational attainment of different children recruited from different classes in a school, the test scores for the participants are observations that occupy the lowest level of a hierarchy. In multilevel modeling, those observations are understood to be nested within higher-level sampling units, here, the classes. We can say that the children are sampled from the population of children. And the classes are sampled from the population of classes. Critically, we recognize that the children’s test scores are <strong>nested within the classes</strong>.</p>
-<p>Figure @ref(fig:SB12multistage) presents a schematic of this kind of multi-stage sampling (from Snijders and Bosker, 2012). What the figure shows you is that psychologists often first sample groups (shown as big rectangles or squares) like schools or classes and then sample individuals within the groups (shown as small circles or squares). This multi-stage sampling has important consequences, as we shall see.</p>
-<p>We are going to be working with the school data collected by Golino and Gomes (2014) in Brazil, so let’s take another look at that dataset. Figure @ref(fig:SB12multistage) presents the first 25 rows of the selected-variables <code>brazil</code> dataset. (I have arranged the rows by class number ID.) You can see that there are multiple rows of data for each <code>class_number</code>, one row for each child, with multiple children (you can see different <code>participant_id</code> numbers). This presentation of the dataset illustrates in practical terms – what you can actually see when you look at your data – what the schematic Figure @ref(fig:SB12multistage) shows in conceptual terms.</p>
+<section id="sec-multilevel-practical-application" class="level3" data-number="3.9.3">
+<h3 data-number="3.9.3" class="anchored" data-anchor-id="sec-multilevel-practical-application"><span class="header-section-number">3.9.3</span> Practical applications: children sampled within classes</h3>
+<p>If a researcher tests participants belonging to different groups, e.g., records the educational attainment of different children recruited from different classes in a school, the test scores for the participants are observations that occupy the lowest level of a hierarchy. In multilevel modeling, those observations are understood to be nested within higher-level sampling units, here, the classes. We can say that the children are sampled from the population of children. And the classes are sampled from the population of classes. Critically, we recognize that the children’s test scores are <strong>nested within the classes</strong>. This multi-stage sampling has important consequences, as we shall see.</p>
+<p>We are going to be working with the school data collected by <span class="citation" data-cites="golino2014">Golino &amp; Gomes (<a href="references.html#ref-golino2014" role="doc-biblioref">2014</a>)</span> in Brazil, so let’s take another look at that dataset. Figure <span class="quarto-unresolved-ref">?fig-golino2014</span> presents the first 25 rows of the selected-variables <code>brazil</code> dataset. (I have arranged the rows by class number ID.) You can see that there are multiple rows of data for each <code>class_number</code>, one row for each child, with multiple children (you can see different <code>participant_id</code> numbers). This presentation of the dataset illustrates in practical terms – what you can actually see when you look at your data – what multilevel structured data can look like.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>   class_number participant_id portuguese english math physics
@@ -759,46 +715,66 @@ Warning
 <section id="to-understand-the-application-of-multilevel-models-first-we-ignore-the-multilevel-structure-in-the-data" class="level3" data-number="3.9.4">
 <h3 data-number="3.9.4" class="anchored" data-anchor-id="to-understand-the-application-of-multilevel-models-first-we-ignore-the-multilevel-structure-in-the-data"><span class="header-section-number">3.9.4</span> To understand the application of multilevel models: first, we ignore the multilevel structure in the data</h3>
 <p>Recognizing that the children’s data are observed within classes means that, when we examine the factors that influence variance in observed outcomes, we need to take into account the fact that the children can be grouped by (or under) the class they were in when their grades were recorded. We can develop an understanding of what this means by moving through a series of steps.</p>
-<p>To illustrate the understanding we need to develop, we analyze the end-of-year school subject grades for the sample of 292 children studied by Golino and Gomes (2014). With these data, we can examine whether differences between children in their Portuguese language grades predicts differences in their English language grades. (We don’t have a theoretical reason to make this prediction though it does not seem unreasonable.) Let’s make this our research question.</p>
+<p>To illustrate the understanding we need to develop, we analyze the end-of-year school subject grades for the sample of 292 children studied by <span class="citation" data-cites="golino2014">Golino &amp; Gomes (<a href="references.html#ref-golino2014" role="doc-biblioref">2014</a>)</span>. With these data, we can examine whether differences between children in their Portuguese language grades predicts differences in their English language grades. (We do not have a theoretical reason to make this prediction though it does not seem unreasonable.) Let’s make this our research question.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Research question: Does Portuguese grade predict English grade?</li>
+</ul>
+</div>
+</div>
 <p>Now, the first step we take in our development of understanding will be to <em>first ignore</em> the importance of the potential differences between classes.</p>
 <p>We can begin our analysis in order to address the research question by plotting the possible association between Portuguese and English grades. We shall create a scatterplot to do this, and we create the plot by running the following code and <em>ignoring group (class) membership</em>. In the following chunk of code, I pipe the <code>brazil</code> data using <code>%&gt;%</code> to <code>ggplot()</code> and then create the plot step-by-step, with each step separated by a <code>+</code> except for the last step.</p>
-<div class="cell" data-layout-align="center" data-hash="01-multilevel_cache/html/brazil-all_d373e4d635645a523c144e080353680c">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>brazil <span class="sc">%&gt;%</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> portuguese, <span class="at">y =</span> english)) <span class="sc">+</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">colour =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Portuguese"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"English"</span>) <span class="sc">+</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>brazil <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> portuguese, <span class="at">y =</span> english)) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">colour =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a>  <span class="fu">xlab</span>(<span class="st">"Portuguese"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"English"</span>) <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula 'y ~ x'</code></pre>
+</div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div id="fig-brazil-all" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="01-multilevel_files/figure-html/brazil-all-1.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Portuguese compared to English grades: each point represents the scores for one child</figcaption><p></p>
+<p><img src="01-multilevel_files/figure-html/fig-brazil-all-1.png" class="img-fluid figure-img" alt="The figure shows scatterplot: each point represents the English and the Portuguese scores for one child. A red line drawn through the points indicates a trend such that higher Portuguese scores are associated with higher English scores." width="480"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.2: Portuguese compared to English grades: each point represents the scores for one child</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Remember that each child ID is associated with a pair of grades: their grade in English and their grade in Portuguese. Each point in Figure @ref(fig:brazil-all) represents the paired grade data for one child.</p>
+<p>Remember that each child ID is associated with a pair of grades: their grade in English and their grade in Portuguese. Each point in <a href="#fig-brazil-all">Figure&nbsp;<span>3.2</span></a> represents the paired grade data for one child.</p>
 <p>Because I say that we are interested in predicting English grades then, by convention, we map English grades to the height of the points (i.e.&nbsp;English grade differences are shown as differences on the y-axis). Because we are using Portuguese grades to do the predicting, by convention, we map Portuguese grades to the horizontal position of the points (i.e.&nbsp;Portuguese grade differences are shown as differences on the x-axis).</p>
 <p>I have added a line using <code>geom_smooth()</code> in red to indicate the trend of the potential association between variation in Portuguese grades and variation in English grades.</p>
-<p>Figure @ref(fig:brazil-all) suggests that children with higher grades in Portuguese tend, on average, to also have higher grades in English.</p>
+<p>Figure <a href="#fig-brazil-all">Figure&nbsp;<span>3.2</span></a> suggests that children with higher grades in Portuguese tend, on average, to also have higher grades in English.</p>
 <section id="exercise-edit-plots" class="level4" data-number="3.9.4.1">
 <h4 data-number="3.9.4.1" class="anchored" data-anchor-id="exercise-edit-plots"><span class="header-section-number">3.9.4.1</span> Exercise – edit plots</h4>
 <p>Notice that when we write the code to produce the plot, we add arguments to the <code>geom_point()</code> and <code>geom_smooth()</code> function calls to adjust the appearance of the points and the smoother line. Notice, also, that we adjust the labels for the x-axis and y-axis and, finally, that we determine the overall appearance of the plot using the <code>theme_bw()</code> function call.</p>
 <p>Do the following exercises to practice your <code>ggplot()</code> skills</p>
-<p>Further information to help you try out coding options can be found here (on scatterplots):</p>
-<p></p>
-<p>and here (on themes):</p>
-<p></p>
+<ol type="1">
+<li>Change the x and y variables to <code>math</code> and <code>physics</code></li>
+<li>Change the theme from <code>theme_bw()</code> to something different</li>
+<li>Change the appearance of the points, try different colour, shape, size</li>
+</ol>
+<p>Further information to help you try out coding options can be found <a href="https://ggplot2.tidyverse.org/reference/geom_point.html">here, on scatterplots</a>, and <a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">here, on themes</a>.</p>
 </section>
 </section>
 <section id="a-linear-model-ignores-the-multilevel-structure-in-the-data" class="level3" data-number="3.9.5">
 <h3 data-number="3.9.5" class="anchored" data-anchor-id="a-linear-model-ignores-the-multilevel-structure-in-the-data"><span class="header-section-number">3.9.5</span> A linear model ignores the multilevel structure in the data</h3>
-<p>Our plot indicates the relationship between English and Portuguese language grades, in Figure @ref(fig:brazil-all), ignoring the fact that children in the sample belonged to different classes when they were tested. The plot shows us only information about the children and grades, with each point representing the observed English and Portuguese grades for each <span class="math inline">\(i\)</span> child.</p>
+<p>Our plot indicates the relationship between English and Portuguese language grades, in <a href="#fig-brazil-all">Figure&nbsp;<span>3.2</span></a>, ignoring the fact that children in the sample belonged to different classes when they were tested. The plot shows us only information about the children and grades, with each point representing the observed English and Portuguese grades for each <span class="math inline">\(i\)</span> child.</p>
 <p>Can we predict variation in English grades given information about children’s Portuguese grades? Are English grades related to Portuguese grades? We can estimate the relationship between English and Portuguese grades using a linear model in which the English grades variable is the <strong>outcome</strong> variable (or the dependent variable) and the Portuguese grades variable is the <strong>predictor</strong> or independent variable:</p>
-<span class="math display">\[\begin{equation}
+<p><span class="math display">\[
 y_i = \beta_0 + \beta_1X_i + e_i
-\end{equation}\]</span>
+\]</span></p>
 <ul>
 <li>where <span class="math inline">\(y_i\)</span> represents the English grade for each <span class="math inline">\(i\)</span> child;</li>
 <li><span class="math inline">\(\beta_0\)</span> represents the intercept, the outcome value obtained if values of the explanatory variable are zero;</li>
@@ -807,7 +783,7 @@ y_i = \beta_0 + \beta_1X_i + e_i
 </ul>
 <p>As you have seen, the code for running a linear model corresponds transparently to the statistical model given in the formula.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(english <span class="sc">~</span> portuguese, <span class="at">data =</span> brazil))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(english <span class="sc">~</span> portuguese, <span class="at">data =</span> brazil))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -830,40 +806,88 @@ F-statistic: 35.43 on 1 and 228 DF,  p-value: 9.906e-09</code></pre>
 </div>
 </div>
 <p>The linear model yields the estimate that for unit increase in Portuguese grade there is an associated increase of about .47 in English grade, on average (for the model, <span class="math inline">\(F(1, 228) = 35, p &lt; .001; adj. R^2 = .13\)</span>). So, we have a preliminary answer to our research question.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Research question: Does Portuguese grade predict English grade?</li>
+<li>Result: Our analysis shows that children who score one grade higher in their Portuguese class (e.g., 61 compared to 60) tended to score .47 of a grade higher in their English class.</li>
+</ul>
+</div>
+</div>
 <p>We shall see that we will need to revise this estimate when we do an analysis that <em>does</em> take school class differences into account.</p>
-<section id="code-tip" class="level4" data-number="3.9.5.1">
-<h4 data-number="3.9.5.1" class="anchored" data-anchor-id="code-tip"><span class="header-section-number">3.9.5.1</span> Code tip</h4>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Notice: here, I have dispensed with the creation of a model object by name. The model is estimated anyway, and I have embedded the <code>lm()</code> function call within a <code>summary()</code> function so that I am asking R to do two things:</p>
 <ol type="1">
 <li><code>lm()</code> fit a linear model</li>
 <li><code>summary()</code> print out a summary of the fitted model object</li>
 </ol>
 <p>I do this to give an example of the way in which code can be varied. Also, to show you how one function can be embedded inside another.</p>
-</section>
-<section id="exercise-fit-a-different-linear-model" class="level4" data-number="3.9.5.2">
-<h4 data-number="3.9.5.2" class="anchored" data-anchor-id="exercise-fit-a-different-linear-model"><span class="header-section-number">3.9.5.2</span> Exercise – fit a different linear model</h4>
+</div>
+</div>
+<section id="exercise-fit-a-different-linear-model" class="level4" data-number="3.9.5.1">
+<h4 data-number="3.9.5.1" class="anchored" data-anchor-id="exercise-fit-a-different-linear-model"><span class="header-section-number">3.9.5.1</span> Exercise – fit a different linear model</h4>
 <p>Do the following exercises to practice your <code>lm()</code> skills</p>
+<ol type="1">
+<li>Change the outcome and predictor variables to <code>math</code> and <code>physics</code></li>
+<li>What do the results tell you about the relationship between maths and physics ability?</li>
+</ol>
 </section>
 </section>
 <section id="notation" class="level3" data-number="3.9.6">
 <h3 data-number="3.9.6" class="anchored" data-anchor-id="notation"><span class="header-section-number">3.9.6</span> Notation</h3>
 <p>In the following discussion, I will present some model formulas as equations. I am not doing that because the discussion is going to consider the modeling in terms of the underlying mathematics. I am doing it with the aim of clarifying how quantities – observed, estimated or predicted – add up, in terms of the linear and then the linear mixed-effects model.</p>
+<ol type="1">
+<li>I am going to refer to the dependent or outcome variable (e.g., school grade), <span class="math inline">\(y\)</span></li>
+<li>and to explanatory or experimental or independent variables (e.g., language skill) as <span class="math inline">\(X\)</span></li>
+<li>Models shall be fitted to estimate the coefficients, written <span class="math inline">\(\beta\)</span>, of the effects of the explanatory variables on the outcome variable</li>
+<li>To distinguish the different coefficients of the different effects, I am going to number the coefficients so</li>
+</ol>
+<ul>
+<li><span class="math inline">\(\beta_0\)</span> is the coefficient of the intercept</li>
+<li><span class="math inline">\(\beta_1\)</span> will be the coefficient of the effect of a first explanatory variable: in the Brazilian schools example, the coefficient of the effect of Portuguese language skill</li>
+</ul>
 <p>To make it clear that each observation can be understood as part of a complex multilevel or crossed random effects structure, I am going to use indices as subscripts for variables.</p>
+<ol type="1">
+<li>I will, here, index individual participants (children) with <span class="math inline">\(i\)</span></li>
+<li>I will index (in the Brazilian schools example) index classes in which children were tested with <span class="math inline">\(j\)</span></li>
+</ol>
 <p>Thus, in the Brazilian schools example, we shall see that we are concerned with observations about children’s school grades, where children are sampled as individuals <em>nested</em> in samples of classes. We will examine how an outcome variable (English language grade) is related to a predictor variable (Portuguese language grade) such that:</p>
+<ul>
+<li><span class="math inline">\(y_{ij}\)</span> is the outcome English language grade recorded for each child <span class="math inline">\(i\)</span> in each class <span class="math inline">\(j\)</span></li>
+<li>while <span class="math inline">\(X_{ij}\)</span> represents the explanatory variable, see following, the Portuguese language grade</li>
+<li>it is subscripted <span class="math inline">\(_{ij}\)</span> because values of the variable depend upon child identity, and children are identified as child <span class="math inline">\(i\)</span> in class <span class="math inline">\(j\)</span> to represent the multilevel structure of the data</li>
+</ul>
 </section>
 <section id="can-we-really-ignore-the-multilevel-structure" class="level3" data-number="3.9.7">
 <h3 data-number="3.9.7" class="anchored" data-anchor-id="can-we-really-ignore-the-multilevel-structure"><span class="header-section-number">3.9.7</span> Can we really ignore the multilevel structure?</h3>
 <p>The linear model ignores the higher-level structure, the distinction between classes. Does that matter?</p>
 <p>We can see the answer to that question if we inspect Figure @ref(fig:pporteng). We create the plot using the following chunk of code; we discuss that later, first reflecting on what the plot shows us.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>brazil <span class="sc">%&gt;%</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> portuguese, <span class="at">y =</span> english)) <span class="sc">+</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"darkgrey"</span>) <span class="sc">+</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> class_number) <span class="sc">+</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Portuguese"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"English"</span>) <span class="sc">+</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">25</span>,<span class="dv">50</span>,<span class="dv">75</span>)) <span class="sc">+</span> <span class="fu">scale_y_continuous</span>(<span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">50</span>,<span class="dv">100</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>brazil <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> portuguese, <span class="at">y =</span> english)) <span class="sc">+</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"darkgrey"</span>) <span class="sc">+</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> class_number) <span class="sc">+</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Portuguese"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"English"</span>) <span class="sc">+</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">25</span>,<span class="dv">50</span>,<span class="dv">75</span>)) <span class="sc">+</span> <span class="fu">scale_y_continuous</span>(<span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">50</span>,<span class="dv">100</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -911,8 +935,8 @@ y_{ij} = \beta_{0j} + \beta_{1j}X_{ij} + e_{ij}
 </ul>
 <p>The problem with the approach is apparent in Figure @ref(fig:pointclass). Figure @ref(fig:pointclass) shows the estimated intercept and coefficient of the slope of the ‘Portuguese’ effect for each class, when we have analyzed the data for each class in a separate linear model. The estimate for each class is shown as a black dot. The standard error of the estimate is shown as a black vertical line, shown above and below a point. You can say that where there is a longer line there we have more uncertainty about the location of the estimate.</p>
 <p>The critical point is that <strong>the standard errors vary</strong> a lot between classes. In some classes, the standard error is small (the black line is short) so we can maybe have more certainty over the estimated intercept or slope for those classes. In other classes, the standard error is large (the black line is long) so we can maybe have less certainty over the estimated intercept or slope for those classes. The <strong>key idea</strong> here is that standard errors vary widely between classes but the two-step modeling approach, while it can take into account the between-class differences in estimates, cannot account for the variation in the standard errors about those estimates.</p>
-<section id="code-tip-1" class="level4" data-number="3.9.9.1">
-<h4 data-number="3.9.9.1" class="anchored" data-anchor-id="code-tip-1"><span class="header-section-number">3.9.9.1</span> Code tip</h4>
+<section id="code-tip" class="level4" data-number="3.9.9.1">
+<h4 data-number="3.9.9.1" class="anchored" data-anchor-id="code-tip"><span class="header-section-number">3.9.9.1</span> Code tip</h4>
 <p>Notice that the code I used fits a separate model for each class, and then plots the per-class estimates of intercepts and slopes of the <span class="math inline">\(english \sim portuguese\)</span> relationship. You can check out the code for yourself in the <strong>how-to.R</strong> for this week.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -973,7 +997,7 @@ y_{ij} = \gamma_0 + \gamma_1X_{ij} + U_{0j} + U_{1j}X_{ij} + e_{ij}
 <p>Let’s try it out.</p>
 <p>To use the <code>lmer()</code> function you need to make the <code>lme4</code> library available.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The model you are going to code will correspond to the statistical model that we have been discussing:</p>
 <span class="math display">\[\begin{equation}
@@ -981,18 +1005,18 @@ y_{ij} = \gamma_0 + \gamma_1X_{ij} + U_{0j} + U_{1j}X_{ij} + e_{ij}
 \end{equation}\]</span>
 <p>And the code is written as follows.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>porto.lmer1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(english <span class="sc">~</span> portuguese <span class="sc">+</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                              (portuguese <span class="sc">+</span> <span class="dv">1</span><span class="sc">|</span>class_number),</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">data =</span> brazil)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>porto.lmer1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(english <span class="sc">~</span> portuguese <span class="sc">+</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                              (portuguese <span class="sc">+</span> <span class="dv">1</span><span class="sc">|</span>class_number),</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">data =</span> brazil)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can see that the <code>lmer()</code> function call is closely similar to the <code>lm()</code> function call, with one critical exception, as I explain next.</p>
 <p>First, we have a chunk of code mostly similar to what we do when we do a regression analysis.</p>
 <p>Second, we have a bit that is specific to multilevel or mixed-effects models.</p>
 <p>If you run the model code as written – see the .R file for an example of the code – and it works then the code will be shown in the console window in R-Studio. To show the model results, you need to get a summary of the model, using the model name.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(porto.lmer1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(porto.lmer1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="exercise-fitting-linear-mixed-effects-models" class="level4" data-number="3.9.12.1">
 <h4 data-number="3.9.12.1" class="anchored" data-anchor-id="exercise-fitting-linear-mixed-effects-models"><span class="header-section-number">3.9.12.1</span> Exercise – fitting linear mixed-effects models</h4>
@@ -1004,7 +1028,7 @@ y_{ij} = \gamma_0 + \gamma_1X_{ij} + U_{0j} + U_{1j}X_{ij} + e_{ij}
 <h3 data-number="3.9.13" class="anchored" data-anchor-id="reading-the-lmer-results"><span class="header-section-number">3.9.13</span> Reading the <em>lmer</em> results</h3>
 <p>Now let’s take a look at the results.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(porto.lmer1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(porto.lmer1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML ['lmerMod']
 Formula: english ~ portuguese + (portuguese + 1 | class_number)
