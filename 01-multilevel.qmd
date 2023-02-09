@@ -78,9 +78,8 @@ Our learning objectives include the development of key concepts and skills.
 1.  **concepts** -- how data can have multilevel structures and what this requires in models
 2.  **skills** -- where skills comprise the capacity to
 
-```{=html}
 <!-- -->
-```
+
 i.  use visualization to examine observations within groups
 ii. run linear models over all data and within each class
 iii. use the `lmer()` function to fit models of multilevel data
@@ -836,38 +835,8 @@ We used the `summary()` function to get model results for both linear models and
 
 ## Recommended reading {#sec-multi-reading}
 
-Snijders and Bosker (2012) present a helpful overview of multilevel modelling. Readers familiar with the book will see that I rely on it to construct the formal presentation of the models.
+@Snijders2004a present a helpful overview of multilevel modelling. Readers familiar with the book will see that I rely on it to construct the formal presentation of the models.
 
-Baayen et al. (2008; see, also, Barr et al., 2013; Judd et al., 2012) discuss mixed-effects models with crossed random effects. This is the topic we shall discuss next.
+@baayen2008 [see also @Barr2013a; @judd2012] discuss mixed-effects models with crossed random effects. This is the topic we shall discuss next.
 
-I wrote a tutorial article on mixed-effects models with Lotte Meteyard. We discuss how important the approach now is for psychological science, what researchers worry about when they use it, and what they should do and report when they use the method/
-
-Meteyard, L., & Davies, R.A.I. (2020). Best practice guidance for linear mixed-effects models in psychological science, *Journal of Memory and Language*, 112, 104092, \url{https://doi.org/10.1016/j.jml.2020.104092}
-
-### References list
-
-Baayen, R. H., Davidson, D. J., & Bates, D. M. (2008). Mixed-effects modeling with crossed random effects for subjects and items. *Journal of Memory and Language*, 59, 390-412.
-
-Balota, D. A., Cortese, M. J., Sergent-Marshall, S. D., Spieler, D. H., & Yap, M. J. (2004). Visual word recognition of single-syllable words. *Journal of Experimental Psychology: General*, 133(2), 283.
-
-Barr, D. J., Levy, R., Scheepers, C., & Tily, H. J. (2013). Random effects structure for confirmatory hypothesis testing: Keep it maximal. *Journal of Memory and Language*, 68, 255-278.
-
-Bryk, A. S., & Raudenbush, S. W. (1992). \emph{Hierarchical linear models: applications and data analysis methods}. London, UK: Sage.
-
-Gelman, A. (2014). The Connection Between Varying Treatment Effects and the Crisis of Unreplicable Research: A Bayesian Perspective. *Journal of Management*, DOI: 0149206314525208.
-
-Gelman, A., & Hill, J. (2007). *Data analysis using regression and multilevel/hierarchical models.* Cambridge University Press.
-
-Goldstein, H. (2011). \emph{Multilevel statistical models}. London, UK: John Wiley & Sons.
-
-Golino, H.F. & Gomes, C.M.A. (2014). Psychology data from the "BAFACALO project: The Brazilian Intelligence Battery based on two state-of-the-art models -- Carroll's Model and the CHC model". *Journal of Open Psychology Data*, 2(1): e6, DOI: \url{http://dx.doi.org/10.5334/jopd.af}
-
-Judd, C. M., Westfall, J., & Kenny, D. A. (2012). Treating stimuli as a random factor in social psychology: a new and comprehensive solution to a pervasive but largely ignored problem. *Journal of Personality and Social Psychology*, 103, 54.
-
-Kreft, I., & de Leeuw, J. (1998). \emph{Introducing multilevel modeling}. London, UK: Sage.
-
-Lorch, R. F., Jr., & Myers, J. L. (1990). Regression analyses of repeated measures data in cognitive research. *Journal of Experimental Psychology: Learning, Memory, and Cognition*, 16, 149--157. http://dx.doi.org/ 10.1037/0278-7393.16.1.149
-
-Pashler, H., & Wagenmakers, E. J. (2012). Editors' Introduction to the Special Section on Replicability in Psychological Science A Crisis of Confidence? *Perspectives on Psychological Science*, 7, 528-530.
-
-Snijders, T.A., & Bosker, R.J. (2012). *Multilevel analysis (2nd Edition)*. London, UK: Sage.
+I wrote a tutorial article on mixed-effects models with Lotte Meteyard [@meteyard2020a]. We discuss how important the approach now is for psychological science, what researchers worry about when they use it, and what they should do and report when they use the method.
