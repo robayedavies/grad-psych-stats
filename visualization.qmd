@@ -173,7 +173,7 @@ Data visualization is not really about coding, as about thinking.
 -   What are our goals?
 -   Why do we make some choices instead of others?
 
-### Purposes {#sec-purposes}
+### Goals {#sec-purposes}
 
 @gelman2013 outline the goals we may contemplate when we produce or evaluate visual data displays. In general, they argue, we are doing one or both of two things.
 
@@ -552,7 +552,7 @@ In the following, I am going to abstract summary information about the @ricketts
 
 ##### Get the data through a downloadable archive {#sec-download}
 
-Download the [data.zip](files/data.zip) files folder and upload the files to RStudio Server.
+Download the [data-visualization.zip](files/data-visualization.zip) files folder and upload the files to RStudio Server.
 
 The folder includes the @ricketts2021 data files:
 
