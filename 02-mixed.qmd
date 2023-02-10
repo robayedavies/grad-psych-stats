@@ -19,7 +19,7 @@ In the **Introduction to multilevel data**, we looked at a multilevel structured
 As we discussed, this kind of data structure will come from studies with a very common design in which the researcher recorded observations about a sample of children who are members of a sample of classes.
 In working with these kind of data, it is common to say that the observations of children's grades are *nested* within classes in a hierarchy.
 
-Many Psychologists conduct studies where observations are properly understood to be structured in groups of some form but where, nevertheless, it is inappropriate to think of the observations as being nested (Baayen et al., 2008). 
+Many Psychologists conduct studies where observations are properly understood to be structured in groups of some form but where, nevertheless, it is inappropriate to think of the observations as being nested [@baayen2008]. 
 We are talking, here, about **repeated-measures designs** where the experimenter presents a sample of multiple stimuli for response to each participant in a sample of for multiple participants.
 This is another *very* common experimental design in psychological science.
 Studies with this kind of design will produce data with a structure that, also, requires the use of mixed-effects models but, as we shall see, the way we think about the structure will be a bit more complicated.
@@ -31,10 +31,9 @@ We shall take the third position and this chapter will concern why, and how we w
 
 ## The key idea to get us started {#sec-intro-key}
 
-\begin{description}
-\item[Linear mixed-effects models] 
-and multilevel models are basically the same.
-\end{description}
+::: callout-important
+Linear mixed-effects models and multilevel models are basically the same.
+:::
 
 This week, we again look at data with multilevel structure.
 But we are looking at data where participants were asked to respond to a set of stimuli (words) so that our observations consist of recordings made of the response made by each child to each stimulus.
@@ -44,29 +43,17 @@ We use the same procedure we did for multilevel data but with one significant ch
 
 Our learning objectives again include the development of both understanding and practical skills.
 
-\begin{description}
-  \item[skills]
-  Practice how to tidy experimental data for mixed-effects analysis
-  \item[concepts]
-  Begin to develop an understanding of crossed random effects of subjects and stimuli
-  \item[skills and concepts]
-  Practice fitting linear mixed-effects models incorporating random effects of subjects and stimuli
-\end{description}
+1. **skills** -- Practice how to tidy experimental data for mixed-effects analysis.
+2. **concepts** -- Begin to develop an understanding of crossed random effects of subjects and stimuli.
+3. **skills and concepts** -- Practice fitting linear mixed-effects models incorporating random effects of subjects and stimuli.
 
 ## Study guide {#sec-intro-mixed-study}
 
-\begin{enumerate}
-	\item
-	Read in the example CP study data
-	\item
-	Identify how the data are structured by both participant and stimulus differences
-	\item
-  Use visualizations to explore the impact of the structure
-  \item
-	Run analyses using linear mixed-effects models involving multiple random effects
-	\item
-	Review readings provided
-\end{enumerate}
+1. Read in the example CP study data
+2. Identify how the data are structured by both participant and stimulus differences
+3. Use visualizations to explore the impact of the structure
+4. un analyses using linear mixed-effects models involving multiple random effects
+5. Review readings provided
 
 ## The data we will work with: CP reading study {#sec-intro-mixed-data}
 
@@ -96,10 +83,9 @@ This is the reason why it is important we teach and learn how to use mixed-effec
 
 We are going to use these data to examine the answers to the following question:
 
-\begin{description}
-\item[RQ.1.]
-What word properties influence responses to words in a test of reading aloud?
-\end{description}
+::: callout-note
+-   Research question: What word properties influence responses to words in a test of reading aloud?
+:::
 
 We can look at the answers to this question while also taking into account the impacts of random differences -- between sampled participants or between sampled words -- using mixed-effects models.
 But, first, we are going to look at how we get the data ready for analysis.
@@ -116,7 +102,7 @@ Looking at the tidying process will give you a concrete sense of the structure i
 You should also take this opportunity to reflect on the nature of the process itself -- what we have to do and why, in what order and why -- so that you can develop a sense of the process you might need to build when the time comes for you to prepare your own data for analysis.
 
 The time that we spend looking at data tidying is an investment in learning that will save you time later, in your professional work.
-If, however, you want to skip it, go to section \@ref(crossed-random).
+If, however, you want to skip it, go to section @sec-intro-mixed-crossed-random.
 
 #### The data we need to use for analysis are not all in the same file {#sec-intro-data-distributed}
 
@@ -124,14 +110,9 @@ In analyzing psychological data, the first step is usually to collect the data t
 In psychological research, the data may exist, at first, in separate files.
 For the CP study, we have *separate files* for each of the pieces of information we need to use in our analyses:
 
-\begin{description}
-\item[Participant attributes] 
--- information about participants' age, gender, identifier code, and abilities on various measures.
-\item[Stimulus attributes] 
--- information about stimulus words, e.g., the word, its item number, its value on each variable in a set of psycholinguistic properties (like word length, frequency).
-\item[Behaviour]
--- behavioural observations e.g. reaction time or accuracy of responses made by each participant to each stimulus word.
-\end{description}
+1. **Participant attributes**: information about participants' age, gender, identifier code, and abilities on various measures.
+2. **Stimulus attributes**: information about stimulus items, e.g., the word, its item number, its value on each variable in a set of psycholinguistic properties (like word length, frequency).
+3. **Behaviour**: behavioural observations e.g. reaction time or accuracy of responses made by each participant to each stimulus word.
 
 Often, we need all these kinds of information for our analyses but different pieces of information are produced in separate ways and come to us in separate files.
 For example, we may collect experimental response data using software like PsychoPy, E-Prime, Qualtrics or DMDX.
@@ -140,11 +121,9 @@ We may collect information about participant characteristics using standardized 
 #### The data we need to use are untidy {#sec-intro-mixed-data-untidy-2}
 
 Often, the files we get are untidy: not in a useful or *tidy* format.
-For example, if you open the file `CP_study_word_naming_rt_180211.dat` (a `.dat` or tab delimited file) in Excel, you will see a spreadsheet that looks like Figure \@ref(fig:CPrt).
+For example, if you open the file `CP_study_word_naming_rt_180211.dat` (a `.dat` or tab delimited file) in Excel, you will see a spreadsheet that looks like @fig-CP-study-RTs.
 
-```{r CPrt, echo=FALSE, fig.cap="CP study RTs .dat file", out.width = '80%'}
-knitr::include_graphics("CP_study_word_naming_rt_180211-excel-shot.png")
-```
+![CP study RTs .dat file](CP_study_word_naming_rt_180211-excel-shot.png){#fig-CP-study-RTs}
 
 Typical of the output from data collection software, we can see a data table with:
 
@@ -168,9 +147,7 @@ There are three inter-related rules which make data *tidy* (Grolemund \& Wickham
 2. Each observation must have its own row.
 3. Each value must have its own cell.
 
-You can read more about tidy data here:
-
-\url{http://r4ds.had.co.nz/tidy-data.html}
+You can read more about tidy data [here](http://r4ds.had.co.nz/tidy-data.html)
 
 For our purposes, the reason we want the data in *tidy* format is that it is required for the functions we are going to use for mixed-effects modelling.
 However, in general, *tidy* format is maximally flexible, and convenient, for use with different R functions.
@@ -179,22 +156,14 @@ However, in general, *tidy* format is maximally flexible, and convenient, for us
 
 Go to the 402 Moodle folder for week 18, and download the .zip (compressed) folder labeled **PSYC402-01-multilevel-resources**
 
-Or, download the same folder by clicking on the link:
-
-\url{https://modules.lancaster.ac.uk/mod/resource/view.php?id=1795341}
+Or, download the same folder by clicking on the [data-01-multilevel.zip](files/data-01-multilevel.zip) link.
 
 In this folder, we have got four files that we will need to import or read in to R:
 
-\begin{itemize}
-\item
-\verb:CP study word naming rt 180211.dat:
-\item
-\verb:CP study word naming acc 180211.dat:
-\item
-\verb:words.items.5 120714 150916.csv:
-\item
-\verb:all.subjects 110614-050316-290518.csv:
-\end{itemize}
+- `CP study word naming rt 180211.dat`
+- `CP study word naming acc 180211.dat`
+- `words.items.5 120714 150916.csv`
+- `all.subjects 110614-050316-290518.csv`
 
 The `words.items` file holds information about the 160 stimulus words presented in the experimental reading (word naming) task.
 The `all.subjects` file holds information about the 62 participants who volunteered to take part in the experiment.
@@ -210,14 +179,16 @@ And we will need to *filter* cases (rows), excluding errors or outliers.
 
 We shall need to do this work in a series of processing steps:
 
-1. Import the data or read the data into R, see Section \@ref(import)
-2. Restructure the data, see Section \@ref(restructure)
-3. Select or transform variables, see Section \@ref(transform)
-4. Filter observations, see Section \@ref(filter)
+1. Import the data or read the data into R, see @sec-intro-mixed-data-import
+2. Restructure the data, see @sec-intro-mixed-data-restructure
+3. Select or transform variables, see @sec-intro-mixed-data-transform
+4. Filter observations, see @sec-intro-mixed-data-filter
 
-We will use `tidyverse` library functions from the begining, starting with the import stage.
+We will use `tidyverse` library functions from the beginning, starting with the import stage.
 
-```{r libtidyverse, eval = FALSE}
+```{r}
+#| label: libtidyverse
+#| eval: false
 library(tidyverse)
 ```
 
@@ -228,22 +199,21 @@ library(tidyverse)
 I am going to assume you have downloaded the data files, that they are all in the same folder, and that you know where they are on your computer or server.
 We need to use different versions of the `read_` function to read all four files into R.
 
-```{r readinall, message = FALSE}
-
+```{r}
+#| label: readinall
+#| warning: false
+#| message: false
 behaviour.rt <- read_tsv("CP study word naming rt 180211.dat", na = "-999")
 behaviour.acc <- read_tsv("CP study word naming acc 180211.dat", na = "-999")
 subjects <- read_csv("all.subjects 110614-050316-290518.csv", na = "-999")
 words <- read_csv("words.items.5 120714 150916.csv", na = "-999")
-
 ```
 
 These different versions respect the different ways in which the `.dat` and `.csv` file formats work.
 We need `read_tsv()` when data files consist of tab separated values.
 We need `read_csv()` when data files consist of comma separated values.
 
-You can read more about the **tidyverse readr** library of helpful functions here:
-
-\url{https://readr.tidyverse.org/}
+You can read more about the `{tidyverse}` `readr` library of helpful functions [here](https://readr.tidyverse.org/)
 
 It is *very* common to get experimental data in all sorts of different formats.
 Learning to use **tidyverse** functions will make it easier to cope with this when you do research.
@@ -253,7 +223,11 @@ Learning to use **tidyverse** functions will make it easier to cope with this wh
 Notice, here, that we use the `read_` function to read in the data, entering two arguments inside the brackets after the function name.
 For example, we write the code as:
 
-```{r readin-demo, eval=FALSE}
+```{r}
+#| label: readin-demo
+#| eval: false
+#| warning: false
+#| message: false
 behaviour.rt <- read_tsv("CP study word naming rt 180211.dat", na = "-999")
 ```
 
@@ -269,11 +243,7 @@ Take a look at what this line of code includes, element by element.
 In R, a missing value is said to be "not available": `NA`.
 
 In the datasets -- typically, the spreadsheets -- we create in our research, we will have values missing for different reasons.
-Take another look at the data spreadsheet you saw earlier, Figure \@ref(fig:CPrt-2).
-
-```{r CPrt-2, echo=FALSE, fig.cap="CP study RTs .dat file", out.width = '80%'}
-knitr::include_graphics("CP_study_word_naming_rt_180211-excel-shot.png")
-```
+Take another look at the data spreadsheet you saw earlier, @fig-CP-study-RTs.
 
 You should be able to see that the spreadsheet holds information, as explained, about the RTs of the responses made by each child to each stimulus word.
 Each of the cells in the spreadsheet (i.e. the box where a column intersects with a row) includes a number value.
@@ -283,7 +253,7 @@ The values have to be positive because they represent the length of time between
 Some of the cells hold the value `-999`, however.
 Obviously, we cannot have negative RT.
 The value represents the fact that we have no data.
-Take a look at Figure \@ref(fig:CPrt-2): we have a `-999` where we should have a RT for the response made by participant `AllanaD` to the word `broad`.
+Take a look at @fig-CP-study-RTs: we have a `-999` where we should have a RT for the response made by participant `AllanaD` to the word `broad`.
 This `-999` is there because, for some reason, we did not record an RT or a response for that combination of participant and stimulus.
 
 We can choose any value we like, as researchers, to code for missing data like this.
@@ -305,12 +275,15 @@ We are going to need to restructure these data from a wide format to a longer fo
 We need to restructure both behavioural data-sets, accuracy and RT.
 We do this using the `pivot_longer()` function.
 
-```{r widetolong, message = FALSE}
+```{r}
+#| label: widetolong
+#| warning: false
+#| message: false
 rt.long <- behaviour.rt %>%
-                            pivot_longer(2:62, names_to = "subjectID", values_to = "RT")
+             pivot_longer(2:62, names_to = "subjectID", values_to = "RT")
 
 acc.long <- behaviour.acc %>%
-                            pivot_longer(2:62, names_to = "subjectID", values_to = "accuracy")
+              pivot_longer(2:62, names_to = "subjectID", values_to = "accuracy")
 ```
 
 Doing data-set construction programmatically, using R functions, is generally more reliable, and faster, than doing it by hand.
@@ -322,9 +295,11 @@ And you *always* make errors.
 
 Here, we use a function you may not have seen before: `pivot_longer()`.
 
-```{r widetolong-demo, eval = FALSE}
+```{r}
+#| label: widetolong-demo
+#| eval: false
 rt.long <- behaviour.rt %>%
-                            pivot_longer(2:62, names_to = "subjectID", values_to = "RT")
+             pivot_longer(2:62, names_to = "subjectID", values_to = "RT")
 ```
 
 The name of the function comes from the fact that we are starting with data in wide format e.g. `behaviour.rt` where we have what should be a single variable of observations (RTs) arranged in a wide series of multiple columns, side-by-side (one column for each participant).
@@ -366,13 +341,9 @@ c. `pivot_longer(...values_to = "RT")`
 There are 61 columns of data listed by participant though 62 children were tested because we lost one child's data through an administrative error.
 As a result, in the wide data sets there are 62 columns, with the first column holding `item_name` data.
 
-You can find more information about pivoting data here:
+You can find more information about pivoting data [here](https://tidyr.tidyverse.org/articles/pivot.html)
 
-\url{https://tidyr.tidyverse.org/articles/pivot.html}
-
-And you can find more information specifically about the `pivot_longer()` operation here:
-
-\url{https://tidyr.tidyverse.org/articles/pivot.html}
+And you can find more information specifically about the `pivot_longer()` operation [here](https://tidyr.tidyverse.org/articles/pivot.html)
 
 ##### Why we restructure the data {#sec-intro-mixed-data-restructure-why}
 
@@ -388,14 +359,12 @@ This means that information about the responses made to each stimulus word are s
 
 You can see this for yourself if you inspect the source data using `head()`.
 
-\small
-
-```{r headcheck-wide}
+```{r}
+#| label: headcheck-wide
+#| eval: false
 head(behaviour.rt)
 head(behaviour.acc)
 ```
-
-\normalsize
 
 This structure is a problem for visualization and for analysis because the functions we will use require us to specify *single* columns for an outcome variable like reaction time.
 
@@ -404,26 +373,20 @@ Learning how to deal with it will save you a lot of time and grief later.
 
 You should check for yourself how `subjectID` and `RT` or `accuracy` scores get transposed from the old structure to the new structure.
 
-\small
-
-```{r headcheck-long}
+```{r}
+#| label: headcheck-long
+#| eval: false
 head(rt.long)
 head(acc.long)
 ```
-
-\normalsize
 
 If you compare the `rt.long` or `acc.long` data with what you see in when the data are in the original wide format then you can see how -- in going from wide -- we have re-arranged the data to a longer and narrower set of columns, one column listing each word, one column for `subjectID` and one column for `RT` or `accuracy`.
 What a check will show you is that we have multiple rows for responses to each item so that the item is repeated multiple times in different rows.
 
 These data are *now tidy*.
 
-\begin{itemize}
-\item
-Each column has information about one variable
-\item
-And each row has information about one observation, here, the response made by a participant to a word
-\end{itemize}
+- Each column has information about one variable
+- And each row has information about one observation, here, the response made by a participant to a word
 
 But these data are *incomplete*.
 Next we shall combine behavioural observations with data about stimulus words and about participants.
@@ -434,11 +397,9 @@ Over the years, different ways of reshaping data have evolved.
 This reflects how important and common the task is.
 An older way to do the same operation uses the function `gather()`.
 
-You can read more about `gather()` here:
+You can read more about `gather()` [here](http://r4ds.had.co.nz/tidy-data.html#spreading-and-gathering)
 
-\url{http://r4ds.had.co.nz/tidy-data.html#spreading-and-gathering}
-
-In \verb:tidyverse: the functions designed to enable you to restructure data have evolved through a series of different forms.
+In `tidyverse` the functions designed to enable you to restructure data have evolved through a series of different forms.
 This change is one of the real benefits of using open software like R.
 In my experience, the newer functions can be useful for *really* untidy data.
 I expect things will continue to evolve and improve over time.
@@ -461,22 +422,26 @@ This gets the job done quickly, and accurately.
 
 First, we join RT and accuracy data together.
 
-```{r gatherall, message = FALSE}
-
+```{r}
+#| label: gatherall
+#| message: false
+#| warning: false
 long <- rt.long %>% 
-                  full_join(acc.long)
+          full_join(acc.long)
 
 ```
 
 Then, we join subject and item information to the behavioural data.
 
-```{r gathersubjects, message = FALSE}
-
+```{r}
+#| label: gathersubjects
+#| message: false
+#| warning: false
 long.subjects <- long %>% 
-                        full_join(subjects, by = "subjectID")
+                   full_join(subjects, by = "subjectID")
 
 long.all <- long.subjects %>%
-                            full_join(words, by = "item_name")
+              full_join(words, by = "item_name")
 
 ```
 
@@ -488,9 +453,11 @@ If we were doing this by hand then we would need to check *very carefully* the c
 Here, in a series of steps, we take one dataset and join it (merge it) with the second dataset.
 Let's look at an example.
 
-```{r demo-join, eval=FALSE}
+```{r}
+#| label: demo-join
+#| eval: false
 long <- rt.long %>% 
-                  full_join(acc.long)
+           full_join(acc.long)
 ```
 
 The code work as follows.
@@ -506,29 +473,19 @@ The code work as follows.
 
 The addition of observations from one database joining to those from another happens through a matching process.
 
-\begin{itemize}
-\item
-R looks at the datasets being merged.
-\item
-It identifies if the two datasets have columns in common. Here, the datasets have \verb:subjectID: and \verb:item_name: in common).
-\item
-R can use these common columns to identify rows of data. Here, each row of data will be identified by both \verb:subjectID: and \verb:item_name: i.e. as data about the response made by a participant to a word.
-\item
-R will then do a series of identity checks, comparing one dataset with the other and, row by row, looking for matching values in the common columns.
-\item
-If there is a match then R joins the corresponding rows of data together. 
-\item
-If there isn't a match then it creates \verb:NAs: where there are missing entries in one row for one dataset which cannot be matched to a row from the joining dataset.
-\end{itemize}
+- R looks at the datasets being merged.
+- It identifies if the two datasets have columns in common. Here, the datasets have `subjectID` and `item_name` in common).
+- R can use these common columns to identify rows of data. Here, each row of data will be identified by both `subjectID` and `item_name` i.e. as data about the response made by a participant to a word.
+- R will then do a series of identity checks, comparing one dataset with the other and, row by row, looking for matching values in the common columns.
+- If there is a match then R joins the corresponding rows of data together. 
+- If there isn't a match then it creates `NAs` where there are missing entries in one row for one dataset which cannot be matched to a row from the joining dataset.
 
 Note that in one example, the example of code I discuss here, I did not specify identifying columns in common, allowing the function to do the work.
 In the other code chunks I did: `long.all <- long.subjects %>% full_join(words, by = "item_name")`  using the `by = ...` argument.
 
 #### Relational data {#sec-intro-mixed-data-relational}
 
-In the `tidyverse` family of `dplyr` functions, when you work with multiple datasets (tables of data), we call the datasets **relational** data.
-
-<http://r4ds.had.co.nz/relational-data.html#relational-data>
+In the `tidyverse` family of `dplyr` functions, when you work with multiple datasets (tables of data), we call the datasets [relational data](http://r4ds.had.co.nz/relational-data.html#relational-data).
 
 There are three families of verbs designed to work with relational data:
 
@@ -564,9 +521,7 @@ I used `full_join()` because I wanted to retain all observations from both datas
 
 #### Exercise {#sec-intro-mixed-data-exx-join}
 
-\begin{description}
-\item[Break the join] You could examine how the \verb:full_join(): works by experimenting with stopping it from working
-\end{description}
+- Break the join: You could examine how the `full_join()` works by experimenting with stopping it from working
 
 As I discuss, you need to have matches in values on key (common) variables.
 If the `subjectID` is different on different datasets, you will lose data that would otherwise be merged to form the merged or composite dataset.
@@ -578,7 +533,8 @@ If it goes wrong, you can always re-access the source files and read them in aga
 You can check what happens before and after you break the match by counting the number of rows in the dataset that results from the merger.
 We can count the number of rows in a dataset with:
 
-```{r check-length}
+```{r}
+#| label: check-length
 length(long.all$RT)
 ```
 
@@ -594,23 +550,21 @@ Then, we need to remove errors and outlying short RT observations: we do that by
 
 We are going to select just the variables we need using the `select()` function.
 
-```{r selectcols, message = FALSE}
-
+```{r}
+#| label: selectcols
 long.all.select <- long.all %>% 
                         select(item_name, subjectID, RT, accuracy, 
-                               Lg.UK.CDcount, brookesIMG, AoA_Kup_lem, 
-                               Ortho_N, regularity, Length, BG_Mean, 
-                               Voice,	Nasal,	Fricative,	Liquid_SV,	
-                               Bilabials,	Labiodentals,	Alveolars,	
-                               Palatals,	Velars,	Glottals, age.months, 
-                               TOWREW_skill, TOWRENW_skill, spoonerisms, CART_score)
+                          Lg.UK.CDcount, brookesIMG, AoA_Kup_lem, 
+                          Ortho_N, regularity, Length, BG_Mean, 
+                          Voice,	Nasal,	Fricative,	Liquid_SV,	
+                          Bilabials,	Labiodentals,	Alveolars,	
+                          Palatals,	Velars,	Glottals, age.months, 
+                          TOWREW_skill, TOWRENW_skill, spoonerisms, CART_score)
 
 ```
 
 Notice that these variables do not have *reader-friendly* names.
-Naming things well is important, as Jenny Bryan teaches:
-
-\url{https://speakerdeck.com/jennybc/how-to-name-files}
+Naming things well is important, as Jenny Bryan [teaches](https://speakerdeck.com/jennybc/how-to-name-files).
 
 I would say that this true for variables as much as for files.
 The names we have in the CP study data were fine for internal use within my research group but we should be careful to ensure that variables have names that make sense to others and to our future selves.
@@ -637,9 +591,7 @@ We can adjust variable names using the `rename()` function but I will leave that
 
 #### Exercise {#sec-intro-mixed-data-exx-transform}
 
-\begin{description}
-\item[Select different variables] You could analyze the CP study data for a research report. What if you wanted to analyze a different set of variables, could you select different variables?
-\end{description}
+- Select different variables: You could analyze the CP study data for a research report. What if you wanted to analyze a different set of variables, could you select different variables?
 
 ### Filter observations {#sec-intro-mixed-data-filter}
 
@@ -659,15 +611,15 @@ At this point, I am going to exclude two sets of observations only.
 
 We can do this using the `filter()` function, setting conditions on rows, as arguments.
 
-```{r filterrows, message = FALSE}
-
+```{r}
+#| label: filterrows
 # step 1
 long.all.select.filter <- long.all.select %>% 
-                                           filter(item_name != 'FALSE')
+                            filter(item_name != 'FALSE')
 
 # step 2
 long.all.select.filter <- long.all.select.filter %>%
-                                                  filter(RT >= 200)
+                            filter(RT >= 200)
 
 ```
 
@@ -675,62 +627,38 @@ long.all.select.filter <- long.all.select.filter %>%
 
 Here, I am using the function `filter()` to ...
 
-\begin{itemize}
-\item
-Create a new dataset \verb:long.all.select.filter <- ...: by
-\item
-Using functions to work on the data named immediately to the right of the assignment arrow: \verb:long.all.select:
-\begin{itemize}
-\item
-An observation is included in the new dataset if it matches the condition specified as an argument in the \verb:filter(): function call, thus:
-\begin{enumerate}
-\item
-\verb:filter(item_name != `FALSE'): means: include in the new dataset \verb:long.all.select.filter: all observations from the old dataset \verb:long.all.select: that are not \verb:!=: (\verb:!: not \verb:=: equal to) the value \verb:FALSE: in the variable \verb:item_name:
-\item
-then recreate the \verb:long.all.select.filter: as a version of itself (with no name change) by including in the new version only those observations where RT was greater than or equal to 200ms using \verb:RT >= 200:
-\end{enumerate}
-\end{itemize}
-\end{itemize}
+- Create a new dataset `long.all.select.filter <- ...` by
+- Using functions to work on the data named immediately to the right of the assignment arrow: `long.all.select`
+- An observation is included in the new dataset if it matches the condition specified as an argument in the `filter()` function call, thus:
+
+1. `filter(item_name != `FALSE')` means: include in the new dataset `long.all.select.filter` all observations from the old dataset `long.all.select` that are not `!=` (`!` not `=` equal to) the value `FALSE` in the variable `item_name`
+2. then recreate the `long.all.select.filter` as a version of itself (with no name change) by including in the new version only those observations where RT was greater than or equal to 200ms using `RT >= 200`
 
 #### The difference between = and ==  {#sec-intro-mixed-equals}
 
 You need to be careful to distinguish these signs.
 
-\begin{itemize}
-\item
-\verb:=: assigns a value, so \verb:x = 2: means "x equals 2"
-\item
-\verb:==: tests a match so \verb:x == 2: means: "is x equal to 2?"
-\end{itemize}
+- `=` assigns a value, so `x = 2` means "x equals 2"
+- `==` tests a match so `x == 2` means: "is x equal to 2?"
 
 #### Using multiple arguments in filtering {#sec-intro-mixed-data-filter-conditions}
 
 You can supply multiple arguments to `filter()` and this may be helpful if (1.) you want to filter observations according to a match on condition-A **and** condition-B (logical "and" is coded with `&`)  or (2.) you want to filter observations according to a match on condition-A or condition-B (logical "or" is coded `|`).
 
-You can read more about using multiple arguments to filter observations here:
-
-\url{https://dplyr.tidyverse.org/reference/filter.html}
+You can read more about using multiple arguments to filter observations [here](https://dplyr.tidyverse.org/reference/filter.html)
 
 #### Exercise {#sec-intro-mixed-data-exx-filter}
 
-\begin{description}
-\item[Vary the filter conditions] in different ways
-\end{description}
+- Vary the filter conditions: in different ways
 
-\begin{enumerate}
-\item
-Change the threshold for including RTs from \verb:RT >= 200: to something else
-\item
-Can you assess what impact the change has? Note that you can count the number of observations (rows) in a dataset using e.g. \verb:length(data.set.name$variable.name):
-\end{enumerate}
+1. Change the threshold for including RTs from `RT >= 200` to something else
+2. Can you assess what impact the change has? Note that you can count the number of observations (rows) in a dataset using e.g. `length(data.set.name$variable.name)`
 
 Filtering or re-coding observations is an important element of the research workflow in psychological science.
 How we do or do not remove observations from original data may have an impact on our results (as explored by, e.g., Steegen et al., 2014).
 It is important, therefore, that we learn how to do this reproducibly using R scripts that we can share with our research reports.
 
-You can read further information about filtering here:
-
-\url{https://r4ds.had.co.nz/transform.html?q=filter#filter-rows-with-filter}
+You can read further information about filtering [here](https://r4ds.had.co.nz/transform.html?q=filter#filter-rows-with-filter)
 
 #### Remove missing values {#sec-intro-mixed-data-omit-na}
 
@@ -738,7 +666,8 @@ We will be working with the `long.all.select.filter.csv` dataset collated from t
 
 For convenience, I am going to remove missing values before we go any further, using the `na.omit()` function.
 
-```{r readinglongallc5, message = FALSE}
+```{r}
+#| label: readinglongallc5
 long.all.noNAs <- na.omit(long.all.select.filter)
 ```
 
@@ -750,15 +679,10 @@ You need to be reasonably sure, when you use this function, where your `NAs` may
 
 ### Now we have some tidy data {#sec-intro-mixed-data-tidy-conclusions}
 
-\small
-
-```{r head-all}
-
+```{r}
+#| label: head-all
 head(long.all.noNAs, n = 10)
-
 ```
-
-\normalsize
 
 If we inspect the \verb:long.all.noNAs: data-set, we can see that we have now got a tidy data-set with all the data we need for our analyses:
 
@@ -774,7 +698,9 @@ We have removed the missing values and we have filtered outliers.
 Having produced the tidy dataset, we may wish to share it, or save ourselves the trouble of going through the process again.
 We can do this by creating a .csv file.
 
-```{r write-csv}
+```{r}
+#| label: write-csv
+#| eval: false
 write_csv(long.all.noNAs, "long.all.noNAs.csv")
 ```
 
@@ -809,14 +735,10 @@ We do not have to make a decision.
 
 Given this common **repeated-measures** design, we can analyze the outcome variable in relation to:
 
-\begin{description}
-\item[fixed effects]
-the impact of independent variables like participant reading skill or word frequency
-\item[random effects]
-the impact of random or unexplained differences between participants and also between stimuli
-\end{description}
+- **fixed effects**: the impact of independent variables like participant reading skill or word frequency
+- **random effects**: the impact of random or unexplained differences between participants and also between stimuli
 
-In this situation, we can say that the random effects are crossed (Baayen et al., 2008).
+In this situation, we can say that the random effects are crossed [@baayen2008].
 When multilevel models require the specification of crossed random effects, they tend to be called **mixed-effects models**.
 
 ## Working with mixed-effects models {#sec-intro-mixed-working-models}
@@ -826,16 +748,16 @@ We begin, as we did previously, by ignoring differences due to grouping variable
 We pretend that all observations are independent.
 In this fantasy situation, we address our research question.
 
-\begin{description}
-\item[RQ.1.]
+::: callout-note
 What word properties influence responses to words in a test of reading aloud?
-\end{description}
+:::
 
 ### Load the data if you need to {#sec-intro-mixed-data-load}
 
 If you did not go through the process of tidying the CP study data from the component source data files, then you can import the pre-tidied data here.
 
-```{r read-csv}
+```{r}
+#| label: read-csv
 long.all.noNAs <- read_csv("long.all.noNAs.csv", 
                   col_types = cols(
                     subjectID = col_factor(),
@@ -850,17 +772,21 @@ Notice that I am using `read_csv()` with an additional argument `col_types = col
 Here, I am requesting that `read_csv()` treats `subjectID` and `item_name` as factors.
 
 This is a very useful capacity, and a more efficient way to work than, say, first reading in the data and then using *coercion* to ensure that variabels are assigned appropriate types.
-You can read more about it here.
-
-\url{https://readr.tidyverse.org/articles/readr.html}
+You can read more about it [here](https://readr.tidyverse.org/articles/readr.html).
 
 ### Linear model for multilevel data -- ignoring the hierarchical structure {#sec-intro-mixed-lm}
 
 We begin by asking if reading reaction time (RT) varies in association with word frequency.
-A scatterplot shows that response latencies decrease with increasing word frequency (Figure \@ref(fig:pfreqc5)). 
+A scatterplot shows that response latencies decrease with increasing word frequency (@fig-freq-all). 
 
-```{r pfreqc5, message = FALSE, fig.cap = "Reading reaction time compared to word frequency, all data", fig.width=5, fig.height=5, out.width = "65%", cache = TRUE, fig.align='center'}
-
+```{r}
+#| label: fig-freq-all
+#| fig-cap: "Reading reaction time compared to word frequency, all data"
+#| fig-alt: "The figure shows scatterplot: each point represents the English and the Portuguese scores for one child. A red line drawn through the points indicates a trend such that higher Portuguese scores are associated with higher English scores."
+#| warning: false
+#| message: false
+#| fig-height: 5
+#| fig-width: 5
 long.all.noNAs %>%
 ggplot(aes(x = Lg.UK.CDcount, y = RT)) +
   geom_point(alpha = .2) + 
@@ -876,9 +802,9 @@ This means that Figure \@ref(fig:pfreqc5) suggests that RT decreases with increa
 
 We can estimate the relationship between RT and word frequency using a linear model in which we ignore the possibility that there may be differences (between subjects, or between items) in the intercept or (between subjects) in the slope of the frequency effect:
 
-\begin{equation}
+$$
 Y_{ij} = \beta_0 + \beta_1X_j + e_{ij} 
-\end{equation}
+$$
 
 * where $Y_{ij}$ is the value of the observed outcome variable, the RT of the response made by the $i$ participant to the $j$ word;
 * $\beta_1X_j$ refers to the fixed effect of the explanatory variable (here, word frequency), where the frequency value $X_j$ is different for different words $j$, and $\beta_1$ is the estimated coefficient of the effect due to the relationship between response RT and word frequency;
@@ -886,14 +812,13 @@ Y_{ij} = \beta_0 + \beta_1X_j + e_{ij}
 
 The linear model can be fit in R using the `lm()` function, as we have done previously.
 
-```{r lmallfreq}
-
+```{r}
+# label: lm-all-freq
 lm.all.1 <- lm(RT ~  Lg.UK.CDcount,
              
                      data = long.all.noNAs)
 
 summary(lm.all.1)
-
 ```
 
 We can see that, in this first analysis, the estimated effect of word frequency is $\beta = -53.375$ (here, word frequency information is in the `Lg.UK.CDcount` variable).
@@ -903,31 +828,31 @@ The model does not explain much variance, as $R^2 = .03$ but, no doubt due to th
 
 #### Exercise {#sec-intro-mixed-exx-lm}
 
-\begin{description}
-\item[Vary the linear model] using different outcomes or predictors
-\end{description}
+- Vary the linear model: using different outcomes or predictors
 
 The CP study dataset is rich with possibility. 
 It would be useful to experiment with it.
 
-\begin{enumerate}
-\item
-Change the predictor from frequency to something else: what do you see when you visualize the relationship between variables using scatterplots?
-\item
-Specify linear models with different predictors: do the relationships you see in plots match the coefficients you see in the model estimates?
-\end{enumerate}
+1. Change the predictor from frequency to something else: what do you see when you visualize the relationship between variables using scatterplots?
+2. Specify linear models with different predictors: do the relationships you see in plots match the coefficients you see in the model estimates?
 
 ### Can we ignore the hierarchical structure? {#sec-intro-mixed-ignore-hierarchy}
 
 In this linear model, the observations are assumed to be independent but the assumption of independence is questionable given the expectation that participants will differ, with one participant's responses perhaps slower or less accurate than another, perhaps more or less affected by word frequency than another. 
 We can examine that variation by estimating the intercept and the slope of the frequency effect separately using the data for each participant alone.
 
-We can start by examining the frequency effect for each child in a grid of plots, with each plot  representing the $RT \sim frequency$ relationship for the data for a child (Figure \@ref(fig:freqperchildtrellis)).
+We can start by examining the frequency effect for each child in a grid of plots, with each plot  representing the $RT \sim frequency$ relationship for the data for a child (@fig-freqperchildtrellis).
 
 We discussed how the plotting code functions in the previous chapter.
 
-```{r freqperchildtrellis, message = FALSE, fig.cap = "RT vs. word frequency, considered separately for data for each child", out.width='95%', fig.width=6.5,fig.height=9}
-
+```{r}
+#| label: fig-freqperchildtrellis
+#| fig-cap: "RT vs. word frequency, considered separately for data for each child"
+#| fig-alt: "The figure shows scatterplot: each point represents the English and the Portuguese scores for one child. A red line drawn through the points indicates a trend such that higher Portuguese scores are associated with higher English scores."
+#| warning: false
+#| message: false
+#| fig-height: 8
+#| fig-width: 8
 long.all.noNAs %>%
   ggplot(aes(x = Lg.UK.CDcount, y = RT)) +
     geom_point(alpha = .2) + 
@@ -935,10 +860,9 @@ long.all.noNAs %>%
     theme_bw() + 
     xlab("Word frequency (log10 UK SUBTLEX CD count)") + 
     facet_wrap(~ subjectID)
-
 ```
 
-Figure \@ref(fig:freqperchildtrellis) shows how, on average, more frequent words are associated with shorter reaction time, faster responses.
+@fig-freqperchildtrellis shows how, on average, more frequent words are associated with shorter reaction time, faster responses.
 The plot further shows, however, that the effect of frequency varies considerably between children.
 Some children show little or no effect; the best fit line is practically level.
 Other children show a marked effect, with a steep fit line indicating a strong frequency effect.
@@ -946,12 +870,12 @@ Other children show a marked effect, with a steep fit line indicating a strong f
 We can get more insight into the differences between children, however, if we plot the estimated intercept and frequency effect coefficients for each child directly.
 This allows more insight because it focuses the eye on the differences between children in the estimates.
 
-Figure \@ref(fig:freqperchildlm) presents a plot showing the estimates of the intercept and the coefficient of the effect of word frequency on reading RT, calculated separately for each child.
+@fig-freqperchildlm presents a plot showing the estimates of the intercept and the coefficient of the effect of word frequency on reading RT, calculated separately for each child.
 The estimate for each child is shown as a black dot.
 The standard error of the estimate is shown as a black vertical line, shown above and below a point.
 You can say that where there is a longer line there we have more uncertainty about the location of the estimate. 
 
-Figure \@ref(fig:freqperchildlm) presents the estimates of intercept and the frequency coefficient, calculated for each child, ordered by the size of the estimate.
+@fig-freqperchildlm presents the estimates of intercept and the frequency coefficient, calculated for each child, ordered by the size of the estimate.
 Drawn this way, we can see how the estimates of both the intercept and the slope of the frequency effect vary substantially between children.
 We can see also how the standard errors vary greatly between children.
 
@@ -963,10 +887,14 @@ In the same way, if there is an average slope for the frequency effect, an effec
 Some children will have larger (here, more negative) frequency effects and other children will have smaller (less negative) frequency effects.
 (Here, the frequency effect is associated with a negative coefficient e.g. $\beta_1 = -53$ so a larger frequency effect will be a bigger negative number e.g. $\beta_1 = -100$.)
 
-```{r freqperchildlm, echo=FALSE, fig.cap = 'Estimated intercepts and frequency effect slopes (with SEs) calculated for each child analysed separately, with point estimates presented in order of size', warning=FALSE, message=FALSE, out.width='95%', fig.width=9,fig.height=5.5}
-
-# plot intercept and lm frequency coefficient for each child, data considered separately
- 
+```{r}
+#| label: fig-freqperchildlm
+#| fig-cap: "Estimated intercepts and frequency effect slopes (with SEs) calculated for each child analysed separately, with point estimates presented in order of size"
+#| fig-alt: "The figure shows scatterplot: each point represents the English and the Portuguese scores for one child. A red line drawn through the points indicates a trend such that higher Portuguese scores are associated with higher English scores."
+#| warning: false
+#| message: false
+#| fig-height: 5
+#| fig-width: 8
 freqperchildlm <- long.all.noNAs %>%
                   group_by(subjectID) %>% 
                   do(tidy(lm(RT ~ Lg.UK.CDcount, data=.)))
@@ -1002,17 +930,17 @@ grid.arrange(pfreqperchildlmint, pfreqperchildlmfreq,
 In a mixed-effects model, we account for this variation: the differences between participants in intercepts and slopes.
 We do this by modeling the intercept as two terms:
 
-\begin{equation}
+$$
 \beta_{0i} = \gamma_0 + U_{0i}
-\end{equation}
+$$
 
 * where $\gamma_0$ is the average intercept and $U_{0i}$ is the difference for each $i$ child between their intercept and the average intercept.
 
 We model the frequency effect as two terms:
 
-\begin{equation}
+$$
 \beta_{1i} = \gamma_1 + U_{1i}
-\end{equation}
+$$
 
 * where $\gamma_1$ is the average slope and $U_{1i}$ represents the difference for each $i$ child between the slope of their frequency effect and the average slope.
 
@@ -1020,9 +948,9 @@ We model the frequency effect as two terms:
 
 We can then incorporate in a single model the **fixed effects** due to the average intercept and the average frequency effect, as well as the **random effects**, error variance due to unexplained differences between participants in intercepts and frequency effects:
 
-\begin{equation}
+$$
 Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + e_{ij}
-\end{equation}
+$$
 
 * where the outcome $Y_{ij}$ is related to ...
 * the average intercept $\gamma_0$ and differences between $i$ children in the intercept $U_{0i}$;
@@ -1046,14 +974,14 @@ We can fit a mixed-effects model of the $RT \sim frequency$ relationship, taking
 I first go through the model fitting code bit by bit.
 (I then go through the output, the results.)
 
-```{r lmerfreq, eval = FALSE}
-
+```{r}
+#| label: lmerfreq
+#| eval: false
 lmer.all.1 <- lmer(RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1||subjectID),
              
              data = long.all.noNAs)
 
 summary(lmer.all.1)
-
 ```
 
 You have seen the `lmer()` function code before but *practice makes perfect* so we shall go through the code step by step, as we did previously.
@@ -1078,55 +1006,44 @@ I want you to notice something that looks like nothing much: `||`.
 We are going to need to defer until later a (necessary) discussion of exactly why we need the two double lines.
 In short, the use of `||` asks R to fit a model in which we estimate random effects associated with
 
-\begin{itemize}
-\item
-variance due to differences in intercepts
-\item
-variance due to differences in slopes
-\item
-but \emph{not} covariance between the two sets of differences
-\end{itemize}
+- nvariance due to differences in intercepts
+- variance due to differences in slopes
+- but *not* covariance between the two sets of differences
 
 I do this because otherwise the model I specify will not converge. 
 We shall need to discuss these things: **convergence**, and failures to converge; as well as **random effects specification** and simplification.
-We will discuss random effects covariance in Section \@ref(variance-covariance).
+We will discuss random effects covariance in @sec-intro-mixed-variance-covariance.
 For now, the most important lesson is learnt by seeing how the analysis approach we saw last week can be extended to examining the effects of experimental variables in data from repeated measures design studies.
 
 #### Reading the lmer()  results {#sec-intro-mixed-lmer-results}
 
-The `lmer()` model code we discussed in Section \@ref(lmer-first) gives us the following output.
+The `lmer()` model code we discussed in @sec-intro-mixed-lmer gives us the following output.
 
-```{r lmerfreq-results, echo = FALSE}
-
+```{r}
+#| label: lmerfreq-results
+#| echo: false
 lmer.all.1 <- lmer(RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1||subjectID),
              
              data = long.all.noNAs)
 
 summary(lmer.all.1)
-
 ```
 
 We discussed the major elements of the results output last week.
 We expand on that discussion, a little, here.
 
-\begin{description}
-\item[The output from the model summary first gives us information about the model.]
-\end{description}
+::: callout-advice
+The output from the model summary first gives us information about the model.
+:::
 
-\begin{itemize}
-\item
-First, we see information about the function used to fit the model, and the model object created by the \verb:lmer(): function call
-\item
-Then, we see the model formula \verb:RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1|subjectID):
-\item
-Then, we see \verb:REML criterion at convergence: about the model fitting process, which we can usually ignore
-\item
-Then, we see information about the distribution of the model residuals.
-\end{itemize}
+- First, we see information about the function used to fit the model, and the model object created by the `lmer()` function call
+- Then, we see the model formula `RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1|subjectID)`
+- Then, we see `REML criterion at convergence` about the model fitting process, which we can usually ignore
+- Then, we see information about the distribution of the model residuals.
 
-\begin{description}
-\item[We then see information listed under Random effects.]
-\end{description}
+::: callout-advice
+We then see information listed under Random effects.
+:::
 
 This is where you can see information about the error variance terms estimated by the model.
 
@@ -1134,27 +1051,22 @@ The information is listed in four columns: 1. `Groups`; 2. `Name`; 3. `Variance`
 You will recall that we have talked about how observations can be grouped by participant (because we have multiple response observations for each person in the study) just as previously we talked about how observations could be grouped by class (because we saw that children were nested under class).
 That is what we mean when we refer to `Groups`, we are identifying the grouping variables that give hierarchical structure to the data.
 The `Name` lists whether the estimate we are looking at corresponds to, here, random differences between participants in intercepts (listed as `(Intercept)`), or in slopes (listed as `Lg.UK.CDcount`).
-As we discuss later, in Section \@ref(variance-covariance), mixed-effects models estimate the spread in random differences.
+As we discuss later, in @sec-intro-mixed-variance-covariance, mixed-effects models estimate the spread in random differences.
 We are not interested in the specific differences in intercept or slope between specific individuals.
 What we want is to be able to take into account the variance associated with those differences.
 
 Thus, we see in the `Random Effects` section, the variances associated with:
 
-\begin{itemize}
-\item
-\verb:subjectID Intercept) 87575:, differences between participants in the intercepts;
-\item
-\verb:subjectID.1 Lg.UK.CDcount 2657:, differences between participants in the slopes of the frequency effect;
-\item
-Alongside \verb:Residual  23734:, residuals where, just like a linear model, we have variance associated with differences between model estimates and observed RT, here, at the trial level.
-\end{itemize}
+- `subjectID Intercept) 87575`, differences between participants in the intercepts;
+- `subjectID.1 Lg.UK.CDcount 2657`, differences between participants in the slopes of the frequency effect;
+- Alongside `Residual  23734`, residuals where, just like a linear model, we have variance associated with differences between model estimates and observed RT, here, at the trial level.
 
 We do not usually discuss the specific variance estimates in research reports.
 However, the relative size of the variances does provide useful information (see also Meteyard \& Davies, 2020), as we shall see when we discuss the different estimates we get when we include a random effect due to differences between items (Section \@ref(random-effect-items)).
 
-\begin{description}
-\item[Lastly, we see estimates of the coefficients (of the slopes) of the fixed effects.]
-\end{description}
+::: callout-advice
+Lastly, we see estimates of the coefficients (of the slopes) of the fixed effects.
+:::
 
 In this model, we see estimates of the fixed effects of the intercept and the slope of the `RT ~ Lg.UK.CDcount` model.
 We discuss these estimates next.
@@ -1168,7 +1080,7 @@ As we saw last, we see, again, that taking into account random differences has a
 
 Which coefficient estimate should you trust?
 Well, it is obvious that the linear model and the linear mixed-effects model estimate are relatively similar.
-However, it is also obvious that the linear model makes an assumption -- the *assumption of independence of observations* -- that does not make sense theoretically (we can readily expect that reading responses will be similar within a child) and does not make sense empirically (responses clearly differ between children, Figure \@ref(fig:freqperchildlm)).
+However, it is also obvious that the linear model makes an assumption -- the *assumption of independence of observations* -- that does not make sense theoretically (we can readily expect that reading responses will be similar within a child) and does not make sense empirically (responses clearly differ between children, see @fig-freqperchildlm).
 Thus, I think we have good grounds for supposing that the linear mixed-effects model estimate for the frequency effect is likely to be closer to the true underlying population effect (whatever that might be).
 
 That being said, it is important to remember, in this discussion, that whatever estimate we can produce is the estimate we can produce *given* the sample of words we used, the measurement of reading RT we were able to make, and the estimate of word frequency we were able to collect. 
@@ -1185,9 +1097,9 @@ We will come back to this but note that if $t > 2$ we can suppose that an effect
 
 We have said that we can incorporate, in a mixed-effects model, **fixed effects** (e.g., the average frequency effect) and **random effects**, error variance due to unexplained differences between participants in intercepts and in frequency effects:
 
-\begin{equation}
+$$
 Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + e_{ij}
-\end{equation}
+$$
 
 So we distinguish:
 
@@ -1217,8 +1129,14 @@ You can see also how in Figure \@ref(fig:BLUPS-prediction) (b.), some children h
 In comparison, some children have frequency effects that are larger than the population-level or average frequency effect -- so their adjustments are negative (to increase their frequency effect, by making it *more* negative).
 Strikingly, you can see that a few children have frequency effects that are as much as 200ms larger (see plot (b.) around $x = -200$) than the population-level or average effect.
 
-```{r BLUPS-prediction, fig.cap = 'Plot showing histograms indicating the distribution of participant adjustments to account for between-child differences in intercept or slope (known as Best Linear Unbiased Predictionss)', echo=FALSE, warning=FALSE, message=FALSE, fig.height=4.5, fig.width=9.75, out.width = '105%'}
-
+```{r}
+#| label: fig-BLUPS-prediction
+#| fig-cap: "Plot showing histograms indicating the distribution of participant adjustments to account for between-child differences in intercept or slope (known as Best Linear Unbiased Predictions)"
+#| fig-alt: "The figure shows scatterplot: each point represents the English and the Portuguese scores for one child. A red line drawn through the points indicates a trend such that higher Portuguese scores are associated with higher English scores."
+#| warning: false
+#| message: false
+#| fig-height: 4.5
+#| fig-width: 10
 lmer.all.1 <- lmer(RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1||subjectID),
                    
                    data = long.all.noNAs)
@@ -1266,20 +1184,12 @@ Mixed-effects modeling is hard to get used to *at first*.
 A bit more practice helps to show you how the different parts of the model work.
 We again focus on the random effects.
 
-\begin{itemize}
-\item
-In the model we have seen so far, we specify \verb:(Lg.UK.CDcount + 1||subjectID):
-\item
-We can change this part -- and only this part -- to see what happens to the results, do this:
-\begin{enumerate}
-\item
-\verb:lmer(RT ~  Lg.UK.CDcount + (1|subjectID)...): gives us a \emph{random intercepts} model accounting for just random differences between participants in the intercept
-\item
-\verb:lmer(RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 0|subjectID)...): gives us a \emph{random slope} model accounting for just random differences between participants in the slope of the frequency effect
-\item
-\verb:lmer(RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1|subjectID)...): gives us a \emph{random intercepts and slopes} model accounting for both random differences between participants in the intercept and in the slope, as well as covariance in these differences.
-\end{enumerate}
-\end{itemize}
+- In the model we have seen so far, we specify `(Lg.UK.CDcount + 1||subjectID)`
+- We can change this part -- and only this part -- to see what happens to the results, do this:
+
+1. `lmer(RT ~  Lg.UK.CDcount + (1|subjectID)...)` gives us a *random intercepts* model accounting for just random differences between participants in the intercept
+2. `lmer(RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 0|subjectID)...)` gives us a *random slope* model accounting for just random differences between participants in the slope of the frequency effect
+3. `lmer(RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1|subjectID)...)` gives us a *random intercepts and slopes* model accounting for both random differences between participants in the intercept and in the slope, as well as covariance in these differences.
 
 Try out these variations and *look carefully* at the different results.
 Look, especially, at what happens to the \verb:Random effects: part of the summary.
@@ -1288,8 +1198,14 @@ We can *visualize* the differences between the models in a plot showing the diff
 Figure \@ref(fig:indiv-prediction) shows what a mixed-effects model would predict should be the effect of frequency on RT for different children in the CP study.
 The predictions vary depending on the nature of the random effects we specify in the model.
 
-```{r indiv-prediction, fig.cap = 'Plot showing model predictions of the effect, for each individual, of word frequency on reading reaction time -- predictions vary between models incorporating (a.) random effect of participants on intercepts only; (b.) random effect of participants on slopes only and (c.) random effect of participants on intercepts and on slopes', echo=FALSE, warning=FALSE, message=FALSE, fig.height=5, fig.width=9.75, out.width = '105%'}
-
+```{r}
+#| label: fig-indiv-prediction
+#| fig-cap: "Plot showing model predictions of the effect, for each individual, of word frequency on reading reaction time -- predictions vary between models incorporating (a.) random effect of participants on intercepts only; (b.) random effect of participants on slopes only and (c.) random effect of participants on intercepts and on slopes"
+#| fig-alt: "The figure shows scatterplot: each point represents the English and the Portuguese scores for one child. A red line drawn through the points indicates a trend such that higher Portuguese scores are associated with higher English scores."
+#| warning: false
+#| message: false
+#| fig-height: 5
+#| fig-width: 10
 # -- fit an lmer -- different kinds
 
 lmer.all.1 <- lmer(RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1||subjectID),
@@ -1355,14 +1271,9 @@ grid.arrange(p.intercepts, p.slopes, p.slopes.intercepts,
 
 We can see that:
 
-\begin{enumerate}
-\item
-If the model includes the random effect of \emph{participants on intercepts only} then all the slopes are the same (the lines in the figure are parallel) because this model assumes that the only differences between participants are differences in the intercepts.
-\item
-If the model includes the random effect of \emph{participants on slopes only} then the slopes vary but they all have the same intercept. The plot does not show this but you can see how all the slopes are converging on one point somewhere on the left. This happens because this model assumes that the only differences between participants are differences in the slopes.
-\item
-If the model includes the random effect of \emph{participants on intercepts and on slopes} then we can see how the intercepts and the slopes vary. Given what we saw when we looked at the relation between frequency and RT for each participant considered separately we might argue that this model is much more realistic about the data.
-\end{enumerate}
+1. If the model includes the random effect of \emph{participants on intercepts only} then all the slopes are the same (the lines in the figure are parallel) because this model assumes that the only differences between participants are differences in the intercepts.
+2. If the model includes the random effect of \emph{participants on slopes only} then the slopes vary but they all have the same intercept. The plot does not show this but you can see how all the slopes are converging on one point somewhere on the left. This happens because this model assumes that the only differences between participants are differences in the slopes.
+3. If the model includes the random effect of \emph{participants on intercepts and on slopes} then we can see how the intercepts and the slopes vary. Given what we saw when we looked at the relation between frequency and RT for each participant considered separately we might argue that this model is much more realistic about the data.
 
 #### Code tip
 
@@ -1372,8 +1283,9 @@ Note: you do not have to just believe me when I say that \verb:||: is in the mod
 Experiment -- and see what happens when you change the code.
 Try this.
 
-```{r lmer-error, eval = FALSE}
-
+```{r}
+#| label: lmer-error
+#| eval: false
 lmer.all.1 <- lmer(RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1|subjectID),
              
              data = long.all.noNAs)
@@ -1385,9 +1297,7 @@ summary(lmer.all.1)
 Do you get an error message?
 
 A very useful trick is to learn to copy the error message you get into a search engine on your web browser.
-Do this and you will find useful help, as here.
-
-\url{https://rstudio-pubs-static.s3.amazonaws.com/33653_57fc7b8e5d484c909b615d8633c01d51.html}
+Do this and you will find useful help, as [here](https://rstudio-pubs-static.s3.amazonaws.com/33653_57fc7b8e5d484c909b615d8633c01d51.html)
 
 ## Variation between stimuli: the "language as fixed-effect fallacy" {#sec-intro-mixed-fixed-effect-fallacy}
 
@@ -1399,8 +1309,14 @@ If we were to estimate the average latency of the responses made by different ch
 Some words elicit slower and some elicit faster responses on average.
 We can also see that there is, again, variation in the uncertainty of estimates, as reflected in differences in the lengths of the error bars corresponding to the standard errors of the estimates.
 
-```{r pitemsints, fig.cap = 'Estimated intercepts (with SEs) calculated for each stimulus word, with coefficients ordered by average latency for each word', echo=FALSE, warning=FALSE, message=FALSE, fig.height=4, fig.width=9, out.width = '100%'}
-
+```{r}
+#| label: fig-pitemsints
+#| fig-cap: "Estimated intercepts (with SEs) calculated for each stimulus word, with coefficients ordered by average latency for each word"
+#| fig-alt: "The figure shows scatterplot: each point represents the English and the Portuguese scores for one child. A red line drawn through the points indicates a trend such that higher Portuguese scores are associated with higher English scores."
+#| warning: false
+#| message: false
+#| fig-height: 4
+#| fig-width: 9
 # what about variation between items in intercepts?
 # -- for each itemname, plots ordered by meanRT
 
@@ -1429,29 +1345,22 @@ Clark (1973) suggested that researchers could calculate $minF'$ (not F) when doi
 
 This involves a series of steps.
 
-\begin{enumerate}
-	\item
-	You start by \emph{aggregating} your data
-	\begin{itemize}
-	\item
-	By-subjects data -- for each subject, take the average of their responses to all the items
-	\item
-	By-items data -- for each item, take the average of all subjects' responses to that item
-	\end{itemize}
-	\item
-	You do separate ANOVAs, one for by-subjects (F1) data and one for by-items (F2) data
-	\item
-	 You put F1 and F2 together, calculating minF'
-\end{enumerate}
+1. You start by *aggregating* your data
+
+- By-subjects data -- for each subject, take the average of their responses to all the items
+- By-items data -- for each item, take the average of all subjects' responses to that item
+
+2. You do separate ANOVAs, one for by-subjects (F1) data and one for by-items (F2) data
+3. You put F1 and F2 together, calculating minF'
 
 Averaging data by-subjects or by-items is relatively simple.
 And you will often see, in the literature, psychological reports in which F1 and F2 analysis results are presented.
 
 Calculating $minF'$ is also relatively simple:
 
-\begin{equation}
-			minF' = \frac{MS_{effect}}{MS_{random-subject-effects} + MS_{random-word-differences}} = \frac{F_1F_2}{F_1 + F_2}
-\end{equation}
+$$
+minF' = \frac{MS_{effect}}{MS_{random-subject-effects} + MS_{random-word-differences}} = \frac{F_1F_2}{F_1 + F_2}
+$$
 
 However, after a while, psychologists stopped doing the extra step of the $minF'$ calculation (Raaijmakers et al., 1999).
 They carried on calculating and reporting F1 and F2 ANOVA results but, as Baayen et al. (2008) discuss, this approach risks a high potential false positive error rate.
@@ -1460,7 +1369,7 @@ Psychologists also found that while the $minF'$ approach allowed them to take in
 This stopped researchers from taking a comprehensive approach to error variance where they wanted to conduct multiple regression analyses.
 You will often see multiple regression analyses of by-items data, where a sample of participants has been asked to respond to a sample of stimuli, and the analysis is of the effects of stimulus properties on outcomes averaged (over participants' responses) to the mean outcome by item.
 But analyzing data only by-items ensures that we lose track of participant differences.
-Lorch and Myers (1990) warn that analyzing only by-items mean RTs just assumes wrongly that \emph{subjects are a fixed effect}.
+Lorch and Myers (1990) warn that analyzing only by-items mean RTs just assumes wrongly that *subjects are a fixed effect*.
 This approach, again, risks a higher rate of false positive errors.
 
 ### Include the random effect of stimulus {#sec-intro-mixed-random-effect-stimulus}
@@ -1469,17 +1378,17 @@ We now no longer need to tolerate these problems.
 
 In the context of our working example, with our analysis of the CP study data, we can build up our mixed-effects model by adding a random effect to capture the impact of unexplained differences between stimuli. We model the random effect of items on intercepts by modeling the intercept as two terms:
 
-\begin{equation}
+$$
 \beta_{0j} = \gamma_0 + W_{0j}
-\end{equation}
+$$
 
 * where $\gamma_0$ is the average intercept and $W_{0j}$ represents the deviation, for each word, between the average intercept and the per-word intercept. 
 
 Our model can now incorporate the additional random effect of items on intercepts:
 
-\begin{equation}
+$$
 Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + W_{0j} + e_{ij}
-\end{equation}
+$$
 
 In this model, the outcome $Y_{ij}$ is related to the average intercept $\gamma_0$ and the word frequency effect $\gamma_1X_j$ plus random effects due to unexplained differences between participants in intercepts $U_{0i}$ and the slope of the frequency effect $U_{1i}X_j$ as well as random differences between items in intercepts $W_{0j}$, in addition to the residual term $e_{ij}$.
 
@@ -1487,8 +1396,8 @@ In this model, the outcome $Y_{ij}$ is related to the average intercept $\gamma_
 
 We can fit a mixed-effects model of the $RT \sim frequency$ relationship, taking into account the random differences between participants *and now also* the random differences between stimulus words.
 
-```{r lmerfreq-subjects-items}
-
+```{r}
+#| label: lmerfreq-subjects-items
 lmer.all.2 <- lmer(RT ~  Lg.UK.CDcount + 
                          (Lg.UK.CDcount + 1||subjectID) +
                          (1|item_name),
@@ -1501,24 +1410,16 @@ summary(lmer.all.2)
 
 This is the same mixed-effects model as the one we discussed in sections \@ref(lmer-first) and \@ref(lmer-results) but with one important addition.
 
-\begin{itemize}
-\item
-We add \verb:(1|item_name): to take into account random differences between between words in intercepts
-\end{itemize}
+- We add `(1|item_name)` to take into account random differences between between words in intercepts
 
 ##### Reading the results {#sec-intro-mixed-lmer-results-read}
 
 Take a look at the model results. 
 You should notice three changes.
 
-\begin{enumerate}
-\item
-You can see that the estimate for the effect of word frequency on reading reaction time has changed again, it is now $\beta = -72.33$
-\item
-\verb:item_name   (Intercept)     3397: there is now an additional term in the list of random effects, giving the model estimate for variance associated with random differences between words in intercepts
-\item
-And you can see that the residual variance has changed. In the first model \verb:lmer.all.1: it was \verb:23734:, now it is \verb:20704:
-\end{enumerate}
+1. You can see that the estimate for the effect of word frequency on reading reaction time has changed again, it is now $\beta = -72.33$
+2. `item_name   (Intercept)     3397` there is now an additional term in the list of random effects, giving the model estimate for variance associated with random differences between words in intercepts
+3. And you can see that the residual variance has changed. In the first model `lmer.all.1` it was `23734`, now it is `20704`
 
 The reduction in residual variance is one way in which we can judge how good a job the model is doing in accounting for the variance in the outcome, observed response reaction time.
 We can see that by adding a term to account for differences between items we can reduce the amount by which the model estimates deviate from observed outcomes.
@@ -1527,8 +1428,14 @@ We will come back to this.
 
 ## Variances and covariances of random effects {#sec-intro-mixed-variance-covariance}
 
-```{r covarp, fig.cap = 'Scatterplot showing the relationship between estimated coefficients for the intercept and for the frequency effect, for each child analysed separately', echo=FALSE, warning=FALSE, message=FALSE, fig.height=3.5, fig.width=3.5, out.width='80%'}
-
+```{r}
+#| label: fig-covarp
+#| fig-cap: "Scatterplot showing the relationship between estimated coefficients for the intercept and for the frequency effect, for each child analysed separately"
+#| fig-alt: "The figure shows scatterplot: each point represents the English and the Portuguese scores for one child. A red line drawn through the points indicates a trend such that higher Portuguese scores are associated with higher English scores."
+#| warning: false
+#| message: false
+#| fig-height: 4
+#| fig-width: 4
 # can combine the per-child intercepts and frequency effects dataframes generated in the foregoing
 
 # plot intercept and lm frequency coefficient for each child, data considered separately
@@ -1608,7 +1515,7 @@ participant | (Intercept) | 112314 | 335.1 |
 participant | Frequency | 3624 | 60.2 |
 residual |  | 20704 | 143.9 |  
 
-Note: \verb:lmer(RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1||subjectID) + (1|item_name):
+Note: `lmer(RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1||subjectID) + (1|item_name)`
 
 Researchers should report their modelling in sufficient detail that their results can be reproduced by others. Barr et al. (2013) argued that choices about random effects structure affect the generalizability of the estimates of fixed effects. In particular, it seems sensible to examine the possibility that the slope of the effect of an explanatory variable may vary at random between participants or between stimuli. Correspondingly, researchers should report and explain their decisions about the inclusion of random effects.
 
@@ -1669,20 +1576,20 @@ We will come back to how we should report the results of mixed-effects models be
 
 <!-- #### Exercise -->
 
-<!-- \begin{description} -->
+<!--  -->
 <!-- \item[Complicate things] Add participant attribute variables to the model -->
-<!-- \end{description} -->
+<!--  -->
 
 <!-- The CP study was designed to examine, in reality, the research questions: -->
 
-<!-- \begin{description} -->
+<!--  -->
 <!-- \item[RQ.1.] -->
 <!-- What word properties influence responses to words in a test of reading aloud? -->
 <!-- \item[RQ.2.] -->
 <!-- What participant attributes influence responses? -->
 <!-- \item[RQ.3.] -->
 <!-- Are the effects of word properties moderated by (do they interact with) the effects of participant attributes? -->
-<!-- \end{description} -->
+<!--  -->
 
 <!-- You can examine answers to RQ.2 by adding one or more of the participant attribute variables to the model. -->
 <!-- For example, is there an effect of age on reading RT? -->
@@ -1757,9 +1664,9 @@ We will come back to how we should report the results of mixed-effects models be
 
 <!-- We *can* allow ourselves to envisage a model including both the fixed effects of word frequency and of child reading skill, and the random effects of between-subjects or between-items differences in the fixed effects. -->
 
-<!-- \begin{equation} -->
+<!-- $$ -->
 <!-- Y_{ij} = \gamma_0 + \gamma_1X_j + \gamma_2X_i + U_{0i} + U_{1i}X_j + W_{0j} + W_{1j}X_i + e_{ij} -->
-<!-- \end{equation} -->
+<!-- $$ -->
 
 <!-- In this model, the outcome $Y_{ij}$ is related to: -->
 
@@ -1825,10 +1732,9 @@ As is typical for the data analysis we need to do for experimental psychological
 
 We then developed a mixed-effects model to answer the research question:
 
-\begin{description}
-\item[RQ.1.]
+::: callout-note
 What word properties influence responses to words in a test of reading aloud?
-\end{description}
+:::
 
 Our analysis focused on the relationship between reading response reaction time (RT, in ms) and the predictor word frequency.
 We examined how the effect of word frequency was estimated in a linear model ignoring the multilevel structure and then in mixed-effects models which incorporated terms to capture variance associated with random differences between participants in intercepts or in the slope of the frequency effect, and between items in intercepts.
@@ -1841,50 +1747,30 @@ We considered the possibility of within-items effects.
 
 We used a number of functions to tidy, visualize and analyze the CP study data.
 
-\begin{itemize}
-\item
-\verb:read_csv(): and \verb:read_csv(): to load source data files into the R workspace
-\item
-\verb:pivot_longer(): to restructure data from wide to long
-\item
-\verb:full_join(): to put together data from separate datasets; in our example, from datasets holding information about participant attributes, stimulus word properties, and participant behaviours
-\item
-\verb:select(): to select the variables we need
-\item
-\verb:filter(): to filter observations based on conditions
-\item
-\verb:na.omit(): to remove missing values
-\item
-For visualisation, we used \verb:facet_wrap(): to show plots of the relationship between outcome and predictor variables separately for different groups (by participant, or by item)
-\item
-We used \verb:lmer(): to fit a multilevel model
-\end{itemize}
+- `read_csv()` and `read_csv()` to load source data files into the R workspace
+- `pivot_longer()` to restructure data from wide to long
+- `full_join()` to put together data from separate datasets; in our example, from datasets holding information about participant attributes, stimulus word properties, and participant behaviours
+- `select()` to select the variables we need
+- `filter()` to filter observations based on conditions
+- `na.omit()` to remove missing values
+- For visualisation, we used `facet_wrap()` to show plots of the relationship between outcome and predictor variables separately for different groups (by participant, or by item)
+- We used `lmer()` to fit a multilevel model
 
-We used the \verb:summary(): function to get model results for both linear models and for the mulilevel or liner mixed-effects model.
+We used the `summary()` function to get model results for both linear models and for the mulilevel or liner mixed-effects model.
 
 ## R code and data file access for the class
 
 Activities in the class that goes with this chapter are associated with the following data file and .R code file:
 
-\begin{itemize}
-\item
-\verb:402-02-mixed-effects-workbook.R:
-\item
-\verb:CP study word naming rt 180211.dat:
-\item
-\verb:CP study word naming acc 180211.dat:
-\item
-\verb:words.items.5 120714 150916.csv:
-\item
-\verb:all.subjects 110614-050316-290518.csv:
-\end{itemize}
+- `402-02-mixed-effects-workbook.R`
+- `CP study word naming rt 180211.dat`
+- `CP study word naming acc 180211.dat`
+- `words.items.5 120714 150916.csv`
+- `all.subjects 110614-050316-290518.csv`
 
 A pre-tidied version of the CP study data is available as:
 
-\begin{itemize}
-\item
-\verb:long.all.noNAs.csv:
-\end{itemize}
+- `long.all.noNAs.csv`
 
 You can get these materials by going to the 402 Moodle folder for week 18, and downloading the .zip (compressed) folder labeled **PSYC402-01-multilevel-resources**
 
@@ -1893,16 +1779,6 @@ Or, you can download the same folder by clicking on the link:
 \url{https://modules.lancaster.ac.uk/mod/resource/view.php?id=1795341}
 
 Run the code in the .R file to reproduce the results presented in this chapter and in the slides.
-
-## References 
-
-<!-- -- note also the web resources: -->
-<!-- https://bbolker.github.io/morelia_2018/notes/mixedlab.html -->
-<!-- https://cran.microsoft.com/snapshot/2017-08-01/web/packages/sjPlot/vignettes/sjplmer.html -->
-<!-- -- sjplmer maybe superseded by: -->
-<!-- https://stackoverflow.com/questions/13847936/plot-random-effects-from-lmer-lme4-package-using-qqmath-or-dotplot-how-to-mak -->
-<!-- https://cran.r-project.org/web/packages/merTools/vignettes/merToolsIntro.html -->
-<!-- https://stackoverflow.com/questions/27787875/options-for-caterpillar-plots-in-lme4-grouping-by-factor-to-visually-identify-t -->
 
 ### Recommended reading {#sec-intro-mixed-recommended-reading}
 
@@ -1914,3 +1790,11 @@ I wrote a tutorial article on mixed-effects models with Lotte Meteyard.
 We discuss how important the approach now is for psychological science, what researchers worry about when they use it, and what they should do and report when they use the method/
 
 Meteyard, L., \& Davies, R.A.I. (2020). Best practice guidance for linear mixed-effects models in psychological science, *Journal of Memory and Language*, 112, 104092, \url{https://doi.org/10.1016/j.jml.2020.104092}
+
+<!-- -- note also the web resources: -->
+<!-- https://bbolker.github.io/morelia_2018/notes/mixedlab.html -->
+<!-- https://cran.microsoft.com/snapshot/2017-08-01/web/packages/sjPlot/vignettes/sjplmer.html -->
+<!-- -- sjplmer maybe superseded by: -->
+<!-- https://stackoverflow.com/questions/13847936/plot-random-effects-from-lmer-lme4-package-using-qqmath-or-dotplot-how-to-mak -->
+<!-- https://cran.r-project.org/web/packages/merTools/vignettes/merToolsIntro.html -->
+<!-- https://stackoverflow.com/questions/27787875/options-for-caterpillar-plots-in-lme4-grouping-by-factor-to-visually-identify-t -->
