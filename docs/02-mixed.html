@@ -260,7 +260,7 @@ div.csl-indent {
   <li><a href="#sec-intro-motivations" id="toc-sec-intro-motivations" class="nav-link active" data-scroll-target="#sec-intro-motivations"><span class="toc-section-number">4.1</span>  Motivations: repeated measures designs and crossed random effects</a></li>
   <li><a href="#sec-intro-key" id="toc-sec-intro-key" class="nav-link" data-scroll-target="#sec-intro-key"><span class="toc-section-number">4.2</span>  The key idea to get us started</a></li>
   <li><a href="#sec-intro-targets" id="toc-sec-intro-targets" class="nav-link" data-scroll-target="#sec-intro-targets"><span class="toc-section-number">4.3</span>  Targets</a></li>
-  <li><a href="#sec-intro-mixed-study" id="toc-sec-intro-mixed-study" class="nav-link" data-scroll-target="#sec-intro-mixed-study"><span class="toc-section-number">4.4</span>  Study guide</a></li>
+  <li><a href="#sec-intro-mixed-guide" id="toc-sec-intro-mixed-guide" class="nav-link" data-scroll-target="#sec-intro-mixed-guide"><span class="toc-section-number">4.4</span>  Study guide</a></li>
   <li><a href="#sec-intro-mixed-data" id="toc-sec-intro-mixed-data" class="nav-link" data-scroll-target="#sec-intro-mixed-data"><span class="toc-section-number">4.5</span>  The data we will work with: CP reading study</a>
   <ul class="collapse">
   <li><a href="#sec-intro-mixed-question" id="toc-sec-intro-mixed-question" class="nav-link" data-scroll-target="#sec-intro-mixed-question"><span class="toc-section-number">4.5.1</span>  Our research question</a></li>
@@ -333,7 +333,7 @@ div.csl-indent {
 </div>
 <section id="sec-intro-motivations" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="sec-intro-motivations"><span class="header-section-number">4.1</span> Motivations: repeated measures designs and crossed random effects</h2>
-<p>In the <strong>Introduction to multilevel data</strong>, we looked at a multilevel structured dataset in which there are observations about children’s grades, and it is evident that those children can be grouped by or under classes. As we discussed, this kind of data structure will come from studies with a very common design in which the researcher recorded observations about a sample of children who are members of a sample of classes. In working with these kind of data, it is common to say that the observations of children’s grades are <em>nested</em> within classes in a hierarchy.</p>
+<p>In <a href="01-multilevel.html"><span>Chapter&nbsp;3</span></a>, we looked at a multilevel structured dataset in which there were observations about children’s grades, and it became evident that those children can be grouped by or under classes. As we discussed, this kind of data structure will come from studies with a very common design in which the researcher recorded observations about a sample of children who are members of a sample of classes. In working with these kind of data, it is common to say that the observations of children’s grades are <em>nested</em> within classes in a hierarchy.</p>
 <p>Many Psychologists conduct studies where observations are properly understood to be structured in groups of some form but where, nevertheless, it is inappropriate to think of the observations as being nested <span class="citation" data-cites="baayen2008">(<a href="references.html#ref-baayen2008" role="doc-biblioref">Baayen et al., 2008</a>)</span>. We are talking, here, about <strong>repeated-measures designs</strong> where the experimenter presents a sample of multiple stimuli for response to each participant in a sample of for multiple participants. This is another <em>very</em> common experimental design in psychological science. Studies with this kind of design will produce data with a structure that, also, requires the use of mixed-effects models but, as we shall see, the way we think about the structure will be a bit more complicated. We could say that observations of the responses made by participants to each stimulus can be grouped by participant: each person will tend to respond in similar ways to different stimuli. Or, we could say that observations of responses can be grouped by stimulus because each stimulus will tend to evoke similar kinds of responses in different people. Or, we could say that both forms of grouping should be taken into account at the same time.</p>
 <p>We shall take the third position and this chapter will concern why, and how we will adapt our thinking and practice.</p>
 </section>
@@ -352,26 +352,39 @@ Important
 <p>Linear mixed-effects models and multilevel models are basically the same.</p>
 </div>
 </div>
-<p>This week, we again look at data with multilevel structure. But we are looking at data where participants were asked to respond to a set of stimuli (words) so that our observations consist of recordings made of the response made by each child to each stimulus. We use the same procedure we did for multilevel data but with one significant change which we shall identify and explain.</p>
+<p>This week, we again look at data with multilevel structure. But we are looking at data where participants were asked to respond to a set of stimuli (here, words) so that our observations consist of recordings made of the response made by each child to each stimulus. We use the same procedure we did for multilevel data but with one significant change which we shall identify and explain.</p>
 </section>
 <section id="sec-intro-targets" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="sec-intro-targets"><span class="header-section-number">4.3</span> Targets</h2>
-<p>Our learning objectives again include the development of both understanding and practical skills.</p>
+<p>Our learning objectives again include the development of both concepts and skills.</p>
 <ol type="1">
-<li><strong>skills</strong> – Practice how to tidy experimental data for mixed-effects analysis.</li>
-<li><strong>concepts</strong> – Begin to develop an understanding of crossed random effects of subjects and stimuli.</li>
-<li><strong>skills and concepts</strong> – Practice fitting linear mixed-effects models incorporating random effects of subjects and stimuli.</li>
+<li><strong>skills</strong> – practice how to tidy experimental data for mixed-effects analysis.</li>
+<li><strong>concepts</strong> – begin to develop an understanding of crossed random effects of participants and stimuli.</li>
+<li><strong>skills and concepts</strong> – practice fitting linear mixed-effects models incorporating random effects of participants and stimuli.</li>
 </ol>
 </section>
-<section id="sec-intro-mixed-study" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="sec-intro-mixed-study"><span class="header-section-number">4.4</span> Study guide</h2>
-<ol type="1">
-<li>Read in the example CP study data</li>
-<li>Identify how the data are structured by both participant and stimulus differences</li>
-<li>Use visualizations to explore the impact of the structure</li>
-<li>un analyses using linear mixed-effects models involving multiple random effects</li>
-<li>Review readings provided</li>
-</ol>
+<section id="sec-intro-mixed-guide" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="sec-intro-mixed-guide"><span class="header-section-number">4.4</span> Study guide</h2>
+<p>I have provided a collection of materials you can use. Here, I explain what they are and how I suggest you use them.</p>
+<p><strong>1. Video recordings of lectures</strong></p>
+<p>1.1 I have recorded a lecture in three parts. The lectures should be accessible by anyone who has the link.</p>
+<ul>
+<li><a href="https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=66e89421-4491-4eb9-b1c8-acd4012a183d">Part 1</a> – about 16 minutes</li>
+<li><a href="https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=22361165-636b-424c-9e28-acd4012efd6f">Part 2</a> – about 13 minutes</li>
+<li><a href="https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=5942b084-457f-4687-aa3d-acd401332b44">Part 3</a> – about 13 minutes</li>
+</ul>
+<p>1.2 I suggest you watch the recordings then read the rest of this chapter. The lectures provide a summary of the main points.</p>
+<p><strong>2. Chapter: 02-mixed</strong></p>
+<p>2.1 I have written this chapter to discuss the main ideas and setting out the practical steps you can follow to start to develop the skills required to analyse multilevel structured data with crossed random effects. 2.2 The practical elements include data tidying, visualization and analysis steps. 2.3 You can read the chapter, run the code, and do the exercises.</p>
+<ul>
+<li>Read in the example <strong>CP reading study</strong> dataset.</li>
+<li>Identify how the data are structured by both participant and stimulus differences.</li>
+<li>Use visualizations to explore the impact of the structure.</li>
+<li>Run analyses using linear mixed-effects models involving multiple random effects.</li>
+<li>Review the recommended readings (<a href="#sec-intro-mixed-recommended-reading"><span>Section&nbsp;4.13.1</span></a>).</li>
+</ul>
+<p><strong>3. Practical workbook materials</strong></p>
+<p>3.1 In the following sections, I describe the practical steps, and associated resources, you can use for your learning.</p>
 </section>
 <section id="sec-intro-mixed-data" class="level2" data-number="4.5">
 <h2 data-number="4.5" class="anchored" data-anchor-id="sec-intro-mixed-data"><span class="header-section-number">4.5</span> The data we will work with: CP reading study</h2>

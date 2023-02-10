@@ -15,7 +15,7 @@ library(tidyverse)
 
 ## Motivations: repeated measures designs and crossed random effects {#sec-intro-motivations}
 
-In the **Introduction to multilevel data**, we looked at a multilevel structured dataset in which there are observations about children's grades, and it is evident that those children can be grouped by or under classes.
+In @sec-intro-multilevel, we looked at a multilevel structured dataset in which there were observations about children's grades, and it became evident that those children can be grouped by or under classes.
 As we discussed, this kind of data structure will come from studies with a very common design in which the researcher recorded observations about a sample of children who are members of a sample of classes.
 In working with these kind of data, it is common to say that the observations of children's grades are *nested* within classes in a hierarchy.
 
@@ -36,24 +36,46 @@ Linear mixed-effects models and multilevel models are basically the same.
 :::
 
 This week, we again look at data with multilevel structure.
-But we are looking at data where participants were asked to respond to a set of stimuli (words) so that our observations consist of recordings made of the response made by each child to each stimulus.
+But we are looking at data where participants were asked to respond to a set of stimuli (here, words) so that our observations consist of recordings made of the response made by each child to each stimulus.
 We use the same procedure we did for multilevel data but with one significant change which we shall identify and explain.
 
 ## Targets {#sec-intro-targets}
 
-Our learning objectives again include the development of both understanding and practical skills.
+Our learning objectives again include the development of both concepts and skills.
 
-1. **skills** -- Practice how to tidy experimental data for mixed-effects analysis.
-2. **concepts** -- Begin to develop an understanding of crossed random effects of subjects and stimuli.
-3. **skills and concepts** -- Practice fitting linear mixed-effects models incorporating random effects of subjects and stimuli.
+1. **skills** -- practice how to tidy experimental data for mixed-effects analysis.
+2. **concepts** -- begin to develop an understanding of crossed random effects of participants and stimuli.
+3. **skills and concepts** -- practice fitting linear mixed-effects models incorporating random effects of participants and stimuli.
 
-## Study guide {#sec-intro-mixed-study}
+## Study guide {#sec-intro-mixed-guide}
 
-1. Read in the example CP study data
-2. Identify how the data are structured by both participant and stimulus differences
-3. Use visualizations to explore the impact of the structure
-4. un analyses using linear mixed-effects models involving multiple random effects
-5. Review readings provided
+I have provided a collection of materials you can use. Here, I explain what they are and how I suggest you use them.
+
+**1. Video recordings of lectures**
+
+1.1 I have recorded a lecture in three parts. The lectures should be accessible by anyone who has the link.
+
+- [Part 1](https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=66e89421-4491-4eb9-b1c8-acd4012a183d) -- about 16 minutes
+- [Part 2](https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=22361165-636b-424c-9e28-acd4012efd6f) -- about 13 minutes
+- [Part 3](https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=5942b084-457f-4687-aa3d-acd401332b44) -- about 13 minutes
+
+1.2 I suggest you watch the recordings then read the rest of this chapter. The lectures provide a summary of the main points.
+
+**2. Chapter: 02-mixed**
+
+2.1 I have written this chapter to discuss the main ideas and setting out the practical steps you can follow to start to develop the skills required to analyse multilevel structured data with crossed random effects.
+2.2 The practical elements include data tidying, visualization and analysis steps.
+2.3 You can read the chapter, run the code, and do the exercises.
+
+- Read in the example **CP reading study** dataset.
+- Identify how the data are structured by both participant and stimulus differences.
+- Use visualizations to explore the impact of the structure.
+- Run analyses using linear mixed-effects models involving multiple random effects.
+- Review the recommended readings (@sec-intro-mixed-recommended-reading).
+
+**3. Practical workbook materials**
+
+3.1 In the following sections, I describe the practical steps, and associated resources, you can use for your learning.
 
 ## The data we will work with: CP reading study {#sec-intro-mixed-data}
 
