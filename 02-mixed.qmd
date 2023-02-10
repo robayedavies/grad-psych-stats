@@ -1914,22 +1914,3 @@ I wrote a tutorial article on mixed-effects models with Lotte Meteyard.
 We discuss how important the approach now is for psychological science, what researchers worry about when they use it, and what they should do and report when they use the method/
 
 Meteyard, L., \& Davies, R.A.I. (2020). Best practice guidance for linear mixed-effects models in psychological science, *Journal of Memory and Language*, 112, 104092, \url{https://doi.org/10.1016/j.jml.2020.104092}
-
-### References list
-
-Baayen, R. H., Davidson, D. J., \& Bates, D. M. (2008). Mixed-effects modeling with crossed random effects for subjects and items. *Journal of Memory and Language*, 59, 390-412.
-
-Barr, D. J., Levy, R., Scheepers, C., \& Tily, H. J. (2013). Random effects structure for confirmatory hypothesis testing: Keep it maximal. *Journal of Memory and Language*, 68, 255-278.
-
-Davies, R. A., Arnell, R., Birchenough, J. M., Grimmond, D., \& Houlson, S. (2017). Reading through the life span: Individual differences in psycholinguistic effects. *Journal of Experimental Psychology: Learning, Memory, and Cognition*, 43, 1298.
-
-Judd, C. M., Westfall, J., \& Kenny, D. A. (2012). Treating stimuli as a random factor in social psychology: a new and comprehensive solution to a pervasive but largely ignored problem. *Journal of Personality and Social Psychology*, 103, 54.
-
-Lorch, R. F., Jr., \& Myers, J. L. (1990). Regression analyses of repeated measures data in cognitive research. *Journal of Experimental Psychology: Learning, Memory, and Cognition*, 16, 149–157. http://dx.doi.org/ 10.1037/0278-7393.16.1.149
-
-Raaijmakers, J. G., Schrijnemakers, J. M., \& Gremmen, F. (1999). How to deal with "the language-as-fixed-effect fallacy": Common misconceptions and alternative solutions. *Journal of Memory and Language*, 41, 416-426.
-
-Snijders, T.A., \& Bosker, R.J. (2012). *Multilevel analysis (2nd Edition)*. London, UK: Sage.
-
-Steegen, S., Tuerlinckx, F., Gelman, A., \& Vanpaemel, W. (2016). Increasing transparency through a multiverse analysis. *Perspectives on Psychological Science*, 11, 702-712.
-
