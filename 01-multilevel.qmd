@@ -76,9 +76,7 @@ We are *not* going to take a mathematical approach to learning about multilevel 
 Our learning objectives include the development of key concepts and skills.
 
 1.  **concepts** -- how data can have multilevel structures and what this requires in models
-2.  **skills** -- where skills comprise the capacity to
-
-<!-- -->
+2.  **skills** -- where skills comprise the capacity to:
 
 i.  use visualization to examine observations within groups
 ii. run linear models over all data and within each class
@@ -88,10 +86,32 @@ We are just getting started. Our plan will be to build depth and breadth in unde
 
 ## Study guide {#sec-multi-guide}
 
-1.  Read in the example data `BAFACALO_DATASET.RData` and identify how the data are structured at multiple levels.
-2.  Use visualizations to explore the impact of the structure.
-3.  Run analyses using linear models (revision) and linear mixed-effects models (extension) code.
-4.  Review readings provided.
+I have provided a collection of materials you can use. Here, I explain what they are and how I suggest you use them.
+
+**1. Video recordings of lectures**
+
+1.1 I have recorded a lecture in three parts. The lectures should be accessible by anyone who has the link.
+
+- [Part 1](https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=66e89421-4491-4eb9-b1c8-acd4012a183d) -- about 16 minutes
+- [Part 2](https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=22361165-636b-424c-9e28-acd4012efd6f) -- about 13 minutes
+- [Part 3](https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=5942b084-457f-4687-aa3d-acd401332b44) -- about 13 minutes
+
+1.2 I suggest you watch the recordings then read the rest of this chapter. The lectures provide a summary of the main points.
+
+**2. Chapter: 01-multilevel**
+
+2.1 I have written a chapter discussing the main ideas and setting out the practical steps you can follow to start to develop the skills required to analyse multilevel structured data.
+2.2 The practical elements include data tidying, visualization and analysis steps.
+2.3 You can read the chapter, run the code, and do the exercises.
+
+- Read in the example data `BAFACALO_DATASET.RData` and identify how the data are structured at multiple levels.
+- Use visualizations to explore the impact of the structure.
+- Run analyses using linear models (revision) and linear mixed-effects models (extension) code.
+- Review the recommended readings (@sec-multi-reading).
+
+**3. Practical workbook materials**
+
+3.1 In the following sections, I describe the practical steps, and associated resources, you can use for your learning.
 
 ## The data we will work with: Brazilian school children {#sec-multi-data-intro}
 
