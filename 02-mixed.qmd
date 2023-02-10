@@ -83,16 +83,6 @@ The presence of these features is the reason why we need to use mixed-effects mo
 These features are common across a range of study designs so the lessons we learn will apply frequently in psychological research. 
 This is the reason why it is important we teach and learn how to use mixed-effects models.
 
-### Our research question {#sec-intro-mixed-question}
-
-We are going to use these data to examine the answers to the following question:
-
-::: callout-note
--   Research question: What word properties influence responses to words in a test of reading aloud?
-:::
-
-We can look at the answers to this question while also taking into account the impacts of random differences -- between sampled participants or between sampled words -- using mixed-effects models. But, first, we are going to look at how we get the data ready for analysis.
-
 ### Locate and download the data file {#sec-intro-mixed-data-download}
 
 You can download the [data-02-mixed.zip](files/data-02-mixed.zip) files folder to get the data you need for the practical work we will be doing for this chapter.
@@ -669,9 +659,15 @@ In this situation, we can say that the random effects are crossed [@baayen2008].
 
 To illustrate the approach, we examine observations from the CP study. We begin, as we did previously, by ignoring differences due to grouping variables (like participant or stimulus). We pretend that all observations are independent. In this fantasy situation, we address our research question.
 
+### Our research question {#sec-intro-mixed-question}
+
+We are going to use the CP study data to examine the answers to the question:
+
 ::: callout-note
-What word properties influence responses to words in a test of reading aloud?
+-   Research question: What word properties influence responses to words in a test of reading aloud?
 :::
+
+We can look at the answers to this question while also taking into account the impacts of random differences -- between sampled participants or between sampled words -- using mixed-effects models.
 
 ### Load the data if you need to {#sec-intro-mixed-data-load}
 
