@@ -1,4 +1,4 @@
-# Introduction to linear mixed-effects models
+# Introduction to linear mixed-effects models {#sec-intro-mixed}
 
 ```{r libraries-hide}
 #| warning: false
@@ -13,7 +13,7 @@ library(sjPlot)
 library(tidyverse)
 ```
 
-## Motivations: repeated measures designs and crossed random effects {#crossed-random}
+## Motivations: repeated measures designs and crossed random effects {#sec-intro-motivations}
 
 In the **Introduction to multilevel data**, we looked at a multilevel structured dataset in which there are observations about children's grades, and it is evident that those children can be grouped by or under classes.
 As we discussed, this kind of data structure will come from studies with a very common design in which the researcher recorded observations about a sample of children who are members of a sample of classes.
@@ -29,7 +29,7 @@ Or, we could say that both forms of grouping should be taken into account at the
 
 We shall take the third position and this chapter will concern why, and how we will adapt our thinking and practice.
 
-## The key idea to get us started {#key-ideas}
+## The key idea to get us started {#sec-intro-key}
 
 \begin{description}
 \item[Linear mixed-effects models] 
@@ -40,7 +40,7 @@ This week, we again look at data with multilevel structure.
 But we are looking at data where participants were asked to respond to a set of stimuli (words) so that our observations consist of recordings made of the response made by each child to each stimulus.
 We use the same procedure we did for multilevel data but with one significant change which we shall identify and explain.
 
-## Targets
+## Targets {#sec-intro-targets}
 
 Our learning objectives again include the development of both understanding and practical skills.
 
@@ -53,7 +53,7 @@ Our learning objectives again include the development of both understanding and 
   Practice fitting linear mixed-effects models incorporating random effects of subjects and stimuli
 \end{description}
 
-## Study guide
+## Study guide {#sec-intro-mixed-study}
 
 \begin{enumerate}
 	\item
@@ -68,7 +68,7 @@ Our learning objectives again include the development of both understanding and 
 	Review readings provided
 \end{enumerate}
 
-## The data we will work with: CP reading study {#CP-study}
+## The data we will work with: CP reading study {#sec-intro-mixed-data}
 
 This week, we will be working with the **CP reading study** dataset.
 CP tested 62 children (aged 116-151 months) on reading aloud in English.
@@ -92,7 +92,7 @@ The presence of these features is the reason why we need to use mixed-effects mo
 These features are common across a range of study designs so the lessons we learn will apply frequently in psychological research.
 This is the reason why it is important we teach and learn how to use mixed-effects models.
 
-### Our research question {#research-question}
+### Our research question {#sec-intro-mixed-question}
 
 We are going to use these data to examine the answers to the following question:
 
@@ -104,7 +104,7 @@ What word properties influence responses to words in a test of reading aloud?
 We can look at the answers to this question while also taking into account the impacts of random differences -- between sampled participants or between sampled words -- using mixed-effects models.
 But, first, we are going to look at how we get the data ready for analysis.
 
-### The challenges of working with real (untidy) experimental data {#untidy-data}
+### The challenges of working with real (untidy) experimental data  {#sec-intro-mixed-data-untidy}
 
 Ordinarily, textbooks and guides to data analysis give you the data ready for analysis but this situation will never be true for your professional practice (at least, not at first).
 Instead of pretending that data arrive ready for analysis, we are going to look at the process of **data tidying**, step-by-step.
@@ -118,7 +118,7 @@ You should also take this opportunity to reflect on the nature of the process it
 The time that we spend looking at data tidying is an investment in learning that will save you time later, in your professional work.
 If, however, you want to skip it, go to section \@ref(crossed-random).
 
-#### The data we need to use for analysis are not all in the same file
+#### The data we need to use for analysis are not all in the same file {#sec-intro-data-distributed}
 
 In analyzing psychological data, the first step is usually to collect the data together.
 In psychological research, the data may exist, at first, in separate files.
@@ -137,7 +137,7 @@ Often, we need all these kinds of information for our analyses but different pie
 For example, we may collect experimental response data using software like PsychoPy, E-Prime, Qualtrics or DMDX.
 We may collect information about participant characteristics using standardized measures, or by asking participants to complete a set of questions on their age, gender, and so on.
 
-#### The data we need to use are untidy
+#### The data we need to use are untidy {#sec-intro-mixed-data-untidy-2}
 
 Often, the files we get are untidy: not in a useful or *tidy* format.
 For example, if you open the file `CP_study_word_naming_rt_180211.dat` (a `.dat` or tab delimited file) in Excel, you will see a spreadsheet that looks like Figure \@ref(fig:CPrt).
@@ -160,7 +160,7 @@ Thus, the dataset is wide with fewer rows and many columns.
 
 We want the data in what is called the *tidy* format.
 
-#### How tidy data are tidy
+#### How tidy data are tidy {#sec-intro-mixed-data-tidy}
 
 There are three inter-related rules which make data *tidy* (Grolemund \& Wickham, 2019):
 
@@ -175,7 +175,7 @@ You can read more about tidy data here:
 For our purposes, the reason we want the data in *tidy* format is that it is required for the functions we are going to use for mixed-effects modelling.
 However, in general, *tidy* format is maximally flexible, and convenient, for use with different R functions.
 
-### Locate and download the data files {#access}
+### Locate and download the data files {#sec-intro-mixed-data-access}
 
 Go to the 402 Moodle folder for week 18, and download the .zip (compressed) folder labeled **PSYC402-01-multilevel-resources**
 
@@ -201,7 +201,7 @@ The `all.subjects` file holds information about the 62 participants who voluntee
 The `.csv` files are *comma separated values* files.
 The `.dat` files are *tab delimited* files holding behavioural data: the latency or reaction time `rt` (in milliseconds) and the accuracy `acc` of response made by each participant to each stimulus.
 
-## Tidy the data {#tidy-the-data}
+## Tidy the data {#sec-intro-mixed-tidy-data}
 
 To answer our research question, we will need to combine the behavioural data with information about the participants (age, gender ...) and about the words (word, frequency ...)
 We will need to ensure that the data-set we construct will be in *tidy* format.
@@ -223,7 +223,7 @@ library(tidyverse)
 
 (Every step can also be done in alternative processing steps with the same result using *base R* code.)
 
-### Read in the data files by using the read_csv and read_tsv functions {#import}
+### Read in the data files by using the read_csv and read_tsv functions {#sec-intro-mixed-data-import}
 
 I am going to assume you have downloaded the data files, that they are all in the same folder, and that you know where they are on your computer or server.
 We need to use different versions of the `read_` function to read all four files into R.
@@ -264,7 +264,7 @@ Take a look at what this line of code includes, element by element.
 3. `read_tsv("CP study word naming rt 180211.dat", ...` first, the name of the file, given in quotes `""` and then a comma.
 4. `read_tsv(..., na = "-999")` second, we tell R that there are some missing values `na` which are coded with the value `"-999"`.
 
-#### A quick lesson about missing value codes
+#### A quick lesson about missing value codes {#sec-intro-missing}
 
 In R, a missing value is said to be "not available": `NA`.
 
@@ -299,7 +299,7 @@ There are a number of reasons why it is bad practice to just leave a cell empty 
 I use `-999` to code for missing values because you should never see a value like that in real reading RT data.
 You can use whatever value you like but you should make sure you *do* code for missing data somehow.
 
-### Reshape the data from wide to long using the gather() function {#restructure}
+### Reshape the data from wide to long using the gather() function {#sec-intro-mixed-data-restructure}
 
 We are going to need to restructure these data from a wide format to a longer format. 
 We need to restructure both behavioural data-sets, accuracy and RT.
@@ -374,7 +374,7 @@ And you can find more information specifically about the `pivot_longer()` operat
 
 \url{https://tidyr.tidyverse.org/articles/pivot.html}
 
-##### Why we restructure the data {#why-restructure}
+##### Why we restructure the data {#sec-intro-mixed-data-restructure-why}
 
 As I noted, one problem with the wide format is that the data are structured so that the column names are not names of variables.
 In our example wide format dataset `behaviour.rt`, the columns are headed by a participant identity code or name but a participant code is not the name of a variable, it is a value of the variable I call `subjectID`.
@@ -428,7 +428,7 @@ And each row has information about one observation, here, the response made by a
 But these data are *incomplete*.
 Next we shall combine behavioural observations with data about stimulus words and about participants.
 
-##### The tidyverse evolves {#evolves}
+##### The tidyverse evolves {#sec-intro-mixed-tidyverse-evolves}
 
 Over the years, different ways of reshaping data have evolved.
 This reflects how important and common the task is.
@@ -443,7 +443,7 @@ This change is one of the real benefits of using open software like R.
 In my experience, the newer functions can be useful for *really* untidy data.
 I expect things will continue to evolve and improve over time.
 
-### Merging data from different data-sets using _join()
+### Merging data from different data-sets using _join() {#sec-intro-mixed-data-join}
 
 To answer our research question, we next need to combine the **RT** with the **accuracy** data, and then the combined behavioural data with **participant** information and **stimulus** information.
 This is because, as we have seen, information about behavioural responses, about participant attributes or stimulus word properties, are located in separate files.
@@ -524,7 +524,7 @@ If there isn't a match then it creates \verb:NAs: where there are missing entrie
 Note that in one example, the example of code I discuss here, I did not specify identifying columns in common, allowing the function to do the work.
 In the other code chunks I did: `long.all <- long.subjects %>% full_join(words, by = "item_name")`  using the `by = ...` argument.
 
-#### Relational data
+#### Relational data {#sec-intro-mixed-data-relational}
 
 In the `tidyverse` family of `dplyr` functions, when you work with multiple datasets (tables of data), we call the datasets **relational** data.
 
@@ -550,7 +550,7 @@ If you reflect, we could not combine the RT and accuracy data correctly:
 Sometimes, I have done this operation and it has gone wrong because a subjectID has been spelled one way in one dataset e.g. `hugh` and another way in the other dataset e.g. `HughH`. 
 This means I am careful about spelling identifiers and I always check my work after merger operations, calculating dataset lengths to ensure the number of rows in the new dataset matches my expectations.
 
-#### _join functions
+#### _join functions {#sec-intro-mixed-data-join-functions}
 
 We used the `full_join()` function.
 
@@ -562,7 +562,7 @@ There are three kinds of joins.
 
 I used `full_join()` because I wanted to retain all observations from both datasets, whether there was a match (as assumed) or not, in the identifying variables, between observations in each dataset.
 
-#### Exercise
+#### Exercise {#sec-intro-mixed-data-exx-join}
 
 \begin{description}
 \item[Break the join] You could examine how the \verb:full_join(): works by experimenting with stopping it from working
@@ -584,7 +584,7 @@ length(long.all$RT)
 
 This bit of code takes the length of the vector (i.e. variable column `RT` in dataset `long.all`), thus counting the number of rows in the dataset.
 
-### Select or transform the variables {#transform}
+### Select or transform the variables {#sec-intro-mixed-data-transform}
 
 OK, now we have all the data about everything all in one big, long and wide, dataset.
 But we do not actually need all this stuff.
@@ -635,13 +635,13 @@ We can adjust variable names using the `rename()` function but I will leave that
 
 <!-- ``` -->
 
-#### Exercise
+#### Exercise {#sec-intro-mixed-data-exx-transform}
 
 \begin{description}
 \item[Select different variables] You could analyze the CP study data for a research report. What if you wanted to analyze a different set of variables, could you select different variables?
 \end{description}
 
-### Filter observations {#filter}
+### Filter observations {#sec-intro-mixed-data-filter}
 
 We now have a tidy dataset `long.all.select` with `r length(long.all.select)` columns and `r length(long.all.select$RT)` rows.
 
@@ -692,7 +692,7 @@ then recreate the \verb:long.all.select.filter: as a version of itself (with no 
 \end{itemize}
 \end{itemize}
 
-#### The difference between = and ==
+#### The difference between = and ==  {#sec-intro-mixed-equals}
 
 You need to be careful to distinguish these signs.
 
@@ -703,7 +703,7 @@ You need to be careful to distinguish these signs.
 \verb:==: tests a match so \verb:x == 2: means: "is x equal to 2?"
 \end{itemize}
 
-#### Using multiple arguments in filtering
+#### Using multiple arguments in filtering {#sec-intro-mixed-data-filter-conditions}
 
 You can supply multiple arguments to `filter()` and this may be helpful if (1.) you want to filter observations according to a match on condition-A **and** condition-B (logical "and" is coded with `&`)  or (2.) you want to filter observations according to a match on condition-A or condition-B (logical "or" is coded `|`).
 
@@ -711,7 +711,7 @@ You can read more about using multiple arguments to filter observations here:
 
 \url{https://dplyr.tidyverse.org/reference/filter.html}
 
-#### Exercise
+#### Exercise {#sec-intro-mixed-data-exx-filter}
 
 \begin{description}
 \item[Vary the filter conditions] in different ways
@@ -732,7 +732,7 @@ You can read further information about filtering here:
 
 \url{https://r4ds.had.co.nz/transform.html?q=filter#filter-rows-with-filter}
 
-#### Remove missing values
+#### Remove missing values {#sec-intro-mixed-data-omit-na}
 
 We will be working with the `long.all.select.filter.csv` dataset collated from the experimental, subject ability scores, and item property data collected for the CP word naming study. 
 
@@ -748,7 +748,7 @@ The `na.omit()` function is powerful.
 In using this function, I am asking R to create a new dataset `long.all.noNAs` from the old dataset `long.all.select.filter` in a process in which the new dataset will have *no* rows in which there is a missing value `NA` in *any* column.
 You need to be reasonably sure, when you use this function, where your `NAs` may be because, otherwise, you may end the process with a new filtered dataset that has many fewer rows in it than you expected.
 
-### Now we have some tidy data
+### Now we have some tidy data {#sec-intro-mixed-data-tidy-conclusions}
 
 \small
 
@@ -769,7 +769,7 @@ If we inspect the \verb:long.all.noNAs: data-set, we can see that we have now go
 
 We have removed the missing values and we have filtered outliers.
 
-### We can output the data as a .csv file
+### We can output the data as a .csv file {#sec-intro-mixed-data-output-csv}
 
 Having produced the tidy dataset, we may wish to share it, or save ourselves the trouble of going through the process again.
 We can do this by creating a .csv file.
@@ -780,15 +780,13 @@ write_csv(long.all.noNAs, "long.all.noNAs.csv")
 
 This function will create a `.csv` file from the dataset you name `long.all.noNAs` which R will put in your working directory.
 
-### Data tidying -- conclusions
+### Data tidying -- conclusions {#sec-intro-mixed-data-conclusions}
 
 Most research work involving quantitative evidence requires a *big* chunk of data tidying or other processing before you get to the statistics.
 Most of the time, this is work *you* will have to do.
 The lessons you can learn about the process will generalize to many future research scenarios.
 
-\newpage
-
-## Repeated measures designs and crossed random effects {#crossed-random}
+## Repeated measures designs and crossed random effects {#sec-intro-mixed-crossed-random}
 
 Our focus this week is on analyzing data that come from studies with **repeated-measures designs** where the experimenter presents multiple stimuli for response to each participant.
 In our working example, the **CP reading study**, CP asked all participants in her study to read a selection of words. 
@@ -821,7 +819,7 @@ the impact of random or unexplained differences between participants and also be
 In this situation, we can say that the random effects are crossed (Baayen et al., 2008).
 When multilevel models require the specification of crossed random effects, they tend to be called **mixed-effects models**.
 
-## Working with mixed-effects models
+## Working with mixed-effects models {#sec-intro-mixed-working-models}
 
 To illustrate the approach, we examine observations from the CP study.
 We begin, as we did previously, by ignoring differences due to grouping variables (like participant or stimulus).
@@ -833,7 +831,7 @@ In this fantasy situation, we address our research question.
 What word properties influence responses to words in a test of reading aloud?
 \end{description}
 
-### Load the data if you need to
+### Load the data if you need to {#sec-intro-mixed-data-load}
 
 If you did not go through the process of tidying the CP study data from the component source data files, then you can import the pre-tidied data here.
 
@@ -856,7 +854,7 @@ You can read more about it here.
 
 \url{https://readr.tidyverse.org/articles/readr.html}
 
-### Linear model for multilevel data -- ignoring the hierarchical structure
+### Linear model for multilevel data -- ignoring the hierarchical structure {#sec-intro-mixed-lm}
 
 We begin by asking if reading reaction time (RT) varies in association with word frequency.
 A scatterplot shows that response latencies decrease with increasing word frequency (Figure \@ref(fig:pfreqc5)). 
@@ -903,7 +901,7 @@ This means that, in the linear model, RT decreases by about 54 milliseconds for 
 (In our analyses, in common with many in the reading literature, we transformed the frequency estimate to the Log base 10 of the frequency of occurrence estimated for each word.)
 The model does not explain much variance, as $R^2 = .03$ but, no doubt due to the large sample, the regression model is overall significant $F(1,9083) = 302.8, p < .001$.
 
-#### Exercise
+#### Exercise {#sec-intro-mixed-exx-lm}
 
 \begin{description}
 \item[Vary the linear model] using different outcomes or predictors
@@ -919,7 +917,7 @@ Change the predictor from frequency to something else: what do you see when you 
 Specify linear models with different predictors: do the relationships you see in plots match the coefficients you see in the model estimates?
 \end{enumerate}
 
-### Can we ignore the hierarchical structure?
+### Can we ignore the hierarchical structure? {#sec-intro-mixed-ignore-hierarchy}
 
 In this linear model, the observations are assumed to be independent but the assumption of independence is questionable given the expectation that participants will differ, with one participant's responses perhaps slower or less accurate than another, perhaps more or less affected by word frequency than another. 
 We can examine that variation by estimating the intercept and the slope of the frequency effect separately using the data for each participant alone.
@@ -999,7 +997,7 @@ grid.arrange(pfreqperchildlmint, pfreqperchildlmfreq,
  
 ```
 
-### Multilevel -- here, more appropriately known as -- mixed-effects models
+### Multilevel -- here, more appropriately known as -- mixed-effects models {#sec-intro-mixed-effects-models}
 
 In a mixed-effects model, we account for this variation: the differences between participants in intercepts and slopes.
 We do this by modeling the intercept as two terms:
@@ -1031,7 +1029,7 @@ Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + e_{ij}
 * the average effect of the explanatory variable frequency $\gamma_1X_j$ and differences between $i$ participants in the slope $U_{1i}X_j$;
 * in addition to residual error variance $e_{ij}$.
 
-#### What are we doing with these random effects terms?
+#### What are we doing with these random effects terms? {#sec-intro-mixed-random-effects-terms}
 
 Note that in sections \@ref(BLUPS) and \@ref(variance-covariance), we look at what *exactly* is captured in these random effects terms $U_{0i}, U_{1i}$.
 Let's first look at the practicalities of analysis then come back to deepen our understanding a bit more.
@@ -1042,7 +1040,7 @@ And we care how widely spread are the differences between child A and the averag
 Therefore, in our analysis, we estimate the spread of the differences as a *variance term*.
 We can see this when we look at the results of the mixed-effects model we specify, next.
 
-#### Fitting a mixed-effect model using the lmer() function {#lmer-first}
+#### Fitting a mixed-effect model using the lmer() function {#sec-intro-mixed-lmer}
 
 We can fit a mixed-effects model of the $RT \sim frequency$ relationship, taking into account the random differences between participants.
 I first go through the model fitting code bit by bit.
@@ -1074,7 +1072,7 @@ Second, we have the bit that is specific to multilevel or mixed-effects models.
 - `(...1 ||subjectID)` says that we want to estimate random differences between sample groups (observations by child) in intercepts, where the intercept is coded by `1`.
 - `(Lg.UK.CDcount... ||subjectID)` adds random differences between sample groups (observations by child) in slopes of the frequency effect coded using the `Lg.UK.CDcount` variable name.
 
-##### What does || mean? {#double-bar}
+##### What does || mean? {#sec-intro-mixed-double-bar}
 
 I want you to notice something that looks like nothing much: `||`.
 We are going to need to defer until later a (necessary) discussion of exactly why we need the two double lines.
@@ -1094,7 +1092,7 @@ We shall need to discuss these things: **convergence**, and failures to converge
 We will discuss random effects covariance in Section \@ref(variance-covariance).
 For now, the most important lesson is learnt by seeing how the analysis approach we saw last week can be extended to examining the effects of experimental variables in data from repeated measures design studies.
 
-#### Reading the lmer()  results {#lmer-results}
+#### Reading the lmer()  results {#sec-intro-mixed-lmer-results}
 
 The `lmer()` model code we discussed in Section \@ref(lmer-first) gives us the following output.
 
@@ -1161,7 +1159,7 @@ However, the relative size of the variances does provide useful information (see
 In this model, we see estimates of the fixed effects of the intercept and the slope of the `RT ~ Lg.UK.CDcount` model.
 We discuss these estimates next.
 
-### Is there a difference between linear model and linear mixed-effects model results?
+### Is there a difference between linear model and linear mixed-effects model results? {#sec-intro-mixed-lm-lmer-results}
 
 Recall that the linear model yields the estimate for the frequency effect on reading RT such that RT decreases by about 53 ms for unit increase in log word frequency ($\beta = -53.375$).
 Now, when we have taken random differences between participants into account, we see that the estimate of the effect **for the mixed-effects model** is $\beta = -67.980$.
@@ -1179,11 +1177,11 @@ How far our estimate actually generalizes to the wider population is not somethi
 Further, we have not finished in our consideration of the random effects that the account should include.
 We need to do more work by thinking about the differences between stimuli (Section \@ref(fixed-fallacy)).
 
-#### Why aren't there p-values?
+#### Why aren't there p-values? {#sec-intro-mixed-p-values}
 
 We will come back to this but note that if $t > 2$ we can suppose that an effect is significant at the $.05$ significance level.
 
-### What we estimate when we estimate random effects {#BLUPS}
+### What we estimate when we estimate random effects {#sec-intro-mixed-BLUPs}
 
 We have said that we can incorporate, in a mixed-effects model, **fixed effects** (e.g., the average frequency effect) and **random effects**, error variance due to unexplained differences between participants in intercepts and in frequency effects:
 
@@ -1262,7 +1260,7 @@ When a mixed-effects model is fitted to a dataset, its set of estimated paramete
 The individual values of the adjustments made to intercepts and slopes are calculated once the random effects have been estimated. 
 If you read the literature on mixed-effects models, you will see that the adjustments are called Best Linear Unbiased Predictors (or BLUPs).
 
-#### Exercise
+#### Exercise {#sec-intro-mixed-exx-lmer}
 
 Mixed-effects modeling is hard to get used to *at first*.
 A bit more practice helps to show you how the different parts of the model work.
@@ -1391,7 +1389,7 @@ Do this and you will find useful help, as here.
 
 \url{https://rstudio-pubs-static.s3.amazonaws.com/33653_57fc7b8e5d484c909b615d8633c01d51.html}
 
-## Variation between stimuli: the "language as fixed-effect fallacy" {#fixed-fallacy}
+## Variation between stimuli: the "language as fixed-effect fallacy" {#sec-intro-mixed-fixed-effect-fallacy}
 
 Experimental psychologists will often collect data in studies where they present some stimuli to a sample of participants (as CP did in her study). 
 Clark (1973) showed that the appropriate analysis of experimental effects for such data requires the researcher to take into account the error variance due to unexplained or random differences between sampled participants *and* to random differences between sampled stimuli. 
@@ -1465,7 +1463,7 @@ But analyzing data only by-items ensures that we lose track of participant diffe
 Lorch and Myers (1990) warn that analyzing only by-items mean RTs just assumes wrongly that \emph{subjects are a fixed effect}.
 This approach, again, risks a higher rate of false positive errors.
 
-### Include the random effect of stimulus
+### Include the random effect of stimulus {#sec-intro-mixed-random-effect-stimulus}
 
 We now no longer need to tolerate these problems.
 
@@ -1485,7 +1483,7 @@ Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + W_{0j} + e_{ij}
 
 In this model, the outcome $Y_{ij}$ is related to the average intercept $\gamma_0$ and the word frequency effect $\gamma_1X_j$ plus random effects due to unexplained differences between participants in intercepts $U_{0i}$ and the slope of the frequency effect $U_{1i}X_j$ as well as random differences between items in intercepts $W_{0j}$, in addition to the residual term $e_{ij}$.
 
-#### Fitting a mixed-effect model -- now with random effects of subjects and items {#random-effect-items}
+#### Fitting a mixed-effect model -- now with random effects of subjects and items  {#sec-intro-mixed-random-effect-items}
 
 We can fit a mixed-effects model of the $RT \sim frequency$ relationship, taking into account the random differences between participants *and now also* the random differences between stimulus words.
 
@@ -1508,7 +1506,7 @@ This is the same mixed-effects model as the one we discussed in sections \@ref(l
 We add \verb:(1|item_name): to take into account random differences between between words in intercepts
 \end{itemize}
 
-##### Reading the results
+##### Reading the results {#sec-intro-mixed-lmer-results-read}
 
 Take a look at the model results. 
 You should notice three changes.
@@ -1527,7 +1525,7 @@ We can see that by adding a term to account for differences between items we can
 This difference in error variance is, essentially, one basis for estimating how well the model fits the data, and a basis for estimating the *variance explained* by a model in terms of the $R^2$ statistic you have seen before.
 We will come back to this.
 
-## Variances and covariances of random effects {#variance-covariance}
+## Variances and covariances of random effects {#sec-intro-mixed-variance-covariance}
 
 ```{r covarp, fig.cap = 'Scatterplot showing the relationship between estimated coefficients for the intercept and for the frequency effect, for each child analysed separately', echo=FALSE, warning=FALSE, message=FALSE, fig.height=3.5, fig.width=3.5, out.width='80%'}
 
@@ -1582,7 +1580,7 @@ Thus, we could specify the random effects of the model can incorporate terms cor
 
 * $covar(U_{0i}, U_{1i}X_j)$
 
-### But remember we excluded random effects covariance
+### But remember we excluded random effects covariance {#sec-intro-mixed-exclude-covariance}
 
 In Section \@ref(double-bar), I noted how we used the \verb:||: notation to stop the model estimating the covariance between differences between participants in intercepts and in slopes.
 The reason I did this is that if I had requested that the model estimate the covariance the model would have failed to converge.
@@ -1590,7 +1588,7 @@ What this means depends on understanding how mixed-effects models are estimated.
 We shall have to return to a development of that understanding later.
 For now, it is enough to note that mixed-effects models fitted with \verb:lmer(): often have more difficulty with random effects covariance estimates.
 
-## Reporting the results of a mixed-effects model
+## Reporting the results of a mixed-effects model {#sec-intro-mixed-lmer-results-reporting}
 
 There is no official convention on what or how to report the results of a mixed-effects model.
 Lotte Meteyard and I suggest what psychologists should report in an article (Meteyard \& Davies, 2020) that has been downloaded a few thousand times so, maybe, our advice will help to influence practice.
@@ -1797,7 +1795,7 @@ We will come back to how we should report the results of mixed-effects models be
 <!-- Lastly, we can see the covariances (shown as correlations) associated with the random intercepts variances and the random slopes variances. -->
 <!-- (We might be troubled by the high correlations, and we would be right to be (Bates et al., 2015); we discuss this kind of concern in the next chapter.) -->
 
-## Conclusions
+## Conclusions {#sec-intro-mixed-conclusions}
 
 A large proportion of psychological studies involves scenarios in which the researcher samples both participants and some kind of stimuli.
 Often, the researcher will present the stimuli to the participants for response in some version of a range of possible designs: all participants see and respond to all stimuli; participants respond to different sub-sets of stimuli in different conditions (or in different groups) but they see and respond to all stimuli in a sub-set; participants are allocated to respond to stimulus sub-sets according to a counter balancing scheme (e.g., through the use of Latin squares).
@@ -1811,7 +1809,7 @@ The insight is: in general, in experimental psychological science, when we do da
 Historically, we have, as a field, learned to take into account these sampling effects.
 Now, and most likely, more and more commonly in the future, we are learning to use multilevel or mixed-effects models to do this.
 
-### Summary
+### Summary {#sec-intro-mixed-summary}
 
 We discussed the way that data are structured when they come from studies with repeated measures designs. 
 Critically, we examined data from a common study design where a sample of stimulus items are presented for response to members of a participant sample.
@@ -1839,7 +1837,7 @@ We saw that estimates of the frequency effect differed between different models.
 
 We considered the possibility of within-items effects.
 
-### Useful functions
+### Useful functions {#sec-intro-mixed-glossary-useful-functions}
 
 We used a number of functions to tidy, visualize and analyze the CP study data.
 
@@ -1906,7 +1904,7 @@ Run the code in the .R file to reproduce the results presented in this chapter a
 <!-- https://cran.r-project.org/web/packages/merTools/vignettes/merToolsIntro.html -->
 <!-- https://stackoverflow.com/questions/27787875/options-for-caterpillar-plots-in-lme4-grouping-by-factor-to-visually-identify-t -->
 
-### Recommended reading
+### Recommended reading {#sec-intro-mixed-recommended-reading}
 
 Snijders and Bosker (2012) present a helpful overview of multilevel modelling. 
 Baayen et al. (2008; see, also, Barr et al., 2013; Judd et al., 2012) discuss mixed-effects models with crossed random effects.
