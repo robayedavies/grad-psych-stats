@@ -147,11 +147,15 @@ We want the data in what is called the *tidy* format.
 
 #### How tidy data are tidy {#sec-intro-mixed-data-tidy}
 
-There are three inter-related rules which make data *tidy* [@grolemund]:
+There are three inter-related rules which make data *tidy* [@grolemund].
+
+::: callout-important
+In tidy data:
 
 1.  Each variable must have its own column.
 2.  Each observation must have its own row.
 3.  Each value must have its own cell.
+:::
 
 You can read more about tidy data [here](http://r4ds.had.co.nz/tidy-data.html).
 
@@ -199,7 +203,11 @@ You can read more about the `{tidyverse}` `{readr}` library of helpful functions
 It is *very* common to get experimental data in all sorts of different formats. Learning to use **tidyverse** functions will make it easier to cope with this when you do research.
 
 ::: callout-tip
-We use the `read_` function to read in the data, entering two arguments inside the brackets after the function name, for example:
+We use the `read_` function to read in the data, entering two arguments inside the brackets after the function name.
+:::
+
+It will help your understanding to examine an example.
+Take a look at what this line of code includes, element by element.
 
 ```{r}
 #| label: readin-demo
@@ -209,8 +217,6 @@ We use the `read_` function to read in the data, entering two arguments inside t
 behaviour.rt <- read_tsv("CP study word naming rt 180211.dat", na = "-999")
 ```
 
-Take a look at what this line of code includes, element by element.
-
 1.  We write `behaviour.rt <- read_tsv(...)` to create an object in the R environment, which we call `behaviour.rt`: the object with this name is the dataset we read into R using `read_tsv(...)`.
 2.  When we write the function `read_tsv(...)` we include two arguments inside it.
 3.  `read_tsv("CP study word naming rt 180211.dat", ...` first, the name of the file, given in quotes `""` and then a comma.
@@ -219,9 +225,11 @@ Take a look at what this line of code includes, element by element.
 
 ### A quick lesson about missing value codes {#sec-intro-missing}
 
-In R, a missing value is said to be "not available": `NA`.
-
 In the datasets -- typically, the spreadsheets -- we create in our research, we will have values missing for different reasons. Take another look at the data spreadsheet you saw earlier, @fig-CP-study-RTs.
+
+::: callout-tip
+In R, a missing value is said to be "not available": `NA`.
+:::
 
 You should be able to see that the spreadsheet holds information, as explained, about the RTs of the responses made by each child to each stimulus word. Each of the cells in the spreadsheet (i.e. the box where a column intersects with a row) includes a number value. Most of the values are positive numbers like `751.3`: the reaction time of a response, recorded in milliseconds. The values have to be positive because they represent the length of time between the moment the stimulus word is presented on the test computer screen and the moment the child's spoken word response has begun to be registered by the computer microphone and sound recording software.
 
@@ -239,7 +247,8 @@ I use `-999` to code for missing values because you should never see a value lik
 
 ### Reshape the data from wide to long using the pivot_longer() function {#sec-intro-mixed-data-restructure}
 
-We are going to need to restructure these data from a wide format to a longer format. We need to restructure both behavioural datasets, accuracy and RT. We do this using the `pivot_longer()` function.
+We are going to need to restructure these data from a wide format to a longer format. We need to restructure both behavioural datasets, accuracy and RT. 
+We do this using the `pivot_longer()` function.
 
 ```{r}
 #| label: widetolong
@@ -252,10 +261,14 @@ acc.long <- behaviour.acc %>%
               pivot_longer(2:62, names_to = "subjectID", values_to = "accuracy")
 ```
 
-Doing dataset construction programmatically, using R functions, is generally more reliable, and faster, than doing it by hand. Researchers used to have to do this sort of thing by hand, using copying and pasting, in Excel or SPSS. Doing the process by hand takes many hours or days. And you *always* make errors.
+Researchers used to have to do this sort of thing by hand, using copying and pasting, in Excel or SPSS. Doing the process by hand takes many hours or days. And you *always* make errors.
 
-::: code-tip
-Here, we use a function you may not have seen before: `pivot_longer()`.
+::: callout-tip
+Doing dataset construction programmatically, using R functions, is generally faster and more reliable than doing it by hand. 
+:::
+
+Here, we use a function you may have seen before: `pivot_longer()`.
+It will help your understanding to examine the code carefully.
 
 ```{r}
 #| label: widetolong-demo
@@ -297,7 +310,6 @@ c.  `pivot_longer(...values_to = "RT")`
 
 -   Third, we tell R that all the RT values should be put in a single column.
 -   We can understand that this new column `RT` will hold RT observations in a vertical stack, one cell for each response by a person to a word, with rows ordered by `subjectID`.
-:::
 
 There are 61 columns of data listed by participant though 62 children were tested because we lost one child's data through an administrative error. As a result, in the wide data sets there are 62 columns, with the first column holding `item_name` data.
 
@@ -362,7 +374,7 @@ This is a big part of data tidying now done.
 However, these data are *incomplete*. 
 Next we shall combine behavioural observations with data about stimulus words and about participants.
 
-#### The tidyverse evolves {#sec-intro-mixed-tidyverse-evolves}
+### The tidyverse evolves {#sec-intro-mixed-tidyverse-evolves}
 
 Over the years, different ways of reshaping data have evolved. This reflects how important and common the task is. An older way to do the same operation uses the function `gather()`.
 
@@ -376,7 +388,7 @@ To answer our research question, we next need to combine the **RT** with the **a
 
 Many researchers have completed this kind of operation by hand. This involves copying and pasting bits of data in a spreadsheet. It can take hours or days. I know because I have done it, and I have seen others do it. **Please don't.** There are better ways to spend your time. And you will make mistakes that you will not then be able to identify.
 
-We can combine the datasets, in the way that we need, using the `tidyverse` `full_join()` function. This gets the job done quickly, and accurately.
+We can combine the datasets, in the way that we need, using the `{tidyverse}` `full_join()` function. This gets the job done quickly, and accurately.
 
 First, we join RT and accuracy data together.
 
@@ -404,8 +416,6 @@ long.all <- long.subjects %>%
 ```
 
 Notice, we can let R figure out how to join the pieces of data together. If we were doing this by hand then we would need to check *very carefully* the correspondences between observations in different datasets.
-
-#### Code tip
 
 Here, in a series of steps, we take one dataset and join it (merge it) with the second dataset. Let's look at an example.
 
