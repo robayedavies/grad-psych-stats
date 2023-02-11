@@ -115,7 +115,7 @@ I have provided a collection of materials you can use. Here, I explain what they
 
 ## The data we will work with: Brazilian school children {#sec-multi-data-intro}
 
-This week, we will be working with data taken from a study on education outcomes in Brazilian children, reported by @golino2014. First, we will progress through the steps required to download and prepare the files for analysis in R.
+In this chapter, we will be working with data taken from a study on education outcomes in Brazilian children, reported by @golino2014. First, we will progress through the steps required to download and prepare the files for analysis in R.
 
 The `BAFACALO_DATASET.RData` data were collected and shared online by @golino2014. Information about the background motivating the study, the methods of data collection, along with the dataset itself, can be found [here](https://openpsychologydata.metajnl.com/articles/10.5334/jopd.af/).
 
