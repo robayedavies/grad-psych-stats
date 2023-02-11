@@ -71,13 +71,14 @@ In this chapter, we will be working with the **CP reading study** dataset. CP te
 
 In addition to the reading task, CP administered tests of reading skill (TOWRE sight word and phonemic tests, Torgesen et al., 1999), reading experience (CART, Stainthorp, 1997), the Spoonerisms sub-test of the Phonological Awareness test Battery (Frederickson et al., 1997), and an orthographic choice test measure of orthographic knowledge (based on Olson et al., 1985). She also recorded the gender and the handedness of the children.
 
-Ultimately, the CP dataset were incorporated in an analysis of the impact of age on reading skills over the life-span, reported by @davies2017. You can find more details on the data and the methods in that paper.
+Ultimately, the CP dataset were incorporated in an analysis of the impact of age on reading skills over the life-span, reported by @davies2017. You can find more details on the data and the methods in that paper. (Data and analysis code are shared through the journal article webpage [paywalled] [here](https://psycnet.apa.org/doiLanding?doi=10.1037%2Fxlm0000366), and a preprint version of the article can be accessed [here](https://eprints.lancs.ac.uk/id/eprint/86453/1/individual_differences_in_reading_subm_accepted.pdf).)
 
 The CP study resembles many studies in psychological science. The critical features of the study are that:
 
-- We have an outcome measure -- the reading response -- observed multiple times: for each participant, over many participants; and for each stimulus, over multiple stimuli. 
-- We have *multiple responses recorded for each participant*: they make one response to each stimulus, for multiple stimuli. 
-- And we have *multiple responses recorded for each stimulus* (here, each stimulus word): one response is made to each stimulus by each participant, for all participants in a sample of multiple participants. 
+- We have an outcome measure -- the reading response -- observed multiple times.
+
+1. We have *multiple responses recorded for each participant*: they make one response to each stimulus (here, each stimulus word), for the multiple stimuli that they see in the experimental reading task. 
+2. And we have *multiple responses recorded for each stimulus*: one response is made to each stimulus by each participant, for all the participants who completed the task, in a sample of multiple participants. 
 
 The presence of these features is the reason why we need to use mixed-effects models in our analysis. 
 These features are common across a range of study designs so the lessons we learn will apply frequently in psychological research. 
