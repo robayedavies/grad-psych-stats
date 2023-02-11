@@ -121,17 +121,17 @@ The `BAFACALO_DATASET.RData` data were collected and shared online by @golino201
 
 @golino2014 collected school end-of-year subject grades for a sample of 292 children recruited from multiple classes in a school in Brazil. Here, each subject is a theme or course that children studied in school, e.g., Physics or English language, and for which each child was awarded a grade at the end of the school year. So, we have information on different children, and information about their subject grades. Children were taught in different classes but the classes appear to be units of the school organization (the information is not quite clear) not subject or course groupings. Thus, we also have information on which classes children were in when data about them were collected.
 
-The data were compiled to an .RData format file.
-
-`.RData` is R's own file format so the code you use to load and access the data for analysis is a bit simpler than you are used to. (You will have used `read.csv()` or `read_csv()` previously.)
-
-In my own practice, I prefer to keep files in formats like `.csv` which can be opened and read in other software applications (like Excel), so using an `.RData` is an exception in these materials.
-
 ### Locate and download the data file {#sec-multi-data-download}
 
 You can access the data from the link associated with the @golino2014 article [here](http://dx.doi.org/10.7910/DVN/23150).
 
 Or you can download the [data-01-multilevel.zip](files/data-01-multilevel.zip) files folder for this chapter.
+
+The data were compiled to an .RData format file.
+
+`.RData` is R's own file format so the code you use to load and access the data for analysis is a bit simpler than you are used to. (You will have used `read.csv()` or `read_csv()` previously.)
+
+In my own practice, I prefer to keep files in formats like `.csv` which can be opened and read in other software applications (like Excel), so using an `.RData` is an exception in these materials.
 
 The file is located in a .zip folder called `data-01-multilevel`. The data file is collected together with the .R scripts:
 
