@@ -71,39 +71,35 @@ In this chapter, we will be working with the **CP reading study** dataset. CP te
 
 In addition to the reading task, CP administered tests of reading skill (TOWRE sight word and phonemic tests, Torgesen et al., 1999), reading experience (CART, Stainthorp, 1997), the Spoonerisms sub-test of the Phonological Awareness test Battery (Frederickson et al., 1997), and an orthographic choice test measure of orthographic knowledge (based on Olson et al., 1985). She also recorded the gender and the handedness of the children.
 
-Ultimately, the CP dataset were incorporated in an analysis of the impact of age on reading skills over the life-span, reported by @davies2017. You can find more details on the data and the methods in that paper. (Data and analysis code are shared through the journal article webpage [paywalled] [here](https://psycnet.apa.org/doiLanding?doi=10.1037%2Fxlm0000366), and a preprint version of the article can be accessed [here](https://eprints.lancs.ac.uk/id/eprint/86453/1/individual_differences_in_reading_subm_accepted.pdf).)
+Ultimately, the CP dataset were incorporated in an analysis of the impact of age on reading skills over the life-span, reported by @davies2017. You can find more details on the data and the methods in that paper. (Data and analysis code are shared through the journal article webpage \[paywalled\] [here](https://psycnet.apa.org/doiLanding?doi=10.1037%2Fxlm0000366), and a preprint version of the article can be accessed [here](https://eprints.lancs.ac.uk/id/eprint/86453/1/individual_differences_in_reading_subm_accepted.pdf).)
 
 The CP study resembles many studies in psychological science. The critical features of the study are that:
 
-- We have an outcome measure -- the reading response -- observed multiple times.
+-   We have an outcome measure -- the reading response -- observed multiple times.
 
-1. We have *multiple responses recorded for each participant*: they make one response to each stimulus (here, each stimulus word), for the multiple stimuli that they see in the experimental reading task. 
-2. And we have *multiple responses recorded for each stimulus*: one response is made to each stimulus by each participant, for all the participants who completed the task, in a sample of multiple participants. 
+1.  We have *multiple responses recorded for each participant*: they make one response to each stimulus (here, each stimulus word), for the multiple stimuli that they see in the experimental reading task.
+2.  And we have *multiple responses recorded for each stimulus*: one response is made to each stimulus by each participant, for all the participants who completed the task, in a sample of multiple participants.
 
-The presence of these features is the reason why we need to use mixed-effects models in our analysis. 
-These features are common across a range of study designs so the lessons we learn will apply frequently in psychological research. 
-This is the reason why it is important we teach and learn how to use mixed-effects models.
+The presence of these features is the reason why we need to use mixed-effects models in our analysis. These features are common across a range of study designs so the lessons we learn will apply frequently in psychological research. This is the reason why it is important we teach and learn how to use mixed-effects models.
 
 ### Locate and download the data file {#sec-intro-mixed-data-download}
 
 You can download the [data-02-mixed.zip](files/data-02-mixed.zip) files folder to get the data you need for the practical work we will be doing for this chapter.
 
-We will be working with multiple data files located in a .zip folder called `data-02-mixed`. 
-In this folder, we have got four files that we will need to import or read in to R:
+We will be working with multiple data files located in a .zip folder called `data-02-mixed`. In this folder, we have got four files that we will need to import or read in to R:
 
 -   `CP study word naming rt 180211.dat`
 -   `CP study word naming acc 180211.dat`
 -   `words.items.5 120714 150916.csv`
 -   `all.subjects 110614-050316-290518.csv`
 
-The `words.items` file holds information about the 160 stimulus words presented in the experimental reading (word naming) task. The `all.subjects` file holds information about the 62 participants who volunteered to take part in the experiment. The other `.dat` files hold information about participant responses, as I explain shortly.
+The `words.items` file holds information about the 160 stimulus words presented in the experimental reading (word naming) task. The `all.subjects` file holds information about the 62 participants who volunteered to take part in the experiment. These `.csv` files are *comma separated values* files.
 
-The `.csv` files are *comma separated values* files. The `.dat` files are *tab delimited* files holding behavioural data: the latency or reaction time `rt` (in milliseconds) and the accuracy `acc` of response made by each participant to each stimulus.
+The `.dat` files are *tab delimited* files holding behavioural data: the latency or reaction time `rt` (in milliseconds) and the accuracy `acc` of response made by each participant to each stimulus.
 
-In the following, I will describe a series of steps through which we get the data ready for analysis.
-However, as we shall see, you can avoid these steps by using the pre-tidied dataset:
+In the following, I will describe a series of steps through which we get the data ready for analysis. However, as we shall see, you can avoid these steps by using the pre-tidied dataset:
 
-- `long.all.noNAs.csv`
+-   `long.all.noNAs.csv`
 
 The data files are collected together with the .R scripts:
 
@@ -132,7 +128,7 @@ Often, we need all these kinds of information for our analyses but different pie
 
 #### The data we need to use are untidy {#sec-intro-mixed-data-untidy-2}
 
-Often, the files we get are untidy: not in a useful or *tidy* format. For example, if you open the file `CP_study_word_naming_rt_180211.dat` (a `.dat` or tab delimited file) in Excel, you will see a spreadsheet that looks like @fig-CP-study-RTs.
+Often, the files we get are **untidy**: not in a useful or *tidy* format. For example, if you open the file `CP_study_word_naming_rt_180211.dat` (a `.dat` or tab delimited file) in Excel, you will see a spreadsheet that looks like @fig-CP-study-RTs.
 
 ![CP study RTs .dat file](CP_study_word_naming_rt_180211-excel-shot.png){#fig-CP-study-RTs}
 
@@ -150,19 +146,19 @@ We want the data in what is called the *tidy* format.
 
 #### How tidy data are tidy {#sec-intro-mixed-data-tidy}
 
-There are three inter-related rules which make data *tidy* (Grolemund & Wickham, 2019):
+There are three inter-related rules which make data *tidy* [@grolemund]:
 
 1.  Each variable must have its own column.
 2.  Each observation must have its own row.
 3.  Each value must have its own cell.
 
-You can read more about tidy data [here](http://r4ds.had.co.nz/tidy-data.html)
+You can read more about tidy data [here](http://r4ds.had.co.nz/tidy-data.html).
 
 For our purposes, the reason we want the data in *tidy* format is that it is required for the functions we are going to use for mixed-effects modelling. However, in general, *tidy* format is maximally flexible, and convenient, for use with different R functions.
 
 ## Tidy the data {#sec-intro-mixed-tidy-data}
 
-To answer our research question, we will need to combine the behavioural data with information about the participants (age, gender ...) and about the words (word, frequency ...) We will need to ensure that the data-set we construct will be in *tidy* format. We will need to *select* variables (columns) to get just those required for our later analyses. And we will need to *filter* cases (rows), excluding errors or outliers.
+To answer our research question, we will need to combine the behavioural data with information about the participants (age, gender ...) and about the words (word, frequency ...) We will need to ensure that the dataset we construct will be in *tidy* format. We will need to *select* variables (columns) to get just those required for our later analyses. And we will need to *filter* cases (rows), excluding errors or outliers.
 
 We shall need to do this work in a series of processing steps:
 
@@ -171,7 +167,7 @@ We shall need to do this work in a series of processing steps:
 3.  Select or transform variables, see @sec-intro-mixed-data-transform
 4.  Filter observations, see @sec-intro-mixed-data-filter
 
-We will use `tidyverse` library functions from the beginning, starting with the import stage.
+We will use `{tidyverse}` library functions from the beginning, starting with the import stage.
 
 ```{r}
 #| label: libtidyverse
@@ -181,7 +177,7 @@ library(tidyverse)
 
 (Every step can also be done in alternative processing steps with the same result using *base R* code.)
 
-### Read in the data files by using the read_csv and read_tsv functions {#sec-intro-mixed-data-import}
+### Read in the data files by using the read_csv() and read_tsv() functions {#sec-intro-mixed-data-import}
 
 I am going to assume you have downloaded the data files, that they are all in the same folder, and that you know where they are on your computer or server. We need to use different versions of the `read_` function to read all four files into R.
 
@@ -197,13 +193,12 @@ words <- read_csv("words.items.5 120714 150916.csv", na = "-999")
 
 These different versions respect the different ways in which the `.dat` and `.csv` file formats work. We need `read_tsv()` when data files consist of tab separated values. We need `read_csv()` when data files consist of comma separated values.
 
-You can read more about the `{tidyverse}` `readr` library of helpful functions [here](https://readr.tidyverse.org/)
+You can read more about the `{tidyverse}` `{readr}` library of helpful functions [here](https://readr.tidyverse.org/)
 
 It is *very* common to get experimental data in all sorts of different formats. Learning to use **tidyverse** functions will make it easier to cope with this when you do research.
 
-#### Code tip
-
-Notice, here, that we use the `read_` function to read in the data, entering two arguments inside the brackets after the function name. For example, we write the code as:
+::: callout-tip
+We use the `read_` function to read in the data, entering two arguments inside the brackets after the function name, for example:
 
 ```{r}
 #| label: readin-demo
@@ -215,10 +210,11 @@ behaviour.rt <- read_tsv("CP study word naming rt 180211.dat", na = "-999")
 
 Take a look at what this line of code includes, element by element.
 
-1.  We write `behaviour.rt <- read_tsv(...)` to create an object in the R environment, which we call `behaviour.rt` -- the object with this name is the dataset we read into R using `read_tsv(...)`.
+1.  We write `behaviour.rt <- read_tsv(...)` to create an object in the R environment, which we call `behaviour.rt`: the object with this name is the dataset we read into R using `read_tsv(...)`.
 2.  When we write the function `read_tsv(...)` we include two arguments inside it.
 3.  `read_tsv("CP study word naming rt 180211.dat", ...` first, the name of the file, given in quotes `""` and then a comma.
 4.  `read_tsv(..., na = "-999")` second, we tell R that there are some missing values `na` which are coded with the value `"-999"`.
+:::
 
 #### A quick lesson about missing value codes {#sec-intro-missing}
 
@@ -1127,7 +1123,7 @@ We can see that:
 
 It is very important to learn to make effective use of the warnings and error messages R can produce.
 
-Note: you do not have to just believe me when I say that \verb:\|\|: is in the model code to stop a problem appearing. Experiment -- and see what happens when you change the code. Try this.
+Note: you do not have to just believe me when I say that \verb:\\\|\\\|: is in the model code to stop a problem appearing. Experiment -- and see what happens when you change the code. Try this.
 
 ```{r}
 #| label: lmer-error
@@ -1314,7 +1310,7 @@ We may expect the random effects of participants or items to covary, e.g., parti
 
 ### But remember we excluded random effects covariance {#sec-intro-mixed-exclude-covariance}
 
-In Section \@ref(double-bar), I noted how we used the \verb:\|\|: notation to stop the model estimating the covariance between differences between participants in intercepts and in slopes. The reason I did this is that if I had requested that the model estimate the covariance the model would have failed to converge. What this means depends on understanding how mixed-effects models are estimated. We shall have to return to a development of that understanding later. For now, it is enough to note that mixed-effects models fitted with \verb:lmer(): often have more difficulty with random effects covariance estimates.
+In Section \@ref(double-bar), I noted how we used the \verb:\\\|\\\|: notation to stop the model estimating the covariance between differences between participants in intercepts and in slopes. The reason I did this is that if I had requested that the model estimate the covariance the model would have failed to converge. What this means depends on understanding how mixed-effects models are estimated. We shall have to return to a development of that understanding later. For now, it is enough to note that mixed-effects models fitted with \verb:lmer(): often have more difficulty with random effects covariance estimates.
 
 ## Reporting the results of a mixed-effects model {#sec-intro-mixed-lmer-results-reporting}
 

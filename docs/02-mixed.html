@@ -271,7 +271,7 @@ div.csl-indent {
   </ul></li>
   <li><a href="#sec-intro-mixed-tidy-data" id="toc-sec-intro-mixed-tidy-data" class="nav-link" data-scroll-target="#sec-intro-mixed-tidy-data"><span class="toc-section-number">4.7</span>  Tidy the data</a>
   <ul class="collapse">
-  <li><a href="#sec-intro-mixed-data-import" id="toc-sec-intro-mixed-data-import" class="nav-link" data-scroll-target="#sec-intro-mixed-data-import"><span class="toc-section-number">4.7.1</span>  Read in the data files by using the read_csv and read_tsv functions</a></li>
+  <li><a href="#sec-intro-mixed-data-import" id="toc-sec-intro-mixed-data-import" class="nav-link" data-scroll-target="#sec-intro-mixed-data-import"><span class="toc-section-number">4.7.1</span>  Read in the data files by using the read_csv() and read_tsv() functions</a></li>
   <li><a href="#sec-intro-mixed-data-restructure" id="toc-sec-intro-mixed-data-restructure" class="nav-link" data-scroll-target="#sec-intro-mixed-data-restructure"><span class="toc-section-number">4.7.2</span>  Reshape the data from wide to long using the gather() function</a></li>
   <li><a href="#sec-intro-mixed-data-join" id="toc-sec-intro-mixed-data-join" class="nav-link" data-scroll-target="#sec-intro-mixed-data-join"><span class="toc-section-number">4.7.3</span>  Merging data from different data-sets using _join()</a></li>
   <li><a href="#sec-intro-mixed-data-transform" id="toc-sec-intro-mixed-data-transform" class="nav-link" data-scroll-target="#sec-intro-mixed-data-transform"><span class="toc-section-number">4.7.4</span>  Select or transform the variables</a></li>
@@ -413,8 +413,8 @@ Important
 <li><code>words.items.5 120714 150916.csv</code></li>
 <li><code>all.subjects 110614-050316-290518.csv</code></li>
 </ul>
-<p>The <code>words.items</code> file holds information about the 160 stimulus words presented in the experimental reading (word naming) task. The <code>all.subjects</code> file holds information about the 62 participants who volunteered to take part in the experiment. The other <code>.dat</code> files hold information about participant responses, as I explain shortly.</p>
-<p>The <code>.csv</code> files are <em>comma separated values</em> files. The <code>.dat</code> files are <em>tab delimited</em> files holding behavioural data: the latency or reaction time <code>rt</code> (in milliseconds) and the accuracy <code>acc</code> of response made by each participant to each stimulus.</p>
+<p>The <code>words.items</code> file holds information about the 160 stimulus words presented in the experimental reading (word naming) task. The <code>all.subjects</code> file holds information about the 62 participants who volunteered to take part in the experiment. These <code>.csv</code> files are <em>comma separated values</em> files.</p>
+<p>The <code>.dat</code> files are <em>tab delimited</em> files holding behavioural data: the latency or reaction time <code>rt</code> (in milliseconds) and the accuracy <code>acc</code> of response made by each participant to each stimulus.</p>
 <p>In the following, I will describe a series of steps through which we get the data ready for analysis. However, as we shall see, you can avoid these steps by using the pre-tidied dataset:</p>
 <ul>
 <li><code>long.all.noNAs.csv</code></li>
@@ -443,7 +443,7 @@ Important
 <p>Often, we need all these kinds of information for our analyses but different pieces of information are produced in separate ways and come to us in separate files. For example, we may collect experimental response data using software like PsychoPy, E-Prime, Qualtrics or DMDX. We may collect information about participant characteristics using standardized measures, or by asking participants to complete a set of questions on their age, gender, and so on.</p>
 <section id="sec-intro-mixed-data-untidy-2" class="level4" data-number="4.6.1.1">
 <h4 data-number="4.6.1.1" class="anchored" data-anchor-id="sec-intro-mixed-data-untidy-2"><span class="header-section-number">4.6.1.1</span> The data we need to use are untidy</h4>
-<p>Often, the files we get are untidy: not in a useful or <em>tidy</em> format. For example, if you open the file <code>CP_study_word_naming_rt_180211.dat</code> (a <code>.dat</code> or tab delimited file) in Excel, you will see a spreadsheet that looks like <a href="#fig-CP-study-RTs">Figure&nbsp;<span>4.1</span></a>.</p>
+<p>Often, the files we get are <strong>untidy</strong>: not in a useful or <em>tidy</em> format. For example, if you open the file <code>CP_study_word_naming_rt_180211.dat</code> (a <code>.dat</code> or tab delimited file) in Excel, you will see a spreadsheet that looks like <a href="#fig-CP-study-RTs">Figure&nbsp;<span>4.1</span></a>.</p>
 <div id="fig-CP-study-RTs" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="CP_study_word_naming_rt_180211-excel-shot.png" class="img-fluid figure-img"></p>
@@ -463,20 +463,20 @@ Important
 </section>
 <section id="sec-intro-mixed-data-tidy" class="level4" data-number="4.6.1.2">
 <h4 data-number="4.6.1.2" class="anchored" data-anchor-id="sec-intro-mixed-data-tidy"><span class="header-section-number">4.6.1.2</span> How tidy data are tidy</h4>
-<p>There are three inter-related rules which make data <em>tidy</em> (Grolemund &amp; Wickham, 2019):</p>
+<p>There are three inter-related rules which make data <em>tidy</em> <span class="citation" data-cites="grolemund">(<a href="references.html#ref-grolemund" role="doc-biblioref">Grolemund &amp; Wickham, n.d.</a>)</span>:</p>
 <ol type="1">
 <li>Each variable must have its own column.</li>
 <li>Each observation must have its own row.</li>
 <li>Each value must have its own cell.</li>
 </ol>
-<p>You can read more about tidy data <a href="http://r4ds.had.co.nz/tidy-data.html">here</a></p>
+<p>You can read more about tidy data <a href="http://r4ds.had.co.nz/tidy-data.html">here</a>.</p>
 <p>For our purposes, the reason we want the data in <em>tidy</em> format is that it is required for the functions we are going to use for mixed-effects modelling. However, in general, <em>tidy</em> format is maximally flexible, and convenient, for use with different R functions.</p>
 </section>
 </section>
 </section>
 <section id="sec-intro-mixed-tidy-data" class="level2" data-number="4.7">
 <h2 data-number="4.7" class="anchored" data-anchor-id="sec-intro-mixed-tidy-data"><span class="header-section-number">4.7</span> Tidy the data</h2>
-<p>To answer our research question, we will need to combine the behavioural data with information about the participants (age, gender …) and about the words (word, frequency …) We will need to ensure that the data-set we construct will be in <em>tidy</em> format. We will need to <em>select</em> variables (columns) to get just those required for our later analyses. And we will need to <em>filter</em> cases (rows), excluding errors or outliers.</p>
+<p>To answer our research question, we will need to combine the behavioural data with information about the participants (age, gender …) and about the words (word, frequency …) We will need to ensure that the dataset we construct will be in <em>tidy</em> format. We will need to <em>select</em> variables (columns) to get just those required for our later analyses. And we will need to <em>filter</em> cases (rows), excluding errors or outliers.</p>
 <p>We shall need to do this work in a series of processing steps:</p>
 <ol type="1">
 <li>Import the data or read the data into R, see <a href="#sec-intro-mixed-data-import"><span>Section&nbsp;4.7.1</span></a></li>
@@ -484,13 +484,13 @@ Important
 <li>Select or transform variables, see <a href="#sec-intro-mixed-data-transform"><span>Section&nbsp;4.7.4</span></a></li>
 <li>Filter observations, see <a href="#sec-intro-mixed-data-filter"><span>Section&nbsp;4.7.5</span></a></li>
 </ol>
-<p>We will use <code>tidyverse</code> library functions from the beginning, starting with the import stage.</p>
+<p>We will use <code>{tidyverse}</code> library functions from the beginning, starting with the import stage.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>(Every step can also be done in alternative processing steps with the same result using <em>base R</em> code.)</p>
 <section id="sec-intro-mixed-data-import" class="level3" data-number="4.7.1">
-<h3 data-number="4.7.1" class="anchored" data-anchor-id="sec-intro-mixed-data-import"><span class="header-section-number">4.7.1</span> Read in the data files by using the read_csv and read_tsv functions</h3>
+<h3 data-number="4.7.1" class="anchored" data-anchor-id="sec-intro-mixed-data-import"><span class="header-section-number">4.7.1</span> Read in the data files by using the read_csv() and read_tsv() functions</h3>
 <p>I am going to assume you have downloaded the data files, that they are all in the same folder, and that you know where they are on your computer or server. We need to use different versions of the <code>read_</code> function to read all four files into R.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>behaviour.rt <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"CP study word naming rt 180211.dat"</span>, <span class="at">na =</span> <span class="st">"-999"</span>)</span>
@@ -499,24 +499,33 @@ Important
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>words <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"words.items.5 120714 150916.csv"</span>, <span class="at">na =</span> <span class="st">"-999"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>These different versions respect the different ways in which the <code>.dat</code> and <code>.csv</code> file formats work. We need <code>read_tsv()</code> when data files consist of tab separated values. We need <code>read_csv()</code> when data files consist of comma separated values.</p>
-<p>You can read more about the <code>{tidyverse}</code> <code>readr</code> library of helpful functions <a href="https://readr.tidyverse.org/">here</a></p>
+<p>You can read more about the <code>{tidyverse}</code> <code>{readr}</code> library of helpful functions <a href="https://readr.tidyverse.org/">here</a></p>
 <p>It is <em>very</em> common to get experimental data in all sorts of different formats. Learning to use <strong>tidyverse</strong> functions will make it easier to cope with this when you do research.</p>
-<section id="code-tip" class="level4" data-number="4.7.1.1">
-<h4 data-number="4.7.1.1" class="anchored" data-anchor-id="code-tip"><span class="header-section-number">4.7.1.1</span> Code tip</h4>
-<p>Notice, here, that we use the <code>read_</code> function to read in the data, entering two arguments inside the brackets after the function name. For example, we write the code as:</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We use the <code>read_</code> function to read in the data, entering two arguments inside the brackets after the function name, for example:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>behaviour.rt <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"CP study word naming rt 180211.dat"</span>, <span class="at">na =</span> <span class="st">"-999"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Take a look at what this line of code includes, element by element.</p>
 <ol type="1">
-<li>We write <code>behaviour.rt &lt;- read_tsv(...)</code> to create an object in the R environment, which we call <code>behaviour.rt</code> – the object with this name is the dataset we read into R using <code>read_tsv(...)</code>.</li>
+<li>We write <code>behaviour.rt &lt;- read_tsv(...)</code> to create an object in the R environment, which we call <code>behaviour.rt</code>: the object with this name is the dataset we read into R using <code>read_tsv(...)</code>.</li>
 <li>When we write the function <code>read_tsv(...)</code> we include two arguments inside it.</li>
 <li><code>read_tsv("CP study word naming rt 180211.dat", ...</code> first, the name of the file, given in quotes <code>""</code> and then a comma.</li>
 <li><code>read_tsv(..., na = "-999")</code> second, we tell R that there are some missing values <code>na</code> which are coded with the value <code>"-999"</code>.</li>
 </ol>
-</section>
-<section id="sec-intro-missing" class="level4" data-number="4.7.1.2">
-<h4 data-number="4.7.1.2" class="anchored" data-anchor-id="sec-intro-missing"><span class="header-section-number">4.7.1.2</span> A quick lesson about missing value codes</h4>
+</div>
+</div>
+<section id="sec-intro-missing" class="level4" data-number="4.7.1.1">
+<h4 data-number="4.7.1.1" class="anchored" data-anchor-id="sec-intro-missing"><span class="header-section-number">4.7.1.1</span> A quick lesson about missing value codes</h4>
 <p>In R, a missing value is said to be “not available”: <code>NA</code>.</p>
 <p>In the datasets – typically, the spreadsheets – we create in our research, we will have values missing for different reasons. Take another look at the data spreadsheet you saw earlier, <a href="#fig-CP-study-RTs">Figure&nbsp;<span>4.1</span></a>.</p>
 <p>You should be able to see that the spreadsheet holds information, as explained, about the RTs of the responses made by each child to each stimulus word. Each of the cells in the spreadsheet (i.e.&nbsp;the box where a column intersects with a row) includes a number value. Most of the values are positive numbers like 751.3: the reaction time of a response, recorded in milliseconds. The values have to be positive because they represent the length of time between the moment the stimulus word is presented on the test computer screen and the moment the child’s spoken word response has begun to be registered by the computer microphone and sound recording software.</p>
@@ -542,8 +551,8 @@ Important
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>              <span class="fu">pivot_longer</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">62</span>, <span class="at">names_to =</span> <span class="st">"subjectID"</span>, <span class="at">values_to =</span> <span class="st">"accuracy"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Doing data-set construction programmatically, using R functions, is generally more reliable, and faster, than doing it by hand. Researchers used to have to do this sort of thing by hand, using copying and pasting, in Excel or SPSS. Doing the process by hand takes many hours or days. And you <em>always</em> make errors.</p>
-<section id="code-tip-1" class="level4" data-number="4.7.2.1">
-<h4 data-number="4.7.2.1" class="anchored" data-anchor-id="code-tip-1"><span class="header-section-number">4.7.2.1</span> Code tip</h4>
+<section id="code-tip" class="level4" data-number="4.7.2.1">
+<h4 data-number="4.7.2.1" class="anchored" data-anchor-id="code-tip"><span class="header-section-number">4.7.2.1</span> Code tip</h4>
 <p>Here, we use a function you may not have seen before: <code>pivot_longer()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>rt.long <span class="ot">&lt;-</span> behaviour.rt <span class="sc">%&gt;%</span></span>
@@ -645,8 +654,8 @@ Important
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>              <span class="fu">full_join</span>(words, <span class="at">by =</span> <span class="st">"item_name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Notice, we can let R figure out how to join the pieces of data together. If we were doing this by hand then we would need to check <em>very carefully</em> the correspondences between observations in different datasets.</p>
-<section id="code-tip-2" class="level4" data-number="4.7.3.1">
-<h4 data-number="4.7.3.1" class="anchored" data-anchor-id="code-tip-2"><span class="header-section-number">4.7.3.1</span> Code tip</h4>
+<section id="code-tip-1" class="level4" data-number="4.7.3.1">
+<h4 data-number="4.7.3.1" class="anchored" data-anchor-id="code-tip-1"><span class="header-section-number">4.7.3.1</span> Code tip</h4>
 <p>Here, in a series of steps, we take one dataset and join it (merge it) with the second dataset. Let’s look at an example.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>long <span class="ot">&lt;-</span> rt.long <span class="sc">%&gt;%</span> </span>
@@ -783,8 +792,8 @@ Important
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>long.all.select.filter <span class="ot">&lt;-</span> long.all.select.filter <span class="sc">%&gt;%</span></span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">filter</span>(RT <span class="sc">&gt;=</span> <span class="dv">200</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="code-tip-3" class="level4" data-number="4.7.5.1">
-<h4 data-number="4.7.5.1" class="anchored" data-anchor-id="code-tip-3"><span class="header-section-number">4.7.5.1</span> Code tip</h4>
+<section id="code-tip-2" class="level4" data-number="4.7.5.1">
+<h4 data-number="4.7.5.1" class="anchored" data-anchor-id="code-tip-2"><span class="header-section-number">4.7.5.1</span> Code tip</h4>
 <p>Here, I am using the function <code>filter()</code> to …</p>
 <ul>
 <li>Create a new dataset <code>long.all.select.filter &lt;- ...</code> by</li>
@@ -829,8 +838,8 @@ Important
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>long.all.noNAs <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(long.all.select.filter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="code-tip-4" class="level4" data-number="4.7.5.6">
-<h4 data-number="4.7.5.6" class="anchored" data-anchor-id="code-tip-4"><span class="header-section-number">4.7.5.6</span> Code tip</h4>
+<section id="code-tip-3" class="level4" data-number="4.7.5.6">
+<h4 data-number="4.7.5.6" class="anchored" data-anchor-id="code-tip-3"><span class="header-section-number">4.7.5.6</span> Code tip</h4>
 <p>The <code>na.omit()</code> function is powerful. In using this function, I am asking R to create a new dataset <code>long.all.noNAs</code> from the old dataset <code>long.all.select.filter</code> in a process in which the new dataset will have <em>no</em> rows in which there is a missing value <code>NA</code> in <em>any</em> column. You need to be reasonably sure, when you use this function, where your <code>NAs</code> may be because, otherwise, you may end the process with a new filtered dataset that has many fewer rows in it than you expected.</p>
 </section>
 </section>
@@ -929,8 +938,8 @@ Note
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>                    )</span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>                  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="code-tip-5" class="level4" data-number="4.9.2.1">
-<h4 data-number="4.9.2.1" class="anchored" data-anchor-id="code-tip-5"><span class="header-section-number">4.9.2.1</span> Code tip</h4>
+<section id="code-tip-4" class="level4" data-number="4.9.2.1">
+<h4 data-number="4.9.2.1" class="anchored" data-anchor-id="code-tip-4"><span class="header-section-number">4.9.2.1</span> Code tip</h4>
 <p>Notice that I am using <code>read_csv()</code> with an additional argument <code>col_types = cols(...)</code> through which I control how <code>read_csv()</code> processes specific column variables in the data. Here, I am requesting that <code>read_csv()</code> treats <code>subjectID</code> and <code>item_name</code> as factors.</p>
 <p>This is a very useful capacity, and a more efficient way to work than, say, first reading in the data and then using <em>coercion</em> to ensure that variabels are assigned appropriate types. You can read more about it <a href="https://readr.tidyverse.org/articles/readr.html">here</a>.</p>
 </section>
@@ -1398,8 +1407,8 @@ Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + e_{ij}
 <li>If the model includes the random effect of then we can see how the intercepts and the slopes vary. Given what we saw when we looked at the relation between frequency and RT for each participant considered separately we might argue that this model is much more realistic about the data.</li>
 </ol>
 </section>
-<section id="code-tip-6" class="level4" data-number="4.9.7.2">
-<h4 data-number="4.9.7.2" class="anchored" data-anchor-id="code-tip-6"><span class="header-section-number">4.9.7.2</span> Code tip</h4>
+<section id="code-tip-5" class="level4" data-number="4.9.7.2">
+<h4 data-number="4.9.7.2" class="anchored" data-anchor-id="code-tip-5"><span class="header-section-number">4.9.7.2</span> Code tip</h4>
 <p>It is very important to learn to make effective use of the warnings and error messages R can produce.</p>
 <p>Note: you do not have to just believe me when I say that is in the model code to stop a problem appearing. Experiment – and see what happens when you change the code. Try this.</p>
 <div class="cell">
@@ -1884,6 +1893,9 @@ Baayen, R. H., Davidson, D. J., &amp; Bates, D. M. (2008). Mixed-effects modelin
 </div>
 <div id="ref-davies2017" class="csl-entry" role="doc-biblioentry">
 Davies, R. A. I., Birchenough, J. M. H., Arnell, R., Grimmond, D., &amp; Houlson, S. (2017). Reading through the life span: Individual differences in psycholinguistic effects. <em>Journal of Experimental Psychology: Learning Memory and Cognition</em>, <em>43</em>(8). <a href="https://doi.org/10.1037/xlm0000366">https://doi.org/10.1037/xlm0000366</a>
+</div>
+<div id="ref-grolemund" class="csl-entry" role="doc-biblioentry">
+Grolemund, G., &amp; Wickham, H. (n.d.). <em>R for Data Science [Book]</em>. <a href="https://www.oreilly.com/library/view/r-for-data/9781491910382/">https://www.oreilly.com/library/view/r-for-data/9781491910382/</a>
 </div>
 </div>
 </section>
