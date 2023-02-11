@@ -1019,7 +1019,25 @@ Tip
 <section id="sec-intro-mixed-data-join" class="level3" data-number="4.7.6">
 <h3 data-number="4.7.6" class="anchored" data-anchor-id="sec-intro-mixed-data-join"><span class="header-section-number">4.7.6</span> Merging data from different datasets using _join() functions</h3>
 <p>To answer our research question, we next need to combine the <strong>RT</strong> with the <strong>accuracy</strong> data, and then the combined behavioural data with <strong>participant</strong> information and <strong>stimulus</strong> information. This is because, as we have seen, information about behavioural responses, about participant attributes or stimulus word properties, are located in separate files.</p>
-<p>Many researchers have completed this kind of operation by hand. This involves copying and pasting bits of data in a spreadsheet. It can take hours or days. I know because I have done it, and I have seen others do it. <strong>Please don’t.</strong> There are better ways to spend your time. And you will make mistakes that you will not then be able to identify.</p>
+<p>Many researchers have completed this kind of operation by hand. This involves copying and pasting bits of data in a spreadsheet. It can take hours or days. I know because I have done it, and I have seen others do it.</p>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Please do not try to combine datasets through manual operations e.g.&nbsp;in Excel. I guarantee that:</p>
+<ol type="1">
+<li>You will make mistakes.</li>
+<li>You will not know when or where those mistakes are in your data.</li>
+</ol>
+<p>There are better ways to spend your time.</p>
+</div>
+</div>
 <p>We can combine the datasets, in the way that we need, using the <code>{tidyverse}</code> <code>full_join()</code> function. This gets the job done quickly, and accurately.</p>
 <p>First, we join RT and accuracy data together.</p>
 <div class="cell">
@@ -1035,7 +1053,7 @@ Tip
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>              <span class="fu">full_join</span>(words, <span class="at">by =</span> <span class="st">"item_name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Notice, we can let R figure out how to join the pieces of data together. If we were doing this by hand then we would need to check <em>very carefully</em> the correspondences between observations in different datasets.</p>
-<p>Here, in a series of steps, we take one dataset and join it (merge it) with the second dataset. Let’s look at an example.</p>
+<p>Here, in a series of steps, we take one dataset and join it (merge it) with the second dataset. Let’s look at an example element by element to better understand how this is accomplished.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>long <span class="ot">&lt;-</span> rt.long <span class="sc">%&gt;%</span> </span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>           <span class="fu">full_join</span>(acc.long)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1063,17 +1081,33 @@ Tip
 <li>If there is a match then R joins the corresponding rows of data together.</li>
 <li>If there isn’t a match then it creates <code>NAs</code> where there are missing entries in one row for one dataset which cannot be matched to a row from the joining dataset.</li>
 </ul>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Note that in one example, the example of code I discuss here, I did not specify identifying columns in common, allowing the function to do the work. In the other code chunks I did: <code>long.all &lt;- long.subjects %&gt;% full_join(words, by = "item_name")</code> using the <code>by = ...</code> argument.</p>
+<ul>
+<li>Sometimes, you can vary in how you employ a <code>_join()</code> function.</li>
+<li>It may help to specify the identifying column if you want to make explicit (to yourselves and others) how the process is to be completed.</li>
+</ul>
+</div>
+</div>
 <section id="sec-intro-mixed-data-relational" class="level4" data-number="4.7.6.1">
 <h4 data-number="4.7.6.1" class="anchored" data-anchor-id="sec-intro-mixed-data-relational"><span class="header-section-number">4.7.6.1</span> Relational data</h4>
-<p>In the <code>tidyverse</code> family of <code>dplyr</code> functions, when you work with multiple datasets (tables of data), we call the datasets <a href="http://r4ds.had.co.nz/relational-data.html#relational-data">relational data</a>.</p>
+<p>In the <code>{tidyverse}</code> family of <code>dplyr</code> functions, when you work with multiple datasets (tables of data), we call the datasets <a href="http://r4ds.had.co.nz/relational-data.html#relational-data">relational data</a>.</p>
 <p>There are three families of verbs designed to work with relational data:</p>
 <ul>
 <li>Mutating joins, which add new variables to one data frame from matching observations in another.</li>
 <li>Filtering joins, which filter observations from one data frame based on whether or not they match an observation in the other table.</li>
 <li>Set operations, which treat observations as if they were set elements.</li>
 </ul>
-<p>We can connect datasets – relate them – according to shared variables like <code>subjectID, item_name</code> (for our data). In <code>tidyverse</code>, the variables that connect pairs of tables are called keys where, and this is what counts, <em>key(-s) are variable(-s) that uniquely identify an observation</em>.</p>
+<p>We can connect datasets – relate them – according to shared variables like <code>subjectID, item_name</code> (for our data). In <code>{tidyverse}</code>, the variables that connect pairs of tables are called keys where, and this is what counts, <em>key(-s) are variable(-s) that uniquely identify an observation</em>.</p>
 <p>For the experimental reading data, we have observations about each response made by a participant (one of 61 subjects) to an item (one of 160 words). For these data, we can match up a pair of RT and accuracy observations for each (unique) <code>subjectID-item_name</code> combination.</p>
 <p>If you reflect, we could not combine the RT and accuracy data correctly:</p>
 <ol type="1">
@@ -1096,9 +1130,10 @@ Tip
 <section id="sec-intro-mixed-data-exx-join" class="level4" data-number="4.7.6.3">
 <h4 data-number="4.7.6.3" class="anchored" data-anchor-id="sec-intro-mixed-data-exx-join"><span class="header-section-number">4.7.6.3</span> Exercise</h4>
 <ul>
-<li>Break the join: You could examine how the <code>full_join()</code> works by experimenting with stopping it from working</li>
+<li>Break the join: You can examine how the <code>full_join()</code> works by experimenting with stopping it from working.</li>
 </ul>
-<p>As I discuss, you need to have matches in values on key (common) variables. If the <code>subjectID</code> is different on different datasets, you will lose data that would otherwise be merged to form the merged or composite dataset. So, check what happens if you deliberately mis-spell one of the <code>subjectID</code> values in one of the original source wide behavioural data files.</p>
+<p>As I discuss, you need to have matches in values on key (common) variables. If the <code>subjectID</code> is different on different datasets, you will lose data that would otherwise be merged to form the merged or composite dataset.</p>
+<p>Check what happens if you deliberately mis-spell one of the <code>subjectID</code> values in one of the original source wide behavioural data files.</p>
 <p>To be safe, you might want to do this exercise with copies of the source files kept in a folder you create for this purpose. If it goes wrong, you can always re-access the source files and read them in again.</p>
 <p>You can check what happens before and after you break the match by counting the number of rows in the dataset that results from the merger. We can count the number of rows in a dataset with:</p>
 <div class="cell">
@@ -1112,7 +1147,8 @@ Tip
 </section>
 <section id="sec-intro-mixed-data-transform" class="level3" data-number="4.7.7">
 <h3 data-number="4.7.7" class="anchored" data-anchor-id="sec-intro-mixed-data-transform"><span class="header-section-number">4.7.7</span> Select or transform the variables</h3>
-<p>OK, now we have all the data about everything all in one big, long and wide, dataset. But we do not actually need all this stuff. We next need to do two things. First, we need to get rid of variables we will not use: we do that by using <code>select()</code>. Then, we need to remove errors and outlying short RT observations: we do that by using <code>filter()</code> in Section @ref(filter).</p>
+<p>OK, now we have all the data about everything all in one big, long and wide, dataset. But we do not actually need all this stuff.</p>
+<p>We next need to do two things. First, we need to get rid of variables we will not use: we do that by using <code>select()</code>. Then, we need to remove errors and outlying short RT observations: we do that by using <code>filter()</code> in Section <a href="#sec-intro-mixed-data-filter"><span>Section&nbsp;4.7.8</span></a>.</p>
 <p>We are going to select just the variables we need using the <code>select()</code> function.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>long.all.select <span class="ot">&lt;-</span> long.all <span class="sc">%&gt;%</span> </span>
@@ -1124,36 +1160,35 @@ Tip
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                          Palatals, Velars, Glottals, age.months, </span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>                          TOWREW_skill, TOWRENW_skill, spoonerisms, CART_score)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Notice that these variables do not have <em>reader-friendly</em> names. Naming things well is important, as Jenny Bryan <a href="https://speakerdeck.com/jennybc/how-to-name-files">teaches</a>.</p>
-<p>I would say that this true for variables as much as for files. The names we have in the CP study data were fine for internal use within my research group but we should be careful to ensure that variables have names that make sense to others and to our future selves. We can adjust variable names using the <code>rename()</code> function but I will leave that as an exercise for you to do.</p>
-<!-- ```{r rename, message=FALSE} -->
-<!-- # Rename the variables to easier to understand names -->
-<!-- CP.data <- long.all.select.filter %>% -->
-<!--                   rename("word" = "item_name", -->
-<!--                          "participant" = "subjectID", -->
-<!--                          "frequency" = "Lg.UK.CDcount", -->
-<!--                          "imageability" = "brookesIMG", -->
-<!--                          "aoa" = "AoA_Kup_lem", -->
-<!--                          "neighbourhood" = "Ortho_N", -->
-<!--                          "length" = "Length", -->
-<!--                          "bigram.mean" = "BG_Mean", -->
-<!--                          "Liquids" = "Liquid_SV", -->
-<!--                          "TOWRE.words" = "TOWREW_skill", -->
-<!--                          "TOWRE.nonwords" = "TOWRENW_skill", -->
-<!--                          "CART" = "CART_score" -->
-<!--                          ) -->
-<!-- ``` -->
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Notice that these variables do not have <em>reader-friendly</em> names: but <strong>naming things is important</strong>.</p>
+<ul>
+<li>Check out the ever-useful Jenny Bryan’s <a href="https://speakerdeck.com/jennybc/how-to-name-files">advice</a>.</li>
+</ul>
+</div>
+</div>
+<p>The names we have in the CP study data were fine for internal use within my research group but we should be careful to ensure that variables have names that make sense to others and to our future selves. We can adjust variable names using the <code>rename()</code> function but I will leave that as an exercise for you to do.</p>
 <section id="sec-intro-mixed-data-exx-transform" class="level4" data-number="4.7.7.1">
 <h4 data-number="4.7.7.1" class="anchored" data-anchor-id="sec-intro-mixed-data-exx-transform"><span class="header-section-number">4.7.7.1</span> Exercise</h4>
 <ul>
-<li>Select different variables: You could analyze the CP study data for a research report. What if you wanted to analyze a different set of variables, could you select different variables?</li>
+<li>Select different variables: You could analyze the CP study data for a research report.</li>
 </ul>
+<p>What if you wanted to analyze a different set of variables, could you select different variables?</p>
 </section>
 </section>
 <section id="sec-intro-mixed-data-filter" class="level3" data-number="4.7.8">
 <h3 data-number="4.7.8" class="anchored" data-anchor-id="sec-intro-mixed-data-filter"><span class="header-section-number">4.7.8</span> Filter observations</h3>
 <p>We now have a tidy dataset <code>long.all.select</code> with 26 columns and 9762 rows.</p>
-<p>The dataset includes missing values, designated <code>NA</code> for <em>not available</em> (to you). Here, every error (coded <code>0</code>, in <code>accuracy</code>) corresponds to an <code>NA</code> in the <code>RT</code> column.</p>
+<p>The dataset includes missing values, designated <code>NA</code>. Here, every error (coded <code>0</code>, in <code>accuracy</code>) corresponds to an <code>NA</code> in the <code>RT</code> column.</p>
 <p>The dataset also includes outlier data. In this context, <span class="math inline">\(RT &lt; 200\)</span> are probably response errors or equipment failures. We will want to analyse <code>accuracy</code> later, so we shall need to be careful about getting rid of <code>NAs</code>.</p>
 <p>At this point, I am going to exclude two sets of observations only.</p>
 <ul>
@@ -1170,8 +1205,6 @@ Tip
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>long.all.select.filter <span class="ot">&lt;-</span> long.all.select.filter <span class="sc">%&gt;%</span></span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">filter</span>(RT <span class="sc">&gt;=</span> <span class="dv">200</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="code-tip" class="level4" data-number="4.7.8.1">
-<h4 data-number="4.7.8.1" class="anchored" data-anchor-id="code-tip"><span class="header-section-number">4.7.8.1</span> Code tip</h4>
 <p>Here, I am using the function <code>filter()</code> to …</p>
 <ul>
 <li>Create a new dataset <code>long.all.select.filter &lt;- ...</code> by</li>
@@ -1179,25 +1212,34 @@ Tip
 <li>An observation is included in the new dataset if it matches the condition specified as an argument in the <code>filter()</code> function call, thus:</li>
 </ul>
 <ol type="1">
-<li><code>filter(item_name !=</code>FALSE’)<code>means: include in the new dataset</code>long.all.select.filter<code>all observations from the old dataset</code>long.all.select<code>that are not</code>!=<code>(</code>!<code>not</code>=<code>equal to) the value</code>FALSE<code>in the variable</code>item_name`</li>
-<li>then recreate the <code>long.all.select.filter</code> as a version of itself (with no name change) by including in the new version only those observations where RT was greater than or equal to 200ms using <code>RT &gt;= 200</code></li>
+<li><code>filter(item_name !='FALSE')</code> means: include in the new dataset <code>long.all.select.filter</code> all observations from the old dataset <code>long.all.select</code> that are not <code>!=</code> (<code>!</code> not <code>=</code> equal to) the value <code>FALSE</code> in the variable <code>item_name</code>,</li>
+<li>then recreate the <code>long.all.select.filter</code> as a version of itself (with no name change) by including in the new version only those observations where RT was greater than or equal to 200ms using <code>RT &gt;= 200</code>.</li>
 </ol>
-</section>
-<section id="sec-intro-mixed-equals" class="level4" data-number="4.7.8.2">
-<h4 data-number="4.7.8.2" class="anchored" data-anchor-id="sec-intro-mixed-equals"><span class="header-section-number">4.7.8.2</span> The difference between = and ==</h4>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The difference between = and ==</p>
 <p>You need to be careful to distinguish these signs.</p>
 <ul>
 <li><code>=</code> assigns a value, so <code>x = 2</code> means “x equals 2”</li>
 <li><code>==</code> tests a match so <code>x == 2</code> means: “is x equal to 2?”</li>
 </ul>
-</section>
-<section id="sec-intro-mixed-data-filter-conditions" class="level4" data-number="4.7.8.3">
-<h4 data-number="4.7.8.3" class="anchored" data-anchor-id="sec-intro-mixed-data-filter-conditions"><span class="header-section-number">4.7.8.3</span> Using multiple arguments in filtering</h4>
+</div>
+</div>
+<section id="sec-intro-mixed-data-filter-conditions" class="level4" data-number="4.7.8.1">
+<h4 data-number="4.7.8.1" class="anchored" data-anchor-id="sec-intro-mixed-data-filter-conditions"><span class="header-section-number">4.7.8.1</span> Using multiple arguments in filtering</h4>
 <p>You can supply multiple arguments to <code>filter()</code> and this may be helpful if (1.) you want to filter observations according to a match on condition-A <strong>and</strong> condition-B (logical “and” is coded with <code>&amp;</code>) or (2.) you want to filter observations according to a match on condition-A or condition-B (logical “or” is coded <code>|</code>).</p>
-<p>You can read more about using multiple arguments to filter observations <a href="https://dplyr.tidyverse.org/reference/filter.html">here</a></p>
+<p>You can read more about using multiple arguments to filter observations <a href="https://dplyr.tidyverse.org/reference/filter.html">here</a>.</p>
 </section>
-<section id="sec-intro-mixed-data-exx-filter" class="level4" data-number="4.7.8.4">
-<h4 data-number="4.7.8.4" class="anchored" data-anchor-id="sec-intro-mixed-data-exx-filter"><span class="header-section-number">4.7.8.4</span> Exercise</h4>
+<section id="sec-intro-mixed-data-exx-filter" class="level4" data-number="4.7.8.2">
+<h4 data-number="4.7.8.2" class="anchored" data-anchor-id="sec-intro-mixed-data-exx-filter"><span class="header-section-number">4.7.8.2</span> Exercise</h4>
 <ul>
 <li>Vary the filter conditions: in different ways</li>
 </ul>
@@ -1205,20 +1247,33 @@ Tip
 <li>Change the threshold for including RTs from <code>RT &gt;= 200</code> to something else</li>
 <li>Can you assess what impact the change has? Note that you can count the number of observations (rows) in a dataset using e.g.&nbsp;<code>length(data.set.name$variable.name)</code></li>
 </ol>
-<p>Filtering or re-coding observations is an important element of the research workflow in psychological science. How we do or do not remove observations from original data may have an impact on our results (as explored by, e.g., Steegen et al., 2014). It is important, therefore, that we learn how to do this reproducibly using R scripts that we can share with our research reports.</p>
-<p>You can read further information about filtering <a href="https://r4ds.had.co.nz/transform.html?q=filter#filter-rows-with-filter">here</a></p>
+<p>Filtering or re-coding observations is an important element of the research workflow in psychological science, as I discuss in <a href="intro.html#sec-multiversedata"><span>Section&nbsp;7.2.4.2</span></a>. How we do or do not remove observations from original data may have an impact on our results (as explored by, e.g., Steegen et al., 2014). It is important, therefore, that we learn how to do this reproducibly using R scripts that we can share with our research reports.</p>
+<p>You can read further information about filtering <a href="https://r4ds.had.co.nz/transform.html?q=filter#filter-rows-with-filter">here</a>.</p>
 </section>
-<section id="sec-intro-mixed-data-omit-na" class="level4" data-number="4.7.8.5">
-<h4 data-number="4.7.8.5" class="anchored" data-anchor-id="sec-intro-mixed-data-omit-na"><span class="header-section-number">4.7.8.5</span> Remove missing values</h4>
+<section id="sec-intro-mixed-data-omit-na" class="level4" data-number="4.7.8.3">
+<h4 data-number="4.7.8.3" class="anchored" data-anchor-id="sec-intro-mixed-data-omit-na"><span class="header-section-number">4.7.8.3</span> Remove missing values</h4>
 <p>We will be working with the <code>long.all.select.filter.csv</code> dataset collated from the experimental, subject ability scores, and item property data collected for the CP word naming study.</p>
 <p>For convenience, I am going to remove missing values before we go any further, using the <code>na.omit()</code> function.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>long.all.noNAs <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(long.all.select.filter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="code-tip-1" class="level4" data-number="4.7.8.6">
-<h4 data-number="4.7.8.6" class="anchored" data-anchor-id="code-tip-1"><span class="header-section-number">4.7.8.6</span> Code tip</h4>
-<p>The <code>na.omit()</code> function is powerful. In using this function, I am asking R to create a new dataset <code>long.all.noNAs</code> from the old dataset <code>long.all.select.filter</code> in a process in which the new dataset will have <em>no</em> rows in which there is a missing value <code>NA</code> in <em>any</em> column. You need to be reasonably sure, when you use this function, where your <code>NAs</code> may be because, otherwise, you may end the process with a new filtered dataset that has many fewer rows in it than you expected.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <code>na.omit()</code> function is powerful.</p>
+<ul>
+<li>In using this function, I am asking R to create a new dataset <code>long.all.noNAs</code> from the old dataset <code>long.all.select.filter</code> in a process in which the new dataset will have <em>no</em> rows in which there is a missing value <code>NA</code> in <em>any</em> column.</li>
+<li>You need to be reasonably sure, when you use this function, where your <code>NAs</code> may be because, otherwise, you may end the process with a new filtered dataset that has many fewer rows in it than you expected.</li>
+</ul>
+</div>
+</div>
 </section>
 </section>
 <section id="sec-intro-mixed-data-tidy-conclusions" class="level3" data-number="4.7.9">
@@ -1248,7 +1303,7 @@ Tip
 #   ⁶​AoA_Kup_lem, ⁷​regularity</code></pre>
 </div>
 </div>
-<p>If we inspect the dataset, we can see that we have now got a tidy dataset with all the data we need for our analyses:</p>
+<p>If we inspect <code>long.all.noNAs</code>, we can see that we have now got a tidy dataset with all the data we need for our analyses:</p>
 <ul>
 <li>One observation per row, corresponding to data about a response made by a participant to a stimulus in an experimental trial</li>
 <li>One variable per column</li>
@@ -1268,6 +1323,41 @@ Tip
 <section id="sec-intro-mixed-data-conclusions" class="level3" data-number="4.7.11">
 <h3 data-number="4.7.11" class="anchored" data-anchor-id="sec-intro-mixed-data-conclusions"><span class="header-section-number">4.7.11</span> Data tidying – conclusions</h3>
 <p>Most research work involving quantitative evidence requires a <em>big</em> chunk of data tidying or other processing before you get to the statistics. Most of the time, this is work <em>you</em> will have to do. The lessons you can learn about the process will generalize to many future research scenarios.</p>
+<div class="callout-advice callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Advice
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It is a mistake to think of data tidying or wrangling as an inconvenience or as an extra task or something you need to do to get to the ‘good stuff’ (your results).</p>
+<ol type="1">
+<li>All analysis results follow from and thus are determined by the data processing steps that precede analysis.</li>
+<li>Analysis results can and do vary, perhaps critically, depending on different processing decisions, and reasonable people may differ on key processing decisions.</li>
+<li>The process of data tidying is instructive of your data quality.</li>
+</ol>
+</div>
+</div>
+<p><a href="https://counting.substack.com/p/data-cleaning-is-analysis-not-grunt">Here</a> is a nice substack post that links to some scholarly writing and makes some excellent points.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A key recommendation is that you write code to tidy or process data, thus creating a self-documented <em>auditable</em> data tidying process in your analysis workflow.</p>
+<ul>
+<li>This is simple to do in R and <em>that</em> is one important reason why we use and teach R.</li>
+</ul>
+</div>
+</div>
 </section>
 </section>
 <section id="sec-intro-mixed-crossed-random" class="level2" data-number="4.8">
@@ -1316,8 +1406,8 @@ Note
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>                    )</span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>                  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="code-tip-2" class="level4" data-number="4.9.2.1">
-<h4 data-number="4.9.2.1" class="anchored" data-anchor-id="code-tip-2"><span class="header-section-number">4.9.2.1</span> Code tip</h4>
+<section id="code-tip" class="level4" data-number="4.9.2.1">
+<h4 data-number="4.9.2.1" class="anchored" data-anchor-id="code-tip"><span class="header-section-number">4.9.2.1</span> Code tip</h4>
 <p>Notice that I am using <code>read_csv()</code> with an additional argument <code>col_types = cols(...)</code> through which I control how <code>read_csv()</code> processes specific column variables in the data. Here, I am requesting that <code>read_csv()</code> treats <code>subjectID</code> and <code>item_name</code> as factors.</p>
 <p>This is a very useful capacity, and a more efficient way to work than, say, first reading in the data and then using <em>coercion</em> to ensure that variabels are assigned appropriate types. You can read more about it <a href="https://readr.tidyverse.org/articles/readr.html">here</a>.</p>
 </section>
@@ -1785,8 +1875,8 @@ Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + e_{ij}
 <li>If the model includes the random effect of then we can see how the intercepts and the slopes vary. Given what we saw when we looked at the relation between frequency and RT for each participant considered separately we might argue that this model is much more realistic about the data.</li>
 </ol>
 </section>
-<section id="code-tip-3" class="level4" data-number="4.9.7.2">
-<h4 data-number="4.9.7.2" class="anchored" data-anchor-id="code-tip-3"><span class="header-section-number">4.9.7.2</span> Code tip</h4>
+<section id="code-tip-1" class="level4" data-number="4.9.7.2">
+<h4 data-number="4.9.7.2" class="anchored" data-anchor-id="code-tip-1"><span class="header-section-number">4.9.7.2</span> Code tip</h4>
 <p>It is very important to learn to make effective use of the warnings and error messages R can produce.</p>
 <p>Note: you do not have to just believe me when I say that is in the model code to stop a problem appearing. Experiment – and see what happens when you change the code. Try this.</p>
 <div class="cell">

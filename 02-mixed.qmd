@@ -386,7 +386,16 @@ In `{tidyverse}` the functions designed to enable you to restructure data have e
 
 To answer our research question, we next need to combine the **RT** with the **accuracy** data, and then the combined behavioural data with **participant** information and **stimulus** information. This is because, as we have seen, information about behavioural responses, about participant attributes or stimulus word properties, are located in separate files.
 
-Many researchers have completed this kind of operation by hand. This involves copying and pasting bits of data in a spreadsheet. It can take hours or days. I know because I have done it, and I have seen others do it. **Please don't.** There are better ways to spend your time. And you will make mistakes that you will not then be able to identify.
+Many researchers have completed this kind of operation by hand. This involves copying and pasting bits of data in a spreadsheet. It can take hours or days. I know because I have done it, and I have seen others do it.
+
+::: callout-warning
+Please do not try to combine datasets through manual operations e.g. in Excel. I guarantee that:
+
+1. You will make mistakes.
+2. You will not know when or where those mistakes are in your data.
+
+There are better ways to spend your time.
+:::
 
 We can combine the datasets, in the way that we need, using the `{tidyverse}` `full_join()` function. This gets the job done quickly, and accurately.
 
@@ -417,7 +426,8 @@ long.all <- long.subjects %>%
 
 Notice, we can let R figure out how to join the pieces of data together. If we were doing this by hand then we would need to check *very carefully* the correspondences between observations in different datasets.
 
-Here, in a series of steps, we take one dataset and join it (merge it) with the second dataset. Let's look at an example.
+Here, in a series of steps, we take one dataset and join it (merge it) with the second dataset. 
+Let's look at an example element by element to better understand how this is accomplished.
 
 ```{r}
 #| label: demo-join
@@ -446,11 +456,16 @@ The addition of observations from one database joining to those from another hap
 -   If there is a match then R joins the corresponding rows of data together.
 -   If there isn't a match then it creates `NAs` where there are missing entries in one row for one dataset which cannot be matched to a row from the joining dataset.
 
+::: callout-tip
 Note that in one example, the example of code I discuss here, I did not specify identifying columns in common, allowing the function to do the work. In the other code chunks I did: `long.all <- long.subjects %>% full_join(words, by = "item_name")` using the `by = ...` argument.
+
+- Sometimes, you can vary in how you employ a `_join()` function. 
+- It may help to specify the identifying column if you want to make explicit (to yourselves and others) how the process is to be completed.
+:::
 
 #### Relational data {#sec-intro-mixed-data-relational}
 
-In the `tidyverse` family of `dplyr` functions, when you work with multiple datasets (tables of data), we call the datasets [relational data](http://r4ds.had.co.nz/relational-data.html#relational-data).
+In the `{tidyverse}` family of `dplyr` functions, when you work with multiple datasets (tables of data), we call the datasets [relational data](http://r4ds.had.co.nz/relational-data.html#relational-data).
 
 There are three families of verbs designed to work with relational data:
 
@@ -458,7 +473,7 @@ There are three families of verbs designed to work with relational data:
 -   Filtering joins, which filter observations from one data frame based on whether or not they match an observation in the other table.
 -   Set operations, which treat observations as if they were set elements.
 
-We can connect datasets -- relate them -- according to shared variables like `subjectID, item_name` (for our data). In `tidyverse`, the variables that connect pairs of tables are called keys where, and this is what counts, *key(-s) are variable(-s) that uniquely identify an observation*.
+We can connect datasets -- relate them -- according to shared variables like `subjectID, item_name` (for our data). In `{tidyverse}`, the variables that connect pairs of tables are called keys where, and this is what counts, *key(-s) are variable(-s) that uniquely identify an observation*.
 
 For the experimental reading data, we have observations about each response made by a participant (one of 61 subjects) to an item (one of 160 words). For these data, we can match up a pair of RT and accuracy observations for each (unique) `subjectID-item_name` combination.
 
@@ -483,9 +498,11 @@ I used `full_join()` because I wanted to retain all observations from both datas
 
 #### Exercise {#sec-intro-mixed-data-exx-join}
 
--   Break the join: You could examine how the `full_join()` works by experimenting with stopping it from working
+-   Break the join: You can examine how the `full_join()` works by experimenting with stopping it from working.
 
-As I discuss, you need to have matches in values on key (common) variables. If the `subjectID` is different on different datasets, you will lose data that would otherwise be merged to form the merged or composite dataset. So, check what happens if you deliberately mis-spell one of the `subjectID` values in one of the original source wide behavioural data files.
+As I discuss, you need to have matches in values on key (common) variables. If the `subjectID` is different on different datasets, you will lose data that would otherwise be merged to form the merged or composite dataset. 
+
+Check what happens if you deliberately mis-spell one of the `subjectID` values in one of the original source wide behavioural data files.
 
 To be safe, you might want to do this exercise with copies of the source files kept in a folder you create for this purpose. If it goes wrong, you can always re-access the source files and read them in again.
 
@@ -500,7 +517,9 @@ This bit of code takes the length of the vector (i.e. variable column `RT` in da
 
 ### Select or transform the variables {#sec-intro-mixed-data-transform}
 
-OK, now we have all the data about everything all in one big, long and wide, dataset. But we do not actually need all this stuff. We next need to do two things. First, we need to get rid of variables we will not use: we do that by using `select()`. Then, we need to remove errors and outlying short RT observations: we do that by using `filter()` in Section \@ref(filter).
+OK, now we have all the data about everything all in one big, long and wide, dataset. But we do not actually need all this stuff. 
+
+We next need to do two things. First, we need to get rid of variables we will not use: we do that by using `select()`. Then, we need to remove errors and outlying short RT observations: we do that by using `filter()` in Section @sec-intro-mixed-data-filter.
 
 We are going to select just the variables we need using the `select()` function.
 
@@ -517,53 +536,25 @@ long.all.select <- long.all %>%
 
 ```
 
-Notice that these variables do not have *reader-friendly* names. Naming things well is important, as Jenny Bryan [teaches](https://speakerdeck.com/jennybc/how-to-name-files).
+::: callout-tip
+Notice that these variables do not have *reader-friendly* names: but **naming things is important**.
 
-I would say that this true for variables as much as for files. The names we have in the CP study data were fine for internal use within my research group but we should be careful to ensure that variables have names that make sense to others and to our future selves. We can adjust variable names using the `rename()` function but I will leave that as an exercise for you to do.
+- Check out the ever-useful Jenny Bryan's [advice](https://speakerdeck.com/jennybc/how-to-name-files).
+:::
 
-<!-- ```{r rename, message=FALSE} -->
-
-<!-- # Rename the variables to easier to understand names -->
-
-<!-- CP.data <- long.all.select.filter %>% -->
-
-<!--                   rename("word" = "item_name", -->
-
-<!--                          "participant" = "subjectID", -->
-
-<!--                          "frequency" = "Lg.UK.CDcount", -->
-
-<!--                          "imageability" = "brookesIMG", -->
-
-<!--                          "aoa" = "AoA_Kup_lem", -->
-
-<!--                          "neighbourhood" = "Ortho_N", -->
-
-<!--                          "length" = "Length", -->
-
-<!--                          "bigram.mean" = "BG_Mean", -->
-
-<!--                          "Liquids" = "Liquid_SV", -->
-
-<!--                          "TOWRE.words" = "TOWREW_skill", -->
-
-<!--                          "TOWRE.nonwords" = "TOWRENW_skill", -->
-
-<!--                          "CART" = "CART_score" -->
-
-<!--                          ) -->
-
-<!-- ``` -->
+The names we have in the CP study data were fine for internal use within my research group but we should be careful to ensure that variables have names that make sense to others and to our future selves. We can adjust variable names using the `rename()` function but I will leave that as an exercise for you to do.
 
 #### Exercise {#sec-intro-mixed-data-exx-transform}
 
--   Select different variables: You could analyze the CP study data for a research report. What if you wanted to analyze a different set of variables, could you select different variables?
+-   Select different variables: You could analyze the CP study data for a research report. 
+
+What if you wanted to analyze a different set of variables, could you select different variables?
 
 ### Filter observations {#sec-intro-mixed-data-filter}
 
 We now have a tidy dataset `long.all.select` with `r length(long.all.select)` columns and `r length(long.all.select$RT)` rows.
 
-The dataset includes missing values, designated `NA` for *not available* (to you). Here, every error (coded `0`, in `accuracy`) corresponds to an `NA` in the `RT` column.
+The dataset includes missing values, designated `NA`. Here, every error (coded `0`, in `accuracy`) corresponds to an `NA` in the `RT` column.
 
 The dataset also includes outlier data. In this context, $RT < 200$ are probably response errors or equipment failures. We will want to analyse `accuracy` later, so we shall need to be careful about getting rid of `NAs`.
 
@@ -586,29 +577,29 @@ long.all.select.filter <- long.all.select.filter %>%
 
 ```
 
-#### Code tip
-
 Here, I am using the function `filter()` to ...
 
 -   Create a new dataset `long.all.select.filter <- ...` by
 -   Using functions to work on the data named immediately to the right of the assignment arrow: `long.all.select`
 -   An observation is included in the new dataset if it matches the condition specified as an argument in the `filter()` function call, thus:
 
-1.  `filter(item_name !=`FALSE')`means: include in the new dataset`long.all.select.filter`all observations from the old dataset`long.all.select`that are not`!=`(`!`not`=`equal to) the value`FALSE`in the variable`item_name\`
-2.  then recreate the `long.all.select.filter` as a version of itself (with no name change) by including in the new version only those observations where RT was greater than or equal to 200ms using `RT >= 200`
+1.  `filter(item_name !='FALSE')` means: include in the new dataset `long.all.select.filter` all observations from the old dataset `long.all.select` that are not `!=` (`!` not `=` equal to) the value `FALSE` in the variable `item_name`,
+2.  then recreate the `long.all.select.filter` as a version of itself (with no name change) by including in the new version only those observations where RT was greater than or equal to 200ms using `RT >= 200`.
 
-#### The difference between = and == {#sec-intro-mixed-equals}
+::: callout-warning
+The difference between = and ==
 
 You need to be careful to distinguish these signs.
 
 -   `=` assigns a value, so `x = 2` means "x equals 2"
 -   `==` tests a match so `x == 2` means: "is x equal to 2?"
+:::
 
 #### Using multiple arguments in filtering {#sec-intro-mixed-data-filter-conditions}
 
 You can supply multiple arguments to `filter()` and this may be helpful if (1.) you want to filter observations according to a match on condition-A **and** condition-B (logical "and" is coded with `&`) or (2.) you want to filter observations according to a match on condition-A or condition-B (logical "or" is coded `|`).
 
-You can read more about using multiple arguments to filter observations [here](https://dplyr.tidyverse.org/reference/filter.html)
+You can read more about using multiple arguments to filter observations [here](https://dplyr.tidyverse.org/reference/filter.html).
 
 #### Exercise {#sec-intro-mixed-data-exx-filter}
 
@@ -617,9 +608,9 @@ You can read more about using multiple arguments to filter observations [here](h
 1.  Change the threshold for including RTs from `RT >= 200` to something else
 2.  Can you assess what impact the change has? Note that you can count the number of observations (rows) in a dataset using e.g. `length(data.set.name$variable.name)`
 
-Filtering or re-coding observations is an important element of the research workflow in psychological science. How we do or do not remove observations from original data may have an impact on our results (as explored by, e.g., Steegen et al., 2014). It is important, therefore, that we learn how to do this reproducibly using R scripts that we can share with our research reports.
+Filtering or re-coding observations is an important element of the research workflow in psychological science, as I discuss in @sec-multiversedata. How we do or do not remove observations from original data may have an impact on our results (as explored by, e.g., Steegen et al., 2014). It is important, therefore, that we learn how to do this reproducibly using R scripts that we can share with our research reports.
 
-You can read further information about filtering [here](https://r4ds.had.co.nz/transform.html?q=filter#filter-rows-with-filter)
+You can read further information about filtering [here](https://r4ds.had.co.nz/transform.html?q=filter#filter-rows-with-filter).
 
 #### Remove missing values {#sec-intro-mixed-data-omit-na}
 
@@ -632,9 +623,12 @@ For convenience, I am going to remove missing values before we go any further, u
 long.all.noNAs <- na.omit(long.all.select.filter)
 ```
 
-#### Code tip
+::: callout-tip
+The `na.omit()` function is powerful. 
 
-The `na.omit()` function is powerful. In using this function, I am asking R to create a new dataset `long.all.noNAs` from the old dataset `long.all.select.filter` in a process in which the new dataset will have *no* rows in which there is a missing value `NA` in *any* column. You need to be reasonably sure, when you use this function, where your `NAs` may be because, otherwise, you may end the process with a new filtered dataset that has many fewer rows in it than you expected.
+- In using this function, I am asking R to create a new dataset `long.all.noNAs` from the old dataset `long.all.select.filter` in a process in which the new dataset will have *no* rows in which there is a missing value `NA` in *any* column. 
+- You need to be reasonably sure, when you use this function, where your `NAs` may be because, otherwise, you may end the process with a new filtered dataset that has many fewer rows in it than you expected.
+:::
 
 ### Now we have some tidy data {#sec-intro-mixed-data-tidy-conclusions}
 
@@ -643,7 +637,7 @@ The `na.omit()` function is powerful. In using this function, I am asking R to c
 head(long.all.noNAs, n = 10)
 ```
 
-If we inspect the \verb:long.all.noNAs: dataset, we can see that we have now got a tidy dataset with all the data we need for our analyses:
+If we inspect `long.all.noNAs`, we can see that we have now got a tidy dataset with all the data we need for our analyses:
 
 -   One observation per row, corresponding to data about a response made by a participant to a stimulus in an experimental trial
 -   One variable per column
@@ -667,6 +661,22 @@ This function will create a `.csv` file from the dataset you name `long.all.noNA
 ### Data tidying -- conclusions {#sec-intro-mixed-data-conclusions}
 
 Most research work involving quantitative evidence requires a *big* chunk of data tidying or other processing before you get to the statistics. Most of the time, this is work *you* will have to do. The lessons you can learn about the process will generalize to many future research scenarios.
+
+::: callout-advice
+It is a mistake to think of data tidying or wrangling as an inconvenience or as an extra task or something you need to do to get to the 'good stuff' (your results).
+
+1. All analysis results follow from and thus are determined by the data processing steps that precede analysis.
+2. Analysis results can and do vary, perhaps critically, depending on different processing decisions, and reasonable people may differ on key processing decisions.
+3. The process of data tidying is instructive of your data quality.
+:::
+
+[Here](https://counting.substack.com/p/data-cleaning-is-analysis-not-grunt) is a nice substack post that links to some scholarly writing and makes some excellent points.
+
+::: callout-tip
+A key recommendation is that you write code to tidy or process data, thus creating a self-documented *auditable* data tidying process in your analysis workflow.
+
+- This is simple to do in R and *that* is one important reason why we use and teach R.
+:::
 
 ## Repeated measures designs and crossed random effects {#sec-intro-mixed-crossed-random}
 
