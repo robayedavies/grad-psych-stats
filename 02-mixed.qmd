@@ -6,6 +6,7 @@
 library(broom)
 library(gridExtra)
 library(here)
+library(kableExtra)
 library(lme4)
 library(memisc)
 library(patchwork)
@@ -216,13 +217,13 @@ Take a look at what this line of code includes, element by element.
 4.  `read_tsv(..., na = "-999")` second, we tell R that there are some missing values `na` which are coded with the value `"-999"`.
 :::
 
-#### A quick lesson about missing value codes {#sec-intro-missing}
+### A quick lesson about missing value codes {#sec-intro-missing}
 
 In R, a missing value is said to be "not available": `NA`.
 
 In the datasets -- typically, the spreadsheets -- we create in our research, we will have values missing for different reasons. Take another look at the data spreadsheet you saw earlier, @fig-CP-study-RTs.
 
-You should be able to see that the spreadsheet holds information, as explained, about the RTs of the responses made by each child to each stimulus word. Each of the cells in the spreadsheet (i.e. the box where a column intersects with a row) includes a number value. Most of the values are positive numbers like 751.3: the reaction time of a response, recorded in milliseconds. The values have to be positive because they represent the length of time between the moment the stimulus word is presented on the test computer screen and the moment the child's spoken word response has begun to be registered by the computer microphone and sound recording software.
+You should be able to see that the spreadsheet holds information, as explained, about the RTs of the responses made by each child to each stimulus word. Each of the cells in the spreadsheet (i.e. the box where a column intersects with a row) includes a number value. Most of the values are positive numbers like `751.3`: the reaction time of a response, recorded in milliseconds. The values have to be positive because they represent the length of time between the moment the stimulus word is presented on the test computer screen and the moment the child's spoken word response has begun to be registered by the computer microphone and sound recording software.
 
 Some of the cells hold the value `-999`, however. Obviously, we cannot have negative RT. The value represents the fact that we have no data. Take a look at @fig-CP-study-RTs: we have a `-999` where we should have a RT for the response made by participant `AllanaD` to the word `broad`. This `-999` is there because, for some reason, we did not record an RT or a response for that combination of participant and stimulus.
 
@@ -236,9 +237,9 @@ There are a number of reasons why it is bad practice to just leave a cell empty 
 
 I use `-999` to code for missing values because you should never see a value like that in real reading RT data. You can use whatever value you like but you should make sure you *do* code for missing data somehow.
 
-### Reshape the data from wide to long using the gather() function {#sec-intro-mixed-data-restructure}
+### Reshape the data from wide to long using the pivot_longer() function {#sec-intro-mixed-data-restructure}
 
-We are going to need to restructure these data from a wide format to a longer format. We need to restructure both behavioural data-sets, accuracy and RT. We do this using the `pivot_longer()` function.
+We are going to need to restructure these data from a wide format to a longer format. We need to restructure both behavioural datasets, accuracy and RT. We do this using the `pivot_longer()` function.
 
 ```{r}
 #| label: widetolong
@@ -251,10 +252,9 @@ acc.long <- behaviour.acc %>%
               pivot_longer(2:62, names_to = "subjectID", values_to = "accuracy")
 ```
 
-Doing data-set construction programmatically, using R functions, is generally more reliable, and faster, than doing it by hand. Researchers used to have to do this sort of thing by hand, using copying and pasting, in Excel or SPSS. Doing the process by hand takes many hours or days. And you *always* make errors.
+Doing dataset construction programmatically, using R functions, is generally more reliable, and faster, than doing it by hand. Researchers used to have to do this sort of thing by hand, using copying and pasting, in Excel or SPSS. Doing the process by hand takes many hours or days. And you *always* make errors.
 
-#### Code tip
-
+::: code-tip
 Here, we use a function you may not have seen before: `pivot_longer()`.
 
 ```{r}
@@ -297,6 +297,7 @@ c.  `pivot_longer(...values_to = "RT")`
 
 -   Third, we tell R that all the RT values should be put in a single column.
 -   We can understand that this new column `RT` will hold RT observations in a vertical stack, one cell for each response by a person to a word, with rows ordered by `subjectID`.
+:::
 
 There are 61 columns of data listed by participant though 62 children were tested because we lost one child's data through an administrative error. As a result, in the wide data sets there are 62 columns, with the first column holding `item_name` data.
 
@@ -304,52 +305,72 @@ You can find more information about pivoting data [here](https://tidyr.tidyverse
 
 And you can find more information specifically about the `pivot_longer()` operation [here](https://tidyr.tidyverse.org/articles/pivot.html)
 
-##### Why we restructure the data {#sec-intro-mixed-data-restructure-why}
+### Why we restructure the data {#sec-intro-mixed-data-restructure-why}
 
-As I noted, one problem with the wide format is that the data are structured so that the column names are not names of variables. In our example wide format dataset `behaviour.rt`, the columns are headed by a participant identity code or name but a participant code is not the name of a variable, it is a value of the variable I call `subjectID`. In the design of the CP reading study, we want to take into account the impact of differences between participants on response RT (so, we need to identify which participant makes which response). But we do not see the responses made by a participant as a predictor variable.
+As I noted, one problem with the wide format is that the data are structured so that the column names are not names of variables. In our example wide format dataset, `behaviour.rt`, the columns are headed by a participant identity code or name but a participant code is not the name of a variable, it is a value of the variable I call `subjectID`. 
+
+In the design of the CP reading study, we want to take into account the impact of differences between participants on response RT (so, we need to identify which participant makes which response). But we do not see the responses made by a participant as a predictor variable.
 
 A second problem is that, in a wide format file like `behaviour.rt`, information about the responses made to each stimulus word is all on the same row (that seems good) but in different columns. Each person responded to all the words. But the response made to a word e.g. `act` made by one participant is in a different column (e.g., 594.8ms, for `AislingoC`) from the response made to the same word by a different participant (e.g., 586ms, for `AlexB`). This means that information about the responses made to each stimulus word are spread out as values across multiple columns.
 
-You can see this for yourself if you inspect the source data using `head()`.
+You can see this for yourself if you inspect the source rt data using `head()` to view the top four rows of the dataset.
 
 ```{r}
 #| label: headcheck-wide
-#| eval: false
-head(behaviour.rt)
-head(behaviour.acc)
+#| echo: false
+# head(behaviour.rt)
+behaviour.rt %>%
+  filter(item_name == c('act', 'ask', 'both', 'box')) %>%
+  as.data.frame() %>%
+  kable() %>%
+  kable_styling()
 ```
 
 This structure is a problem for visualization and for analysis because the functions we will use require us to specify *single* columns for an outcome variable like reaction time.
 
 We are looking at the process of tidying data because untidiness is very common. Learning how to deal with it will save you a lot of time and grief later.
 
-You should check for yourself how `subjectID` and `RT` or `accuracy` scores get transposed from the old structure to the new structure.
+You should check for yourself how `subjectID` and `RT` or `accuracy` scores get transposed from the old wide structure to the new long structure.
 
 ```{r}
 #| label: headcheck-long
 #| eval: false
+
+# RT data
+head(behaviour.rt)
 head(rt.long)
+
+# accuracy data
+head(behaviour.acc)
 head(acc.long)
 ```
 
-If you compare the `rt.long` or `acc.long` data with what you see in when the data are in the original wide format then you can see how -- in going from wide -- we have re-arranged the data to a longer and narrower set of columns, one column listing each word, one column for `subjectID` and one column for `RT` or `accuracy`. What a check will show you is that we have multiple rows for responses to each item so that the item is repeated multiple times in different rows.
+If you compare the `rt.long` or `acc.long` data with the data in the original wide format then you can see how -- in going from wide -- we have re-arranged the data to a longer and narrower set of columns:
+
+- one column listing each word;
+- one column for `subjectID`;
+- and one column for `RT` or `accuracy`. 
+
+What a check will show you is that we have multiple rows for responses to each item so that the item is repeated multiple times in different rows.
 
 These data are *now tidy*.
 
 -   Each column has information about one variable
 -   And each row has information about one observation, here, the response made by a participant to a word
 
-But these data are *incomplete*. Next we shall combine behavioural observations with data about stimulus words and about participants.
+This is a big part of data tidying now done.
+However, these data are *incomplete*. 
+Next we shall combine behavioural observations with data about stimulus words and about participants.
 
-##### The tidyverse evolves {#sec-intro-mixed-tidyverse-evolves}
+#### The tidyverse evolves {#sec-intro-mixed-tidyverse-evolves}
 
 Over the years, different ways of reshaping data have evolved. This reflects how important and common the task is. An older way to do the same operation uses the function `gather()`.
 
 You can read more about `gather()` [here](http://r4ds.had.co.nz/tidy-data.html#spreading-and-gathering)
 
-In `tidyverse` the functions designed to enable you to restructure data have evolved through a series of different forms. This change is one of the real benefits of using open software like R. In my experience, the newer functions can be useful for *really* untidy data. I expect things will continue to evolve and improve over time.
+In `{tidyverse}` the functions designed to enable you to restructure data have evolved through a series of different forms. This change is one of the real benefits of using open software like R. In my experience, the newer functions can be useful for *really* untidy data. I expect things will continue to evolve and improve over time.
 
-### Merging data from different data-sets using \_join() {#sec-intro-mixed-data-join}
+### Merging data from different datasets using \_join() functions {#sec-intro-mixed-data-join}
 
 To answer our research question, we next need to combine the **RT** with the **accuracy** data, and then the combined behavioural data with **participant** information and **stimulus** information. This is because, as we have seen, information about behavioural responses, about participant attributes or stimulus word properties, are located in separate files.
 
@@ -612,7 +633,7 @@ The `na.omit()` function is powerful. In using this function, I am asking R to c
 head(long.all.noNAs, n = 10)
 ```
 
-If we inspect the \verb:long.all.noNAs: data-set, we can see that we have now got a tidy data-set with all the data we need for our analyses:
+If we inspect the \verb:long.all.noNAs: dataset, we can see that we have now got a tidy dataset with all the data we need for our analyses:
 
 -   One observation per row, corresponding to data about a response made by a participant to a stimulus in an experimental trial
 -   One variable per column
