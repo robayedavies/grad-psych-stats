@@ -78,6 +78,9 @@ Our learning objectives include the development of key concepts and skills.
 1.  **concepts** -- how data can have multilevel structures and what this requires in models
 2.  **skills** -- where skills comprise the capacity to:
 
+```{=html}
+<!-- -->
+```
 i.  use visualization to examine observations within groups
 ii. run linear models over all data and within each class
 iii. use the `lmer()` function to fit models of multilevel data
@@ -92,22 +95,20 @@ I have provided a collection of materials you can use. Here, I explain what they
 
 1.1 I have recorded a lecture in three parts. The lectures should be accessible by anyone who has the link.
 
-- [Part 1](https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=66e89421-4491-4eb9-b1c8-acd4012a183d) -- about 16 minutes
-- [Part 2](https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=22361165-636b-424c-9e28-acd4012efd6f) -- about 13 minutes
-- [Part 3](https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=5942b084-457f-4687-aa3d-acd401332b44) -- about 13 minutes
+-   [Part 1](https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=66e89421-4491-4eb9-b1c8-acd4012a183d) -- about 16 minutes
+-   [Part 2](https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=22361165-636b-424c-9e28-acd4012efd6f) -- about 13 minutes
+-   [Part 3](https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=5942b084-457f-4687-aa3d-acd401332b44) -- about 13 minutes
 
 1.2 I suggest you watch the recordings then read the rest of this chapter. The lectures provide a summary of the main points.
 
 **2. Chapter: 01-multilevel**
 
-2.1 I have written this chapter to discuss the main ideas and set out the practical steps you can follow to start to develop the skills required to analyse multilevel structured data.
-2.2 The practical elements include data tidying, visualization and analysis steps.
-2.3 You can read the chapter, run the code, and do the exercises.
+2.1 I have written this chapter to discuss the main ideas and set out the practical steps you can follow to start to develop the skills required to analyse multilevel structured data. 2.2 The practical elements include data tidying, visualization and analysis steps. 2.3 You can read the chapter, run the code, and do the exercises.
 
-- Read in the example data `BAFACALO_DATASET.RData` and identify how the data are structured at multiple levels.
-- Use visualizations to explore the impact of the structure.
-- Run analyses using linear models (revision) and linear mixed-effects models (extension) code.
-- Review the recommended readings (@sec-multi-reading).
+-   Read in the example data `BAFACALO_DATASET.RData` and identify how the data are structured at multiple levels.
+-   Use visualizations to explore the impact of the structure.
+-   Run analyses using linear models (revision) and linear mixed-effects models (extension) code.
+-   Review the recommended readings (@sec-multi-reading).
 
 **3. Practical workbook materials**
 
@@ -802,11 +803,11 @@ Note that we see coefficient estimates like in a linear model summary **but no p
 
 There is no convention, yet, on how to report the results of these models. Lotte Meteyard and I argue for a set of conventions that will help researchers to understand each others' results better.
 
--   In this exercise, go read the bit where we advise Psychologists how to write about the results, in our paper (Meteyard & Davies, 2020).
+-   In this exercise, go read the bit where we advise Psychologists how to write about the results, in our paper [@meteyard2020a].
 
 ### Fixed and random effects {#sec-fixed-random}
 
-You will have noticed the reference to fixed and random effects in the discussion in this chapter, and the use of fixed and random effects as titles for sections of the model output. The terms *fixed effects* and *random effects* are not used consistently in the statistical literature (Gelman & Hill, 2007). I am going to use these terms because they are helpful, at first, and because they are widely used, not least in the results of our analyses in R.
+You will have noticed the reference to fixed and random effects in the discussion in this chapter, and the use of fixed and random effects as titles for sections of the model output. The terms *fixed effects* and *random effects* are not used consistently in the statistical literature [@Gelman2007g]. I am going to use these terms because they are helpful, at first, and because they are widely used, not least in the results of our analyses in R.
 
 It is common in the psychological literature to refer to the effects on outcomes of experimental manipulations (e.g., the effect on outcomes of differences between experimental conditions) or to the effects of correlated variables of theoretical or explanatory interest (e.g., the effect of differences in Portuguese language skill) as *fixed effects*. Typically, we are aiming to get estimates of the coefficients of these effects. And, much like we would do when we use linear models, we expect that these coefficients represent an estimate of the effects of these variables, on average, across the population. (Hence, some analysts prefer to talk about these effects as population average effects).
 
@@ -827,7 +828,7 @@ Recall that the linear model yields the estimate that for unit increase in Portu
 
 Psychological studies frequently result in hierarchically structured data. The structure can be understood in terms of the grouping of observations, as when there are multiple observations per group, participant or stimulus. The existence of such structure must be taken into account in analyses. Multilevel or mixed-effects models can be specified by the researcher to include random effects parameters that capture unexplained differences between participants or other sampling units in the intercepts or the slopes of explanatory variables. Where a sample of participants is asked to respond to a sample of stimuli, structure relating both to participants and to stimuli can be incorporated.
 
-Many researchers will be aware of concerns over the non-replication of published effects in psychological science (Pashler & Wagenmakers, 2012). As Gelman (2014) discusses, non-replication of results may arise if effects vary between contexts groups while traditional analytic methods assume that effects are constant. Psychological researchers can expect average outcomes and the effects of independent variables to vary among sampling units, whether their investigations involve multiple observations per child or stimulus, or children sampled within classes, clinics or schools. However, traditional analytic methods often require us to ignore this variation by averaging, say, responses over multiple trials for each child, to collapse an inherently multilevel data structure into a single level of observations that can be analysed using regression or ANOVA. By using multilevel models, researchers will, instead, be able to properly estimate the effects of theoretical interest, and better understand how those effects vary.
+Many researchers will be aware of concerns over the non-replication of published effects in psychological science (see @sec-context-replication). As @gelman2014b discusses, non-replication of results may arise if effects vary between contexts groups while traditional analytic methods assume that effects are constant. Psychological researchers can expect average outcomes and the effects of independent variables to vary among sampling units, whether their investigations involve multiple observations per child or stimulus, or children sampled within classes, clinics or schools. However, traditional analytic methods often require us to ignore this variation by averaging, say, responses over multiple trials for each child, to collapse an inherently multilevel data structure into a single level of observations that can be analysed using regression or ANOVA. By using multilevel models, researchers will, instead, be able to properly estimate the effects of theoretical interest, and better understand how those effects vary.
 
 ### Summary {#sec-multi-summary}
 
@@ -857,6 +858,6 @@ We used the `summary()` function to get model results for both linear models and
 
 @Snijders2004a present a helpful overview of multilevel modelling. Readers familiar with the book will see that I rely on it to construct the formal presentation of the models.
 
-@baayen2008 [see also @Barr2013a; @judd2012] discuss mixed-effects models with crossed random effects. This is the topic we shall discuss next.
+@Gelman2007g present a more in-depth treatment of multilevel models.
 
 I wrote a tutorial article on mixed-effects models with Lotte Meteyard [@meteyard2020a]. We discuss how important the approach now is for psychological science, what researchers worry about when they use it, and what they should do and report when they use the method.
