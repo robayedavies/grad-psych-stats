@@ -27,7 +27,7 @@ We will begin by discussing psychological research, and research *about* psychol
 
 ## Why: what is the motivation for the assignment?
 
-### The wider context: crisis and revolution
+### The wider context: crisis and revolution {#sec-context-replication}
 
 We are here because we are interested in humans and human behaviour, and because we are interested in scientific methods of making sense of these things. Some of us are aware that science (including psychological science) has undergone a rolling series of crises: the replicability or replication crisis [@Pashler2012a; @Pashler2012b]; the statistical crisis [@gelman2014a]; and the generalizability crisis [@yarkoni2022]. And that science is undergoing a response to these crises, evidenced in the advocacy of pre-registration [@nosek2018; @nosek2019prereg], and of registered reports [@nosek2014], the use of open science badges (e.g., [for the journal *Psychological Science*](https://www.psychologicalscience.org/publications/badges){.external target="_blank"}), the completion of large-scale replication studies [@aarts2015], and the identification of open science principles [@munafò2017]. We may usefully refer, collectively, to the crises and the responses, as the *credibility revolution* [@vazire2018]
 
