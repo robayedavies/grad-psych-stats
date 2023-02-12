@@ -859,5 +859,3 @@ We used the `summary()` function to get model results for both linear models and
 @Snijders2004a present a helpful overview of multilevel modelling. Readers familiar with the book will see that I rely on it to construct the formal presentation of the models.
 
 @Gelman2007g present a more in-depth treatment of multilevel models.
-
-I wrote a tutorial article on mixed-effects models with Lotte Meteyard [@meteyard2020a]. We discuss how important the approach now is for psychological science, what researchers worry about when they use it, and what they should do and report when they use the method.
