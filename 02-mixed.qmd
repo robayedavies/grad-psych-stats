@@ -791,7 +791,9 @@ The CP study dataset is rich with possibility. It would be useful to experiment 
 
 ### Can we ignore the hierarchical structure? {#sec-intro-mixed-ignore-hierarchy}
 
-In this linear model, the observations are assumed to be independent but the assumption of independence is questionable given the expectation that participants will differ, with one participant's responses perhaps slower or less accurate than another, perhaps more or less affected by word frequency than another. We can examine that variation by estimating the intercept and the slope of the frequency effect separately using the data for each participant alone.
+In this linear model, we see an approximate first answer to our research question.
+
+Our problem is that the observations are assumed to be independent whereas the assumption of independence is questionable given the expectation that participants will differ: one participant's responses will perhaps be slower or less accurate than another, perhaps more or less affected by word frequency than another. We can examine that variation by estimating the intercept and the slope of the frequency effect separately using the data for each participant alone.
 
 We can start by examining the frequency effect for each child in a grid of plots, with each plot representing the $RT \sim frequency$ relationship for the data for a child (@fig-freqperchildtrellis).
 
@@ -800,11 +802,11 @@ We discussed how the plotting code functions in the previous chapter.
 ```{r}
 #| label: fig-freqperchildtrellis
 #| fig-cap: "RT vs. word frequency, considered separately for data for each child"
-#| fig-alt: "The figure shows scatterplot: each point represents the English and the Portuguese scores for one child. A red line drawn through the points indicates a trend such that higher Portuguese scores are associated with higher English scores."
+#| fig-alt: "The figure shows a grid of scatterplots. In each plot, each point represents the lexical frequency (on the x-axis) and the reaction time (RT, on the y-axis) of responses made by children to a set of words. A red line is drawn through the points, indicating that RT decreases for higher values of frequency. A different plot is shown to represent the data for each child. Between plots, we can see that the potential association between RT and frequency can vary."
 #| warning: false
 #| message: false
-#| fig-height: 8
-#| fig-width: 8
+#| fig-height: 10
+#| fig-width: 7.5
 long.all.noNAs %>%
   ggplot(aes(x = Lg.UK.CDcount, y = RT)) +
     geom_point(alpha = .2) + 
@@ -814,25 +816,23 @@ long.all.noNAs %>%
     facet_wrap(~ subjectID)
 ```
 
-@fig-freqperchildtrellis shows how, on average, more frequent words are associated with shorter reaction time, faster responses. The plot further shows, however, that the effect of frequency varies considerably between children. Some children show little or no effect; the best fit line is practically level. Other children show a marked effect, with a steep fit line indicating a strong frequency effect.
+@fig-freqperchildtrellis shows how, on average, more frequent words are associated with shorter reaction time, faster responses. The plot further shows, however, that the effect of frequency varies considerably between children. 
+
+- Some children show little or no effect; the best fit line is practically level. 
+- Some children show a marked effect, with a steep fit line indicating a strong frequency effect.
 
 We can get more insight into the differences between children, however, if we plot the estimated intercept and frequency effect coefficients for each child directly. This allows more insight because it focuses the eye on the differences between children in the estimates.
-
-@fig-freqperchildlm presents a plot showing the estimates of the intercept and the coefficient of the effect of word frequency on reading RT, calculated separately for each child. The estimate for each child is shown as a black dot. The standard error of the estimate is shown as a black vertical line, shown above and below a point. You can say that where there is a longer line there we have more uncertainty about the location of the estimate.
-
-@fig-freqperchildlm presents the estimates of intercept and the frequency coefficient, calculated for each child, ordered by the size of the estimate. Drawn this way, we can see how the estimates of both the intercept and the slope of the frequency effect vary substantially between children. We can see also how the standard errors vary greatly between children.
-
-Notice that if there is an average intercept for everyone in the sample or, better, an intercept we could estimate for everyone in the population, then the different intercepts we have estimated for each child would be distributed around that population-level average. Some children will have slower (here, larger) intercepts and other children will have faster (shorter) intercepts. (Here, the intercept can be taken to be the average RT when all other effects in the model are set to zero. RT varies for this sample around somewhere like $\beta_0 = 883ms$ so a slower larger intercept might be e.g. $\beta_0 = 1000ms$.)
-
-In the same way, if there is an average slope for the frequency effect, an effect of frequency on reading RT, averaged across everyone in the population, then, again, the different slopes we have estimated for each child would be distributed around that population-level effect. Some children will have larger (here, more negative) frequency effects and other children will have smaller (less negative) frequency effects. (Here, the frequency effect is associated with a negative coefficient e.g. $\beta_1 = -53$ so a larger frequency effect will be a bigger negative number e.g. $\beta_1 = -100$.)
+We do this next: see @fig-freqperchildlm.
+(I present the code for generating the plot in: `02-mixed-workbook-with-answers.R`)
 
 ```{r}
 #| label: fig-freqperchildlm
-#| fig-cap: "Estimated intercepts and frequency effect slopes (with SEs) calculated for each child analysed separately, with point estimates presented in order of size"
-#| fig-alt: "The figure shows scatterplot: each point represents the English and the Portuguese scores for one child. A red line drawn through the points indicates a trend such that higher Portuguese scores are associated with higher English scores."
+#| fig-cap: "Estimated intercepts and frequency effect slopes calculated for each child's data, with child data analysed separately for all children. Points represent estimates. Lines represent standard errors for estimates. Point estimates are presented in order of size."
+#| fig-alt: "The figure presents two scatterplots: on the left, a plot presenting estimates of intercepts (shown as points, with lines representing standard errors); on the right, a plot presenting estimates of slopes for the effect of frequency on RT (shown as points, with lines representing standard errors). The estimates clearly vary between children."
 #| warning: false
 #| message: false
-#| fig-height: 5
+#| echo: false
+#| fig-height: 4
 #| fig-width: 8
 freqperchildlm <- long.all.noNAs %>%
                   group_by(subjectID) %>% 
@@ -864,6 +864,16 @@ grid.arrange(pfreqperchildlmint, pfreqperchildlmfreq,
  
 ```
 
+@fig-freqperchildlm presents two plots showing the estimates of the intercept and the coefficient of the effect of word frequency on reading RT, calculated separately for each child. This means that we fitted a separate linear model, for the association between RT and frequency, using the data for just one child, for each child in our sample, for all the children. 
+
+The estimate for each child is shown as a black dot. The standard error of the estimate is shown as a black vertical line, shown above and below a point. You can say that where there is a longer line there we have more uncertainty about the location of the estimate.
+
+The estimates calculated for each child are ordered from left to right by the size of the estimate. Drawn this way, we can see how the estimates of both the intercept and the slope of the frequency effect vary substantially between children. We can see also how the standard errors vary greatly between children.
+
+Notice that if there is an average intercept for everyone in the sample or, better, an intercept we could estimate for everyone in the population, then the different intercepts we have estimated for each child would be distributed around that population-level average. Some children will have slower (here, larger) intercepts and other children will have faster (shorter) intercepts. (Here, the intercept can be taken to be the average RT when all other effects in the model are set to zero. RT varies for this sample around somewhere like $\beta_0 = 883ms$ so a slower larger intercept might be e.g. $\beta_0 = 1000ms$.)
+
+In the same way, if there is an average slope for the frequency effect, an effect of frequency on reading RT, averaged across everyone in the population, then, again, the different slopes we have estimated for each child would be distributed around that population-level effect. Some children will have larger (here, more negative) frequency effects and other children will have smaller (less negative) frequency effects. (Here, the frequency effect is associated with a negative coefficient e.g. $\beta_1 = -53$ so a larger frequency effect will be a bigger negative number e.g. $\beta_1 = -100$.)
+
 ### Multilevel -- here, more appropriately known as -- mixed-effects models {#sec-intro-mixed-effects-models}
 
 In a mixed-effects model, we account for this variation: the differences between participants in intercepts and slopes. We do this by modeling the intercept as two terms:
@@ -882,8 +892,6 @@ $$
 
 -   where $\gamma_1$ is the average slope and $U_{1i}$ represents the difference for each $i$ child between the slope of their frequency effect and the average slope.
 
-<!-- (It is useful to note, here, that numeric subscripts for $\gamma_0 + \gamma_1$ represent how the coefficients relate to intercept or to explanatory variable effects.) -->
-
 We can then incorporate in a single model the **fixed effects** due to the average intercept and the average frequency effect, as well as the **random effects**, error variance due to unexplained differences between participants in intercepts and frequency effects:
 
 $$
@@ -897,25 +905,26 @@ $$
 
 #### What are we doing with these random effects terms? {#sec-intro-mixed-random-effects-terms}
 
-Note that in sections \@ref(BLUPS) and \@ref(variance-covariance), we look at what *exactly* is captured in these random effects terms $U_{0i}, U_{1i}$. Let's first look at the practicalities of analysis then come back to deepen our understanding a bit more.
+In sections @sec-intro-mixed-BLUPs and @sec-intro-mixed-variance-covariance, we look at what *exactly* is captured in these random effects terms $U_{0i}, U_{1i}$. Let's first look at the practicalities of analysis then come back to deepen our understanding a bit more.
 
 Right now, it is important to understand that in our analysis we do not care about the differences between *specific* children. We care that there are differences. And we care how widely spread are the differences between child A and the average intercept (or slope), or between child B and the average intercept (or slope), or between child C ... (you get the idea). Therefore, in our analysis, we estimate the spread of the differences as a *variance term*. We can see this when we look at the results of the mixed-effects model we specify, next.
 
-#### Fitting a mixed-effect model using the lmer() function {#sec-intro-mixed-lmer}
+### Fitting a mixed-effect model using the lmer() function {#sec-intro-mixed-lmer}
 
 We can fit a mixed-effects model of the $RT \sim frequency$ relationship, taking into account the random differences between participants. I first go through the model fitting code bit by bit. (I then go through the output, the results.)
 
 ```{r}
 #| label: lmerfreq
 #| eval: false
-lmer.all.1 <- lmer(RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1||subjectID),
+lmer.all.1 <- lmer(RT ~  Lg.UK.CDcount + 
+                         (Lg.UK.CDcount + 1||subjectID),
              
              data = long.all.noNAs)
 
 summary(lmer.all.1)
 ```
 
-You have seen the `lmer()` function code before but *practice makes perfect* so we shall go through the code step by step, as we did previously. This time, notice what is different versus what stays the same.
+You have seen the `lmer()` function code before but *practice makes perfect* so we shall go through the code step by step, as we did previously. This time, notice what is different versus what stays the same compared to what you saw in @sec-multi-lmer.
 
 First, we have a chunk of code mostly similar to what we do when we do a regression analysis.
 
@@ -930,24 +939,25 @@ Second, we have the bit that is specific to multilevel or mixed-effects models.
 -   `(...1 ||subjectID)` says that we want to estimate random differences between sample groups (observations by child) in intercepts, where the intercept is coded by `1`.
 -   `(Lg.UK.CDcount... ||subjectID)` adds random differences between sample groups (observations by child) in slopes of the frequency effect coded using the `Lg.UK.CDcount` variable name.
 
-##### What does \|\| mean? {#sec-intro-mixed-double-bar}
+#### What does \|\| mean? {#sec-intro-mixed-double-bar}
 
-I want you to notice something that looks like nothing much: `||`. We are going to need to defer until later a (necessary) discussion of exactly why we need the two double lines. In short, the use of `||` asks R to fit a model in which we estimate random effects associated with
+I want you to notice something that looks like nothing much: `||`. We are going to need to defer until later a (necessary) discussion of exactly why we need the two double lines. In short, the use of `||` asks R to fit a model in which we estimate random effects associated with:
 
--   nvariance due to differences in intercepts
+-   variance due to differences in intercepts
 -   variance due to differences in slopes
 -   but *not* covariance between the two sets of differences
 
 I do this because otherwise the model I specify will not converge. We shall need to discuss these things: **convergence**, and failures to converge; as well as **random effects specification** and simplification. We will discuss random effects covariance in @sec-intro-mixed-variance-covariance. For now, the most important lesson is learnt by seeing how the analysis approach we saw last week can be extended to examining the effects of experimental variables in data from repeated measures design studies.
 
-#### Reading the lmer() results {#sec-intro-mixed-lmer-results}
+### Reading the lmer() results {#sec-intro-mixed-lmer-results}
 
 The `lmer()` model code we discussed in @sec-intro-mixed-lmer gives us the following output.
 
 ```{r}
 #| label: lmerfreq-results
 #| echo: false
-lmer.all.1 <- lmer(RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1||subjectID),
+lmer.all.1 <- lmer(RT ~  Lg.UK.CDcount + 
+                         (Lg.UK.CDcount + 1||subjectID),
              
              data = long.all.noNAs)
 
@@ -956,22 +966,22 @@ summary(lmer.all.1)
 
 We discussed the major elements of the results output last week. We expand on that discussion, a little, here.
 
-::: callout-advice
-The output from the model summary first gives us information about the model.
-:::
+1. The output from the model summary first gives us **information about the model**.
 
--   First, we see information about the function used to fit the model, and the model object created by the `lmer()` function call
--   Then, we see the model formula `RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1|subjectID)`
--   Then, we see `REML criterion at convergence` about the model fitting process, which we can usually ignore
+-   First, we see information about the function used to fit the model, and the model object created by the `lmer()` function call.
+-   Then, we see the model formula `RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1|subjectID)`.
+-   Then, we see `REML criterion at convergence` about the model fitting process, which we can usually ignore.
 -   Then, we see information about the distribution of the model residuals.
 
-::: callout-advice
-We then see information listed under Random effects.
-:::
+2. We then see information listed under **Random effects**: this is where you can see information about the error variance terms estimated by the model.
 
-This is where you can see information about the error variance terms estimated by the model.
+- The information is listed in four columns: 1. `Groups`; 2. `Name`; 3. `Variance`; and 4. `Std.Dev.` 
 
-The information is listed in four columns: 1. `Groups`; 2. `Name`; 3. `Variance`; and 4. `Std.Dev.` You will recall that we have talked about how observations can be grouped by participant (because we have multiple response observations for each person in the study) just as previously we talked about how observations could be grouped by class (because we saw that children were nested under class). That is what we mean when we refer to `Groups`, we are identifying the grouping variables that give hierarchical structure to the data. The `Name` lists whether the estimate we are looking at corresponds to, here, random differences between participants in intercepts (listed as `(Intercept)`), or in slopes (listed as `Lg.UK.CDcount`). As we discuss later, in @sec-intro-mixed-variance-covariance, mixed-effects models estimate the spread in random differences. We are not interested in the specific differences in intercept or slope between specific individuals. What we want is to be able to take into account the variance associated with those differences.
+We have talked about how observations can be grouped by participant (because we have multiple response observations for each person in the study) just as previously we talked about how observations could be grouped by class (because we saw that children were nested under class). That is what we mean when we refer to `Groups`. We are identifying the grouping variables that give hierarchical structure to the data.
+
+- The `Name` lists whether the estimate we are looking at corresponds to, here, random differences between participants in intercepts (listed as `(Intercept)`), or in slopes (listed as `Lg.UK.CDcount`). 
+
+As we discuss later, in @sec-intro-mixed-variance-covariance, mixed-effects models estimate the spread in random differences. We are not interested in the specific differences in intercept or slope between specific individuals. What we want is to be able to take into account the variance associated with those differences.
 
 Thus, we see in the `Random Effects` section, the variances associated with:
 
@@ -979,23 +989,21 @@ Thus, we see in the `Random Effects` section, the variances associated with:
 -   `subjectID.1 Lg.UK.CDcount 2657`, differences between participants in the slopes of the frequency effect;
 -   Alongside `Residual  23734`, residuals where, just like a linear model, we have variance associated with differences between model estimates and observed RT, here, at the trial level.
 
-We do not usually discuss the specific variance estimates in research reports. However, the relative size of the variances does provide useful information (see also Meteyard & Davies, 2020), as we shall see when we discuss the different estimates we get when we include a random effect due to differences between items (Section \@ref(random-effect-items)).
+We do not usually discuss the specific variance estimates in research reports. However, the relative size of the variances does provide useful information [@meteyard2020a], as we shall see when we discuss the different estimates we get when we include a random effect due to differences between items (@sec-intro-mixed-random-effect-items).
 
-::: callout-advice
-Lastly, we see estimates of the coefficients (of the slopes) of the fixed effects.
-:::
+3. Lastly, we see estimates of the coefficients (of the slopes) of the fixed effects.
 
 In this model, we see estimates of the fixed effects of the intercept and the slope of the `RT ~ Lg.UK.CDcount` model. We discuss these estimates next.
 
-### Is there a difference between linear model and linear mixed-effects model results? {#sec-intro-mixed-lm-lmer-results}
+#### Is there a difference between linear model and linear mixed-effects model results? {#sec-intro-mixed-lm-lmer-results}
 
-Recall that the linear model yields the estimate for the frequency effect on reading RT such that RT decreases by about 53 ms for unit increase in log word frequency ($\beta = -53.375$). Now, when we have taken random differences between participants into account, we see that the estimate of the effect **for the mixed-effects model** is $\beta = -67.980$. This is a noteworthy difference in our estimate for the effect. As we saw last, we see, again, that taking into account random differences has an impact on results.
+Recall that the linear model yields the estimate for the frequency effect on reading RT such that RT decreases by about 53 ms for unit increase in log word frequency ($\beta = -53.375$). Now, when we have taken random differences between participants into account, we see that the estimate of the effect **for the mixed-effects model** is $\beta = -67.980$. This is a noteworthy difference in our estimate for the effect: taking into account random differences has an impact on results.
 
 Which coefficient estimate should you trust? Well, it is obvious that the linear model and the linear mixed-effects model estimate are relatively similar. However, it is also obvious that the linear model makes an assumption -- the *assumption of independence of observations* -- that does not make sense theoretically (we can readily expect that reading responses will be similar within a child) and does not make sense empirically (responses clearly differ between children, see @fig-freqperchildlm). Thus, I think we have good grounds for supposing that the linear mixed-effects model estimate for the frequency effect is likely to be closer to the true underlying population effect (whatever that might be).
 
 That being said, it is important to remember, in this discussion, that whatever estimate we can produce is the estimate we can produce *given* the sample of words we used, the measurement of reading RT we were able to make, and the estimate of word frequency we were able to collect. How far our estimate actually generalizes to the wider population is not something we can settle in the context of a single study.
 
-Further, we have not finished in our consideration of the random effects that the account should include. We need to do more work by thinking about the differences between stimuli (Section \@ref(fixed-fallacy)).
+Further, we have not finished in our consideration of the random effects that the account should include. We need to do more work by thinking about the differences between stimuli (@sec-intro-mixed-fixed-effect-fallacy).
 
 #### Why aren't there p-values? {#sec-intro-mixed-p-values}
 
@@ -1020,20 +1028,31 @@ When we think about the differences between participants (or between the units o
 -   should be normally distributed;
 -   and are distributed around the population or average fixed effects.
 
-We should understand that the mixed-effects model sees the differences between participants **relative to the fixed effect intercept or slope**, that is, relative to the population level or average effects. We can illustrate this by plotting, in Figure \@ref(fig:BLUPS-prediction), the differences as estimated (technically, predicted) by the mixed-effects model that we discussed in sections \@ref(lmer-first) and \@ref(lmer-results).
+We should understand that the mixed-effects model sees the differences between participants **relative to the fixed effect intercept or slope**, that is, relative to the population level or average effects. We can illustrate this by plotting, in @fig-BLUPS-prediction, the differences as estimated (technically, predicted) by the mixed-effects model that we have been examining.
+(The code for producing the plot can be found in `02-mixed-workbook-answers.R`.)
 
-What you can see in Figure \@ref(fig:BLUPS-prediction) are distributions. The centers of the distributions are on zero (shown by a red line). For each distribution (a. and b.), that is where the model estimate of the intercept or the slope of the frequency effect is located. Spread around that central point, you see the adjustments the model makes to account for differences between participants.
+What you can see in @fig-BLUPS-prediction are distributions. The centers of the distributions are located at zero (shown by a red line). For each distribution (a. and b.), that is where the model estimate of the intercept or the slope of the frequency effect is located. Spread around that central point, you see the adjustments the model makes to account for differences between participants.
 
-You can see how in Figure \@ref(fig:BLUPS-prediction) (a.), some children have intercepts that are smaller than the population-level or average intercept -- so their adjustments are negative (to decrease their intercepts). In comparison, some children have intercepts that are larger than the population-level or average intercept -- so their adjustments are positive (to increase their intercepts). Strikingly, you can see that a few children have intercepts that are as much as 1000ms larger than the population-level or average intercept.
+1. Notice how, in @fig-BLUPS-prediction (a.)
 
-You can see also how in Figure \@ref(fig:BLUPS-prediction) (b.), some children have frequency effects (coefficients) that are smaller than the population-level or average frequency effect -- so their adjustments are positive (to decrease their frequency effect, by making it *less* negative). (Remember the estimated $\beta$ coefficient for the frequency effect is negative because higher word frequency is associated with smaller RT.) In comparison, some children have frequency effects that are larger than the population-level or average frequency effect -- so their adjustments are negative (to increase their frequency effect, by making it *more* negative). Strikingly, you can see that a few children have frequency effects that are as much as 200ms larger (see plot (b.) around $x = -200$) than the population-level or average effect.
+- Some children have intercepts that are smaller than the population-level or average intercept -- so their adjustments are negative (to decrease their intercepts). 
+- In comparison, some children have intercepts that are larger than the population-level or average intercept -- so their adjustments are positive (to increase their intercepts). 
+- Strikingly, you can see that a few children have intercepts that are as much as 1000ms larger than the population-level or average intercept.
+
+2. Notice how, in @fig-BLUPS-prediction (b.)
+
+- Some children have frequency effects (coefficients) that are smaller than the population-level or average frequency effect -- so their adjustments are positive (to decrease their frequency effect, by making it *less* negative).
+- Remember the estimated $\beta$ coefficient for the frequency effect is negative because higher word frequency is associated with smaller RT.
+- In comparison, some children have frequency effects that are larger than the population-level or average frequency effect -- so their adjustments are negative (to increase their frequency effect, by making it *more* negative).
+- Strikingly, you can see that a few children have frequency effects that are as much as 200ms larger (see plot (b.) around $x = -200$) than the population-level or average effect.
 
 ```{r}
 #| label: fig-BLUPS-prediction
 #| fig-cap: "Plot showing histograms indicating the distribution of participant adjustments to account for between-child differences in intercept or slope (known as Best Linear Unbiased Predictions)"
-#| fig-alt: "The figure shows scatterplot: each point represents the English and the Portuguese scores for one child. A red line drawn through the points indicates a trend such that higher Portuguese scores are associated with higher English scores."
+#| fig-alt: "The figure shows two histograms (a.) on the left represents the distribution of adjustments to account for per-child deviations between the overall intercept and the intercept estimated for a child while (b.) on the right represents the distribution of adjustments to account for per-child deviations between the overall slope and the slope estimated for a child. The histograms indicate widely spread deviations about the overall estimate."
 #| warning: false
 #| message: false
+#| echo: false
 #| fig-height: 4.5
 #| fig-width: 10
 lmer.all.1 <- lmer(RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1||subjectID),
@@ -1041,15 +1060,11 @@ lmer.all.1 <- lmer(RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1||subjectID),
                    data = long.all.noNAs)
 
 # -- plot the distribution of random effects: conditional modes:
-
 BLUPS <- ranef(lmer.all.1)$subjectID
-# summary(BLUPS)
 
 BLUPS.df <- data.frame(subjectID = rownames(BLUPS), 
                        intercepts = BLUPS[,1], 
                        frequency = BLUPS[,2])
-# summary(BLUPS.df)
-# str(BLUPS.df)
 
 p.BLUPS.intercepts <- BLUPS.df %>%
   ggplot(aes(x = intercepts)) +
@@ -1073,7 +1088,7 @@ grid.arrange(p.BLUPS.intercepts, p.BLUPS.slopes,
 
 ```
 
-When a mixed-effects model is fitted to a dataset, its set of estimated parameters includes the coefficients for the fixed effects as well as the standard deviations for the random effects (Baayen, 2008). The individual values of the adjustments made to intercepts and slopes are calculated once the random effects have been estimated. If you read the literature on mixed-effects models, you will see that the adjustments are called Best Linear Unbiased Predictors (or BLUPs).
+When a mixed-effects model is fitted to a dataset, its set of estimated parameters includes the coefficients for the fixed effects as well as the standard deviations for the random effects [@baayen2008]. The individual values of the adjustments made to intercepts and slopes are calculated once the random effects have been estimated. If you read the literature on mixed-effects models, you will see that the adjustments are called *Best Linear Unbiased Predictors* (BLUPs).
 
 #### Exercise {#sec-intro-mixed-exx-lmer}
 
@@ -1086,37 +1101,33 @@ Mixed-effects modeling is hard to get used to *at first*. A bit more practice he
 2.  `lmer(RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 0|subjectID)...)` gives us a *random slope* model accounting for just random differences between participants in the slope of the frequency effect
 3.  `lmer(RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1|subjectID)...)` gives us a *random intercepts and slopes* model accounting for both random differences between participants in the intercept and in the slope, as well as covariance in these differences.
 
-Try out these variations and *look carefully* at the different results. Look, especially, at what happens to the \verb:Random effects: part of the summary.
+Try out these variations and *look carefully* at the different results. Look, especially, at what happens to the `Random effects` part of the summary.
 
-We can *visualize* the differences between the models in a plot showing the different predictions that the different models give us. Figure \@ref(fig:indiv-prediction) shows what a mixed-effects model would predict should be the effect of frequency on RT for different children in the CP study. The predictions vary depending on the nature of the random effects we specify in the model.
+We can *visualize* the differences between the models in a plot showing the different predictions that the different models give us. @fig-indiv-prediction shows what a mixed-effects model would predict should be the effect of frequency on RT for different children in the CP study. The predictions vary depending on the nature of the random effects we specify in the model.
+
+(Note that I figured out how to produce the plot from the information [here](https://bbolker.github.io/morelia_2018/notes/mixedlab.html).)
 
 ```{r}
 #| label: fig-indiv-prediction
-#| fig-cap: "Plot showing model predictions of the effect, for each individual, of word frequency on reading reaction time -- predictions vary between models incorporating (a.) random effect of participants on intercepts only; (b.) random effect of participants on slopes only and (c.) random effect of participants on intercepts and on slopes"
-#| fig-alt: "The figure shows scatterplot: each point represents the English and the Portuguese scores for one child. A red line drawn through the points indicates a trend such that higher Portuguese scores are associated with higher English scores."
+#| fig-cap: "Plot showing model predictions of the effect, for each individual, of word frequency on reading reaction time -- predictions vary between models incorporating (a.) random effect of participants on intercepts only; (b.) random effect of participants on slopes only and (c.) random effect of participants on intercepts and on slopes."
+#| fig-alt: "The figure shows a grid of scatterplots. In all scatterplots, the same scatter is shown. Points in grey represent the RT and word frequency information for children's responses in reading words in the experimental task. Superimposed on the points are sets of red lines. The lines represent the predictions of different models (a.) assuming a random effect of participants on intercepts, all slopes are the same  but intercepts vary (b.) assuming a random effect of participants on slopes only, slopes vary but intercepts are the same (c.) and assuming random effect of participants on intercepts and on slopes both intercepts and slopes can be seen to vary."
 #| warning: false
 #| message: false
+#| echo: false
 #| fig-height: 5
-#| fig-width: 10
+#| fig-width: 8
 # -- fit an lmer -- different kinds
-
 lmer.all.1 <- lmer(RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1||subjectID),
                    
                    data = long.all.noNAs)
-
-# summary(lmer.all.1)
 
 lmer.all.2 <- lmer(RT ~  Lg.UK.CDcount + (1|subjectID),
                    
                    data = long.all.noNAs)
 
-# summary(lmer.all.2)
-
 lmer.all.3 <- lmer(RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 0|subjectID),
                    
                    data = long.all.noNAs)
-
-# summary(lmer.all.3)
 
 # -- plot random effect -- per person predictions
 # https://bbolker.github.io/morelia_2018/notes/mixedlab.html
@@ -1163,15 +1174,15 @@ grid.arrange(p.intercepts, p.slopes, p.slopes.intercepts,
 
 We can see that:
 
-1.  If the model includes the random effect of \emph{participants on intercepts only} then all the slopes are the same (the lines in the figure are parallel) because this model assumes that the only differences between participants are differences in the intercepts.
-2.  If the model includes the random effect of \emph{participants on slopes only} then the slopes vary but they all have the same intercept. The plot does not show this but you can see how all the slopes are converging on one point somewhere on the left. This happens because this model assumes that the only differences between participants are differences in the slopes.
-3.  If the model includes the random effect of \emph{participants on intercepts and on slopes} then we can see how the intercepts and the slopes vary. Given what we saw when we looked at the relation between frequency and RT for each participant considered separately we might argue that this model is much more realistic about the data.
+1.  If the model includes the random effect of *participants on intercepts only* then all the slopes are the same (the lines in the figure are parallel) because this model assumes that the only differences between participants are differences in the intercepts.
+2.  If the model includes the random effect of *participants on slopes only* then the slopes vary but they all have the same intercept. The plot does not show this but you can see how all the slopes are converging on one point somewhere on the left. This happens because this model assumes that the only differences between participants are differences in the slopes.
+3.  If the model includes the random effect of *participants on intercepts and on slopes*  then we can see how the intercepts and the slopes vary. Given what we saw when we looked at the relation between frequency and RT for each participant considered separately we might argue that this model is much more realistic about the data.
 
-#### Code tip
-
+::: callout-tip
 It is very important to learn to make effective use of the warnings and error messages R can produce.
+::: 
 
-Note: you do not have to just believe me when I say that \verb:\\\|\\\|: is in the model code to stop a problem appearing. Experiment -- and see what happens when you change the code. Try this.
+Note: you do not have to just believe me when I say that `||` is in the model code to stop a problem appearing. Experiment -- and see what happens when you change the code. Try this.
 
 ```{r}
 #| label: lmer-error
@@ -1192,7 +1203,7 @@ A very useful trick is to learn to copy the error message you get into a search 
 
 Experimental psychologists will often collect data in studies where they present some stimuli to a sample of participants (as CP did in her study). Clark (1973) showed that the appropriate analysis of experimental effects for such data requires the researcher to take into account the error variance due to unexplained or random differences between sampled participants *and* to random differences between sampled stimuli. This is true in the context of psycholinguistics but it is also true in the context of work in any field where the presented stimuli can be understood to constitute a sample from a wider population of potential stimuli (Judd, Westfall, & Kenny, 2012).
 
-If we were to estimate the average latency of the responses made by different children to each word, we would see that there is considerable variation between words (Figure \@ref(fig:pitemsints)). Some words elicit slower and some elicit faster responses on average. We can also see that there is, again, variation in the uncertainty of estimates, as reflected in differences in the lengths of the error bars corresponding to the standard errors of the estimates.
+If we were to estimate the average latency of the responses made by different children to each word, we would see that there is considerable variation between words (@fig-pitemsints). Some words elicit slower and some elicit faster responses on average. We can also see that there is, again, variation in the uncertainty of estimates, as reflected in differences in the lengths of the error bars corresponding to the standard errors of the estimates.
 
 ```{r}
 #| label: fig-pitemsints
@@ -1224,7 +1235,7 @@ pwperitemlmint + geom_point() + geom_linerange() +
 
 In general, psychologists have been aware since Clark (1973, if not earlier) that responses to experimental stimuli can vary because of random or unexplained differences between the stimuli: whether the stimuli are words, pictures or stories, etc. And researchers have been aware that if we did not take such variation into account, we might mistakenly detect an experimental effect, for example, as a significant difference between mean response in different conditions, simply because different stimuli presented in different conditions varied in some unknown way, randomly, in relative difficulty.
 
-For many years, psychologists tried to take random differences between stimuli into account, alongside random differences between participants, using a variety of strategies with important limitations (see Baayen et al., 2008, for discussion). Clark (1973) suggested that researchers could calculate $minF'$ (not F) when doing Analyses of Variance of experimental data
+For many years, psychologists tried to take random differences between stimuli into account, alongside random differences between participants, using a variety of strategies with important limitations (see @baayen2008, for discussion). Clark (1973) suggested that researchers could calculate $minF'$ (not F) when doing Analyses of Variance of experimental data
 
 This involves a series of steps.
 
@@ -1382,7 +1393,7 @@ Note: `lmer(RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1||subjectID) + (1|item_name)
 
 Researchers should report their modelling in sufficient detail that their results can be reproduced by others. Barr et al. (2013) argued that choices about random effects structure affect the generalizability of the estimates of fixed effects. In particular, it seems sensible to examine the possibility that the slope of the effect of an explanatory variable may vary at random between participants or between stimuli. Correspondingly, researchers should report and explain their decisions about the inclusion of random effects.
 
-It is normal practice in psychology to report the p-values associated with null hypothesis significance tests of effects when reporting analysis. Performing hypothesis tests using t- or F-distributions depends on the calculation of degrees of freedom yet it is uncertain how degrees of freedom should be counted when analysing multilevel data (Baayen et al., 2008). In most software applications, however, p-values associated with fixed effects may be calculated using an approximation for denominator degrees of freedom.
+It is normal practice in psychology to report the p-values associated with null hypothesis significance tests of effects when reporting analysis. Performing hypothesis tests using t- or F-distributions depends on the calculation of degrees of freedom yet it is uncertain how degrees of freedom should be counted when analysing multilevel data (@baayen2008). In most software applications, however, p-values associated with fixed effects may be calculated using an approximation for denominator degrees of freedom.
 
 We will come back to how we should report the results of mixed-effects models because, here, too, we can benefit by developing our approach, in depth, step by step.
 
@@ -1662,7 +1673,7 @@ We saw that estimates of the frequency effect differed between different models.
 
 We considered the possibility of within-items effects.
 
-### Useful functions {#sec-intro-mixed-glossary-useful-functions}
+### Glossary: useful functions {#sec-intro-mixed-glossary-useful-functions}
 
 We used a number of functions to tidy, visualize and analyze the CP study data.
 
@@ -1677,46 +1688,8 @@ We used a number of functions to tidy, visualize and analyze the CP study data.
 
 We used the `summary()` function to get model results for both linear models and for the mulilevel or liner mixed-effects model.
 
-## R code and data file access for the class
+## Recommended reading {#sec-intro-mixed-recommended-reading}
 
-Activities in the class that goes with this chapter are associated with the following data file and .R code file:
+@baayen2008 [see also @Barr2013a; @judd2012] discuss mixed-effects models with crossed random effects in a variety of contexts in psychological science. The explanations are clear and the examples are often helpful.
 
--   `402-02-mixed-effects-workbook.R`
--   `CP study word naming rt 180211.dat`
--   `CP study word naming acc 180211.dat`
--   `words.items.5 120714 150916.csv`
--   `all.subjects 110614-050316-290518.csv`
-
-A pre-tidied version of the CP study data is available as:
-
--   `long.all.noNAs.csv`
-
-You can get these materials by going to the 402 Moodle folder for week 18, and downloading the .zip (compressed) folder labeled **PSYC402-01-multilevel-resources**
-
-Or, you can download the same folder by clicking on the link:
-
-\url{https://modules.lancaster.ac.uk/mod/resource/view.php?id=1795341}
-
-Run the code in the .R file to reproduce the results presented in this chapter and in the slides.
-
-### Recommended reading {#sec-intro-mixed-recommended-reading}
-
-Snijders and Bosker (2012) present a helpful overview of multilevel modelling. Baayen et al. (2008; see, also, Barr et al., 2013; Judd et al., 2012) discuss mixed-effects models with crossed random effects. Readers familiar with the book will see that I rely on it to construct the formal presentation of the models.
-
-I wrote a tutorial article on mixed-effects models with Lotte Meteyard. We discuss how important the approach now is for psychological science, what researchers worry about when they use it, and what they should do and report when they use the method/
-
-Meteyard, L., & Davies, R.A.I. (2020). Best practice guidance for linear mixed-effects models in psychological science, *Journal of Memory and Language*, 112, 104092, \url{https://doi.org/10.1016/j.jml.2020.104092}
-
-<!-- -- note also the web resources: -->
-
-<!-- https://bbolker.github.io/morelia_2018/notes/mixedlab.html -->
-
-<!-- https://cran.microsoft.com/snapshot/2017-08-01/web/packages/sjPlot/vignettes/sjplmer.html -->
-
-<!-- -- sjplmer maybe superseded by: -->
-
-<!-- https://stackoverflow.com/questions/13847936/plot-random-effects-from-lmer-lme4-package-using-qqmath-or-dotplot-how-to-mak -->
-
-<!-- https://cran.r-project.org/web/packages/merTools/vignettes/merToolsIntro.html -->
-
-<!-- https://stackoverflow.com/questions/27787875/options-for-caterpillar-plots-in-lme4-grouping-by-factor-to-visually-identify-t -->
+I wrote a tutorial article on mixed-effects models with Lotte Meteyard [@meteyard2020a]. We discuss how important the approach now is for psychological science, what researchers worry about when they use it, and what they should do and report when they use the method.

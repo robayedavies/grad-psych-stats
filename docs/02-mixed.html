@@ -293,8 +293,9 @@ div.csl-indent {
   <li><a href="#sec-intro-mixed-lm" id="toc-sec-intro-mixed-lm" class="nav-link" data-scroll-target="#sec-intro-mixed-lm"><span class="toc-section-number">4.9.2</span>  Linear model for multilevel data – ignoring the hierarchical structure</a></li>
   <li><a href="#sec-intro-mixed-ignore-hierarchy" id="toc-sec-intro-mixed-ignore-hierarchy" class="nav-link" data-scroll-target="#sec-intro-mixed-ignore-hierarchy"><span class="toc-section-number">4.9.3</span>  Can we ignore the hierarchical structure?</a></li>
   <li><a href="#sec-intro-mixed-effects-models" id="toc-sec-intro-mixed-effects-models" class="nav-link" data-scroll-target="#sec-intro-mixed-effects-models"><span class="toc-section-number">4.9.4</span>  Multilevel – here, more appropriately known as – mixed-effects models</a></li>
-  <li><a href="#sec-intro-mixed-lm-lmer-results" id="toc-sec-intro-mixed-lm-lmer-results" class="nav-link" data-scroll-target="#sec-intro-mixed-lm-lmer-results"><span class="toc-section-number">4.9.5</span>  Is there a difference between linear model and linear mixed-effects model results?</a></li>
-  <li><a href="#sec-intro-mixed-BLUPs" id="toc-sec-intro-mixed-BLUPs" class="nav-link" data-scroll-target="#sec-intro-mixed-BLUPs"><span class="toc-section-number">4.9.6</span>  What we estimate when we estimate random effects</a></li>
+  <li><a href="#sec-intro-mixed-lmer" id="toc-sec-intro-mixed-lmer" class="nav-link" data-scroll-target="#sec-intro-mixed-lmer"><span class="toc-section-number">4.9.5</span>  Fitting a mixed-effect model using the lmer() function</a></li>
+  <li><a href="#sec-intro-mixed-lmer-results" id="toc-sec-intro-mixed-lmer-results" class="nav-link" data-scroll-target="#sec-intro-mixed-lmer-results"><span class="toc-section-number">4.9.6</span>  Reading the lmer() results</a></li>
+  <li><a href="#sec-intro-mixed-BLUPs" id="toc-sec-intro-mixed-BLUPs" class="nav-link" data-scroll-target="#sec-intro-mixed-BLUPs"><span class="toc-section-number">4.9.7</span>  What we estimate when we estimate random effects</a></li>
   </ul></li>
   <li><a href="#sec-intro-mixed-fixed-effect-fallacy" id="toc-sec-intro-mixed-fixed-effect-fallacy" class="nav-link" data-scroll-target="#sec-intro-mixed-fixed-effect-fallacy"><span class="toc-section-number">4.10</span>  Variation between stimuli: the “language as fixed-effect fallacy”</a>
   <ul class="collapse">
@@ -308,12 +309,9 @@ div.csl-indent {
   <li><a href="#sec-intro-mixed-conclusions" id="toc-sec-intro-mixed-conclusions" class="nav-link" data-scroll-target="#sec-intro-mixed-conclusions"><span class="toc-section-number">4.13</span>  Conclusions</a>
   <ul class="collapse">
   <li><a href="#sec-intro-mixed-summary" id="toc-sec-intro-mixed-summary" class="nav-link" data-scroll-target="#sec-intro-mixed-summary"><span class="toc-section-number">4.13.1</span>  Summary</a></li>
-  <li><a href="#sec-intro-mixed-glossary-useful-functions" id="toc-sec-intro-mixed-glossary-useful-functions" class="nav-link" data-scroll-target="#sec-intro-mixed-glossary-useful-functions"><span class="toc-section-number">4.13.2</span>  Useful functions</a></li>
+  <li><a href="#sec-intro-mixed-glossary-useful-functions" id="toc-sec-intro-mixed-glossary-useful-functions" class="nav-link" data-scroll-target="#sec-intro-mixed-glossary-useful-functions"><span class="toc-section-number">4.13.2</span>  Glossary: useful functions</a></li>
   </ul></li>
-  <li><a href="#r-code-and-data-file-access-for-the-class" id="toc-r-code-and-data-file-access-for-the-class" class="nav-link" data-scroll-target="#r-code-and-data-file-access-for-the-class"><span class="toc-section-number">4.14</span>  R code and data file access for the class</a>
-  <ul class="collapse">
-  <li><a href="#sec-intro-mixed-recommended-reading" id="toc-sec-intro-mixed-recommended-reading" class="nav-link" data-scroll-target="#sec-intro-mixed-recommended-reading"><span class="toc-section-number">4.14.1</span>  Recommended reading</a></li>
-  </ul></li>
+  <li><a href="#sec-intro-mixed-recommended-reading" id="toc-sec-intro-mixed-recommended-reading" class="nav-link" data-scroll-target="#sec-intro-mixed-recommended-reading"><span class="toc-section-number">4.14</span>  Recommended reading</a></li>
   </ul>
 </nav>
     </div>
@@ -389,7 +387,7 @@ Important
 <li>Identify how the data are structured by both participant and stimulus differences.</li>
 <li>Use visualizations to explore the impact of the structure.</li>
 <li>Run analyses using linear mixed-effects models involving multiple random effects.</li>
-<li>Review the recommended readings (<a href="#sec-intro-mixed-recommended-reading"><span>Section&nbsp;4.14.1</span></a>).</li>
+<li>Review the recommended readings (<a href="#sec-intro-mixed-recommended-reading"><span>Section&nbsp;4.14</span></a>).</li>
 </ul>
 <p><strong>3. Practical workbook materials</strong></p>
 <p>3.1 In the following sections, I describe the practical steps, and associated resources, you can use for your learning.</p>
@@ -1509,7 +1507,8 @@ F-statistic: 302.8 on 1 and 9083 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section>
 <section id="sec-intro-mixed-ignore-hierarchy" class="level3" data-number="4.9.3">
 <h3 data-number="4.9.3" class="anchored" data-anchor-id="sec-intro-mixed-ignore-hierarchy"><span class="header-section-number">4.9.3</span> Can we ignore the hierarchical structure?</h3>
-<p>In this linear model, the observations are assumed to be independent but the assumption of independence is questionable given the expectation that participants will differ, with one participant’s responses perhaps slower or less accurate than another, perhaps more or less affected by word frequency than another. We can examine that variation by estimating the intercept and the slope of the frequency effect separately using the data for each participant alone.</p>
+<p>In this linear model, we see an approximate first answer to our research question.</p>
+<p>Our problem is that the observations are assumed to be independent whereas the assumption of independence is questionable given the expectation that participants will differ: one participant’s responses will perhaps be slower or less accurate than another, perhaps more or less affected by word frequency than another. We can examine that variation by estimating the intercept and the slope of the frequency effect separately using the data for each participant alone.</p>
 <p>We can start by examining the frequency effect for each child in a grid of plots, with each plot representing the <span class="math inline">\(RT \sim frequency\)</span> relationship for the data for a child (<a href="#fig-freqperchildtrellis">Figure&nbsp;<span>4.3</span></a>).</p>
 <p>We discussed how the plotting code functions in the previous chapter.</p>
 <div class="cell">
@@ -1523,55 +1522,33 @@ F-statistic: 302.8 on 1 and 9083 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell-output-display">
 <div id="fig-freqperchildtrellis" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="02-mixed_files/figure-html/fig-freqperchildtrellis-1.png" class="img-fluid figure-img" alt="The figure shows scatterplot: each point represents the English and the Portuguese scores for one child. A red line drawn through the points indicates a trend such that higher Portuguese scores are associated with higher English scores." width="768"></p>
+<p><img src="02-mixed_files/figure-html/fig-freqperchildtrellis-1.png" class="img-fluid figure-img" alt="The figure shows a grid of scatterplots. In each plot, each point represents the lexical frequency (on the x-axis) and the reaction time (RT, on the y-axis) of responses made by children to a set of words. A red line is drawn through the points, indicating that RT decreases for higher values of frequency. A different plot is shown to represent the data for each child. Between plots, we can see that the potential association between RT and frequency can vary." width="720"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;4.3: RT vs.&nbsp;word frequency, considered separately for data for each child</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-<p><a href="#fig-freqperchildtrellis">Figure&nbsp;<span>4.3</span></a> shows how, on average, more frequent words are associated with shorter reaction time, faster responses. The plot further shows, however, that the effect of frequency varies considerably between children. Some children show little or no effect; the best fit line is practically level. Other children show a marked effect, with a steep fit line indicating a strong frequency effect.</p>
-<p>We can get more insight into the differences between children, however, if we plot the estimated intercept and frequency effect coefficients for each child directly. This allows more insight because it focuses the eye on the differences between children in the estimates.</p>
-<p><a href="#fig-freqperchildlm">Figure&nbsp;<span>4.4</span></a> presents a plot showing the estimates of the intercept and the coefficient of the effect of word frequency on reading RT, calculated separately for each child. The estimate for each child is shown as a black dot. The standard error of the estimate is shown as a black vertical line, shown above and below a point. You can say that where there is a longer line there we have more uncertainty about the location of the estimate.</p>
-<p><a href="#fig-freqperchildlm">Figure&nbsp;<span>4.4</span></a> presents the estimates of intercept and the frequency coefficient, calculated for each child, ordered by the size of the estimate. Drawn this way, we can see how the estimates of both the intercept and the slope of the frequency effect vary substantially between children. We can see also how the standard errors vary greatly between children.</p>
-<p>Notice that if there is an average intercept for everyone in the sample or, better, an intercept we could estimate for everyone in the population, then the different intercepts we have estimated for each child would be distributed around that population-level average. Some children will have slower (here, larger) intercepts and other children will have faster (shorter) intercepts. (Here, the intercept can be taken to be the average RT when all other effects in the model are set to zero. RT varies for this sample around somewhere like <span class="math inline">\(\beta_0 = 883ms\)</span> so a slower larger intercept might be e.g.&nbsp;<span class="math inline">\(\beta_0 = 1000ms\)</span>.)</p>
-<p>In the same way, if there is an average slope for the frequency effect, an effect of frequency on reading RT, averaged across everyone in the population, then, again, the different slopes we have estimated for each child would be distributed around that population-level effect. Some children will have larger (here, more negative) frequency effects and other children will have smaller (less negative) frequency effects. (Here, the frequency effect is associated with a negative coefficient e.g.&nbsp;<span class="math inline">\(\beta_1 = -53\)</span> so a larger frequency effect will be a bigger negative number e.g.&nbsp;<span class="math inline">\(\beta_1 = -100\)</span>.)</p>
+<p><a href="#fig-freqperchildtrellis">Figure&nbsp;<span>4.3</span></a> shows how, on average, more frequent words are associated with shorter reaction time, faster responses. The plot further shows, however, that the effect of frequency varies considerably between children.</p>
+<ul>
+<li>Some children show little or no effect; the best fit line is practically level.</li>
+<li>Some children show a marked effect, with a steep fit line indicating a strong frequency effect.</li>
+</ul>
+<p>We can get more insight into the differences between children, however, if we plot the estimated intercept and frequency effect coefficients for each child directly. This allows more insight because it focuses the eye on the differences between children in the estimates. We do this next: see <a href="#fig-freqperchildlm">Figure&nbsp;<span>4.4</span></a>. (I present the code for generating the plot in: <code>02-mixed-workbook-with-answers.R</code>)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>freqperchildlm <span class="ot">&lt;-</span> long.all.noNAs <span class="sc">%&gt;%</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">group_by</span>(subjectID) <span class="sc">%&gt;%</span> </span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">do</span>(<span class="fu">tidy</span>(<span class="fu">lm</span>(RT <span class="sc">~</span> Lg.UK.CDcount, <span class="at">data=</span>.)))</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>freqperchildlm<span class="sc">$</span>term <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(freqperchildlm<span class="sc">$</span>term)</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>freqperchildlmint <span class="ot">&lt;-</span> <span class="fu">filter</span>(freqperchildlm, term <span class="sc">==</span> <span class="st">'(Intercept)'</span>)</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>freqperchildlmfreq <span class="ot">&lt;-</span> <span class="fu">filter</span>(freqperchildlm, term <span class="sc">==</span> <span class="st">'Lg.UK.CDcount'</span>)</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>pfreqperchildlmint <span class="ot">&lt;-</span> freqperchildlmint <span class="sc">%&gt;%</span></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(subjectID, estimate), <span class="at">y =</span> estimate, <span class="at">ymin =</span> estimate <span class="sc">-</span> std.error, <span class="at">ymax =</span> estimate <span class="sc">+</span> std.error)) <span class="sc">+</span> </span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_linerange</span>() <span class="sc">+</span> </span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Intercepts in order of size"</span>) <span class="sc">+</span></span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Estimated intercept +/- SE"</span>) <span class="sc">+</span> </span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>), <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">5</span>), <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(), <span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>pfreqperchildlmfreq <span class="ot">&lt;-</span> freqperchildlmfreq <span class="sc">%&gt;%</span></span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(subjectID, estimate), <span class="at">y =</span> estimate, <span class="at">ymin =</span> estimate <span class="sc">-</span> std.error, <span class="at">ymax =</span> estimate <span class="sc">+</span> std.error)) <span class="sc">+</span> </span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_linerange</span>() <span class="sc">+</span> </span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Frequency effect coefficient in order of size"</span>) <span class="sc">+</span></span>
-<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Estimated coefficient for the frequency effect +/- SE"</span>) <span class="sc">+</span> </span>
-<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>), <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">5</span>), <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(), <span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(pfreqperchildlmint, pfreqperchildlmfreq,</span>
-<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>             <span class="at">ncol =</span> <span class="dv">2</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-freqperchildlm" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="02-mixed_files/figure-html/fig-freqperchildlm-1.png" class="img-fluid figure-img" alt="The figure shows scatterplot: each point represents the English and the Portuguese scores for one child. A red line drawn through the points indicates a trend such that higher Portuguese scores are associated with higher English scores." width="768"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;4.4: Estimated intercepts and frequency effect slopes (with SEs) calculated for each child analysed separately, with point estimates presented in order of size</figcaption><p></p>
+<p><img src="02-mixed_files/figure-html/fig-freqperchildlm-1.png" class="img-fluid figure-img" alt="The figure presents two scatterplots: on the left, a plot presenting estimates of intercepts (shown as points, with lines representing standard errors); on the right, a plot presenting estimates of slopes for the effect of frequency on RT (shown as points, with lines representing standard errors). The estimates clearly vary between children." width="768"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.4: Estimated intercepts and frequency effect slopes calculated for each child’s data, with child data analysed separately for all children. Points represent estimates. Lines represent standard errors for estimates. Point estimates are presented in order of size.</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
+<p><a href="#fig-freqperchildlm">Figure&nbsp;<span>4.4</span></a> presents two plots showing the estimates of the intercept and the coefficient of the effect of word frequency on reading RT, calculated separately for each child. This means that we fitted a separate linear model, for the association between RT and frequency, using the data for just one child, for each child in our sample, for all the children.</p>
+<p>The estimate for each child is shown as a black dot. The standard error of the estimate is shown as a black vertical line, shown above and below a point. You can say that where there is a longer line there we have more uncertainty about the location of the estimate.</p>
+<p>The estimates calculated for each child are ordered from left to right by the size of the estimate. Drawn this way, we can see how the estimates of both the intercept and the slope of the frequency effect vary substantially between children. We can see also how the standard errors vary greatly between children.</p>
+<p>Notice that if there is an average intercept for everyone in the sample or, better, an intercept we could estimate for everyone in the population, then the different intercepts we have estimated for each child would be distributed around that population-level average. Some children will have slower (here, larger) intercepts and other children will have faster (shorter) intercepts. (Here, the intercept can be taken to be the average RT when all other effects in the model are set to zero. RT varies for this sample around somewhere like <span class="math inline">\(\beta_0 = 883ms\)</span> so a slower larger intercept might be e.g.&nbsp;<span class="math inline">\(\beta_0 = 1000ms\)</span>.)</p>
+<p>In the same way, if there is an average slope for the frequency effect, an effect of frequency on reading RT, averaged across everyone in the population, then, again, the different slopes we have estimated for each child would be distributed around that population-level effect. Some children will have larger (here, more negative) frequency effects and other children will have smaller (less negative) frequency effects. (Here, the frequency effect is associated with a negative coefficient e.g.&nbsp;<span class="math inline">\(\beta_1 = -53\)</span> so a larger frequency effect will be a bigger negative number e.g.&nbsp;<span class="math inline">\(\beta_1 = -100\)</span>.)</p>
 </section>
 <section id="sec-intro-mixed-effects-models" class="level3" data-number="4.9.4">
 <h3 data-number="4.9.4" class="anchored" data-anchor-id="sec-intro-mixed-effects-models"><span class="header-section-number">4.9.4</span> Multilevel – here, more appropriately known as – mixed-effects models</h3>
@@ -1589,7 +1566,6 @@ F-statistic: 302.8 on 1 and 9083 DF,  p-value: &lt; 2.2e-16</code></pre>
 <ul>
 <li>where <span class="math inline">\(\gamma_1\)</span> is the average slope and <span class="math inline">\(U_{1i}\)</span> represents the difference for each <span class="math inline">\(i\)</span> child between the slope of their frequency effect and the average slope.</li>
 </ul>
-<!-- (It is useful to note, here, that numeric subscripts for $\gamma_0 + \gamma_1$ represent how the coefficients relate to intercept or to explanatory variable effects.) -->
 <p>We can then incorporate in a single model the <strong>fixed effects</strong> due to the average intercept and the average frequency effect, as well as the <strong>random effects</strong>, error variance due to unexplained differences between participants in intercepts and frequency effects:</p>
 <p><span class="math display">\[
 Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + e_{ij}
@@ -1602,20 +1578,22 @@ Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + e_{ij}
 </ul>
 <section id="sec-intro-mixed-random-effects-terms" class="level4" data-number="4.9.4.1">
 <h4 data-number="4.9.4.1" class="anchored" data-anchor-id="sec-intro-mixed-random-effects-terms"><span class="header-section-number">4.9.4.1</span> What are we doing with these random effects terms?</h4>
-<p>Note that in sections @ref(BLUPS) and @ref(variance-covariance), we look at what <em>exactly</em> is captured in these random effects terms <span class="math inline">\(U_{0i}, U_{1i}\)</span>. Let’s first look at the practicalities of analysis then come back to deepen our understanding a bit more.</p>
+<p>In sections <a href="#sec-intro-mixed-BLUPs"><span>Section&nbsp;4.9.7</span></a> and <a href="#sec-intro-mixed-variance-covariance"><span>Section&nbsp;4.11</span></a>, we look at what <em>exactly</em> is captured in these random effects terms <span class="math inline">\(U_{0i}, U_{1i}\)</span>. Let’s first look at the practicalities of analysis then come back to deepen our understanding a bit more.</p>
 <p>Right now, it is important to understand that in our analysis we do not care about the differences between <em>specific</em> children. We care that there are differences. And we care how widely spread are the differences between child A and the average intercept (or slope), or between child B and the average intercept (or slope), or between child C … (you get the idea). Therefore, in our analysis, we estimate the spread of the differences as a <em>variance term</em>. We can see this when we look at the results of the mixed-effects model we specify, next.</p>
 </section>
-<section id="sec-intro-mixed-lmer" class="level4" data-number="4.9.4.2">
-<h4 data-number="4.9.4.2" class="anchored" data-anchor-id="sec-intro-mixed-lmer"><span class="header-section-number">4.9.4.2</span> Fitting a mixed-effect model using the lmer() function</h4>
+</section>
+<section id="sec-intro-mixed-lmer" class="level3" data-number="4.9.5">
+<h3 data-number="4.9.5" class="anchored" data-anchor-id="sec-intro-mixed-lmer"><span class="header-section-number">4.9.5</span> Fitting a mixed-effect model using the lmer() function</h3>
 <p>We can fit a mixed-effects model of the <span class="math inline">\(RT \sim frequency\)</span> relationship, taking into account the random differences between participants. I first go through the model fitting code bit by bit. (I then go through the output, the results.)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>lmer.all<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">lmer</span>(RT <span class="sc">~</span>  Lg.UK.CDcount <span class="sc">+</span> (Lg.UK.CDcount <span class="sc">+</span> <span class="dv">1</span><span class="sc">||</span>subjectID),</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>             </span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> long.all.noNAs)</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmer.all<span class="fl">.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>lmer.all<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">lmer</span>(RT <span class="sc">~</span>  Lg.UK.CDcount <span class="sc">+</span> </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                         (Lg.UK.CDcount <span class="sc">+</span> <span class="dv">1</span><span class="sc">||</span>subjectID),</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> long.all.noNAs)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmer.all<span class="fl">.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>You have seen the <code>lmer()</code> function code before but <em>practice makes perfect</em> so we shall go through the code step by step, as we did previously. This time, notice what is different versus what stays the same.</p>
+<p>You have seen the <code>lmer()</code> function code before but <em>practice makes perfect</em> so we shall go through the code step by step, as we did previously. This time, notice what is different versus what stays the same compared to what you saw in <a href="01-multilevel.html#sec-multi-lmer"><span>Section&nbsp;3.9.12</span></a>.</p>
 <p>First, we have a chunk of code mostly similar to what we do when we do a regression analysis.</p>
 <ol type="1">
 <li><code>lmer.all.1 &lt;- lmer(...)</code> creates a <em>linear mixed-effects model</em> object using the <code>lmer()</code> function.</li>
@@ -1629,20 +1607,20 @@ Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + e_{ij}
 <li><code>(...1 ||subjectID)</code> says that we want to estimate random differences between sample groups (observations by child) in intercepts, where the intercept is coded by <code>1</code>.</li>
 <li><code>(Lg.UK.CDcount... ||subjectID)</code> adds random differences between sample groups (observations by child) in slopes of the frequency effect coded using the <code>Lg.UK.CDcount</code> variable name.</li>
 </ul>
-<section id="sec-intro-mixed-double-bar" class="level5" data-number="4.9.4.2.1">
-<h5 data-number="4.9.4.2.1" class="anchored" data-anchor-id="sec-intro-mixed-double-bar"><span class="header-section-number">4.9.4.2.1</span> What does || mean?</h5>
-<p>I want you to notice something that looks like nothing much: <code>||</code>. We are going to need to defer until later a (necessary) discussion of exactly why we need the two double lines. In short, the use of <code>||</code> asks R to fit a model in which we estimate random effects associated with</p>
+<section id="sec-intro-mixed-double-bar" class="level4" data-number="4.9.5.1">
+<h4 data-number="4.9.5.1" class="anchored" data-anchor-id="sec-intro-mixed-double-bar"><span class="header-section-number">4.9.5.1</span> What does || mean?</h4>
+<p>I want you to notice something that looks like nothing much: <code>||</code>. We are going to need to defer until later a (necessary) discussion of exactly why we need the two double lines. In short, the use of <code>||</code> asks R to fit a model in which we estimate random effects associated with:</p>
 <ul>
-<li>nvariance due to differences in intercepts</li>
+<li>variance due to differences in intercepts</li>
 <li>variance due to differences in slopes</li>
 <li>but <em>not</em> covariance between the two sets of differences</li>
 </ul>
 <p>I do this because otherwise the model I specify will not converge. We shall need to discuss these things: <strong>convergence</strong>, and failures to converge; as well as <strong>random effects specification</strong> and simplification. We will discuss random effects covariance in <a href="#sec-intro-mixed-variance-covariance"><span>Section&nbsp;4.11</span></a>. For now, the most important lesson is learnt by seeing how the analysis approach we saw last week can be extended to examining the effects of experimental variables in data from repeated measures design studies.</p>
 </section>
 </section>
-<section id="sec-intro-mixed-lmer-results" class="level4" data-number="4.9.4.3">
-<h4 data-number="4.9.4.3" class="anchored" data-anchor-id="sec-intro-mixed-lmer-results"><span class="header-section-number">4.9.4.3</span> Reading the lmer() results</h4>
-<p>The <code>lmer()</code> model code we discussed in <a href="#sec-intro-mixed-lmer"><span>Section&nbsp;4.9.4.2</span></a> gives us the following output.</p>
+<section id="sec-intro-mixed-lmer-results" class="level3" data-number="4.9.6">
+<h3 data-number="4.9.6" class="anchored" data-anchor-id="sec-intro-mixed-lmer-results"><span class="header-section-number">4.9.6</span> Reading the lmer() results</h3>
+<p>The <code>lmer()</code> model code we discussed in <a href="#sec-intro-mixed-lmer"><span>Section&nbsp;4.9.5</span></a> gives us the following output.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML ['lmerMod']
@@ -1674,76 +1652,51 @@ Lg.UK.CDcnt -0.093</code></pre>
 </div>
 </div>
 <p>We discussed the major elements of the results output last week. We expand on that discussion, a little, here.</p>
-<div class="callout-advice callout callout-style-default no-icon callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Advice
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The output from the model summary first gives us information about the model.</p>
-</div>
-</div>
+<ol type="1">
+<li>The output from the model summary first gives us <strong>information about the model</strong>.</li>
+</ol>
 <ul>
-<li>First, we see information about the function used to fit the model, and the model object created by the <code>lmer()</code> function call</li>
-<li>Then, we see the model formula <code>RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1|subjectID)</code></li>
-<li>Then, we see <code>REML criterion at convergence</code> about the model fitting process, which we can usually ignore</li>
+<li>First, we see information about the function used to fit the model, and the model object created by the <code>lmer()</code> function call.</li>
+<li>Then, we see the model formula <code>RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1|subjectID)</code>.</li>
+<li>Then, we see <code>REML criterion at convergence</code> about the model fitting process, which we can usually ignore.</li>
 <li>Then, we see information about the distribution of the model residuals.</li>
 </ul>
-<div class="callout-advice callout callout-style-default no-icon callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Advice
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>We then see information listed under Random effects.</p>
-</div>
-</div>
-<p>This is where you can see information about the error variance terms estimated by the model.</p>
-<p>The information is listed in four columns: 1. <code>Groups</code>; 2. <code>Name</code>; 3. <code>Variance</code>; and 4. <code>Std.Dev.</code> You will recall that we have talked about how observations can be grouped by participant (because we have multiple response observations for each person in the study) just as previously we talked about how observations could be grouped by class (because we saw that children were nested under class). That is what we mean when we refer to <code>Groups</code>, we are identifying the grouping variables that give hierarchical structure to the data. The <code>Name</code> lists whether the estimate we are looking at corresponds to, here, random differences between participants in intercepts (listed as <code>(Intercept)</code>), or in slopes (listed as <code>Lg.UK.CDcount</code>). As we discuss later, in <a href="#sec-intro-mixed-variance-covariance"><span>Section&nbsp;4.11</span></a>, mixed-effects models estimate the spread in random differences. We are not interested in the specific differences in intercept or slope between specific individuals. What we want is to be able to take into account the variance associated with those differences.</p>
+<ol start="2" type="1">
+<li>We then see information listed under <strong>Random effects</strong>: this is where you can see information about the error variance terms estimated by the model.</li>
+</ol>
+<ul>
+<li>The information is listed in four columns: 1. <code>Groups</code>; 2. <code>Name</code>; 3. <code>Variance</code>; and 4. <code>Std.Dev.</code></li>
+</ul>
+<p>We have talked about how observations can be grouped by participant (because we have multiple response observations for each person in the study) just as previously we talked about how observations could be grouped by class (because we saw that children were nested under class). That is what we mean when we refer to <code>Groups</code>. We are identifying the grouping variables that give hierarchical structure to the data.</p>
+<ul>
+<li>The <code>Name</code> lists whether the estimate we are looking at corresponds to, here, random differences between participants in intercepts (listed as <code>(Intercept)</code>), or in slopes (listed as <code>Lg.UK.CDcount</code>).</li>
+</ul>
+<p>As we discuss later, in <a href="#sec-intro-mixed-variance-covariance"><span>Section&nbsp;4.11</span></a>, mixed-effects models estimate the spread in random differences. We are not interested in the specific differences in intercept or slope between specific individuals. What we want is to be able to take into account the variance associated with those differences.</p>
 <p>Thus, we see in the <code>Random Effects</code> section, the variances associated with:</p>
 <ul>
 <li><code>subjectID Intercept) 87575</code>, differences between participants in the intercepts;</li>
 <li><code>subjectID.1 Lg.UK.CDcount 2657</code>, differences between participants in the slopes of the frequency effect;</li>
 <li>Alongside <code>Residual  23734</code>, residuals where, just like a linear model, we have variance associated with differences between model estimates and observed RT, here, at the trial level.</li>
 </ul>
-<p>We do not usually discuss the specific variance estimates in research reports. However, the relative size of the variances does provide useful information (see also Meteyard &amp; Davies, 2020), as we shall see when we discuss the different estimates we get when we include a random effect due to differences between items (Section @ref(random-effect-items)).</p>
-<div class="callout-advice callout callout-style-default no-icon callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Advice
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Lastly, we see estimates of the coefficients (of the slopes) of the fixed effects.</p>
-</div>
-</div>
+<p>We do not usually discuss the specific variance estimates in research reports. However, the relative size of the variances does provide useful information <span class="citation" data-cites="meteyard2020a">(<a href="references.html#ref-meteyard2020a" role="doc-biblioref">Meteyard &amp; Davies, 2020</a>)</span>, as we shall see when we discuss the different estimates we get when we include a random effect due to differences between items (<a href="#sec-intro-mixed-random-effect-items"><span>Section&nbsp;4.10.1.1</span></a>).</p>
+<ol start="3" type="1">
+<li>Lastly, we see estimates of the coefficients (of the slopes) of the fixed effects.</li>
+</ol>
 <p>In this model, we see estimates of the fixed effects of the intercept and the slope of the <code>RT ~ Lg.UK.CDcount</code> model. We discuss these estimates next.</p>
-</section>
-</section>
-<section id="sec-intro-mixed-lm-lmer-results" class="level3" data-number="4.9.5">
-<h3 data-number="4.9.5" class="anchored" data-anchor-id="sec-intro-mixed-lm-lmer-results"><span class="header-section-number">4.9.5</span> Is there a difference between linear model and linear mixed-effects model results?</h3>
-<p>Recall that the linear model yields the estimate for the frequency effect on reading RT such that RT decreases by about 53 ms for unit increase in log word frequency (<span class="math inline">\(\beta = -53.375\)</span>). Now, when we have taken random differences between participants into account, we see that the estimate of the effect <strong>for the mixed-effects model</strong> is <span class="math inline">\(\beta = -67.980\)</span>. This is a noteworthy difference in our estimate for the effect. As we saw last, we see, again, that taking into account random differences has an impact on results.</p>
+<section id="sec-intro-mixed-lm-lmer-results" class="level4" data-number="4.9.6.1">
+<h4 data-number="4.9.6.1" class="anchored" data-anchor-id="sec-intro-mixed-lm-lmer-results"><span class="header-section-number">4.9.6.1</span> Is there a difference between linear model and linear mixed-effects model results?</h4>
+<p>Recall that the linear model yields the estimate for the frequency effect on reading RT such that RT decreases by about 53 ms for unit increase in log word frequency (<span class="math inline">\(\beta = -53.375\)</span>). Now, when we have taken random differences between participants into account, we see that the estimate of the effect <strong>for the mixed-effects model</strong> is <span class="math inline">\(\beta = -67.980\)</span>. This is a noteworthy difference in our estimate for the effect: taking into account random differences has an impact on results.</p>
 <p>Which coefficient estimate should you trust? Well, it is obvious that the linear model and the linear mixed-effects model estimate are relatively similar. However, it is also obvious that the linear model makes an assumption – the <em>assumption of independence of observations</em> – that does not make sense theoretically (we can readily expect that reading responses will be similar within a child) and does not make sense empirically (responses clearly differ between children, see <a href="#fig-freqperchildlm">Figure&nbsp;<span>4.4</span></a>). Thus, I think we have good grounds for supposing that the linear mixed-effects model estimate for the frequency effect is likely to be closer to the true underlying population effect (whatever that might be).</p>
 <p>That being said, it is important to remember, in this discussion, that whatever estimate we can produce is the estimate we can produce <em>given</em> the sample of words we used, the measurement of reading RT we were able to make, and the estimate of word frequency we were able to collect. How far our estimate actually generalizes to the wider population is not something we can settle in the context of a single study.</p>
-<p>Further, we have not finished in our consideration of the random effects that the account should include. We need to do more work by thinking about the differences between stimuli (Section @ref(fixed-fallacy)).</p>
-<section id="sec-intro-mixed-p-values" class="level4" data-number="4.9.5.1">
-<h4 data-number="4.9.5.1" class="anchored" data-anchor-id="sec-intro-mixed-p-values"><span class="header-section-number">4.9.5.1</span> Why aren’t there p-values?</h4>
+<p>Further, we have not finished in our consideration of the random effects that the account should include. We need to do more work by thinking about the differences between stimuli (<a href="#sec-intro-mixed-fixed-effect-fallacy"><span>Section&nbsp;4.10</span></a>).</p>
+</section>
+<section id="sec-intro-mixed-p-values" class="level4" data-number="4.9.6.2">
+<h4 data-number="4.9.6.2" class="anchored" data-anchor-id="sec-intro-mixed-p-values"><span class="header-section-number">4.9.6.2</span> Why aren’t there p-values?</h4>
 <p>We will come back to this but note that if <span class="math inline">\(t &gt; 2\)</span> we can suppose that an effect is significant at the <span class="math inline">\(.05\)</span> significance level.</p>
 </section>
 </section>
-<section id="sec-intro-mixed-BLUPs" class="level3" data-number="4.9.6">
-<h3 data-number="4.9.6" class="anchored" data-anchor-id="sec-intro-mixed-BLUPs"><span class="header-section-number">4.9.6</span> What we estimate when we estimate random effects</h3>
+<section id="sec-intro-mixed-BLUPs" class="level3" data-number="4.9.7">
+<h3 data-number="4.9.7" class="anchored" data-anchor-id="sec-intro-mixed-BLUPs"><span class="header-section-number">4.9.7</span> What we estimate when we estimate random effects</h3>
 <p>We have said that we can incorporate, in a mixed-effects model, <strong>fixed effects</strong> (e.g., the average frequency effect) and <strong>random effects</strong>, error variance due to unexplained differences between participants in intercepts and in frequency effects:</p>
 <p><span class="math display">\[
 Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + e_{ij}
@@ -1759,57 +1712,38 @@ Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + e_{ij}
 <li>should be normally distributed;</li>
 <li>and are distributed around the population or average fixed effects.</li>
 </ul>
-<p>We should understand that the mixed-effects model sees the differences between participants <strong>relative to the fixed effect intercept or slope</strong>, that is, relative to the population level or average effects. We can illustrate this by plotting, in Figure @ref(fig:BLUPS-prediction), the differences as estimated (technically, predicted) by the mixed-effects model that we discussed in sections @ref(lmer-first) and @ref(lmer-results).</p>
-<p>What you can see in Figure @ref(fig:BLUPS-prediction) are distributions. The centers of the distributions are on zero (shown by a red line). For each distribution (a. and b.), that is where the model estimate of the intercept or the slope of the frequency effect is located. Spread around that central point, you see the adjustments the model makes to account for differences between participants.</p>
-<p>You can see how in Figure @ref(fig:BLUPS-prediction) (a.), some children have intercepts that are smaller than the population-level or average intercept – so their adjustments are negative (to decrease their intercepts). In comparison, some children have intercepts that are larger than the population-level or average intercept – so their adjustments are positive (to increase their intercepts). Strikingly, you can see that a few children have intercepts that are as much as 1000ms larger than the population-level or average intercept.</p>
-<p>You can see also how in Figure @ref(fig:BLUPS-prediction) (b.), some children have frequency effects (coefficients) that are smaller than the population-level or average frequency effect – so their adjustments are positive (to decrease their frequency effect, by making it <em>less</em> negative). (Remember the estimated <span class="math inline">\(\beta\)</span> coefficient for the frequency effect is negative because higher word frequency is associated with smaller RT.) In comparison, some children have frequency effects that are larger than the population-level or average frequency effect – so their adjustments are negative (to increase their frequency effect, by making it <em>more</em> negative). Strikingly, you can see that a few children have frequency effects that are as much as 200ms larger (see plot (b.) around <span class="math inline">\(x = -200\)</span>) than the population-level or average effect.</p>
+<p>We should understand that the mixed-effects model sees the differences between participants <strong>relative to the fixed effect intercept or slope</strong>, that is, relative to the population level or average effects. We can illustrate this by plotting, in <a href="#fig-BLUPS-prediction">Figure&nbsp;<span>4.5</span></a>, the differences as estimated (technically, predicted) by the mixed-effects model that we have been examining. (The code for producing the plot can be found in <code>02-mixed-workbook-answers.R</code>.)</p>
+<p>What you can see in <a href="#fig-BLUPS-prediction">Figure&nbsp;<span>4.5</span></a> are distributions. The centers of the distributions are located at zero (shown by a red line). For each distribution (a. and b.), that is where the model estimate of the intercept or the slope of the frequency effect is located. Spread around that central point, you see the adjustments the model makes to account for differences between participants.</p>
+<ol type="1">
+<li>Notice how, in <a href="#fig-BLUPS-prediction">Figure&nbsp;<span>4.5</span></a> (a.)</li>
+</ol>
+<ul>
+<li>Some children have intercepts that are smaller than the population-level or average intercept – so their adjustments are negative (to decrease their intercepts).</li>
+<li>In comparison, some children have intercepts that are larger than the population-level or average intercept – so their adjustments are positive (to increase their intercepts).</li>
+<li>Strikingly, you can see that a few children have intercepts that are as much as 1000ms larger than the population-level or average intercept.</li>
+</ul>
+<ol start="2" type="1">
+<li>Notice how, in <a href="#fig-BLUPS-prediction">Figure&nbsp;<span>4.5</span></a> (b.)</li>
+</ol>
+<ul>
+<li>Some children have frequency effects (coefficients) that are smaller than the population-level or average frequency effect – so their adjustments are positive (to decrease their frequency effect, by making it <em>less</em> negative).</li>
+<li>Remember the estimated <span class="math inline">\(\beta\)</span> coefficient for the frequency effect is negative because higher word frequency is associated with smaller RT.</li>
+<li>In comparison, some children have frequency effects that are larger than the population-level or average frequency effect – so their adjustments are negative (to increase their frequency effect, by making it <em>more</em> negative).</li>
+<li>Strikingly, you can see that a few children have frequency effects that are as much as 200ms larger (see plot (b.) around <span class="math inline">\(x = -200\)</span>) than the population-level or average effect.</li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>lmer.all<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">lmer</span>(RT <span class="sc">~</span>  Lg.UK.CDcount <span class="sc">+</span> (Lg.UK.CDcount <span class="sc">+</span> <span class="dv">1</span><span class="sc">||</span>subjectID),</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                   </span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">data =</span> long.all.noNAs)</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co"># -- plot the distribution of random effects: conditional modes:</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>BLUPS <span class="ot">&lt;-</span> <span class="fu">ranef</span>(lmer.all<span class="fl">.1</span>)<span class="sc">$</span>subjectID</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(BLUPS)</span></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>BLUPS.df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">subjectID =</span> <span class="fu">rownames</span>(BLUPS), </span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>                       <span class="at">intercepts =</span> BLUPS[,<span class="dv">1</span>], </span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>                       <span class="at">frequency =</span> BLUPS[,<span class="dv">2</span>])</span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(BLUPS.df)</span></span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="co"># str(BLUPS.df)</span></span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>p.BLUPS.intercepts <span class="ot">&lt;-</span> BLUPS.df <span class="sc">%&gt;%</span></span>
-<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> intercepts)) <span class="sc">+</span></span>
-<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> </span>
-<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"(a.) Adjustment by child"</span>) <span class="sc">+</span></span>
-<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"In the intercept"</span>) <span class="sc">+</span></span>
-<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>p.BLUPS.slopes <span class="ot">&lt;-</span> BLUPS.df <span class="sc">%&gt;%</span></span>
-<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> frequency)) <span class="sc">+</span></span>
-<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> </span>
-<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"(b.) Adjustment by child"</span>) <span class="sc">+</span></span>
-<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"In the frequency slope (coefficient)"</span>) <span class="sc">+</span></span>
-<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p.BLUPS.intercepts, p.BLUPS.slopes,</span>
-<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>             <span class="at">ncol =</span> <span class="dv">2</span></span>
-<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a>              )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-BLUPS-prediction" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="02-mixed_files/figure-html/fig-BLUPS-prediction-1.png" class="img-fluid figure-img" alt="The figure shows scatterplot: each point represents the English and the Portuguese scores for one child. A red line drawn through the points indicates a trend such that higher Portuguese scores are associated with higher English scores." width="960"></p>
+<p><img src="02-mixed_files/figure-html/fig-BLUPS-prediction-1.png" class="img-fluid figure-img" alt="The figure shows two histograms (a.) on the left represents the distribution of adjustments to account for per-child deviations between the overall intercept and the intercept estimated for a child while (b.) on the right represents the distribution of adjustments to account for per-child deviations between the overall slope and the slope estimated for a child. The histograms indicate widely spread deviations about the overall estimate." width="960"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;4.5: Plot showing histograms indicating the distribution of participant adjustments to account for between-child differences in intercept or slope (known as Best Linear Unbiased Predictions)</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-<p>When a mixed-effects model is fitted to a dataset, its set of estimated parameters includes the coefficients for the fixed effects as well as the standard deviations for the random effects (Baayen, 2008). The individual values of the adjustments made to intercepts and slopes are calculated once the random effects have been estimated. If you read the literature on mixed-effects models, you will see that the adjustments are called Best Linear Unbiased Predictors (or BLUPs).</p>
-<section id="sec-intro-mixed-exx-lmer" class="level4" data-number="4.9.6.1">
-<h4 data-number="4.9.6.1" class="anchored" data-anchor-id="sec-intro-mixed-exx-lmer"><span class="header-section-number">4.9.6.1</span> Exercise</h4>
+<p>When a mixed-effects model is fitted to a dataset, its set of estimated parameters includes the coefficients for the fixed effects as well as the standard deviations for the random effects <span class="citation" data-cites="baayen2008">(<a href="references.html#ref-baayen2008" role="doc-biblioref">Baayen et al., 2008</a>)</span>. The individual values of the adjustments made to intercepts and slopes are calculated once the random effects have been estimated. If you read the literature on mixed-effects models, you will see that the adjustments are called <em>Best Linear Unbiased Predictors</em> (BLUPs).</p>
+<section id="sec-intro-mixed-exx-lmer" class="level4" data-number="4.9.7.1">
+<h4 data-number="4.9.7.1" class="anchored" data-anchor-id="sec-intro-mixed-exx-lmer"><span class="header-section-number">4.9.7.1</span> Exercise</h4>
 <p>Mixed-effects modeling is hard to get used to <em>at first</em>. A bit more practice helps to show you how the different parts of the model work. We again focus on the random effects.</p>
 <ul>
 <li>In the model we have seen so far, we specify <code>(Lg.UK.CDcount + 1||subjectID)</code></li>
@@ -1820,95 +1754,45 @@ Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + e_{ij}
 <li><code>lmer(RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 0|subjectID)...)</code> gives us a <em>random slope</em> model accounting for just random differences between participants in the slope of the frequency effect</li>
 <li><code>lmer(RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1|subjectID)...)</code> gives us a <em>random intercepts and slopes</em> model accounting for both random differences between participants in the intercept and in the slope, as well as covariance in these differences.</li>
 </ol>
-<p>Try out these variations and <em>look carefully</em> at the different results. Look, especially, at what happens to the part of the summary.</p>
-<p>We can <em>visualize</em> the differences between the models in a plot showing the different predictions that the different models give us. Figure @ref(fig:indiv-prediction) shows what a mixed-effects model would predict should be the effect of frequency on RT for different children in the CP study. The predictions vary depending on the nature of the random effects we specify in the model.</p>
+<p>Try out these variations and <em>look carefully</em> at the different results. Look, especially, at what happens to the <code>Random effects</code> part of the summary.</p>
+<p>We can <em>visualize</em> the differences between the models in a plot showing the different predictions that the different models give us. <a href="#fig-indiv-prediction">Figure&nbsp;<span>4.6</span></a> shows what a mixed-effects model would predict should be the effect of frequency on RT for different children in the CP study. The predictions vary depending on the nature of the random effects we specify in the model.</p>
+<p>(Note that I figured out how to produce the plot from the information <a href="https://bbolker.github.io/morelia_2018/notes/mixedlab.html">here</a>.)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -- fit an lmer -- different kinds</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>lmer.all<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">lmer</span>(RT <span class="sc">~</span>  Lg.UK.CDcount <span class="sc">+</span> (Lg.UK.CDcount <span class="sc">+</span> <span class="dv">1</span><span class="sc">||</span>subjectID),</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>                   </span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">data =</span> long.all.noNAs)</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(lmer.all.1)</span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>lmer.all<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">lmer</span>(RT <span class="sc">~</span>  Lg.UK.CDcount <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>subjectID),</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>                   </span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>                   <span class="at">data =</span> long.all.noNAs)</span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(lmer.all.2)</span></span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>lmer.all<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="fu">lmer</span>(RT <span class="sc">~</span>  Lg.UK.CDcount <span class="sc">+</span> (Lg.UK.CDcount <span class="sc">+</span> <span class="dv">0</span><span class="sc">|</span>subjectID),</span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>                   </span>
-<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>                   <span class="at">data =</span> long.all.noNAs)</span>
-<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(lmer.all.3)</span></span>
-<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a><span class="co"># -- plot random effect -- per person predictions</span></span>
-<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a><span class="co"># https://bbolker.github.io/morelia_2018/notes/mixedlab.html</span></span>
-<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a><span class="co"># In lmer, predict has a re.form argument that specifies which random effects should </span></span>
-<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a><span class="co"># be included (NA or ~0=none, population level; NULL (=all) or ~subject=prediction at </span></span>
-<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a><span class="co"># the subject level; more complex models, might have additional nested levels).</span></span>
-<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>long.all.noNAs<span class="sc">$</span>pred1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(lmer.all<span class="fl">.1</span>) <span class="do">## individual level</span></span>
-<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>long.all.noNAs<span class="sc">$</span>pred2 <span class="ot">&lt;-</span> <span class="fu">predict</span>(lmer.all<span class="fl">.2</span>) <span class="do">## individual level</span></span>
-<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>long.all.noNAs<span class="sc">$</span>pred3 <span class="ot">&lt;-</span> <span class="fu">predict</span>(lmer.all<span class="fl">.3</span>) <span class="do">## individual level</span></span>
-<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>p.slopes.intercepts <span class="ot">&lt;-</span> long.all.noNAs <span class="sc">%&gt;%</span></span>
-<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Lg.UK.CDcount, <span class="at">y =</span> RT)) <span class="sc">+</span></span>
-<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">25</span>, <span class="at">colour =</span> <span class="st">"darkgrey"</span>) <span class="sc">+</span></span>
-<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> pred1, <span class="at">group =</span> subjectID), <span class="at">colour=</span><span class="st">"red"</span>, <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"(c.)</span><span class="sc">\n</span><span class="st">(Lg.UK.CDcount + 1||subjectID)"</span>) <span class="sc">+</span></span>
-<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Frequency (Lg.UK.CDcount)"</span>) <span class="sc">+</span></span>
-<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a>p.intercepts <span class="ot">&lt;-</span> long.all.noNAs <span class="sc">%&gt;%</span></span>
-<span id="cb27-41"><a href="#cb27-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Lg.UK.CDcount, <span class="at">y =</span> RT)) <span class="sc">+</span></span>
-<span id="cb27-42"><a href="#cb27-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">25</span>, <span class="at">colour =</span> <span class="st">"darkgrey"</span>) <span class="sc">+</span></span>
-<span id="cb27-43"><a href="#cb27-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> pred2, <span class="at">group =</span> subjectID), <span class="at">colour=</span><span class="st">"red"</span>, <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb27-44"><a href="#cb27-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"(a.)</span><span class="sc">\n</span><span class="st">(1|subjectID)"</span>) <span class="sc">+</span></span>
-<span id="cb27-45"><a href="#cb27-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Frequency (Lg.UK.CDcount)"</span>) <span class="sc">+</span></span>
-<span id="cb27-46"><a href="#cb27-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb27-47"><a href="#cb27-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb27-48"><a href="#cb27-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-49"><a href="#cb27-49" aria-hidden="true" tabindex="-1"></a>p.slopes <span class="ot">&lt;-</span> long.all.noNAs <span class="sc">%&gt;%</span></span>
-<span id="cb27-50"><a href="#cb27-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Lg.UK.CDcount, <span class="at">y =</span> RT)) <span class="sc">+</span></span>
-<span id="cb27-51"><a href="#cb27-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">25</span>, <span class="at">colour =</span> <span class="st">"darkgrey"</span>) <span class="sc">+</span></span>
-<span id="cb27-52"><a href="#cb27-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> pred3, <span class="at">group =</span> subjectID), <span class="at">colour=</span><span class="st">"red"</span>, <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb27-53"><a href="#cb27-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"(b.)</span><span class="sc">\n</span><span class="st">(Lg.UK.CDcount + 0|subjectID)"</span>) <span class="sc">+</span></span>
-<span id="cb27-54"><a href="#cb27-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Frequency (Lg.UK.CDcount)"</span>) <span class="sc">+</span></span>
-<span id="cb27-55"><a href="#cb27-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb27-56"><a href="#cb27-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb27-57"><a href="#cb27-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-58"><a href="#cb27-58" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p.intercepts, p.slopes, p.slopes.intercepts, </span>
-<span id="cb27-59"><a href="#cb27-59" aria-hidden="true" tabindex="-1"></a>             <span class="at">ncol =</span> <span class="dv">3</span></span>
-<span id="cb27-60"><a href="#cb27-60" aria-hidden="true" tabindex="-1"></a>             )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-indiv-prediction" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="02-mixed_files/figure-html/fig-indiv-prediction-1.png" class="img-fluid figure-img" alt="The figure shows scatterplot: each point represents the English and the Portuguese scores for one child. A red line drawn through the points indicates a trend such that higher Portuguese scores are associated with higher English scores." width="960"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;4.6: Plot showing model predictions of the effect, for each individual, of word frequency on reading reaction time – predictions vary between models incorporating (a.) random effect of participants on intercepts only; (b.) random effect of participants on slopes only and (c.) random effect of participants on intercepts and on slopes</figcaption><p></p>
+<p><img src="02-mixed_files/figure-html/fig-indiv-prediction-1.png" class="img-fluid figure-img" alt="The figure shows a grid of scatterplots. In all scatterplots, the same scatter is shown. Points in grey represent the RT and word frequency information for children's responses in reading words in the experimental task. Superimposed on the points are sets of red lines. The lines represent the predictions of different models (a.) assuming a random effect of participants on intercepts, all slopes are the same  but intercepts vary (b.) assuming a random effect of participants on slopes only, slopes vary but intercepts are the same (c.) and assuming random effect of participants on intercepts and on slopes both intercepts and slopes can be seen to vary." width="768"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.6: Plot showing model predictions of the effect, for each individual, of word frequency on reading reaction time – predictions vary between models incorporating (a.) random effect of participants on intercepts only; (b.) random effect of participants on slopes only and (c.) random effect of participants on intercepts and on slopes.</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
 <p>We can see that:</p>
 <ol type="1">
-<li>If the model includes the random effect of then all the slopes are the same (the lines in the figure are parallel) because this model assumes that the only differences between participants are differences in the intercepts.</li>
-<li>If the model includes the random effect of then the slopes vary but they all have the same intercept. The plot does not show this but you can see how all the slopes are converging on one point somewhere on the left. This happens because this model assumes that the only differences between participants are differences in the slopes.</li>
-<li>If the model includes the random effect of then we can see how the intercepts and the slopes vary. Given what we saw when we looked at the relation between frequency and RT for each participant considered separately we might argue that this model is much more realistic about the data.</li>
+<li>If the model includes the random effect of <em>participants on intercepts only</em> then all the slopes are the same (the lines in the figure are parallel) because this model assumes that the only differences between participants are differences in the intercepts.</li>
+<li>If the model includes the random effect of <em>participants on slopes only</em> then the slopes vary but they all have the same intercept. The plot does not show this but you can see how all the slopes are converging on one point somewhere on the left. This happens because this model assumes that the only differences between participants are differences in the slopes.</li>
+<li>If the model includes the random effect of <em>participants on intercepts and on slopes</em> then we can see how the intercepts and the slopes vary. Given what we saw when we looked at the relation between frequency and RT for each participant considered separately we might argue that this model is much more realistic about the data.</li>
 </ol>
-</section>
-<section id="code-tip" class="level4" data-number="4.9.6.2">
-<h4 data-number="4.9.6.2" class="anchored" data-anchor-id="code-tip"><span class="header-section-number">4.9.6.2</span> Code tip</h4>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>It is very important to learn to make effective use of the warnings and error messages R can produce.</p>
-<p>Note: you do not have to just believe me when I say that is in the model code to stop a problem appearing. Experiment – and see what happens when you change the code. Try this.</p>
+</div>
+</div>
+<p>Note: you do not have to just believe me when I say that <code>||</code> is in the model code to stop a problem appearing. Experiment – and see what happens when you change the code. Try this.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>lmer.all<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">lmer</span>(RT <span class="sc">~</span>  Lg.UK.CDcount <span class="sc">+</span> (Lg.UK.CDcount <span class="sc">+</span> <span class="dv">1</span><span class="sc">|</span>subjectID),</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>             </span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> long.all.noNAs)</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmer.all<span class="fl">.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>lmer.all<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">lmer</span>(RT <span class="sc">~</span>  Lg.UK.CDcount <span class="sc">+</span> (Lg.UK.CDcount <span class="sc">+</span> <span class="dv">1</span><span class="sc">|</span>subjectID),</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> long.all.noNAs)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmer.all<span class="fl">.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Do you get an error message?</p>
 <p>A very useful trick is to learn to copy the error message you get into a search engine on your web browser. Do this and you will find useful help, as <a href="https://rstudio-pubs-static.s3.amazonaws.com/33653_57fc7b8e5d484c909b615d8633c01d51.html">here</a></p>
@@ -1918,25 +1802,25 @@ Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + e_{ij}
 <section id="sec-intro-mixed-fixed-effect-fallacy" class="level2" data-number="4.10">
 <h2 data-number="4.10" class="anchored" data-anchor-id="sec-intro-mixed-fixed-effect-fallacy"><span class="header-section-number">4.10</span> Variation between stimuli: the “language as fixed-effect fallacy”</h2>
 <p>Experimental psychologists will often collect data in studies where they present some stimuli to a sample of participants (as CP did in her study). Clark (1973) showed that the appropriate analysis of experimental effects for such data requires the researcher to take into account the error variance due to unexplained or random differences between sampled participants <em>and</em> to random differences between sampled stimuli. This is true in the context of psycholinguistics but it is also true in the context of work in any field where the presented stimuli can be understood to constitute a sample from a wider population of potential stimuli (Judd, Westfall, &amp; Kenny, 2012).</p>
-<p>If we were to estimate the average latency of the responses made by different children to each word, we would see that there is considerable variation between words (Figure @ref(fig:pitemsints)). Some words elicit slower and some elicit faster responses on average. We can also see that there is, again, variation in the uncertainty of estimates, as reflected in differences in the lengths of the error bars corresponding to the standard errors of the estimates.</p>
+<p>If we were to estimate the average latency of the responses made by different children to each word, we would see that there is considerable variation between words (<a href="#fig-pitemsints">Figure&nbsp;<span>4.7</span></a>). Some words elicit slower and some elicit faster responses on average. We can also see that there is, again, variation in the uncertainty of estimates, as reflected in differences in the lengths of the error bars corresponding to the standard errors of the estimates.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># what about variation between items in intercepts?</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -- for each itemname, plots ordered by meanRT</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create a model for each item, including just the intercept</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>wperitemlm <span class="ot">&lt;-</span> long.all.noNAs <span class="sc">%&gt;%</span> </span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>              <span class="fu">group_by</span>(item_name) <span class="sc">%&gt;%</span> </span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>              <span class="fu">do</span>(<span class="fu">tidy</span>(<span class="fu">lm</span>(RT <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data=</span>.)))</span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>wperitemlm<span class="sc">$</span>term <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(wperitemlm<span class="sc">$</span>term)</span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="co"># wperitemlm</span></span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="co"># plot intercepts by-items -- ordering items by item_name by estimated intercept size</span></span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>pwperitemlmint <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(wperitemlm, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(item_name, estimate), <span class="at">y =</span> estimate, <span class="at">ymin =</span> estimate <span class="sc">-</span> std.error, <span class="at">ymax =</span> estimate <span class="sc">+</span> std.error))</span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>pwperitemlmint <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_linerange</span>() <span class="sc">+</span> </span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Estimated coefficient +/- SE"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Per-item estimates of intercept, ordered by intercept estimate size"</span>) <span class="sc">+</span></span>
-<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>), <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">5</span>), <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(), <span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># what about variation between items in intercepts?</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -- for each itemname, plots ordered by meanRT</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create a model for each item, including just the intercept</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>wperitemlm <span class="ot">&lt;-</span> long.all.noNAs <span class="sc">%&gt;%</span> </span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>              <span class="fu">group_by</span>(item_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>              <span class="fu">do</span>(<span class="fu">tidy</span>(<span class="fu">lm</span>(RT <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data=</span>.)))</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>wperitemlm<span class="sc">$</span>term <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(wperitemlm<span class="sc">$</span>term)</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co"># wperitemlm</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="co"># plot intercepts by-items -- ordering items by item_name by estimated intercept size</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>pwperitemlmint <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(wperitemlm, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(item_name, estimate), <span class="at">y =</span> estimate, <span class="at">ymin =</span> estimate <span class="sc">-</span> std.error, <span class="at">ymax =</span> estimate <span class="sc">+</span> std.error))</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>pwperitemlmint <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_linerange</span>() <span class="sc">+</span> </span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Estimated coefficient +/- SE"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Per-item estimates of intercept, ordered by intercept estimate size"</span>) <span class="sc">+</span></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>), <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">5</span>), <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(), <span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-pitemsints" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -1947,7 +1831,7 @@ Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + e_{ij}
 </div>
 </div>
 <p>In general, psychologists have been aware since Clark (1973, if not earlier) that responses to experimental stimuli can vary because of random or unexplained differences between the stimuli: whether the stimuli are words, pictures or stories, etc. And researchers have been aware that if we did not take such variation into account, we might mistakenly detect an experimental effect, for example, as a significant difference between mean response in different conditions, simply because different stimuli presented in different conditions varied in some unknown way, randomly, in relative difficulty.</p>
-<p>For many years, psychologists tried to take random differences between stimuli into account, alongside random differences between participants, using a variety of strategies with important limitations (see Baayen et al., 2008, for discussion). Clark (1973) suggested that researchers could calculate <span class="math inline">\(minF'\)</span> (not F) when doing Analyses of Variance of experimental data</p>
+<p>For many years, psychologists tried to take random differences between stimuli into account, alongside random differences between participants, using a variety of strategies with important limitations (see <span class="citation" data-cites="baayen2008">Baayen et al. (<a href="references.html#ref-baayen2008" role="doc-biblioref">2008</a>)</span>, for discussion). Clark (1973) suggested that researchers could calculate <span class="math inline">\(minF'\)</span> (not F) when doing Analyses of Variance of experimental data</p>
 <p>This involves a series of steps.</p>
 <ol type="1">
 <li>You start by <em>aggregating</em> your data</li>
@@ -1986,13 +1870,13 @@ Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + W_{0j} + e_{ij}
 <h4 data-number="4.10.1.1" class="anchored" data-anchor-id="sec-intro-mixed-random-effect-items"><span class="header-section-number">4.10.1.1</span> Fitting a mixed-effect model – now with random effects of subjects and items</h4>
 <p>We can fit a mixed-effects model of the <span class="math inline">\(RT \sim frequency\)</span> relationship, taking into account the random differences between participants <em>and now also</em> the random differences between stimulus words.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>lmer.all<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">lmer</span>(RT <span class="sc">~</span>  Lg.UK.CDcount <span class="sc">+</span> </span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>                         (Lg.UK.CDcount <span class="sc">+</span> <span class="dv">1</span><span class="sc">||</span>subjectID) <span class="sc">+</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                         (<span class="dv">1</span><span class="sc">|</span>item_name),</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>             </span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> long.all.noNAs)</span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmer.all<span class="fl">.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>lmer.all<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">lmer</span>(RT <span class="sc">~</span>  Lg.UK.CDcount <span class="sc">+</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>                         (Lg.UK.CDcount <span class="sc">+</span> <span class="dv">1</span><span class="sc">||</span>subjectID) <span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                         (<span class="dv">1</span><span class="sc">|</span>item_name),</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> long.all.noNAs)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmer.all<span class="fl">.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML ['lmerMod']
 Formula: RT ~ Lg.UK.CDcount + ((1 | subjectID) + (0 + Lg.UK.CDcount |  
@@ -2043,40 +1927,40 @@ Lg.UK.CDcnt -0.388</code></pre>
 <section id="sec-intro-mixed-variance-covariance" class="level2" data-number="4.11">
 <h2 data-number="4.11" class="anchored" data-anchor-id="sec-intro-mixed-variance-covariance"><span class="header-section-number">4.11</span> Variances and covariances of random effects</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># can combine the per-child intercepts and frequency effects dataframes generated in the foregoing</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># plot intercept and lm frequency coefficient for each child, data considered separately</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>freqperchildlm <span class="ot">&lt;-</span> long.all.noNAs <span class="sc">%&gt;%</span></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">group_by</span>(subjectID) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">do</span>(<span class="fu">tidy</span>(<span class="fu">lm</span>(RT <span class="sc">~</span> Lg.UK.CDcount, <span class="at">data=</span>.)))</span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>freqperchildlm<span class="sc">$</span>term <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(freqperchildlm<span class="sc">$</span>term)</span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="co"># filter to two separate dataframes the by-subjects intercepts estimates, and the by-subjects frequency effects slope estimates</span></span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>freqperchildlmint <span class="ot">&lt;-</span> <span class="fu">filter</span>(freqperchildlm, term <span class="sc">==</span> <span class="st">'(Intercept)'</span>)</span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>freqperchildlmfreq <span class="ot">&lt;-</span> <span class="fu">filter</span>(freqperchildlm, term <span class="sc">==</span> <span class="st">'Lg.UK.CDcount'</span>)</span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a><span class="co"># join the two sets of data together so that we have by-subjects intercepts in one column, and by-subjects frequency effects slopes in another column</span></span>
-<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a><span class="co"># -- we did this because intercepts and frequency estimates would otherwise be stacked in the same column, term, ordered by level of term</span></span>
-<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>freqperchildlm.int.freq <span class="ot">&lt;-</span> freqperchildlmint <span class="sc">%&gt;%</span> </span>
-<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>        <span class="fu">full_join</span>(freqperchildlmfreq, <span class="at">by =</span> <span class="st">"subjectID"</span>)</span>
-<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a><span class="co"># -- rename columns for convenience</span></span>
-<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>freqperchildlm.int.freq <span class="ot">&lt;-</span> <span class="fu">rename</span>(freqperchildlm.int.freq, <span class="at">estimate.intercept =</span> estimate.x)</span>
-<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a>freqperchildlm.int.freq <span class="ot">&lt;-</span> <span class="fu">rename</span>(freqperchildlm.int.freq, <span class="at">estimate.slope =</span> estimate.y)</span>
-<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a><span class="co"># then plot the by-subjects (or items) intercepts and slopes against each other</span></span>
-<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(freqperchildlm.int.freq)</span></span>
-<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a>pfreqperchildlm.int.freq <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(freqperchildlm.int.freq, <span class="fu">aes</span>(<span class="at">x =</span> estimate.intercept, <span class="at">y =</span> estimate.slope))</span>
-<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a>pfreqperchildlm.int.freq <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">1.5</span>, <span class="at">alpha =</span> .<span class="dv">85</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Estimated coefficient of the frequency effect"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Estimated intercept"</span>) <span class="sc">+</span> </span>
-<span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>), <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># can combine the per-child intercepts and frequency effects dataframes generated in the foregoing</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co"># plot intercept and lm frequency coefficient for each child, data considered separately</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>freqperchildlm <span class="ot">&lt;-</span> long.all.noNAs <span class="sc">%&gt;%</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">group_by</span>(subjectID) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">do</span>(<span class="fu">tidy</span>(<span class="fu">lm</span>(RT <span class="sc">~</span> Lg.UK.CDcount, <span class="at">data=</span>.)))</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>freqperchildlm<span class="sc">$</span>term <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(freqperchildlm<span class="sc">$</span>term)</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="co"># filter to two separate dataframes the by-subjects intercepts estimates, and the by-subjects frequency effects slope estimates</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>freqperchildlmint <span class="ot">&lt;-</span> <span class="fu">filter</span>(freqperchildlm, term <span class="sc">==</span> <span class="st">'(Intercept)'</span>)</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>freqperchildlmfreq <span class="ot">&lt;-</span> <span class="fu">filter</span>(freqperchildlm, term <span class="sc">==</span> <span class="st">'Lg.UK.CDcount'</span>)</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="co"># join the two sets of data together so that we have by-subjects intercepts in one column, and by-subjects frequency effects slopes in another column</span></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="co"># -- we did this because intercepts and frequency estimates would otherwise be stacked in the same column, term, ordered by level of term</span></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>freqperchildlm.int.freq <span class="ot">&lt;-</span> freqperchildlmint <span class="sc">%&gt;%</span> </span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>        <span class="fu">full_join</span>(freqperchildlmfreq, <span class="at">by =</span> <span class="st">"subjectID"</span>)</span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a><span class="co"># -- rename columns for convenience</span></span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>freqperchildlm.int.freq <span class="ot">&lt;-</span> <span class="fu">rename</span>(freqperchildlm.int.freq, <span class="at">estimate.intercept =</span> estimate.x)</span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>freqperchildlm.int.freq <span class="ot">&lt;-</span> <span class="fu">rename</span>(freqperchildlm.int.freq, <span class="at">estimate.slope =</span> estimate.y)</span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a><span class="co"># then plot the by-subjects (or items) intercepts and slopes against each other</span></span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(freqperchildlm.int.freq)</span></span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>pfreqperchildlm.int.freq <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(freqperchildlm.int.freq, <span class="fu">aes</span>(<span class="at">x =</span> estimate.intercept, <span class="at">y =</span> estimate.slope))</span>
+<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a>pfreqperchildlm.int.freq <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">1.5</span>, <span class="at">alpha =</span> .<span class="dv">85</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Estimated coefficient of the frequency effect"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Estimated intercept"</span>) <span class="sc">+</span> </span>
+<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>), <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-covarp" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -2176,7 +2060,7 @@ Lg.UK.CDcnt -0.388</code></pre>
 </table>
 <p>Note: <code>lmer(RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1||subjectID) + (1|item_name)</code></p>
 <p>Researchers should report their modelling in sufficient detail that their results can be reproduced by others. Barr et al.&nbsp;(2013) argued that choices about random effects structure affect the generalizability of the estimates of fixed effects. In particular, it seems sensible to examine the possibility that the slope of the effect of an explanatory variable may vary at random between participants or between stimuli. Correspondingly, researchers should report and explain their decisions about the inclusion of random effects.</p>
-<p>It is normal practice in psychology to report the p-values associated with null hypothesis significance tests of effects when reporting analysis. Performing hypothesis tests using t- or F-distributions depends on the calculation of degrees of freedom yet it is uncertain how degrees of freedom should be counted when analysing multilevel data (Baayen et al., 2008). In most software applications, however, p-values associated with fixed effects may be calculated using an approximation for denominator degrees of freedom.</p>
+<p>It is normal practice in psychology to report the p-values associated with null hypothesis significance tests of effects when reporting analysis. Performing hypothesis tests using t- or F-distributions depends on the calculation of degrees of freedom yet it is uncertain how degrees of freedom should be counted when analysing multilevel data (<span class="citation" data-cites="baayen2008">Baayen et al. (<a href="references.html#ref-baayen2008" role="doc-biblioref">2008</a>)</span>). In most software applications, however, p-values associated with fixed effects may be calculated using an approximation for denominator degrees of freedom.</p>
 <p>We will come back to how we should report the results of mixed-effects models because, here, too, we can benefit by developing our approach, in depth, step by step.</p>
 <!-- ### Random effects of items on the slopes of fixed effects -->
 <!-- I wanted to keep the discussion of the model of the CP reading study data relatively simple by ignoring effects of individual differences, like the effect of differences between participants in reading skill. -->
@@ -2332,7 +2216,7 @@ Note
 <p>We considered the possibility of within-items effects.</p>
 </section>
 <section id="sec-intro-mixed-glossary-useful-functions" class="level3" data-number="4.13.2">
-<h3 data-number="4.13.2" class="anchored" data-anchor-id="sec-intro-mixed-glossary-useful-functions"><span class="header-section-number">4.13.2</span> Useful functions</h3>
+<h3 data-number="4.13.2" class="anchored" data-anchor-id="sec-intro-mixed-glossary-useful-functions"><span class="header-section-number">4.13.2</span> Glossary: useful functions</h3>
 <p>We used a number of functions to tidy, visualize and analyze the CP study data.</p>
 <ul>
 <li><code>read_csv()</code> and <code>read_csv()</code> to load source data files into the R workspace</li>
@@ -2347,41 +2231,18 @@ Note
 <p>We used the <code>summary()</code> function to get model results for both linear models and for the mulilevel or liner mixed-effects model.</p>
 </section>
 </section>
-<section id="r-code-and-data-file-access-for-the-class" class="level2" data-number="4.14">
-<h2 data-number="4.14" class="anchored" data-anchor-id="r-code-and-data-file-access-for-the-class"><span class="header-section-number">4.14</span> R code and data file access for the class</h2>
-<p>Activities in the class that goes with this chapter are associated with the following data file and .R code file:</p>
-<ul>
-<li><code>402-02-mixed-effects-workbook.R</code></li>
-<li><code>CP study word naming rt 180211.dat</code></li>
-<li><code>CP study word naming acc 180211.dat</code></li>
-<li><code>words.items.5 120714 150916.csv</code></li>
-<li><code>all.subjects 110614-050316-290518.csv</code></li>
-</ul>
-<p>A pre-tidied version of the CP study data is available as:</p>
-<ul>
-<li><code>long.all.noNAs.csv</code></li>
-</ul>
-<p>You can get these materials by going to the 402 Moodle folder for week 18, and downloading the .zip (compressed) folder labeled <strong>PSYC402-01-multilevel-resources</strong></p>
-<p>Or, you can download the same folder by clicking on the link:</p>
-<p></p>
-<p>Run the code in the .R file to reproduce the results presented in this chapter and in the slides.</p>
-<section id="sec-intro-mixed-recommended-reading" class="level3" data-number="4.14.1">
-<h3 data-number="4.14.1" class="anchored" data-anchor-id="sec-intro-mixed-recommended-reading"><span class="header-section-number">4.14.1</span> Recommended reading</h3>
-<p>Snijders and Bosker (2012) present a helpful overview of multilevel modelling. Baayen et al.&nbsp;(2008; see, also, Barr et al., 2013; Judd et al., 2012) discuss mixed-effects models with crossed random effects. Readers familiar with the book will see that I rely on it to construct the formal presentation of the models.</p>
-<p>I wrote a tutorial article on mixed-effects models with Lotte Meteyard. We discuss how important the approach now is for psychological science, what researchers worry about when they use it, and what they should do and report when they use the method/</p>
-<p>Meteyard, L., &amp; Davies, R.A.I. (2020). Best practice guidance for linear mixed-effects models in psychological science, <em>Journal of Memory and Language</em>, 112, 104092, </p>
-<!-- -- note also the web resources: -->
-<!-- https://bbolker.github.io/morelia_2018/notes/mixedlab.html -->
-<!-- https://cran.microsoft.com/snapshot/2017-08-01/web/packages/sjPlot/vignettes/sjplmer.html -->
-<!-- -- sjplmer maybe superseded by: -->
-<!-- https://stackoverflow.com/questions/13847936/plot-random-effects-from-lmer-lme4-package-using-qqmath-or-dotplot-how-to-mak -->
-<!-- https://cran.r-project.org/web/packages/merTools/vignettes/merToolsIntro.html -->
-<!-- https://stackoverflow.com/questions/27787875/options-for-caterpillar-plots-in-lme4-grouping-by-factor-to-visually-identify-t -->
+<section id="sec-intro-mixed-recommended-reading" class="level2" data-number="4.14">
+<h2 data-number="4.14" class="anchored" data-anchor-id="sec-intro-mixed-recommended-reading"><span class="header-section-number">4.14</span> Recommended reading</h2>
+<p><span class="citation" data-cites="baayen2008 Barr2013a judd2012">Baayen et al. (<a href="references.html#ref-baayen2008" role="doc-biblioref">2008</a>; see also <a href="references.html#ref-Barr2013a" role="doc-biblioref">Barr et al., 2013</a>; <a href="references.html#ref-judd2012" role="doc-biblioref">Judd et al., 2012</a>)</span> discuss mixed-effects models with crossed random effects in a variety of contexts in psychological science. The explanations are clear and the examples are often helpful.</p>
+<p>I wrote a tutorial article on mixed-effects models with Lotte Meteyard <span class="citation" data-cites="meteyard2020a">(<a href="references.html#ref-meteyard2020a" role="doc-biblioref">Meteyard &amp; Davies, 2020</a>)</span>. We discuss how important the approach now is for psychological science, what researchers worry about when they use it, and what they should do and report when they use the method.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography" style="display: none">
 <div id="ref-baayen2008" class="csl-entry" role="doc-biblioentry">
 Baayen, R. H., Davidson, D. J., &amp; Bates, D. M. (2008). Mixed-effects modeling with crossed random effects for subjects and items. <em>Journal of Memory and Language</em>, <em>59</em>(4), 390–412. <a href="https://doi.org/10.1016/j.jml.2007.12.005">https://doi.org/10.1016/j.jml.2007.12.005</a>
+</div>
+<div id="ref-Barr2013a" class="csl-entry" role="doc-biblioentry">
+Barr, D. J., Levy, R., Scheepers, C., &amp; Tily, H. J. (2013). Random effects structure for confirmatory hypothesis testing: Keep it maximal. <em>Journal of Memory and Language</em>, <em>68</em>, 255–278.
 </div>
 <div id="ref-davies2017" class="csl-entry" role="doc-biblioentry">
 Davies, R. A. I., Birchenough, J. M. H., Arnell, R., Grimmond, D., &amp; Houlson, S. (2017). Reading through the life span: Individual differences in psycholinguistic effects. <em>Journal of Experimental Psychology: Learning Memory and Cognition</em>, <em>43</em>(8). <a href="https://doi.org/10.1037/xlm0000366">https://doi.org/10.1037/xlm0000366</a>
@@ -2389,8 +2250,13 @@ Davies, R. A. I., Birchenough, J. M. H., Arnell, R., Grimmond, D., &amp; Houlson
 <div id="ref-grolemund" class="csl-entry" role="doc-biblioentry">
 Grolemund, G., &amp; Wickham, H. (n.d.). <em>R for Data Science [Book]</em>. <a href="https://www.oreilly.com/library/view/r-for-data/9781491910382/">https://www.oreilly.com/library/view/r-for-data/9781491910382/</a>
 </div>
+<div id="ref-judd2012" class="csl-entry" role="doc-biblioentry">
+Judd, C. M., Westfall, J., &amp; Kenny, D. A. (2012). <em>Treating stimuli as a random factor in social psychology : A new and comprehensive solution to a pervasive but largely ignored problem</em>. <em>103</em>(1), 54–69. <a href="https://doi.org/10.1037/a0028347">https://doi.org/10.1037/a0028347</a>
 </div>
-</section>
+<div id="ref-meteyard2020a" class="csl-entry" role="doc-biblioentry">
+Meteyard, L., &amp; Davies, R. A. I. (2020). Best practice guidance for linear mixed-effects models in psychological science. <em>Journal of Memory and Language</em>, <em>112</em>, 104092. <a href="https://doi.org/10.1016/j.jml.2020.104092">https://doi.org/10.1016/j.jml.2020.104092</a>
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
