@@ -72,6 +72,14 @@ In this chapter, we will be working with the **CP reading study** dataset. CP te
 
 In addition to the reading task, CP administered tests of reading skill (TOWRE sight word and phonemic tests, Torgesen et al., 1999), reading experience (CART, Stainthorp, 1997), the Spoonerisms sub-test of the Phonological Awareness test Battery (Frederickson et al., 1997), and an orthographic choice test measure of orthographic knowledge (based on Olson et al., 1985). She also recorded the gender and the handedness of the children.
 
+We are going to use the CP study data to examine the answers to a research question similar to the question CP investigated:
+
+::: callout-note
+-   Research question: What word properties influence responses to words in a test of reading aloud?
+:::
+
+We can look at the answers to this question while also taking into account the impacts of random differences -- between sampled participants or between sampled words -- using mixed-effects models.
+
 Ultimately, the CP dataset were incorporated in an analysis of the impact of age on reading skills over the life-span, reported by @davies2017. You can find more details on the data and the methods in that paper. (Data and analysis code are shared through the journal article webpage \[paywalled\] [here](https://psycnet.apa.org/doiLanding?doi=10.1037%2Fxlm0000366), and a preprint version of the article can be accessed [here](https://eprints.lancs.ac.uk/id/eprint/86453/1/individual_differences_in_reading_subm_accepted.pdf).)
 
 The CP study resembles many studies in psychological science. The critical features of the study are that:
@@ -502,7 +510,7 @@ I used `full_join()` because I wanted to retain all observations from both datas
 
 As I discuss, you need to have matches in values on key (common) variables. If the `subjectID` is different on different datasets, you will lose data that would otherwise be merged to form the merged or composite dataset. 
 
-Check what happens if you deliberately mis-spell one of the `subjectID` values in one of the original source wide behavioural data files.
+Check what happens if you deliberately misspell one of the `subjectID` values in one of the original source wide behavioural data files.
 
 To be safe, you might want to do this exercise with copies of the source files kept in a folder you create for this purpose. If it goes wrong, you can always re-access the source files and read them in again.
 
@@ -517,7 +525,7 @@ This bit of code takes the length of the vector (i.e. variable column `RT` in da
 
 ### Select or transform the variables {#sec-intro-mixed-data-transform}
 
-OK, now we have all the data about everything all in one big, long and wide, dataset. But we do not actually need all this stuff. 
+OK, now we have all the data about everything all in one big, long and wide, dataset. But we do not actually require all of the dataset for the analyses we are going to do. 
 
 We next need to do two things. First, we need to get rid of variables we will not use: we do that by using `select()`. Then, we need to remove errors and outlying short RT observations: we do that by using `filter()` in Section @sec-intro-mixed-data-filter.
 
@@ -527,12 +535,13 @@ We are going to select just the variables we need using the `select()` function.
 #| label: selectcols
 long.all.select <- long.all %>% 
                         select(item_name, subjectID, RT, accuracy, 
-                          Lg.UK.CDcount, brookesIMG, AoA_Kup_lem, 
-                          Ortho_N, regularity, Length, BG_Mean, 
-                          Voice,	Nasal,	Fricative,	Liquid_SV,	
-                          Bilabials,	Labiodentals,	Alveolars,	
-                          Palatals,	Velars,	Glottals, age.months, 
-                          TOWREW_skill, TOWRENW_skill, spoonerisms, CART_score)
+                               Lg.UK.CDcount, brookesIMG, AoA_Kup_lem, 
+                               Ortho_N, regularity, Length, BG_Mean, 
+                               Voice,	Nasal,	Fricative,	Liquid_SV,
+                               Bilabials,	Labiodentals,	Alveolars,
+                               Palatals,	Velars,	Glottals, 
+                               age.months, TOWREW_skill, TOWRENW_skill, 
+                               spoonerisms, CART_score)
 
 ```
 
@@ -660,7 +669,7 @@ This function will create a `.csv` file from the dataset you name `long.all.noNA
 
 ### Data tidying -- conclusions {#sec-intro-mixed-data-conclusions}
 
-Most research work involving quantitative evidence requires a *big* chunk of data tidying or other processing before you get to the statistics. Most of the time, this is work *you* will have to do. The lessons you can learn about the process will generalize to many future research scenarios.
+Most research work involving quantitative evidence requires a *big* chunk of data tidying or processing before you get to the statistics. Most of the time, this is work *you* will have to do. The lessons you can learn about the process will generalize to many future research scenarios.
 
 ::: callout-advice
 It is a mistake to think of data tidying or wrangling as an inconvenience or as an extra task or something you need to do to get to the 'good stuff' (your results).
@@ -680,7 +689,9 @@ A key recommendation is that you write code to tidy or process data, thus creati
 
 ## Repeated measures designs and crossed random effects {#sec-intro-mixed-crossed-random}
 
-Our focus this week is on analyzing data that come from studies with **repeated-measures designs** where the experimenter presents multiple stimuli for response to each participant. In our working example, the **CP reading study**, CP asked all participants in her study to read a selection of words. All participants read the same selection of words, and every person read every word. For each participant, we have multiple observations and these (within-participant) observations will not be independent of each other. One participant will tend to be slower or less accurate compared to another participant, on average. Likewise, one participant's responses will reveal a stronger (or weaker) impact of the effect of an experimental variable than another participant. These between-participant differences will tend to be apparent for each set of observations we have for each participant, across the sample of participants.
+Our focus in this chapter is on analyzing data that come from studies with **repeated-measures designs** where the experimenter presents multiple stimuli for response to each participant. 
+
+In our working example, the **CP reading study**, CP asked all participants in her study to read a selection of words. All participants read the same selection of words, and every person read every word. For each participant, we have multiple observations and these (within-participant) observations will not be independent of each other. One participant will tend to be slower or less accurate compared to another participant, on average. Likewise, one participant's responses will reveal a stronger (or weaker) impact of the effect of an experimental variable than another participant. These between-participant differences will tend to be apparent for each set of observations we have for each participant, across the sample of participants.
 
 You could say that the lowest trial-level observations can be grouped with respect to participants, that observations are nested within participant. But the data can also be grouped by stimuli. Remember that in the CP study, all participants read the same selection of words, and every person read every word. This means that for each stimulus word, there are multiple observations because all participants responded to each word, and these (within-item) observations will not be independent of each other. One word may prove to be more challenging compared to another, eliciting slower or less accurate responses, on average. Likewise, participants' responses to a word will reveal a stronger (or weaker) impact of the effect of an experimental variable than the responses to another word. Again, these between-stimulus differences will tend to be apparent for each set of observations we have for each stimulus word, across the sample of words.
 
@@ -697,19 +708,13 @@ In this situation, we can say that the random effects are crossed [@baayen2008].
 
 To illustrate the approach, we examine observations from the CP study. We begin, as we did previously, by ignoring differences due to grouping variables (like participant or stimulus). We pretend that all observations are independent. In this fantasy situation, we address our research question.
 
-### Our research question {#sec-intro-mixed-question}
-
-We are going to use the CP study data to examine the answers to the question:
-
 ::: callout-note
 -   Research question: What word properties influence responses to words in a test of reading aloud?
 :::
 
-We can look at the answers to this question while also taking into account the impacts of random differences -- between sampled participants or between sampled words -- using mixed-effects models.
-
 ### Load the data if you need to {#sec-intro-mixed-data-load}
 
-If you did not go through the process of tidying the CP study data from the component source data files, then you can import the pre-tidied data here.
+If you have not completed the process of tidying the CP study data then you can import the pre-tidied data here.
 
 ```{r}
 #| label: read-csv
@@ -721,24 +726,28 @@ long.all.noNAs <- read_csv("long.all.noNAs.csv",
                   ) 
 ```
 
-#### Code tip
+Notice that I am using `read_csv()` with an additional argument `col_types = cols(...)`.
 
-Notice that I am using `read_csv()` with an additional argument `col_types = cols(...)` through which I control how `read_csv()` processes specific column variables in the data. Here, I am requesting that `read_csv()` treats `subjectID` and `item_name` as factors.
+- Here, I am requesting that `read_csv()` treats `subjectID` and `item_name` as factors.
 
-This is a very useful capacity, and a more efficient way to work than, say, first reading in the data and then using *coercion* to ensure that variabels are assigned appropriate types. You can read more about it [here](https://readr.tidyverse.org/articles/readr.html).
+::: callout-tip
+We can use `col_types = cols(...)` to control how `read_csv()` interprets specific column variables in the data. 
+:::
+
+Controlling the way that `read_csv()` handles variables is a very useful capacity, and a more efficient way to work than, say, first reading in the data and then using *coercion* to ensure that variables are assigned appropriate types. You can read more about it [here](https://readr.tidyverse.org/articles/readr.html).
 
 ### Linear model for multilevel data -- ignoring the hierarchical structure {#sec-intro-mixed-lm}
 
-We begin by asking if reading reaction time (RT) varies in association with word frequency. A scatterplot shows that response latencies decrease with increasing word frequency (@fig-freq-all).
+We begin our data analysis by asking if reading reaction time (RT) varies in association with word frequency. A scatterplot shows that response latencies decrease with increasing word frequency (@fig-freq-all).
 
 ```{r}
 #| label: fig-freq-all
 #| fig-cap: "Reading reaction time compared to word frequency, all data"
-#| fig-alt: "The figure shows scatterplot: each point represents the English and the Portuguese scores for one child. A red line drawn through the points indicates a trend such that higher Portuguese scores are associated with higher English scores."
+#| fig-alt: "The figure shows a scatterplot: each point represents the lexical frequency (on the x-axis) and the reaction time (RT, on the y-axis) of responses made by children to a set of words. A red line is drawn through the points, indicating that RT decreases for higher values of frequency."
 #| warning: false
 #| message: false
-#| fig-height: 5
-#| fig-width: 5
+#| fig-height: 4.5
+#| fig-width: 4.5
 long.all.noNAs %>%
 ggplot(aes(x = Lg.UK.CDcount, y = RT)) +
   geom_point(alpha = .2) + 
@@ -748,7 +757,7 @@ ggplot(aes(x = Lg.UK.CDcount, y = RT)) +
 
 ```
 
-In the plot, we see that the best fit line drawn with `geom_smooth()` trends downward for higher values of word frequency. This means that Figure \@ref(fig:pfreqc5) suggests that RT decreases with increasing word frequency. (I know there is a weird looking line of points around 0 but we can ignore that here.)
+In the plot, we see that the best fit line drawn with `geom_smooth()` trends downward for higher values of word frequency. This means that @fig-freq-all suggests that RT decreases with increasing word frequency. (I know there is a weird looking line of points around 0 but we can ignore that here.)
 
 We can estimate the relationship between RT and word frequency using a linear model in which we ignore the possibility that there may be differences (between subjects, or between items) in the intercept or (between subjects) in the slope of the frequency effect:
 
@@ -764,18 +773,16 @@ The linear model can be fit in R using the `lm()` function, as we have done prev
 
 ```{r}
 # label: lm-all-freq
-lm.all.1 <- lm(RT ~  Lg.UK.CDcount,
-             
-                     data = long.all.noNAs)
+lm.all.1 <- lm(RT ~  Lg.UK.CDcount, data = long.all.noNAs)
 
 summary(lm.all.1)
 ```
 
-We can see that, in this first analysis, the estimated effect of word frequency is $\beta = -53.375$ (here, word frequency information is in the `Lg.UK.CDcount` variable). This means that, in the linear model, RT decreases by about 54 milliseconds for each unit increase in log word frequency. (In our analyses, in common with many in the reading literature, we transformed the frequency estimate to the Log base 10 of the frequency of occurrence estimated for each word.) The model does not explain much variance, as $R^2 = .03$ but, no doubt due to the large sample, the regression model is overall significant $F(1,9083) = 302.8, p < .001$.
+We can see that, in this first analysis, the estimated effect of word frequency is $\beta = -53.375$ (here, word frequency information is in the `Lg.UK.CDcount` variable). This means that, in the linear model, RT decreases by about 54 milliseconds for each unit increase in log word frequency. (In our analyses, in common with many in the reading literature, we transformed the frequency estimate to the Log base 10 of the frequency of occurrence estimated for each word.) The model does not explain much variance, as $Adjusted \space R^2 = .03$ but, no doubt due to the large sample, the regression model is overall significant $F(1,9083) = 302.8, p < .001$.
 
 #### Exercise {#sec-intro-mixed-exx-lm}
 
--   Vary the linear model: using different outcomes or predictors
+-   Vary the linear model: using different outcomes or different predictor variables.
 
 The CP study dataset is rich with possibility. It would be useful to experiment with it.
 
