@@ -1378,8 +1378,8 @@ Tip
 <section id="sec-intro-mixed-crossed-random" class="level2" data-number="4.8">
 <h2 data-number="4.8" class="anchored" data-anchor-id="sec-intro-mixed-crossed-random"><span class="header-section-number">4.8</span> Repeated measures designs and crossed random effects</h2>
 <p>Our focus in this chapter is on analyzing data that come from studies with <strong>repeated-measures designs</strong> where the experimenter presents multiple stimuli for response to each participant.</p>
-<p>In our working example, the <strong>CP reading study</strong>, CP asked all participants in her study to read a selection of words. All participants read the same selection of words, and every person read every word. For each participant, we have multiple observations and these (within-participant) observations will not be independent of each other. One participant will tend to be slower or less accurate compared to another participant, on average. Likewise, one participant’s responses will reveal a stronger (or weaker) impact of the effect of an experimental variable than another participant. These between-participant differences will tend to be apparent for each set of observations we have for each participant, across the sample of participants.</p>
-<p>You could say that the lowest trial-level observations can be grouped with respect to participants, that observations are nested within participant. But the data can also be grouped by stimuli. Remember that in the CP study, all participants read the same selection of words, and every person read every word. This means that for each stimulus word, there are multiple observations because all participants responded to each word, and these (within-item) observations will not be independent of each other. One word may prove to be more challenging compared to another, eliciting slower or less accurate responses, on average. Likewise, participants’ responses to a word will reveal a stronger (or weaker) impact of the effect of an experimental variable than the responses to another word. Again, these between-stimulus differences will tend to be apparent for each set of observations we have for each stimulus word, across the sample of words.</p>
+<p>In our working example, the <strong>CP reading study</strong>, CP asked all participants in her study to read a selection of words. All participants read the same selection of words, and every person read every word. For each participant, we have multiple observations and these (within-participant) observations will not be independent of each other. One participant will tend to be slower or less accurate compared to another participant, on average. Likewise, one participant’s responses will reveal a stronger (or weaker) impact of the effect of an experimental variable than another participant. These between-participant differences will tend to be apparent across the sample of participants.</p>
+<p>You could say that the lowest trial-level observations can be grouped with respect to participants, that observations are nested within participant. But the data can also be grouped by stimuli. Remember that in the CP study, all participants read the same selection of words, and every person read every word. This means that for each stimulus word, there are multiple observations because all participants responded to each word, and these (within-item) observations will not be independent of each other. One word may prove to be more challenging compared to another, eliciting slower or less accurate responses, on average. Likewise, participants’ responses to a word will reveal a stronger (or weaker) impact of the effect of an experimental variable than the responses to another word. Again, these between-stimulus differences will tend to be apparent observations across the sample of words.</p>
 <p>Under these circumstances, are observations about the responses made by different participants nested under words or are observations about the responses to different words nested under participants? We do not have to make a decision.</p>
 <p>Given this common <strong>repeated-measures</strong> design, we can analyze the outcome variable in relation to:</p>
 <ul>
@@ -1492,7 +1492,25 @@ Multiple R-squared:  0.03227,   Adjusted R-squared:  0.03216
 F-statistic: 302.8 on 1 and 9083 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<p>We can see that, in this first analysis, the estimated effect of word frequency is <span class="math inline">\(\beta = -53.375\)</span> (here, word frequency information is in the <code>Lg.UK.CDcount</code> variable). This means that, in the linear model, RT decreases by about 54 milliseconds for each unit increase in log word frequency. (In our analyses, in common with many in the reading literature, we transformed the frequency estimate to the Log base 10 of the frequency of occurrence estimated for each word.) The model does not explain much variance, as <span class="math inline">\(Adjusted \space R^2 = .03\)</span> but, no doubt due to the large sample, the regression model is overall significant <span class="math inline">\(F(1,9083) = 302.8, p &lt; .001\)</span>.</p>
+<p>In the estimates from this linear model, we see an approximate first answer to our research question.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Research question: What word properties influence responses to words in a test of reading aloud?</li>
+<li>Result: Our analysis shows that the estimated effect of word frequency is <span class="math inline">\(\beta = -53.375\)</span>. This means that, according to the linear model, RT decreases by about 54 milliseconds for each unit increase in log word frequency.</li>
+</ul>
+</div>
+</div>
+<p>Notice that, here, word frequency information is located in the <code>Lg.UK.CDcount</code> variable. In a common move for reading data analyses, we transformed the frequency estimate to the Log base 10 of the word frequency values prior to analysis, in part, because word frequency estimates are usually highly skewed.</p>
+<p>The model does not explain much variance, as <span class="math inline">\(Adjusted \space R^2 = .03\)</span> but, no doubt due to the large sample, the regression model is significant overall <span class="math inline">\(F(1,9083) = 302.8, p &lt; .001\)</span>.</p>
 <section id="sec-intro-mixed-exx-lm" class="level4" data-number="4.9.2.1">
 <h4 data-number="4.9.2.1" class="anchored" data-anchor-id="sec-intro-mixed-exx-lm"><span class="header-section-number">4.9.2.1</span> Exercise</h4>
 <ul>
@@ -1507,10 +1525,9 @@ F-statistic: 302.8 on 1 and 9083 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section>
 <section id="sec-intro-mixed-ignore-hierarchy" class="level3" data-number="4.9.3">
 <h3 data-number="4.9.3" class="anchored" data-anchor-id="sec-intro-mixed-ignore-hierarchy"><span class="header-section-number">4.9.3</span> Can we ignore the hierarchical structure?</h3>
-<p>In this linear model, we see an approximate first answer to our research question.</p>
-<p>Our problem is that the observations are assumed to be independent whereas the assumption of independence is questionable given the expectation that participants will differ: one participant’s responses will perhaps be slower or less accurate than another, perhaps more or less affected by word frequency than another. We can examine that variation by estimating the intercept and the slope of the frequency effect separately using the data for each participant alone.</p>
-<p>We can start by examining the frequency effect for each child in a grid of plots, with each plot representing the <span class="math inline">\(RT \sim frequency\)</span> relationship for the data for a child (<a href="#fig-freqperchildtrellis">Figure&nbsp;<span>4.3</span></a>).</p>
-<p>We discussed how the plotting code functions in the previous chapter.</p>
+<p>The problem is that, as we have discussed, we assume that observations are independent for the linear model yet we can suppose in advance that that assumption of independence will be questionable given the expectation that participants’ responses will differ in predictable ways: one participant’s responses will perhaps be slower or less accurate than another, perhaps more or less affected by word frequency than another.</p>
+<p>We can examine that variation by estimating the intercept and the slope of the frequency effect separately using the data for each participant alone. We can start by visualizing the frequency effect for each child in a grid of plots, with each plot representing the <span class="math inline">\(RT \sim frequency\)</span> relationship for the data for a child (<a href="#fig-freqperchildtrellis">Figure&nbsp;<span>4.3</span></a>).</p>
+<p>We looked at how the plotting code works in <a href="01-multilevel.html#sec-multi-plot-lattice"><span>Section&nbsp;3.9.7</span></a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>long.all.noNAs <span class="sc">%&gt;%</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Lg.UK.CDcount, <span class="at">y =</span> RT)) <span class="sc">+</span></span>
@@ -1528,12 +1545,12 @@ F-statistic: 302.8 on 1 and 9083 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </div>
-<p><a href="#fig-freqperchildtrellis">Figure&nbsp;<span>4.3</span></a> shows how, on average, more frequent words are associated with shorter reaction time, faster responses. The plot further shows, however, that the effect of frequency varies considerably between children.</p>
+<p><a href="#fig-freqperchildtrellis">Figure&nbsp;<span>4.3</span></a> shows how, on average, more frequent words are associated with shorter reaction time: faster responses. The plot further shows, however, that the effect of frequency varies considerably between children.</p>
 <ul>
 <li>Some children show little or no effect; the best fit line is practically level.</li>
 <li>Some children show a marked effect, with a steep fit line indicating a strong frequency effect.</li>
 </ul>
-<p>We can get more insight into the differences between children, however, if we plot the estimated intercept and frequency effect coefficients for each child directly. This allows more insight because it focuses the eye on the differences between children in the estimates. We do this next: see <a href="#fig-freqperchildlm">Figure&nbsp;<span>4.4</span></a>. (I present the code for generating the plot in: <code>02-mixed-workbook-with-answers.R</code>)</p>
+<p>We can get more insight into the differences between children if we plot the estimated intercept and frequency effect coefficients for each child directly. This allows more insight because it focuses the eye on the differences between children in the estimates. We do this next: see <a href="#fig-freqperchildlm">Figure&nbsp;<span>4.4</span></a>. (I work through the code for generating the plot in: <code>02-mixed-workbook-with-answers.R</code>)</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-freqperchildlm" class="quarto-figure quarto-figure-center anchored">
