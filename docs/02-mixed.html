@@ -2217,13 +2217,41 @@ Tip
 </section>
 <section id="sec-intro-mixed-conclusions" class="level2" data-number="4.13">
 <h2 data-number="4.13" class="anchored" data-anchor-id="sec-intro-mixed-conclusions"><span class="header-section-number">4.13</span> Conclusions</h2>
-<p>A large proportion of psychological studies involves scenarios in which the researcher samples both participants and some kind of stimuli. Often, the researcher will present the stimuli to the participants for response in some version of a range of possible designs: all participants see and respond to all stimuli; participants respond to different sub-sets of stimuli in different conditions (or in different groups) but they see and respond to all stimuli in a sub-set; participants are allocated to respond to stimulus sub-sets according to a counter balancing scheme (e.g., through the use of Latin squares). Whatever version of this scenario, <em>if</em> participants are responding to multiple stimuli and <em>if</em> multiple partcipants respond to each stimulus, then the data will have a multilevel structure such that each observation can be grouped both by participant and by stimulus. We are interested in taking into account the random effects associated with unexplained or random differences between participants or between stimuli. We often discuss the accounting of these effects in terms of the estimation of error variances associated with the random differences, calling the effects of the differences <em>random effects</em>. Where we have to deal with both samples of participants and samples of stimuli, we can talk about <em>crossed random effects</em>.</p>
-<p>The terms are not that important. The insight is: in general, in experimental psychological science, when we do data analysis, if we want to estimate effects of experimental variables more accurately then our models need to incorporate terms to capture the impact on observed outcomes of sampled participants and sampled stimuli. Historically, we have, as a field, learned to take into account these sampling effects. Now, and most likely, more and more commonly in the future, we are learning to use multilevel or mixed-effects models to do this.</p>
+<p>A large proportion of psychological studies involves scenarios in which the researcher samples both participants and some kind of stimuli. Often, the researcher will present the stimuli to the participants for response in some version of a range of possible designs:</p>
+<ul>
+<li>all participants see and respond to all stimuli;</li>
+<li>participants respond to different sub-sets of stimuli in different conditions (or in different groups) but they see and respond to all stimuli in a sub-set;</li>
+<li>participants are allocated to respond to stimulus sub-sets according to a counter balancing scheme (e.g., through the use of Latin squares).</li>
+</ul>
+<p>Whatever version of this scenario, <em>if</em> participants are responding to multiple stimuli and <em>if</em> multiple partcipants respond to each stimulus, then the data will have a multilevel structure such that each observation can be grouped both by participant and by stimulus.</p>
+<p>We are interested in taking into account the random effects associated with unexplained or random differences between participants or between stimuli. We often discuss the accounting of these effects in terms of the estimation of error variances associated with the random differences, calling the effects of the differences <em>random effects</em>. Where we have to deal with both samples of participants and samples of stimuli, we can talk about <em>crossed random effects</em>.</p>
+<p>The terms are not that important. The insight is.</p>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>n general, in experimental psychological science, when we do data analysis, if we want to estimate effects of experimental variables more accurately then our models need to incorporate terms to capture the impact on observed outcomes of sampled participants and sampled stimuli.</p>
+</div>
+</div>
+<p>Historically, we have, as a field, learned to take into account these sampling effects. Now, and most likely, more and more commonly in the future, we are learning to use multilevel or mixed-effects models to do this.</p>
 <section id="sec-intro-mixed-summary" class="level3" data-number="4.13.1">
 <h3 data-number="4.13.1" class="anchored" data-anchor-id="sec-intro-mixed-summary"><span class="header-section-number">4.13.1</span> Summary</h3>
-<p>We discussed the way that data are structured when they come from studies with repeated measures designs. Critically, we examined data from a common study design where a sample of stimulus items are presented for response to members of a participant sample. This means that each observation can be grouped by participant and, also, by stimulus. The possibility that observations can be grouped means that the data have a multilevel structure. The multilevel structure requires the use of linear mixed-effects models when we seek to estimate the effects of experimental variables. The fact that data can be grouped both by participant and by stimulus means that the model can incorporate random effects to capture random between-participant differences as well as between-stimulus differences. The use of mixed-effects models has meant that psychologists no longer need to adopt compromise solutions which have important limitations, like by-items and by-subjects analyses.</p>
+<section id="sec-intro-mixed-summary-concepts" class="level4" data-number="4.13.1.1">
+<h4 data-number="4.13.1.1" class="anchored" data-anchor-id="sec-intro-mixed-summary-concepts"><span class="header-section-number">4.13.1.1</span> Summary: concepts</h4>
+<p>We discussed the way that data are structured when they come from studies with repeated measures designs. Critically, we examined data from a common study design where a sample of stimulus items are presented for response to members of a participant sample. This means that each observation can be grouped by participant and, also, by stimulus. The possibility that observations can be grouped means that the data have a multilevel structure.</p>
+<p>The multilevel structure requires the use of linear mixed-effects models when we seek to estimate the effects of experimental variables. The fact that data can be grouped both by participant and by stimulus means that the model can incorporate random effects to capture random between-participant differences as well as between-stimulus differences.</p>
+<p>The use of mixed-effects models has meant that psychologists no longer need to adopt compromise solutions which have important limitations, like by-items and by-subjects analyses.</p>
+</section>
+<section id="sec-intro-mixed-summary-skills" class="level4" data-number="4.13.1.2">
+<h4 data-number="4.13.1.2" class="anchored" data-anchor-id="sec-intro-mixed-summary-skills"><span class="header-section-number">4.13.1.2</span> Summary: concepts</h4>
 <p>We reviewed the ways that experimental data can be untidy. And we outlined the steps that may be required to process untidy data into a tidy format suitable for analysis. As is typical for the data analysis we need to do for experimental psychological science, getting data ready for analysis requires a series of steps including: access; import; restructure; select variables; and filter observations.</p>
-<p>We then developed a mixed-effects model to answer the research question:</p>
+<p>We then developed a mixed-effects model to answer the question:</p>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -2234,16 +2262,22 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>What word properties influence responses to words in a test of reading aloud?</p>
+<ul>
+<li>Research question: What word properties influence responses to words in a test of reading aloud?</li>
+</ul>
 </div>
 </div>
-<p>Our analysis focused on the relationship between reading response reaction time (RT, in ms) and the predictor word frequency. We examined how the effect of word frequency was estimated in a linear model ignoring the multilevel structure and then in mixed-effects models which incorporated terms to capture variance associated with random differences between participants in intercepts or in the slope of the frequency effect, and between items in intercepts.</p>
+<p>Our analysis focused on the relationship between reading response reaction time (RT, in ms) and the predictor word frequency. We examined how the effect of word frequency was estimated in a linear model ignoring the multilevel structure and then in mixed-effects models which incorporated terms to capture:</p>
+<ul>
+<li>variance associated with random differences between participants in intercepts or in the slope of the frequency effect,</li>
+<li>variance associated with random differences between items in intercepts.</li>
+</ul>
 <p>We saw that estimates of the frequency effect differed between different models.</p>
-<p>We considered the possibility of within-items effects.</p>
+</section>
 </section>
 <section id="sec-intro-mixed-glossary-useful-functions" class="level3" data-number="4.13.2">
 <h3 data-number="4.13.2" class="anchored" data-anchor-id="sec-intro-mixed-glossary-useful-functions"><span class="header-section-number">4.13.2</span> Glossary: useful functions</h3>
-<p>We used a number of functions to tidy, visualize and analyze the CP study data.</p>
+<p>We used a number of functions to tidy and visualize the CP study data.</p>
 <ul>
 <li><code>read_csv()</code> and <code>read_csv()</code> to load source data files into the R workspace</li>
 <li><code>pivot_longer()</code> to restructure data from wide to long</li>
@@ -2252,7 +2286,10 @@ Note
 <li><code>filter()</code> to filter observations based on conditions</li>
 <li><code>na.omit()</code> to remove missing values</li>
 <li>For visualisation, we used <code>facet_wrap()</code> to show plots of the relationship between outcome and predictor variables separately for different groups (by participant, or by item)</li>
-<li>We used <code>lmer()</code> to fit a multilevel model</li>
+</ul>
+<p>For our analyses:</p>
+<ul>
+<li>We used <code>lmer()</code> to fit a multilevel model.</li>
 </ul>
 <p>We used the <code>summary()</code> function to get model results for both linear models and for the mulilevel or liner mixed-effects model.</p>
 </section>
