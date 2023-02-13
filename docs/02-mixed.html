@@ -1635,7 +1635,7 @@ Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + e_{ij}
 </section>
 <section id="sec-intro-mixed-lmer" class="level3" data-number="4.9.5">
 <h3 data-number="4.9.5" class="anchored" data-anchor-id="sec-intro-mixed-lmer"><span class="header-section-number">4.9.5</span> Fitting a mixed-effect model using the lmer() function</h3>
-<p>We can fit a mixed-effects model of the <span class="math inline">\(RT \sim frequency\)</span> relationship, taking into account the random differences between participants. I first go through the model fitting code bit by bit. (I then go through the output, the results.)</p>
+<p>We can fit a mixed-effects model of the <span class="math inline">\(RT \sim frequency\)</span> relationship, taking into account the random differences between participants. I first go through the model fitting code bit by bit. (I go through the output, the results, in <a href="#sec-intro-mixed-lmer-results"><span>Section&nbsp;4.9.6</span></a>.)</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>lmer.all<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">lmer</span>(RT <span class="sc">~</span>  Lg.UK.CDcount <span class="sc">+</span> </span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                         (Lg.UK.CDcount <span class="sc">+</span> <span class="dv">1</span><span class="sc">||</span>subjectID),</span>
@@ -1644,7 +1644,7 @@ Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + e_{ij}
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmer.all<span class="fl">.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>You have seen the <code>lmer()</code> function code before but <em>practice makes perfect</em> so we shall go through the code step by step, as we did previously. This time, notice what is different versus what stays the same compared to what you saw in <a href="01-multilevel.html#sec-multi-lmer"><span>Section&nbsp;3.9.12</span></a>.</p>
+<p>You have seen the <code>lmer()</code> function code before but <em>practice makes perfect</em> so we shall go through the code step by step, as we did previously.</p>
 <p>First, we have a chunk of code mostly similar to what we do when we do a regression analysis.</p>
 <ol type="1">
 <li><code>lmer.all.1 &lt;- lmer(...)</code> creates a <em>linear mixed-effects model</em> object using the <code>lmer()</code> function.</li>
@@ -1658,15 +1658,39 @@ Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + e_{ij}
 <li><code>(...1 ||subjectID)</code> says that we want to estimate random differences between sample groups (observations by child) in intercepts, where the intercept is coded by <code>1</code>.</li>
 <li><code>(Lg.UK.CDcount... ||subjectID)</code> adds random differences between sample groups (observations by child) in slopes of the frequency effect coded using the <code>Lg.UK.CDcount</code> variable name.</li>
 </ul>
-<section id="sec-intro-mixed-double-bar" class="level4" data-number="4.9.5.1">
-<h4 data-number="4.9.5.1" class="anchored" data-anchor-id="sec-intro-mixed-double-bar"><span class="header-section-number">4.9.5.1</span> What does || mean?</h4>
-<p>I want you to notice something that looks like nothing much: <code>||</code>. We are going to need to defer until later a (necessary) discussion of exactly why we need the two double lines. In short, the use of <code>||</code> asks R to fit a model in which we estimate random effects associated with:</p>
+<section id="sec-intro-mixed-exx-lmer" class="level4" data-number="4.9.5.1">
+<h4 data-number="4.9.5.1" class="anchored" data-anchor-id="sec-intro-mixed-exx-lmer"><span class="header-section-number">4.9.5.1</span> Exercise</h4>
+<p>It will help your learning if you now go back and compare this model with the model you saw in <a href="01-multilevel.html#sec-multi-lmer"><span>Section&nbsp;3.9.12</span></a>.</p>
+<ul>
+<li>Identify what is different: dataset, variable names, and model formula.</li>
+<li>Identify what stays the same: function name … the specification of both model and random effects.</li>
+</ul>
+<p>If you can see what is different versus what stays the same then you learn what <em>you can change</em> when the time comes for your analysis with your data.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Learning to look at example code <em>so that you can identify how to adapt it</em> for your own purposes is a key skill in psychological data science.</p>
+</div>
+</div>
+</section>
+<section id="sec-intro-mixed-double-bar" class="level4" data-number="4.9.5.2">
+<h4 data-number="4.9.5.2" class="anchored" data-anchor-id="sec-intro-mixed-double-bar"><span class="header-section-number">4.9.5.2</span> What does || mean?</h4>
+<p>Before we move on, I want you to notice something that looks like nothing much: <code>||</code>.</p>
+<p>We are going to need to defer until later a (necessary) discussion of exactly why we need the two double lines. In short, the use of <code>||</code> asks R to fit a model in which we estimate random effects associated with:</p>
 <ul>
 <li>variance due to differences in intercepts</li>
 <li>variance due to differences in slopes</li>
 <li>but <em>not</em> covariance between the two sets of differences</li>
 </ul>
-<p>I do this because otherwise the model I specify will not converge. We shall need to discuss these things: <strong>convergence</strong>, and failures to converge; as well as <strong>random effects specification</strong> and simplification. We will discuss random effects covariance in <a href="#sec-intro-mixed-variance-covariance"><span>Section&nbsp;4.11</span></a>. For now, the most important lesson is learnt by seeing how the analysis approach we saw last week can be extended to examining the effects of experimental variables in data from repeated measures design studies.</p>
+<p>I do this because otherwise the model I specify <em>will not converge</em>.</p>
+<p>We shall need to discuss these things: <strong>convergence</strong>, and failures to converge; as well as random effects specification and simplification. We will discuss random effects covariance in <a href="#sec-intro-mixed-variance-covariance"><span>Section&nbsp;4.11</span></a>. For now, the most important lesson is learnt by seeing how the analysis approach we saw last week can be extended to examining the effects of experimental variables in data from repeated measures design studies.</p>
 </section>
 </section>
 <section id="sec-intro-mixed-lmer-results" class="level3" data-number="4.9.6">

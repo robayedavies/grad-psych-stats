@@ -933,7 +933,7 @@ Right now, it is important to understand that in our analysis we do not care abo
 
 ### Fitting a mixed-effect model using the lmer() function {#sec-intro-mixed-lmer}
 
-We can fit a mixed-effects model of the $RT \sim frequency$ relationship, taking into account the random differences between participants. I first go through the model fitting code bit by bit. (I then go through the output, the results.)
+We can fit a mixed-effects model of the $RT \sim frequency$ relationship, taking into account the random differences between participants. I first go through the model fitting code bit by bit. (I go through the output, the results, in @sec-intro-mixed-lmer-results.)
 
 ```{r}
 #| label: lmerfreq
@@ -946,7 +946,7 @@ lmer.all.1 <- lmer(RT ~  Lg.UK.CDcount +
 summary(lmer.all.1)
 ```
 
-You have seen the `lmer()` function code before but *practice makes perfect* so we shall go through the code step by step, as we did previously. This time, notice what is different versus what stays the same compared to what you saw in @sec-multi-lmer.
+You have seen the `lmer()` function code before but *practice makes perfect* so we shall go through the code step by step, as we did previously.
 
 First, we have a chunk of code mostly similar to what we do when we do a regression analysis.
 
@@ -961,15 +961,32 @@ Second, we have the bit that is specific to multilevel or mixed-effects models.
 -   `(...1 ||subjectID)` says that we want to estimate random differences between sample groups (observations by child) in intercepts, where the intercept is coded by `1`.
 -   `(Lg.UK.CDcount... ||subjectID)` adds random differences between sample groups (observations by child) in slopes of the frequency effect coded using the `Lg.UK.CDcount` variable name.
 
+#### Exercise {#sec-intro-mixed-exx-lmer}
+
+It will help your learning if you now go back and compare this model with the model you saw in @sec-multi-lmer.
+
+- Identify what is different: dataset, variable names, and model formula.
+- Identify what stays the same: function name ... the specification of both model and random effects.
+
+If you can see what is different versus what stays the same then you learn what *you can change* when the time comes for your analysis with your data. 
+
+::: callout-tip
+Learning to look at example code *so that you can identify how to adapt it* for your own purposes is a key skill in psychological data science.
+:::
+
 #### What does \|\| mean? {#sec-intro-mixed-double-bar}
 
-I want you to notice something that looks like nothing much: `||`. We are going to need to defer until later a (necessary) discussion of exactly why we need the two double lines. In short, the use of `||` asks R to fit a model in which we estimate random effects associated with:
+Before we move on, I want you to notice something that looks like nothing much: `||`. 
+
+We are going to need to defer until later a (necessary) discussion of exactly why we need the two double lines. In short, the use of `||` asks R to fit a model in which we estimate random effects associated with:
 
 -   variance due to differences in intercepts
 -   variance due to differences in slopes
 -   but *not* covariance between the two sets of differences
 
-I do this because otherwise the model I specify will not converge. We shall need to discuss these things: **convergence**, and failures to converge; as well as **random effects specification** and simplification. We will discuss random effects covariance in @sec-intro-mixed-variance-covariance. For now, the most important lesson is learnt by seeing how the analysis approach we saw last week can be extended to examining the effects of experimental variables in data from repeated measures design studies.
+I do this because otherwise the model I specify *will not converge*. 
+
+We shall need to discuss these things: **convergence**, and failures to converge; as well as random effects specification and simplification. We will discuss random effects covariance in @sec-intro-mixed-variance-covariance. For now, the most important lesson is learnt by seeing how the analysis approach we saw last week can be extended to examining the effects of experimental variables in data from repeated measures design studies.
 
 ### Reading the lmer() results {#sec-intro-mixed-lmer-results}
 
