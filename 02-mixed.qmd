@@ -1005,18 +1005,17 @@ summary(lmer.all.1)
 
 We discussed the major elements of the results output last week. We expand on that discussion, a little, here.
 
-1. The output from the model summary first gives us **information about the model**.
+The output from the model summary first gives us **information about the model**.
 
--   First, we see information about the function used to fit the model, and the model object created by the `lmer()` function call.
--   Then, we see the model formula `RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1|subjectID)`.
--   Then, we see `REML criterion at convergence` about the model fitting process, which we can usually ignore.
--   Then, we see information about the distribution of the model residuals.
-
-2. We then see information listed under **Random effects**: this is where you can see information about the error variance terms estimated by the model.
+1. First, we see information about the function used to fit the model, and the model object created by the `lmer()` function call.
+2. Then, we see the model formula `RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1|subjectID)`.
+3. Then, we see `REML criterion at convergence` about the model fitting process, which we can usually ignore.
+4. Then, we see information about the distribution of the model residuals.
+5. We then see information listed under **Random effects**: this is where you can see information about the error variance terms estimated by the model.
 
 - The information is listed in four columns: 1. `Groups`; 2. `Name`; 3. `Variance`; and 4. `Std.Dev.` 
 
-We have talked about how observations can be grouped by participant (because we have multiple response observations for each person in the study) just as previously we talked about how observations could be grouped by class (because we saw that children were nested under class). That is what we mean when we refer to `Groups`. We are identifying the grouping variables that give hierarchical structure to the data.
+We have discussed how observations can be grouped by participant (because we have multiple response observations for each person in the study) just as previously we identified how observations could be grouped by class (because we saw that children were nested under class). That is what we mean when we refer to `Groups`: we are identifying the grouping variables that give hierarchical structure to the data.
 
 - The `Name` lists whether the estimate we are looking at corresponds to, here, random differences between participants in intercepts (listed as `(Intercept)`), or in slopes (listed as `Lg.UK.CDcount`). 
 
@@ -1030,7 +1029,7 @@ Thus, we see in the `Random Effects` section, the variances associated with:
 
 We do not usually discuss the specific variance estimates in research reports. However, the relative size of the variances does provide useful information [@meteyard2020a], as we shall see when we discuss the different estimates we get when we include a random effect due to differences between items (@sec-intro-mixed-random-effect-items).
 
-3. Lastly, we see estimates of the coefficients (of the slopes) of the fixed effects.
+6. Lastly, we see estimates of the coefficients (of the slopes) of the fixed effects.
 
 In this model, we see estimates of the fixed effects of the intercept and the slope of the `RT ~ Lg.UK.CDcount` model. We discuss these estimates next.
 

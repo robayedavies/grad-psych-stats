@@ -1727,22 +1727,18 @@ Lg.UK.CDcnt -0.093</code></pre>
 </div>
 </div>
 <p>We discussed the major elements of the results output last week. We expand on that discussion, a little, here.</p>
+<p>The output from the model summary first gives us <strong>information about the model</strong>.</p>
 <ol type="1">
-<li>The output from the model summary first gives us <strong>information about the model</strong>.</li>
-</ol>
-<ul>
 <li>First, we see information about the function used to fit the model, and the model object created by the <code>lmer()</code> function call.</li>
 <li>Then, we see the model formula <code>RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1|subjectID)</code>.</li>
 <li>Then, we see <code>REML criterion at convergence</code> about the model fitting process, which we can usually ignore.</li>
 <li>Then, we see information about the distribution of the model residuals.</li>
-</ul>
-<ol start="2" type="1">
 <li>We then see information listed under <strong>Random effects</strong>: this is where you can see information about the error variance terms estimated by the model.</li>
 </ol>
 <ul>
 <li>The information is listed in four columns: 1. <code>Groups</code>; 2. <code>Name</code>; 3. <code>Variance</code>; and 4. <code>Std.Dev.</code></li>
 </ul>
-<p>We have talked about how observations can be grouped by participant (because we have multiple response observations for each person in the study) just as previously we talked about how observations could be grouped by class (because we saw that children were nested under class). That is what we mean when we refer to <code>Groups</code>. We are identifying the grouping variables that give hierarchical structure to the data.</p>
+<p>We have discussed how observations can be grouped by participant (because we have multiple response observations for each person in the study) just as previously we identified how observations could be grouped by class (because we saw that children were nested under class). That is what we mean when we refer to <code>Groups</code>: we are identifying the grouping variables that give hierarchical structure to the data.</p>
 <ul>
 <li>The <code>Name</code> lists whether the estimate we are looking at corresponds to, here, random differences between participants in intercepts (listed as <code>(Intercept)</code>), or in slopes (listed as <code>Lg.UK.CDcount</code>).</li>
 </ul>
@@ -1754,7 +1750,7 @@ Lg.UK.CDcnt -0.093</code></pre>
 <li>Alongside <code>Residual  23734</code>, residuals where, just like a linear model, we have variance associated with differences between model estimates and observed RT, here, at the trial level.</li>
 </ul>
 <p>We do not usually discuss the specific variance estimates in research reports. However, the relative size of the variances does provide useful information <span class="citation" data-cites="meteyard2020a">(<a href="references.html#ref-meteyard2020a" role="doc-biblioref">Meteyard &amp; Davies, 2020</a>)</span>, as we shall see when we discuss the different estimates we get when we include a random effect due to differences between items (<a href="#sec-intro-mixed-random-effect-items"><span>Section&nbsp;4.10.1.1</span></a>).</p>
-<ol start="3" type="1">
+<ol start="6" type="1">
 <li>Lastly, we see estimates of the coefficients (of the slopes) of the fixed effects.</li>
 </ol>
 <p>In this model, we see estimates of the fixed effects of the intercept and the slope of the <code>RT ~ Lg.UK.CDcount</code> model. We discuss these estimates next.</p>
