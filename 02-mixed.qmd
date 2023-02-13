@@ -1048,9 +1048,11 @@ It is important to remember, however, that whatever estimate we can produce is t
 
 Further, we have not finished in our consideration of the random effects that the account should include. We need to do more work by thinking about the differences between stimuli (@sec-intro-mixed-fixed-effect-fallacy).
 
-#### Why aren't there p-values? {#sec-intro-mixed-p-values}
+::: callout-warning
+Why aren't there p-values?
 
 We will come back to this but note that if $t > 2$ we can suppose that an effect is significant at the $.05$ significance level.
+:::
 
 ### What we estimate when we estimate random effects {#sec-intro-mixed-BLUPs}
 
