@@ -1563,9 +1563,43 @@ Note
 </div>
 <p><a href="#fig-freqperchildlm">Figure&nbsp;<span>4.4</span></a> presents two plots showing the estimates of the intercept and the coefficient of the effect of word frequency on reading RT, calculated separately for each child. This means that we fitted a separate linear model, for the association between RT and frequency, using the data for just one child, for each child in our sample, for all the children.</p>
 <p>The estimate for each child is shown as a black dot. The standard error of the estimate is shown as a black vertical line, shown above and below a point. You can say that where there is a longer line there we have more uncertainty about the location of the estimate.</p>
-<p>The estimates calculated for each child are ordered from left to right by the size of the estimate. Drawn this way, we can see how the estimates of both the intercept and the slope of the frequency effect vary substantially between children. We can see also how the standard errors vary greatly between children.</p>
-<p>Notice that if there is an average intercept for everyone in the sample or, better, an intercept we could estimate for everyone in the population, then the different intercepts we have estimated for each child would be distributed around that population-level average. Some children will have slower (here, larger) intercepts and other children will have faster (shorter) intercepts. (Here, the intercept can be taken to be the average RT when all other effects in the model are set to zero. RT varies for this sample around somewhere like <span class="math inline">\(\beta_0 = 883ms\)</span> so a slower larger intercept might be e.g.&nbsp;<span class="math inline">\(\beta_0 = 1000ms\)</span>.)</p>
-<p>In the same way, if there is an average slope for the frequency effect, an effect of frequency on reading RT, averaged across everyone in the population, then, again, the different slopes we have estimated for each child would be distributed around that population-level effect. Some children will have larger (here, more negative) frequency effects and other children will have smaller (less negative) frequency effects. (Here, the frequency effect is associated with a negative coefficient e.g.&nbsp;<span class="math inline">\(\beta_1 = -53\)</span> so a larger frequency effect will be a bigger negative number e.g.&nbsp;<span class="math inline">\(\beta_1 = -100\)</span>.)</p>
+<p>The estimates calculated for each child are shown ordered from left to right in the plot by the size of the estimate. This adjustment to the plot reveals how the estimates of both the intercept and the slope of the frequency effect vary substantially between children.</p>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The first <strong>key observation</strong> is that if there is an average intercept for everyone in the sample or, better, an intercept we could estimate for everyone in the population, then the different intercepts we have estimated for each child would be distributed around that population-level average:</p>
+<ul>
+<li>Some children will have slower (here, larger) intercepts</li>
+<li>and other children will have faster (shorter) intercepts.</li>
+</ul>
+</div>
+</div>
+<p>Here, the intercept can be taken to be the average RT when all other effects in the model are set to zero. RT varies for this sample around somewhere like <span class="math inline">\(\beta_0 = 883ms\)</span> so a slower larger intercept might be e.g.&nbsp;<span class="math inline">\(\beta_0 = 1000ms\)</span>.</p>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The second <strong>key observation</strong> is that if there is an average slope for the frequency effect, an effect of frequency on reading RT, averaged across everyone in the population, then, again, the different slopes we have estimated for each child would be distributed around that population-level effect.</p>
+<ul>
+<li>Some children will have larger (here, more negative) frequency effects</li>
+<li>and other children will have smaller (less negative) frequency effects.</li>
+</ul>
+</div>
+</div>
+<p>Here, the frequency effect is associated with a negative coefficient e.g.&nbsp;<span class="math inline">\(\beta_1 = -53\)</span> so a larger frequency effect will be a bigger negative number e.g.&nbsp;<span class="math inline">\(\beta_1 = -100\)</span>.</p>
 </section>
 <section id="sec-intro-mixed-effects-models" class="level3" data-number="4.9.4">
 <h3 data-number="4.9.4" class="anchored" data-anchor-id="sec-intro-mixed-effects-models"><span class="header-section-number">4.9.4</span> Multilevel – here, more appropriately known as – mixed-effects models</h3>

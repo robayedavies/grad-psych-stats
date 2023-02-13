@@ -876,11 +876,25 @@ grid.arrange(pfreqperchildlmint, pfreqperchildlmfreq,
 
 The estimate for each child is shown as a black dot. The standard error of the estimate is shown as a black vertical line, shown above and below a point. You can say that where there is a longer line there we have more uncertainty about the location of the estimate.
 
-The estimates calculated for each child are ordered from left to right by the size of the estimate. Drawn this way, we can see how the estimates of both the intercept and the slope of the frequency effect vary substantially between children. We can see also how the standard errors vary greatly between children.
+The estimates calculated for each child are shown ordered from left to right in the plot by the size of the estimate. This adjustment to the plot reveals how the estimates of both the intercept and the slope of the frequency effect vary substantially between children.
 
-Notice that if there is an average intercept for everyone in the sample or, better, an intercept we could estimate for everyone in the population, then the different intercepts we have estimated for each child would be distributed around that population-level average. Some children will have slower (here, larger) intercepts and other children will have faster (shorter) intercepts. (Here, the intercept can be taken to be the average RT when all other effects in the model are set to zero. RT varies for this sample around somewhere like $\beta_0 = 883ms$ so a slower larger intercept might be e.g. $\beta_0 = 1000ms$.)
+::: callout-important
+The first **key observation** is that if there is an average intercept for everyone in the sample or, better, an intercept we could estimate for everyone in the population, then the different intercepts we have estimated for each child would be distributed around that population-level average:
 
-In the same way, if there is an average slope for the frequency effect, an effect of frequency on reading RT, averaged across everyone in the population, then, again, the different slopes we have estimated for each child would be distributed around that population-level effect. Some children will have larger (here, more negative) frequency effects and other children will have smaller (less negative) frequency effects. (Here, the frequency effect is associated with a negative coefficient e.g. $\beta_1 = -53$ so a larger frequency effect will be a bigger negative number e.g. $\beta_1 = -100$.)
+- Some children will have slower (here, larger) intercepts
+- and other children will have faster (shorter) intercepts.
+::: 
+
+Here, the intercept can be taken to be the average RT when all other effects in the model are set to zero. RT varies for this sample around somewhere like $\beta_0 = 883ms$ so a slower larger intercept might be e.g. $\beta_0 = 1000ms$.
+
+::: callout-important
+The second **key observation** is that if there is an average slope for the frequency effect, an effect of frequency on reading RT, averaged across everyone in the population, then, again, the different slopes we have estimated for each child would be distributed around that population-level effect. 
+
+- Some children will have larger (here, more negative) frequency effects 
+- and other children will have smaller (less negative) frequency effects.
+:::
+
+Here, the frequency effect is associated with a negative coefficient e.g. $\beta_1 = -53$ so a larger frequency effect will be a bigger negative number e.g. $\beta_1 = -100$.
 
 ### Multilevel -- here, more appropriately known as -- mixed-effects models {#sec-intro-mixed-effects-models}
 
