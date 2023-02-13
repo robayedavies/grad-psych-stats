@@ -1803,72 +1803,54 @@ Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + e_{ij}
 <li>the average intercept <span class="math inline">\(\gamma_0\)</span> and differences between <span class="math inline">\(i\)</span> children in the intercept <span class="math inline">\(U_{0i}\)</span>;</li>
 <li>the average effect of the explanatory variable frequency <span class="math inline">\(\gamma_1X_j\)</span> and differences between <span class="math inline">\(i\)</span> participants in the slope <span class="math inline">\(U_{1i}X_j\)</span>.</li>
 </ul>
-<p>When we think about the differences between participants (or between the units of any grouping variable), in intercepts or in slopes, we should understand that for the mixed-effects model, the differences are:</p>
+<p>When we think about the differences between participants (or between the units of any grouping variable), in intercepts or in slopes, we typically assume that the differences are:</p>
 <ul>
 <li>random;</li>
 <li>should be normally distributed;</li>
 <li>and are distributed around the population or average fixed effects.</li>
 </ul>
-<p>We should understand that the mixed-effects model sees the differences between participants <strong>relative to the fixed effect intercept or slope</strong>, that is, relative to the population level or average effects. We can illustrate this by plotting, in <a href="#fig-BLUPS-prediction">Figure&nbsp;<span>4.5</span></a>, the differences as estimated (technically, predicted) by the mixed-effects model that we have been examining. (The code for producing the plot can be found in <code>02-mixed-workbook-answers.R</code>.)</p>
-<p>What you can see in <a href="#fig-BLUPS-prediction">Figure&nbsp;<span>4.5</span></a> are distributions. The centers of the distributions are located at zero (shown by a red line). For each distribution (a. and b.), that is where the model estimate of the intercept or the slope of the frequency effect is located. Spread around that central point, you see the adjustments the model makes to account for differences between participants.</p>
-<ol type="1">
-<li>Notice how, in <a href="#fig-BLUPS-prediction">Figure&nbsp;<span>4.5</span></a> (a.)</li>
-</ol>
-<ul>
-<li>Some children have intercepts that are smaller than the population-level or average intercept – so their adjustments are negative (to decrease their intercepts).</li>
-<li>In comparison, some children have intercepts that are larger than the population-level or average intercept – so their adjustments are positive (to increase their intercepts).</li>
-<li>Strikingly, you can see that a few children have intercepts that are as much as 1000ms larger than the population-level or average intercept.</li>
-</ul>
-<ol start="2" type="1">
-<li>Notice how, in <a href="#fig-BLUPS-prediction">Figure&nbsp;<span>4.5</span></a> (b.)</li>
-</ol>
-<ul>
-<li>Some children have frequency effects (coefficients) that are smaller than the population-level or average frequency effect – so their adjustments are positive (to decrease their frequency effect, by making it <em>less</em> negative).</li>
-<li>Remember the estimated <span class="math inline">\(\beta\)</span> coefficient for the frequency effect is negative because higher word frequency is associated with smaller RT.</li>
-<li>In comparison, some children have frequency effects that are larger than the population-level or average frequency effect – so their adjustments are negative (to increase their frequency effect, by making it <em>more</em> negative).</li>
-<li>Strikingly, you can see that a few children have frequency effects that are as much as 200ms larger (see plot (b.) around <span class="math inline">\(x = -200\)</span>) than the population-level or average effect.</li>
-</ul>
+<p>We can say that the mixed-effects model sees the differences between participants <strong>relative to the fixed effect intercept or slope</strong>, that is, relative to the population level or average effects.</p>
+<p>We can illustrate this by plotting, in <a href="#fig-BLUPS-prediction">Figure&nbsp;<span>4.5</span></a>, the differences as estimated – technically, <em>predicted</em> – by the mixed-effects model that we have been examining. (The code for producing the plot can be found in <code>02-mixed-workbook-answers.R</code>.)</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-BLUPS-prediction" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="02-mixed_files/figure-html/fig-BLUPS-prediction-1.png" class="img-fluid figure-img" alt="The figure shows two histograms (a.) on the left represents the distribution of adjustments to account for per-child deviations between the overall intercept and the intercept estimated for a child while (b.) on the right represents the distribution of adjustments to account for per-child deviations between the overall slope and the slope estimated for a child. The histograms indicate widely spread deviations about the overall estimate." width="960"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;4.5: Plot showing histograms indicating the distribution of participant adjustments to account for between-child differences in intercept or slope (known as Best Linear Unbiased Predictions)</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.5: Plot showing histograms indicating the distribution of participant adjustments to account for between-child differences in intercept or slope (the Best Linear Unbiased Predictions).</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-<p>When a mixed-effects model is fitted to a dataset, its set of estimated parameters includes the coefficients for the fixed effects as well as the standard deviations for the random effects <span class="citation" data-cites="baayen2008">(<a href="references.html#ref-baayen2008" role="doc-biblioref">Baayen et al., 2008</a>)</span>. The individual values of the adjustments made to intercepts and slopes are calculated once the random effects have been estimated. If you read the literature on mixed-effects models, you will see that the adjustments are called <em>Best Linear Unbiased Predictors</em> (BLUPs).</p>
-<section id="sec-intro-mixed-exx-lmer" class="level4" data-number="4.9.7.1">
-<h4 data-number="4.9.7.1" class="anchored" data-anchor-id="sec-intro-mixed-exx-lmer"><span class="header-section-number">4.9.7.1</span> Exercise</h4>
-<p>Mixed-effects modeling is hard to get used to <em>at first</em>. A bit more practice helps to show you how the different parts of the model work. We again focus on the random effects.</p>
+<p>What you can see in <a href="#fig-BLUPS-prediction">Figure&nbsp;<span>4.5</span></a> are distributions, presented using histograms. The centers of the distributions are located at zero (shown by a red line). For each distribution (a. and b.), that is where the model estimate of the intercept or the slope of the frequency effect is located. Spread around that central point, you see the adjustments the model makes to account for differences between participants.</p>
+<p>Notice how, in <a href="#fig-BLUPS-prediction">Figure&nbsp;<span>4.5</span></a> (a.):</p>
+<ol type="1">
+<li>Some children have intercepts that are smaller than the population-level or average intercept – so their adjustments are negative (to decrease their intercepts).</li>
+<li>Some children have intercepts that are larger than the population-level or average intercept – so their adjustments are positive (to increase their intercepts).</li>
+</ol>
 <ul>
-<li>In the model we have seen so far, we specify <code>(Lg.UK.CDcount + 1||subjectID)</code></li>
-<li>We can change this part – and only this part – to see what happens to the results, do this:</li>
+<li>Strikingly, you can see that a few children have intercepts that are as much as 1000ms larger than the population-level or average intercept: the bars representing the estimates for these children are far out on the right of the x-axis in <a href="#fig-BLUPS-prediction">Figure&nbsp;<span>4.5</span></a> (a.).</li>
+</ul>
+<p>Now notice how, in <a href="#fig-BLUPS-prediction">Figure&nbsp;<span>4.5</span></a> (b.):</p>
+<ol start="3" type="1">
+<li>Some children have frequency effects (coefficients) that are smaller than the population-level or average frequency effect – so their adjustments are positive (to decrease their frequency effect, by making it <em>less</em> negative).</li>
+<li>Some children have frequency effects that are larger than the population-level or average frequency effect – so their adjustments are negative (to increase their frequency effect, by making it <em>more</em> negative).</li>
+</ol>
+<p>(When you look at <a href="#fig-BLUPS-prediction">Figure&nbsp;<span>4.5</span></a> (b.), remember that the estimated <span class="math inline">\(\beta\)</span> coefficient for the frequency effect is negative because higher word frequency is associated with smaller RT.)</p>
+<ul>
+<li>Strikingly, you can see that a few children have frequency effects that are as much as 200ms larger (see plot (b.) around <span class="math inline">\(x = -200\)</span>) than the population-level or average effect.</li>
+</ul>
+<p>When a mixed-effects model is fitted to a dataset, its set of estimated parameters includes the coefficients for the fixed effects as well as the standard deviations for the random effects <span class="citation" data-cites="baayen2008">(<a href="references.html#ref-baayen2008" role="doc-biblioref">Baayen et al., 2008</a>)</span>. If you read the literature on mixed-effects models, you will see that the adjustments are called <em>Best Linear Unbiased Predictors</em> (BLUPs).</p>
+<section id="sec-intro-mixed-exx-lmer-random-effects" class="level4" data-number="4.9.7.1">
+<h4 data-number="4.9.7.1" class="anchored" data-anchor-id="sec-intro-mixed-exx-lmer-random-effects"><span class="header-section-number">4.9.7.1</span> Exercise: Random effects in mixed-effects models</h4>
+<p>Mixed-effects modeling is hard to get used to <em>at first</em>. A bit more practice helps to show you how the different parts of the model work. We again focus on the random effects.</p>
+<p>In the model we have seen so far, we specify <code>(Lg.UK.CDcount + 1||subjectID)</code></p>
+<ul>
+<li>We can change this part – and only this part – to see what happens to the results. <strong>Do it:</strong> rerun the model code, having changed the random effects part:</li>
 </ul>
 <ol type="1">
 <li><code>lmer(RT ~  Lg.UK.CDcount + (1|subjectID)...)</code> gives us a <em>random intercepts</em> model accounting for just random differences between participants in the intercept</li>
 <li><code>lmer(RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 0|subjectID)...)</code> gives us a <em>random slope</em> model accounting for just random differences between participants in the slope of the frequency effect</li>
 <li><code>lmer(RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1|subjectID)...)</code> gives us a <em>random intercepts and slopes</em> model accounting for both random differences between participants in the intercept and in the slope, as well as covariance in these differences.</li>
-</ol>
-<p>Try out these variations and <em>look carefully</em> at the different results. Look, especially, at what happens to the <code>Random effects</code> part of the summary.</p>
-<p>We can <em>visualize</em> the differences between the models in a plot showing the different predictions that the different models give us. <a href="#fig-indiv-prediction">Figure&nbsp;<span>4.6</span></a> shows what a mixed-effects model would predict should be the effect of frequency on RT for different children in the CP study. The predictions vary depending on the nature of the random effects we specify in the model.</p>
-<p>(Note that I figured out how to produce the plot from the information <a href="https://bbolker.github.io/morelia_2018/notes/mixedlab.html">here</a>.)</p>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-indiv-prediction" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="02-mixed_files/figure-html/fig-indiv-prediction-1.png" class="img-fluid figure-img" alt="The figure shows a grid of scatterplots. In all scatterplots, the same scatter is shown. Points in grey represent the RT and word frequency information for children's responses in reading words in the experimental task. Superimposed on the points are sets of red lines. The lines represent the predictions of different models (a.) assuming a random effect of participants on intercepts, all slopes are the same  but intercepts vary (b.) assuming a random effect of participants on slopes only, slopes vary but intercepts are the same (c.) and assuming random effect of participants on intercepts and on slopes both intercepts and slopes can be seen to vary." width="768"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;4.6: Plot showing model predictions of the effect, for each individual, of word frequency on reading reaction time – predictions vary between models incorporating (a.) random effect of participants on intercepts only; (b.) random effect of participants on slopes only and (c.) random effect of participants on intercepts and on slopes.</figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-<p>We can see that:</p>
-<ol type="1">
-<li>If the model includes the random effect of <em>participants on intercepts only</em> then all the slopes are the same (the lines in the figure are parallel) because this model assumes that the only differences between participants are differences in the intercepts.</li>
-<li>If the model includes the random effect of <em>participants on slopes only</em> then the slopes vary but they all have the same intercept. The plot does not show this but you can see how all the slopes are converging on one point somewhere on the left. This happens because this model assumes that the only differences between participants are differences in the slopes.</li>
-<li>If the model includes the random effect of <em>participants on intercepts and on slopes</em> then we can see how the intercepts and the slopes vary. Given what we saw when we looked at the relation between frequency and RT for each participant considered separately we might argue that this model is much more realistic about the data.</li>
 </ol>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -1880,10 +1862,38 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>It is very important to learn to make effective use of the warnings and error messages R can produce.</p>
+<p>Try out these variations and <em>look carefully</em> at the different results. Look, especially, at what happens to the <code>Random effects</code> part of the summary.</p>
 </div>
 </div>
-<p>Note: you do not have to just believe me when I say that <code>||</code> is in the model code to stop a problem appearing. Experiment – and see what happens when you change the code. Try this.</p>
+<p>This will be an important and revealing exercise.</p>
+<p>We can <em>visualize</em> the differences between the models in a plot showing the different predictions that the different models give us. <a href="#fig-indiv-prediction">Figure&nbsp;<span>4.6</span></a> shows what a mixed-effects model predicts are the effects of frequency on RT <em>for different children</em> in the CP study.</p>
+<ul>
+<li>The predictions vary depending on the nature of the random effects we specify in the model.</li>
+</ul>
+<p>(Note that I figured out how to produce the plot from the information <a href="https://bbolker.github.io/morelia_2018/notes/mixedlab.html">here</a>.)</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-indiv-prediction" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="02-mixed_files/figure-html/fig-indiv-prediction-1.png" class="img-fluid figure-img" alt="The figure shows a grid of scatterplots. In all scatterplots, the same scatter is shown. Points in grey represent the RT and word frequency information for children's responses in reading words in the experimental task. Superimposed on the points are sets of red lines. The lines represent the predictions of different models (a.) assuming a random effect of participants on intercepts, all slopes are the same  but intercepts vary (b.) assuming a random effect of participants on slopes only, slopes vary but intercepts are the same (c.) and assuming random effect of participants on intercepts and on slopes both intercepts and slopes can be seen to vary." width="960"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.6: Plot showing model predictions of the effect, for each individual, of word frequency on reading reaction time – predictions vary between models incorporating (a.) random effect of participants on intercepts only; (b.) random effect of participants on slopes only and (c.) random effect of participants on intercepts and on slopes.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can see that:</p>
+<ol type="1">
+<li>If the model includes the random effect of <em>participants on intercepts only</em> then all the slopes are the same (the lines in the figure are parallel) because this model assumes that the only differences between participants are differences in the intercepts.</li>
+<li>If the model includes the random effect of <em>participants on slopes only</em> then the slopes vary but they all have the same intercept. The plot does not show this but you can see how all the slopes are converging on one point somewhere on the left. This happens because this model assumes that the only differences between participants are differences in the slopes.</li>
+<li>If the model includes the random effect of <em>participants on intercepts and on slopes</em> then we can see how the intercepts and the slopes vary. Given what we saw when we looked at the relation between frequency and RT for each participant considered separately we might argue that this model is much more realistic about the data.</li>
+</ol>
+</section>
+<section id="sec-intro-mixed-exx-lmer-error" class="level4" data-number="4.9.7.2">
+<h4 data-number="4.9.7.2" class="anchored" data-anchor-id="sec-intro-mixed-exx-lmer-error"><span class="header-section-number">4.9.7.2</span> Exercise: Error messages for mixed-effects models</h4>
+<p>You do not have to just believe me when I say that <code>||</code> is in the model code to stop a problem appearing.</p>
+<ul>
+<li>Experiment – and see what happens when you change the code. Try this.</li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>lmer.all<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">lmer</span>(RT <span class="sc">~</span>  Lg.UK.CDcount <span class="sc">+</span> (Lg.UK.CDcount <span class="sc">+</span> <span class="dv">1</span><span class="sc">|</span>subjectID),</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>             </span>
@@ -1893,6 +1903,19 @@ Tip
 </div>
 <p>Do you get an error message?</p>
 <p>A very useful trick is to learn to copy the error message you get into a search engine on your web browser. Do this and you will find useful help, as <a href="https://rstudio-pubs-static.s3.amazonaws.com/33653_57fc7b8e5d484c909b615d8633c01d51.html">here</a></p>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It is key to your skills development that you learn to make effective use of the warnings and error messages R can produce.</p>
+</div>
+</div>
 </section>
 </section>
 </section>
