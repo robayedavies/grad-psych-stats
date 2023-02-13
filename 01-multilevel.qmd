@@ -78,9 +78,8 @@ Our learning objectives include the development of key concepts and skills.
 1.  **concepts** -- how data can have multilevel structures and what this requires in models
 2.  **skills** -- where skills comprise the capacity to:
 
-```{=html}
 <!-- -->
-```
+
 i.  use visualization to examine observations within groups
 ii. run linear models over all data and within each class
 iii. use the `lmer()` function to fit models of multilevel data
@@ -832,7 +831,7 @@ Many researchers will be aware of concerns over the non-replication of published
 
 ### Summary {#sec-multi-summary}
 
-We outlined the features of a \emph{multilevel} structure dataset. We then discussed visualizing and modeling the relationship between outcome and predictor variables:
+We outlined the features of a *multilevel* structure dataset. We then discussed visualizing and modeling the relationship between outcome and predictor variables:
 
 1.  When you ignore the multilevel structure;
 2.  Why ignoring the structure is a bad idea;
