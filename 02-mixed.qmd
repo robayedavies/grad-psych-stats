@@ -70,7 +70,7 @@ I have provided a collection of materials you can use. Here, I explain what they
 
 In this chapter, we will be working with the **CP reading study** dataset. CP tested 62 children (aged 116-151 months) on reading aloud in English. In the experimental reading task, she presented 160 words as stimuli. The same 160 words were presented to all children. The words were presented one at a time on a computer screen. Each time a word was shown, each child had to read the word out loud and their response was recorded. Thus, the CP reading study dataset comprised observations about the responses made by 62 children to 160 words.
 
-In addition to the reading task, CP administered tests of reading skill (TOWRE sight word and phonemic tests, Torgesen et al., 1999), reading experience (CART, Stainthorp, 1997), the Spoonerisms sub-test of the Phonological Awareness test Battery (Frederickson et al., 1997), and an orthographic choice test measure of orthographic knowledge (based on Olson et al., 1985). She also recorded the gender and the handedness of the children.
+In addition to the reading task, CP administered tests of reading skill [TOWRE sight word and phonemic tests, @torgesen1999towre], reading experience [CART, @stainthorp1997children], the Spoonerisms sub-test of the Phonological Awareness test Battery [PhAB, @Frederickson1997a], and an orthographic choice test measure of orthographic knowledge. She also recorded the gender and the handedness of the children.
 
 We are going to use the CP study data to examine the answers to a research question similar to the question CP investigated:
 
@@ -1325,7 +1325,7 @@ In the psychological literature, you will often see multiple regression analyses
 
 The good thing is that, thanks to the advent of mixed-effects models, we now no longer need to tolerate these problems.
 
-In the context of our working example, in our analysis of the CP study data, we can build up our mixed-effects model by adding a random effect to capture the impact of unexplained differences between stimuli. 
+In the context of our working example, in our analysis of the CP study data, we can build up our mixed-effects model by adding a random effect to capture the impact of unexplained differences between stimuli.
 
 We model the random effect of items on intercepts by modeling the intercept as two terms:
 
@@ -1343,10 +1343,10 @@ $$
 
 In this model, the outcome $Y_{ij}$ is related to:
 
-- the average intercept $\gamma_0$ and the word frequency effect $\gamma_1X_j$ 
-- plus random effects due to unexplained differences between participants in intercepts $U_{0i}$ and the slope of the frequency effect $U_{1i}X_j$ 
-- *as well as* random differences between items in intercepts $W_{0j}$,
-- in addition to the residual term $e_{ij}$.
+-   the average intercept $\gamma_0$ and the word frequency effect $\gamma_1X_j$
+-   plus random effects due to unexplained differences between participants in intercepts $U_{0i}$ and the slope of the frequency effect $U_{1i}X_j$
+-   *as well as* random differences between items in intercepts $W_{0j}$,
+-   in addition to the residual term $e_{ij}$.
 
 ### Fitting a mixed-effect model -- now with random effects of subjects and items {#sec-intro-mixed-random-effect-items}
 
@@ -1377,16 +1377,16 @@ Take a look at the model results. You should notice three changes.
 3.  And you can see that the residual variance has changed. In the first model `lmer.all.1` it was `23734`, now it is `20704`
 
 ::: callout-tip
-The reduction in residual variance is one way in which we can judge how good a job the model is doing in accounting for the variance in the outcome, observed response reaction time. 
+The reduction in residual variance is one way in which we can judge how good a job the model is doing in accounting for the variance in the outcome, observed response reaction time.
 :::
 
-We can see that by adding a term to account for differences between items we can reduce the amount by which the model estimates deviate from observed outcomes. This difference in error variance is, essentially, one basis for estimating how well the model fits the data, and a basis for estimating the *variance explained* by a model in terms of the $R^2$ statistic you have seen before. 
+We can see that by adding a term to account for differences between items we can reduce the amount by which the model estimates deviate from observed outcomes. This difference in error variance is, essentially, one basis for estimating how well the model fits the data, and a basis for estimating the *variance explained* by a model in terms of the $R^2$ statistic you have seen before.
 
 We will come back to this.
 
 ## Variances and covariances of random effects {#sec-intro-mixed-variance-covariance}
 
-As I have said, we usually do not aim to examine the specific deviation from the average intercept or the average fixed effect slope for a participant or stimulus. We estimate just the spread of deviations by-participants or by-items. 
+As I have said, we usually do not aim to examine the specific deviation from the average intercept or the average fixed effect slope for a participant or stimulus. We estimate just the spread of deviations by-participants or by-items.
 
 A mixed-effects model like our final model includes fixed effects corresponding to the intercept and the slope of the word frequency effect plus the *variances*:
 
@@ -1458,13 +1458,13 @@ In @sec-intro-mixed-double-bar, I noted how we used the `||` notation to stop th
 There is no official convention on what or how to report the results of a mixed-effects model. Lotte Meteyard and I suggest what psychologists should report in an article [@meteyard2020a] that has been downloaded a few thousand times so, maybe, our advice will help to influence practice.
 
 ::: callout-advice
-- Explain what you did, and why.
-- Explain what you found, not just whether effects are significant or not.
+-   Explain what you did, and why.
+-   Explain what you found, not just whether effects are significant or not.
 :::
 
-1. We argue that researchers should explain what analysis they have done and, where space allows, should report both the estimates of the **fixed effects** and the estimates of the **random effects**. 
+1.  We argue that researchers should explain what analysis they have done and, where space allows, should report both the estimates of the **fixed effects** and the estimates of the **random effects**.
 
-2. We think you can report the model code (maybe in an appendix, maybe in a note under a tabled summary of results).
+2.  We think you can report the model code (maybe in an appendix, maybe in a note under a tabled summary of results).
 
 A table summary presenting model results can look like this.
 
@@ -1485,7 +1485,7 @@ Note: `lmer(RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1||subjectID) + (1|item_name)
 @Barr2013a argued that choices about random effects structure affect the generalizability of the estimates of fixed effects. In particular, it seems sensible to examine the possibility that the slope of the effect of an explanatory variable may vary at random between participants or between stimuli. Correspondingly, researchers should report and explain their decisions about the inclusion of random effects.
 
 ::: callout-tip
-Researchers should report their modelling in sufficient detail that their results can be reproduced by others. 
+Researchers should report their modelling in sufficient detail that their results can be reproduced by others.
 :::
 
 It is normal practice in psychology to report the p-values associated with null hypothesis significance tests of effects when reporting analysis. Performing hypothesis tests using t- or F-distributions depends on the calculation of degrees of freedom yet it is uncertain how degrees of freedom should be counted when analyzing multilevel data (@baayen2008). In most software applications, however, p-values associated with fixed effects may be calculated using an approximation for denominator degrees of freedom.
@@ -1494,13 +1494,13 @@ We will come back to how we should report the results of mixed-effects models be
 
 ## Conclusions {#sec-intro-mixed-conclusions}
 
-A large proportion of psychological studies involves scenarios in which the researcher samples both participants and some kind of stimuli. Often, the researcher will present the stimuli to the participants for response in some version of a range of possible designs: 
+A large proportion of psychological studies involves scenarios in which the researcher samples both participants and some kind of stimuli. Often, the researcher will present the stimuli to the participants for response in some version of a range of possible designs:
 
-- all participants see and respond to all stimuli; 
-- participants respond to different sub-sets of stimuli in different conditions (or in different groups) but they see and respond to all stimuli in a sub-set; 
-- participants are allocated to respond to stimulus sub-sets according to a counter balancing scheme (e.g., through the use of Latin squares). 
+-   all participants see and respond to all stimuli;
+-   participants respond to different sub-sets of stimuli in different conditions (or in different groups) but they see and respond to all stimuli in a sub-set;
+-   participants are allocated to respond to stimulus sub-sets according to a counter balancing scheme (e.g., through the use of Latin squares).
 
-Whatever version of this scenario, *if* participants are responding to multiple stimuli and *if* multiple partcipants respond to each stimulus, then the data will have a multilevel structure such that each observation can be grouped both by participant and by stimulus. 
+Whatever version of this scenario, *if* participants are responding to multiple stimuli and *if* multiple partcipants respond to each stimulus, then the data will have a multilevel structure such that each observation can be grouped both by participant and by stimulus.
 
 We are interested in taking into account the random effects associated with unexplained or random differences between participants or between stimuli. We often discuss the accounting of these effects in terms of the estimation of error variances associated with the random differences, calling the effects of the differences *random effects*. Where we have to deal with both samples of participants and samples of stimuli, we can talk about *crossed random effects*.
 
@@ -1516,10 +1516,9 @@ Historically, we have, as a field, learned to take into account these sampling e
 
 #### Summary: concepts {#sec-intro-mixed-summary-concepts}
 
-We discussed the way that data are structured when they come from studies with repeated measures designs. Critically, we examined data from a common study design where a sample of stimulus items are presented for response to members of a participant sample. This means that each observation can be grouped by participant and, also, by stimulus. 
-The possibility that observations can be grouped means that the data have a multilevel structure. 
+We discussed the way that data are structured when they come from studies with repeated measures designs. Critically, we examined data from a common study design where a sample of stimulus items are presented for response to members of a participant sample. This means that each observation can be grouped by participant and, also, by stimulus. The possibility that observations can be grouped means that the data have a multilevel structure.
 
-The multilevel structure requires the use of linear mixed-effects models when we seek to estimate the effects of experimental variables. The fact that data can be grouped both by participant and by stimulus means that the model can incorporate random effects to capture random between-participant differences as well as between-stimulus differences. 
+The multilevel structure requires the use of linear mixed-effects models when we seek to estimate the effects of experimental variables. The fact that data can be grouped both by participant and by stimulus means that the model can incorporate random effects to capture random between-participant differences as well as between-stimulus differences.
 
 The use of mixed-effects models has meant that psychologists no longer need to adopt compromise solutions which have important limitations, like by-items and by-subjects analyses.
 
@@ -1535,8 +1534,8 @@ We then developed a mixed-effects model to answer the question:
 
 Our analysis focused on the relationship between reading response reaction time (RT, in ms) and the predictor word frequency. We examined how the effect of word frequency was estimated in a linear model ignoring the multilevel structure and then in mixed-effects models which incorporated terms to capture:
 
-- variance associated with random differences between participants in intercepts or in the slope of the frequency effect,
-- variance associated with random differences between items in intercepts.
+-   variance associated with random differences between participants in intercepts or in the slope of the frequency effect,
+-   variance associated with random differences between items in intercepts.
 
 We saw that estimates of the frequency effect differed between different models.
 
