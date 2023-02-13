@@ -1035,11 +1035,16 @@ In this model, we see estimates of the fixed effects of the intercept and the sl
 
 #### Is there a difference between linear model and linear mixed-effects model results? {#sec-intro-mixed-lm-lmer-results}
 
-Recall that the linear model yields the estimate for the frequency effect on reading RT such that RT decreases by about 53 ms for unit increase in log word frequency ($\beta = -53.375$). Now, when we have taken random differences between participants into account, we see that the estimate of the effect **for the mixed-effects model** is $\beta = -67.980$. This is a noteworthy difference in our estimate for the effect: taking into account random differences has an impact on results.
+Recall that the linear model yields the estimate for the frequency effect on reading RT such that RT decreases by about 53 ms for unit increase in log word frequency ($\beta = -53.375$). Now, when we have taken random differences between participants into account, we see that the estimate of the effect **for the mixed-effects model** is $\beta = -67.980$. Taking into account random differences clearly has an impact on results.
 
-Which coefficient estimate should you trust? Well, it is obvious that the linear model and the linear mixed-effects model estimate are relatively similar. However, it is also obvious that the linear model makes an assumption -- the *assumption of independence of observations* -- that does not make sense theoretically (we can readily expect that reading responses will be similar within a child) and does not make sense empirically (responses clearly differ between children, see @fig-freqperchildlm). Thus, I think we have good grounds for supposing that the linear mixed-effects model estimate for the frequency effect is likely to be closer to the true underlying population effect (whatever that might be).
+::: callout-note
+-   Research question: What word properties influence responses to words in a test of reading aloud?
+-   Result: The mixed-effect analysis shows that RT decreases by about $68$ milliseconds for each unit increase in log word frequency.
+:::
 
-That being said, it is important to remember, in this discussion, that whatever estimate we can produce is the estimate we can produce *given* the sample of words we used, the measurement of reading RT we were able to make, and the estimate of word frequency we were able to collect. How far our estimate actually generalizes to the wider population is not something we can settle in the context of a single study.
+Which coefficient estimate should you trust? Well, it is obvious that the linear model and the linear mixed-effects model estimate are relatively similar. However, it is also obvious that the linear model makes an assumption -- the *assumption of independence of observations* -- that does not make sense theoretically (reading responses will be similar within a child) and does not make sense empirically (responses will differ between children, see @fig-freqperchildlm). Thus, we have good grounds for supposing that the linear mixed-effects model estimate for the frequency effect is likely to be closer to the true underlying population effect.
+
+It is important to remember, however, that whatever estimate we can produce is the estimate *given* the sample of words we used, our information about word frequency, and our measurement of reading RT responses. How far our estimate actually generalizes to the wider population is not something we can judge in the context of a single study.
 
 Further, we have not finished in our consideration of the random effects that the account should include. We need to do more work by thinking about the differences between stimuli (@sec-intro-mixed-fixed-effect-fallacy).
 
