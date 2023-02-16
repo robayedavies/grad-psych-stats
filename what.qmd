@@ -4,9 +4,9 @@
 This chapter is still under construction.
 :::
 
-## PSYC401 Project -- research report -- what you are expected to do
+## PSYC402 Project -- research report -- what you are expected to do
 
-We present the following guidelines to help you to complete the coursework assessment. If you have any questions, email Padraic Monaghan at: `p.monaghan@lancaster.ac.uk`
+We present the following guidelines to help you to complete the coursework assessment. If you have any questions, email Rob Davies at: `r.davies1@lancaster.ac.uk`
 
 Note the information mirrors exactly the information provided on Moodle:
 
