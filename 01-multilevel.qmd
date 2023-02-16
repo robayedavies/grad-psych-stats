@@ -92,17 +92,21 @@ I have provided a collection of materials you can use. Here, I explain what they
 
 **1. Video recordings of lectures**
 
-1.1 I have recorded a lecture in three parts. The lectures should be accessible by anyone who has the link.
+1.1. I have recorded a lecture in three parts. The lectures should be accessible by anyone who has the link.
 
 -   [Part 1](https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=66e89421-4491-4eb9-b1c8-acd4012a183d) -- about 16 minutes
 -   [Part 2](https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=22361165-636b-424c-9e28-acd4012efd6f) -- about 13 minutes
 -   [Part 3](https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=5942b084-457f-4687-aa3d-acd401332b44) -- about 13 minutes
 
-1.2 I suggest you watch the recordings then read the rest of this chapter. The lectures provide a summary of the main points.
+1.2. I suggest you watch the recordings then read the rest of this chapter. The lectures provide a summary of the main points.
 
 **2. Chapter: 01-multilevel**
 
-2.1 I have written this chapter to discuss the main ideas and set out the practical steps you can follow to start to develop the skills required to analyse multilevel structured data. 2.2 The practical elements include data tidying, visualization and analysis steps. 2.3 You can read the chapter, run the code, and do the exercises.
+2.1. I have written this chapter to discuss the main ideas and set out the practical steps you can follow to start to develop the skills required to analyse multilevel structured data. 
+
+2.2. The practical elements include data tidying, visualization and analysis steps. 
+
+2.3. You can read the chapter, run the code, and do the exercises.
 
 -   Read in the example data `BAFACALO_DATASET.RData` and identify how the data are structured at multiple levels.
 -   Use visualizations to explore the impact of the structure.
@@ -369,11 +373,11 @@ digraph D {
 }
 ```
 
-We are going to be working with the school data collected by @golino2014 in Brazil, so let's take another look at that dataset. Figure @fig-golino2014 presents the first 25 rows of the selected-variables `brazil` dataset. (I have arranged the rows by class number ID.) You can see that there are multiple rows of data for each `class_number`, one row for each child, with multiple children (you can see different `participant_id` numbers). This presentation of the dataset illustrates in practical terms -- what you can actually see when you look at your data -- what multilevel structured data can look like.
+We are going to be working with the school data collected by @golino2014 in Brazil, so let's take another look at that dataset. The data extract, following, presents the first 25 rows of the selected-variables `brazil` dataset. (I have arranged the rows by class number ID, and you may need to make sure the browser window is wide enough to see the data properly.) If you examine the extract, you can see that there are multiple rows of data for each `class_number`, one row for each child, with multiple children (you can see different `participant_id` numbers). This presentation of the dataset illustrates in practical terms -- what you can actually see when you look at your data -- what multilevel structured data can look like.
 
 ```{r}
 #| label: fig-golino2014
-#| fig-cap: The first 25 rows of the selected-variables `brazil` dataset
+#| fig-cap: "The first 25 rows of the selected-variables `brazil` dataset"
 brazil %>%
        arrange(desc(class_number)) %>%
                  head(n = 25)
@@ -633,6 +637,8 @@ pbrazlmint + pbrazlmport
 Notice that the code I used fits a separate model for each class, and then plots the per-class estimates of intercepts and slopes of the `english ~ portuguese` relationship.
 :::
 
+(In case you want to see how this plot is produced, I work through the code for drawing @fig-pointclass in the workbook .R.)
+
 #### Discussion: slopes-as-outcomes analyses as a common approach {#sec-multi-discussion-two-step}
 
 The 'slopes-as-outcomes' approach is quite common and can be found in a number of papers in the psychological and educational research literatures. An influential example can be found in the report by @balota2004 of their analysis of psycholinguistic effects in older and younger adults. @balota2004 wanted to examine if or how effects of variables like word frequency, on reading response latencies, were different in different age groups. To do this, they first estimated the effect of the (word-level) psycholinguistic variables in separate linear model (multple regressions) for each adult. They then took the estimated coefficients as the dependent variable (slopes-as-outcomes) for a second analysis in which they tested the effect of age group on variation in the estimated coefficients (see @Lorch1990a for a discussion of the approach).
@@ -831,12 +837,11 @@ Many researchers will be aware of concerns over the non-replication of published
 
 ### Summary {#sec-multi-summary}
 
-We outlined the features of a *multilevel* structure dataset. We then discussed visualizing and modeling the relationship between outcome and predictor variables:
-
-1.  When you ignore the multilevel structure;
-2.  Why ignoring the structure is a bad idea;
-3.  How slopes-as-outcomes analyses are an approximate method to take the structure into account;
-4.  How multilevel modeling is a better method to estimate the relationship between outcome and predictor variables
+1. We outlined the features of a *multilevel* structure dataset. 
+2. We then discussed visualizing and modeling the relationship between outcome and predictor variables when you ignore the multilevel structure.
+3. We examined why ignoring the structure is a bad idea.
+4. We considered how slopes-as-outcomes analyses are an approximate method to take the structure into account.
+5. We dmonstrated how multilevel modeling is a better method to estimate the relationship between outcome and predictor variables
 
 ### Glossary: useful functions {#sec-multi-glossary}
 

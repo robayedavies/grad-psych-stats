@@ -432,15 +432,17 @@ Important
 <h2 data-number="3.6" class="anchored" data-anchor-id="sec-multi-guide"><span class="header-section-number">3.6</span> Study guide</h2>
 <p>I have provided a collection of materials you can use. Here, I explain what they are and how I suggest you use them.</p>
 <p><strong>1. Video recordings of lectures</strong></p>
-<p>1.1 I have recorded a lecture in three parts. The lectures should be accessible by anyone who has the link.</p>
+<p>1.1. I have recorded a lecture in three parts. The lectures should be accessible by anyone who has the link.</p>
 <ul>
 <li><a href="https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=66e89421-4491-4eb9-b1c8-acd4012a183d">Part 1</a> – about 16 minutes</li>
 <li><a href="https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=22361165-636b-424c-9e28-acd4012efd6f">Part 2</a> – about 13 minutes</li>
 <li><a href="https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=5942b084-457f-4687-aa3d-acd401332b44">Part 3</a> – about 13 minutes</li>
 </ul>
-<p>1.2 I suggest you watch the recordings then read the rest of this chapter. The lectures provide a summary of the main points.</p>
+<p>1.2. I suggest you watch the recordings then read the rest of this chapter. The lectures provide a summary of the main points.</p>
 <p><strong>2. Chapter: 01-multilevel</strong></p>
-<p>2.1 I have written this chapter to discuss the main ideas and set out the practical steps you can follow to start to develop the skills required to analyse multilevel structured data. 2.2 The practical elements include data tidying, visualization and analysis steps. 2.3 You can read the chapter, run the code, and do the exercises.</p>
+<p>2.1. I have written this chapter to discuss the main ideas and set out the practical steps you can follow to start to develop the skills required to analyse multilevel structured data.</p>
+<p>2.2. The practical elements include data tidying, visualization and analysis steps.</p>
+<p>2.3. You can read the chapter, run the code, and do the exercises.</p>
 <ul>
 <li>Read in the example data <code>BAFACALO_DATASET.RData</code> and identify how the data are structured at multiple levels.</li>
 <li>Use visualizations to explore the impact of the structure.</li>
@@ -802,7 +804,7 @@ B2-&gt;C6
 </div>
 </div>
 </div>
-<p>We are going to be working with the school data collected by <span class="citation" data-cites="golino2014">Golino &amp; Gomes (<a href="references.html#ref-golino2014" role="doc-biblioref">2014</a>)</span> in Brazil, so let’s take another look at that dataset. Figure <span class="quarto-unresolved-ref">?fig-golino2014</span> presents the first 25 rows of the selected-variables <code>brazil</code> dataset. (I have arranged the rows by class number ID.) You can see that there are multiple rows of data for each <code>class_number</code>, one row for each child, with multiple children (you can see different <code>participant_id</code> numbers). This presentation of the dataset illustrates in practical terms – what you can actually see when you look at your data – what multilevel structured data can look like.</p>
+<p>We are going to be working with the school data collected by <span class="citation" data-cites="golino2014">Golino &amp; Gomes (<a href="references.html#ref-golino2014" role="doc-biblioref">2014</a>)</span> in Brazil, so let’s take another look at that dataset. The data extract, following, presents the first 25 rows of the selected-variables <code>brazil</code> dataset. (I have arranged the rows by class number ID, and you may need to make sure the browser window is wide enough to see the data properly.) If you examine the extract, you can see that there are multiple rows of data for each <code>class_number</code>, one row for each child, with multiple children (you can see different <code>participant_id</code> numbers). This presentation of the dataset illustrates in practical terms – what you can actually see when you look at your data – what multilevel structured data can look like.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>brazil <span class="sc">%&gt;%</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">arrange</span>(<span class="fu">desc</span>(class_number)) <span class="sc">%&gt;%</span></span>
@@ -1130,6 +1132,7 @@ Tip
 <p>Notice that the code I used fits a separate model for each class, and then plots the per-class estimates of intercepts and slopes of the <code>english ~ portuguese</code> relationship.</p>
 </div>
 </div>
+<p>(In case you want to see how this plot is produced, I work through the code for drawing <a href="#fig-pointclass">Figure&nbsp;<span>3.5</span></a> in the workbook .R.)</p>
 <section id="sec-multi-discussion-two-step" class="level4" data-number="3.9.9.1">
 <h4 data-number="3.9.9.1" class="anchored" data-anchor-id="sec-multi-discussion-two-step"><span class="header-section-number">3.9.9.1</span> Discussion: slopes-as-outcomes analyses as a common approach</h4>
 <p>The ‘slopes-as-outcomes’ approach is quite common and can be found in a number of papers in the psychological and educational research literatures. An influential example can be found in the report by <span class="citation" data-cites="balota2004">Balota et al. (<a href="references.html#ref-balota2004" role="doc-biblioref">2004</a>)</span> of their analysis of psycholinguistic effects in older and younger adults. <span class="citation" data-cites="balota2004">Balota et al. (<a href="references.html#ref-balota2004" role="doc-biblioref">2004</a>)</span> wanted to examine if or how effects of variables like word frequency, on reading response latencies, were different in different age groups. To do this, they first estimated the effect of the (word-level) psycholinguistic variables in separate linear model (multple regressions) for each adult. They then took the estimated coefficients as the dependent variable (slopes-as-outcomes) for a second analysis in which they tested the effect of age group on variation in the estimated coefficients (see <span class="citation" data-cites="Lorch1990a">Lorch &amp; Myers (<a href="references.html#ref-Lorch1990a" role="doc-biblioref">1990</a>)</span> for a discussion of the approach).</p>
@@ -1348,12 +1351,12 @@ Note
 <p>Many researchers will be aware of concerns over the non-replication of published effects in psychological science (see <a href="intro.html#sec-context-replication"><span>Section&nbsp;7.2.1</span></a>). As <span class="citation" data-cites="gelman2014b">Gelman (<a href="references.html#ref-gelman2014b" role="doc-biblioref">2014</a>)</span> discusses, non-replication of results may arise if effects vary between contexts groups while traditional analytic methods assume that effects are constant. Psychological researchers can expect average outcomes and the effects of independent variables to vary among sampling units, whether their investigations involve multiple observations per child or stimulus, or children sampled within classes, clinics or schools. However, traditional analytic methods often require us to ignore this variation by averaging, say, responses over multiple trials for each child, to collapse an inherently multilevel data structure into a single level of observations that can be analysed using regression or ANOVA. By using multilevel models, researchers will, instead, be able to properly estimate the effects of theoretical interest, and better understand how those effects vary.</p>
 <section id="sec-multi-summary" class="level3" data-number="3.10.1">
 <h3 data-number="3.10.1" class="anchored" data-anchor-id="sec-multi-summary"><span class="header-section-number">3.10.1</span> Summary</h3>
-<p>We outlined the features of a <em>multilevel</em> structure dataset. We then discussed visualizing and modeling the relationship between outcome and predictor variables:</p>
 <ol type="1">
-<li>When you ignore the multilevel structure;</li>
-<li>Why ignoring the structure is a bad idea;</li>
-<li>How slopes-as-outcomes analyses are an approximate method to take the structure into account;</li>
-<li>How multilevel modeling is a better method to estimate the relationship between outcome and predictor variables</li>
+<li>We outlined the features of a <em>multilevel</em> structure dataset.</li>
+<li>We then discussed visualizing and modeling the relationship between outcome and predictor variables when you ignore the multilevel structure.</li>
+<li>We examined why ignoring the structure is a bad idea.</li>
+<li>We considered how slopes-as-outcomes analyses are an approximate method to take the structure into account.</li>
+<li>We dmonstrated how multilevel modeling is a better method to estimate the relationship between outcome and predictor variables</li>
 </ol>
 </section>
 <section id="sec-multi-glossary" class="level3" data-number="3.10.2">
