@@ -13,6 +13,10 @@ library(sjPlot)
 library(tidyverse)
 ```
 
+::: callout-warning
+This chapter is still under construction.
+:::
+
 ## Motivations: to grow in sophistication
 
 Linear mixed-effects models are important, interesting, and sometimes challenging.

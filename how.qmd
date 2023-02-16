@@ -1,5 +1,9 @@
 # How {#sec-how}
 
+::: callout-warning
+This chapter is still under construction.
+:::
+
 The research report assignment requires students to locate, access, analyse and report previously collected data. Here, we answer the question:
 
 -   How can the assignment be done?
@@ -224,26 +228,21 @@ We will look at data like these, for analyses involving the linear model, in our
 
 Here's a quick summary of the advice we have discussed so far.
 
-- At the start of your work, you will need to (1.) locate then (2.) access data for analysis, and then you will need to (3.) check that the data are usable. 
-- Once you have confirmed you have found interesting data you can use, you should plan your analysis.
-- Students do a variety of kinds of analysis. Whatever your interest, you first will want to first make sure you can identify exactly what the authors of the original study did, how they did it, and why they did it.
-- If you are interested in attempting a methods reproducibility test (can you repeat a result, given shared data?) you will perhaps benefit from focusing a result that is both substantive and straightforward.
-- If you are interested in doing an alternate analysis, you can critically evaluate the data processing and the data analysis choices that the original study authors made. You can consider whether other choices would be appropriate, and might sensibly motivate a (limited) investigation of the impact of a different analysis pipeline choice on the results.
+-   At the start of your work, you will need to (1.) locate then (2.) access data for analysis, and then you will need to (3.) check that the data are usable.
+-   Once you have confirmed you have found interesting data you can use, you should plan your analysis.
+-   Students do a variety of kinds of analysis. Whatever your interest, you first will want to first make sure you can identify exactly what the authors of the original study did, how they did it, and why they did it.
+-   If you are interested in attempting a methods reproducibility test (can you repeat a result, given shared data?) you will perhaps benefit from focusing a result that is both substantive and straightforward.
+-   If you are interested in doing an alternate analysis, you can critically evaluate the data processing and the data analysis choices that the original study authors made. You can consider whether other choices would be appropriate, and might sensibly motivate a (limited) investigation of the impact of a different analysis pipeline choice on the results.
 
-What if you access interesting data that were shared without a previous analysis? 
-We talk about that situation, next.
+What if you access interesting data that were shared without a previous analysis? We talk about that situation, next.
 
 ## Working with data that are not associated with a published analysis {#sec-noanalysis}
 
-A number of datasets have been published online with information about the data but with no analysis.
-You can look for data that may be interest you in a number of different places, now, but I would focus on one. I talk about that next.
-Then I offer some guidance on how you might approach analyzing such data [Section -@sec-openanalysis].
+A number of datasets have been published online with information about the data but with no analysis. You can look for data that may be interest you in a number of different places, now, but I would focus on one. I talk about that next. Then I offer some guidance on how you might approach analyzing such data [Section -@sec-openanalysis].
 
 ### Looking for open data
 
-Wicherts and colleagues set up the Journal of Open Psychology Data (JOPD) to make it easier for Psychologists to share experimental data.
-A link to the journal webpage is [here](https://openpsychologydata.metajnl.com/articles/){.external target="_blank"})
-Usually, a data paper reports a study and provides a link to a downloadable dataset.
+Wicherts and colleagues set up the Journal of Open Psychology Data (JOPD) to make it easier for Psychologists to share experimental data. A link to the journal webpage is [here](https://openpsychologydata.metajnl.com/articles/){.external target="_blank"}) Usually, a data paper reports a study and provides a link to a downloadable dataset.
 
 Some datasets that I have looked at in JOPD and other places include the following.
 
@@ -251,15 +250,12 @@ Some datasets that I have looked at in JOPD and other places include the followi
 
 Wicherts did what he recommended and put a large dataset online [here](http://www.sciencedirect.com/science/article/pii/S0160289612000050){.external target="_blank"}
 
-You can analyse these data in a number of different interesting ways.
-You can explore relationships between gender, intelligence and personality differences.
+You can analyse these data in a number of different interesting ways. You can explore relationships between gender, intelligence and personality differences.
 
-The data file and an explanatory document are located at the end of the article. 
-Read the article, it's worth your time.
-Wicherts reports:
+The data file and an explanatory document are located at the end of the article. Read the article, it's worth your time. Wicherts reports:
 
-::: {.border}
-The file includes data from our freshman-testing program called "Testweek" ( Busato et al., 2000, Smits et al., 2011 and Wicherts and Vorst, 2010) in which 537 students (age: M = 21.0, SD = 4.3) took the Advanced Progressive Matrices ( Raven, Court, & Raven, 1996), a test of Arithmetic, a Number Series test, a Hidden Figures Test, a test of Vocabulary, a test of Verbal Analogies, and a Logical Reasoning test ( Elshout, 1976). 
+::: border
+The file includes data from our freshman-testing program called "Testweek" ( Busato et al., 2000, Smits et al., 2011 and Wicherts and Vorst, 2010) in which 537 students (age: M = 21.0, SD = 4.3) took the Advanced Progressive Matrices ( Raven, Court, & Raven, 1996), a test of Arithmetic, a Number Series test, a Hidden Figures Test, a test of Vocabulary, a test of Verbal Analogies, and a Logical Reasoning test ( Elshout, 1976).
 
 Also included are data from a Dutch big five personality inventory (Elshout & Akkerman, 1975), the NEO-PI-R ( Hoekstra, Ormel, & Fruyt, 1996), scales of social desirability and impression management (based on work by Paulhus, 1984 and Wicherts, 2002), sex of the participants, and grade point averages of the freshmen's first trimester that may act as outcome variable.
 :::
@@ -270,32 +266,19 @@ Smits and colleagues (including Wicherts) put an even larger dataset online at t
 
 You will need to register to be able to download the data but the process is simple.
 
-The Smits dataset includes **Big-5** personality scores for several thousand individuals recorded over a series of years.
-You can analyse these data in interesting ways including examining changes in personality scores among students over different years.
+The Smits dataset includes **Big-5** personality scores for several thousand individuals recorded over a series of years. You can analyse these data in interesting ways including examining changes in personality scores among students over different years.
 
 #### Embodied terror management
 
-Tjew A Sin and colleagues shared a dataset at the Journal of Open Psychology Data on an interesting study they did to test the idea that interpersonal touch or simulated interpersonal touch can relieve existential concerns (fear of death) among individuals with low self-esteem.
-The data can be found [here](http://openpsychologydata.metajnl.com/articles/10.5334/jopd.ah/){.external target="_blank"})
+Tjew A Sin and colleagues shared a dataset at the Journal of Open Psychology Data on an interesting study they did to test the idea that interpersonal touch or simulated interpersonal touch can relieve existential concerns (fear of death) among individuals with low self-esteem. The data can be found [here](http://openpsychologydata.metajnl.com/articles/10.5334/jopd.ah/){.external target="_blank"})
 
-The Tjew A Sin can be downloaded from a link to a repository location, given at the end of the article.
-You will likely need to register to download the data.
-Note that the spreadsheets holding the study data include `999` values to code for missing data.
-Note also that the data spreadsheets include (in different columns) scores per participant for various measures e.g. mortality anxiety or self-esteem. 
-The measures are explained in the paper.
-To use the data, you will need to work out the simple process of how to sum the scores across items to get e.g. a measure of self-esteem for each person.
+The Tjew A Sin can be downloaded from a link to a repository location, given at the end of the article. You will likely need to register to download the data. Note that the spreadsheets holding the study data include `999` values to code for missing data. Note also that the data spreadsheets include (in different columns) scores per participant for various measures e.g. mortality anxiety or self-esteem. The measures are explained in the paper. To use the data, you will need to work out the simple process of how to sum the scores across items to get e.g. a measure of self-esteem for each person.
 
 #### Demographic influences on disgust
 
-Berger and Anaki shared data on the disgust sensitivity of a large sample of individuals.
-The data are from the administration of the Disgust Scale to a set of Hebrew speakers.
-They can be found [here](http://openpsychologydata.metajnl.com/articles/10.5334/jopd.ag/){.external target="_blank"})
+Berger and Anaki shared data on the disgust sensitivity of a large sample of individuals. The data are from the administration of the Disgust Scale to a set of Hebrew speakers. They can be found [here](http://openpsychologydata.metajnl.com/articles/10.5334/jopd.ag/){.external target="_blank"})
 
-The experimenters collected data on participants' characteristics so that analyses of the way in which sensitivity varies in relation to demographic attributes is possible.
-You will see that the disgust scale is explained in the paper.
-The different disgust scores, for each item in the disgust scale, can be found in different columns.
-The disgust scores, for person, are calculated overall as values:
-`Mean_general_ds, Mean_core, Mean_Animal_reminder, Mean_Contamination`
+The experimenters collected data on participants' characteristics so that analyses of the way in which sensitivity varies in relation to demographic attributes is possible. You will see that the disgust scale is explained in the paper. The different disgust scores, for each item in the disgust scale, can be found in different columns. The disgust scores, for person, are calculated overall as values: `Mean_general_ds, Mean_core, Mean_Animal_reminder, Mean_Contamination`
 
 When you download the dataset, you may need to change the file name, adding a suffix: `.txt` (for the tab delimited file), to be opened in Excel, or `.sav` (for the SPSS data file), to be opened in SPSS -- to the file name to allow you to open it in the appropriate application.
 
@@ -303,19 +286,14 @@ When you download the dataset, you may need to change the file name, adding a su
 
 The availability of rich, curated, clearly usable datasets with many variables can make it challenging to decide what to do.
 
-I would advise beginning with an exploratory analysis of the data you have accessed.
-You will want to begin by using the data visualization skills we have taught you to examine:
+I would advise beginning with an exploratory analysis of the data you have accessed. You will want to begin by using the data visualization skills we have taught you to examine:
 
-1. The distributions of the variables that interest you using histograms, density plots or bar charts.
-2. The potential relationship between variables using scatterplots.
+1.  The distributions of the variables that interest you using histograms, density plots or bar charts.
+2.  The potential relationship between variables using scatterplots.
 
-In such *Exploratory Data Analyses*, you are interested in what the data visualization tells you about the nature of the dataset you have accessed.
-The papers associated with the datasets can sometimes offer only outline information: how the data were collected, coded, and processed.
-You may need to satisfy yourself that there is nothing odd or surprising about the distributions of scores.
-This stage can help you to identify problems like survey responses with implausible scores.
+In such *Exploratory Data Analyses*, you are interested in what the data visualization tells you about the nature of the dataset you have accessed. The papers associated with the datasets can sometimes offer only outline information: how the data were collected, coded, and processed. You may need to satisfy yourself that there is nothing odd or surprising about the distributions of scores. This stage can help you to identify problems like survey responses with implausible scores.
 
-The work you do in exploring, and summarizing, the data variables that interest you will often constitute a substantial element of the work you can do and present for your report.
-You may discuss, for advice, what parts of this work will be interesting or useful to present.
+The work you do in exploring, and summarizing, the data variables that interest you will often constitute a substantial element of the work you can do and present for your report. You may discuss, for advice, what parts of this work will be interesting or useful to present.
 
 Then, our advice is simple.
 
@@ -323,29 +301,19 @@ Then, our advice is simple.
 -   When working with open datasets, consider keeping the analysis *simple*.
 :::
 
-Note that *simple* is relative.
-Do what interests you.
-Work with the methods you have learned or will learn (the linear model).
+Note that *simple* is relative. Do what interests you. Work with the methods you have learned or will learn (the linear model).
 
 In practice, you will find that part of the challenge is located not in using the data or in running an analysis like a linear model, it is in (1.) justifying or motivating the analysis and (2.) explaining the implications of your findings.
 
-Working on the thinking you must develop to motivate an analysis or to explain implications requires you to do some (limited) reading of relevant research. (Relevant sources will be cited in data papers, as part of their outline of the background for their data collection.) 
-If you consider the advice we discussed in the graduate class on developing writing skills, you will see that there I talked about how you might extract data from a set of relevant sources (papers) to get an understanding of the questions people ask, the assumptions they make.
-That is the kind of process you can follow to develop your thinking around the analysis you will do.
-What you are looking for is information you can use so that you can say something brief about, for example, why it might be interesting to analyze, say, whether personality (measured using the Big-5) varies given differences in gender or differences between population cohorts.
-The reading and the conceptual development should be fairly limited, not extensive, but should be sufficient that you can write something sensible when you introduce and then when you discuss your analysis results.
+Working on the thinking you must develop to motivate an analysis or to explain implications requires you to do some (limited) reading of relevant research. (Relevant sources will be cited in data papers, as part of their outline of the background for their data collection.) If you consider the advice we discussed in the graduate class on developing writing skills, you will see that there I talked about how you might extract data from a set of relevant sources (papers) to get an understanding of the questions people ask, the assumptions they make. That is the kind of process you can follow to develop your thinking around the analysis you will do. What you are looking for is information you can use so that you can say something brief about, for example, why it might be interesting to analyze, say, whether personality (measured using the Big-5) varies given differences in gender or differences between population cohorts. The reading and the conceptual development should be fairly limited, not extensive, but should be sufficient that you can write something sensible when you introduce and then when you discuss your analysis results.
 
 ## Summary: how
 
-In this chapter, I have outlined some advice on how you might approach the task of locating, accessing, and analyzing previously collected data.
-The main advice is to think about your workflow in stages, then progress through the work one step at a time.
+In this chapter, I have outlined some advice on how you might approach the task of locating, accessing, and analyzing previously collected data. The main advice is to think about your workflow in stages, then progress through the work one step at a time.
 
-You will need to begin by assuring yourself that you can find a dataset that interests you, and that you can access and use the data.
-The usability of data will require clear, understandable, descriptions in the published article (if any) about the research question and hypothesis, the study design, the data collection methods, the data processing steps, and the data analysis (if any).
-Sometimes, useful information about data processing and data analysis can be found in detail in repository documentation (e.g., in guides to materials) but only referenced in the text of the article.
+You will need to begin by assuring yourself that you can find a dataset that interests you, and that you can access and use the data. The usability of data will require clear, understandable, descriptions in the published article (if any) about the research question and hypothesis, the study design, the data collection methods, the data processing steps, and the data analysis (if any). Sometimes, useful information about data processing and data analysis can be found in detail in repository documentation (e.g., in guides to materials) but only referenced in the text of the article.
 
-If you know you can locate, access and have checked data as usable, you will want to think about what analysis you want to do the data.
-The approach you take depending on what aims you would like to pursue.
+If you know you can locate, access and have checked data as usable, you will want to think about what analysis you want to do the data. The approach you take depending on what aims you would like to pursue.
 
 If you are interested in attempting a methods reproducibility test (i.e. checking if you can repeat presented results, given shared data), then you will first need to identify a substantive and straightforward result to try to reproduce. If you identify a primary result to examine, you will want to check that you can work with the data that have been shared, and then that you can use the analysis methods you have learned to reproduce some or all of the result that interests you.
 
@@ -353,9 +321,9 @@ If you are interested in doing an alternate or a different analysis (from what m
 
 In considering an analysis of data shared without a published set of results, you may want to keep your approach simple. Focus on what analysis you can do using the methods you have learned. And think about the understanding you will need to develop, to justify the analysis you do, and to make sense, in the discussion of your report of the analysis results you will present.
 
-It is always a good idea to explore your data using visualization techniques throughout your workflow. 
+It is always a good idea to explore your data using visualization techniques throughout your workflow.
 
-:::  callout-tip
-- You can always get advice, do not hesitate to ask.
-- We are happy to discuss your thinking, especially in class.
+::: callout-tip
+-   You can always get advice, do not hesitate to ask.
+-   We are happy to discuss your thinking, especially in class.
 :::

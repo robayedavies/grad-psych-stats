@@ -1,5 +1,9 @@
 # Introduction to Generalized Linear Mixed-effects Models
 
+::: callout-warning
+This chapter is still under construction.
+:::
+
 ```{r libraries-hide}
 #| warning: false
 #| echo: false
