@@ -16,9 +16,11 @@ library(tidyverse)
 
 ## Motivations: repeated measures designs and crossed random effects {#sec-intro-motivations}
 
-In @sec-intro-multilevel, we looked at a multilevel structured dataset in which there were observations about children's grades, and it became evident that those children can be grouped by or under classes. As we discussed, this kind of data structure will come from studies with a very common design in which the researcher recorded observations about a sample of children who are members of a sample of classes. In working with these kind of data, it is common to say that the observations of children's grades are *nested* within classes in a hierarchy.
+In @sec-intro-multilevel, we looked at a multilevel structured dataset in which there were observations about children's grades, and it became evident that those children can be grouped by or under classes. As we discussed, this kind of data structure will come from studies with a very common design in which, for example, the researcher records observations about a sample of children who are members of a sample of classes. In working with these kind of data, it is common to say that the observations of children's grades are *nested* within classes in a hierarchy.
 
-Many Psychologists conduct studies where observations are properly understood to be structured in groups of some form but where, nevertheless, it is inappropriate to think of the observations as being nested [@baayen2008]. We are talking, here, about **repeated-measures designs** where the experimenter presents a sample of multiple stimuli for response to each participant in a sample of for multiple participants. This is another *very* common experimental design in psychological science. Studies with this kind of design will produce data with a structure that, also, requires the use of mixed-effects models but, as we shall see, the way we think about the structure will be a bit more complicated. We could say that observations of the responses made by participants to each stimulus can be grouped by participant: each person will tend to respond in similar ways to different stimuli. Or, we could say that observations of responses can be grouped by stimulus because each stimulus will tend to evoke similar kinds of responses in different people. Or, we could say that both forms of grouping should be taken into account at the same time.
+Many Psychologists conduct studies where observations are properly understood to be structured in groups of some form but where, nevertheless, it is inappropriate to think of the observations as being nested [@baayen2008]. We are talking, here, about **repeated-measures designs** where the experimenter presents a sample of multiple stimuli for response to each participant in a sample of multiple participants. This is another *very* common experimental design in psychological science.
+
+Studies with repeated-measures designs will produce data with a structure that, also, requires the use of mixed-effects models but, as we shall see, the way we think about the structure will be a bit more complicated. We could say that observations of the responses made by participants to each stimulus can be grouped by participant: each person will tend to respond in similar ways to different stimuli. Or, we could say that observations of responses can be grouped by stimulus because each stimulus will tend to evoke similar kinds of responses in different people. Or, we could say that both forms of grouping should be taken into account at the same time.
 
 We shall take the third position and this chapter will concern why, and how we will adapt our thinking and practice.
 
@@ -44,17 +46,21 @@ I have provided a collection of materials you can use. Here, I explain what they
 
 **1. Video recordings of lectures**
 
-1.1 I have recorded a lecture in three parts. The lectures should be accessible by anyone who has the link.
+1.1. I have recorded a lecture in three parts. The lectures should be accessible by anyone who has the link.
 
 -   [Part 1](https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=2fa60b12-2eca-4412-8672-acd60104da1d) -- about 8 minutes
 -   [Part 2](https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=7f31cef0-1e39-4712-b2a1-acd601195c78) -- about 21 minutes
 -   [Part 3](https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=58ab0c0c-37be-491f-a9e5-acd6011c38dd) -- about 15 minutes
 
-1.2 I suggest you watch the recordings then read the rest of this chapter. The lectures provide a summary of the main points.
+1.2. I suggest you watch the recordings then read the rest of this chapter. The lectures provide a summary of the main points.
 
 **2. Chapter: 02-mixed**
 
-2.1 I have written this chapter to discuss the main ideas and setting out the practical steps you can follow to start to develop the skills required to analyse multilevel structured data with crossed random effects. 2.2 The practical elements include data tidying, visualization and analysis steps. 2.3 You can read the chapter, run the code, and do the exercises.
+2.1. I have written this chapter to discuss the main ideas and set out the practical steps you can follow to start to develop the skills required to analyse multilevel structured data with crossed random effects. 
+
+2.2. The practical elements include data tidying, visualization and analysis steps. 
+
+2.3. You can read the chapter, run the code, and do the exercises.
 
 -   Read in the example **CP reading study** datasets.
 -   Identify how the data are structured by both participant and stimulus differences.
@@ -135,7 +141,7 @@ In analyzing psychological data, the first step is usually to collect the data t
 
 Often, we need all these kinds of information for our analyses but different pieces of information are produced in separate ways and come to us in separate files. For example, we may collect experimental response data using software like PsychoPy, E-Prime, Qualtrics or DMDX. We may collect information about participant characteristics using standardized measures, or by asking participants to complete a set of questions on their age, gender, and so on.
 
-#### The data we need to use are untidy {#sec-intro-mixed-data-untidy-2}
+### The data we need to use are untidy {#sec-intro-mixed-data-untidy-2}
 
 Often, the files we get are **untidy**: not in a useful or *tidy* format. For example, if you open the file `CP_study_word_naming_rt_180211.dat` (a `.dat` or tab delimited file) in Excel, you will see a spreadsheet that looks like @fig-CP-study-RTs.
 
@@ -211,7 +217,9 @@ You can read more about the `{tidyverse}` `{readr}` library of helpful functions
 It is *very* common to get experimental data in all sorts of different formats. Learning to use **tidyverse** functions will make it easier to cope with this when you do research.
 
 ::: callout-tip
-We use the `read_` function to read in the data, entering two arguments inside the brackets after the function name.
+We use the `read_` function to read in the data
+
+- entering (here, at least) arguments -- inside the brackets after the function name -- to tell R what file we need and how missing values (`NAs`) are coded.
 :::
 
 It will help your understanding to examine an example. Take a look at what this line of code includes, element by element.
@@ -227,7 +235,7 @@ behaviour.rt <- read_tsv("CP study word naming rt 180211.dat", na = "-999")
 1.  We write `behaviour.rt <- read_tsv(...)` to create an object in the R environment, which we call `behaviour.rt`: the object with this name is the dataset we read into R using `read_tsv(...)`.
 2.  When we write the function `read_tsv(...)` we include two arguments inside it.
 3.  `read_tsv("CP study word naming rt 180211.dat", ...` first, the name of the file, given in quotes `""` and then a comma.
-4.  `read_tsv(..., na = "-999")` second, we tell R that there are some missing values `na` which are coded with the value `"-999"`. :::
+4.  `read_tsv(..., na = "-999")` second, we tell R that there are some missing values `na` which are coded with the value `"-999"`.
 
 ### A quick lesson about missing value codes {#sec-intro-missing}
 
@@ -453,7 +461,7 @@ The addition of observations from one database joining to those from another hap
 -   R looks at the datasets being merged.
 -   It identifies if the two datasets have columns in common. Here, the datasets have `subjectID` and `item_name` in common).
 -   R can use these common columns to identify rows of data. Here, each row of data will be identified by both `subjectID` and `item_name` i.e. as data about the response made by a participant to a word.
--   R will then do a series of identity checks, comparing one dataset with the other and, row by row, looking for matching values in the common columns.
+-   R will then do a series of identity checks, comparing one dataset with the other and, row by row, looking for matching values in the columns that are common to both datasets.
 -   If there is a match then R joins the corresponding rows of data together.
 -   If there isn't a match then it creates `NAs` where there are missing entries in one row for one dataset which cannot be matched to a row from the joining dataset.
 
@@ -468,7 +476,7 @@ Note that in one example, the example of code I discuss here, I did not specify 
 
 In the `{tidyverse}` family of `dplyr` functions, when you work with multiple datasets (tables of data), we call the datasets [relational data](http://r4ds.had.co.nz/relational-data.html#relational-data).
 
-There are three families of verbs designed to work with relational data:
+There are three families of functions (like verbs) designed to work with relational data:
 
 -   Mutating joins, which add new variables to one data frame from matching observations in another.
 -   Filtering joins, which filter observations from one data frame based on whether or not they match an observation in the other table.
@@ -477,13 +485,17 @@ There are three families of verbs designed to work with relational data:
 We can connect datasets -- relate them -- according to shared variables like `subjectID, item_name` (for our data). In `{tidyverse}`, the variables that connect pairs of tables are called keys where, and this is what counts, *key(-s) are variable(-s) that uniquely identify an observation*.
 
 For the experimental reading data, we have observations about each response made by a participant (one of 61 subjects) to an item (one of 160 words). For these data, we can match up a pair of RT and accuracy observations for each (unique) `subjectID-item_name` combination.
+If you reflect, we could not combine the RT and accuracy data correctly if we did not have both identifying variables in both datasets, because both column variables are required to uniquely identify each observation.
 
-If you reflect, we could not combine the RT and accuracy data correctly:
+Further, we could not combine the RT and accuracy data correctly if there were mismatches in values of the identifying variable.
+Sometimes, I have done this operation and it has gone wrong because a subjectID has been spelled one way in one dataset e.g. `hugh` and another way in the other dataset e.g. `HughH`. This leads me to share some advice.
 
-1.  If we did not have both identifying variables for both datasets, both required to uniquely identify each observation.
-2.  If there were mismatches in values of the identifying variable.
+::: callout-tip
+- Be careful about spelling identifiers.
+- Always check your work after merger operations. 
 
-Sometimes, I have done this operation and it has gone wrong because a subjectID has been spelled one way in one dataset e.g. `hugh` and another way in the other dataset e.g. `HughH`. This means I am careful about spelling identifiers and I always check my work after merger operations, calculating dataset lengths to ensure the number of rows in the new dataset matches my expectations.
+You can check your work by calculating dataset lengths to ensure the number of rows in the new dataset matches your expectations, given the study design and data collection procedure.
+:::
 
 #### \_join functions {#sec-intro-mixed-data-join-functions}
 
@@ -614,7 +626,7 @@ Filtering or re-coding observations is an important element of the research work
 
 You can read further information about filtering [here](https://r4ds.had.co.nz/transform.html?q=filter#filter-rows-with-filter).
 
-#### Remove missing values {#sec-intro-mixed-data-omit-na}
+### Remove missing values {#sec-intro-mixed-data-omit-na}
 
 We will be working with the `long.all.select.filter.csv` dataset collated from the experimental, subject ability scores, and item property data collected for the CP word naming study.
 
@@ -669,8 +681,10 @@ It is a mistake to think of data tidying or wrangling as an inconvenience or as 
 
 1.  All analysis results follow from and thus are determined by the data processing steps that precede analysis.
 2.  Analysis results can and do vary, perhaps critically, depending on different processing decisions, and reasonable people may differ on key processing decisions.
-3.  The process of data tidying is instructive of your data quality.
+3.  The process of data tidying is frequently instructive of your data recording quality: you find things out about your field measurements or your instrument integrity or quality of your recordings, when you pay attention, when you process your data.
 :::
+
+It is wise to see data tidying or processing as a key part of the data analysis workflow because, as I discuss in @sec-multiversedata, the choices you make or the integrity or quality of the actions you take, will have consequences for your analysis results or, more generally, for the quality of the evidence you share with others.
 
 [Here](https://counting.substack.com/p/data-cleaning-is-analysis-not-grunt) is a nice substack post that links to some scholarly writing and makes some excellent points.
 
@@ -686,14 +700,14 @@ Our focus in this chapter is on analyzing data that come from studies with **rep
 
 In our working example, the **CP reading study**, CP asked all participants in her study to read a selection of words. All participants read the same selection of words, and every person read every word. For each participant, we have multiple observations and these (within-participant) observations will not be independent of each other. One participant will tend to be slower or less accurate compared to another participant, on average. Likewise, one participant's responses will reveal a stronger (or weaker) impact of the effect of an experimental variable than another participant. These between-participant differences will tend to be apparent across the sample of participants.
 
-You could say that the lowest trial-level observations can be grouped with respect to participants, that observations are nested within participant. But the data can also be grouped by stimuli. Remember that in the CP study, all participants read the same selection of words, and every person read every word. This means that for each stimulus word, there are multiple observations because all participants responded to each word, and these (within-item) observations will not be independent of each other. One word may prove to be more challenging compared to another, eliciting slower or less accurate responses, on average. Likewise, participants' responses to a word will reveal a stronger (or weaker) impact of the effect of an experimental variable than the responses to another word. Again, these between-stimulus differences will tend to be apparent observations across the sample of words.
+You could say that the lowest trial-level observations can be grouped with respect to participants, that observations are nested within participant. But the data can also be grouped by stimuli. Remember that in the CP study, all participants read the same selection of words, and every person read every word. This means that for each stimulus word, there are multiple observations because all participants responded to each word, and these (within-item) observations will not be independent of each other. One word may prove to be more challenging compared to another, eliciting slower or less accurate responses, on average. Likewise, participants' responses to a word will reveal a stronger (or weaker) impact of the effect of an experimental variable than the responses to another word. Again, these between-stimulus differences will tend to be apparent when you examine observations of responses across the sample of words.
 
-Under these circumstances, are observations about the responses made by different participants nested under words or are observations about the responses to different words nested under participants? We do not have to make a decision.
+Under these circumstances, are observations about the responses made by different participants nested under words, or are observations about the responses to different words nested under participants? We do not have to make a decision.
 
 Given this common **repeated-measures** design, we can analyze the outcome variable in relation to:
 
 -   **fixed effects**: the impact of independent variables like participant reading skill or word frequency
--   **random effects**: the impact of random or unexplained differences between participants and also between stimuli
+-   **random effects**: the impact of random or unexplained differences between participants *and also* between stimuli
 
 In this situation, we can say that the random effects are crossed [@baayen2008]. When multilevel models require the specification of crossed random effects, they tend to be called **mixed-effects models**.
 
@@ -752,7 +766,8 @@ ggplot(aes(x = Lg.UK.CDcount, y = RT)) +
 
 In the plot, we see that the best fit line drawn with `geom_smooth()` trends downward for higher values of word frequency. This means that @fig-freq-all suggests that RT decreases with increasing word frequency. (I know there is a weird looking line of points around 0 but we can ignore that here.)
 
-We can estimate the relationship between RT and word frequency using a linear model in which we ignore the possibility that there may be differences (between subjects, or between items) in the intercept or (between subjects) in the slope of the frequency effect:
+We can estimate the relationship between RT and word frequency using a linear model in which we ignore the possibility that there may be differences (between subjects, or between items) in the intercept or (between subjects) in the slope of the frequency effect.
+This simplified model can be stated as:
 
 $$
 Y_{ij} = \beta_0 + \beta_1X_j + e_{ij} 
@@ -778,7 +793,7 @@ In the estimates from this linear model, we see an approximate first answer to o
 -   Result: Our analysis shows that the estimated effect of word frequency is $\beta = -53.375$. This means that, according to the linear model, RT decreases by about 54 milliseconds for each unit increase in log word frequency.
 :::
 
-Notice that, here, word frequency information is located in the `Lg.UK.CDcount` variable. In a common move for reading data analyses, we transformed the frequency estimate to the Log base 10 of the word frequency values prior to analysis, in part, because word frequency estimates are usually highly skewed.
+Notice that, here, word frequency information is located in the `Lg.UK.CDcount` variable. In a common move for reading data analyses, we transformed the frequency estimate to the Log base 10 of the word frequency values, prior to analysis, in part because word frequency estimates are usually highly skewed.
 
 The model does not explain much variance, as $Adjusted \space R^2 = .03$ but, no doubt due to the large sample, the regression model is significant overall $F(1,9083) = 302.8, p < .001$.
 
@@ -888,7 +903,9 @@ Here, the frequency effect is associated with a negative coefficient e.g. $\beta
 
 ### Multilevel -- here, more appropriately known as -- mixed-effects models {#sec-intro-mixed-effects-models}
 
-In a mixed-effects model, we account for this variation: the differences between participants in intercepts and slopes. We do this by modeling the intercept as two terms:
+In a mixed-effects model, we account for this variation: the differences between participants in intercepts and slopes. 
+
+We do this by modeling the intercept as two terms:
 
 $$
 \beta_{0i} = \gamma_0 + U_{0i}
@@ -941,7 +958,7 @@ You have seen the `lmer()` function code before but *practice makes perfect* so 
 First, we have a chunk of code mostly similar to what we do when we do a regression analysis.
 
 1.  `lmer.all.1 <- lmer(...)` creates a *linear mixed-effects model* object using the `lmer()` function.
-2.  `RT ~  Lg.UK.CDcount` is a formula expressing the model in which we estimate the fixed effect on the outcome or dependent variable `RT` (reaction time, in milliseconds) predicted $\sim$ by the independent or predictor variable `Lg.UK.CDcount` (word frequency).
+2.  `RT ~  Lg.UK.CDcount` is a formula expressing the model in which we estimate the fixed effect on the outcome or dependent variable `RT` (reaction time, in milliseconds) as predicted $\sim$ by the independent or predictor variable `Lg.UK.CDcount` (word frequency).
 3.  `...(..., data = long.all.noNAs)` specifies the dataset in which you can find the variables named in the model fitting code.
 4.  `summary(lmer.all.1)` gets a summary of the fitted model object, showing you the results.
 
@@ -1005,7 +1022,7 @@ The output from the model summary first gives us **information about the model**
 
 -   The information is listed in four columns: 1. `Groups`; 2. `Name`; 3. `Variance`; and 4. `Std.Dev.`
 
-We have discussed how observations can be grouped by participant (because we have multiple response observations for each person in the study) just as previously we identified how observations could be grouped by class (because we saw that children were nested under class). That is what we mean when we refer to `Groups`: we are identifying the grouping variables that give hierarchical structure to the data.
+We have discussed how observations can be *grouped* by participant (because we have multiple response observations for each person in the study) just as previously we identified how observations could be *grouped* by class (because we saw that children were nested under class). That is what we mean when we refer to `Groups`: we are identifying the grouping variables that give hierarchical structure to the data.
 
 -   The `Name` lists whether the estimate we are looking at corresponds to, here, random differences between participants in intercepts (listed as `(Intercept)`), or in slopes (listed as `Lg.UK.CDcount`).
 
@@ -1032,7 +1049,7 @@ Recall that the linear model yields the estimate for the frequency effect on rea
 -   Result: The mixed-effect analysis shows that RT decreases by about $68$ milliseconds for each unit increase in log word frequency.
 :::
 
-Which coefficient estimate should you trust? Well, it is obvious that the linear model and the linear mixed-effects model estimate are relatively similar. However, it is also obvious that the linear model makes an assumption -- the *assumption of independence of observations* -- that does not make sense theoretically (reading responses will be similar within a child) and does not make sense empirically (responses will differ between children, see @fig-freqperchildlm). Thus, we have good grounds for supposing that the linear mixed-effects model estimate for the frequency effect is likely to be closer to the true underlying population effect.
+Which coefficient estimate should you trust? Well, it is obvious that the linear model and the linear mixed-effects model estimate are relatively similar. However, it is also obvious that the linear model makes an assumption -- the *assumption of independence of observations* -- that does not make sense theoretically (because reading responses will be similar for each child) and does not make sense empirically (because responses will differ between children, see @fig-freqperchildlm). Thus, we have good grounds for supposing that the linear mixed-effects model estimate for the frequency effect is likely to be closer to the true underlying population effect.
 
 It is important to remember, however, that whatever estimate we can produce is the estimate *given* the sample of words we used, our information about word frequency, and our measurement of reading RT responses. How far our estimate actually generalizes to the wider population is not something we can judge in the context of a single study.
 
@@ -1310,7 +1327,7 @@ Averaging data by-subjects or by-items is relatively simple. It is *very common*
 Calculating $minF'$ is also relatively simple:
 
 $$
-minF' = \frac{MS_{effect}}{MS_{random-subject-effects} + MS_{random-word-differences}} = \frac{F_1F_2}{F_1 + F_2}
+minF' = \frac{MS_{effect}}{MS_{\text{random-subject-effects}} + MS_{\text{random-word-differences}}} = \frac{F_1F_2}{F_1 + F_2}
 $$
 
 However, after a while, psychologists stopped doing the extra step of the $minF'$ calculation [@raaijmakers1999]. They carried on calculating and reporting F1 and F2 ANOVA results but, as @baayen2008 discuss, that approach risks a high *false positive error rate*.
@@ -1347,6 +1364,13 @@ In this model, the outcome $Y_{ij}$ is related to:
 -   plus random effects due to unexplained differences between participants in intercepts $U_{0i}$ and the slope of the frequency effect $U_{1i}X_j$
 -   *as well as* random differences between items in intercepts $W_{0j}$,
 -   in addition to the residual term $e_{ij}$.
+
+::: callout-warning
+What about random effects associated with differences between stimulus items in the slopes of effects?
+
+- Just as we may expect there to be between-participant differences in the slope of the word frequency effect, we may expect there to be between-stimulus differences in the slope of the effect of, e.g., participant age.
+- Rest assured, we *will* look at this question.
+:::
 
 ### Fitting a mixed-effect model -- now with random effects of subjects and items {#sec-intro-mixed-random-effect-items}
 
@@ -1448,7 +1472,7 @@ This is why it would often make sense to specify, among the random effects of th
 -   $covar(U_{0i}, U_{1i}X_j)$
 
 ::: callout-warning
-But remember we excluded random effects covariance {#sec-intro-mixed-exclude-covariance}
+Remember we excluded random effects covariance {#sec-intro-mixed-exclude-covariance}
 :::
 
 In @sec-intro-mixed-double-bar, I noted how we used the `||` notation to stop the model estimating the covariance between differences between participants in intercepts and in slopes. The reason I did this is that if I had requested that the model estimate the covariance the model would have failed to converge. What this means depends on understanding how mixed-effects models are estimated. We shall have to return to a development of that understanding later. For now, it is enough to note that mixed-effects models fitted with `lmer()` often have more difficulty with random effects covariance estimates.
@@ -1507,7 +1531,7 @@ We are interested in taking into account the random effects associated with unex
 The terms are not that important. The insight is.
 
 ::: callout-important
-n general, in experimental psychological science, when we do data analysis, if we want to estimate effects of experimental variables more accurately then our models need to incorporate terms to capture the impact on observed outcomes of sampled participants and sampled stimuli.
+In general, in experimental psychological science, when we do data analysis, if we want to estimate effects of experimental variables more accurately then our models need to incorporate terms to capture the impact on observed outcomes of sampled participants and sampled stimuli.
 :::
 
 Historically, we have, as a field, learned to take into account these sampling effects. Now, and most likely, more and more commonly in the future, we are learning to use multilevel or mixed-effects models to do this.
@@ -1522,7 +1546,7 @@ The multilevel structure requires the use of linear mixed-effects models when we
 
 The use of mixed-effects models has meant that psychologists no longer need to adopt compromise solutions which have important limitations, like by-items and by-subjects analyses.
 
-#### Summary: concepts {#sec-intro-mixed-summary-skills}
+#### Summary: skills {#sec-intro-mixed-summary-skills}
 
 We reviewed the ways that experimental data can be untidy. And we outlined the steps that may be required to process untidy data into a tidy format suitable for analysis. As is typical for the data analysis we need to do for experimental psychological science, getting data ready for analysis requires a series of steps including: access; import; restructure; select variables; and filter observations.
 

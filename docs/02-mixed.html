@@ -271,6 +271,7 @@ div.csl-indent {
   <li><a href="#sec-intro-mixed-data-untidy" id="toc-sec-intro-mixed-data-untidy" class="nav-link" data-scroll-target="#sec-intro-mixed-data-untidy"><span class="toc-section-number">4.6</span>  The challenges of working with real (untidy) experimental data</a>
   <ul class="collapse">
   <li><a href="#sec-intro-data-distributed" id="toc-sec-intro-data-distributed" class="nav-link" data-scroll-target="#sec-intro-data-distributed"><span class="toc-section-number">4.6.1</span>  The data we need to use for analysis are not all in the same file</a></li>
+  <li><a href="#sec-intro-mixed-data-untidy-2" id="toc-sec-intro-mixed-data-untidy-2" class="nav-link" data-scroll-target="#sec-intro-mixed-data-untidy-2"><span class="toc-section-number">4.6.2</span>  The data we need to use are untidy</a></li>
   </ul></li>
   <li><a href="#sec-intro-mixed-tidy-data" id="toc-sec-intro-mixed-tidy-data" class="nav-link" data-scroll-target="#sec-intro-mixed-tidy-data"><span class="toc-section-number">4.7</span>  Tidy the data</a>
   <ul class="collapse">
@@ -282,9 +283,10 @@ div.csl-indent {
   <li><a href="#sec-intro-mixed-data-join" id="toc-sec-intro-mixed-data-join" class="nav-link" data-scroll-target="#sec-intro-mixed-data-join"><span class="toc-section-number">4.7.6</span>  Merging data from different datasets using _join() functions</a></li>
   <li><a href="#sec-intro-mixed-data-transform" id="toc-sec-intro-mixed-data-transform" class="nav-link" data-scroll-target="#sec-intro-mixed-data-transform"><span class="toc-section-number">4.7.7</span>  Select or transform the variables</a></li>
   <li><a href="#sec-intro-mixed-data-filter" id="toc-sec-intro-mixed-data-filter" class="nav-link" data-scroll-target="#sec-intro-mixed-data-filter"><span class="toc-section-number">4.7.8</span>  Filter observations</a></li>
-  <li><a href="#sec-intro-mixed-data-tidy-conclusions" id="toc-sec-intro-mixed-data-tidy-conclusions" class="nav-link" data-scroll-target="#sec-intro-mixed-data-tidy-conclusions"><span class="toc-section-number">4.7.9</span>  Now we have some tidy data</a></li>
-  <li><a href="#sec-intro-mixed-data-output-csv" id="toc-sec-intro-mixed-data-output-csv" class="nav-link" data-scroll-target="#sec-intro-mixed-data-output-csv"><span class="toc-section-number">4.7.10</span>  We can output the data as a .csv file</a></li>
-  <li><a href="#sec-intro-mixed-data-conclusions" id="toc-sec-intro-mixed-data-conclusions" class="nav-link" data-scroll-target="#sec-intro-mixed-data-conclusions"><span class="toc-section-number">4.7.11</span>  Data tidying – conclusions</a></li>
+  <li><a href="#sec-intro-mixed-data-omit-na" id="toc-sec-intro-mixed-data-omit-na" class="nav-link" data-scroll-target="#sec-intro-mixed-data-omit-na"><span class="toc-section-number">4.7.9</span>  Remove missing values</a></li>
+  <li><a href="#sec-intro-mixed-data-tidy-conclusions" id="toc-sec-intro-mixed-data-tidy-conclusions" class="nav-link" data-scroll-target="#sec-intro-mixed-data-tidy-conclusions"><span class="toc-section-number">4.7.10</span>  Now we have some tidy data</a></li>
+  <li><a href="#sec-intro-mixed-data-output-csv" id="toc-sec-intro-mixed-data-output-csv" class="nav-link" data-scroll-target="#sec-intro-mixed-data-output-csv"><span class="toc-section-number">4.7.11</span>  We can output the data as a .csv file</a></li>
+  <li><a href="#sec-intro-mixed-data-conclusions" id="toc-sec-intro-mixed-data-conclusions" class="nav-link" data-scroll-target="#sec-intro-mixed-data-conclusions"><span class="toc-section-number">4.7.12</span>  Data tidying – conclusions</a></li>
   </ul></li>
   <li><a href="#sec-intro-mixed-crossed-random" id="toc-sec-intro-mixed-crossed-random" class="nav-link" data-scroll-target="#sec-intro-mixed-crossed-random"><span class="toc-section-number">4.8</span>  Repeated measures designs and crossed random effects</a></li>
   <li><a href="#sec-intro-mixed-working-models" id="toc-sec-intro-mixed-working-models" class="nav-link" data-scroll-target="#sec-intro-mixed-working-models"><span class="toc-section-number">4.9</span>  Working with mixed-effects models</a>
@@ -337,8 +339,9 @@ div.csl-indent {
 </div>
 <section id="sec-intro-motivations" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="sec-intro-motivations"><span class="header-section-number">4.1</span> Motivations: repeated measures designs and crossed random effects</h2>
-<p>In <a href="01-multilevel.html"><span>Chapter&nbsp;3</span></a>, we looked at a multilevel structured dataset in which there were observations about children’s grades, and it became evident that those children can be grouped by or under classes. As we discussed, this kind of data structure will come from studies with a very common design in which the researcher recorded observations about a sample of children who are members of a sample of classes. In working with these kind of data, it is common to say that the observations of children’s grades are <em>nested</em> within classes in a hierarchy.</p>
-<p>Many Psychologists conduct studies where observations are properly understood to be structured in groups of some form but where, nevertheless, it is inappropriate to think of the observations as being nested <span class="citation" data-cites="baayen2008">(<a href="references.html#ref-baayen2008" role="doc-biblioref">Baayen et al., 2008</a>)</span>. We are talking, here, about <strong>repeated-measures designs</strong> where the experimenter presents a sample of multiple stimuli for response to each participant in a sample of for multiple participants. This is another <em>very</em> common experimental design in psychological science. Studies with this kind of design will produce data with a structure that, also, requires the use of mixed-effects models but, as we shall see, the way we think about the structure will be a bit more complicated. We could say that observations of the responses made by participants to each stimulus can be grouped by participant: each person will tend to respond in similar ways to different stimuli. Or, we could say that observations of responses can be grouped by stimulus because each stimulus will tend to evoke similar kinds of responses in different people. Or, we could say that both forms of grouping should be taken into account at the same time.</p>
+<p>In <a href="01-multilevel.html"><span>Chapter&nbsp;3</span></a>, we looked at a multilevel structured dataset in which there were observations about children’s grades, and it became evident that those children can be grouped by or under classes. As we discussed, this kind of data structure will come from studies with a very common design in which, for example, the researcher records observations about a sample of children who are members of a sample of classes. In working with these kind of data, it is common to say that the observations of children’s grades are <em>nested</em> within classes in a hierarchy.</p>
+<p>Many Psychologists conduct studies where observations are properly understood to be structured in groups of some form but where, nevertheless, it is inappropriate to think of the observations as being nested <span class="citation" data-cites="baayen2008">(<a href="references.html#ref-baayen2008" role="doc-biblioref">Baayen et al., 2008</a>)</span>. We are talking, here, about <strong>repeated-measures designs</strong> where the experimenter presents a sample of multiple stimuli for response to each participant in a sample of multiple participants. This is another <em>very</em> common experimental design in psychological science.</p>
+<p>Studies with repeated-measures designs will produce data with a structure that, also, requires the use of mixed-effects models but, as we shall see, the way we think about the structure will be a bit more complicated. We could say that observations of the responses made by participants to each stimulus can be grouped by participant: each person will tend to respond in similar ways to different stimuli. Or, we could say that observations of responses can be grouped by stimulus because each stimulus will tend to evoke similar kinds of responses in different people. Or, we could say that both forms of grouping should be taken into account at the same time.</p>
 <p>We shall take the third position and this chapter will concern why, and how we will adapt our thinking and practice.</p>
 </section>
 <section id="sec-intro-key" class="level2" data-number="4.2">
@@ -371,15 +374,17 @@ Important
 <h2 data-number="4.4" class="anchored" data-anchor-id="sec-intro-mixed-guide"><span class="header-section-number">4.4</span> Study guide</h2>
 <p>I have provided a collection of materials you can use. Here, I explain what they are and how I suggest you use them.</p>
 <p><strong>1. Video recordings of lectures</strong></p>
-<p>1.1 I have recorded a lecture in three parts. The lectures should be accessible by anyone who has the link.</p>
+<p>1.1. I have recorded a lecture in three parts. The lectures should be accessible by anyone who has the link.</p>
 <ul>
 <li><a href="https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=2fa60b12-2eca-4412-8672-acd60104da1d">Part 1</a> – about 8 minutes</li>
 <li><a href="https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=7f31cef0-1e39-4712-b2a1-acd601195c78">Part 2</a> – about 21 minutes</li>
 <li><a href="https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=58ab0c0c-37be-491f-a9e5-acd6011c38dd">Part 3</a> – about 15 minutes</li>
 </ul>
-<p>1.2 I suggest you watch the recordings then read the rest of this chapter. The lectures provide a summary of the main points.</p>
+<p>1.2. I suggest you watch the recordings then read the rest of this chapter. The lectures provide a summary of the main points.</p>
 <p><strong>2. Chapter: 02-mixed</strong></p>
-<p>2.1 I have written this chapter to discuss the main ideas and setting out the practical steps you can follow to start to develop the skills required to analyse multilevel structured data with crossed random effects. 2.2 The practical elements include data tidying, visualization and analysis steps. 2.3 You can read the chapter, run the code, and do the exercises.</p>
+<p>2.1. I have written this chapter to discuss the main ideas and set out the practical steps you can follow to start to develop the skills required to analyse multilevel structured data with crossed random effects.</p>
+<p>2.2. The practical elements include data tidying, visualization and analysis steps.</p>
+<p>2.3. You can read the chapter, run the code, and do the exercises.</p>
 <ul>
 <li>Read in the example <strong>CP reading study</strong> datasets.</li>
 <li>Identify how the data are structured by both participant and stimulus differences.</li>
@@ -459,8 +464,9 @@ Note
 <li><strong>Behaviour</strong>: behavioural observations e.g.&nbsp;reaction time or accuracy of responses made by each participant to each stimulus word.</li>
 </ol>
 <p>Often, we need all these kinds of information for our analyses but different pieces of information are produced in separate ways and come to us in separate files. For example, we may collect experimental response data using software like PsychoPy, E-Prime, Qualtrics or DMDX. We may collect information about participant characteristics using standardized measures, or by asking participants to complete a set of questions on their age, gender, and so on.</p>
-<section id="sec-intro-mixed-data-untidy-2" class="level4" data-number="4.6.1.1">
-<h4 data-number="4.6.1.1" class="anchored" data-anchor-id="sec-intro-mixed-data-untidy-2"><span class="header-section-number">4.6.1.1</span> The data we need to use are untidy</h4>
+</section>
+<section id="sec-intro-mixed-data-untidy-2" class="level3" data-number="4.6.2">
+<h3 data-number="4.6.2" class="anchored" data-anchor-id="sec-intro-mixed-data-untidy-2"><span class="header-section-number">4.6.2</span> The data we need to use are untidy</h3>
 <p>Often, the files we get are <strong>untidy</strong>: not in a useful or <em>tidy</em> format. For example, if you open the file <code>CP_study_word_naming_rt_180211.dat</code> (a <code>.dat</code> or tab delimited file) in Excel, you will see a spreadsheet that looks like <a href="#fig-CP-study-RTs">Figure&nbsp;<span>4.1</span></a>.</p>
 <div id="fig-CP-study-RTs" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -478,9 +484,8 @@ Note
 </ol>
 <p>Data laid out like this are sometimes said to be in <em>wide</em> format. You can see that the data are <em>wide</em> because at least one variable – here, reading reaction time – is held not in one column but spread out over several columns, side-by-side. Thus, the dataset is wide with fewer rows and many columns.</p>
 <p>We want the data in what is called the <em>tidy</em> format.</p>
-</section>
-<section id="sec-intro-mixed-data-tidy" class="level4" data-number="4.6.1.2">
-<h4 data-number="4.6.1.2" class="anchored" data-anchor-id="sec-intro-mixed-data-tidy"><span class="header-section-number">4.6.1.2</span> How tidy data are tidy</h4>
+<section id="sec-intro-mixed-data-tidy" class="level4" data-number="4.6.2.1">
+<h4 data-number="4.6.2.1" class="anchored" data-anchor-id="sec-intro-mixed-data-tidy"><span class="header-section-number">4.6.2.1</span> How tidy data are tidy</h4>
 <p>There are three inter-related rules which make data <em>tidy</em> <span class="citation" data-cites="grolemund">(<a href="references.html#ref-grolemund" role="doc-biblioref">Grolemund &amp; Wickham, n.d.</a>)</span>.</p>
 <div class="callout-important callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -542,7 +547,10 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>We use the <code>read_</code> function to read in the data, entering two arguments inside the brackets after the function name.</p>
+<p>We use the <code>read_</code> function to read in the data</p>
+<ul>
+<li>entering (here, at least) arguments – inside the brackets after the function name – to tell R what file we need and how missing values (<code>NAs</code>) are coded.</li>
+</ul>
 </div>
 </div>
 <p>It will help your understanding to examine an example. Take a look at what this line of code includes, element by element.</p>
@@ -553,7 +561,7 @@ Tip
 <li>We write <code>behaviour.rt &lt;- read_tsv(...)</code> to create an object in the R environment, which we call <code>behaviour.rt</code>: the object with this name is the dataset we read into R using <code>read_tsv(...)</code>.</li>
 <li>When we write the function <code>read_tsv(...)</code> we include two arguments inside it.</li>
 <li><code>read_tsv("CP study word naming rt 180211.dat", ...</code> first, the name of the file, given in quotes <code>""</code> and then a comma.</li>
-<li><code>read_tsv(..., na = "-999")</code> second, we tell R that there are some missing values <code>na</code> which are coded with the value <code>"-999"</code>. :::</li>
+<li><code>read_tsv(..., na = "-999")</code> second, we tell R that there are some missing values <code>na</code> which are coded with the value <code>"-999"</code>.</li>
 </ol>
 </section>
 <section id="sec-intro-missing" class="level3" data-number="4.7.2">
@@ -1089,7 +1097,7 @@ Warning
 <li>R looks at the datasets being merged.</li>
 <li>It identifies if the two datasets have columns in common. Here, the datasets have <code>subjectID</code> and <code>item_name</code> in common).</li>
 <li>R can use these common columns to identify rows of data. Here, each row of data will be identified by both <code>subjectID</code> and <code>item_name</code> i.e.&nbsp;as data about the response made by a participant to a word.</li>
-<li>R will then do a series of identity checks, comparing one dataset with the other and, row by row, looking for matching values in the common columns.</li>
+<li>R will then do a series of identity checks, comparing one dataset with the other and, row by row, looking for matching values in the columns that are common to both datasets.</li>
 <li>If there is a match then R joins the corresponding rows of data together.</li>
 <li>If there isn’t a match then it creates <code>NAs</code> where there are missing entries in one row for one dataset which cannot be matched to a row from the joining dataset.</li>
 </ul>
@@ -1113,20 +1121,32 @@ Tip
 <section id="sec-intro-mixed-data-relational" class="level4" data-number="4.7.6.1">
 <h4 data-number="4.7.6.1" class="anchored" data-anchor-id="sec-intro-mixed-data-relational"><span class="header-section-number">4.7.6.1</span> Relational data</h4>
 <p>In the <code>{tidyverse}</code> family of <code>dplyr</code> functions, when you work with multiple datasets (tables of data), we call the datasets <a href="http://r4ds.had.co.nz/relational-data.html#relational-data">relational data</a>.</p>
-<p>There are three families of verbs designed to work with relational data:</p>
+<p>There are three families of functions (like verbs) designed to work with relational data:</p>
 <ul>
 <li>Mutating joins, which add new variables to one data frame from matching observations in another.</li>
 <li>Filtering joins, which filter observations from one data frame based on whether or not they match an observation in the other table.</li>
 <li>Set operations, which treat observations as if they were set elements.</li>
 </ul>
 <p>We can connect datasets – relate them – according to shared variables like <code>subjectID, item_name</code> (for our data). In <code>{tidyverse}</code>, the variables that connect pairs of tables are called keys where, and this is what counts, <em>key(-s) are variable(-s) that uniquely identify an observation</em>.</p>
-<p>For the experimental reading data, we have observations about each response made by a participant (one of 61 subjects) to an item (one of 160 words). For these data, we can match up a pair of RT and accuracy observations for each (unique) <code>subjectID-item_name</code> combination.</p>
-<p>If you reflect, we could not combine the RT and accuracy data correctly:</p>
-<ol type="1">
-<li>If we did not have both identifying variables for both datasets, both required to uniquely identify each observation.</li>
-<li>If there were mismatches in values of the identifying variable.</li>
-</ol>
-<p>Sometimes, I have done this operation and it has gone wrong because a subjectID has been spelled one way in one dataset e.g.&nbsp;<code>hugh</code> and another way in the other dataset e.g.&nbsp;<code>HughH</code>. This means I am careful about spelling identifiers and I always check my work after merger operations, calculating dataset lengths to ensure the number of rows in the new dataset matches my expectations.</p>
+<p>For the experimental reading data, we have observations about each response made by a participant (one of 61 subjects) to an item (one of 160 words). For these data, we can match up a pair of RT and accuracy observations for each (unique) <code>subjectID-item_name</code> combination. If you reflect, we could not combine the RT and accuracy data correctly if we did not have both identifying variables in both datasets, because both column variables are required to uniquely identify each observation.</p>
+<p>Further, we could not combine the RT and accuracy data correctly if there were mismatches in values of the identifying variable. Sometimes, I have done this operation and it has gone wrong because a subjectID has been spelled one way in one dataset e.g.&nbsp;<code>hugh</code> and another way in the other dataset e.g.&nbsp;<code>HughH</code>. This leads me to share some advice.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Be careful about spelling identifiers.</li>
+<li>Always check your work after merger operations.</li>
+</ul>
+<p>You can check your work by calculating dataset lengths to ensure the number of rows in the new dataset matches your expectations, given the study design and data collection procedure.</p>
+</div>
+</div>
 </section>
 <section id="sec-intro-mixed-data-join-functions" class="level4" data-number="4.7.6.2">
 <h4 data-number="4.7.6.2" class="anchored" data-anchor-id="sec-intro-mixed-data-join-functions"><span class="header-section-number">4.7.6.2</span> _join functions</h4>
@@ -1263,8 +1283,9 @@ Warning
 <p>Filtering or re-coding observations is an important element of the research workflow in psychological science, as I discuss in <a href="intro.html#sec-multiversedata"><span>Section&nbsp;7.2.4.2</span></a>. How we do or do not remove observations from original data may have an impact on our results (as explored by, e.g., Steegen et al., 2014). It is important, therefore, that we learn how to do this reproducibly using R scripts that we can share with our research reports.</p>
 <p>You can read further information about filtering <a href="https://r4ds.had.co.nz/transform.html?q=filter#filter-rows-with-filter">here</a>.</p>
 </section>
-<section id="sec-intro-mixed-data-omit-na" class="level4" data-number="4.7.8.3">
-<h4 data-number="4.7.8.3" class="anchored" data-anchor-id="sec-intro-mixed-data-omit-na"><span class="header-section-number">4.7.8.3</span> Remove missing values</h4>
+</section>
+<section id="sec-intro-mixed-data-omit-na" class="level3" data-number="4.7.9">
+<h3 data-number="4.7.9" class="anchored" data-anchor-id="sec-intro-mixed-data-omit-na"><span class="header-section-number">4.7.9</span> Remove missing values</h3>
 <p>We will be working with the <code>long.all.select.filter.csv</code> dataset collated from the experimental, subject ability scores, and item property data collected for the CP word naming study.</p>
 <p>For convenience, I am going to remove missing values before we go any further, using the <code>na.omit()</code> function.</p>
 <div class="cell">
@@ -1288,9 +1309,8 @@ Tip
 </div>
 </div>
 </section>
-</section>
-<section id="sec-intro-mixed-data-tidy-conclusions" class="level3" data-number="4.7.9">
-<h3 data-number="4.7.9" class="anchored" data-anchor-id="sec-intro-mixed-data-tidy-conclusions"><span class="header-section-number">4.7.9</span> Now we have some tidy data</h3>
+<section id="sec-intro-mixed-data-tidy-conclusions" class="level3" data-number="4.7.10">
+<h3 data-number="4.7.10" class="anchored" data-anchor-id="sec-intro-mixed-data-tidy-conclusions"><span class="header-section-number">4.7.10</span> Now we have some tidy data</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(long.all.noNAs, <span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1325,16 +1345,16 @@ Tip
 </ul>
 <p>We have removed the missing values and we have filtered outliers.</p>
 </section>
-<section id="sec-intro-mixed-data-output-csv" class="level3" data-number="4.7.10">
-<h3 data-number="4.7.10" class="anchored" data-anchor-id="sec-intro-mixed-data-output-csv"><span class="header-section-number">4.7.10</span> We can output the data as a .csv file</h3>
+<section id="sec-intro-mixed-data-output-csv" class="level3" data-number="4.7.11">
+<h3 data-number="4.7.11" class="anchored" data-anchor-id="sec-intro-mixed-data-output-csv"><span class="header-section-number">4.7.11</span> We can output the data as a .csv file</h3>
 <p>Having produced the tidy dataset, we may wish to share it, or save ourselves the trouble of going through the process again. We can do this by creating a .csv file.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(long.all.noNAs, <span class="st">"long.all.noNAs.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This function will create a <code>.csv</code> file from the dataset you name <code>long.all.noNAs</code> which R will put in your working directory.</p>
 </section>
-<section id="sec-intro-mixed-data-conclusions" class="level3" data-number="4.7.11">
-<h3 data-number="4.7.11" class="anchored" data-anchor-id="sec-intro-mixed-data-conclusions"><span class="header-section-number">4.7.11</span> Data tidying – conclusions</h3>
+<section id="sec-intro-mixed-data-conclusions" class="level3" data-number="4.7.12">
+<h3 data-number="4.7.12" class="anchored" data-anchor-id="sec-intro-mixed-data-conclusions"><span class="header-section-number">4.7.12</span> Data tidying – conclusions</h3>
 <p>Most research work involving quantitative evidence requires a <em>big</em> chunk of data tidying or processing before you get to the statistics. Most of the time, this is work <em>you</em> will have to do. The lessons you can learn about the process will generalize to many future research scenarios.</p>
 <div class="callout-advice callout callout-style-default no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -1350,10 +1370,11 @@ Advice
 <ol type="1">
 <li>All analysis results follow from and thus are determined by the data processing steps that precede analysis.</li>
 <li>Analysis results can and do vary, perhaps critically, depending on different processing decisions, and reasonable people may differ on key processing decisions.</li>
-<li>The process of data tidying is instructive of your data quality.</li>
+<li>The process of data tidying is frequently instructive of your data recording quality: you find things out about your field measurements or your instrument integrity or quality of your recordings, when you pay attention, when you process your data.</li>
 </ol>
 </div>
 </div>
+<p>It is wise to see data tidying or processing as a key part of the data analysis workflow because, as I discuss in <a href="intro.html#sec-multiversedata"><span>Section&nbsp;7.2.4.2</span></a>, the choices you make or the integrity or quality of the actions you take, will have consequences for your analysis results or, more generally, for the quality of the evidence you share with others.</p>
 <p><a href="https://counting.substack.com/p/data-cleaning-is-analysis-not-grunt">Here</a> is a nice substack post that links to some scholarly writing and makes some excellent points.</p>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -1377,12 +1398,12 @@ Tip
 <h2 data-number="4.8" class="anchored" data-anchor-id="sec-intro-mixed-crossed-random"><span class="header-section-number">4.8</span> Repeated measures designs and crossed random effects</h2>
 <p>Our focus in this chapter is on analyzing data that come from studies with <strong>repeated-measures designs</strong> where the experimenter presents multiple stimuli for response to each participant.</p>
 <p>In our working example, the <strong>CP reading study</strong>, CP asked all participants in her study to read a selection of words. All participants read the same selection of words, and every person read every word. For each participant, we have multiple observations and these (within-participant) observations will not be independent of each other. One participant will tend to be slower or less accurate compared to another participant, on average. Likewise, one participant’s responses will reveal a stronger (or weaker) impact of the effect of an experimental variable than another participant. These between-participant differences will tend to be apparent across the sample of participants.</p>
-<p>You could say that the lowest trial-level observations can be grouped with respect to participants, that observations are nested within participant. But the data can also be grouped by stimuli. Remember that in the CP study, all participants read the same selection of words, and every person read every word. This means that for each stimulus word, there are multiple observations because all participants responded to each word, and these (within-item) observations will not be independent of each other. One word may prove to be more challenging compared to another, eliciting slower or less accurate responses, on average. Likewise, participants’ responses to a word will reveal a stronger (or weaker) impact of the effect of an experimental variable than the responses to another word. Again, these between-stimulus differences will tend to be apparent observations across the sample of words.</p>
-<p>Under these circumstances, are observations about the responses made by different participants nested under words or are observations about the responses to different words nested under participants? We do not have to make a decision.</p>
+<p>You could say that the lowest trial-level observations can be grouped with respect to participants, that observations are nested within participant. But the data can also be grouped by stimuli. Remember that in the CP study, all participants read the same selection of words, and every person read every word. This means that for each stimulus word, there are multiple observations because all participants responded to each word, and these (within-item) observations will not be independent of each other. One word may prove to be more challenging compared to another, eliciting slower or less accurate responses, on average. Likewise, participants’ responses to a word will reveal a stronger (or weaker) impact of the effect of an experimental variable than the responses to another word. Again, these between-stimulus differences will tend to be apparent when you examine observations of responses across the sample of words.</p>
+<p>Under these circumstances, are observations about the responses made by different participants nested under words, or are observations about the responses to different words nested under participants? We do not have to make a decision.</p>
 <p>Given this common <strong>repeated-measures</strong> design, we can analyze the outcome variable in relation to:</p>
 <ul>
 <li><strong>fixed effects</strong>: the impact of independent variables like participant reading skill or word frequency</li>
-<li><strong>random effects</strong>: the impact of random or unexplained differences between participants and also between stimuli</li>
+<li><strong>random effects</strong>: the impact of random or unexplained differences between participants <em>and also</em> between stimuli</li>
 </ul>
 <p>In this situation, we can say that the random effects are crossed <span class="citation" data-cites="baayen2008">(<a href="references.html#ref-baayen2008" role="doc-biblioref">Baayen et al., 2008</a>)</span>. When multilevel models require the specification of crossed random effects, they tend to be called <strong>mixed-effects models</strong>.</p>
 </section>
@@ -1454,7 +1475,7 @@ Tip
 </div>
 </div>
 <p>In the plot, we see that the best fit line drawn with <code>geom_smooth()</code> trends downward for higher values of word frequency. This means that <a href="#fig-freq-all">Figure&nbsp;<span>4.2</span></a> suggests that RT decreases with increasing word frequency. (I know there is a weird looking line of points around 0 but we can ignore that here.)</p>
-<p>We can estimate the relationship between RT and word frequency using a linear model in which we ignore the possibility that there may be differences (between subjects, or between items) in the intercept or (between subjects) in the slope of the frequency effect:</p>
+<p>We can estimate the relationship between RT and word frequency using a linear model in which we ignore the possibility that there may be differences (between subjects, or between items) in the intercept or (between subjects) in the slope of the frequency effect. This simplified model can be stated as:</p>
 <p><span class="math display">\[
 Y_{ij} = \beta_0 + \beta_1X_j + e_{ij}
 \]</span></p>
@@ -1507,7 +1528,7 @@ Note
 </ul>
 </div>
 </div>
-<p>Notice that, here, word frequency information is located in the <code>Lg.UK.CDcount</code> variable. In a common move for reading data analyses, we transformed the frequency estimate to the Log base 10 of the word frequency values prior to analysis, in part, because word frequency estimates are usually highly skewed.</p>
+<p>Notice that, here, word frequency information is located in the <code>Lg.UK.CDcount</code> variable. In a common move for reading data analyses, we transformed the frequency estimate to the Log base 10 of the word frequency values, prior to analysis, in part because word frequency estimates are usually highly skewed.</p>
 <p>The model does not explain much variance, as <span class="math inline">\(Adjusted \space R^2 = .03\)</span> but, no doubt due to the large sample, the regression model is significant overall <span class="math inline">\(F(1,9083) = 302.8, p &lt; .001\)</span>.</p>
 <section id="sec-intro-mixed-exx-lm" class="level4" data-number="4.9.2.1">
 <h4 data-number="4.9.2.1" class="anchored" data-anchor-id="sec-intro-mixed-exx-lm"><span class="header-section-number">4.9.2.1</span> Exercise</h4>
@@ -1601,7 +1622,8 @@ Important
 </section>
 <section id="sec-intro-mixed-effects-models" class="level3" data-number="4.9.4">
 <h3 data-number="4.9.4" class="anchored" data-anchor-id="sec-intro-mixed-effects-models"><span class="header-section-number">4.9.4</span> Multilevel – here, more appropriately known as – mixed-effects models</h3>
-<p>In a mixed-effects model, we account for this variation: the differences between participants in intercepts and slopes. We do this by modeling the intercept as two terms:</p>
+<p>In a mixed-effects model, we account for this variation: the differences between participants in intercepts and slopes.</p>
+<p>We do this by modeling the intercept as two terms:</p>
 <p><span class="math display">\[
 \beta_{0i} = \gamma_0 + U_{0i}
 \]</span></p>
@@ -1646,7 +1668,7 @@ Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + e_{ij}
 <p>First, we have a chunk of code mostly similar to what we do when we do a regression analysis.</p>
 <ol type="1">
 <li><code>lmer.all.1 &lt;- lmer(...)</code> creates a <em>linear mixed-effects model</em> object using the <code>lmer()</code> function.</li>
-<li><code>RT ~  Lg.UK.CDcount</code> is a formula expressing the model in which we estimate the fixed effect on the outcome or dependent variable <code>RT</code> (reaction time, in milliseconds) predicted <span class="math inline">\(\sim\)</span> by the independent or predictor variable <code>Lg.UK.CDcount</code> (word frequency).</li>
+<li><code>RT ~  Lg.UK.CDcount</code> is a formula expressing the model in which we estimate the fixed effect on the outcome or dependent variable <code>RT</code> (reaction time, in milliseconds) as predicted <span class="math inline">\(\sim\)</span> by the independent or predictor variable <code>Lg.UK.CDcount</code> (word frequency).</li>
 <li><code>...(..., data = long.all.noNAs)</code> specifies the dataset in which you can find the variables named in the model fitting code.</li>
 <li><code>summary(lmer.all.1)</code> gets a summary of the fitted model object, showing you the results.</li>
 </ol>
@@ -1736,7 +1758,7 @@ Lg.UK.CDcnt -0.093</code></pre>
 <ul>
 <li>The information is listed in four columns: 1. <code>Groups</code>; 2. <code>Name</code>; 3. <code>Variance</code>; and 4. <code>Std.Dev.</code></li>
 </ul>
-<p>We have discussed how observations can be grouped by participant (because we have multiple response observations for each person in the study) just as previously we identified how observations could be grouped by class (because we saw that children were nested under class). That is what we mean when we refer to <code>Groups</code>: we are identifying the grouping variables that give hierarchical structure to the data.</p>
+<p>We have discussed how observations can be <em>grouped</em> by participant (because we have multiple response observations for each person in the study) just as previously we identified how observations could be <em>grouped</em> by class (because we saw that children were nested under class). That is what we mean when we refer to <code>Groups</code>: we are identifying the grouping variables that give hierarchical structure to the data.</p>
 <ul>
 <li>The <code>Name</code> lists whether the estimate we are looking at corresponds to, here, random differences between participants in intercepts (listed as <code>(Intercept)</code>), or in slopes (listed as <code>Lg.UK.CDcount</code>).</li>
 </ul>
@@ -1771,7 +1793,7 @@ Note
 </ul>
 </div>
 </div>
-<p>Which coefficient estimate should you trust? Well, it is obvious that the linear model and the linear mixed-effects model estimate are relatively similar. However, it is also obvious that the linear model makes an assumption – the <em>assumption of independence of observations</em> – that does not make sense theoretically (reading responses will be similar within a child) and does not make sense empirically (responses will differ between children, see <a href="#fig-freqperchildlm">Figure&nbsp;<span>4.4</span></a>). Thus, we have good grounds for supposing that the linear mixed-effects model estimate for the frequency effect is likely to be closer to the true underlying population effect.</p>
+<p>Which coefficient estimate should you trust? Well, it is obvious that the linear model and the linear mixed-effects model estimate are relatively similar. However, it is also obvious that the linear model makes an assumption – the <em>assumption of independence of observations</em> – that does not make sense theoretically (because reading responses will be similar for each child) and does not make sense empirically (because responses will differ between children, see <a href="#fig-freqperchildlm">Figure&nbsp;<span>4.4</span></a>). Thus, we have good grounds for supposing that the linear mixed-effects model estimate for the frequency effect is likely to be closer to the true underlying population effect.</p>
 <p>It is important to remember, however, that whatever estimate we can produce is the estimate <em>given</em> the sample of words we used, our information about word frequency, and our measurement of reading RT responses. How far our estimate actually generalizes to the wider population is not something we can judge in the context of a single study.</p>
 <p>Further, we have not finished in our consideration of the random effects that the account should include. We need to do more work by thinking about the differences between stimuli (<a href="#sec-intro-mixed-fixed-effect-fallacy"><span>Section&nbsp;4.10</span></a>).</p>
 <div class="callout-warning callout callout-style-default callout-captioned">
@@ -1965,7 +1987,7 @@ Important
 <p>Averaging data by-subjects or by-items is relatively simple. It is <em>very common</em> to see, in the literature, psychological reports in which F1 and F2 analysis results are presented (that is why I am explaining this).</p>
 <p>Calculating <span class="math inline">\(minF'\)</span> is also relatively simple:</p>
 <p><span class="math display">\[
-minF' = \frac{MS_{effect}}{MS_{random-subject-effects} + MS_{random-word-differences}} = \frac{F_1F_2}{F_1 + F_2}
+minF' = \frac{MS_{effect}}{MS_{\text{random-subject-effects}} + MS_{\text{random-word-differences}}} = \frac{F_1F_2}{F_1 + F_2}
 \]</span></p>
 <p>However, after a while, psychologists stopped doing the extra step of the <span class="math inline">\(minF'\)</span> calculation <span class="citation" data-cites="raaijmakers1999">(<a href="references.html#ref-raaijmakers1999" role="doc-biblioref">Raaijmakers et al., 1999</a>)</span>. They carried on calculating and reporting F1 and F2 ANOVA results but, as <span class="citation" data-cites="baayen2008">Baayen et al. (<a href="references.html#ref-baayen2008" role="doc-biblioref">2008</a>)</span> discuss, that approach risks a high <em>false positive error rate</em>.</p>
 <p>Psychologists also found that while the <span class="math inline">\(minF'\)</span> approach allowed them to take into account between-participant and between-stimulus differences it could not be applied where ANOVA could not be used. This stopped researchers from taking a comprehensive approach to error variance where they wanted to conduct multiple regression analyses.</p>
@@ -1993,6 +2015,23 @@ Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + W_{0j} + e_{ij}
 <li><em>as well as</em> random differences between items in intercepts <span class="math inline">\(W_{0j}\)</span>,</li>
 <li>in addition to the residual term <span class="math inline">\(e_{ij}\)</span>.</li>
 </ul>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What about random effects associated with differences between stimulus items in the slopes of effects?</p>
+<ul>
+<li>Just as we may expect there to be between-participant differences in the slope of the word frequency effect, we may expect there to be between-stimulus differences in the slope of the effect of, e.g., participant age.</li>
+<li>Rest assured, we <em>will</em> look at this question.</li>
+</ul>
+</div>
+</div>
 </section>
 <section id="sec-intro-mixed-random-effect-items" class="level3" data-number="4.10.2">
 <h3 data-number="4.10.2" class="anchored" data-anchor-id="sec-intro-mixed-random-effect-items"><span class="header-section-number">4.10.2</span> Fitting a mixed-effect model – now with random effects of subjects and items</h3>
@@ -2100,7 +2139,7 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>But remember we excluded random effects covariance {#sec-intro-mixed-exclude-covariance}</p>
+<p>Remember we excluded random effects covariance {#sec-intro-mixed-exclude-covariance}</p>
 </div>
 </div>
 <p>In <a href="#sec-intro-mixed-double-bar"><span>Section&nbsp;4.9.5.2</span></a>, I noted how we used the <code>||</code> notation to stop the model estimating the covariance between differences between participants in intercepts and in slopes. The reason I did this is that if I had requested that the model estimate the covariance the model would have failed to converge. What this means depends on understanding how mixed-effects models are estimated. We shall have to return to a development of that understanding later. For now, it is enough to note that mixed-effects models fitted with <code>lmer()</code> often have more difficulty with random effects covariance estimates.</p>
@@ -2236,7 +2275,7 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>n general, in experimental psychological science, when we do data analysis, if we want to estimate effects of experimental variables more accurately then our models need to incorporate terms to capture the impact on observed outcomes of sampled participants and sampled stimuli.</p>
+<p>In general, in experimental psychological science, when we do data analysis, if we want to estimate effects of experimental variables more accurately then our models need to incorporate terms to capture the impact on observed outcomes of sampled participants and sampled stimuli.</p>
 </div>
 </div>
 <p>Historically, we have, as a field, learned to take into account these sampling effects. Now, and most likely, more and more commonly in the future, we are learning to use multilevel or mixed-effects models to do this.</p>
@@ -2249,7 +2288,7 @@ Important
 <p>The use of mixed-effects models has meant that psychologists no longer need to adopt compromise solutions which have important limitations, like by-items and by-subjects analyses.</p>
 </section>
 <section id="sec-intro-mixed-summary-skills" class="level4" data-number="4.13.1.2">
-<h4 data-number="4.13.1.2" class="anchored" data-anchor-id="sec-intro-mixed-summary-skills"><span class="header-section-number">4.13.1.2</span> Summary: concepts</h4>
+<h4 data-number="4.13.1.2" class="anchored" data-anchor-id="sec-intro-mixed-summary-skills"><span class="header-section-number">4.13.1.2</span> Summary: skills</h4>
 <p>We reviewed the ways that experimental data can be untidy. And we outlined the steps that may be required to process untidy data into a tidy format suitable for analysis. As is typical for the data analysis we need to do for experimental psychological science, getting data ready for analysis requires a series of steps including: access; import; restructure; select variables; and filter observations.</p>
 <p>We then developed a mixed-effects model to answer the question:</p>
 <div class="callout-note callout callout-style-default callout-captioned">
