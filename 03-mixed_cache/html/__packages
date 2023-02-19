@@ -17,3 +17,4 @@ purrr
 dplyr
 stringr
 forcats
+kableExtra
