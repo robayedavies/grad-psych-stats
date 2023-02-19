@@ -1309,73 +1309,7 @@ Tip
 </div>
 <p>In all plots, the pink or red line represents the <em>complete pooling</em> model estimate of the effect of frequency on response RTs. The line is the same for each participant because there is only one estimated effect, based on all data for all participants.</p>
 <p>In addition, in each plot, you can see a green line. You can see that the line varies between participants. This represents the effect of frequency estimated using just the data for each participant, analyzed separately. These are the <em>no pooling</em> estimates. We call them the no pooling estimates because each is based just on the data from one participant.</p>
-<div class="cell" data-hash="03-mixed_cache/html/fig-no-vs-complete_9d77a9e7e59fa637cf858c667442feac">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -- we fit a separate line for each cluster of data, one for each participant </span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -- the lmList() function in lme4 automates this process</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>df_no_pooling <span class="ot">&lt;-</span> <span class="fu">lmList</span>(logrt <span class="sc">~</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                          </span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                          LgSUBTLCD <span class="sc">|</span> subjectID, ML.all.correct) <span class="sc">%&gt;%</span> </span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coef</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Subject IDs are stored as row-names. Make them an explicit column</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="st">"subjectID"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">Intercept =</span> <span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span>, <span class="at">Slope_frequency =</span> LgSUBTLCD) <span class="sc">%&gt;%</span> </span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_column</span>(<span class="at">Model =</span> <span class="st">"No pooling"</span>)</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="co"># -- inspect the tibble produced by these lines of code</span></span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(df_no_pooling)</span></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="co"># -- make the subjectID and model label vectors a factor</span></span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>df_no_pooling<span class="sc">$</span>subjectID <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df_no_pooling<span class="sc">$</span>subjectID)</span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>df_no_pooling<span class="sc">$</span>Model <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df_no_pooling<span class="sc">$</span>Model)</span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a><span class="co"># -- in contrast, we might consider a complete pooling model where all the </span></span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a><span class="co"># information from the participants is combined together</span></span>
-<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a><span class="co"># -- we fit a single line for all data</span></span>
-<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a><span class="co"># -- fit a model on all the data pooled together</span></span>
-<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>m_pooled <span class="ot">&lt;-</span> <span class="fu">lm</span>(logrt <span class="sc">~</span> LgSUBTLCD, ML.all.correct) </span>
-<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a><span class="co"># -- repeat the intercept and slope terms for each participant</span></span>
-<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>df_pooled <span class="ot">&lt;-</span> <span class="fu">data_frame</span>(</span>
-<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">Model =</span> <span class="st">"Complete pooling"</span>,</span>
-<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">subjectID =</span> <span class="fu">unique</span>(ML.all.correct<span class="sc">$</span>subjectID),</span>
-<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">Intercept =</span> <span class="fu">coef</span>(m_pooled)[<span class="dv">1</span>], </span>
-<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">Slope_frequency =</span> <span class="fu">coef</span>(m_pooled)[<span class="dv">2</span>])</span>
-<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a><span class="co"># -- inspect</span></span>
-<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(df_pooled)</span></span>
-<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a><span class="co"># -- make the model label vector a factor</span></span>
-<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>df_pooled<span class="sc">$</span>Model <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df_pooled<span class="sc">$</span>Model)</span>
-<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a><span class="co"># -- we can compare these two approaches</span></span>
-<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a><span class="co"># -- instead of calculating the regression lines with stat_smooth(), we can use </span></span>
-<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a><span class="co"># geom_abline() to draw the lines from our dataframe of intercept and slope </span></span>
-<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a><span class="co"># parameters</span></span>
-<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a><span class="co"># -- join the raw data so we can use plot the points and the lines</span></span>
-<span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a>df_models <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(df_pooled, df_no_pooling) <span class="sc">%&gt;%</span> </span>
-<span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(ML.all.correct, <span class="at">by =</span> <span class="st">"subjectID"</span>)</span>
-<span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-48"><a href="#cb24-48" aria-hidden="true" tabindex="-1"></a><span class="co"># -- inspect</span></span>
-<span id="cb24-49"><a href="#cb24-49" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(df_models)</span></span>
-<span id="cb24-50"><a href="#cb24-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-51"><a href="#cb24-51" aria-hidden="true" tabindex="-1"></a><span class="co"># -- produce the plot</span></span>
-<span id="cb24-52"><a href="#cb24-52" aria-hidden="true" tabindex="-1"></a>p_model_comparison <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_models) <span class="sc">+</span></span>
-<span id="cb24-53"><a href="#cb24-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> LgSUBTLCD, <span class="at">y =</span> logrt) <span class="sc">+</span> </span>
-<span id="cb24-54"><a href="#cb24-54" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Set the color mapping in this layer so the points don't get a color</span></span>
-<span id="cb24-55"><a href="#cb24-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">05</span>) <span class="sc">+</span></span>
-<span id="cb24-56"><a href="#cb24-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="fu">aes</span>(<span class="at">intercept =</span> Intercept, </span>
-<span id="cb24-57"><a href="#cb24-57" aria-hidden="true" tabindex="-1"></a>              <span class="at">slope =</span> Slope_frequency, </span>
-<span id="cb24-58"><a href="#cb24-58" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> Model),</span>
-<span id="cb24-59"><a href="#cb24-59" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> .<span class="dv">75</span>) <span class="sc">+</span></span>
-<span id="cb24-60"><a href="#cb24-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> subjectID) <span class="sc">+</span></span>
-<span id="cb24-61"><a href="#cb24-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fl">1.5</span><span class="sc">:</span><span class="dv">4</span> <span class="sc">*</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
-<span id="cb24-62"><a href="#cb24-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb24-63"><a href="#cb24-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
-<span id="cb24-64"><a href="#cb24-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-65"><a href="#cb24-65" aria-hidden="true" tabindex="-1"></a><span class="co"># -- show the plot</span></span>
-<span id="cb24-66"><a href="#cb24-66" aria-hidden="true" tabindex="-1"></a>p_model_comparison</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="03-mixed_cache/html/fig-no-vs-complete_3a2c85725ea8bdd34fe7adc1cad4f013">
 <div class="cell-output-display">
 <div id="fig-no-vs-complete" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -1479,17 +1413,17 @@ Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + W_{0j} + e_{ij}
 </ul>
 <p>The model syntax corresponds to the statistical formula and the code is written as:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct.lmer  <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                           LgSUBTLCD <span class="sc">+</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>                           (LgSUBTLCD <span class="sc">+</span> <span class="dv">1</span><span class="sc">|</span>subjectID) <span class="sc">+</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>                           (<span class="dv">1</span><span class="sc">|</span>item_name),</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> ML.all.correct)</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ML.all.correct.lmer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct.lmer  <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                           LgSUBTLCD <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                           (LgSUBTLCD <span class="sc">+</span> <span class="dv">1</span><span class="sc">|</span>subjectID) <span class="sc">+</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>                           (<span class="dv">1</span><span class="sc">|</span>item_name),</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> ML.all.correct)</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ML.all.correct.lmer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>As will now be getting familiar, the code works as follows:</p>
 <ul>
@@ -1527,17 +1461,17 @@ Tip
 <p>We can then specify <code>summary(ML.all.correct.lmer)</code> to get a summary of the fitted model.</p>
 <p>If you run the model code as written then you would see the following results.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct.lmer  <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>                           LgSUBTLCD <span class="sc">+</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                           (LgSUBTLCD <span class="sc">+</span> <span class="dv">1</span><span class="sc">|</span>subjectID) <span class="sc">+</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>                           (<span class="dv">1</span><span class="sc">|</span>item_name),</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> ML.all.correct)</span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ML.all.correct.lmer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct.lmer  <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                           LgSUBTLCD <span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>                           (LgSUBTLCD <span class="sc">+</span> <span class="dv">1</span><span class="sc">|</span>subjectID) <span class="sc">+</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>                           (<span class="dv">1</span><span class="sc">|</span>item_name),</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> ML.all.correct)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ML.all.correct.lmer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML ['lmerMod']
 Formula: logrt ~ LgSUBTLCD + (LgSUBTLCD + 1 | subjectID) + (1 | item_name)
@@ -1644,106 +1578,7 @@ Warning
 <p>For other participants, we have more information – maybe they made all correct responses. For these people, because we have more information, the intercept estimate will be based more on the data for each participant.</p>
 <p>To make sense of what this means, think about the differences between participants in how much reliable information we can have, given our sample, about their average level of response speed or about how they are affected by experimental variables. Think back to my comments about <a href="#fig-rt-correct-log-den-by-subj">Figure&nbsp;<span>5.4</span></a>, about the differences between participants in how spread out the distributions of their log RT values are. Recall that I said that where participants’ responses are more spread out – just as where we have less observations for some participants than for others – we shall inevitably have less certainty about our estimates for the effects that influence their performance if we base our account on just their data. Mixed-effects models perform better – as prediction models – than <em>no pooling</em> approaches because they are not relying, for any participant, on just their sometimes unreliable data.</p>
 <p>We can look again at a plot showing the data for each participant. <a href="#fig-no-vs-complete-vs-partial">Figure&nbsp;<span>5.6</span></a> presents a grid or trellis of plots, one plot per person. In each plot, you can see points corresponding to the RT of each response made by a participant to a stimulus word. In all plots, the pink line represents the <em>complete pooling</em> data model estimate of the effect of frequency on response RTs. In each plot, the green line represents the effect of frequency estimated using just the data for each participant, the <em>no pooling</em> estimates. Now, we also see blue lines that represent the mixed-effects model <em>partial pooling</em> estimates.</p>
-<div class="cell" data-hash="03-mixed_cache/html/fig-no-vs-complete-vs-partial_8413e7eb87952fed11f4f4f92d5c5cc9">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -- we fit a separate line for each cluster of data, one for each participant </span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -- the lmList() function in lme4 automates this process</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>df_no_pooling <span class="ot">&lt;-</span> <span class="fu">lmList</span>(logrt <span class="sc">~</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>                          </span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>                          LgSUBTLCD <span class="sc">|</span> subjectID, ML.all.correct) <span class="sc">%&gt;%</span> </span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coef</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Subject IDs are stored as row-names. Make them an explicit column</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="st">"subjectID"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">Intercept =</span> <span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span>, <span class="at">Slope_frequency =</span> LgSUBTLCD) <span class="sc">%&gt;%</span> </span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_column</span>(<span class="at">Model =</span> <span class="st">"No pooling"</span>)</span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="co"># -- inspect the tibble produced by these lines of code</span></span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(df_no_pooling)</span></span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a><span class="co"># -- make the subjectID and model label vectors a factor</span></span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>df_no_pooling<span class="sc">$</span>subjectID <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df_no_pooling<span class="sc">$</span>subjectID)</span>
-<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>df_no_pooling<span class="sc">$</span>Model <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df_no_pooling<span class="sc">$</span>Model)</span>
-<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a><span class="co"># -- in contrast, we might consider a complete pooling model where all the </span></span>
-<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a><span class="co"># information from the participants is combined together</span></span>
-<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a><span class="co"># -- we fit a single line for all data</span></span>
-<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a><span class="co"># -- fit a model on all the data pooled together</span></span>
-<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>m_pooled <span class="ot">&lt;-</span> <span class="fu">lm</span>(logrt <span class="sc">~</span> LgSUBTLCD, ML.all.correct) </span>
-<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a><span class="co"># -- repeat the intercept and slope terms for each participant</span></span>
-<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a>df_pooled <span class="ot">&lt;-</span> <span class="fu">data_frame</span>(</span>
-<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">Model =</span> <span class="st">"Complete pooling"</span>,</span>
-<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">subjectID =</span> <span class="fu">unique</span>(ML.all.correct<span class="sc">$</span>subjectID),</span>
-<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">Intercept =</span> <span class="fu">coef</span>(m_pooled)[<span class="dv">1</span>], </span>
-<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">Slope_frequency =</span> <span class="fu">coef</span>(m_pooled)[<span class="dv">2</span>])</span>
-<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a><span class="co"># -- inspect</span></span>
-<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(df_pooled)</span></span>
-<span id="cb28-35"><a href="#cb28-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-36"><a href="#cb28-36" aria-hidden="true" tabindex="-1"></a><span class="co"># -- make the model label vector a factor</span></span>
-<span id="cb28-37"><a href="#cb28-37" aria-hidden="true" tabindex="-1"></a>df_pooled<span class="sc">$</span>Model <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df_pooled<span class="sc">$</span>Model)</span>
-<span id="cb28-38"><a href="#cb28-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-39"><a href="#cb28-39" aria-hidden="true" tabindex="-1"></a><span class="co"># -- we can compare these two approaches</span></span>
-<span id="cb28-40"><a href="#cb28-40" aria-hidden="true" tabindex="-1"></a><span class="co"># -- instead of calculating the regression lines with stat_smooth(), we can use </span></span>
-<span id="cb28-41"><a href="#cb28-41" aria-hidden="true" tabindex="-1"></a><span class="co"># geom_abline() to draw the lines from our dataframe of intercept and slope </span></span>
-<span id="cb28-42"><a href="#cb28-42" aria-hidden="true" tabindex="-1"></a><span class="co"># parameters</span></span>
-<span id="cb28-43"><a href="#cb28-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-44"><a href="#cb28-44" aria-hidden="true" tabindex="-1"></a><span class="co"># -- we fit a mixed-effects model including the fixed effects of the intercept and the frequency effect</span></span>
-<span id="cb28-45"><a href="#cb28-45" aria-hidden="true" tabindex="-1"></a><span class="co"># -- as well as the random effects due to differences between participants (subject ID) in intercepts or</span></span>
-<span id="cb28-46"><a href="#cb28-46" aria-hidden="true" tabindex="-1"></a><span class="co"># in the slope of the frequency effect, as well as differences between items (item_name) in intercepts</span></span>
-<span id="cb28-47"><a href="#cb28-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-48"><a href="#cb28-48" aria-hidden="true" tabindex="-1"></a>ML.all.correct.lmer  <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span></span>
-<span id="cb28-49"><a href="#cb28-49" aria-hidden="true" tabindex="-1"></a>                               </span>
-<span id="cb28-50"><a href="#cb28-50" aria-hidden="true" tabindex="-1"></a>                               LgSUBTLCD <span class="sc">+</span> (LgSUBTLCD <span class="sc">+</span> <span class="dv">1</span><span class="sc">|</span>subjectID) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>item_name),     </span>
-<span id="cb28-51"><a href="#cb28-51" aria-hidden="true" tabindex="-1"></a>                             </span>
-<span id="cb28-52"><a href="#cb28-52" aria-hidden="true" tabindex="-1"></a>                             <span class="at">data =</span> ML.all.correct, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb28-53"><a href="#cb28-53" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(ML.all.correct.lmer)</span></span>
-<span id="cb28-54"><a href="#cb28-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-55"><a href="#cb28-55" aria-hidden="true" tabindex="-1"></a><span class="co"># -- to visualize these estimates, we extract each participant’s intercept and slope using coef()</span></span>
-<span id="cb28-56"><a href="#cb28-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-57"><a href="#cb28-57" aria-hidden="true" tabindex="-1"></a><span class="co"># -- make a dataframe with the fitted effects</span></span>
-<span id="cb28-58"><a href="#cb28-58" aria-hidden="true" tabindex="-1"></a>df_partial_pooling <span class="ot">&lt;-</span> <span class="fu">coef</span>(ML.all.correct.lmer)[[<span class="st">"subjectID"</span>]] <span class="sc">%&gt;%</span> </span>
-<span id="cb28-59"><a href="#cb28-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="st">"subjectID"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb28-60"><a href="#cb28-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb28-61"><a href="#cb28-61" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">Intercept =</span> <span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span>, <span class="at">Slope_frequency =</span> LgSUBTLCD) <span class="sc">%&gt;%</span> </span>
-<span id="cb28-62"><a href="#cb28-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_column</span>(<span class="at">Model =</span> <span class="st">"Partial pooling"</span>)</span>
-<span id="cb28-63"><a href="#cb28-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-64"><a href="#cb28-64" aria-hidden="true" tabindex="-1"></a><span class="co"># -- inspect the tibble produced by these lines of code</span></span>
-<span id="cb28-65"><a href="#cb28-65" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(df_partial_pooling)</span></span>
-<span id="cb28-66"><a href="#cb28-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-67"><a href="#cb28-67" aria-hidden="true" tabindex="-1"></a><span class="co"># -- make the subjectID and model label vectors both factors</span></span>
-<span id="cb28-68"><a href="#cb28-68" aria-hidden="true" tabindex="-1"></a>df_partial_pooling<span class="sc">$</span>subjectID <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df_partial_pooling<span class="sc">$</span>subjectID)</span>
-<span id="cb28-69"><a href="#cb28-69" aria-hidden="true" tabindex="-1"></a>df_partial_pooling<span class="sc">$</span>Model <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df_partial_pooling<span class="sc">$</span>Model)</span>
-<span id="cb28-70"><a href="#cb28-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-71"><a href="#cb28-71" aria-hidden="true" tabindex="-1"></a><span class="co"># -- update the previous plot by using a dataset consisting of of all three models’ estimates</span></span>
-<span id="cb28-72"><a href="#cb28-72" aria-hidden="true" tabindex="-1"></a>df_models <span class="ot">&lt;-</span> <span class="fu">rbind</span>(df_pooled, df_no_pooling, df_partial_pooling) <span class="sc">%&gt;%</span></span>
-<span id="cb28-73"><a href="#cb28-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(ML.all.correct, <span class="at">by =</span> <span class="st">"subjectID"</span>)</span>
-<span id="cb28-74"><a href="#cb28-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-75"><a href="#cb28-75" aria-hidden="true" tabindex="-1"></a><span class="co"># -- inspect the differences between the datasets</span></span>
-<span id="cb28-76"><a href="#cb28-76" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(df_pooled)</span></span>
-<span id="cb28-77"><a href="#cb28-77" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(df_no_pooling)</span></span>
-<span id="cb28-78"><a href="#cb28-78" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(df_partial_pooling)</span></span>
-<span id="cb28-79"><a href="#cb28-79" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(ML.all.correct)</span></span>
-<span id="cb28-80"><a href="#cb28-80" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(df_models)</span></span>
-<span id="cb28-81"><a href="#cb28-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-82"><a href="#cb28-82" aria-hidden="true" tabindex="-1"></a><span class="co"># -- replace the data-set used in the last plot with this new data-set</span></span>
-<span id="cb28-83"><a href="#cb28-83" aria-hidden="true" tabindex="-1"></a><span class="co"># -- and regenerate the plot</span></span>
-<span id="cb28-84"><a href="#cb28-84" aria-hidden="true" tabindex="-1"></a><span class="co"># -- we  produce a plot showing the no-pooling, complete-pooling and partial-pooling (mixed effects)</span></span>
-<span id="cb28-85"><a href="#cb28-85" aria-hidden="true" tabindex="-1"></a><span class="co"># estimates</span></span>
-<span id="cb28-86"><a href="#cb28-86" aria-hidden="true" tabindex="-1"></a>p_model_comparison <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_models) <span class="sc">+</span></span>
-<span id="cb28-87"><a href="#cb28-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> LgSUBTLCD, <span class="at">y =</span> logrt) <span class="sc">+</span></span>
-<span id="cb28-88"><a href="#cb28-88" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Set the color mapping in this layer so the points don't get a color</span></span>
-<span id="cb28-89"><a href="#cb28-89" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">05</span>) <span class="sc">+</span></span>
-<span id="cb28-90"><a href="#cb28-90" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="fu">aes</span>(<span class="at">intercept =</span> Intercept,</span>
-<span id="cb28-91"><a href="#cb28-91" aria-hidden="true" tabindex="-1"></a>                  <span class="at">slope =</span> Slope_frequency,</span>
-<span id="cb28-92"><a href="#cb28-92" aria-hidden="true" tabindex="-1"></a>                  <span class="at">color =</span> Model),</span>
-<span id="cb28-93"><a href="#cb28-93" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> .<span class="dv">75</span>) <span class="sc">+</span></span>
-<span id="cb28-94"><a href="#cb28-94" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> subjectID) <span class="sc">+</span></span>
-<span id="cb28-95"><a href="#cb28-95" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fl">1.5</span><span class="sc">:</span><span class="dv">4</span> <span class="sc">*</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb28-96"><a href="#cb28-96" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb28-97"><a href="#cb28-97" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
-<span id="cb28-98"><a href="#cb28-98" aria-hidden="true" tabindex="-1"></a><span class="co"># -- show the plot</span></span>
-<span id="cb28-99"><a href="#cb28-99" aria-hidden="true" tabindex="-1"></a>p_model_comparison</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="03-mixed_cache/html/fig-no-vs-complete-vs-partial_2dbf718efb81d54f5e279fd420617200">
 <div class="cell-output-display">
 <div id="fig-no-vs-complete-vs-partial" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -1755,27 +1590,6 @@ Warning
 </div>
 <p>It is quite difficult to identify, in this sample, where the partial pooling and no pooling estimates differ. We can focus on a few clear examples. <a href="#fig-no-vs-complete-vs-partial-zoom">Figure&nbsp;<span>5.7</span></a>) presents a grid of plots for just four participants. I have picked some extreme examples but the plot illustrates how: (1.) for some participants e.g.&nbsp;<code>AA1</code> all estimates are practically identical; (2.) for some participants <code>EB5 JL3 JP3</code> the no-pooling and complete-pooling estimates are really quite different and (3.) for some participants <code>JL3 JP3</code> the no-pooling and partial-pooling estimates are quite different.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -- zoom in on a few participants</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -- use filter to select a small number of participants</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>df_zoom <span class="ot">&lt;-</span> df_models <span class="sc">%&gt;%</span> </span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(subjectID <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"EB5"</span>, <span class="st">"JP3"</span>, <span class="st">"JL3"</span>, <span class="st">"AA1"</span>))</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co"># -- replace the data-set of the last plot</span></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co"># -- re-generate the plot with this zoomed-in selection dataset</span></span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>p_model_comparison <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_zoom) <span class="sc">+</span> </span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> LgSUBTLCD, <span class="at">y =</span> logrt) <span class="sc">+</span> </span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Set the color mapping in this layer so the points don't get a color</span></span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">05</span>) <span class="sc">+</span></span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="fu">aes</span>(<span class="at">intercept =</span> Intercept, </span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>                  <span class="at">slope =</span> Slope_frequency, </span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>                  <span class="at">color =</span> Model),</span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> .<span class="dv">75</span>) <span class="sc">+</span></span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> subjectID) <span class="sc">+</span></span>
-<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fl">1.5</span><span class="sc">:</span><span class="dv">4</span> <span class="sc">*</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
-<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
-<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>p_model_comparison</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-no-vs-complete-vs-partial-zoom" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -1789,53 +1603,7 @@ Warning
 <p>Formally, whether an estimate for a participant (in our example) is pulled more or less towards the overall estimate will depend not just on the number of data-points we have for that person. The optimal combined estimate for a participant is termed the <em>Empirical Bayes estimate</em> and the weighting – the extent to which the per-participant ‘estimate’ depends on the participant’s data or the overall data – depends on the reliability of the estimate (of the intercept or the frequency effect) given by analyzing that participant’s data <span class="citation" data-cites="Snijders2004a">(<a href="references.html#ref-Snijders2004a" role="doc-biblioref">Snijders &amp; Bosker, 2004</a>)</span>. If you think about it, smaller samples – e.g.&nbsp;where a participant completed less correct responses – will give you less reliable estimates (and so will samples that show more variation).</p>
 <p>What we are looking at, here, is a form of <em>regularization</em> in which we use all the sources of information we can to ensure we take into account the variability in the data while not getting over-excited by extreme differences (McElreath, 2015). We want to see estimates pulled towards an overall average where we have little data or unreliable estimates. We can see how strongly estimates can be shrunk in a plot like <a href="#fig-shrinkage">Figure&nbsp;<span>5.8</span></a>.</p>
 <p><a href="#fig-shrinkage">Figure&nbsp;<span>5.8</span></a> illustrates the shrinkage effect. I plotted a scatterplot of intercept and slope parameters from each model (models with different kinds of pooling), and connect estimates for the same participant. The plot uses arrows to connect the different estimates for each participant, different estimates from no-pooling (per-participant) compared to partial-pooling (mixed-effects) models. The plot shows how more extreme estimates are shrunk towards the global average estimate.</p>
-<div class="cell" data-hash="03-mixed_cache/html/fig-shrinkage_67071118b235eedabc738b6a46f9d347">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -- the partial pooling model pulls (or shrinks) more extreme estimates towards an overall average</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -- we can visualize this shrinkage effect by plotting a scatterplot of intercept and slope </span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># parameters from each model and connecting estimates for the same participant</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co"># -- we use arrows to connect the different estimates for each participant, different estimates</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co"># from no-pooling (per-participant) compared to partial-pooling (mixed-effects) models</span></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="co"># -- the plot shows how more extreme estimates are shrunk towards the global average estimate</span></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>df_fixef <span class="ot">&lt;-</span> <span class="fu">data_frame</span>(</span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">Model =</span> <span class="st">"Partial pooling (average)"</span>,</span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">Intercept =</span> <span class="fu">fixef</span>(ML.all.correct.lmer)[<span class="dv">1</span>],</span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">Slope_frequency =</span> <span class="fu">fixef</span>(ML.all.correct.lmer)[<span class="dv">2</span>])</span>
-<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Complete pooling / fixed effects are center of gravity in the plot</span></span>
-<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>df_gravity <span class="ot">&lt;-</span> df_pooled <span class="sc">%&gt;%</span> </span>
-<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(Model, Intercept, Slope_frequency) <span class="sc">%&gt;%</span> </span>
-<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rbind</span>(df_fixef)</span>
-<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a><span class="co"># df_gravity</span></span>
-<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 x 3</span></span>
-<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                       Model Intercept Slope_Days</span></span>
-<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                       &lt;chr&gt;     &lt;dbl&gt;      &lt;dbl&gt;</span></span>
-<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1          Complete pooling  252.3207   10.32766</span></span>
-<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 Partial pooling (average)  252.5426   10.45212</span></span>
-<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>df_pulled <span class="ot">&lt;-</span> <span class="fu">rbind</span>(df_no_pooling, df_partial_pooling)</span>
-<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_pulled) <span class="sc">+</span> </span>
-<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> Intercept, <span class="at">y =</span> Slope_frequency, <span class="at">color =</span> Model) <span class="sc">+</span> </span>
-<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> df_gravity, <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span> </span>
-<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Draw an arrow connecting the observations between models</span></span>
-<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="fu">aes</span>(<span class="at">group =</span> subjectID, <span class="at">color =</span> <span class="cn">NULL</span>), </span>
-<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a>            <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(.<span class="dv">02</span>, <span class="st">"npc"</span>))) <span class="sc">+</span> </span>
-<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Use ggrepel to jitter the labels away from the points</span></span>
-<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(</span>
-<span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> subjectID, <span class="at">color =</span> <span class="cn">NULL</span>),</span>
-<span id="cb30-36"><a href="#cb30-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> df_no_pooling) <span class="sc">+</span></span>
-<span id="cb30-37"><a href="#cb30-37" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Don't forget 373</span></span>
-<span id="cb30-38"><a href="#cb30-38" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ggrepel::geom_text_repel(</span></span>
-<span id="cb30-39"><a href="#cb30-39" aria-hidden="true" tabindex="-1"></a>  <span class="co">#   aes(label = subjectID, color = NULL), </span></span>
-<span id="cb30-40"><a href="#cb30-40" aria-hidden="true" tabindex="-1"></a>  <span class="co">#   data = filter(df_partial_pooling, Subject == "373")) + </span></span>
-<span id="cb30-41"><a href="#cb30-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>) <span class="sc">+</span> </span>
-<span id="cb30-42"><a href="#cb30-42" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ggtitle("Pooling of regression parameters") + </span></span>
-<span id="cb30-43"><a href="#cb30-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Intercept estimate"</span>) <span class="sc">+</span> </span>
-<span id="cb30-44"><a href="#cb30-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Slope estimate"</span>) <span class="sc">+</span> </span>
-<span id="cb30-45"><a href="#cb30-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
-<span id="cb30-46"><a href="#cb30-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="03-mixed_cache/html/fig-shrinkage_57148ae21fea000d154411bdc2e39eab">
 <div class="cell-output-display">
 <div id="fig-shrinkage" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -2008,13 +1776,13 @@ BIC = -2ln(l) + kln(N)
 <p>In analyzing the effect of frequency on log RT for the ML study data, we can examine whether the random effects of subjects or of items on intercepts are necessary. Then we can examine if we should take into account random effects of subjects on the slope of the fixed effect of frequency, in addition to the random effects on intercepts.</p>
 <p>To begin with, we can look at a simpler model. We can run model with just the fixed effects of intercept and frequency, and the random effects of participants or items on intercepts only. We exclude the <code>(LgSUBTLCD + ...|subjectID)</code> specification for the random effect of participants on the slope of the frequency <code>LgSUBTLCD</code> effect. We use REML fitting, as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct.lmer.REML.si  <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span> LgSUBTLCD <span class="sc">+</span> </span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>                                    </span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>                                          (<span class="dv">1</span><span class="sc">|</span>subjectID) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>item_name),</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> ML.all.correct, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ML.all.correct.lmer.REML.si)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct.lmer.REML.si  <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span> LgSUBTLCD <span class="sc">+</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>                                    </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                                          (<span class="dv">1</span><span class="sc">|</span>subjectID) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>item_name),</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> ML.all.correct, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ML.all.correct.lmer.REML.si)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML ['lmerMod']
 Formula: logrt ~ LgSUBTLCD + (1 | subjectID) + (1 | item_name)
@@ -2050,13 +1818,13 @@ LgSUBTLCD -0.658</code></pre>
 <p>Notice that I changed the model name to be able to distinguish the maximum likelihood from the restricted maximum likelihood model.</p>
 <p>Following <span class="citation" data-cites="baayen2008">Baayen et al. (<a href="references.html#ref-baayen2008" role="doc-biblioref">2008</a>)</span>, we can then run a series of models with just one random effect. Firstly, just the random effect of items on intercepts:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct.lmer.REML.i  <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>       LgSUBTLCD <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>item_name),</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> ML.all.correct, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ML.all.correct.lmer.REML.i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct.lmer.REML.i  <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>       LgSUBTLCD <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>item_name),</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> ML.all.correct, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ML.all.correct.lmer.REML.i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML ['lmerMod']
 Formula: logrt ~ LgSUBTLCD + (1 | item_name)
@@ -2086,13 +1854,13 @@ LgSUBTLCD -0.977</code></pre>
 </div>
 <p>Secondly, just the random effect of subjects on intercepts:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct.lmer.REML.s  <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>       LgSUBTLCD <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>subjectID),</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> ML.all.correct, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ML.all.correct.lmer.REML.s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct.lmer.REML.s  <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>       LgSUBTLCD <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>subjectID),</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> ML.all.correct, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ML.all.correct.lmer.REML.s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML ['lmerMod']
 Formula: logrt ~ LgSUBTLCD + (1 | subjectID)
@@ -2126,8 +1894,8 @@ LgSUBTLCD -0.517</code></pre>
 <li>Then compare models with <code>ML.all.correct.lmer.REML.si</code> versus without <code>ML.all.correct.lmer.REML.s</code> the random effect of items on intercepts.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ML.all.correct.lmer.REML.si, ML.all.correct.lmer.REML.i, <span class="at">refit =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ML.all.correct.lmer.REML.si, ML.all.correct.lmer.REML.s, <span class="at">refit =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ML.all.correct.lmer.REML.si, ML.all.correct.lmer.REML.i, <span class="at">refit =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ML.all.correct.lmer.REML.si, ML.all.correct.lmer.REML.s, <span class="at">refit =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We compare models using the <code>anova()</code> function. We can list as many models as we like for comparison.</p>
 <p>Notice:</p>
@@ -2141,7 +1909,7 @@ LgSUBTLCD -0.517</code></pre>
 <p>As Ben Bolker points out <a href="http://stackoverflow.com/questions/22892063/do-i-need-to-set-refit-false-when-testing-for-random-effects-in-lmer-models-wi">in this discussion</a>, analyses of simulated data analyses suggest that it does not make much difference whether we use REML or ML when we are comparing models with the same fixed effects but varying random effects. But it does matter <em>very much</em> that we fit models using ML when we are comparing models with the same random effects but differing fixed effects.</p>
 <p>When we run the <code>anova()</code> function call, it can be seen that the random effects of subjects on intercepts is required.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ML.all.correct.lmer.REML.si, ML.all.correct.lmer.REML.i, <span class="at">refit =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ML.all.correct.lmer.REML.si, ML.all.correct.lmer.REML.i, <span class="at">refit =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Data: ML.all.correct
 Models:
@@ -2174,7 +1942,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>You can say that the comparison of the model <code>ML.all.correct.lmer.REML.si</code> with the random effect of participants on intercepts versus the model <code>ML.all.correct.lmer.REML.i</code> without the random effect of participants on intercepts shows that the inclusion of the random effect of participants on intercepts is <em>warranted by a significant difference in model fit</em>. (I highlight here the language you can use in your reporting.)</p>
 <p>The second model comparison shows that the random effects of items on intercepts is also justified.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ML.all.correct.lmer.REML.si, ML.all.correct.lmer.REML.s, <span class="at">refit =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ML.all.correct.lmer.REML.si, ML.all.correct.lmer.REML.s, <span class="at">refit =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Data: ML.all.correct
 Models:
@@ -2224,11 +1992,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>In general, and simplifying things a bit, if an effect is manipulated within-units then both random effects of those units on intercepts and slopes should be examined but if it is manipulated between units then only random effects of those units on intercepts may be required.</p>
 <p>Examine the utility of random effects by comparing models with the same fixed effects but varying random effects. You can add a fixed effect term inside the specification of random effects to examine random slopes, as we saw earlier in this chapter.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct.lmer.REML.slopes  <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span> LgSUBTLCD <span class="sc">+</span> </span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>                                           </span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>                                                (LgSUBTLCD <span class="sc">+</span> <span class="dv">1</span><span class="sc">|</span>subjectID) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>item_name),</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> ML.all.correct, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct.lmer.REML.slopes  <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span> LgSUBTLCD <span class="sc">+</span> </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>                                           </span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>                                                (LgSUBTLCD <span class="sc">+</span> <span class="dv">1</span><span class="sc">|</span>subjectID) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>item_name),</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> ML.all.correct, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Looking at the code:</p>
 <ul>
@@ -2237,7 +2005,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </ul>
 <p>And as before, we can use <code>anova()</code> to check whether the increase in model complexity associated with the addition of random slopes terms is justified by an increase in model fit to data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ML.all.correct.lmer.REML.si, ML.all.correct.lmer.REML.slopes, <span class="at">refit =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ML.all.correct.lmer.REML.si, ML.all.correct.lmer.REML.slopes, <span class="at">refit =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Data: ML.all.correct
 Models:
@@ -2278,15 +2046,15 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <!-- I am not sure but I think that this is what the SPSS mixed-effects models procedure does do}; it is worth bearing in mind that the p-values for t-tests on effects estimates for mixed-effects models are, if calculated as outlined, likely to be anti-conservative -- so that you find effects that are not really there -- but the difference may not amount to much if, as here, for the ML data set, you actually do have a lot of observations, both lowest-level raw RT observations, as well as many participants and many stimulus items. -->
 <p>While this makes sense to me (see comments earlier on Bayesian methods), Psychologists will need p-values. This is now relatively easy. We can run mixed-effects models with p-values from significance tests on the estimates of the fixed effects coefficients using the <code>library(lmerTest)</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>ML.all.correct.lmer.REML.slopes  <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span> LgSUBTLCD <span class="sc">+</span> </span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>                                           </span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>                                                (LgSUBTLCD <span class="sc">+</span> <span class="dv">1</span><span class="sc">|</span>subjectID) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>item_name),</span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> ML.all.correct, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ML.all.correct.lmer.REML.slopes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>ML.all.correct.lmer.REML.slopes  <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span> LgSUBTLCD <span class="sc">+</span> </span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>                                           </span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>                                                (LgSUBTLCD <span class="sc">+</span> <span class="dv">1</span><span class="sc">|</span>subjectID) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>item_name),</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> ML.all.correct, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ML.all.correct.lmer.REML.slopes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]

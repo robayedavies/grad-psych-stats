@@ -727,6 +727,7 @@ In addition, in each plot, you can see a green line. You can see that the line v
 #| fig-alt: "Plot showing the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant; red-pink line shows the complete pooling estimate, blue-green line shows the no-pooling estimate."
 #| warning: false
 #| message: false
+#| echo: false
 #| cache: true
 #| fig-height: 9
 #| fig-width: 7
@@ -1034,6 +1035,7 @@ We can look again at a plot showing the data for each participant. @fig-no-vs-co
 #| fig-alt: "Plot showing the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant; pink line shows the complete pooling estimate green line shows the no-pooling estimate; and blue line shows the linear mixed-effects model partial pooling estimate."
 #| warning: false
 #| message: false
+#| echo: false
 #| cache: true
 #| fig-height: 9
 #| fig-width: 7
@@ -1147,6 +1149,7 @@ It is quite difficult to identify, in this sample, where the partial pooling and
 #| fig-alt: "Plot showing the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant -- for participants AA1, EB5, JL3 and JP3; pink line shows the complete pooling estimate green line shows the no-pooling estimate; and blue line shows the linear mixed-effects model partial pooling estimate."
 #| warning: false
 #| message: false
+#| echo: false
 #| fig-height: 9
 #| fig-width: 7
 # -- zoom in on a few participants
@@ -1187,6 +1190,7 @@ What we are looking at, here, is a form of *regularization* in which we use all 
 #| fig-alt: "Plot illustrating shrinkage: big green and pink points show the complete pooling and partial pooling (average) estimates for the slope and intercept; orange and purple points show the no pooling (orange) and partial pooling (purple) estimates for each person; estimates for a person are connected by arrows to show the direction towards which no pooling estimates are pulled or shrunk."
 #| warning: false
 #| message: false
+#| echo: false
 #| cache: true
 #| fig-height: 6
 #| fig-width: 6.5
