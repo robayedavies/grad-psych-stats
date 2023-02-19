@@ -88,9 +88,9 @@ I have provided a collection of materials you can use. Here, I explain what they
 
 1.1. I have recorded a lecture in three parts. The lectures should be accessible by anyone who has the link.
 
--   [Part 1](https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=2fa60b12-2eca-4412-8672-acd60104da1d) -- about 8 minutes
--   [Part 2](https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=7f31cef0-1e39-4712-b2a1-acd601195c78) -- about 21 minutes
--   [Part 3](https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=58ab0c0c-37be-491f-a9e5-acd6011c38dd) -- about 15 minutes
+-   [Part 1](https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=6ee1618c-ced2-425b-9213-ace4011ea856) -- about 13 minutes
+-   [Part 2](https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=01dccf63-8b1e-406c-8694-ace401229f10) -- about 13 minutes
+-   [Part 3](https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=ddde4efb-2975-4347-b255-ace401328b39) -- about 24 minutes
 
 1.2. I suggest you watch the recordings then read the rest of this chapter. The lectures provide a summary of the main points.
 
@@ -191,7 +191,6 @@ The data file is collected together with the .R scripts:
 
 -   `03-mixed-workbook.R` the workbook you will need to do the practical exercises.
 -   `03-mixed-workbook-answers.R` with answers to questions and code for exercises.
-
 
 ## Tidy the data {#sec-dev-mixed-tidy}
 
@@ -1763,7 +1762,7 @@ We used two functions to fit and evaluate mixed-effects models.
 - We used`anova()` to compare two or more models using AIC, BIC and the Likelihood Ratio Test.
 - We used the `lmerTest` library to get significance tests for coefficient estimates of fixed effects.
 
-## Recommended reading {#sec-dev-mixed-glossary-recommended-reading}
+## Recommended reading {#sec-dev-mixed-recommended-reading}
 
 Snijders and Bosker (2012) present a helpful overview of multilevel modelling. Baayen et al. (2008; see, also, Barr et al., 2013; Judd et al., 2012) discuss mixed-effects models with crossed random effects.
 
