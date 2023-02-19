@@ -20,13 +20,13 @@ This chapter is still under construction.
 
 ## Motivations: to grow in sophistication {#sec-dev-mixed-motivations}
 
-Linear mixed-effects models are important, interesting, and sometimes challenging. We have worked through two chapters (see @secsec-intro-multilevel, @sec-intro-mixed) in which we have aimed to learn:
+Linear mixed-effects models are important, interesting, and sometimes challenging. We have worked through two chapters (see @sec-intro-multilevel, @sec-intro-mixed) in which we have aimed to learn:
 
 -   **To recognize** the situations where we shall see multilevel structured data and therefore where we will need to apply multilevel or mixed-effects models.
 -   **To understand** the nature and the advantages of these models: what they are, and why they work better than other kinds of models, given multilevel data.
 -   **To practice** how we code for mixed-effects models, and how we read or write about the results.
 
-We now need to develop our understanding and skills further. We now need to examine some of the complexities that we may face when we work with mixed-effects models.
+We now need to develop our understanding and skills further. And we now need to examine some of the complexities that we may face when we work with mixed-effects models.
 
 Our approach will continue to depend on verbal explanation, visualization and a practical code-based approach to the modeling.
 
@@ -50,16 +50,19 @@ We have three capacities we seek to develop. These include the capacity:
 3.  and to communicate their results effectively (to ourselves and others).
 :::
 
-The development of skills and understanding in relation to each of these capacities will travel at different speeds, for different people, and within any person for different capacities. Our internal evaluation of our understanding will not exactly match the evaluation that comes from external assessment. In other words, we might not be satisfied with our understanding but, still, our understanding might be satisfactory. It might be that we can learn to say in words what mixed-effects models are or involve, or what their results mean, *very effectively* even if we remain unsure about our understanding.
+We should be aware that the development of skills and understanding in relation to each of these capacities will travel at different speeds for different people, and *within any person* at different speeds for different capacities. 
+
+We should also be aware that our internal evaluation of our understanding will not exactly match the evaluation that comes from external assessment. In other words, we might not be satisfied with our understanding but, still, our understanding might be satisfactory. It might be that we can learn to say in words what mixed-effects models are or involve, or what their results mean, *very effectively* even if we remain unsure about our understanding.
 
 For these reasons, I specify what we are aiming to develop in terms of what we can *do*.
+You can test your development against this checklist of targets for learning.
 
 1.  We want to develop the capacity to **understand** mixed-effects models, the capacity to:
 
 -   recognize where data have a multilevel structure;
 -   recognize where multilevel or mixed-effects models are required;
 -   distinguish the elements of a mixed-effects model, including fixed effects and random effects;
--   explain how random effects can be understood in terms of random differences (or deviations), between groups or classes or individuals, in intercepts or slopes;
+-   explain how random effects can be understood in terms of random differences (or deviations) between groups or classes or individuals, in intercepts or slopes;
 -   explain how random effects can be understood in terms of variances, as a means to account for random differences between groups or classes or individuals in intercepts or slopes;
 -   explain how mixed-effects models work better than linear models, for multilevel structured data;
 -   explain how mixed-effects models work better because they allow partial-pooling of estimates.
@@ -72,10 +75,10 @@ For these reasons, I specify what we are aiming to develop in terms of what we c
 -   interpret the fixed-effects estimates;
 -   interpret the random effects estimates, including both the variance and covariance estimates.
 
-3.  We want to develop the capacity to talk about and present the results of mixed-effects models, the capacity to:
+3.  We want to develop the capacity to **communicate** the results of mixed-effects models effectively, to ourselves and to others, the capacity to:
 
 -   describe in words and summary tables the results of a mixed-effects model;
--   visualize the effects estimates from a mixed-effects model.
+-   visualize the effects estimates or predictions from a mixed-effects model.
 
 ## Study guide {#sec-dev-mixed-guide}
 
@@ -126,7 +129,25 @@ In our analyses, the focus of our interest will be on the ways in which particip
 
 The total number of participants for this study was 39, including a group of younger adults and a group of older adults. Information was collected about the participants' age, education and gender. In addition, participants were asked to complete ability measures (TOWRE sight word and phonemic tests, @torgesen1999towre) and a measure of reading experience (Author Recognition Test, ART, @Masterson2007c).
 
-In summary, ML collected data on lexical decision task response reaction times (RTs) and accuracy and information on participants, including age, reading ability and reading experience. In addition, she collected information on the properties of the lexical decision stimulus items, including variables like the length or frequency of words (values taken from the English Lexicon Project, @Balota2007Balota).
+### Research hypotheses {#sec-dev-mixed-hypotheses}
+
+Instead of posing a simple and general research question, we shall orient our work around a set of quite specific predictions. ML hypothesized:
+
+1. Effects of stimulus attributes
+
+- Predicting that words that are shorter, that look like more other words, and that appear frequently in the language will be easier to recognize.
+
+2. Effects of participant attributes
+
+- Predicting that older readers would be faster and more accurate than younger readers in word recognition.
+
+3. Effects of interactions between the effects of word attributes and person attributes.
+
+- Predicting that better (older) readers will show smaller effects of word attributes.
+
+### The ML recognition study data variables {#sec-dev-mixed-data-variables}
+
+In summary, ML collected data on lexical decision task response reaction times (RTs) and accuracy and information on participants, including age, reading ability and reading experience. In addition, she collected information on the properties of the lexical decision stimulus items, including variables like the length or frequency of words (values taken from the English Lexicon Project, @Balota2007).
 
 The ML study data includes the following variables that we will work with (as well as some you can ignore):
 
@@ -160,25 +181,26 @@ The ML study data includes the following variables that we will work with (as we
 
 You can download the [data-03-mixed.zip](files/data-03-mixed.zip) files folder to get the data you need for the practical work we will be doing for this chapter.
 
-We will be working with the files located in a .zip folder called `data-03-mixed`. The data are held in one file:
+The data are held in one file:
 
 -   `subjects.behaviour.words-310114.csv` which holds information about the (word) stimuli, participants, and the responses recorded in the ML study.
 
-The data files are collected together with the .R scripts:
+The `.csv` file is a *comma separated values* file and can be opened in Excel.
+
+The data file is collected together with the .R scripts:
 
 -   `03-mixed-workbook.R` the workbook you will need to do the practical exercises.
 -   `03-mixed-workbook-answers.R` with answers to questions and code for exercises.
 
-The `.csv` file is a *comma separated values* file and can be opened in Excel.
 
 ## Tidy the data {#sec-dev-mixed-tidy}
 
 In @sec-intro-mixed-tidy-data, we saw how we may need to tidy the data we collect in experimental studies: combining data about responses with data about participant attributes or stimulus properties, and restructuring the data so that they are in a tidy format. For this class, many steps in the process of data tidying were completed previously. Thus, we only need to perform steps 1, 3 and 4 of the usual *data tidying* process:
 
-1.  Import the data or read the data into R, see @sec-dev-mixed-import
-2.  Restructure the data
-3.  Select or transform variables, see @sec-dev-mixed-data-transform
-4.  Filter observations, see @sec-dev-mixed-data-filter
+1.  Import the data or read the data into R, see @sec-dev-mixed-import;
+2.  Restructure the data;
+3.  Select or transform variables, see @sec-dev-mixed-data-transform;
+4.  Filter observations, see @sec-dev-mixed-data-filter.
 
 We are going to first filter the observations, then transform the outcome variable. We will explain why we have to do this as we proceed.
 
@@ -201,12 +223,13 @@ I am going to assume you have downloaded the data file, and that you know where 
 ML.all <- read_csv("subjects.behaviour.words-310114.csv", na = "-999")
 ```
 
-The data file `subjects.behaviour.words-310114.csv` holds all the data about everything (behaviour, participants, stimuli) we need for our analysiswork in one big dataset.
+The data file `subjects.behaviour.words-310114.csv` holds all the data about everything (behaviour, participants, stimuli) we need for our analysis wor.
 
 ::: callout-tip
 It is *always* a good idea to first inspect what you have got when you read a data file into R before you do anything more demanding.
 
--   You cannot assume that the data are what you think they are or are structured or coded in the ways that you think they should be structured or coded.
+-   You **cannot assume** that the data are what you think they are
+-   or  that the data are structured or coded in the ways that you think (or have been told) they should be structured or coded.
 :::
 
 You can inspect the first few rows of the dataset using `head()`.
@@ -232,7 +255,7 @@ summary(ML.all)
 
 The summary shows some features of the dataset, or of how R interprets the dataset, that are of immediate interest to us, though we do not necessarily have to do anything about them.
 
-1.  We can see statistical summaries -- showing the mean, median, minimum and maximum, etc. -- of numeric variables like the outcome variable `RT`, or candidate predictor variables like `LgSUBTLCD`, a measure of the frequency of occurrence of words in participant experience.
+1.  We can see statistical summaries -- showing the mean, median, minimum and maximum, etc. -- of numeric variables like the outcome variable `RT`.
 2.  We can see statistical summaries, also, of variables that comprise number values but which we do not want to be treated as numbers, e.g., the word stimulus coding variable `item_number`.
 3.  We can see that some variables are simply listed as `Class: character`. That tells us that one or more values in the columns in the datasheet that correspond to these variables are words or strings of letters or alphanumeric characters.
 4.  There is no sign of the presence of missing values in this dataset, no counts of `NAs`.
@@ -248,30 +271,27 @@ We should examine the distribution of the outcome variable, lexical decision res
 We shall examine the distribution of the outcome variable, lexical decision response reaction time (RT in ms), using density plots. An alternative method would be to use histograms. I choose to use density plots because they allow the easy comparison of the distributions of values of a continuous numeric variable like reaction time. A density plot shows a curve. You can say that the density corresponds to the height of the curve for a given value of the variable being depicted, and that it is related to the probability of observing values of the variable within some range of values (Howell, 2014).
 
 <!-- % howell/p.124 density is not synonymous with probability -- best thought of as the height of the curve at different values of x given infinite differences -->
-
 <!-- % -- it does not make sense to talk about the probability of any specific outcome -->
-
 <!-- % it does make sense to talk about the the probability of obtaining a score falling within some interval -->
-
 <!-- %if we arbitrarily define the total area under the curve to = 1 then the shaded band capturing points falling within a-b -->
-
 <!-- %will = the prob that randomly selected obs will have values in that range -->
-
 <!-- %-- with calculus if we knew the form of the equation that describes this distribution we would simply need to integrate the function -->
-
 <!-- %over the interval a-b -->
-
 <!-- % -->
-
 <!-- % %chang/pp.124 -- a kernel density curve is an estimate of the population distribution given the sample data                   -->
-
 <!-- % %-- the amount of smoothing depends on the kernel bandwidth                   -->
-
 <!-- % %-- the larger the bandwidth the more smoothing there is  -->
 
-Getting a density plot of RTs of responses is easy in `ggplot()`.
+Getting a density plot of RTs of responses is easy using `ggplot()` code.
 
-```{r fig-rt-all-density, message = FALSE, fig.cap = "Density plot showing word recognition reaction time, correct and incorrect responses", fig.width=5, fig.height=5, out.width = "55%", cache = TRUE, fig.align='center'}
+```{r}
+#| label: fig-rt-all-density
+#| fig-cap: "Density plot showing word recognition reaction time, correct and incorrect responses"
+#| fig-alt: "Density plot showing word recognition reaction time, correct and incorrect responses. The figure shows a black line, a curve peaking over RT = about 500 but ranging between -2000 and +2000. Under the curve, a series of black tick marks are shown under the x-axis border."
+#| warning: false
+#| message: false
+#| fig-height: 5
+#| fig-width: 5
 ML.all %>%
   ggplot(aes(x = RT)) +
   geom_density(size=1.5) +
@@ -282,22 +302,25 @@ ML.all %>%
 
 The code delivers a plot (@fig-rt-all-density) showing three peaks in the distribution of RT values. You can see that there is a peak of RT observations around 500-1000ms, another smaller peak around -500ms, and a third smaller peak around -2000ms.
 
-The density plot shows the reaction times recorded for participants' button press \`yes' responses to word stimuli in the lexical decision task. The peaks of negative RTs represent observations that are impossible. Remember that reaction time, in a task like lexical decision, represents the interval in time between the onset of a task stimulus (in lexical decision, a word or a nonword) and the onset of the response (the button press to indicate the lexical decision). We cannot have negative time intervals. The explanation is that ML collected her data using DMDX (Forster & Forster, 2003). DMDX records the reaction times for incorrect responses as *negative RTs*.
+The density plot shows the reaction times recorded for participants' button press 'yes' responses to word stimuli in the lexical decision task. The peaks of negative RTs represent observations that are *impossible*.
 
-#### Code tip
+Remember that reaction time, in a task like lexical decision, represents the interval in time between the onset of a task stimulus (in lexical decision, a word or a nonword) and the onset of the response (the button press to indicate the lexical decision). We cannot have negative time intervals. The explanation is that ML collected her data using DMDX (Forster & Forster, 2003). DMDX records the reaction times for incorrect responses as *negative RTs*.
 
 The code to produce @fig-rt-all-density works in a series of steps.
 
 1.  `ML.all %>%` takes the dataset, from the ML study, that we have read in to the R workspace and pipes it to the visualization code, next.
 2.  `ggplot(aes(x = RT)) +` creates a plot object in which the x-axis variable is specified as `RT`. The values of this variable will be mapped to geometric objects, i.e. plot features, that you can see, next.
-3.  `geom_density(size=1.5) +` first displays the distribution of values in the variable `RT` as a density curve. The argument `size=1.5` tells R to make the line $1.5 \times$ the thickness of the line used by default to show variation in density. Some further information is added to the plot, next.
+3.  `geom_density(size=1.5) +` first displays the distribution of values in the variable `RT` as a density curve. The argument `size=1.5` tells R to make the line $1.5 \times$ the thickness of the line used by default to show variation in density. 
+
+Some further information is added to the plot, next.
+
 4.  `geom_rug(alpha = .2) +` with a command that tells R to add a rug plot below the density curve.
 5.  `ggtitle("Raw RT")` makes a plot title.
 
 Notice that beneath the curve of the density plot, you can see a series of vertical lines. Each line represents the x-axis location of an RT observation in the ML study data set. This *rug plot* represents the distribution of RT observations in one dimension.
 
 -   `geom_rug()` draws a vertical line at each location on the x-axis that we observe a value of the variable, RT, named in `aes(x = RT)`.
--   `geom_rug(alpha = .2)` reduces the opacity of each line to ensure the reader can see how the RT observations are denser in some places than others.
+-   `geom_rug(alpha = .2)` reduces the opacity of each line, using `alpha`, to ensure the reader can see how the RT observations are denser in some places than others.
 
 You can see that we have many more observations of RTs from around 250ms to 1250ms, where the rug of lines is thickest, under the peak of the density plot. This indicates what the two kinds of plots are doing.
 
@@ -305,17 +328,11 @@ You can see that we have many more observations of RTs from around 250ms to 1250
 
 You should try out alternative visualisation methods to reveal the patterns in the distribution of variables in the ML dataset (or in your own data).
 
-Take a look at the `geoms` documented in:
+1. Take a look at the `geoms` documented in the `{ggplot2}` library reference section [here](https://ggplot2.tidyverse.org/reference/#section-layer-geoms).
+2. Experiment with code to answer the following questions:
 
-\url{https://ggplot2.tidyverse.org/reference/#section-layer-geoms}
-
-Would a histogram or a frequency polygon provide a more informative view?
-
-\url{https://ggplot2.tidyverse.org/reference/geom_histogram.html}
-
-What about a dotplot?
-
-\url{https://ggplot2.tidyverse.org/reference/geom_dotplot.html}
+- Would a histogram or a frequency polygon provide a more informative view? Take a look [here for advice](https://ggplot2.tidyverse.org/reference/geom_histogram.html).
+- What about a dotplot? Take a look [here for advice](https://ggplot2.tidyverse.org/reference/geom_dotplot.html)
 
 ### Filter observations {#sec-dev-mixed-data-filter}
 
@@ -336,9 +353,24 @@ length(ML.all.correct$RT)
 
 If you run the `length()` function calls then you should see that the *length* or number of observations or rows in the `ML.all.correct` dataset should be smaller than the number of observations in the `ML.all` dataset.
 
+::: callout-tip
+It is wise to *check* that the operations you perform to tidy, process or wrangle data *actually do* do what you mean them to do.
+Checks can be performed, for each processing stage, by:
+
+1. Forming expectations or predictions about what the operation is supposed to do e.g. filter out some rows by some number;
+2. Check what you get against these predictions e.g. count the number of rows before versus after filtering.
+:::
+
 Having obtained a new data frame with data on just those trials where responses were correct, we can plot the distribution of RTs for just the correct responses (@fig-rt-correct-density).
 
-```{r fig-rt-correct-density, message = FALSE, fig.cap = "Density plot showing word recognition reaction time, correct responses only", fig.width=5, fig.height=5, out.width = "55%", cache = TRUE}
+```{r}
+#| label: fig-rt-correct-density
+#| fig-cap: "Density plot showing word recognition reaction time, correct responses only"
+#| fig-alt: "Density plot showing word recognition reaction time, correct and incorrect responses. The figure shows a black line, a curve peaking over RT = about 500 now ranging between 0 and +2000. Under the curve, a series of black tick marks are shown under the x-axis border. The skew towards high values is now more obvious."
+#| warning: false
+#| message: false
+#| fig-height: 5
+#| fig-width: 5
 ML.all.correct %>%
   ggplot(aes(x = RT)) +
   geom_density(size=1.5) + 
@@ -347,44 +379,61 @@ ML.all.correct %>%
   theme_bw()
 ```
 
-#### Code tip
-
-The filter code is written to subset the data by rows using a condition on the values of the RT variable.
+The filter code is written to subset the data by rows **using a condition** on the values of the RT variable.
 
 `ML.all.correct <- filter(ML.all, RT >= 200)` works as follows.
 
 1.  `ML.all.correct <- filter(ML.all ...)` creates a new dataset with a new name `ML.all.correct` from the old dataset `ML.all` using the `filter()` function.
-2.  `filter(... RT >= 200)` specifies an argument for the `filter()` function. In effect, we are asking R to look at every value in the `RT` column. R will do a check through the `ML.all` dataset, row by row. *If* a row includes an RT that is greater than or equal to 200 *then* that row will be included in the new dataset `ML.all.correct`. *But if* a row includes an RT that is less than 200, then that row will not be included. We express this condition as `RT >= 200`.
+2.  `filter(... RT >= 200)` specifies an argument for the `filter()` function. 
 
-The `length()` function will count the elements in whatever object is specified as an argument in the function call. This means that if you put a variable name into the function as in `length(dataset$variable)` it will count how long that variable is -- how many rows there are in the column. If that variable happens to be, as here, part of a dataset, the same calculation will tell you how many rows there are in the dataset as a whole.
+In effect, we are asking R to check every value in the `RT` column.
 
-If you just enter `length(dataset)`, naming some dataset, then the function will return a count of the number of columns in the dataset.
+- R will do a check through the `ML.all` dataset, row by row. 
+- *If* a row includes an RT that is greater than or equal to 200 *then* that row will be included in the new dataset `ML.all.correct`. This is what I mean by **using a condition**.
+- *But if* a row includes an RT that is less than 200, then that row will not be included. We express this condition as `RT >= 200`.
+
+The `length()` function will count the elements in whatever object is specified as an argument in the function call. 
+
+- This means that if you put a variable name into the function as in `length(dataset$variable)` it will count how long that variable is -- how many rows there are in the column. 
+- If that variable happens to be, as here, part of a dataset, the same calculation will tell you how many rows there are in the dataset as a whole.
+- If you just enter `length(dataset)`, naming some dataset, then the function will return a count of the number of columns in the dataset.
 
 #### Exercise {#sec-dev-mixed-exx-filter}
 
--   Vary the filter conditions
+Vary the filter conditions in different ways.
 
-in different ways
+1.  Change the threshold for including RTs from `RT >= 200` to something else: you can change the number, or you can change the operator from `>=` to a different comparison (try `=, <, <=, >`.
+2.  Can you assess what impact the change has? 
 
-1.  Change the threshold for including RTs from `RT >= 200` to something else: you can change the number, or you can change the operators from `>=` to a different comparison.
-2.  Can you assess what impact the change has? Note that you can count the number of observations (rows) in a dataset using e.g. `length()`.
+Note that you can count the number of observations (rows) in a dataset using e.g. `length()`.
 
 #### Filtering observations as a decision in the psychological research workflow {#sec-dev-mixed-workflow-filter}
 
-I choose to filter out or exclude} not only error responses (where $RT < 0ms$) but also short reaction times (where $RT < 200ms$). I think that any response in the lexical decision task that is recorded as less than 200ms cannot possibly represent a real word recognition response. Participants who complete experimental psychological tasks can and do press the button before they have time to engage the psychological processes (like word recognition) that the tasks we administer are designed to probe (like lexical decision). There is some relevant literature that concerns the speed at which neural word recognition processes operate. However, I think you should note that the threshold I am setting for exclusion, here, is essentially *arbitrary*. If you think about it, I could have set the threshold at any number from $100-300ms$ or some other range. What is guiding me is experience but other researchers will have different experiences and set different thresholds. *This* is why using exclusion criteria to remove data is problematic.
+I choose to filter out or exclude not only error responses (where $RT < 0ms$) but also short reaction times (where $RT < 200ms$). 
+I think that any response in the lexical decision task that is recorded as less than 200ms cannot possibly represent a real word recognition response. Participants who complete experimental psychological tasks can and do press the button before they have time to engage the psychological processes (like word recognition) that the tasks we administer are designed to probe (like lexical decision).
 
-Filtering or re-coding observations is an important element of the research workflow in psychological science. How we do or do not remove observations from original data may have an impact on our results (as explored by Steegen et al., 2016). It is important, therefore, that we learn how to do this reproducibly using, for example, R scripts that we can share with our research reports. I would argue that, at minimum, a researcher should report their research including:
+There is some relevant literature that concerns the speed at which neural word recognition processes operate. However, I think you should note that the threshold I am setting for exclusion, here, is essentially *arbitrary*. If you think about it, I could have set the threshold at any number from $100-300ms$ or some other range. 
+
+::: callout-warning
+What is guiding me in setting the filter threshold is experience. But other researchers will have different experiences and set different thresholds. 
+
+- *This* is why using exclusion criteria to remove data is problematic.
+:::
+
+Filtering or re-coding observations is an important element of the research workflow in psychological science. How we do or do not remove observations from original data may have an impact on our results (as explored by @steegen2016). It is important, therefore, that we learn how to do this reproducibly using, for example, R scripts that we can share with our research reports. 
+
+I would argue that, at minimum, a researcher should report their research including:
 
 -   What exclusion criteria they use to remove data, explaining why.
 -   Report analyses with and without exclusions, to indicate if their results are sensitive to their decisions.
 
 You can read further information about the practicalities of using R to do filtering [here](https://r4ds.had.co.nz/transform.html?q=filter#filter-rows-with-filter).
 
-You can read a brief discussion of the impacts of researcher choices in dataset construction in @sec-multiversedata.
+You can read a brief discussion of the impacts of researcher choices in dataset construction in @sec-multiversedata and in @steegen2016.
 
 ### Select or transform the variables: the log10 transformation of RT {#sec-dev-mixed-data-transform}
 
-@fig-rt-correct-density shows that we have successfully removed all errors (negative RTs) but now we see how skewed the RT distribution is. Note the *long tail* of longer RTs.
+@fig-rt-correct-density shows that we have successfully removed all errors (negative RTs) but now we see just how skewed the RT distribution is. Note the *long tail* of longer RTs.
 
 Most researchers assume that participants -- healthy young adults -- take about 500-1000ms to perform the task and that values outside that range correspond to either fast guesses (RTs that are too short) or to distracted or tired or bored responses (RTs that are too long). In theory, the lexical decision task should be probing automatic cognitive processes, measuring the steps from perception to visual word recognition in the time interval between the moment the stimulus is first shown and the moment the button is pressed by the participant to indicate a response. Thus, it might seem natural to exclude extreme RT values which might correspond not to automatic cognitive processes but to unknowable distraction events or boredom and inattention. However, we shall complete no further data exclusions.
 
@@ -394,7 +443,7 @@ Generally, we assume that departures from a model's predictions about our observ
 
 It is not *cheating* to transform variables. Transformations of data variables can be helpful for a variety of reasons in the analysis of psychological data (Cohen et al., 2003; Gelman & Hill, 2006). I do recommend, however, that you are careful to report what transformations you use, and why you do them.
 
-Psychology researchers often take the log (often log base 10) of RT values before performing an analysis. Transforming RTs to the log base 10 of RT values has the effect of correcting the skew -- bringing the larger RTs 'closer' (e.g., $1000 = 3$ in log10) to those near the middle which do not change as much (e.g. $500 = 2.7$ in log10).
+Psychology researchers often take the log (often the log base 10) of RT values before performing an analysis. Transforming RTs to the log base 10 of RT values has the effect of correcting the skew -- bringing the larger RTs 'closer' (e.g., $1000 = 3$ in log10) to those near the middle which do not change as much (e.g. $500 = 2.7$ in log10).
 
 ```{r}
 #| label: log-transform
@@ -403,7 +452,14 @@ ML.all.correct$logrt <- log10(ML.all.correct$RT)
 
 We can see the effect of the transformation if we plot the log10 transformed RTs (see @fig-rt-correct-log-density). We arrive at a distribution that more closely approximates the normal distribution.
 
-```{r fig-rt-correct-log-density, message = FALSE, fig.cap = "Density plot showing log10 transformed reaction time, correct responses only", fig.width=5, fig.height=5, out.width = "55%", cache = TRUE}
+```{r}
+#| label: fig-rt-correct-log-density
+#| fig-cap: "Density plot showing log10 transformed reaction time, correct responses only"
+#| fig-alt: "Density plot showing word recognition reaction time, correct and incorrect responses. The figure shows a black line, a curve peaking over logrt = about 2.8 ranging between 2.4 and 3.5. Under the curve, a series of black tick marks are shown under the x-axis border. The skew towards high values is now considerably reduced."
+#| warning: false
+#| message: false
+#| fig-height: 5
+#| fig-width: 5
 ML.all.correct %>%
   ggplot(aes(x = logrt)) +
   geom_density(size = 1.5) + 
@@ -412,28 +468,32 @@ ML.all.correct %>%
   theme_bw()
 ```
 
-##### Code tip
-
 The `log10()` function works as follows:-
 
 1.  `ML.all.correct$logrt <- log10(...)` creates a a new variable `logrt`, adding it to the `ML.all.correct` dataset. The variable is created using the transformation function `log10()`.
 2.  `log10(ML.all.correct$RT)` creates a the new variable by transforming (to log10) the values of the old variable, `RT`.
 
-There are other log transformation functions and we often see researchers using the natural log instead of the log base 10.
-
-\url{https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/log}
+::: callout-tip
+There are other log transformation functions and we often see researchers using the natural log instead of the log base 10 as discussed [here](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/log)
+:::
 
 ### Data tidying -- conclusions {#sec-dev-mixed-data-tidy-conclusions}
 
 Even when data have been structured appropriately, we will still, often, need to do some tidying before we can do an analysis. Most research work involving quantitative evidence requires a *big* chunk of data tidying or other processing before you get to the statistics.
 
-Our data are now ready for analysis.
+**Our data are now ready for analysis.**
 
 ## Repeated measures designs and crossed random effects {#sec-dev-mixed-crossed-random}
 
-As we saw in @sec-intro-mixed, many Psychologists conduct studies where it is not sensible to think of observations as being nested [@baayen2008]. In this chapter, we turn to the ML word recognition study dataset, which has a structure similar to the CP study data we worked with previously. Again, the core concern is that the data come from a study with a **repeated-measures design** where the experimenter presented multiple stimuli for response to each participant, for several participants, so that we have multiple observations for each participant and multiple observations for each stimulus. Getting practice with this kind of data will help you to easily recognize what you have got when you see it in your own work.
+As we saw in @sec-intro-mixed, many Psychologists conduct studies where it is not sensible to think of observations as being nested [@baayen2008]. In this chapter, we turn to the ML word recognition study dataset, which has a structure similar to the CP study data that we worked with previously. Again, the core concern is that the data come from a study with a **repeated-measures design** where the experimenter presented multiple stimuli for response to each participant, for several participants, so that we have multiple observations for each participant and multiple observations for each stimulus. Getting practice with this kind of data will help you to easily recognize what you have got when you see it in your own work.
 
-ML asked all participants in a sample of people to read a selection of words (a sample of words from the language). For each participant, we will have multiple observations and these observations will not be independent. One participant will tend to be slower or less accurate compared to another. Her responses may be more or less susceptible to the effects of the experimental variables. The lowest trial-level observations can be grouped with respect to participants. However, the data can also be grouped by stimuli. For each stimulus word, there are multiple observations and these observations will not be independent. One stimulus may prove to be more challenging to all participants compared to another, eliciting slower or less accurate responses on average. In addition, if there are within-items effects, we may ask if the impact of those within-items effects is more prominent, stronger, among responses to some items compared to others. Given this common *repeated-measures* design, we can analyse the outcome variable in relation to:
+ML asked all participants in a sample of people to read a selection of words (a sample of words from the language). 
+
+For each participant, we will have multiple observations and these observations will not be independent. One participant will tend to be slower or less accurate compared to another. Her responses may be more or less susceptible to the effects of the experimental variables. The lowest trial-level observations can be grouped with respect to participants. However, the data can also be grouped by stimuli. 
+
+For each stimulus word, there are multiple observations and these observations will not be independent. One stimulus may prove to be more challenging to all participants compared to another, eliciting slower or less accurate responses on average. In addition, if there are within-items effects, we may ask if the impact of those within-items effects is more prominent, stronger, among responses to some items compared to others.
+
+Given this common *repeated-measures* design, we can analyse the outcome variable in relation to:
 
 -   **fixed effects**: the impact of independent variables like participant reading skill or word frequency;
 -   **random effects**: the impact of random or unexplained differences between participants and also between stimuli.
@@ -448,7 +508,14 @@ Our concern will be with different ways of thinking about why mixed-effects mode
 
 To get started, we can examine -- for each individual separately -- the distribution of log RT observations, in @fig-rt-correct-log-den-by-subj.
 
-```{r fig-rt-correct-log-den-by-subj, message = FALSE, fig.cap = "Density plot showing log10 transformed reaction time, correct responses, separately for each participant", fig.width=8.5, fig.height=9, out.width = "100%"}
+```{r}
+#| label: fig-rt-correct-log-den-by-subj
+#| fig-cap: "Density plot showing log10 transformed reaction time, correct responses, separately for each participant"
+#| fig-alt: "The figure presents a grid of density plots showing log10 transformed reaction time, correct responses, separately for each participant. A dashed red line is dran through all plots, indicating the mean RT. The curves vary in both the location of the peak and in the shape of the curve."
+#| warning: false
+#| message: false
+#| fig-height: 10
+#| fig-width: 8
 ML.all.correct %>%
   group_by(subjectID) %>%
   mutate(mean_logrt = mean(logrt, na.rm = TRUE)) %>%
@@ -469,9 +536,9 @@ The grid of plots illustrates some interesting features about the data in the ML
 
 I think the key message of the plot is that some distributions are wider (RTs are more spread out) than others. We might be concerned that people who present more variable reaction times (wider distributions) may be associated with less reliable estimates of their average response speed, or of the impact of word attributes (like word frequency) on their response speed.
 
-#### Code tip
+#### Combining data processing and plotting code {sec-dev-mixed-combine-wrangling-plotting}
 
-The plotting code progresses through a series of steps. This example demonstrates how you can combine data tidying and plotting steps in a single sequence, using `tidyverse` functions and the `%>%` pipe, so I will take the time to explain what is going on.
+The plotting code I used to produce @fig-rt-correct-log-den-by-subj progresses through a series of steps. This example demonstrates how you can combine data tidying and plotting steps in a single sequence, using `tidyverse` functions and the `%>%` pipe, so I will take the time to explain what is going on.
 
 My aim is to create a grid of individual plots, showing the distribution of log RTs for each participant, so that the plots are presented in order, from the fastest participant to the slowest. Take a look at the plotting code. We can explain how it works, step by step.
 
@@ -509,9 +576,14 @@ ML.all.correct %>%
 
 1.  `ML.all.correct %>%` takes the selected filtered dataset `ML.all.correct` and pipes it `%>%` to the next step.
 2.  `group_by(subjectID) %>%` tells R to group the data by `subject ID`. We have a set of multiple log RT observations for each `subjectID` because each participant was asked to respond to multiple word stimuli.
-3.  `mutate(mean_logrt = mean(logrt, na.rm = TRUE))` next calculates and stores the mean log RT for each person. We create a new variable `mean_logrt`. We calculate the average of the set of log RTs recorded for each `subjectID` and construct the new variable `mean_logrt` from these averages. We do not need to treat the data in groups so we remove the grouping, next.
-4.  `ungroup() %>%` having grouped the data to calculate the mean log RTs, we `ungroup` the dataset so that R can look at all observations in the next step.
-5.  `mutate(subjectID = fct_reorder(subjectID, mean_logrt)) %>%` asks R to look at all log RT observations in the dataset, and change the top-to-bottom order of the rows. We ask R to order observations by `subjectID` so that each person's data are listed by their average speed, from the fastest to the slowest. We then pipe these ordered data to the plotting code, next.
+3.  `mutate(mean_logrt = mean(logrt, na.rm = TRUE))` next calculates and stores the mean log RT for each person. We create a new variable `mean_logrt`. We calculate the average of the set of log RTs recorded for each `subjectID` and construct the new variable `mean_logrt` from these averages. 
+
+We do not need to treat the data in groups so we remove the grouping, next.
+
+4.  Using `ungroup() %>%` means that, having grouped the data to calculate the mean log RTs, we `ungroup` the dataset so that R can look at all observations in the next step.
+5.  `mutate(subjectID = fct_reorder(subjectID, mean_logrt)) %>%` asks R to look at all log RT observations in the dataset, and change the top-to-bottom order of the rows. 
+
+We ask R to order observations by `subjectID` so that each person's data are listed by their average speed, from the fastest to the slowest. We then pipe these ordered data to the plotting code, next.
 
 If you delete or comment out these first lines, you will see that R uses just a default ordering, drawing the plot for each person in the alphabetical order of their `subjectID` codes. Try it, though don't forget to start with `ML.all.correct %>%`.
 
@@ -535,7 +607,7 @@ The key functions that create a grid of density plots are the following.
 
 -   `facet_wrap(~ subjectID)` works to split the dataset up by participant, with observations corresponding to each participant identified by their `subjectID`, and to then split the plotting to show the distribution of log RT separately for each participant.
 
-I wanted to present the plots in order of the average speed of response of participants. If you look at Figure \@ref(fig:rt-correct-log-den-by-subj) you can see that the position of the peak of the log RT distribution for each participant moves, from the fastest plots where the peak is around $log RT = 2.5$ (shown from the top left of the grid), to the slowest plots where the peak is around $log RT = 2.75$ (shown towards the bottom right of the grid)
+I wanted to present the plots in order of the average speed of response of participants. If you look at @fig-rt-correct-log-den-by-subj, you can see that the position of the peak of the log RT distribution for each participant moves, from the fastest plots where the peak is around $log RT = 2.5$ (shown from the top left of the grid), to the slowest plots where the peak is around $log RT = 2.75$ (shown towards the bottom right of the grid)
 
 We can then use further `ggplot` functions to edit the appearance of the plot, to make it more useful.
 
@@ -555,7 +627,13 @@ We can then use further `ggplot` functions to edit the appearance of the plot, t
 
 #### Exercises {#sec-dev-mixed-exx-viz-histograms}
 
-It is worthwhile experimenting with example code to figure out how it works. One way you can do this is by commenting out one line of code, at a time by putting the `#` at the start of the line. If you do this, you can see what the line of code does by, effectively, asking R to ignore it.
+::: callout-tip
+It is often useful to experiment with example code to figure out how it works. 
+:::
+
+One way you can do this is by commenting out one line of code, at a time by putting the `#` at the start of the line. 
+
+- If you do this, you can see what the line of code does by, effectively, asking R to ignore it.
 
 Another way you can experiment with code is by seeing what you can change and what effect the changes have.
 
@@ -564,7 +642,13 @@ Another way you can experiment with code is by seeing what you can change and wh
 
 ### Approximations to Linear Mixed-effects models: complete pooling {#sec-dev-mixed-complete-pooling}
 
-As we have discussed in previous chapters, a good way to approach a mixed-effects analysis is by first estimating the effects of the experimental variables (here, frequency) using linear models, ignoring the hierarchical structure in the data. A linear model of multilevel structured data can be regarded as an **approximation** to the better analysis. We model the effects of interest, using all the data (hence, *complete pooling*) but ignoring the differences between participants. This means we can see something of the 'true' picture of our data through the linear model results but the linear model misses important information, which the mixed-effects model will include, that would improve its performance.
+As we have discussed in previous chapters, a good way to approach a mixed-effects analysis is by first estimating the effects of the experimental variables (here, frequency) using linear models, *ignoring* the hierarchical structure in the data. 
+
+::: callout-note
+A linear model of multilevel structured data can be regarded as an **approximation** to the better analysis. 
+:::
+
+We model the effects of interest, using all the data (hence, *complete pooling*) but ignoring the differences between participants. This means we can see something of the 'true' picture of our data through the linear model results but the linear model misses important information, which the mixed-effects model will include, that would improve its performance.
 
 As we saw in the last chapter, we can estimate the relationship between lexical decision RTs and word frequency using a linear model:
 
@@ -590,13 +674,22 @@ ML.all.correct.lm  <- lm(logrt ~
 summary(ML.all.correct.lm)
 ```
 
-We can see that, in this first analysis, the estimated effect of word frequency is $\beta = -0.033850$. I know this looks like a very small number but you should realize that the estimates for the coefficients of fixed effects like the frequency effect are scaled according to the outcome. Here, the outcome is log10 RT, where a log10 RT of 3 equals 1000ms, and, as we can calculate in R
+In the estimates from this linear model, we see an approximate first answer to our research question.
+
+::: callout-note
+-   Predicted effects of stimulus attributes: words that are shorter, that look like more other words, and that **appear frequently in the language will be easier to recognize**.
+-   Result: We can see that, in this first analysis, the estimated effect of word frequency is $\beta = -0.033850$. 
+:::
+
+I know this looks like a very small number but you should realize that the estimates for the coefficients of fixed effects like the frequency effect are scaled according to the outcome. Here, the outcome is log10 RT, where a log10 RT of 3 equals 1000ms, and, as we can calculate in R
 
 ```{r}
 log10(0.925)
 ```
 
-Also, remember that frequency is scaled in logs too, so the estimate of the coefficient tells us how log10 RT changes for unit change in log frequency. The coefficient represents the estimated change in log10 RT for unit change in log frequency `LgSUBTLCD`. So, as log frequency increases, logRT *decreases* by $-0.033850$.
+Also, remember that frequency is scaled in logs too, so the estimate of the coefficient tells us how log10 RT changes for unit change in log frequency. The coefficient represents the estimated change in log10 RT for unit change in log frequency `LgSUBTLCD`. 
+
+The estimate indicates that as word log frequency increases, responses logRT *decreases* by $-0.033850$.
 
 In this model, all the information from all participants is analyzed. In discussions of mixed-effects analyses, we say that this is a *complete pooling* model. This is because *all the data have been pooled together*, that is, we use all observations in the sample to estimate the effect of frequency.
 
@@ -615,25 +708,41 @@ I would recommend that you both estimate the effects of variables *and* visualiz
 
 ### Approximations to Linear Mixed-effects models: no pooling {#sec-dev-mixed-no-pooling}
 
-We can examine variation between participants by analyzing the data for each participant's responses separately, fitting a *different* linear model of the effect of word frequency on lexical decision RTs for each participant *separately*. @fig-no-vs-complete presents a grid or trellis of plots, one plot per person. In each plot, you can see points corresponding to the log RT of each response made by a participant to a stimulus word. In all plots, the pink or red line represents the *complete pooling* model estimate of the effect of frequency on response RTs. The line is the same for each participant because there is only one estimated effect, based on all data for all participants. In addition, in each plot, you can see a green line. You can see that the line varies between participants. This represents the effect of frequency estimated using just the data for each participant, analyzed separately. These are the *no pooling* estimates. We call them the no pooling estimates because each is based just on the data from one participant.
+We can examine variation between participants by analyzing the data for each participant's responses separately, fitting a *different* linear model of the effect of word frequency on lexical decision RTs for each participant *separately*. 
+@fig-no-vs-complete presents a grid or trellis of plots, one plot per person.
+In each plot, you can see points corresponding to the log RT of the responses made by each participant to the stimulus words. 
 
-Note: I was able to produce the plot in @fig-no-vs-completethanks to [this helpful blog post by TJ Mahr](https://www.tjmahr.com/plotting-partial-pooling-in-mixed-effects-models/)
+::: callout-tip
+In working with R, we often benefit from the vast R knowledge ecosystem.
 
-```{r fig-no-vs-complete, warning = FALSE, message = FALSE, echo = FALSE, fig.height=8.5, fig.width=6, out.width='95%', fig.cap="Plot showing the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant; red-pink line shows the complete pooling estimate, blue-green line shows the no-pooling estimate"}
+- I was able to produce the plot in @fig-no-vs-completethanks to [this helpful blog post by TJ Mahr](https://www.tjmahr.com/plotting-partial-pooling-in-mixed-effects-models/)
+:::
+
+In all plots, the pink or red line represents the *complete pooling* model estimate of the effect of frequency on response RTs. The line is the same for each participant because there is only one estimated effect, based on all data for all participants. 
+
+In addition, in each plot, you can see a green line. You can see that the line varies between participants. This represents the effect of frequency estimated using just the data for each participant, analyzed separately. These are the *no pooling* estimates. We call them the no pooling estimates because each is based just on the data from one participant.
+
+```{r}
+#| label: fig-no-vs-complete
+#| fig-cap: "Plot showing the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant; red-pink line shows the complete pooling estimate, blue-green line shows the no-pooling estimate"
+#| fig-alt: "Plot showing the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant; red-pink line shows the complete pooling estimate, blue-green line shows the no-pooling estimate."
+#| warning: false
+#| message: false
+#| cache: true
+#| fig-height: 9
+#| fig-width: 7
 # -- we fit a separate line for each cluster of data, one for each participant 
 # -- the lmList() function in lme4 automates this process
-
 df_no_pooling <- lmList(logrt ~
                           
                           LgSUBTLCD | subjectID, ML.all.correct) %>% 
   coef() %>% 
   # Subject IDs are stored as row-names. Make them an explicit column
   rownames_to_column("subjectID") %>% 
-  rename(Intercept = `(Intercept)`, Slope_frequency = LgSUBTLCD) %>% 
+  dplyr::rename(Intercept = `(Intercept)`, Slope_frequency = LgSUBTLCD) %>% 
   add_column(Model = "No pooling")
 
 # -- inspect the tibble produced by these lines of code
-
 # summary(df_no_pooling)
 
 # -- make the subjectID and model label vectors a factor
@@ -669,11 +778,11 @@ df_pooled$Model <- as.factor(df_pooled$Model)
 df_models <- bind_rows(df_pooled, df_no_pooling) %>% 
   left_join(ML.all.correct, by = "subjectID")
 
-# -- produce the plot, as a .pdf
-# 
-# pdf("ML-data-frequency-no-or-complete-pooling.pdf", w = 6, h = 8)
+# -- inspect
+# summary(df_models)
 
-p_model_comparison <- ggplot(df_models) + 
+# -- produce the plot
+p_model_comparison <- ggplot(df_models) +
   aes(x = LgSUBTLCD, y = logrt) + 
   # Set the color mapping in this layer so the points don't get a color
   geom_point(alpha = .05) +
@@ -686,22 +795,27 @@ p_model_comparison <- ggplot(df_models) +
   theme_bw() + 
   theme(legend.position = "top")
 
+# -- show the plot
 p_model_comparison
-
-# dev.off()
 ```
 
-@fig-no-vs-complete reveals substantial differences between participants in both average response speed and the frequency effect, alongside variation in standard errors. We can predict variation in standard errors between participants given, also, the differences between participants in the spread of log RT, illustrated by @fig-rt-correct-log-den-by-subj. Basically, where the distribution of log RT is more widely spread out, for any one participant, there it will be harder for us to estimate with certainty the mean or the sources of variance for the participant's response speed.
+@fig-no-vs-complete reveals substantial differences between participants in both average response speed and the frequency effect. 
 
-You will notice that the *no pooling* and *complete pooling* estimates tend to be quite similar. But for some participants more than others there is variation between the estimates.
+We may further predict variation in standard errors between participants given, also, the differences between participants in the spread of log RT, illustrated by @fig-rt-correct-log-den-by-subj. Basically, where the distribution of log RT is more widely spread out, for any one participant, there it will be harder for us to estimate with certainty the mean or the sources of variance for the participant's response speed.
 
-You can reflect that the *complete pooling* is unsatisfactory because it ignores the variation between the participants: some people *are* slower than others; some people *do* show a larger frequency effect than others. You can also reflect that the *no pooling* is unsatisfactory because it ignores the similarities between the participants. While there *is* variation between participants there is also similarity across the group so that the effect of frequency is similar between participants. What we need is an analytic method that is capable of *both* estimating the overall average population-level effect (here, of word frequency) and taking into account the differences between sampling units (here, participants). **That method is linear mixed-effects modeling.**
+You will notice that the *no pooling* and *complete pooling* estimates tend to be quite similar. But for some participants -- more than for others -- there is variation between the estimates.
+
+You can reflect that the *complete pooling* is unsatisfactory because it ignores the variation between the participants: some people *are* slower than others; some people *do* show a larger frequency effect than others. You can also reflect that the *no pooling* is unsatisfactory because it ignores the similarities between the participants. 
+
+While there *is* variation between participants there is also similarity across the group so that the effect of frequency is similar between participants. What we need is an analytic method that is capable of *both* estimating the overall average population-level effect (here, of word frequency) and taking into account the differences between sampling units (here, participants). **That method is linear mixed-effects modeling.**
 
 ## The linear mixed-effects model {#sec-dev-mixed-lme}
 
 ### Fixed and random effects {#sec-dev-mixed-fixed-random}
 
-As you have seen before, we can account for the variation -- the differences between participants in intercepts and slopes. First, we model the intercept as two terms:
+As you have seen before, we can account for the variation -- the differences between participants in intercepts and slopes. 
+
+First, we model the intercept as two terms:
 
 $$
 \beta_{0i} = \gamma_0 + U_{0i}
@@ -709,9 +823,10 @@ $$
 
 Where:
 
--   $\gamma_{0}$ is the average intercept and $u_{0i}$ is the difference for each participant between their intercept and the average intercept.
+-   $\gamma_{0}$ is the average intercept, and
+-   $u_{0i}$ is the difference for each participant between their intercept and the average intercept.
 
-We can model the frequency effect as two terms:
+Second, we can model the frequency effect as two terms:
 
 $$
 \beta_{1i} = \gamma_1 + U_{1i}
@@ -719,9 +834,10 @@ $$
 
 Where:
 
--   $\gamma_{10}$ is the average slope and $U_{1i}$ represents the difference for each participant between the slope of their frequency effect and the average slope.
+-   $\gamma_{10}$ is the average slope, and:
+-   U_{1i}$ represents the difference for each participant between the slope of their frequency effect and the average slope.
 
-We can then incorporate in a single model the **fixed effects** due to the average intercept and the average frequency effect, as well as the **random effects**, error variance due to unexplained differences between participants in intercepts and in frequency effects:
+We can then incorporate in a single model the **fixed effects** due to the average intercept and the average frequency effect, as well as the **random effects** -- the error variance due to unexplained differences between participants in intercepts and in frequency effects:
 
 $$
 Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + e_{ij}
@@ -735,7 +851,9 @@ Where the outcome $Y_{ij}$ is related to:
 
 ### Variance and covariance {#sec-dev-mixed-variance-covariance}
 
-As we first saw in the last chapter, in conducting mixed-effects analyses, we do not aim to examine the specific deviation (here, for each participant) from the average intercept or the average effect or slope. We estimate just the spread of deviations by-participants. A mixed-effects model like our final model actually includes fixed effects corresponding to the intercept and the slope of the word frequency effect plus the variances:
+As we first saw in @sec-intro-mixed, in conducting mixed-effects analyses, we do not aim to examine the specific deviation (here, for each participant) from the average intercept or the average effect or slope. We estimate just the spread of deviations by-participants.
+
+A mixed-effects model like our final model actually includes fixed effects corresponding to the intercept and the slope of the word frequency effect plus the variances:
 
 -   $var(U_{0i})$ variance of deviations by-participants from the average intercept;
 -   $var(U_{1i}X_j)$ variance of deviations by-participants from the average slope of the frequency effect;
@@ -745,37 +863,9 @@ We may expect the random effects of participants or items to covary, e.g., parti
 
 -   $covar(U_{0i}, U_{1i}X_j)$
 
-<!-- Thus, we can incorporate in a single model the fixed effects} due to the average intercept and the average frequency effect, as well as the random effects}, error variance due to unexplained differences between participants in intercepts and in frequency effects: -->
-
-<!-- \begin{equation} -->
-
-<!-- Y_{ij} = \gamma_{0} + \gamma_{1}X_j + U_{0i}+ U_{1i}X_j + e_{ij} -->
-
-<!-- \end{equation} -->
-
-<!--  -->
-
-<!-- \item -->
-
-<!-- where the outcome $Y_{ij}$ is related to ... -->
-
-<!-- \item -->
-
-<!-- the average intercept $\gamma_0$ and differences between $i$ participants in the intercept $U_{0i}$; -->
-
-<!-- \item -->
-
-<!-- the average effect of the explanatory variable frequency $\gamma_{1}X_j$ and differences between $i$ participants in the slope $U_{1i}X_j$; -->
-
-<!-- \item -->
-
-<!-- in addition to residual error variance $e_{ij}$. -->
-
-<!--  -->
-
 ### Random effects of differences between stimuli {#sec-dev-mixed-random-stimulus-effects}
 
-As we know, some words elicit slower and some elicit faster responses on average. As we discussed in the last chapter, if we did not take such variation into account, we might spuriously identify an experimental effect actually due just to unexplained between-items differences in intercepts [@clark1973; @raaijmakers1999] committing an error: *The language as fixed effect fallacy*.
+As we know, some words elicit slower and some elicit faster responses on average. As we discussed in the last chapter, if we did not take such variation into account, we might spuriously identify an experimental effect actually due just to unexplained between-items differences in intercepts [@clark1973; @raaijmakers1999] committing an error: *the language as fixed effect fallacy*.
 
 We can model the random effect of items on intercepts by modeling the intercept as two terms:
 
@@ -785,11 +875,12 @@ $$
 
 Where:
 
--   $\gamma_{0}$ is the average intercept and $W_{0j}$ represents the deviation, for each word, between the average intercept and the per-word intercept.
+-   $\gamma_{0}$ is the average intercept, and
+-   $W_{0j}$ represents the deviation, for each word, between the average intercept and the per-word intercept.
 
 Note that I ignore the possibility, for now, of differences between items in the slopes of fixed effects but I *do* come back to this.
 
-Remember that the the *language as fixed effect fallacy* implies that thinking about the random effects of stimulus differences applies only when we are looking at experiments about language. But you should remember that we need to think about the impact of random differences between stimuli whenever we present samples of stimuli to participants, and we collect observations about multiple responses for each stimulus. This is true whatever the nature of the stimuli.
+The term *the language as fixed effect fallacy* [@clark1973; @raaijmakers1999] implies that thinking about the random effects of stimulus differences applies only when we are looking at experiments about language. But you should remember that we need to think about the impact of random differences between stimuli whenever we present samples of stimuli to participants, and we collect observations about multiple responses for each stimulus. This is true whatever the nature of the stimuli [see e.g. @judd2012].
 
 ### A model including random effects of differences between stimuli as well as participants {#sec-dev-mixed-random-participants-stimuli}
 
@@ -802,13 +893,13 @@ $$
 In this model, the outcome $Y_{ij}$ is related to:
 
 -   the average intercept $\gamma_0$ and the word frequency effect $\gamma_1X_j$;
--   plus random effects due to unexplained differences between participants in intercepts $U_{0i}$ and the slope of the frequency effect $U_{1i}X_j$;
+-   plus random effects due to unexplained differences between participants in intercepts $U_{0i}$ and in the slope of the frequency effect $U_{1i}X_j$;
 -   as well as random differences between items in intercepts $W_{0j}$;
 -   in addition to the residual term $e_{ij}$.
 
 ### Fitting a mixed-effect model using lmer() {#sec-dev-mixed-lmer}
 
-We fit a mixed-effects model of the $logrt \sim frequency$ relationship using the `lmer()` function, taking into account:
+We fit a mixed-effects model of the $logrt \sim \text{frequency}$ relationship using the `lmer()` function, taking into account:
 
 -   the fact that the study data have a hierarchical structure -- with observations sensibly grouped by participant;
 -   the fact that both the frequency effect, and average speed, may vary between participants;
@@ -833,27 +924,34 @@ summary(ML.all.correct.lmer)
 
 As will now be getting familiar, the code works as follows:
 
--   `ML.all.correct.lmer  <- lmer(...)` creates a *linear mixed-effects model* object using the\`lmer()\* function.
--   `logrt ~ LgSUBTLCD` the fixed effect in the model is expressed as a formula in which the outcome or dependent variable`logrt` is predicted `~` by the independent or predictor variable`LgSUBTLCD` word frequency.
+-   `ML.all.correct.lmer  <- lmer(...)` creates a *linear mixed-effects model* object using the `lmer()` function.
+-   `logrt ~ LgSUBTLCD` the fixed effect in the model is expressed as a formula in which the outcome or dependent variable `logrt` is predicted `~` by the independent or predictor variable `LgSUBTLCD` word frequency.
 
+::: callout-tip
 If there were more terms in the model, the terms would be added in series separated by `+`
+:::
 
--   `(...|subjectID)` adds random effects corresponding to random differences between sample groups (subjects) coded by the `subjectID` variable.
+The random effects part of the model is then specified as follows.
 
--   `(...1 \|subjectID)` including random differences between sample groups (`subjectID`) in intercepts coded `1`.
+First, we have the random effects associated with random differences between participants:
 
--   `(LgSUBTLCD... |subjectID) and random differences between sample groups (`subjectID`) in slopes of the frequency effect coded by using the`LgSUBTLCD\` variable name.
+-   `(...|subjectID)` adds random effects corresponding to random differences between sample groups (participants subjects) coded by the `subjectID` variable.
+-   `(...1 |subjectID)` including random differences between sample groups (`subjectID`) in intercepts coded `1`.
+-   `(LgSUBTLCD... |subjectID)` and random differences between sample groups (`subjectID`) in the slopes of the frequency effect coded by using the`LgSUBTLCD` variable name.
+
+Then, we have the random effects associated with random differences between stimuli:
 
 -   `(1|item_name)` adds a random effect to account for random differences between sample groups (`item_name`) in intercepts coded `1`.
 
+Last:
+
 -   `...(..., data = ML.all.correct)` specifies the dataset in which you can find the variables named in the model fitting code.
 
--   \``summary(ML.all.correct.lmer)` gets a summary of the fitted model object.
+We can then specify `summary(ML.all.correct.lmer)` to get a summary of the fitted model.
 
 If you run the model code as written then you would see the following results.
 
 ```{r}
-#| eval: false
 ML.all.correct.lmer  <- lmer(logrt ~
 
                            LgSUBTLCD +
@@ -878,14 +976,23 @@ In these results, we see:
 Notice that the statistics are `Variance Std.Dev. Corr.`, that is, the variance, the corresponding standard deviation, and the correlation estimates associated with the random effects.
 
 -   We see `Residual` error variance, just like in a linear model, corresponding to a distribution or spread of deviations between the model prediction and the observed RT for each response made by a participant to a stimulus.
--   In addition, for this model, we see `Variance` terms corresponding to what can be understood as group-level residuals. Here, the variance due to random differences between the average intercept (over all data) and the intercept for each participant, and the variance due to random differences between the average slope of the frequency effect and the slope for each participant.
+-   We see `Variance` terms corresponding to what can be understood as group-level residuals. Here, the variance due to random differences between the average intercept (over all data) and the intercept for each participant, and the variance due to random differences between the average slope of the frequency effect and the slope for each participant.
 -   We also see the variance due to random differences between the average intercept (over all data) and the intercept for responses to each word stimulus.
--   *And* we see the `corr` estimate, telling us about the *covariance* between random deviations (between participants) in the intercepts and in the slopes of the frequency effect.
+-   *And* we see the `Corr` estimate, telling us about the *covariance* between random deviations (between participants) in the intercepts and in the slopes of the frequency effect.
 
 6.  Last, just as for linear models, we see estimates of the coefficients (of the slopes) of the fixed effects, the intercept and the slope of the `logrts ~ LgSUBTLCD` relationship.
 
+We can compare this estimate with our previous `lm()` estimate for the effect of frequency.
+
+::: callout-note
+-   Predicted effects of stimulus attributes: words that are shorter, that look like more other words, and that **appear frequently in the language will be easier to recognize**.
+-   Result: We can see that, in this mixed-effects analysis, the estimated effect of word frequency is now $\beta = -0.034471$. 
+:::
+
+The estimate is different, a bit smaller. While the change in the estimate is also small, we may remember that we are looking at slope estimates for predicted change in *log RT*, in an experimental research area in which effects are often of the order of 10s of milliseconds. The estimates, and changes in the estimates, will tend to be quite small.
+
 ::: callout-warning
-Note that we see coefficient estimates like in a linear model summary but no p-values.
+Note that we see coefficient estimates, as in a linear model summary but no p-values.
 
 -   We will come back to this, see @sec-dev-mixed-discussion-p-values.
 -   However, note that if $t >= 2$ we can suppose that (for a large dataset) an effect is significant at the $.05$ significance level.
@@ -893,13 +1000,15 @@ Note that we see coefficient estimates like in a linear model summary but no p-v
 
 ## Mixed-effects models, partial pooling, and shrinkage or regularisation of estimates {#sec-dev-mixed-regularisation}
 
-What is the impact of the incorporation of random effects -- the variance and covariance terms -- in mixed-effects models? Mixed-effects models can be understood, in general, as a method to compromise between ignoring the differences between groups (here, participants constitute groups of data) as in complete pooling} or focusing entirely on each group (participant) as in no pooling} (Gelman & Hill, 2006). In this discussion, I am going to refer to the differences between participants but you can assume that the lesson applies generally to any situation in which you have different units in a multilevel structured dataset in which the units correspond to groups or clusters of data, as in the multiple observations recorded for each participant in the ML dataset.
+What is the impact of the incorporation of random effects -- the variance and covariance terms -- in mixed-effects models? Mixed-effects models can be understood, in general, as a method to compromise between ignoring the differences between groups (here, participants constitute groups of data) as in *complete pooling* or focusing entirely on each group (participant) as in *no pooling* [@Gelman2007g]. In this discussion, I am going to refer to the differences between participants but you can assume that the lesson applies generally to any situation in which you have different units in a multilevel structured dataset in which the units correspond to groups or clusters of data.
 
 ### Overfitting {#sec-dev-mixed-overfitting}
 
 The problem with ignoring the differences between groups (participants), as in the *complete pooling* model (here, the linear model), has been obvious when we examined the differences between participants (or between classes) in slopes and intercepts in previous weeks. The problem with focusing entirely on each participant, as in the *no pooling* model, has not been made apparent in our discussion yet.
 
-If we analyze each participant separately then we will get, for each participant, for our model of the frequency effect, the per-participant estimate of the intercept and the per-participant estimate of the slope of the frequency effect. These no-pooling estimates will tend to exaggerate or overstate the differences between participants (Gelman & Hill, 2006). By basing the estimates on just the data for a person, in each per-participant analysis, the no-pooling approach overfits} the data. You could say that the no-pooling approach gives us estimates that depend too much on the sample of data we have got, and are unlikely to be similar to the estimates we would see in other samples in future studies. The no-pooling estimates are too strongly} influenced by the data we are currently analyzing.
+If we analyze each participant separately then we will get, for each participant, for our model of the frequency effect, the per-participant estimate of the intercept and the per-participant estimate of the slope of the frequency effect. These no-pooling estimates will tend to exaggerate or overstate the differences between participants [@Gelman2007g]. By basing the estimates on just the data for a person, in each per-participant analysis, the no-pooling approach *overfits* the data. 
+
+You could say that the no-pooling approach gives us estimates that depend *too much* on the sample of data we have got, and are unlikely to be similar to the estimates we would see in other samples in future studies. The no-pooling estimates are too strongly influenced by the data we are currently analyzing.
 
 ### Partial pooling: shrinkage or borrowing strength {#sec-dev-mixed-partial-pooling}
 
@@ -920,17 +1029,15 @@ To make sense of what this means, think about the differences between participan
 
 We can look again at a plot showing the data for each participant. @fig-no-vs-complete-vs-partial presents a grid or trellis of plots, one plot per person. In each plot, you can see points corresponding to the RT of each response made by a participant to a stimulus word. In all plots, the pink line represents the *complete pooling* data model estimate of the effect of frequency on response RTs. In each plot, the green line represents the effect of frequency estimated using just the data for each participant, the *no pooling* estimates. Now, we also see blue lines that represent the mixed-effects model *partial pooling* estimates.
 
-```{r fig-no-vs-complete-vs-partial, warning = FALSE, message = FALSE, echo = FALSE, fig.height=8.5, fig.width=6, out.width='95%', fig.cap="Plot showing the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant; pink line shows the complete pooling estimate green line shows the no-pooling estimate; and blue line shows the linear mixed-effects model partial pooling estimate"}
-
-#######################################################################################
-
-# ML.all <- read_csv("subjects.behaviour.words-310114.csv")
-# ML.all.correct <- 
-#   filter(ML.all, RT >= 200)
-# ML.all.correct$logrt <- log10(ML.all.correct$RT)
-
-# -- mixed-effects models represent partial pooling of data
-
+```{r}
+#| label: fig-no-vs-complete-vs-partial
+#| fig-cap: "Plot showing the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant; pink line shows the complete pooling estimate green line shows the no-pooling estimate; and blue line shows the linear mixed-effects model partial pooling estimate"
+#| fig-alt: "Plot showing the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant; pink line shows the complete pooling estimate green line shows the no-pooling estimate; and blue line shows the linear mixed-effects model partial pooling estimate."
+#| warning: false
+#| message: false
+#| cache: true
+#| fig-height: 9
+#| fig-width: 7
 # -- we fit a separate line for each cluster of data, one for each participant 
 # -- the lmList() function in lme4 automates this process
 df_no_pooling <- lmList(logrt ~
@@ -939,7 +1046,7 @@ df_no_pooling <- lmList(logrt ~
   coef() %>% 
   # Subject IDs are stored as row-names. Make them an explicit column
   rownames_to_column("subjectID") %>% 
-  rename(Intercept = `(Intercept)`, Slope_frequency = LgSUBTLCD) %>% 
+  dplyr::rename(Intercept = `(Intercept)`, Slope_frequency = LgSUBTLCD) %>% 
   add_column(Model = "No pooling")
 
 # -- inspect the tibble produced by these lines of code
@@ -974,10 +1081,6 @@ df_pooled$Model <- as.factor(df_pooled$Model)
 # geom_abline() to draw the lines from our dataframe of intercept and slope 
 # parameters
 
-# -- join the raw data so we can use plot the points and the lines
-# df_models <- bind_rows(df_pooled, df_no_pooling) %>% 
-#   left_join(ML.all.correct, by = "subjectID")
-
 # -- we fit a mixed-effects model including the fixed effects of the intercept and the frequency effect
 # -- as well as the random effects due to differences between participants (subject ID) in intercepts or
 # in the slope of the frequency effect, as well as differences between items (item_name) in intercepts
@@ -995,7 +1098,7 @@ ML.all.correct.lmer  <- lmer(logrt ~
 df_partial_pooling <- coef(ML.all.correct.lmer)[["subjectID"]] %>% 
   rownames_to_column("subjectID") %>% 
   as_tibble() %>% 
-  rename(Intercept = `(Intercept)`, Slope_frequency = LgSUBTLCD) %>% 
+  dplyr::rename(Intercept = `(Intercept)`, Slope_frequency = LgSUBTLCD) %>% 
   add_column(Model = "Partial pooling")
 
 # -- inspect the tibble produced by these lines of code
@@ -1006,7 +1109,6 @@ df_partial_pooling$subjectID <- as.factor(df_partial_pooling$subjectID)
 df_partial_pooling$Model <- as.factor(df_partial_pooling$Model)
 
 # -- update the previous plot by using a dataset consisting of of all three models’ estimates
-
 df_models <- rbind(df_pooled, df_no_pooling, df_partial_pooling) %>%
   left_join(ML.all.correct, by = "subjectID")
 
@@ -1021,9 +1123,6 @@ df_models <- rbind(df_pooled, df_no_pooling, df_partial_pooling) %>%
 # -- and regenerate the plot
 # -- we  produce a plot showing the no-pooling, complete-pooling and partial-pooling (mixed effects)
 # estimates
-
-# # pdf("ML-data-frequency-no-or-complete-or-partial-pooling.pdf", w = 6, h = 8)
-
 p_model_comparison <- ggplot(df_models) +
   aes(x = LgSUBTLCD, y = logrt) +
   # Set the color mapping in this layer so the points don't get a color
@@ -1036,29 +1135,28 @@ p_model_comparison <- ggplot(df_models) +
   scale_x_continuous(breaks = 1.5:4 * 1) +
   theme_bw() +
   theme(legend.position = "top")
-
+# -- show the plot
 p_model_comparison
 
-# # dev.off()
 ```
 
 It is quite difficult to identify, in this sample, where the partial pooling and no pooling estimates differ. We can focus on a few clear examples. @fig-no-vs-complete-vs-partial-zoom) presents a grid of plots for just four participants. I have picked some extreme examples but the plot illustrates how: (1.) for some participants e.g. `AA1` all estimates are practically identical; (2.) for some participants `EB5 JL3 JP3` the no-pooling and complete-pooling estimates are really quite different and (3.) for some participants `JL3 JP3` the no-pooling and partial-pooling estimates are quite different.
 
-```{r fig-no-vs-complete-vs-partial-zoom, warning = FALSE, message = FALSE, echo = FALSE, fig.height=8.5, fig.width=7, out.width='100%', fig.align='center', fig.cap="Plot showing the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant -- for participants AA1, EB5, JL3 and JP3; pink line shows the complete pooling estimate green line shows the no-pooling estimate; and blue line shows the linear mixed-effects model partial pooling estimate"}
-
-#######################################################################################
-
+```{r}
+#| label: fig-no-vs-complete-vs-partial-zoom
+#| fig-cap: "Plot showing the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant -- for participants AA1, EB5, JL3 and JP3; pink line shows the complete pooling estimate green line shows the no-pooling estimate; and blue line shows the linear mixed-effects model partial pooling estimate"
+#| fig-alt: "Plot showing the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant -- for participants AA1, EB5, JL3 and JP3; pink line shows the complete pooling estimate green line shows the no-pooling estimate; and blue line shows the linear mixed-effects model partial pooling estimate."
+#| warning: false
+#| message: false
+#| fig-height: 9
+#| fig-width: 7
 # -- zoom in on a few participants
 # -- use filter to select a small number of participants
-
 df_zoom <- df_models %>% 
   filter(subjectID %in% c("EB5", "JP3", "JL3", "AA1"))
 
 # -- replace the data-set of the last plot
 # -- re-generate the plot with this zoomed-in selection dataset
-
-# pdf("ML-data-frequency-no-or-complete-or-partial-pooling-zoom.pdf", w = 5, h = 5)
-
 p_model_comparison <- ggplot(df_zoom) + 
   aes(x = LgSUBTLCD, y = logrt) + 
   # Set the color mapping in this layer so the points don't get a color
@@ -1076,26 +1174,29 @@ p_model_comparison
 
 ```
 
-In general, partial pooling will apply both to estimates of intercepts and to estimates of the slopes of fixed effects like the influence of word frequency in reaction time. Likewise, if we consider this idea in general, we can see how it should work whether we are talking about groups or clusters of data grouped by participant or by stimulus or by school or class or clinic, etc.
+In general, partial pooling will apply both to estimates of intercepts and to estimates of the slopes of fixed effects like the influence of word frequency in reaction time. Likewise, if we consider this idea in general, we can see how it should work whether we are talking about groups or clusters of data grouped by participant or by stimulus or by school, class or clinic, etc.
 
-Formally, whether an estimate for a participant (in our example) is pulled more or less towards the overall estimate will depend not just on the number of data-points we have for that person. The optimal combined estimate for a participant is termed the Empirical Bayes} 'estimate' and the weighting -- the extent to which the per-participant 'estimate' depends on the participant's data or the overall data -- depends on the reliability of the estimate (of the intercept or the frequency effect) given by analyzing that participant's data [@Snijders2004a]. If you think about it, smaller samples -- e.g. where a participant completed less correct responses -- will give you less reliable estimates (and so will samples that show more variation).
+Formally, whether an estimate for a participant (in our example) is pulled more or less towards the overall estimate will depend not just on the number of data-points we have for that person. The optimal combined estimate for a participant is termed the *Empirical Bayes estimate* and the weighting -- the extent to which the per-participant 'estimate' depends on the participant's data or the overall data -- depends on the reliability of the estimate (of the intercept or the frequency effect) given by analyzing that participant's data [@Snijders2004a]. If you think about it, smaller samples -- e.g. where a participant completed less correct responses -- will give you less reliable estimates (and so will samples that show more variation).
 
-What we are looking at, here, is a form of regularization} in which we use all the sources of information we can to ensure we take into account the variability in the data while not getting over-excited by extreme differences (McElreath, 2015). We want to see estimates pulled towards an overall average where we have little data or unreliable estimates. We can see how strongly estimates can be shrunk in a plot like @fig-shrinkage.
+What we are looking at, here, is a form of *regularization* in which we use all the sources of information we can to ensure we take into account the variability in the data while not getting over-excited by extreme differences (McElreath, 2015). We want to see estimates pulled towards an overall average where we have little data or unreliable estimates. We can see how strongly estimates can be shrunk in a plot like @fig-shrinkage.
 
 @fig-shrinkage illustrates the shrinkage effect. I plotted a scatterplot of intercept and slope parameters from each model (models with different kinds of pooling), and connect estimates for the same participant. The plot uses arrows to connect the different estimates for each participant, different estimates from no-pooling (per-participant) compared to partial-pooling (mixed-effects) models. The plot shows how more extreme estimates are shrunk towards the global average estimate.
 
-```{r fig-shrinkage, warning = FALSE, message = FALSE, echo = FALSE, fig.height=6, fig.width=7, out.width='100%', fig.align='center', fig.cap="Plot illustrating shrinkage: big green and pink points show the complete pooling and partial pooling (average) estimates for the slope and intercept; orange and purple points show the no pooling (orange) and partial pooling (purple) estimates for each person; estimates for a person are connected by arrows to show the direction towards which no pooling estimates are pulled or shrunk"}
-
-#######################################################################################
-
+```{r}
+#| label: fig-shrinkage
+#| fig-cap: "Plot illustrating shrinkage: big green and pink points show the complete pooling and partial pooling (average) estimates for the slope and intercept; orange and purple points show the no pooling (orange) and partial pooling (purple) estimates for each person; estimates for a person are connected by arrows to show the direction towards which no pooling estimates are pulled or shrunk"
+#| fig-alt: "Plot illustrating shrinkage: big green and pink points show the complete pooling and partial pooling (average) estimates for the slope and intercept; orange and purple points show the no pooling (orange) and partial pooling (purple) estimates for each person; estimates for a person are connected by arrows to show the direction towards which no pooling estimates are pulled or shrunk."
+#| warning: false
+#| message: false
+#| cache: true
+#| fig-height: 6
+#| fig-width: 6.5
 # -- the partial pooling model pulls (or shrinks) more extreme estimates towards an overall average
 # -- we can visualize this shrinkage effect by plotting a scatterplot of intercept and slope 
 # parameters from each model and connecting estimates for the same participant
 # -- we use arrows to connect the different estimates for each participant, different estimates
 # from no-pooling (per-participant) compared to partial-pooling (mixed-effects) models
 # -- the plot shows how more extreme estimates are shrunk towards the global average estimate
-
-# pdf("ML-data-frequency-no-or-complete-or-partial-pooling-shrinkage.pdf", w = 6.5, h = 6.5)
 
 df_fixef <- data_frame(
   Model = "Partial pooling (average)",
@@ -1149,9 +1250,12 @@ Before we move on, we can think briefly about how the mixed-effects models are e
 
 - If we knew the random effects, we could find the fixed effects estimates by minimizing differences -- like linear modeling.
 - If we knew the fixed effects -- the regression coefficients -- we could work out the residuals and the random effects.
-- At the start, we know neither, but we can move between partial estimation of fixed and random effect in an iterative approach.
-- Using provisional values for the fixed effects to estimate the random effects.       
-- Using provisional values for the random effects to estimate the fixed effects again.  - To *converge* on the maximum likelihood estimates of effects -- when the estimates stop changin.     
+
+At the start, we know neither, but we can move between partial estimation of fixed and random effect in an iterative approach.
+
+- Using provisional values for the fixed effects to estimate the random effects.    
+- Using provisional values for the random effects to estimate the fixed effects again.  
+- To *converge* on the maximum likelihood estimates of effects -- when the estimates stop changin.     
 
 In mixed-effects models, the things that are estimated are the fixed effects (the intercept, the slope of the frequency effect, in our example), along with the variance and correlation terms associated with the random effects. Previously, I referred to the partial-pooling mixed-effects 'estimates' of the intercept or the frequency effect for each person, using the quotation marks because, strictly, these estimates are actually predictions, *Best Unbiased Linear Predictions (BLUPs)*, based on the estimates of the fixed and random effects.
 
@@ -1161,7 +1265,7 @@ Mostly, our main concern, in working with mixed-effects models, is over what eff
 
 ## Fitting and evaluating Linear Mixed-effects models {#sec-dev-mixed-evaluating}
 
-Up to this point, we have discussed the empirical or conceptual reasons we should expect to take into account, in our model, the effects on the outcome due to systematic differences in the experimental variables, e.g., in stimulus word frequency frequency, or to random differences between participants or between stimuli. We can now think about how we should statistically evaluate the relative usefulness of these different fixed effects or random effects, where usefulness is judged in relation to our capacity to explain outcome variance, or to improve model fit to sample data. We shall take an approach that follows the approach set out by Baayen, Bates and others (Baayen et al., 2008; Bates et al., 2015; Matuschek et al., 2017).
+Up to this point, we have discussed the empirical or conceptual reasons we should expect to take into account, in our model, the effects on the outcome due to systematic differences in the experimental variables, e.g., in stimulus word frequency frequency, or to random differences between participants or between stimuli. We can now think about how we should statistically evaluate the relative usefulness of these different fixed effects or random effects, where usefulness is judged in relation to our capacity to explain outcome variance, or to improve model fit to sample data. We shall take an approach that follows the approach set out by Baayen, Bates and others (@baayen200; Bates et al., 2015; Matuschek et al., 2017).
 
 In this approach, we shall look at the choices that psychology researchers have to make. Researchers using statistical models are always faced with choices. As we have seen, these choices begin even before we start to do analyses, as when we make decisions about dataset construction [@steegen2016]. The need to make choices is always present for all the kinds of models we work with. This may not always be obvious because, for example, in using some data analysis software, researchers may rely on defaults with limited indication that that is what they are doing. Just because we are making choices does not mean we are operating subjectively in a non-scientific fashion, rather, provided we work in an appropriate mode of transparency or reflectiveness, it means we are working with an awareness of our options and the context for the data analysis (see discussion in Gelman & Hennig, 2017).
 
@@ -1184,25 +1288,30 @@ As our discussion progresses, I think it would be helpful to reflect on some of 
 
 1. What about multiple comparisons?
 
-You might well ask yourself: if we engage in a bunch of comparisons to check if we should or should not include a variable, isn't this just exploiting *researcher degrees of freedom*? Or, you might ask: if we are conducting multiple tests on the same data, aren't we running the risk of raising the Type I error (false positive) rate because we are doing *multiple comparisons*? I think these are good questions but, here, my task is to explain what people do, why they do it, and how it helps in your data analysis.
+You might well ask yourself: 
+
+- If we engage in a bunch of comparisons to check if we should or should not include a variable, isn't this just exploiting *researcher degrees of freedom*? 
+
+Or, you might ask: 
+
+- If we are conducting multiple tests on the same data, aren't we running the risk of raising the Type I error (false positive) rate because we are doing *multiple comparisons*? 
+
+I think these are good questions but, here, my task is to explain what people do, why they do it, and how it helps in your data analysis.
 
 2. Is any model the best?
 
-So you are looking at models with varying fixed effects (fitted using ML) or models with varying random effects (fitted using REML). How do you decide which model is better? Some researchers argue that trying to decide which model is better or best is inappropriate (see e.g. Gelman et al., 2014) -- all models are wrong (that is, all are approximations to the data, given your assumptions), but some are more useful than others (explain or predict outcomes better, depending on your criteria, and the cost-benefit analysis). In this class, I will explain the model comparison process while acknowledging this point, because researchers are increasingly using model comparison techniques to evaluate the relative usefulness of different alternate models.
+So you are looking at models with varying fixed effects (fitted using ML) or models with varying random effects (fitted using REML). How do you decide which model is better? Some researchers argue that trying to decide which model is better or best is inappropriate (see e.g. Gelman et al., 2014) -- all models are wrong (that is, all are approximations to the data, given your assumptions), but some are more useful than others (explain or predict outcomes better, depending on your criteria, and the cost-benefit analysis). Here, I will explain the model comparison process while acknowledging this point, because researchers are increasingly using model comparison techniques to evaluate the relative usefulness of different alternate models.
 
 ### Model comparison using information criteria, AIC and BIC {#sec-dev-mixed-IC}
 
 You will often encounter, in the psychological research literature, Information Criteria statistics like BIC: they are understood within an approach: *Information-theoretic methods*. They are grounded in the insight that you have reality and then you have approximating models. The distance between a model and reality corresponds to the information lost when we use a model to approximate reality. Information criteria -- AIC or BIC -- are estimates of *information loss*. The process of model selection aims to minimize information loss.
 
-I will not discuss information criteria methods of model evaluation in detail here, because psychologists frequently use the Likelihood Ratio Test method (Meteyard & Davies, 2020), see following, but take a look at, e.g., Burnham and Anderson (2004) for a readable discussion, if you are interested. However, you should have some idea of what information criteria statistics (like AIC and BIC mean) because you will see these statistics in the outputs from model comparisons using the `anova()` function, which we shall review a bit later (@sec-dev-mixed-LRT).
+I will not discuss information criteria methods of model evaluation in detail here, because psychologists frequently use the Likelihood Ratio Test method (@meteyard2020a), see following, but take a look at, e.g., Burnham and Anderson (2004) for a readable discussion, if you are interested. However, you should have some idea of what information criteria statistics (like AIC and BIC mean) because you will see these statistics in the outputs from model comparisons using the `anova()` function, which we shall review a bit later (@sec-dev-mixed-LRT).
 
 In summary, Akaike showed you could estimate information loss in terms of the likelihood of the model given the data -- Akaike Information Criteria, *AIC*:
 
 <!-- % % burnham & anderson 2001/p.3 -->
-
 <!-- % % baguleypp. 402 -- -->
-
-<!-- % -->
 
 $$
 AIC = -2ln(l) + 2k
@@ -1221,7 +1330,6 @@ You could better approximate reality by including lots of predictors, specifying
 Schwartz proposed an alternative estimate -- Bayesian Information Criteria: *BIC*:
 
 <!-- % % burnham & anderson 2001/p.3 -->
-
 <!-- % % baguleypp. 402 -- -->
 
 $$
@@ -1242,8 +1350,8 @@ At this point we just need to think about *Model selection and judgment* using A
 
 Compare a simpler model: model 1, just main effects; model 2, main effects plus interactions.
 
-- If the more complex model better approximates reality then it will be more likely given the data
-- BIC or AIC will be closer to negative infinity: $-2ln(l)$ will be larger e.g. 10 is better than 1000, -1000 better than -10
+- If the more complex model better approximates reality then it will be more likely given the data.
+- BIC or AIC will be closer to negative infinity: $-2ln(l)$ will be larger e.g. 10 is better than 1000, -1000 better than -10.
 
 AIC and BIC should move in the same direction. They usually will. 
 
@@ -1279,7 +1387,14 @@ In an exploratory study, I would keep things simple by comparing a series of mod
 
 In my experience, the estimates (and associated significance levels) associated with fixed effects can vary quite a bit depending on what other variables are included in the model. This has led me to take an approach where I am *not* varying too much how predictors are included in the model. As noted, this won't really apply if you are doing an *confirmatory* study in which you are obliged to include the manipulated variables. However, if you are doing something a bit more *exploratory* then you might have to think about the kinds of predictors you include in your model, and how or when you include them.
 
-In what order should you examine the usefulness of different sets of fixed effects? This is a difficult question to answer and the difficulty is one reason why I think we need to be cautious when we engage in model comparison to try to get to a model of our data. My advice would be to plan out in advance a sequence of model comparisons. You should begin with simpler models with fewer effects. You should begin with those effects whose impacts are well established and well understood by you. If there is a whole set of well established effects typically included in an analysis in the field in which you are working, it might be sensible to include all the effects in a single step. Then, I would use subsequent incremental steps to increase model complexity by adding effects that are theoretically justified, i.e., hypothesized, but which may be new, or may depend on the experimental manipulation you are testing out.
+In what order should you examine the usefulness of different sets of fixed effects? This is a difficult question to answer and the difficulty is one reason why I think we need to be cautious when we engage in model comparison to try to get to a model of our data. 
+
+My advice would be to plan out in advance a sequence of model comparisons. 
+
+- You should begin with simpler models with fewer effects. 
+- You should begin with those effects whose impacts are well established and well understood by you. 
+- If there is a whole set of well established effects typically included in an analysis in the field in which you are working, it might be sensible to include all the effects in a single step.
+- Then, I would use subsequent incremental steps to increase model complexity by adding effects that are theoretically justified, i.e., hypothesized, but which may be new, or may depend on the experimental manipulation you are testing out.
 
 Having established a model with some set of sensible fixed effects (guided by information criteria or LRT statistics), I would then turn my attention to the random effects component of the model. As noted, we may expect to see random differences between subjects (and possibly between items) in both the level of average performance -- random effects of subjects or items on intercepts -- and in the slopes of fixed effects -- random effects of subjects or items on slopes. What I do is this: for a dataset like ML's, I examine firstly if both random effects of subjects *and* items on intercepts are required. I then check if random effects of subjects or items on slopes are *additionally* required in the model.
 
@@ -1293,7 +1408,8 @@ The `lmer()` function has defaults, like any analysis function, so we often do n
 
 1. Restricted maximum likelihood
 
-- In R: `REML=TRUE` is stated in the `lmer()` function call.
+In R: `REML=TRUE` is stated in the `lmer()` function call.
+
 - REML estimates the variance components while taking into account the loss of degrees of freedom resulting from the estimation of the fixed effects: REML estimates vary *if the fixed effects vary*.     
 - Therefore it is not recommended to compare the likelihood of models varying in fixed effects and fitted using REML [@Pinheiro2000aa].
 - The REML method is recommended for comparing the likelihood of models with the same fixed effects but different random effects.
@@ -1302,9 +1418,11 @@ The `lmer()` function has defaults, like any analysis function, so we often do n
 2. Maximum likelihood
 
 In R: `REML=FALSE` is stated in the`lmer()` function call.
+
 - ML estimation methods can be used to fit models with varying fixed effects but the same random effects.     
 - ML estimation: a good place to start when building-up model complexity -- adding parameters to an empty model.  
-- @Pinheiro2000aa advise that the approach is anti-conservative (will sometimes indicate effects where there are none there) but @Barr2013a argue that their analyses suggest that that is not so.   
+
+@Pinheiro2000aa advise that the approach is anti-conservative (it will sometimes indicate effects where there are none there) but @Barr2013a argue that their analyses suggest that that is not so.   
 
 <!-- % pinheiro & bates 2000 / p.76 -->
 
@@ -1314,15 +1432,11 @@ In R: `REML=FALSE` is stated in the`lmer()` function call.
 
 ### Comparing models of varying random effects but constant fixed effects {#sec-dev-mixed-anova}
 
-<!-- % In the following, I discuss code that is set out in the -->
-
-<!-- % `402-class-6-210217-200218.R:. -->
-
 As noted, it is recommended [@Pinheiro2000aa] that we compare models of varying random effects using Restricted Maximum Likelihood (REML) fitting. We might be comparing different models with different sets of random effects if we are in the process of working out whether our model should include random intercepts and random slopes, that is, model parameters accounting for random differences between subjects or between items in the average level of performance or in the slope of the fixed effects. I think it is sensible to build up model complexity in the random component so that we are working through a series of model comparisons, comparing more simple with more complex models where the more complex model includes the same terms as the simpler model but adds some more.
 
 In analyzing the effect of frequency on log RT for the ML study data, we can examine whether the random effects of subjects or of items on intercepts are necessary. Then we can examine if we should take into account random effects of subjects on the slope of the fixed effect of frequency, in addition to the random effects on intercepts.
 
-To begin with, we can look at a simpler model. We can run model with just the fixed effects of intercept and frequency, and the random effects of participants or items on intercepts only. We exclude the `(LgSUBTLCD + ...|subjectID): specification for the random effect of participants on the slope of the frequency`LgSUBTLCD: effect. We use REML fitting, as follows:
+To begin with, we can look at a simpler model. We can run model with just the fixed effects of intercept and frequency, and the random effects of participants or items on intercepts only. We exclude the `(LgSUBTLCD + ...|subjectID)` specification for the random effect of participants on the slope of the frequency `LgSUBTLCD` effect. We use REML fitting, as follows:
 
 ```{r}
 ML.all.correct.lmer.REML.si  <- lmer(logrt ~ LgSUBTLCD + 
@@ -1364,15 +1478,16 @@ ML.all.correct.lmer.REML.s  <- lmer(logrt ~
 summary(ML.all.correct.lmer.REML.s)
 ```
 
-If we now run Likelihood Ratio Test comparisons of these models, we are effectively examining if one of the random effects can be dispensed with: if its inclusion makes no difference to the likelihood of the model then it is not needed. Is the random effect of subjects on intercepts justified? Compare models, first, with `ML.all.correct.lmer.REML.si` versus without `ML.all.correct.lmer.REML.i` the random effect of subjects on intercepts. Then compare models with `ML.all.correct.lmer.REML.si` versus without `ML.all.correct.lmer.REML.s` the random effect of items on intercepts.
+If we now run Likelihood Ratio Test comparisons of these models, we are effectively examining if one of the random effects can be dispensed with: if its inclusion makes no difference to the likelihood of the model then it is not needed. Is the random effect of subjects on intercepts justified? 
+
+- Compare models, first, with `ML.all.correct.lmer.REML.si` versus without `ML.all.correct.lmer.REML.i` the random effect of subjects on intercepts. 
+- Then compare models with `ML.all.correct.lmer.REML.si` versus without `ML.all.correct.lmer.REML.s` the random effect of items on intercepts.
 
 ```{r}
 #| eval: false
 anova(ML.all.correct.lmer.REML.si, ML.all.correct.lmer.REML.i, refit = FALSE)
 anova(ML.all.correct.lmer.REML.si, ML.all.correct.lmer.REML.s, refit = FALSE)
 ```
-
-#### Code tip
 
 We compare models using the `anova()` function. We can list as many models as we like for comparison.
 
@@ -1381,9 +1496,11 @@ Notice:
 - `anova()` does the model comparison, for the models named in the list   
 - We specify `refit = FALSE` because otherwise R will compare ML fitted models -- in practice, results are the same if compare REML vs. ML models -- the refitting occurs by default to stop users from trying to compare REML models varying in fixed effects
 
-@Pinheiro2000aa advised that if one is fitting models with random effects the estimates are more accurate if the models are fitted using restricted maximum likelihood, that is achieved in the `lmer()` function call by adding the argument `REML=TRUE`. @Pinheiro2000aa (see, e.g., pp.82-) recommended that if you compare models with the same fixed effects but varying random effects the models should be fitted using restricted maximum likelihood. We can do this for the foregoing series of models but what you will notice is that when we run the `anova()` function call, without the`refit = FALSE` argument, we get the warning `refitting model(s) with ML (instead of REML)`. Why? it's basically about stopping users from comparing REML-fitted models with varying fixed effects see [this discussion](https://stat.ethz.ch/pipermail/r-sig-mixed-models/2013q4/021040.html)
+@Pinheiro2000aa advised that if one is fitting models with random effects the estimates are more accurate if the models are fitted using restricted maximum likelihood, that is achieved in the `lmer()` function call by adding the argument `REML=TRUE`. @Pinheiro2000aa (see, e.g., pp.82-) recommended that if you compare models with the same fixed effects but varying random effects the models should be fitted using restricted maximum likelihood. 
 
-As Ben Bolker points out, in [this discussion](http://stackoverflow.com/questions/22892063/do-i-need-to-set-refit-false-when-testing-for-random-effects-in-lmer-models-wi) analyses of simulated data analyses suggest that it does not make much difference whether we use REML or ML when we are comparing models with the same fixed effects but varying random effects. But it does matter *very much* that we fit models using ML when we are comparing models with the same random effects but differing fixed effects.
+We can do this for the foregoing series of models but what you will notice is that when we run the `anova()` function call, without the`refit = FALSE` argument, we get the warning `refitting model(s) with ML (instead of REML)`. Why? it's basically about stopping users from comparing REML-fitted models with varying fixed effects see [this discussion](https://stat.ethz.ch/pipermail/r-sig-mixed-models/2013q4/021040.html)
+
+As Ben Bolker points out [in this discussion](http://stackoverflow.com/questions/22892063/do-i-need-to-set-refit-false-when-testing-for-random-effects-in-lmer-models-wi), analyses of simulated data analyses suggest that it does not make much difference whether we use REML or ML when we are comparing models with the same fixed effects but varying random effects. But it does matter *very much* that we fit models using ML when we are comparing models with the same random effects but differing fixed effects.
 
 When we run the `anova()` function call, it can be seen that the random effects of subjects on intercepts is required.
 
@@ -1393,7 +1510,7 @@ anova(ML.all.correct.lmer.REML.si, ML.all.correct.lmer.REML.i, refit = FALSE)
 
 If you look at the results of the model comparison then you should notice:
 
-1. The `ML.all.correct.lmer.REML.si` model is more complex than the`ML.all.correct.lmer.REML.i` model.
+1. The `ML.all.correct.lmer.REML.si` model is more complex than the `ML.all.correct.lmer.REML.i` model.
 
 - `ML.all.correct.lmer.REML.si` includes `LgSUBTLCD + (1 | subjectID) + (1 | item_name)`
 - `ML.all.correct.lmer.REML.i` includes `LgSUBTLCD + (1 | item_name)`.
@@ -1402,7 +1519,7 @@ If you look at the results of the model comparison then you should notice:
 
 - The $\chi^2 = 1508.1$ statistic, on `1 Df` has a p-value of `Pr(>Chisq) <2.2e-16`.
 
-You can say that the comparison of a model `ML.all.correct.lmer.REML.si` with versus a model `ML.all.correct.lmer.REML.i` without the random effect of participants on intercepts shows that the inclusion of the random effect of participants on intercepts is *warranted by a significant difference in model fit*. 
+You can say that the comparison of the model `ML.all.correct.lmer.REML.si` with the random effect of participants on intercepts versus the model `ML.all.correct.lmer.REML.i` without the random effect of participants on intercepts shows that the inclusion of the random effect of participants on intercepts is *warranted by a significant difference in model fit*. 
 (I highlight here the language you can use in your reporting.)
 
 The second model comparison shows that the random effects of items on intercepts is also justified.
@@ -1416,7 +1533,7 @@ If you look at the results of the model comparison then you should notice:
 1. The `ML.all.correct.lmer.REML.si` model is more complex than the `ML.all.correct.lmer.REML.s` model.
 
 - `ML.all.correct.lmer.REML.si` includes `LgSUBTLCD + (1 | subjectID) + (1 | item_name)`.
-- `ML.all.correct.lmer.REML.i` includes `LgSUBTLCD + (1 | subjectID)`
+- `ML.all.correct.lmer.REML.s` includes `LgSUBTLCD + (1 | subjectID)`
 
 2. The more complex model `ML.all.correct.lmer.REML.si` has AIC (`-9835.1`) and BIC (`-9802.3`) numbers that are larger or more negative, and has a likelihood (`4922.6`) that is larger than the simpler model `ML.all.correct.lmer.REML.s` which has AIC (`-9778.3`) and BIC (`-9752.0`) and likelihood (`4893.2`).
 
@@ -1432,7 +1549,11 @@ We can draw this conclusion because the difference between the model including j
 
 We should next consider whether it is justified or warranted to include in our model a term capturing the random effect of participants in the slope of the frequency effect. Of course, we have seen how in theory it seems to make sense to include this effect. Some researchers might ask: does the inclusion of the random effect seem justified by improved model fit to data?
 
-I should acknowledge, here, that there is an on-going discussion over what random effects should be included in mixed-effects models (see @meteyard2020a for an overview). The discussion can be seen from a number of different perspectives. Key articles include those published by Bates et al. (2015), @Barr2013a, and Matuschek et al. (2017). You could be advised that a mixed-effects model should include all random effects that make sense a priori, so, the random effects of participants on intercepts and on the slopes of all fixed effects that are in your model (variances and covariances) as well as all the random effects of items on intercepts and on slopes. This is characterized as the *keep it maximal* approach, associated with @Barr2013a though the discussion in that article is more nuanced than this sounds. Or, you could be advised that a mixed-effects model should only include those random effects that appear to be justified or warranted by their usefulness in accounting for the data. In practice, this may mean, you should include only those random effects that appear justified by improved model fit to data, as indicated by a model comparison (see e.g. Bates et al., 2015; Matuschek et al., 2017).
+I should acknowledge, here, that there is an on-going discussion over what random effects should be included in mixed-effects models (see @meteyard2020a for an overview). The discussion can be seen from a number of different perspectives. Key articles include those published by Bates et al. (2015), @Barr2013a, and Matuschek et al. (2017). 
+
+You could be advised that a mixed-effects model should include all random effects that make sense a priori, so, here, we are talking about the random effects of participants on intercepts and on the slopes of all fixed effects that are in your model (variances and covariances) as well as all the random effects of items on intercepts and on slopes. This is characterized as the *keep it maximal* approach, associated with @Barr2013a, though the discussion in that article is more nuanced than this sounds. 
+
+Or, you could be advised that a mixed-effects model should only include those random effects that appear to be justified or warranted by their usefulness in accounting for the data. In practice, this may mean, you should include only those random effects that appear justified by improved model fit to data, as indicated by a model comparison (see e.g. Bates et al., 2015; Matuschek et al., 2017).
 
 I think, in practice, that maximal models can run into convergence problems. This means that many researchers adopt an approach which you could call: **Maximum justifiable**.
 This involves fitting a model, including all the random effects that make sense, that are justified by improved model fit to data (given a significance test, model comparison) for a model that actually converges.
@@ -1448,40 +1569,6 @@ But this discussion raises a question.
 
 In general, and simplifying things a bit, if an effect is manipulated within-units then both random effects of those units on intercepts and slopes should be examined but if it is manipulated between units then only random effects of those units on intercepts may be required.
 
-<!-- My advice is this. -->
-
-<!--  -->
-
-<!--    \item -->
-
-<!--    It makes sense to allow for variation in the effects of variables that are manipulated within-subjects} -->
-
-<!--    \item -->
-
-<!--    If everyone sees the same words and you are testing the effect of word attributes then the effects of those variables are within-subjects} -->
-
-<!--    \item -->
-
-<!--    Consider: you have several observations for a person, within} the variation in RT for that person the relative frequency of a word may or may not be associated with change in the RTs of their responses -->
-
-<!--    \item -->
-
-<!--    What about effects that may vary within-items}? -->
-
-<!--     -->
-
-<!--    \item -->
-
-<!--    Evidently, it would not make sense to consider the random effect of items on the slope of the effect of frequency -- how could we ask if words vary in their sensitivity to a frequency effect? -->
-
-<!--    \item -->
-
-<!--    But consider: if you were testing the response of participants to words presented under different priming conditions -- there you might sensibly examine the random effect of items on the slope of the priming effect -->
-
-<!--     -->
-
-<!--     -->
-
 Examine the utility of random effects by comparing models with the same fixed effects but varying random effects. You can add a fixed effect term inside the specification of random effects to examine random slopes, as we saw earlier in this chapter.
 
 ```{r}
@@ -1496,7 +1583,7 @@ ML.all.correct.lmer.REML.slopes  <- lmer(logrt ~ LgSUBTLCD +
 
 Looking at the code:
 
-- `(LgSUBTLCD + 1 |subjectID)` we specify a random effect of subjects on intercepts and on the slope of the frequency effects.
+- With `(LgSUBTLCD + 1 |subjectID)` we specify a random effect of subjects on intercepts and on the slope of the frequency effects.
 - We do not specify -- it happens by default -- the estimation of the covariance of random differences among subjects in intercepts and random differences among subjects in the slope of the frequency effect.
 
 And as before, we can use `anova()` to check whether the increase in model complexity associated with the addition of random slopes terms is justified by an increase in model fit to data.

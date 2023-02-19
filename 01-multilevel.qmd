@@ -856,7 +856,7 @@ We used some new functions, or focused on functions we have seen before but not 
 -   For visualization, we used `facet_wrap()` to show plots of the relationship between English and Portuguese scores in each class separately.
 -   We used `lmer()` to fit a multilevel model.
 
-We used the `summary()` function to get model results for both linear models and for the mulilevel or liner mixed-effects model.
+We used the `summary()` function to get model results for both linear models and for the multilevel or linear mixed-effects model.
 
 ## Recommended reading {#sec-multi-reading}
 
