@@ -1,4 +1,4 @@
-# Introduction to Generalized Linear Mixed-effects Models
+# Introduction to Generalized Linear Mixed-effects Models {#sec-glmm-intro}
 
 ::: callout-warning
 This chapter is still under construction.
