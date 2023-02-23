@@ -579,7 +579,7 @@ Note
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ML.all <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"subjects.behaviour.words-310114.csv"</span>, <span class="at">na =</span> <span class="st">"-999"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The data file <code>subjects.behaviour.words-310114.csv</code> holds all the data about everything (behaviour, participants, stimuli) we need for our analysis wor.</p>
+<p>The data file <code>subjects.behaviour.words-310114.csv</code> holds all the data about everything (behaviour, participants, stimuli) we need for our analysis work.</p>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1194,7 +1194,7 @@ Note
 </div>
 </div>
 <p>We model the effects of interest, using all the data (hence, <em>complete pooling</em>) but ignoring the differences between participants. This means we can see something of the ‘true’ picture of our data through the linear model results but the linear model misses important information, which the mixed-effects model will include, that would improve its performance.</p>
-<p>As we saw, in a similar analysis in <span class="quarto-unresolved-ref">?sec-sec-intro-mixed</span>, we can estimate the relationship between reading reaction times (here, lexical decision RTs) and word frequency using a linear model:</p>
+<p>As we saw, in a similar analysis in <a href="02-mixed.html"><span>Chapter&nbsp;4</span></a>, we can estimate the relationship between reading reaction times (here, lexical decision RTs) and word frequency using a linear model:</p>
 <p><span class="math display">\[
 Y_{ij} = \beta_0 + \beta_1X_j + e_{ij}
 \]</span></p>
@@ -1521,8 +1521,8 @@ LgSUBTLCD -0.764</code></pre>
 <p>Notice that the statistics are <code>Variance Std.Dev. Corr.</code>, that is, the variance, the corresponding standard deviation, and the correlation estimates associated with the random effects.</p>
 <ul>
 <li>We see <code>Residual</code> error variance, just like in a linear model, corresponding to a distribution or spread of deviations between the model prediction and the observed RT for each response made by a participant to a stimulus.</li>
-<li>We see <code>Variance</code> terms corresponding to what can be understood as group-level residuals. Here, the variance due to random differences between the average intercept (over all data) and the intercept for each participant, and the variance due to random differences between the average slope of the frequency effect and the slope for each participant.</li>
-<li>We also see the variance due to random differences between the average intercept (over all data) and the intercept for responses to each word stimulus.</li>
+<li>We see <code>Variance</code> terms corresponding to what can be understood as group-level residuals. Here, the variance is estimated for the spread in random differences between the average intercept (over all data) and the intercept for each participant, and the variance due to random differences between the average slope of the frequency effect and the slope for each participant.</li>
+<li>We also see the variance estimated for the spread in random differences between the average intercept (over all data) and the intercept for responses to each word stimulus.</li>
 <li><em>And</em> we see the <code>Corr</code> estimate, telling us about the <em>covariance</em> between random deviations (between participants) in the intercepts and in the slopes of the frequency effect.</li>
 </ul>
 <ol start="6" type="1">
@@ -1615,7 +1615,7 @@ Tip
 <div class="cell-output-display">
 <div id="fig-no-vs-complete-vs-partial-zoom" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="03-mixed_files/figure-html/fig-no-vs-complete-vs-partial-zoom-1.png" class="img-fluid figure-img" alt="The figure shows a grid of 4 plots, one plot each for participants AA1, EB5, JL3 and JP3. Each plot shows the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant. A red-pink line shows the complete pooling estimate. Different blue-green lines shows the no-pooling estimate given the data for each participant. The blue lines show the linear mixed-effects model partial pooling estimate for each participant." width="672"></p>
+<p><img src="03-mixed_files/figure-html/fig-no-vs-complete-vs-partial-zoom-1.png" class="img-fluid figure-img" alt="The figure shows a grid of 4 plots, one plot each for participants AA1, EB5, JL3 and JP3. Each plot shows the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant. A red-pink line shows the complete pooling estimate. Different blue-green lines shows the no-pooling estimate given the data for each participant. The blue lines show the linear mixed-effects model partial pooling estimate for each participant." width="1008"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;5.7: Plot showing the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant – for participants AA1, EB5, JL3 and JP3; pink line shows the complete pooling estimate green line shows the no-pooling estimate; and blue line shows the linear mixed-effects model partial pooling estimate</figcaption><p></p>
 </figure>
 </div>
@@ -1648,11 +1648,9 @@ Tip
 </ul>
 <p>At the start, we know neither, but we can move between partial estimation of fixed and random effect in an iterative approach.</p>
 <ul>
-<li>Using provisional values for the fixed effects to estimate the random effects.<br>
-</li>
-<li>Using provisional values for the random effects to estimate the fixed effects again.<br>
-</li>
-<li>To <em>converge</em> on the maximum likelihood estimates of effects – when the estimates stop changin.</li>
+<li>Using provisional values for the fixed effects to estimate the random effects.</li>
+<li>Using provisional values for the random effects to estimate the fixed effects again.</li>
+<li>To <em>converge</em> on the maximum likelihood estimates of effects – when the estimates stop changing.</li>
 </ul>
 <p>In mixed-effects models, the things that are estimated are the fixed effects (the intercept, the slope of the frequency effect, in our example), along with the variance and correlation terms associated with the random effects. Previously, I referred to the partial-pooling mixed-effects ‘estimates’ of the intercept or the frequency effect for each person, using the quotation marks because, strictly, these estimates are actually predictions, <em>Best Unbiased Linear Predictions (BLUPs)</em>, based on the estimates of the fixed and random effects.</p>
 <section id="sec-dev-mixed-convergence-problems" class="level3" data-number="5.11.1">
@@ -1664,7 +1662,7 @@ Tip
 <section id="sec-dev-mixed-evaluating" class="level2" data-number="5.12">
 <h2 data-number="5.12" class="anchored" data-anchor-id="sec-dev-mixed-evaluating"><span class="header-section-number">5.12</span> Fitting and evaluating Linear Mixed-effects models</h2>
 <p>Up to this point, we have discussed the empirical or conceptual reasons we should expect to take into account, in our model, the effects on the outcome due to systematic differences in the experimental variables, e.g., in stimulus word frequency frequency, or to random differences between participants or between stimuli. We can now think about how we should statistically evaluate the relative usefulness of these different fixed effects or random effects, where usefulness is judged in relation to our capacity to explain outcome variance, or to improve model fit to sample data. We shall take an approach that follows the approach set out by Baayen, Bates and others <span class="citation" data-cites="Baayen2008 bates2015parsimonious matuschek2017">(<a href="references.html#ref-Baayen2008" role="doc-biblioref">Baayen et al., 2008b</a>; <a href="references.html#ref-bates2015parsimonious" role="doc-biblioref">Bates et al., 2015</a>; <a href="references.html#ref-matuschek2017" role="doc-biblioref">Matuschek et al., 2017</a>)</span>.</p>
-<p>In this approach, we shall look at the choices that psychology researchers have to make. Researchers using statistical models are always faced with choices. As we have seen, these choices begin even before we start to do analyses, as when we make decisions about dataset construction <span class="citation" data-cites="steegen2016">(<a href="references.html#ref-steegen2016" role="doc-biblioref">Steegen et al., 2016</a>)</span>. The need to make choices is always present for all the kinds of models we work with (as I discuss in <a href="intro.html#sec-multiverse"><span>Section&nbsp;7.2.4</span></a>) though this may not always be obvious because, for example, in using some data analysis software, researchers may rely on defaults with limited indication that that is what they are doing.</p>
+<p>In this approach, we shall look at the choices that psychology researchers have to make. Researchers using statistical models are always faced with choices. As we have seen, these choices begin even before we start to do analyses, as when we make decisions about dataset construction <span class="citation" data-cites="steegen2016">(<a href="references.html#ref-steegen2016" role="doc-biblioref">Steegen et al., 2016</a>)</span>. The need to make choices is always present for all the kinds of models we work with (as I discuss in <a href="intro.html#sec-multiverse"><span>Section&nbsp;7.2.4</span></a>). This may not always be obvious because, for example, in using some data analysis software, researchers may rely on defaults with limited indication that that is what they are doing.</p>
 <div class="callout-important callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1675,7 +1673,7 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Just because we are making choices does not mean we are operating subjectively in a non-scientific fashion. Rather, provided we work in an appropriate mode of transparency or reflexiveness, we can work with an awareness of our options and the context for the data analysis (see the very helpful discussion in <span class="citation" data-cites="gelman2017">Gelman &amp; Hennig (<a href="references.html#ref-gelman2017" role="doc-biblioref">2017</a>)</span>).</p>
+<p>Just because we are making choices does not mean we are operating subjectively in a non-scientific fashion. Rather, provided we work in an appropriate mode of transparency or reflexiveness, we can work with an awareness of our options and the context for the data analysis <span class="citation" data-cites="gelman2017">(see the very helpful discussion in <a href="references.html#ref-gelman2017" role="doc-biblioref">Gelman &amp; Hennig, 2017</a>)</span>.</p>
 </div>
 </div>
 <section id="sec-dev-mixed-model-comparison" class="level3" data-number="5.12.1">
@@ -1723,7 +1721,7 @@ Tip
 <section id="sec-dev-mixed-IC" class="level3" data-number="5.12.2">
 <h3 data-number="5.12.2" class="anchored" data-anchor-id="sec-dev-mixed-IC"><span class="header-section-number">5.12.2</span> Model comparison using information criteria, AIC and BIC</h3>
 <p>You will often encounter, in the psychological research literature, Information Criteria statistics like BIC: they are understood within an approach: <em>Information-theoretic methods</em>. They are grounded in the insight that you have reality and then you have approximating models. The distance between a model and reality corresponds to the information lost when we use a model to approximate reality. Information criteria – AIC or BIC – are estimates of <em>information loss</em>. The process of model selection aims to minimize information loss.</p>
-<p>I will not discuss information criteria methods of model evaluation in detail, here, because psychologists frequently use the Likelihood Ratio Test method (<span class="citation" data-cites="meteyard2020a">Meteyard &amp; Davies (<a href="references.html#ref-meteyard2020a" role="doc-biblioref">2020</a>)</span>), see following. (Take a look at, e.g., <span class="citation" data-cites="Burnham2004">Burnham (<a href="references.html#ref-Burnham2004" role="doc-biblioref">2004</a>)</span> for a readable discussion, if you are interested.) However, you should have some idea of what information criteria statistics (like AIC and BIC) mean because you will see these statistics in the outputs from model comparisons using the <code>anova()</code> function, which we shall review a bit later (<a href="#sec-dev-mixed-LRT"><span>Section&nbsp;5.12.3</span></a>).</p>
+<p>I will not discuss information criteria methods of model evaluation in detail, here, because psychologists frequently use the Likelihood Ratio Test method <span class="citation" data-cites="meteyard2020a">(<a href="references.html#ref-meteyard2020a" role="doc-biblioref">Meteyard &amp; Davies, 2020</a>)</span>, see following. (Take a look at, e.g., <span class="citation" data-cites="Burnham2004">Burnham (<a href="references.html#ref-Burnham2004" role="doc-biblioref">2004</a>)</span> for a readable discussion, if you are interested.) However, you should have some idea of what information criteria statistics (like AIC and BIC) mean because you will see these statistics in the outputs from model comparisons using the <code>anova()</code> function, which we shall review a bit later (<a href="#sec-dev-mixed-LRT"><span>Section&nbsp;5.12.3</span></a>).</p>
 <p>In summary, Akaike showed you could estimate information loss in terms of the likelihood of the model given the data – Akaike Information Criteria, <em>AIC</em>:</p>
 <!-- % % burnham & anderson 2001/p.3 -->
 <!-- % % baguleypp. 402 -- -->
@@ -1763,7 +1761,8 @@ BIC = -2ln(l) + kln(N)
 </section>
 <section id="sec-dev-mixed-LRT" class="level3" data-number="5.12.3">
 <h3 data-number="5.12.3" class="anchored" data-anchor-id="sec-dev-mixed-LRT"><span class="header-section-number">5.12.3</span> Model comparison using the Likelihood Ratio Test</h3>
-<p><span class="citation" data-cites="Pinheiro2000aa Barr2013a matuschek2017">(<a href="references.html#ref-Pinheiro2000aa" role="doc-biblioref">Pinheiro &amp; Bates, 2000</a>; see also <a href="references.html#ref-Barr2013a" role="doc-biblioref">Barr et al., 2013</a>; <a href="references.html#ref-matuschek2017" role="doc-biblioref">Matuschek et al., 2017</a>)</span> recommend that models of varying predictor sets can be compared using Likelihood Ratio Test comparison (LRTs) where the simple model is <em>nested</em> inside the more complex model. The “nested”, here, means that the predictors in the simpler model are a subset of the predictors in the more complex model. For example, you might have just main effects in the simpler model but both main and interaction effects in the more complex model. Or, in another example, you might have just random effects of subjects or items on intercepts in the simpler model but both random effects on intercepts and random effects on slopes of fixed effects in the more complex model.</p>
+<p><span class="citation" data-cites="Pinheiro2000aa Barr2013a matuschek2017">Pinheiro &amp; Bates (<a href="references.html#ref-Pinheiro2000aa" role="doc-biblioref">2000</a>; see also <a href="references.html#ref-Barr2013a" role="doc-biblioref">Barr et al., 2013</a>; <a href="references.html#ref-matuschek2017" role="doc-biblioref">Matuschek et al., 2017</a>)</span> recommend that models of varying predictor sets can be compared using Likelihood Ratio Test comparison (LRTs) where the simple model is <em>nested</em> inside the more complex model.</p>
+<p>The “nested”, here, means that the predictors in the simpler model are a subset of the predictors in the more complex model. For example, you might have just main effects in the simpler model but both main and interaction effects in the more complex model. Or, in another example, you might have just random effects of subjects or items on intercepts in the simpler model but both random effects on intercepts and random effects on slopes of fixed effects in the more complex model.</p>
 <div class="callout-warning callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1778,12 +1777,12 @@ Warning
 </div>
 </div>
 <p><span class="citation" data-cites="Barr2013a">Barr et al. (<a href="references.html#ref-Barr2013a" role="doc-biblioref">2013</a>)</span> note that we can compare models varying in the fixed effects (but constant in the random effects) or models varying in the random effects (but constant in the fixed effects) using LRTs. I have frequently reported model comparisons using the <em>Likelihood ratio test, LRT</em>. In part, this is for analytic reasons: I can compare simple and complex models getting multiple information criteria statistics for the models being compared in one function call, <code>anova([model1], [model2]</code>. In part, it is for social pragmatic reasons: the LRT comparison yields a significance p-value so that I can say, using the comparison, something like “The more complex model provided a significantly better fit to observation (LRT comparison, … p <span class="math inline">\(=\)</span> …”</p>
-<p>In a <em>Likelihood ratio test, LRT</em>, the test statistic is the comparison of the likelihood of the simpler model with the more complex model. Fortunately for us, we can R to calculate the model likelihood and do the model comparison (<span class="quarto-unresolved-ref">?sec-dev-mixed-model-anova</span>).</p>
+<p>In a <em>Likelihood Ratio Test</em>, the test statistic is the comparison of the likelihood of the simpler model with the more complex model. Fortunately for us, we can R to calculate the model likelihood and do the model comparison (<a href="#sec-dev-mixed-anova"><span>Section&nbsp;5.13.2</span></a>).</p>
 <p>The comparison of models works by division: we divide the likelihood of the more complex model by the likelihood of the simpler model, calculating a <em>likelihood ratio</em>.</p>
 <p><span class="math display">\[
 \chi^2 = 2log\frac{likelihood-complex}{likelihood-simple}
 \]</span></p>
-<p>The likelihood ratio is compared to the <span class="math inline">\(\chi^2\)</span> distribution for a significance test. In this significance test, we assume the null hypothesis that the simpler model is adequate as an account of the outcome variance. We calculate the p-value for the significance test using a number for the degrees of freedom equal to the difference in the number of parameters of the models being compared.</p>
+<p>The likelihood ratio value is then compared to the <span class="math inline">\(\chi^2\)</span> distribution for a significance test. In this significance test, we assume the null hypothesis that the simpler model is adequate as an account of the outcome variance. We calculate the p-value for the significance test using a number for the degrees of freedom equal to the difference in the number of parameters of the models being compared.</p>
 </section>
 </section>
 <section id="sec-dev-mixed-model-steps" class="level2" data-number="5.13">
@@ -1805,7 +1804,7 @@ Important
 </div>
 </div>
 <p>In short, <em>if</em> you have <strong>pre-registered</strong> the design of your study and, as part of that registration, you recorded the hypotheses you plan to test, as well as the analysis method you plan to use to test your hypotheses, then the answer is simple: <strong>fit the model you said you were going to use</strong>.</p>
-<p>But <em>if</em> you are doing an <strong>exploratory</strong> study, then you will need to make some choices, in part, depending on the nature of the sample you are working with, and other aspects of the research context, but it will help to <strong>keep things simple</strong>. These days, if you have not pre-registered your analysis plans, you are practically-speaking engaged in exploratory work.</p>
+<p>These days, if you have not pre-registered your analysis plans, you are practically-speaking engaged in exploratory work. <em>If</em> you are doing an <strong>exploratory</strong> study, then you will need to make some choices, in part, depending on the nature of the sample you are working with, and other aspects of the research context, but it will help to <strong>keep things simple</strong>.</p>
 <p>In an exploratory study, I would keep things simple by comparing a series of models, fitted with different sets of predictor variables (fixed effects).</p>
 <div class="callout-warning callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -1859,13 +1858,13 @@ Tip
 <li>For a dataset like ML’s, I examine firstly if both random effects of subjects <em>and</em> items on intercepts are required.</li>
 <li>I then check if random effects of subjects or items on slopes are <em>additionally</em> required in the model.</li>
 </ul>
-<p>The distinction between <em>exploratory</em> and <em>confirmatory</em> studies breaks down, in my experience, when we start thinking about what random effects should be included in a model <span class="citation" data-cites="Barr2013a">Matuschek et al. (<a href="references.html#ref-matuschek2017" role="doc-biblioref">2017</a>)</span>.</p>
+<p>The distinction between <em>exploratory</em> and <em>confirmatory</em> studies breaks down, in my experience, when we start thinking about what random effects should be included in a model. It will be useful to review, here, <span class="citation" data-cites="Barr2013a">Barr et al. (<a href="references.html#ref-Barr2013a" role="doc-biblioref">2013</a>)</span> and <span class="citation" data-cites="matuschek2017">Matuschek et al. (<a href="references.html#ref-matuschek2017" role="doc-biblioref">2017</a>)</span> for an interesting discussion, and contrasting approaches.</p>
 <section id="sec-dev-mixed-REML" class="level3" data-number="5.13.1">
 <h3 data-number="5.13.1" class="anchored" data-anchor-id="sec-dev-mixed-REML"><span class="header-section-number">5.13.1</span> Maximum Likelihood and Restricted Maximum Likelihood</h3>
 <p>Before we go any further, we need to briefly discuss one key choice that we face in working with mixed-effects models. This concerns the difference between Restricted Maximum Likelihood (REML) and Maximum Likelihood (ML) estimation methods. Both methods are iterative.</p>
 <p>The <code>lmer()</code> function has defaults, like any analysis function, so we often do not need to make the choice explicit. We do need to when we compare models that vary in fixed effects, or in random effects.</p>
 <ol type="1">
-<li>Restricted maximum likelihood</li>
+<li><strong>Restricted maximum likelihood</strong></li>
 </ol>
 <p>In R: <code>REML=TRUE</code> is stated in the <code>lmer()</code> function call.</p>
 <ul>
@@ -1875,22 +1874,21 @@ Tip
 <li>REML is more accurate for random effects estimation.</li>
 </ul>
 <ol start="2" type="1">
-<li>Maximum likelihood</li>
+<li><strong>Maximum likelihood</strong></li>
 </ol>
 <p>In R: <code>REML=FALSE</code> is stated in the<code>lmer()</code> function call.</p>
 <ul>
-<li>ML estimation methods can be used to fit models with varying fixed effects but the same random effects.<br>
-</li>
+<li>ML estimation methods can be used to fit models with varying fixed effects but the same random effects.</li>
 <li>ML estimation: a good place to start when building-up model complexity – adding parameters to an empty model.</li>
+<li><span class="citation" data-cites="Pinheiro2000aa">Pinheiro &amp; Bates (<a href="references.html#ref-Pinheiro2000aa" role="doc-biblioref">2000</a>)</span> advise that the approach is anti-conservative (it will sometimes indicate effects where there are none there) but <span class="citation" data-cites="Barr2013a">Barr et al. (<a href="references.html#ref-Barr2013a" role="doc-biblioref">2013</a>)</span> argue that their analyses suggest that that is not so.</li>
 </ul>
-<p><span class="citation" data-cites="Pinheiro2000aa">Pinheiro &amp; Bates (<a href="references.html#ref-Pinheiro2000aa" role="doc-biblioref">2000</a>)</span> advise that the approach is anti-conservative (it will sometimes indicate effects where there are none there) but <span class="citation" data-cites="Barr2013a">Barr et al. (<a href="references.html#ref-Barr2013a" role="doc-biblioref">2013</a>)</span> argue that their analyses suggest that that is not so.</p>
 <!-- % pinheiro & bates 2000 / p.76 -->
 <!-- % snijders & boskers p.60 -->
 <!-- % snijders & boskers p.89 -->
 </section>
 <section id="sec-dev-mixed-anova" class="level3" data-number="5.13.2">
 <h3 data-number="5.13.2" class="anchored" data-anchor-id="sec-dev-mixed-anova"><span class="header-section-number">5.13.2</span> Comparing models of varying random effects but constant fixed effects</h3>
-<p>As noted, it is recommended <span class="citation" data-cites="Pinheiro2000aa">(<a href="references.html#ref-Pinheiro2000aa" role="doc-biblioref">Pinheiro &amp; Bates, 2000</a>)</span> that we compare models of varying random effects using Restricted Maximum Likelihood (REML) fitting. We might be comparing different models with different sets of random effects if we are in the process of working out whether our model should include random intercepts and random slopes, that is, model parameters accounting for random differences between subjects or between items in the average level of performance or in the slope of the fixed effects. I think it is sensible to build up model complexity in the random component so that we are working through a series of model comparisons, comparing more simple with more complex models where the more complex model includes the same terms as the simpler model but adds some more.</p>
+<p>As noted, it is recommended <span class="citation" data-cites="Pinheiro2000aa">(<a href="references.html#ref-Pinheiro2000aa" role="doc-biblioref">Pinheiro &amp; Bates, 2000</a>)</span> that we compare models of varying random effects using Restricted Maximum Likelihood (REML) fitting. We might be comparing different models with different sets of random effects if we are in the process of working out whether our model should include both random intercepts and random slopes. I think it is sensible to build up model complexity in the random component so that we are working through a series of model comparisons, comparing more simple with more complex models where the more complex model includes the same terms as the simpler model but adds some more.</p>
 <p>In analyzing the effect of frequency on log RT for the ML study data, we can examine whether the random effects of subjects or of items on intercepts are necessary. Then we can examine if we should take into account random effects of subjects on the slope of the fixed effect of frequency, in addition to the random effects on intercepts.</p>
 <p>To begin with, we look at a simpler model. We can fit a model with just the fixed effects of intercept and frequency, and the random effects of participants or items on intercepts only. We exclude the <code>(LgSUBTLCD + ...|subjectID)</code> specification for the random effect of participants on the slope of the frequency <code>LgSUBTLCD</code> effect.</p>
 <p>We use REML fitting, as follows:</p>
@@ -1930,11 +1928,11 @@ Correlation of Fixed Effects:
 LgSUBTLCD -0.658</code></pre>
 </div>
 </div>
-<p>Notice:</p>
+<p>If you look at the code chunk, you can see that:</p>
 <ul>
-<li><code>REML = TRUE</code> is the only change to the code: it specifies the change in model fitting method.</li>
+<li><code>REML = TRUE</code> is the only change to the code: it specifies the change in model fitting method;</li>
+<li>also, I changed the model name to <code>ML.all.correct.lmer.REML.si</code> to be able to distinguish the maximum likelihood from the restricted maximum likelihood model.</li>
 </ul>
-<p>You can see, also, I changed the model name to <code>ML.all.correct.lmer.REML.si</code> to be able to distinguish the maximum likelihood from the restricted maximum likelihood model.</p>
 <p>Following <span class="citation" data-cites="baayen2008">Baayen et al. (<a href="references.html#ref-baayen2008" role="doc-biblioref">2008a</a>)</span>, we can then run a series of models with just one random effect. Firstly, just the random effect of items on intercepts:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct.lmer.REML.i  <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span></span>
@@ -2016,16 +2014,29 @@ LgSUBTLCD -0.517</code></pre>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ML.all.correct.lmer.REML.si, ML.all.correct.lmer.REML.i, <span class="at">refit =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ML.all.correct.lmer.REML.si, ML.all.correct.lmer.REML.s, <span class="at">refit =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We compare models using the <code>anova()</code> function. We can list as many models as we like for comparison.</p>
-<p>Notice:</p>
+<section id="sec-dev-mixed-anova-advice" class="level4" data-number="5.13.2.1">
+<h4 data-number="5.13.2.1" class="anchored" data-anchor-id="sec-dev-mixed-anova-advice"><span class="header-section-number">5.13.2.1</span> Working with the anova() function</h4>
+<p>We compare models using the <code>anova()</code> function.</p>
 <ul>
-<li><code>anova()</code> does the model comparison, for the models named in the list.</li>
-<li>We specify <code>refit = FALSE</code>.</li>
+<li><code>anova()</code> does the model comparison, for the models named in the list in brackets.</li>
 </ul>
-<p>We specify <code>refit = FALSE</code> because otherwise R will compare ML fitted models. (The refitting otherwise occurs, by default, to stop users from trying to compare REML models varying in fixed effects.)</p>
-<p><span class="citation" data-cites="Pinheiro2000aa">Pinheiro &amp; Bates (<a href="references.html#ref-Pinheiro2000aa" role="doc-biblioref">2000</a>)</span> advised that if one is fitting models with random effects the estimates are more accurate if the models are fitted using Restricted Maximum Likelihood (REML). That is achieved in the <code>lmer()</code> function call by adding the argument <code>REML=TRUE</code>. <span class="citation" data-cites="Pinheiro2000aa">Pinheiro &amp; Bates (<a href="references.html#ref-Pinheiro2000aa" role="doc-biblioref">2000</a>)</span> (see, e.g., pp.82-) recommended that if you compare models with the same fixed effects but with varying random effects then the models should be fitted using Restricted Maximum Likelihood.</p>
-<p>We can do this for the foregoing series of models but what you will notice is that when we run the <code>anova()</code> function call, without the<code>refit = FALSE</code> argument, we get the warning <code>refitting model(s) with ML (instead of REML)</code>. Why? R refits models, for the comparison, using ML <em>even if</em> we originally specified REML fitting. It does this to stop users from comparing REML-fitted models with different sets of fixed effects see, as discussed <a href="https://stat.ethz.ch/pipermail/r-sig-mixed-models/2013q4/021040.html">here</a>.</p>
-<p>As Ben Bolker points out (<a href="http://stackoverflow.com/questions/22892063/do-i-need-to-set-refit-false-when-testing-for-random-effects-in-lmer-models-wi">in this discussion</a>), analyses of simulated data analyses suggest that it does not make much difference whether we use REML or ML when we are comparing models with the same fixed effects but varying random effects. But it does matter <em>very much</em> that we should fit models using ML when we are comparing models with the same random effects but <em>differing fixed effects</em>.</p>
+<p>You can do this for the foregoing series of models but notice that in the code we specify:</p>
+<ul>
+<li>refit = FALSE`</li>
+</ul>
+<p>What happens if we do not add that bit? What you will see if you run the <code>anova()</code> function call, without the<code>refit = FALSE</code> argument – try it – is that you will then get the warning <code>refitting model(s) with ML (instead of REML)</code>.</p>
+<p>Why? The immediate reason for this warning is that we have to specify <code>refit = FALSE</code> because otherwise R will compare ML fitted models. The refitting occurs by default.</p>
+<p>What is the reason for the imposition of this default?</p>
+<p>You will recall that <span class="citation" data-cites="Pinheiro2000aa">Pinheiro &amp; Bates (<a href="references.html#ref-Pinheiro2000aa" role="doc-biblioref">2000</a>)</span> advise that if one is fitting models with random effects the estimates are more accurate if the models are fitted using Restricted Maximum Likelihood (REML). That is achieved in the <code>lmer()</code> function call by adding the argument <code>REML=TRUE</code>. <span class="citation" data-cites="Pinheiro2000aa">Pinheiro &amp; Bates (<a href="references.html#ref-Pinheiro2000aa" role="doc-biblioref">2000</a>)</span> further recommend (see, e.g., pp.82-) that if you compare models:</p>
+<ul>
+<li>with the same fixed effects</li>
+<li>but with varying random effects</li>
+<li>then the models <em>should be fitted using Restricted Maximum Likelihood</em>.</li>
+</ul>
+<p>R refits models, for the <code>anova()</code> comparison using ML <em>even if</em> we originally specified REML fitting. It does this to stop users from comparing REML-fitted models when those models are specified with different sets of fixed effects, as discussed <a href="https://stat.ethz.ch/pipermail/r-sig-mixed-models/2013q4/021040.html">here</a>. The reason for this is explained by Ben Bolker (<a href="http://stackoverflow.com/questions/22892063/do-i-need-to-set-refit-false-when-testing-for-random-effects-in-lmer-models-wi">in this discussion</a>): analyses of simulated data analyses suggest that it does not make much difference whether we use REML or ML when we are comparing models with the same fixed effects but varying random effects. It does matter <em>very much</em>, however, that we should fit models using ML when we are comparing models with the same random effects but <em>differing fixed effects</em>. You will remember that <strong>REML estimates vary if the fixed effects vary</strong>.</p>
+</section>
+<section id="sec-dev-mixed-anova-results" class="level4" data-number="5.13.2.2">
+<h4 data-number="5.13.2.2" class="anchored" data-anchor-id="sec-dev-mixed-anova-results"><span class="header-section-number">5.13.2.2</span> Reading the results of the anova() model comparison</h4>
 <p>When we run the <code>anova()</code> function call, it can be seen that the random effects of subjects on intercepts is required.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ML.all.correct.lmer.REML.si, ML.all.correct.lmer.REML.i, <span class="at">refit =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2058,7 +2069,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <ul>
 <li>The <span class="math inline">\(\chi^2 = 1508.1\)</span> statistic, on <code>1 Df</code> has a p-value of <code>Pr(&gt;Chisq) &lt;2.2e-16</code>.</li>
 </ul>
-<p>You can say that the comparison of the model <code>ML.all.correct.lmer.REML.si</code> with the random effect of participants on intercepts versus the model <code>ML.all.correct.lmer.REML.i</code> without the random effect of participants on intercepts shows that the inclusion of the random effect of participants on intercepts is <em>warranted by a significant difference in model fit</em>. (I highlight here the language you can use in your reporting.)</p>
+<p>You can say that the comparison of the model <code>ML.all.correct.lmer.REML.si</code> (with the random effect of participants on intercepts) versus the model <code>ML.all.correct.lmer.REML.i</code> (without the random effect of participants on intercepts) shows that the inclusion of the random effect of participants on intercepts is <em>warranted by a significant difference in model fit</em>. (I highlight here the language you can use in your reporting.)</p>
 <p>The second model comparison shows that the random effects of items on intercepts is also justified.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ML.all.correct.lmer.REML.si, ML.all.correct.lmer.REML.s, <span class="at">refit =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2094,6 +2105,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>You can say that the comparison of a model <code>ML.all.correct.lmer.REML.si</code> with versus a model <code>ML.all.correct.lmer.REML.s</code> without the random effect of items on intercepts shows that the inclusion of the random effect of items on intercepts is warranted by a significant difference in model fit.</p>
 <p>I would conclude that both random effects of subjects and items on intercepts are required.</p>
 <p>We can draw this conclusion because the difference between the model including just the random effect of items on intercepts <code>anova-ML-all-correct-lmer-REML-i</code>, or the model including just the random effect of subjects on intercepts <code>anova-ML-all-correct-lmer-REML-s</code>, compared to the model including both the random effect of items on intercepts and of subjects on intercepts <code>anova-ML-all-correct-lmer-REML</code> is significant. This tells us that the absence of the term accounting for the random effect of subjects on intercepts is associated with a significant decrease in model fit to data, in model likelihood.</p>
+</section>
 </section>
 <section id="sec-dev-mixed-evaluate-random-effects" class="level3" data-number="5.13.3">
 <h3 data-number="5.13.3" class="anchored" data-anchor-id="sec-dev-mixed-evaluate-random-effects"><span class="header-section-number">5.13.3</span> Evaluating random effects of subjects or items on slopes</h3>
@@ -2138,7 +2150,7 @@ Warning
 </div>
 </div>
 <p>In general, and simplifying things a bit, if an effect is manipulated <em>within grouping units</em> then we should specify random effects terms that allow us to take into account random differences between groups (e.g, between participants, stimulus words, or classes) in intercepts or in the slopes of the effects of theoretical interest, the fixed effects. The language of <em>within-subjects</em> or <em>between-subjects</em> effects is common in statistical education in psychological science and, I guess, it is a legacy of the focus of that education on ANOVA. A nice explanation of the difference between <em>within-subjects</em> or <em>between-subjects</em> effects can be found in <span class="citation" data-cites="Barr2013a">Barr et al. (<a href="references.html#ref-Barr2013a" role="doc-biblioref">2013</a>)</span>.</p>
-<p>In short, if a participant provides responses data under multiple levels of an experimental condition, or in response to multiple levels of a predictor variable (e.g.&nbsp;a person responds to multiple words, with differing frequency levels) then we are going to estimate or test the effect of that condition or that variable as if the condition is manipulated <em>within-subjects</em> or as if the responses to the variable vary <em>within-subjects</em>. If and only if we are in this situation, we can draw a plot of the kind you see in <a href="#fig-no-vs-complete-vs-partial">Figure&nbsp;<span>5.6</span></a>: where we may be able to see the way that the slope of the effect of the variable differs between participants. (In contrast, for example, outside of longitudinal studies, we would identify age as a between-subjects rather than a within-subjects variable and, if you think about it, we could not draw a grid of plots like <a href="#fig-no-vs-complete-vs-partial">Figure&nbsp;<span>5.6</span></a> to examine how the slope of the age effect might differ between participants.) In this situation, we can and should (as <span class="citation" data-cites="Barr2013a">Barr et al. (<a href="references.html#ref-Barr2013a" role="doc-biblioref">2013</a>)</span> argue) specify random effects terms to account for between-participant differences in the slopes of the fixed effect.</p>
+<p>In short, if a participant provides response data under multiple levels of an experimental condition, or in response to multiple levels of a predictor variable (e.g.&nbsp;a person responds to multiple words, with differing frequency levels) then we are going to estimate or test the effect of that condition or that variable as if the condition is manipulated <em>within-subjects</em> or as if the responses to the variable vary <em>within-subjects</em>. If and only if we are in this situation, we can draw a plot of the kind you see in <a href="#fig-no-vs-complete-vs-partial">Figure&nbsp;<span>5.6</span></a>: where we may be able to see the way that the slope of the effect of the variable differs between participants. (In contrast, for example, outside of longitudinal studies, we would identify age as a between-subjects rather than a within-subjects variable and, if you think about it, we could not draw a grid of plots like <a href="#fig-no-vs-complete-vs-partial">Figure&nbsp;<span>5.6</span></a> to examine how the slope of the age effect might differ between participants.) In this situation, we can and should (as <span class="citation" data-cites="Barr2013a">Barr et al. (<a href="references.html#ref-Barr2013a" role="doc-biblioref">2013</a>)</span> argue) specify random effects terms to account for between-participant differences in the slopes of the fixed effect.</p>
 <p>We can examine the utility of random effects by comparing models with the same fixed effects but with varying random effects. We can specify a fixed effect term <em>inside</em> the random effects part of the mixed-effects model code, as we saw in <a href="#sec-dev-mixed-lmer"><span>Section&nbsp;5.9.5</span></a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>ML.all.correct.lmer.REML.slopes  <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span> LgSUBTLCD <span class="sc">+</span> </span>
@@ -2235,13 +2247,16 @@ LgSUBTLCD -0.764</code></pre>
 <h2 data-number="5.14" class="anchored" data-anchor-id="sec-dev-mixed-reporting-results"><span class="header-section-number">5.14</span> Reporting results</h2>
 <section id="sec-dev-mixed-reporting-comparisons" class="level3" data-number="5.14.1">
 <h3 data-number="5.14.1" class="anchored" data-anchor-id="sec-dev-mixed-reporting-comparisons"><span class="header-section-number">5.14.1</span> Reporting comparisons of ML and REML models</h3>
-<p>If you look at an example mixed-effects analysis report, like that presented in <span class="citation" data-cites="Davies2013b">Davies et al. (<a href="references.html#ref-Davies2013b" role="doc-biblioref">2013</a>)</span>, you can see a few features of the reporting:</p>
+<p>How do we report the analyses and their results?</p>
+<p>I think it may help if I analyze the structure and content of a results report that I did, in <span class="citation" data-cites="Davies2013b">Davies et al. (<a href="references.html#ref-Davies2013b" role="doc-biblioref">2013</a>)</span>. The report is published together with data and analysis code.</p>
+<p>If you look at the report, you can identify the kinds of information that I think you should communicate.</p>
 <ul>
 <li>Because it was an exploratory study, I started by reporting the comparison of models varying in fixed effects.</li>
 <li>I explain what predictors are included in each model.</li>
 <li>I explain how I make decisions about which model to select.</li>
 <li>I then go on to discuss the comparison of models varying in random effects.</li>
 </ul>
+<p>I think it is important to be as clear as possible about what model comparison process (if any) you may undertake.</p>
 <blockquote class="blockquote">
 <p>We stepped through a series of models. Firstly, assuming the same random effects of subjects and items on intercepts, we compared models differing in fixed effects: a model (model 1) with just initialstress factors; a model (model 2) with initialstress factors plus linear effects due to the orthographic.form, frequency, semantic, and bigram.frequency factors; and lastly a model (model 3) with the same factors as model 2 but adding restricted cubic splines for the frequency and orthographic.form factors to examine the evidence for the presence of curvilinear effects of frequency and length (the orthographic.form factor loads heavily on length).</p>
 </blockquote>
@@ -2265,8 +2280,8 @@ Tip
 </ul>
 </div>
 </div>
-<p>For the <span class="citation" data-cites="Davies2013b">Davies et al. (<a href="references.html#ref-Davies2013b" role="doc-biblioref">2013</a>)</span> data set, I include first phonetic coding variables then psycholinguistic variables. I include linear effects then additional terms allowing the effects to be curvilinear</p>
-<p>Finally, you can see that I report model comparisons in terms of Likelihood Ratio Test comparisons, firstly, considering the basis for selecting one model out of the models varying in fixed effects:</p>
+<p>For the <span class="citation" data-cites="Davies2013b">Davies et al. (<a href="references.html#ref-Davies2013b" role="doc-biblioref">2013</a>)</span> dataset, I include first the set of phonetic coding variables then the set of psycholinguistic variables (see the paper for details). I include linear effects then additional terms allowing the effects to be curvilinear.</p>
+<p>Finally, you can see that I report model comparisons in terms of Likelihood Ratio Tests. I do this, firstly, in order to report comparisons conducted to examine the basis for selecting one model out of a set of possible models varying in fixed effects:</p>
 <blockquote class="blockquote">
 <p>Comparing models 1 and 2, models with initialstress factors but differing in whether they did or did not include key psycholinguistic factors like orthographic.form, the LRT statistic was significant (<span class="math inline">\(\chi^2 = 1,007, 4 df, p = 2 * 10^-16\)</span>). Comparing models 2 and 3, i.e.&nbsp;models with initialstress and key psycholinguistic components but differing in whether they did or did not use restricted cubic splines to fit the orthographic.form and frequency effects, the LRT statistic was significant (<span class="math inline">\(\chi^2 = 23, 2 df, p = 1 * 10^-5\)</span>).</p>
 </blockquote>
@@ -2274,6 +2289,8 @@ Tip
 <blockquote class="blockquote">
 <p>We compared models that included: (i.) both random effects of subjects and items, as specified for model 3; (ii.) just the random effect of subjects; (iii.) just the random effect of items. The difference between models (i.) and (ii.) was significant (<span class="math inline">\(\chi^2 = 185, 1 df, p = 2 * 10^-16\)</span>) indicating inclusion of an item effect was justified. The difference between models (i.) and (iii.) was significant (<span class="math inline">\(\chi^2 = 17,388, 1 df, p = 2 * 10^-16\)</span>) indicating inclusion of a subject effect was justified.</p>
 </blockquote>
+<p>If you look at the report, you will see, also, that present a summary table showing the estimates for the fixed effects, and a series of plots indicating the predicted change in outcome (reading RT) given variation in the values of the predictor variables.</p>
+<p>In summary, I think we can and should report both an outline of the process of development of the model or models we use to estimate the effects of interest, and the estimates we derive through the modeling.</p>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -2284,15 +2301,16 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>You should include in your results report:</p>
+<p>I would advise you to report:</p>
 <ul>
-<li>A summary of fixed effects – just like in linear models, with coefficient estimates, standard errors, t and p (if you use it).</li>
-<li>Report random effects variance and covariance (if applicable).</li>
-<li>In text, report likelihood comparisons.</li>
-<li>I recommend presenting the final model summary in a table that is structured like a multiple regression model summary table showing the random and the fixed effects.</li>
+<li>A summary of fixed effects – just like in linear models, with coefficient estimates, standard errors, t and p (if you use it);</li>
+<li>Random effects variance and covariance (as applicable);</li>
+<li>Model building processes or model comparisons (if used).</li>
 </ul>
+<p>I recommend presenting the final model summary in a table that is structured like a multiple regression model summary table showing both random and the fixed effects.</p>
 </div>
 </div>
+<p>I also think it helps the reader to know <em>what</em> model is the basis for any estimates presented <span class="citation" data-cites="meteyard2020a">(see <a href="references.html#ref-meteyard2020a" role="doc-biblioref">Meteyard &amp; Davies, 2020</a> for further advice)</span>.</p>
 </section>
 </section>
 <section id="sec-dev-mixed-summary" class="level2" data-number="5.15">
