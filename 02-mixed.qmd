@@ -1058,7 +1058,7 @@ Further, we have not finished in our consideration of the random effects that th
 ::: callout-warning
 Why aren't there p-values?
 
-We will come back to this but note that if $t > 2$ we can suppose that an effect is significant at the $.05$ significance level.
+We will come back to this (@sec-dev-mixed-discussion-p-values) but note that if $t > 2$ we can suppose that an effect is significant at the $.05$ significance level.
 :::
 
 ### What we estimate when we estimate random effects {#sec-intro-mixed-BLUPs}
