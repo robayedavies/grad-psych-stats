@@ -169,7 +169,7 @@ In the published report (Ricketts et al., 2021) we focus our analysis of the ort
 
 You can download the [data-04-glmm.zip](files/data-04-glmm.zip) files folder for this chapter.
 
-Ibn this chapter, we will be working with the data about the orthographic post-test outcome for the longitudinal study:
+In this chapter, we will be working with the data about the orthographic post-test outcome for the longitudinal study:
 
 * `long.orth_2020-08-11.csv`
 
@@ -177,6 +177,19 @@ The data file is collected together with the .R scripts:
 
 -   `04-glmm-workbook.R` the workbook you will need to do the practical exercises.
 -   `04-glmm-workbook-answers.R` with answers to questions and code for exercises.
+
+The data come from the Ricketts study, and you can access the analysis code and data for that study, in full, at the OSF repository [here](https://osf.io/e5gzk/?view_only=038118528c7c426c9729983f54138c88)
+
+In addition to these data, you will notice that I refer, @sec-glmm-bounded-outcomes, to another dataset analyzed by Monaghan et al. (2015). 
+I enclose the data referenced:
+
+- `noun-verb-learning-study.csv`
+
+Along with additional .R you can work with to develop your skills:
+
+- `402-04-GLMM-exercise-gavagai-data-analysis-notes.R`
+
+The paper can be accessed [here](https://onlinelibrary.wiley.com/doi/10.1111/cogs.12186).
 
 ### Read-in the data file using read_csv {#sec-glmm-data-import}
 
