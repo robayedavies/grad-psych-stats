@@ -36,11 +36,10 @@ You need to do something about the categorical nature of the outcome.
 In this chapter, we look at Generalized Linear Mixed-effects Models (GLMMs): we can use these models to analyze outcome variables of different kinds, including outcome variables like response accuracy that are coded using discrete categories (e.g. correct vs. incorrect).
 Our aims are to:
 
-1. Understand the reasons for using GLMMs when we analyze discrete outcome variables
-2. Recognize the limitations of alternative methods for analyzing such outcomes
-3.Practice running GLMMs with varying random effects structures
-4. Practice reporting the results of GLMMs, including through the use of model plots
-    				
+1. Understand the reasons for using GLMMs when we analyze discrete outcome variables.
+2. Recognize the limitations of alternative methods for analyzing such outcomes.
+3. Practice running GLMMs with varying random effects structures.
+4. Practice reporting the results of GLMMs, including through the use of model plots.
 
 ## Study guide {#sec-glmm-guide}
 
@@ -92,25 +91,25 @@ pcorrect +
 
 We often need to analyze outcome or dependent variables which comprise observations of responses that are discrete or categorical.
 We need to learn to recognize research contexts that require GLMMs.
-Categorical outcome variables can include any of the following.
+Categorical outcome variables can include any of the following:
 
 - The accuracy of responses: is a response correct or incorrect?
-- The membership of one group out of two possible groups: e.g., is a participant impaired or unimpaired; e.g., was a recorded eye movement, a fixation, to the left or to the right visual field?
+- The location of a recorded eye movement, e.g. a fixation to the left or to the right visual field.
+
+- The membership of one group out of two possible groups: e.g., is a participant impaired or unimpaired. 
 - The membership of one group out of multiple possible groups: e.g., is a participant a member of one out of some number of groups, say, a member of a religious or ethnic group; e.g., is an incorrect response one out of some number of possible error types?  
+
 - Responses that can be coded in terms of ordered categories: e.g., a response on a (Likert) ratings scale.
 - Outcomes like the frequency of occurrence of an event, e.g., how many arrests are made at a particular city location?
 
 In this chapter, we will focus on **accuracy data**: where the outcome variable consists of responses observed in a behavioural task, the accuracy of responses was recorded, and responses could either be correct or incorrect.
 The accuracy of a response is, here, coded under a **binary** or dichotomous classification though we can imagine situations when a response is coded in multiple different ways.
-Other binary outcome variables may include, for example, eye fixations when a fixation could either be to a region of interest or outside the region of interest.
 
-Those interested in analyzing outcome data from ratings scales, that is, ordered categorical outcome variables, often called ordinal data, may wish to read about ordinal regression analyses, which you can do in R using functions from the *ordinal* library.
-
-\url{https://cran.r-project.org/web/packages/ordinal/vignettes/clmm2_tutorial.pdf}
+Those interested in analyzing outcome data from ratings scales, that is, ordered categorical outcome variables, often called ordinal data, may wish to read about ordinal regression analyses, which you can do in R using functions from the `{ordinal}` [library](https://cran.r-project.org/web/packages/ordinal/vignettes/clmm2_tutorial.pdf).
 
 Those interested in analyzing outcome data composed of counts may wish to read about poisson regression analyses in Gelman and Hill (2007).
 
-It will be apparent in our discussion that researchers have used, and will continue to use, a number of traditional methods to analyze categorical outcome variables when really they should be using GLMMs. 
+It will be apparent in our discussion that researchers have used, and will continue to use, a number of 'traditional' methods to analyze categorical outcome variables when really they should be using GLMMs. 
 We will talk about these alternatives first, so that you recognize what is being done when you read research articles. 
 Critically, we will discuss the limitations of such methods because these limitations explain why we bother to learn about GLMMs. 
 
@@ -120,14 +119,18 @@ If you want to analyze data from a study where responses can be either correct o
 However, if you read enough psychological research articles then you will see many reports of data analyses in which the researchers collected data on the accuracy of responses but then present the results of analyses that *ignored* the binary or dichotomous nature of accuracy.
 We often see response accuracy analyzed using an approach that looks something like the following:
 
-1. The accuracy of responses (correct vs. incorrect) is counted, e.g., as the number of correct responses or the number of errors;
-2. The percentage, or the proportion, of responses that are correct or incorrect is calculated, for each participant, for each level of each experimental condition or factor;
+1. The accuracy of responses (correct vs. incorrect) is counted, e.g., as the number of correct responses or the number of errors.
+2. The percentage, or the proportion, of responses that are correct or incorrect is calculated, for each participant, for each level of each experimental condition or factor.
 3. The percentage or proportion values are then entered as the outcome or dependent variable in ANOVA or t-test or linear model (multiple regression) analyses of response accuracy.
 
 You will see many reports of ANOVA or t-test or linear model analyses of accuracy.
+
+::: callout-tip
 Why can't we follow these examples, and save ourselves the effort of learning how to use GLMMs?
-The reason is that these analyses are, at best, approximations to more appropriate methods.
-Their results can be expected to be questionable, or misleading, for reasons that we discuss next.
+
+- The reason is that these analyses are, at best, approximations to more appropriate methods.
+- Their results can be expected to be questionable, or misleading, for reasons that we discuss next.
+:::
 
 #### Accuracy is bounded between 1 and 0, linear model model predictions or confidence intervals are not
 
@@ -162,12 +165,11 @@ The other fundamental problem with using analysis approaches like ANOVA or regre
 
 <!-- ``` -->
 
-The logic of the problem can be set out as follows \dots
+The logic of the problem can be set out as follows:
 
-1. Given a binary outcome, e.g., where the response is correct or incorrect,
+1. Given a binary outcome, e.g., where the response is correct or incorrect.
 2. For every trial, there is a probability $p$ that the response is correct.
 3. The variance of the proportion of trials (per condition) with correct responses is dependent on $p$ and greater when $p \sim .5$, the probability that a response will be correct.
-
 
 Jaeger (2008; p. 3) then explains the problem like this.
 <!-- % The expected sample proportion $p$ over $n$ trials is given by dividing $\mu_X$ by the number of trials $n$, equal to $p$. -->
@@ -227,11 +229,11 @@ The effect of this transformation is to turn a discrete binary bounded outcome i
 
 - Odds are, for example, the ratio of the probability of the occurrence of an event compared to the probability of the non-occurrence of an event, or, in terms of a response accuracy variable, the ratio of the probability of the response being correct compared to the probability of the response being incorrect.
 - And odds are continuous numeric quantities that are scaled from zero to infinity.
-- You can see how this works if you run the calculations using the equation $o = \frac{p}{1-p}$ in R as \verb:odds <- p/(1-p):, replacing p with various numbers (e.g. $p = 0.1, 0.01, 0.001$).
+- You can see how this works if you run the calculations using the equation $o = \frac{p}{1-p}$ in R as `odds <- p/(1-p)`, replacing p with various numbers (e.g. $p = 0.1, 0.01, 0.001$).
   
 2. We can then use the (natural) logarithm of the odds $logit = ln\frac{p}{1-p}$ because using the logarithm removes the boundary at zero because log odds ranges from negative to positive infinity. 
 
-- You can see how this works if you run the calculations using the equation $logit = ln\frac{p}{1-p}$ in R as \verb:logit <- log(p/(1-p)):, replacing p with smaller and smaller numbers (e.g. $p = 0.1, 0.01, 0.001$) gets you increasing negative log odds.
+- You can see how this works if you run the calculations using the equation $logit = ln\frac{p}{1-p}$ in R as `logit <- log(p/(1-p))`, replacing p with smaller and smaller numbers (e.g. $p = 0.1, 0.01, 0.001$) gets you increasing negative log odds.
 
 When we model the log odds (logit) that a response will be correct, the model is called a logistic regression} or logistic model.
 We can think of logistic models as working like linear models with log-odds outcomes.
@@ -404,7 +406,7 @@ For the purposes of our learning in Week 20, we focus on the accuracy of respons
 Each response made by a child to a target word was coded as correct or incorrect.
 
 Note that a more sensitive outcome measure of orthographic knowledge was also taken.
-Responses were also scored using a Levenshtein distance measure, using the \verb:stringdist: library (van der Loo, 2019).
+Responses were also scored using a Levenshtein distance measure, using the `stringdist: library (van der Loo, 2019).
 This score indexes the number of letter deletions, insertions and substitutions that distinguish between the target and child’s response.
 <!-- The maximum score is 0, with higher scores indicating less accurate responses. For the interested reader, accuracy data are also available alongside Levenshtein distance scores in the shared data-sets. -->
 In the published report (Ricketts et al., 2021) we focus our analysis of the orthographic outcome on the Levenshtein distance measure of response spelling accuracy, and further details on the analysis approach (Poisson rather than Binomial Generalized Linear Mixed-effects Models) can be found in the paper.
@@ -451,8 +453,11 @@ The data are already *tidy*: each column in `long.orth_2020-08-11.csv` correspon
 We will nevertheless be using `tidyverse` functions to prepare the data for analysis.
 We load the `tidyverse` and other helpful libraries here.
 
-```{r libraries, message = FALSE, warning = FALSE}
-
+```{r}
+#| label: libraries-demo
+#| warning: false
+#| message: false
+#| eval: false
 library(broom)
 library(effects)
 library(gridExtra)
@@ -463,7 +468,6 @@ library(lme4)
 library(MuMIn)
 library(sjPlot)
 library(tidyverse)
-
 ```
 
 ### Read-in the data file using read_csv {#sec-glmm-data-import}
@@ -471,7 +475,9 @@ library(tidyverse)
 I am going to assume you have downloaded the data file, and that you know where it is.
 We use `read_csv` to read the data file into R.
 
-```{r readinall, message = FALSE}
+```{r}
+#| label: readinall
+#| message: false
 long.orth <- read_csv("long.orth_2020-08-11.csv", 
                       col_types = cols(
                         Participant = col_factor(),
@@ -487,46 +493,30 @@ long.orth <- read_csv("long.orth_2020-08-11.csv",
                     )
 ```
 
-<!-- #### Code tip -->
-
-You can see, here, that within the \verb:read_csv(): function call, I specify \verb:col_types:, instructing R how to treat a number of different variables.
-You can read more about this here:
-
-\url{https://readr.tidyverse.org/articles/readr.html}
+You can see, here, that within the `read_csv()` function call, I specify `col_types`, instructing R how to treat a number of different variables.
+You can read more about this [here](https://readr.tidyverse.org/articles/readr.html).
 
 It is always a good to inspect what you have got when you read a data file in to R.
-(I leave it as an exercise for you to do.)
 
-```{r summary, eval=FALSE}
+```{r}
+#| label: data-summary
+#| eval: false
 summary(long.orth)
 ```
 
-Some of the variables included in the .csv file are listed, following, with information about value coding or calculation.
+Some of the variables included in the `.csv` file are listed, following, with information about value coding or calculation.
 
--  Participant]
-Participant identity codes were used to anonymize participation.
-- Time]
-Test time was coded 1 (time 1) or 2 (time 2). For the Study 1 longitudinal data, it can be seen that each participant identity code is associated with observations taken at test times 1 and 2.
-- Instructions]
-Variable coding for whether participants undertook training in the explicit} or incidental} conditions.
-- Word]
-Letter string values showing the words presented as stimuli to the children.
-- Orthography]
-Variable coding for whether participants had seen a word in training in the orthography absent} or present} conditions.
-- Consistency-H]
-Calculated orthography-to-phonology consistency value for each word.
-- zConsistency-H]
-Standardized Consistency H scores
-- Score]
-Outcome variable -- for the orthographic post-test, responses were scored as:
+-  `Participant` -- Participant identity codes were used to anonymize participation.
+- `Time` -- Test time was coded 1 (time 1) or 2 (time 2). For the Study 1 longitudinal data, it can be seen that each participant identity code is associated with observations taken at test times 1 and 2.
+- `Instructions` -- Variable coding for whether participants undertook training in the explicit} or incidental} conditions.
+- `Word` -- Letter string values showing the words presented as stimuli to the children.
+- `Orthography` -- Variable coding for whether participants had seen a word in training in the orthography absent or present conditions.
+- `Consistency-H` -- Calculated orthography-to-phonology consistency value for each word.
+-`zConsistency-H` -- Standardized Consistency H scores
+- `Score` -- Outcome variable -- for the orthographic post-test, responses were scored as:
 
-- 1 -- correct, if the target spelling was produced in full
-- 0 -- incorrect, if the target spelling was not produced
-
-
-
-<!-- Children included in studies 1 and 2 -- participants in the longitudinal data collection -- were coded \verb:EOF[number]:. -->
-<!-- Children included in Study 2 only (i.e., the older, additional, sample) were coded \verb:ND[number]:. -->
+1. `1` -- correct, if the target spelling was produced in full;
+2. `0` -- incorrect, if the target spelling was not produced.
 
 The summary will show you that we have a number of other variables available, including measures of individual differences in reading or reading-related abilities or knowledge, but we do not need to pay attention to them, for our exercises.
 If you are interested in the dataset, you can find more information about the variables in the Appendix for this chapter and, of course, in Ricketts et al. (2021).
@@ -534,42 +524,31 @@ If you are interested in the dataset, you can find more information about the va
 ### Code categorical factors {#sec-glmm-data-recode}
 
 The data are tidy but we need to do a bit of work, before we can run any analyses, to fix the coding of the categorical predictor (or independent) variables, the factors Orthography, Instructions, and Time.
-By default, R will dummy code} observations at different levels of a factor.
-So, for a factor or a categorical variable like `Orthography` (present, absent), R will code one level name e.g. \verb:absent: as 0 and the other e.g. \verb:present: as 1.
-The 0-coded level is termed the reference level}, which you could call the baseline level, and by default R will code the level with the name appearing earlier in the alphabet as the reference level.
+By default, R will *dummy code* observations at different levels of a factor.
+So, for a factor or a categorical variable like `Orthography` (present, absent), R will code one level name e.g. `absent` as `0` and the other e.g. `present` as `1`.
+The 0-coded level is termed the *reference level*, which you could call the baseline level, and by default R will code the level with the name appearing earlier in the alphabet as the reference level.
 
 All this is usually not important.
 When you specify a model in R where you are asking to estimate the effect of a categorical variable like `Orthography` (present, absent) then, by default, what you will get is an estimate of the average difference in outcome, when all other factors are set to zero, estimated as the difference in outcomes comparing the reference level and the other level or levels of the factor. 
 This will be presented, for example, like the output shown following, for a Generalized Linear Model (i.e., a logistic regression) analysis of the effect of Orthography condition, ignoring the random effects:
 
-```{r summary-glm, cache=TRUE}
+```{r}
+#| label: glm-summary
 summary(glm(Score ~ Orthography, family = "binomial", data = long.orth))
 ```
 
 You can see that you have an estimate, in the summary, of the effect of orthographic condition shown as:
 
-\verb:Orthographypresent  0.52951:.
+`Orthographypresent  0.52951`
 
-This model (and default coding) gives us an estimate of how the log odds of a child getting a response correct changes if we compare the responses in the \verb:absent: condition (here, treated as the baseline or reference level) with responses in the \verb:present: condition.
-(Notice that R tells us about the estimate by adding the name of the factor level that is *not* the reference level, here, \verb:present: to the name of the variable \verb:Orthography: whose effect is being estimated.)
+This model (and default coding) gives us an estimate of how the log odds of a child getting a response correct changes if we compare the responses in the `absent` condition (here, treated as the baseline or reference level) with responses in the `present` condition.
+(Notice that R tells us about the estimate by adding the name of the factor level that is *not* the reference level, here, `present` to the name of the variable `Orthography` whose effect is being estimated.)
 We can see that the log odds of a correct response increase by $0.52951$ when the orthography (visual word form or spelling) of a word is present during learning trials.
 
-However, as Dale Barr explains here: 
-
-\url{http://talklab.psy.gla.ac.uk/tvw/catpred/}
-
-It is better not to use R's default dummy coding scheme if we are analyzing data where the data come from a study involving two or more factors, and we want to estimate not just the main effects of the factors but also the effect of the interaction between the factors.
-<!-- Basically, we cannot use dummy coding for data from factorial experiments. -->
+However, as Dale Barr explains [here](http://talklab.psy.gla.ac.uk/tvw/catpred/) it is better not to use R's default dummy coding scheme if we are analyzing data where the data come from a study involving two or more factors, and we want to estimate not just the main effects of the factors but also the effect of the interaction between the factors.
 
 In our analyses, we want the coding that allows us to get estimates of the main effects of factors, and of the interaction effects, somewhat like what we would get from an ANOVA.
 This requires us to use effect coding.
-
-<!-- I am going to plagiarize elements of the explanation of effect coding from the UCLA guide: -->
-
-<!-- \url{https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faqwhat-is-effect-coding/} -->
-
-<!-- Effect coding uses ones, zeroes and minus ones to code group membership. -->
-<!-- In our example, we can code whether a response was recorded in the absent or the present Orthography condition using the word coding you see when you inspect the factor \verb:Orthography: in the dataset. -->
 
 We can code whether a response was recorded in the absent or present condition using numbers.
 In dummy coding, for any observation, we would use a column of zeroes or ones to code condition: i.e., absent (0) or present (1).
@@ -580,9 +559,7 @@ In effect coding, observations coded -1 are in the reference level.
 With effect coding, the constant (i.e., the intercept for our model) is equal to the grand mean of all the observed responses.
 And the coefficient of each of the effect variables is equal to the difference between the mean of the group coded 1 and the grand mean.
 
-You can read more about effect coding here:
-
-\url{https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faqwhat-is-effect-coding/}
+You can read more about effect coding [here](https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faqwhat-is-effect-coding/).
 
 <!-- #### Why use effect coding? -->
 
@@ -609,16 +586,16 @@ Further, to make interpretation easier, we want the coding to work so that for b
 - Instructions, incidental (-1) vs. explicit (+1)
 - Time, test time 1 (-1) vs. time 2 (+1)
 
-We use a modified version of the \verb:contr.sum(): function (provided in the \verb:memisc: library) that allows us to define the base or reference level for the factor manually:
+We use a modified version of the `contr.sum()` function (provided in the `{memisc}` library) that allows us to define the base or reference level for the factor manually (see [documentation](https://www.rdocumentation.org/packages/memisc/versions/0.99.17.2/topics/contr)).
 
-\url{https://www.rdocumentation.org/packages/memisc/versions/0.99.17.2/topics/contr}
-
-```{r warning=FALSE, message=FALSE}
+```{r}
+#| warning: false
+#| message: false
 library(memisc)
 ```
 
-Note: we have seen in some classes that we cannot appear to load \verb:library(memisc): and \verb:library(tidyverse): at the same time without getting weird warnings.
-So I would load \verb:library(memisc): after I have loaded \verb:library(tidyverse): and maybe unload it afterwards: just click on the button next to the package or library name in R-Studio to detach the library (i.e., stop it from being available in the R session).
+Note: we have seen in some classes that we cannot appear to load `library(memisc)` and `library(tidyverse)` at the same time without getting weird warnings.
+So I would load `library(memisc)` after I have loaded `library(tidyverse)` and maybe unload it afterwards: just click on the button next to the package or library name in R-Studio to detach the library (i.e., stop it from being available in the R session).
 
 In the following sequence, I first check how R codes the levels of each factor by default, I then change the coding, and check that the change gets me what I want.
 
@@ -667,16 +644,16 @@ contrasts(long.orth$Time)
 
 #### Code tip
 
-I use \verb:contr.sum(a, base = b): to do the coding, where a is the number of levels in a factor, and b tells R which level to use as the baseline or reference level.
+I use `contr.sum(a, base = b)` to do the coding, where a is the number of levels in a factor, and b tells R which level to use as the baseline or reference level.
 I usually need to check the coding before and after I specify it.
 
 ## Working with GLMMs in R {#sec-glmm-working}
 
-A small change in R \verb:lmer: code allows us to extend what we know about linear mixed-effects models to conduct Generalized Linear Mixed-effects Models}.
-We change the function call from \verb:lmer(): to \verb:glmer():.
+A small change in R `lmer` code allows us to extend what we know about linear mixed-effects models to conduct *Generalized Linear Mixed-effects Models*.
+We change the function call from `lmer()` to `glmer()`.
 However, we have to make some other changes, as we detail in the following sections.
 
-We will be examining the impact of the experimental effects, that is, the fixed effects} associated with the impacts on the outcome \verb:Score: (accuracy of response in the word spelling test) associated with the following comparisons:
+We will be examining the impact of the experimental effects, that is, the fixed effects} associated with the impacts on the outcome `Score` (accuracy of response in the word spelling test) associated with the following comparisons:
 
 - Time: time 1 versus time 2
 - Orthography: present versus absent conditions
@@ -691,7 +668,8 @@ We will begin by keeping the random effects structure simple.
 
 In our first model, we will specify just random effects of participants and items on intercepts.
 
-```{r eval = FALSE}
+```{r}
+#| eval: false
 long.orth.min.glmer <- glmer(Score ~ 
                                Time + Orthography + Instructions + zConsistency_H + 
                                
@@ -713,24 +691,26 @@ summary(long.orth.min.glmer)
 
 The code works as follows.
 
-- \verb:glmer(): the function name changes because now we want a generalized} linear mixed-effects model of accuracy
-- With \verb:(1 | Participant): we include random effects of participants on on intercepts
-- With \verb:(1 | Word): we include random effects of stimulus on on intercepts
-- \verb:family = binomial: accuracy is a binary outcome variable (correct, incorrect) so we assume a binomial probability distribution
-- \verb:glmerControl(optimizer="bobyqa", ...): we change the underlying mathematical engine (the optimizer) to cope with greater model complexity, and we allow the model fitting functions to take longer to find estimates with \verb:optCtrl=list(maxfun=2e5):
+- `glmer()` the function name changes because now we want a generalized} linear mixed-effects model of accuracy
+- With `(1 | Participant)` we include random effects of participants on on intercepts
+- With `(1 | Word)` we include random effects of stimulus on on intercepts
+- `family = binomial` accuracy is a binary outcome variable (correct, incorrect) so we assume a binomial probability distribution
+- `glmerControl(optimizer="bobyqa", ...)` we change the underlying mathematical engine (the optimizer) to cope with greater model complexity, and we allow the model fitting functions to take longer to find estimates with `optCtrl=list(maxfun=2e5)`.
 
 Notice how we specify the fixed effects.
-We want \verb:glmer(): to estimate "main effects and interactions" that we hypothesized.
+We want `glmer()` to estimate "main effects and interactions" that we hypothesized.
 
 We specify the *main* effects with:
 
-```{r eval = FALSE}
+```{r}
+#| eval: false
 Time + Orthography + Instructions + zConsistency_H +
 ```
 
 We specify the *interaction* effects with:
 
-```{r eval = FALSE}
+```{r}
+#| eval: false
 Orthography:Instructions +
                                
 Orthography:zConsistency_H +
@@ -738,30 +718,32 @@ Orthography:zConsistency_H +
 
 Where we ask for estimates of the fixed effects associated with:
 
-- \verb:Orthography:Instructions: the interaction between the effects of Orthography and Instructions
-- \verb:Orthography:zConsistency-H: the interaction between the effects of Orthography and consistency
+- `Orthography:Instructions` the interaction between the effects of Orthography and Instructions
+- `Orthography:zConsistency-H` the interaction between the effects of Orthography and consistency
 
 #### Code tip
 
 There are two forms of notation we can use to specify interactions in R.
 The simplest form is to use something like this:
 
-```{r eval = FALSE}
+```{r}
+#| eval: false
 Orthography*Instructions
 ```
 
 This will get you estimates of:
 
-- \verb:Orthography: present versus absent conditions
-- \verb:Instructions: explicit versus incidental conditions
-- \verb:Orthography x Instructions: the interaction between the effects of Orthography and Instructions
+- `Orthography` present versus absent conditions
+- `Instructions` explicit versus incidental conditions
+- `Orthography x Instructions` the interaction between the effects of Orthography and Instructions
 
 So, in general, if you want estimates of the effects of variables A, B and the interaction A x B, then you write `A*B`.
 
-We can also use the colon symbol to specify only the interaction, i.e., ignoring main effects, so if you specify \verb-A:B- then you will get an estimate of the interaction A x B but not the effects A, B.
+We can also use the colon symbol to specify only the interaction, i.e., ignoring main effects, so if you specify `A:B` then you will get an estimate of the interaction A x B but not the effects A, B.
 With the coding 
 
-```{r eval = FALSE}
+```{r}
+#| eval: false
 Score ~ Orthography + Instructions + Orthography:Instructions
 ```
 
@@ -793,17 +775,17 @@ summary(long.orth.min.glmer)
 
 In these results, we see:
 
-1. First, information about the function used to fit the model, and the model object created by the \verb:glmer(): function call
+1. First, information about the function used to fit the model, and the model object created by the `glmer()` function call
 
-- Then the model formula including main effects \verb:Score ~ Time + Orthography + Instructions + zConsistencyH:
-- As well as interactions \verb-Orthography:Instructions + Orthography:zConsistencyH-
-- And the random effects \verb:(1 | Participant) + (1 |Word):
-- Then we see \verb:REML criterion at convergence: about the model fitting process, which we can usually ignore
+- Then the model formula including main effects `Score ~ Time + Orthography + Instructions + zConsistencyH:
+- As well as interactions `Orthography:Instructions + Orthography:zConsistencyH`
+- And the random effects `(1 | Participant) + (1 |Word)`
+- Then we see `REML criterion at convergence` about the model fitting process, which we can usually ignore
 - Then we see information about the model algorithm
-- Then we see model fit statistics, including \verb:AIC BIC logLik:
+- Then we see model fit statistics, including `AIC BIC logLik`
 - Then we see information about the distribution of residuals
 
-2. Then the \verb:Random Effects:. Notice that the statistics are \verb:Variance Std.Dev.:, that is, the variance and the corresponding standard deviation associated with the random effects
+2. Then the `Random Effects`. Notice that the statistics are `Variance Std.Dev.`, that is, the variance and the corresponding standard deviation associated with the random effects
 
 - The variance due to random differences between the average intercept (over all data) and the intercept for each participant
 - And the variance due to random differences between the average intercept (over all data) and the intercept for responses to each word stimulus
@@ -813,16 +795,16 @@ In these results, we see:
 Note that we get p-values for what are called Wald null hypothesis significance tests on the coefficients.
 
 We can see that one effect is significant.
-The estimate for the effect of the presence compared to the absence of Orthography is \verb:0.455009:
+The estimate for the effect of the presence compared to the absence of Orthography is `0.455009`
 The positive coefficient tells us that the log odds that a response will be correct is higher when Orthography is present compared to when it is absent.
 
 We can also see an effect of consistency that can be considered to be marginal or near-significant by some standards.
-The estimate for the effect of \verb:zConsistency_H: is \verb:-0.618093: indicating that the log odds of a response being correct decrease for unit increase in the standardized H consistency measure.
+The estimate for the effect of `zConsistency_H` is `-0.618093` indicating that the log odds of a response being correct decrease for unit increase in the standardized H consistency measure.
 
 ### GLMMs and hypothesis tests {#sec-glmm-hypothesis}
 
 As we discussed in the last chaptr, we can conduct null hypothesis significance tests by comparing models that differ in the presence or absence of a fixed effect or a random effect, using the Likelihood Ratio Test.
-In the results output for a GLMM by the \verb:glmer(): function, you can see that alongside the estimates of the coefficients (and standard error) for the fixed effects we also have z and p-values.
+In the results output for a GLMM by the `glmer(): function, you can see that alongside the estimates of the coefficients (and standard error) for the fixed effects we also have z and p-values.
 Wald z tests for GLMMs test the null hypothesis of no effect by comparing the effect estimate with their standard error, and comparing the resulting test statistic to zero (Bolker et al., 2009).
 
 ### Presenting and visualizing the effects {#sec-glmm-visualizing}
@@ -833,8 +815,8 @@ There are a variety of tools that help us to do this.
 
 #### sjPlot library
 
-We can use the \verb:plot_model: function from the \verb:sjPlot: library.
-The following sequence of code takes information from the model we have just run, then generates model predictions, of change in the probablity of a correct response (Score) for different levels of the Orthography factor and the consistency variable.
+We can use the `plot_model` function from the `{sjPlot}` library.
+The following sequence of code takes information from the model we have just run, then generates model predictions, of change in the probablity of a correct response (`Score`) for different levels of the Orthography factor and the consistency variable.
 I chose these variables because they are the significant or near-significant effects.
 
 ```{r sjplot-orthography, warning = FALSE, message = FALSE, fig.height=3.5, fig.width=6, out.width='95%', fig.cap="Effect of orthography condition (present versus absent) on probability of a response being correct"}
@@ -863,15 +845,15 @@ We can also see a trend such that the probability of a response being correct de
 
 ##### Code tip
 
-You will need to install the \verb:sjPlot: library first, and then run the command \verb:library(sjPlot): before creating your plot.
+You will need to install the `{sjPlot}` library first, and then run the command `library(sjPlot)` before creating your plot.
 
 Notice:
 
-- \verb:plot_model(): produces the plot
-- \verb:plot_modellong.orth.min.glmer): specifies that the plot should be produced given information about the previously fitted model \verb:long.orth.min.glmer:
-- \verb:type = "pred": tells R that you want a plot showing the model predictions, of the effect of, e.g., \verb:Orthography: condition
+- `plot_model()` produces the plot
+- `plot_modellong.orth.min.glmer)` specifies that the plot should be produced given information about the previously fitted model `long.orth.min.glmer`
+- `type = "pred"` tells R that you want a plot showing the model predictions, of the effect of, e.g., `Orthography: condition
 
-The function outputs an object whose appearance can be edited as a \verb:ggplot: object.
+The function outputs an object whose appearance can be edited as a `ggplot` object.
 
 See the following set of blog posts for detailed advice and explanation:
 
@@ -881,13 +863,11 @@ See the following set of blog posts for detailed advice and explanation:
 
 \url{https://cran.r-project.org/web/packages/sjPlot/vignettes/plot_model_estimates.html}
 
-And see the library manual for detailed technical information:
-
-\url{https://cran.r-project.org/web/packages/sjPlot/sjPlot.pdf}
+And see the library manual for detailed technical [information](https://cran.r-project.org/web/packages/sjPlot/sjPlot.pdf).
 
 <!-- #### effects library -->
 
-<!-- We can use the \verb:effect: function from the \verb:effects: library. -->
+<!-- We can use the `effect: function from the `effects: library. -->
 <!-- Again, we feed information about the model into a function that generates and plots model predictions, given variation in the named experimental factors. -->
 
 <!-- ```{r effects-orthography, warning = FALSE, message = FALSE, fig.height=3.5, fig.width=6, out.width='95%', fig.cap="Effect of orthography condition (present versus absent) on probability of a response being correct"} -->
@@ -902,40 +882,40 @@ And see the library manual for detailed technical information:
 
 <!-- ##### Code tip -->
 
-<!-- You will need to install the \verb:effects: library first, and then run the command \verb:library(effects): before creating your plot. -->
+<!-- You will need to install the `effects: library first, and then run the command `library(effects): before creating your plot. -->
 
 <!-- Notice: -->
 
 <!--  -->
 <!-- \item -->
-<!-- \verb:effect(): creates the information for the plot, given information about the fitted model -->
+<!-- `effect(): creates the information for the plot, given information about the fitted model -->
 <!-- \item -->
-<!-- \verb:plot(effect(): embedding \verb:effect(): within the \verb:plot(): function call requires R to make a plot out of the information constructed from the model using the \verb:effect(): function -->
+<!-- `plot(effect(): embedding `effect(): within the `plot(): function call requires R to make a plot out of the information constructed from the model using the `effect(): function -->
 <!-- \item -->
-<!-- \verb:effect("Orthography" ...): tells R what effect we want to plot -->
+<!-- `effect("Orthography" ...): tells R what effect we want to plot -->
 <!-- \item -->
-<!-- \verb:mod = long.orth.min.glmer: specifies that the model that is the basis for plot production -->
+<!-- `mod = long.orth.min.glmer: specifies that the model that is the basis for plot production -->
 <!--  -->
 
 <!-- This plotting function is based on what is called the lattice} plotting engine. -->
 <!-- The lattice} plotting engine is a bit more flexible than the base R} engine. -->
 
 <!-- \item -->
-<!-- \verb:rug = FALSE: I switch off the option to show the occurrence of observations at different values of the x-axis variable (here, block) though, in other contexts, this option is useful -->
+<!-- `rug = FALSE: I switch off the option to show the occurrence of observations at different values of the x-axis variable (here, block) though, in other contexts, this option is useful -->
 <!-- \item -->
-<!-- \verb:ylab = "Probability (correct response)": I change the axis labelling to make it easier to understand -->
+<!-- `ylab = "Probability (correct response)": I change the axis labelling to make it easier to understand -->
 <!-- \item -->
-<!-- \verb:par.settings = list(fontsize = list(text = 15, points = 10))": I change the font size settings to make the labels a bit clearer -->
+<!-- `par.settings = list(fontsize = list(text = 15, points = 10))": I change the font size settings to make the labels a bit clearer -->
 <!-- \item -->
 <!-- I enclose the plotting code within the lines -->
 <!--  -->
 <!-- \item -->
-<!-- \verb:pdf("noun-verb-learning-glmm3-partial-effects-effects-plot.pdf", w=5, h=5): to create a .pdf file, named in \verb:"":, of dimensions 6 inches width x 5 inches height -->
+<!-- `pdf("noun-verb-learning-glmm3-partial-effects-effects-plot.pdf", w=5, h=5): to create a .pdf file, named in `"":, of dimensions 6 inches width x 5 inches height -->
 <!-- \item -->
-<!-- \verb:dev.off(): to close the file -->
+<!-- `dev.off(): to close the file -->
 <!--  -->
 
-<!-- You can check the \verb:effects: library manual for details. -->
+<!-- You can check the `effects: library manual for details. -->
 
 <!-- \url{https://cran.r-project.org/web/packages/effects/effects.pdf} -->
 
@@ -943,7 +923,7 @@ And see the library manual for detailed technical information:
 
 <!-- \url{https://www.jstatsoft.org/article/view/v008i15} -->
 
-<!-- You will need to install the \verb:effects: library first, and then run the command \verb:library(effects):. -->
+<!-- You will need to install the `effects: library first, and then run the command `library(effects):. -->
 
 <!-- \subsection{Exercises} -->
 
@@ -955,7 +935,7 @@ And see the library manual for detailed technical information:
 <!-- \item -->
 <!-- Take a look at the library information at the websites I have listed, and at other websites -->
 <!-- \item -->
-<!-- Examine what happens if you make different choices than I make, for example, by flipping \verb:TRUE: to \verb:FALSE: or \verb:FALSE: to \verb:TRUE: in the code -->
+<!-- Examine what happens if you make different choices than I make, for example, by flipping `TRUE: to `FALSE: or `FALSE: to `TRUE: in the code -->
 <!-- \item -->
 <!-- Go deeper and vary plot settings relating to the composition and the appearance of the plot: labelling, label placement, label text size, theme, colour, line type etc. -->
 <!--  -->
@@ -969,7 +949,7 @@ We now need to examine the question: What random effects should we specify?
 I must warn you that the question and the answer are complex but the coding is quite simple, and the approaches you can take to address the question are, now, quite well recognized by the psychological community.
 In other words, the community recognizes the nature of the problem, and recognizes the methods you can potentially follow to solve the problem.
 
-The complexity, for us, lies not in the mathematics: the coding is simple and the \verb:glmer(): function does the work.
+The complexity, for us, lies not in the mathematics: the coding is simple and the `glmer(): function does the work.
 I think the complexity lies, firstly, in how we have to think about the study design, what gets manipulated or allowed to vary.
 I find it very helpful to sketch out, by hand, what the study design means in relation to who does what in an experiment.
 And when I work with collaborators, I typically ask them to explain the design verbally while I try to write in pencil what the dataset looks like (for a small number of participants or stimuli).
@@ -990,20 +970,20 @@ A currently influential set of recommendations (Barr et al., 2013; but see discu
 This means that specification of the random effects structure requires two sets of information:
 
 - What are the fixed effects?
-- What are the grouping variables: did you test multiple participants using multiple stimuli (e.g., words \dots) or did you test participants under multiple different conditions (e.g., levels of experimental condition factors)?
+- What are the grouping variables: did you test multiple participants using multiple stimuli (e.g., words ...) or did you test participants under multiple different conditions (e.g., levels of experimental condition factors)?
 
 Our answers to these questions then dictate potentially how we specify the random effects structure for our model.
 
 - We can consider that we should certainly include a random effect of each grouping variable (e.g., participants, stimulus word) on intercepts.
-- We can reflect that we should also include a random effect of a grouping variable e.g. \verb:(|participant): on the slope of each variable that was manipulated within} the units of that variable.
-- When we specify models, we should remember that by default if you specify \verb:(1 + something | participant): then you are specifying that you want to take into account variance due to the random differences between participants in intercepts \verb:(1 ...| participant):, plus variance due to the random differences between participants in slopes \verb:(... something | participant):, plus the covariance (or correlation) between the random intercepts and the random slopes.
+- We can reflect that we should also include a random effect of a grouping variable e.g. `(|participant)` on the slope of each variable that was manipulated *within* the units of that variable.
+- When we specify models, we should remember that by default if you specify `(1 + something | participant)` then you are specifying that you want to take into account variance due to the random differences between participants in intercepts `(1 ...| participant)`, plus variance due to the random differences between participants in slopes `(... something | participant)`, plus the covariance (or correlation) between the random intercepts and the random slopes.
 
 <!-- If a fixed effect is manipulated within-units then random effects of those units on intercepts and on the slopes of the within-units fixed effect should be examined but if it is manipulated between units then only random effects of those units on intercepts may be required. -->
 <!-- So if a fixed effect (the effect of an experimental variable) is manipulated within-subjects, then it is often advisable to examine if there is a random effect of subjects on the slope of that fixed effect. -->
 <!-- Likewise, if a fixed effect is manipulated within-items then it is advisable to examine if there is a random effect of items on the slope of that fixed effect. -->
 
 You will have become familiar with the practice of referring to effects as within-subjects} or between-subjects} previously, in working with ANOVA.
-Here, whether an effect is within-subjects} or within-items} or not has relevance to whether we can or should specify a random effect of subjects or of items on the slope of a fixed effect.
+Here, whether an effect is *within-subjects* or *within-items* or not has relevance to whether we can or should specify a random effect of subjects or of items on the slope of a fixed effect.
 
 <!--  -->
 <!-- 	\item -->
@@ -1095,8 +1075,8 @@ These considerations suggests that we should specify a model with the random eff
 
 This is simple to do using the code shown following.
 
-```{r eval = FALSE}
-
+```{r}
+#| eval: false
 long.orth.max.glmer <- glmer(Score ~ 
                            Time + Orthography + Instructions + zConsistency_H + 
                            
@@ -1114,18 +1094,17 @@ long.orth.max.glmer <- glmer(Score ~
                          data = long.orth)
 
 summary(long.orth.max.glmer)
-
 ```
 
 Where we have the critical terms:
 
-- \verb:(Time + Orthography + zConsistency_H + 1 | Participant): to account for the random effects of participants on intercepts, and on the slopes of the effects of Time, Orthography and spelling-sound consistency, as well as all corresponding covariances.
-- \verb:(Time + Orthography + Instructions + 1 |Word): the random effects of stimulus words on intercepts, and on the slopes of the effects of Time, Orthography and Instructions, as well as all corresponding covariances.
+- `(Time + Orthography + zConsistency_H + 1 | Participant)` to account for the random effects of participants on intercepts, and on the slopes of the effects of Time, Orthography and spelling-sound consistency, as well as all corresponding covariances.
+- `(Time + Orthography + Instructions + 1 |Word)` the random effects of stimulus words on intercepts, and on the slopes of the effects of Time, Orthography and Instructions, as well as all corresponding covariances.
 
 If you run this code, however, you will see that you get warnings along with your estimates.
 
-```{r echo = FALSE}
-
+```{r}
+#| echo: false
 long.orth.max.glmer <- glmer(Score ~ 
                            Time + Orthography + Instructions + zConsistency_H + 
                            
@@ -1148,20 +1127,19 @@ summary(long.orth.max.glmer)
 
 Notice, especially, the warning:
 
-```{r eval = FALSE}
+```{r}
+#| eval: false
 boundary (singular) fit: see ?isSingular
 ```
 
 If you put the warning message text into a search engine, then you will get directed to a variety of discussions about what they mean and what you should do about them.
 
-A highly instructive blog post by (I think) Ben Bolker provides some very useful advice:
-
-\url{https://rstudio-pubs-static.s3.amazonaws.com/33653_57fc7b8e5d484c909b615d8633c01d51.html}
+A highly instructive blog post by (I think) Ben Bolker provides some very useful [advice](https://rstudio-pubs-static.s3.amazonaws.com/33653_57fc7b8e5d484c909b615d8633c01d51.html)
 
 Where we see this advice:
 
-- [Check singularity]
-
+> **Check singularity**
+>
 > If the fit is singular or near-singular, there might be a higher chance of a false positive (we're not necessarily screening out gradient and Hessian checking on singular directions properly); a higher chance that the model has actually misconverged (because the optimization problem is difficult on the boundary); and a reasonable argument that the random effects model should be simplified}.
 >
 > The definition of singularity is that some of the constrained parameters of the random effects theta parameters are on the boundary (equal to zero, or very very close to zero ...)
@@ -1186,7 +1164,8 @@ Look out for convergence or singularity warnings, where they appear.
 In the first model, we have just random effects of participants or items on intercepts.
 This is where we started.
 
-```{r eval = FALSE}
+```{r}
+#| eval: false
 long.orth.min.glmer <- glmer(Score ~ 
                                Time + Orthography + Instructions + zConsistency_H + 
                                
@@ -1240,32 +1219,30 @@ This model converges without warnings.
 
 ##### Code tip
 
-Notice that we specify that we \verb:||: do not want random covariances; we are keeping things simple in each step.
+Notice that we specify that we `||` do not want random covariances; we are keeping things simple in each step.
 
-Note the use of \verb:dummy(): inside the random effects terms.
+Note the use of `dummy()` inside the random effects terms.
 The 'dummy' is a mis-leading name; we are not talking about dummy coding (as above).
-Here, the \verb:dummy(): stops R from mis-interpreting the requirement to estimate the effect of the differences between category levels, within random effects.
+Here, the `dummy()` stops R from mis-interpreting the requirement to estimate the effect of the differences between category levels, within random effects.
 
-<!-- , when you are using the \verb:||: notation. -->
+<!-- , when you are using the `||: notation. -->
 
 <!-- -- maybe need to review notes from when worked to assist SSSR workshop -->
 <!-- https://rpubs.com/Reinhold/22193 -->
 <!-- https://rpubs.com/Reinhold/391027 -->
 
-The reason is explained here:
-
-\url{https://rdrr.io/cran/lme4/man/dummy.html}
+The reason is explained [here](https://rdrr.io/cran/lme4/man/dummy.html).
 
 <!-- -- see also from a discussion thread with alan garnham 2018 emails, ST&D R workshop: -->
 <!-- https://github.com/lme4/lme4/issues/182 -->
 
 You can see what impact it has by specifying, instead, the naked random effect:
 
-\verb: e.g. (Orthography + 1 || Participant):.
+`(Orthography + 1 || Participant)`.
 
 #### Random effects of subjects and stimulus words on the slope of the Instructions effect  {#sec-glmm-random-effects-subjects-items-slopes-2}
 
-Next we can add \verb:Instructions: to take into account random differences between words in the slope of this effect.
+Next we can add `Instructions: to take into account random differences between words in the slope of this effect.
 We show the results for this model as they are instructive.
 
 ```{r orth-3-glmer, cache=TRUE}
@@ -1293,19 +1270,18 @@ This model also converges without warnings.
 Take a look at the random effects summary.
 You can see:
 
-- \verb:Participant (Intercept) 1.64393: estimated variance due to random effect of participants on intercepts
-- \verb:Participant.1 dummy(Orthography) 0.55604:  variance due to random effect of participants on the slope of the Orthography effect
-- \verb:Word (Intercept) 1.94314: variance due to random effect of words on intercepts
-\item
-\verb:Word.1 dummy(Orthography) 0.01607: variance due to random effect of words on the slope of the Orthography effect
-- \verb:Word.2 dummy(Instructions) 0.86694: variance due to random effect of words on the slope of the Instructions effect 
+- `Participant (Intercept) 1.64393` estimated variance due to random effect of participants on intercepts
+- `Participant.1 dummy(Orthography) 0.55604`  variance due to random effect of participants on the slope of the Orthography effect
+- `Word (Intercept) 1.94314` variance due to random effect of words on intercepts
+- `Word.1 dummy(Orthography) 0.01607` variance due to random effect of words on the slope of the Orthography effect
+- `Word.2 dummy(Instructions) 0.86694` variance due to random effect of words on the slope of the Instructions effect 
 
-We do *not* see correlations (random effects covariances) because we use the \verb:||: notation to stop them being estimated.
+We do *not* see correlations (random effects covariances) because we use the `||` notation to stop them being estimated.
 We want to stop them being estimated because we want to see what we gain from adding just the requirement, first, to estimate the variance associated with random effects of participants or words on the slopes of the experimental variables.
 
 Also, we can suspect that adding the requirement to estimate covariances will blow the model up for two reasons.
 The maximal model, including random slopes variances *and* covariances clearly did not converge.
-Secondly, at least two of the correlations listed in the random effects, for the maximal model, were pretty extreme with \verb:Corr: $=-0.01$ and $=0.99$; such extreme values ($r \sim \pm 1$) are bad signs; see the discussion in \@ref(bad-signs).
+Secondly, at least two of the correlations listed in the random effects, for the maximal model, were pretty extreme with `Corr: $=-0.01$ and $=0.99$; such extreme values ($r \sim \pm 1$) are bad signs; see the discussion in \@ref(bad-signs).
 
 #### Adding effects a bit at a time {#sec-glmm-random-effects-add}
 
@@ -1345,8 +1321,8 @@ summary(long.orth.4.a.glmer)
 
 We see two useful pieces of information when we run this model:
 
-- We get the warning \verb:boundary (singular) fit: see ?isSingular: that tells us the model algorithm could not converge on effects estimates, given the model we specify, given the data
-- Note, also, we see the random effects variance estimate \verb:Participant.2 zConsistency_H 1.259e-10:
+- We get the warning `boundary (singular) fit: see ?isSingular: that tells us the model algorithm could not converge on effects estimates, given the model we specify, given the data
+- Note, also, we see the random effects variance estimate `Participant.2 zConsistency_H 1.259e-10`.
 
 These two things are possibly connected: the singularity warning; and the estimated variance of $1.259e-10$ (i.e. a very very small number) associated with the random effect of participants on the slope of the `zConsistency_H`.
 We can expect that the model fitting algorithm is going to have difficulty estimating nothing, or something close to nothing: here, the very very small variance associated with the between-participant differences in the slope of the non-significant effect of word spelling-sound consistency on response accuracy.
@@ -1379,9 +1355,9 @@ Nope.
 
 We again see two useful pieces of information when we run this model:
 
-- We get the warning \verb:boundary (singular) fit: see ?isSingular: that tells us the model algorithm could not converge on effects estimates, given the model we specify, given the data
-- Note, also, we see the random effects variance estimate \verb:Participant.2 dummy(Time) 0.000e+00:
-- And we see the variance estimate \verb:Word.3 dummy(Time) 2.161e-07:
+- We get the warning `boundary (singular) fit` see `?isSingular` that tells us the model algorithm could not converge on effects estimates, given the model we specify, given the data
+- Note, also, we see the random effects variance estimate `Participant.2 dummy(Time) 0.000e+00`.
+- And we see the variance estimate `Word.3 dummy(Time) 2.161e-07`.
 
 Again, we can surmise that a mixed-effects model will get into trouble -- and we will see convergence warnings -- where we have a fixed effect with little impact (like, here, Time, or, before consistency) and we are asking for the estimation of variance associated with random differences in slopes where there may be, in fact, little random variation.
 Possibly, these two things are connected too: we are perhaps unlikely to see random differences in the slope of the effect of an experimental variable if the effect is at or near zero.
@@ -1399,7 +1375,7 @@ We can see that a model has difficulty if we see things like:
 
 <!--  -->
 <!-- \item -->
-<!-- The variance estimate associated with random effects of items on the slope of the fixed effect of block is very very small: $4.650e-05$ for the effect of target objects \verb:(cblock + 1 | targetobject):; and $3.912e-06$ for the effect of target actions \verb:(cblock + 1 | targetaction): -->
+<!-- The variance estimate associated with random effects of items on the slope of the fixed effect of block is very very small: $4.650e-05$ for the effect of target objects `(cblock + 1 | targetobject):; and $3.912e-06$ for the effect of target actions `(cblock + 1 | targetaction): -->
 <!-- \item -->
 <!-- Consider how small are the deviations due to random differences between items when the spread of such differences -- given by the variance estimates -- are numbers as small as about a millionth $3.912e-06 = 0.000003912$ (if you remember your scientific notation) -->
 <!-- \item -->
@@ -1409,14 +1385,14 @@ We can see that a model has difficulty if we see things like:
 <!-- \item -->
 <!-- We can conclude that specifying a model that adds complexity in terms of the random effect of items on the slope of the blocks effect is not justified -->
 <!-- \item -->
-<!-- A further warning sign can be seen in random effects covariances -- see the values listed in the columns under \verb:Corr: -->
+<!-- A further warning sign can be seen in random effects covariances -- see the values listed in the columns under `Corr: -->
 <!-- \item -->
 <!-- We can see extreme correlations of $1.00$ -->
 <!-- \item -->
 <!-- Correlations as high as these strongly suggest that the model has difficulty capturing the associated random effects (like the effect of items on the slopes of the block effect) because they are not really present in the data -->
 <!--  -->
 
-If we see a warning that the model fitting algorithm nearly failed to converge: \verb-boundary (singular) fit: see ?isSingular- or failed to converge then this tells us that, given the data, the mathematical engine (optimizer) underlying the \verb:lmer(): function model fitting got into trouble because, in short, it was trying to find estimates for effects that were close to not being there at all.
+If we see a warning that the model fitting algorithm nearly failed to converge: `boundary (singular) fit: see ?isSingular` or failed to converge then this tells us that, given the data, the mathematical engine (optimizer) underlying the `lmer(): function model fitting got into trouble because, in short, it was trying to find estimates for effects that were close to not being there at all.
 
 If the variances for the random effects of participants or stimulus items on the slopes of an experimental variable are very small this suggests that the level of complexity in the model cannot really be justified or that the model will have difficulty estimating it.
 Extreme correlations (near 0 or 1) between random effects on intercepts and on slopes of fixed effects suggest the level of complexity in the model cannot really be justified (see also the discussion in Bates et al., 2015; Matuschek et al., 2017).
@@ -1429,19 +1405,19 @@ Does the addition of random slopes improve model fit?
 We can compare the model in pairs, as follows, to test whether each addition in model complexity improves model fit.
 We run the code for the model comparisons as follows.
 
-First, we compare the model \verb:long.orth.min.glmer: (just random intercepts) with \verb:long.orth.2.glmer: to check if increasing model complexity, by accounting for random differences between participants or words in the slope of the Orthography effect improves model fit to data.
+First, we compare the model `long.orth.min.glmer` (just random intercepts) with `long.orth.2.glmer` to check if increasing model complexity, by accounting for random differences between participants or words in the slope of the Orthography effect improves model fit to data.
 
 ```{r}
 anova(long.orth.min.glmer, long.orth.2.glmer)
 ```
 
-Second, we compare the model \verb:long.orth.min.glmer: (just random intercepts) with \verb:long.orth.3.glmer: to check if increasing model complexity, by accounting for random differences between participants or words in the slope of the Instructions effect improves model fit to data.
+Second, we compare the model `long.orth.min.glmer` (just random intercepts) with `long.orth.3.glmer` to check if increasing model complexity, by accounting for random differences between participants or words in the slope of the Instructions effect improves model fit to data.
 
 ```{r}
 anova(long.orth.min.glmer, long.orth.3.glmer)
 ```
 
-I think this justifies reporting the model \verb:long.orth.3.glmer:
+I think this justifies reporting the model `long.orth.3.glmer:
 
 If you look at the outputs, the addition of the random effects of participants and words on the slope of the effect of Orthography cannot be justified ($\chi^2 = 3.3909, 2 df, p = .1835$) by improved model fit, in comparison to a model with the random effects of participants and words on intercepts.
 
@@ -1466,7 +1442,7 @@ Problems can also occur if variables have very large or very small ranges.
 
 We can detect and address these problems in a number of ways:
 
-1. Sometimes convergence problems can be fixed by switching the optimizer used to fit the model -- we can do this by adding the argument: \verb:glmerControl(optimize = "bobyqa"): to the glmer() function call, as I did for the class example. Switching optimizers is a quick solution to a common problem: models can fail to converge for a number of different reasons. In short, there may not be enough data for the model fitting process to settle on appropriate estimates for fixed or random effects.
+1. Sometimes convergence problems can be fixed by switching the optimizer used to fit the model -- we can do this by adding the argument: `glmerControl(optimize = "bobyqa")` to the `glmer()` function call, as I did for the class example. Switching optimizers is a quick solution to a common problem: models can fail to converge for a number of different reasons. In short, there may not be enough data for the model fitting process to settle on appropriate estimates for fixed or random effects.
 2. Sometimes, a warning message advises us to consider rescaling the continuous numeric predictor variable. For this reason, and others, I usually standardize numeric predictor variables, as a default, before the analysis.
 3. Sometimes, the warnings tell us that we need to simplify the random effects part of the model. We can simplify the random effects structure of a mixed-effects model in a number of ways:
 As we examine the estimates resulting from a model fit we can consider whether the variance and covariance terms are small or large.
@@ -1477,16 +1453,14 @@ Ultimately, I decided that the effects of subjects and items on intercepts was i
 The approach we have progressed through is widely used (see discussions in Baayen et al., 2008; Barr, et al., 2013; Luke, 2017; Matuschek et al., 2017; Meteyard \& Davies, 2019).
 <!-- You might take this approach, then, if you are investigating whether effects that interest you, for theoretical or practical reasons, are or are not helpful in your research when you are seeking to specify an account of the factors that result in the data you observed. -->
 
-See, especially, the troubleshooting guide by Ben Bolker:
-
-\url{https://rstudio-pubs-static.s3.amazonaws.com/33653_57fc7b8e5d484c909b615d8633c01d51.html}
+See, especially, the troubleshooting guide by Ben Bolker [here](https://rstudio-pubs-static.s3.amazonaws.com/33653_57fc7b8e5d484c909b615d8633c01d51.html).
 
 #### Exercises
 
 To demonstrate the impact of these adjustments, you could refit the models discussed in the foregoing:
 
 - Without using the standardized consistency variable as a predictor
-- Without using the modification to the model fitting code, i.e. deleting the line that includes \verb:glmerControl(optimizer = "bobyqa"):
+- Without using the modification to the model fitting code, i.e. deleting the line that includes `glmerControl(optimizer = "bobyqa")`
 - Making the last most complex model more complex by adding further random effects of subjects or items on the slopes of both main effects and the interaction
 
 #### Summary advice {#sec-glmm-advice-summary}
@@ -1514,13 +1488,13 @@ Our best practice guidance for reporting mixed-effects models includes, among ot
 
 This looks like a lot of work.
 
-- Why bother?]
+- Why bother?
 
 I think it is always worth asking this question.
 
 The first answer is that it is all relative. 
 In my own experience, a lot of the effort spent in the research workflow used to be occupied by face-to-face data collection: weeks or months of testing; now all data get collected online, and it gets finished overnight.
-Considerable time and effort (as Hadley Wickham's joke runs, 80\% of analysis effort) was spent on tidying the data before analysis; I still do this work but it is now much faster and less effortful, thanks to \verb:tidyverse:.
+Considerable time and effort (as Hadley Wickham's joke runs, 80\% of analysis effort) was spent on tidying the data before analysis; I still do this work but it is now much faster and less effortful, thanks to `tidyverse:.
 A lot of effort used to be spent by me or colleagues on the literature review, the power analysis, or the stimulus preparation: that still happens.
 And a lot of effort used to be spent on doing the analysis and figuring out what the results mean: that, too, still happens.
 It is up to you if you want to spend ten months on data collection and five minutes on data analysis (as another joke has it, a million bucks on the data and a nickel on the statistics).
@@ -1551,16 +1525,16 @@ Lotte Meteyard and I recommend that results reporting should:
 
 For the word learning study we have been working through, the Results section for the report would include the following elements:
 
-- [Explain approach]
+- **Explain approach**
 We used mixed-effects models to analyse data because this approach permits modelling of both participant- and item-level variability simultaneously, unlike more traditional approaches such as ANOVA. In this study, multiple participants responded to multiple items, meaning that both participants and items were sources of nonindependence in our data (i.e. responses from the same participant are likely to be correlated, as are responses to the same item). Compared to ANOVA, mixed-effects models offer a more flexible approach, and are better able to handle missing data without significant loss of statistical power (Baayen, Davidson, \& Bates, 2008).
 
-- [Explain how you get from the study design to the model you use to test or estimate key effects]
+- **Explain how you get from the study design to the model you use to test or estimate key effects**
 We took a hypothesis driven approach, estimating the fixed effects of time (Time 1 versus Time 2), Orthography (absent versus present), Instructions (incidental versus explicit) and consistency (standardized H), as well as the interaction between orthography and instructions and the interaction between orthography and consistency. Different levels of the three binary fixed effects were sum coded. Consistency H, as a numeric predictor variable, was standardized to z scores before entry to models as a predictor.
 
 
 <!-- We took a hypothesis-driven approach, estimating the fixed effects of time (Time 1 versus Time 2), orthography (absent versus present), instructions (incidental versus explicit) and consistency (standardized H), as well as the interaction between orthography and instructions and the interaction between orthography and consistency. Different levels of the three binary fixed effects were sum coded, with orthography as $−1$ (absent) versus $+1$ (present), instructions as $−1$ (incidental) versus $+1$ (explicit), and time as $−1$ (Time 1) versus $+1$ (Time 2). Consistency H, as a numeric predictor variable, was standardized to z scores before entry to models as predictors. -->
 
-- Outline the model comparison or model selection work]
+- **Outline the model comparison or model selection work**
 The models were initially fitted specifying just random effects to account for variation by participants and stimuli in accuracy (random intercepts) plus terms to estimate the fixed effects of the experimental conditions ([name them]), and the interactions [name them]. Following the recommendations of Barr, Levy, Scheepers, and Tily (2013; see also Baayen, 2008; Matuschek et al., 2017), we fitted further models adding both random intercepts and random slopes for the random effects. Likelihood ratio test comparison of models showed that a model with both random intercepts and slopes ... fit the data better than a model with just random intercepts $(\chi^2(df) = ..., p = ...)$.
 - Use appendices or supplementary materials]
 To give the reader full information on models fit, model comparisons
@@ -1569,10 +1543,10 @@ As I have advised for reporting linear models, I included a tabled summary of co
 - Show and tell]
 Use figures -- model prediction plots, as seen -- to help the reader to see what the fixed effects estimates imply.
 
-- Which model do we report?]
+- **Which model do we report?**
 
 
-Note that given the model comparison results we have seen, I would probably report the estimates from \verb:long.orth.3.glmer:.
+Note that given the model comparison results we have seen, I would probably report the estimates from `long.orth.3.glmer:.
 The model appears to include the most comprehensive account of random effects while still being capable of converging.
 
 <!-- As I have advised for reporting linear models, I included a tabled summary of coefficient estimates, as shown in Figure \ref{noun-verb-learning-glmm-paper-summary} -->
@@ -1705,21 +1679,21 @@ The model appears to include the most comprehensive account of random effects wh
 
 <!-- ##### Prepare the data -->
 
-<!-- Sometimes, a \verb:glmer(): warning message advises us to consider rescaling the continuous numeric predictor variable. -->
-<!-- To avoid getting that warning, we should center the block variable before the modeling using the \verb:scale(): function. -->
+<!-- Sometimes, a `glmer(): warning message advises us to consider rescaling the continuous numeric predictor variable. -->
+<!-- To avoid getting that warning, we should center the block variable before the modeling using the `scale(): function. -->
 
 <!-- ```{r} -->
 <!-- gavagai$cblock <- scale(gavagai$block, scale = FALSE, center = TRUE) -->
 <!-- ``` -->
 
-<!-- In this transformation}, we are asking R to create a new variable \verb:all.merged$cblock: from the old variable, by calculating, for each block, the difference between the block identity number (there are 12 blocks, so blocks are numbered 1-12) and the average block identity number. -->
+<!-- In this transformation}, we are asking R to create a new variable `all.merged$cblock: from the old variable, by calculating, for each block, the difference between the block identity number (there are 12 blocks, so blocks are numbered 1-12) and the average block identity number. -->
 <!-- This transformation makes later interpretation of effects a bit easier (see, e.g., Cohen et al., 2003) on why centering predictor variables helps you to interpret the estimated coefficients of effects. -->
 
 <!-- ##### Work on the model -->
 
 <!-- To get you started, we can specify a random intercepts model. -->
 
-<!-- We can start with a model for which we specify (1.) that \verb:accuracy: is the outcome variable, and we are predicting it with (2.) the fixed effects plus (3.)just the random effects on intercepts of participant \verb:Subjecta:, stimulus object \verb:targetobject: and stimulus action \verb:targetaction:. -->
+<!-- We can start with a model for which we specify (1.) that `accuracy: is the outcome variable, and we are predicting it with (2.) the fixed effects plus (3.)just the random effects on intercepts of participant `Subjecta:, stimulus object `targetobject: and stimulus action `targetaction:. -->
 
 <!-- Now the model code. -->
 
@@ -1739,21 +1713,21 @@ The model appears to include the most comprehensive account of random effects wh
 
 <!--  -->
 <!--   \item -->
-<!-- 	\verb:glmer(): the function name changes because we want a generalized} linear mixed-effects model -->
+<!-- 	`glmer(): the function name changes because we want a generalized} linear mixed-effects model -->
 <!--   \item -->
-<!--   With \verb:(1|Subjecta) + (1|targetobject) + (1|targetaction): we have included random effects of stimulus object and stimulus action (motion) as well as participants on on intercepts -->
+<!--   With `(1|Subjecta) + (1|targetobject) + (1|targetaction): we have included random effects of stimulus object and stimulus action (motion) as well as participants on on intercepts -->
 <!-- 	\item -->
-<!--   \verb:family = binomial: accuracy is a binary outcome variable so assume a binomial probability distribution -->
+<!--   `family = binomial: accuracy is a binary outcome variable so assume a binomial probability distribution -->
 <!--   \item -->
-<!--   \verb:glmerControl(optimize = "bobyqa")): we change the underlying mathematical engine (the optimizer) to cope with greater model complexity -->
+<!--   `glmerControl(optimize = "bobyqa")): we change the underlying mathematical engine (the optimizer) to cope with greater model complexity -->
 <!--     \item -->
-<!-- 	\verb:Experiment: learning conditions coded with the "Experiment" variable, a factor with levels \verb:nounonly:, \verb:verbonly:, and \verb:nounverb: -->
+<!-- 	`Experiment: learning conditions coded with the "Experiment" variable, a factor with levels `nounonly:, `verbonly:, and `nounverb: -->
 <!-- 	  \item -->
-<!-- 	\verb:block: there were 12 blocks of 24 learning trials, and here block is treated as a numeric variable -->
+<!-- 	`block: there were 12 blocks of 24 learning trials, and here block is treated as a numeric variable -->
 <!-- 	\item -->
-<!-- 	\verb:cblock: notice that we use the centred} block variable \verb:cblock: -->
+<!-- 	`cblock: notice that we use the centred} block variable `cblock: -->
 <!--   \item -->
-<!-- 	Notice that the \verb:(something)*(something): get you interactions and main effects for all possible pairs of variables -->
+<!-- 	Notice that the `(something)*(something): get you interactions and main effects for all possible pairs of variables -->
 <!--  -->
 
 <!-- Now it's over to you: what next? -->
@@ -1783,8 +1757,8 @@ We considered how to report the model selection (or comparison, or building) pro
 
 We used two functions to fit and evaluate mixed-effects models.
 
-- We used \verb:glmer(): to fit a mixed-effects model
-- We used \verb:anova(): to compare two or more models using AIC, BIC and the Likelihood Ratio Test
+- We used `glmer()` to fit a mixed-effects model
+- We used `anova()` to compare two or more models using AIC, BIC and the Likelihood Ratio Test
 
 
 ## R code and data file access for the class
@@ -1793,18 +1767,18 @@ Activities in the class that goes with this chapter are associated with the foll
 
 
 \item
-\verb:04-glmm-workbook.R:
+`04-glmm-workbook.R:
 \item
-\verb:long.orth_2020-08-11.csv:
+`long.orth_2020-08-11.csv:
 
 
 <!--  -->
 <!-- \item -->
-<!-- \verb:04-glmm-workbook.R: -->
+<!-- `04-glmm-workbook.R: -->
 <!-- \item -->
-<!-- \verb:04-glmm-exercises.R: -->
+<!-- `04-glmm-exercises.R: -->
 <!-- \item -->
-<!-- \verb:long.orth_2020-08-11.csv: -->
+<!-- `long.orth_2020-08-11.csv: -->
 <!-- \item -->
 <!-- noun-verb-learning-study.csv -->
 <!--  -->
@@ -1904,7 +1878,7 @@ Snijders, T.A., \& Bosker, R.J. (2012). *Multilevel analysis (2nd Edition)*. Lon
 
 ## Appendix: Example dataset variable information
 
-Further information about the variables in the \verb:long.orth_2020-08-11.csv: dataset.
+Further information about the variables in the `long.orth_2020-08-11.csv: dataset.
 
 
 \item[Participant]
@@ -1927,7 +1901,7 @@ Calculated orthography-to-phonology value for each word.
 \item[Orthography]
 Variable coding for whether participants had seen a word in training in the orthography absent} or present} conditions.
 \item[Measure]
-Variable coding for the post-test measure: \verb:Sem_all: if the semantic post-test; \verb:Orth_sp: if the orthographic post-test.
+Variable coding for the post-test measure: `Sem_all: if the semantic post-test; `Orth_sp: if the orthographic post-test.
 \item[Score]
 Variable coding for response category. For the semantic (sequential or dynamic) post-test, responses were scored as corresponding to:
 
@@ -1967,7 +1941,7 @@ Raw score -- vocabulary knowledge indexed by the British Picture Vocabulary Scal
 \item[Spelling.transcription]
 Transcription of the spelling response produced by children in the orthographic post-test
 \item[Levenshtein.Score]
-Children were asked to spell each word to dictation and spelling productions were transcribed for scoring. Responses were scored using a Levenshtein distance measure, using the \verb:stringdist: library (van der Loo, 2019). This score indexes the number of letter deletions, insertions and substitutions that distinguish between the target and child’s response. For example, the response ‘epegram’ for target ‘epigram’ attracts a Levenshtein score of 1 (one substitution). Thus, this score gives credit for partially correct responses, as well as entirely correct responses. The maximum score is 0, with higher scores indicating less accurate responses.
+Children were asked to spell each word to dictation and spelling productions were transcribed for scoring. Responses were scored using a Levenshtein distance measure, using the `stringdist: library (van der Loo, 2019). This score indexes the number of letter deletions, insertions and substitutions that distinguish between the target and child’s response. For example, the response ‘epegram’ for target ‘epigram’ attracts a Levenshtein score of 1 (one substitution). Thus, this score gives credit for partially correct responses, as well as entirely correct responses. The maximum score is 0, with higher scores indicating less accurate responses.
 \item[zTOWREsweRS]
 We standardized TOWREsweRS values, calculating the z score as $z = \frac{x - \bar{x}}{sd_x}$, over all observations in the longitudinal} (Study 1) or concurrent} (Study 2) data-set, using the ```scale()``` function in R.
 \item[zTOWREpdeRS]
@@ -1985,8 +1959,8 @@ Standardized BPVSRS scores
 
 
 <!-- \item[mean-z-vocab] -->
-<!-- We aggregate vocabulary measures, averaging variables together: \verb:data$mean_z_vocab <- (data$zWASIvRS + data$zBPVSRS)/2: -->
+<!-- We aggregate vocabulary measures, averaging variables together: `data$mean_z_vocab <- (data$zWASIvRS + data$zBPVSRS)/2: -->
 <!-- \item[mean_z_read] -->
 <!-- We aggregated reading skills measures, averaging variables together: \verb-data$mean_z_read<-(data$zTOWREsweRS + data$zTOWREpdeRS + data$zCC2regRS + data$zCC2irregRS + data$zCC2nwRS)/5- -->
 <!-- \item[zConsistency-H] -->
-<!-- Standardised \verb:Consistency_H: scores -->
+<!-- Standardised `Consistency_H: scores -->
