@@ -1,9 +1,5 @@
 # Introduction to Generalized Linear Mixed-effects Models {#sec-glmm-intro}
 
-::: callout-warning
-This chapter is still under construction.
-:::
-
 ```{r libraries-hide}
 #| warning: false
 #| echo: false
@@ -17,31 +13,25 @@ library(sjPlot)
 library(tidyverse)
 ```
 
-```{r read-data, warning=FALSE, message=FALSE, echo=FALSE}
-
+```{r read-data}
+#| warning: false
+#| echo: false
 gavagai <- read_csv("noun-verb-learning-study.csv", na = "-999")
-
 ```
 
-We have been discussing how we can use Linear Mixed-effects models to analyze multilevel structured data, the kind of data that we commonly acquire in experimental psychological studies, for example, when our studies have repeated measures designs. 
-The use of Linear Mixed-effects models is appropriate where the outcome variable is a continuous numeric variable like reaction time.
-In this chapter, we extend our understanding and skills by moving to examine data where the outcome variable is categorical: this is a context that requires the use of **Generalized Linear Mixed-effects Models (GLMMs)**. 
+We have been discussing how we can use Linear Mixed-effects models to analyze multilevel structured data, the kind of data that we commonly acquire in experimental psychological studies, for example, when our studies have repeated measures designs. The use of Linear Mixed-effects models is appropriate where the outcome variable is a continuous numeric variable like reaction time. In this chapter, we extend our understanding and skills by moving to examine data where the outcome variable is categorical: this is a context that requires the use of **Generalized Linear Mixed-effects Models (GLMMs)**.
 
-We will begin by looking at the motivations for using GLMMs.
-We will then look at a practical example of a GLMM analysis, in an exploration in which we shall reveal some of the challenges that can arise in such work.
-The R code to do the modeling is very similar to the code we have used before. 
-The way we can understand the models is also similar but *with one critical difference*.
-We start to understand that difference here.
+We will begin by looking at the motivations for using GLMMs. We will then look at a practical example of a GLMM analysis, in an exploration in which we shall reveal some of the challenges that can arise in such work. The R code to do the modeling is very similar to the code we have used before. The way we can understand the models is also similar but *with one critical difference*. We start to understand that difference here.
 
-## The key idea to get us started {#key-ideas}
+## The key idea to get us started {#sec-glmm-ideas}
 
-\begin{description}
-\item[Categorical outcomes] cannot be analyzed using linear models (ANOVA or t-test or linear models or linear mixed-effects models) without having to make some important compromises.
-\end{description}
+::: callout-important
+Categorical outcomes cannot be analyzed using linear models, in whatever form, without having to make some important compromises.
+:::
 
 You need to do something about the categorical nature of the outcome.
 
-## Targets
+## Targets {#sec-glmm-targets}
 
 In this chapter, we look at Generalized Linear Mixed-effects Models (GLMMs): we can use these models to analyze outcome variables of different kinds, including outcome variables like response accuracy that are coded using discrete categories (e.g. correct vs. incorrect).
 Our aims are to:
@@ -57,7 +47,7 @@ Our aims are to:
   Practice reporting the results of GLMMs, including through the use of model plots
   \end{enumerate}  				
 
-## Study guide
+## Study guide {#sec-glmm-guide}
 
 1. Play with the .R file used to create examples for the lecture.
 2. Edit example code to create alternate visualizations of variable distributions and of the relationships between critical variables.
@@ -101,7 +91,7 @@ pcorrect +
 
 ```
 
-## Motivations
+## Motivations {#sec-glmm-motivations}
 
 ### Our focus is on the analysis of catgorical outcome variables
 
@@ -242,7 +232,7 @@ However, as Jaeger (2008) demonstrates, the remedies like the arcsine transforma
 <!-- If you are not interested in the accuracy of prediction of outcomes at the extremes, and so do not mind if your ordinary least squares regression (your normal linear model) of outcome accuracy can give you impossible predicted values (predicted proportions of correct responses $< 0$ or $>1$) then, likewise, the approximation is acceptable. -->
 <!-- However, tolerating the limitations in these traditional approaches does seem hard to justify. -->
 
-## Understanding the Generalized part of the Generalized Linear Mixed-effects Models in practical terms
+## Understanding the Generalized part of the Generalized Linear Mixed-effects Models in practical terms {#sec-glmm-practical-understanding}
 
 What we need, then, is a method that allows us to analyze categorical outcomes.
 We find the appropriate method in Generalized Linear Models, and in Generalized Linear Mixed-effects Models for repeated measures or multilevel structured data.
@@ -351,7 +341,7 @@ We are used to seeing and thinking in everyday life about the chances that some 
 <!-- We generally prefer to examine the impacts of experimental variables well away from these extremes. -->
 <!-- This is because the heterogeneity of variance in outcomes, discussed earlier, makes it difficult to come up with a valid interpretation of estimated effects when performance at one of the conditions is at floor or at ceiling. -->
 
-## The data we will work with: the Ricketts word learning study {#word-learning}
+## The data we will work with: the Ricketts word learning study {#sec-glmm-word-learning-data}
 
 We will be working with data collected for a study investigating word learning in children, reported by Ricketts, Dawson, and Davies (2021).
 You will see that the study design has both a repeated measures aspect because each child is asked to respond to multiple stimuli, and a longitudinal aspect because responses are recorded at two time points.
@@ -365,11 +355,11 @@ You will be able to generalize from our work this week to many other research co
 However, our focus here is on the fact that the outcome for analysis is the accuracy of the responses made by children to word targets in a spelling task.
 The categorical nature of accuracy as an outcome is the reason why we now turn to use Generalized Linear Mixed-effects Models.
 
-### Study information
+### Study information {#sec-glmm-data-study}
 
 I am going to present the study information in some detail, in part, to enable you to make sense of the analysis aims and results and, in part, so that we can simulate results reporting in a meaningful context.
 
-#### Introduction: the background for the study
+#### Introduction: the background for the study {#sec-glmm-data-background}
 
 Vocabulary knowledge is essential for processing language in everyday life and it is vital that we know how to optimize vocabulary teaching.
 One strategy with growing empirical support is orthographic facilitation: children and adults are more likely to learn new spoken words that are taught with their orthography (visual word forms; for a systematic review, see Colenbrander, Miles \& Ricketts, 2019). 
@@ -401,7 +391,7 @@ Longitudinal studies of word learning are rare and this is the first longitudina
 
 We addressed three research questions.
 
-#### Research questions
+#### Research questions {#sec-glmm-data-research-questions}
 
 \begin{enumerate}
 \item
@@ -412,18 +402,18 @@ Will orthographic facilitation be greater when the presence of orthography is em
 Does word consistency moderate the orthographic facilitation effect? For orthographic learning, we expected that the presence of orthography might be particularly beneficial for words with higher spelling-sound consistency, with learning highest when children saw and heard the word, and these codes provided overlapping information. 
 \end{enumerate}
 
-#### Design
+#### Design {#sec-glmm-data-study-design}
 
 Children were taught 16 novel words in a $2 \times 2$ factorial design. 
 The presence of orthography (orthography absent vs. orthography present) was manipulated within participants: for all children, eight of the words were taught with orthography present and eight with orthography absent. 
 Instructions (incidental vs. explicit) were manipulated between participants such that children in the explicit condition were alerted to the presence of orthography whereas children in the incidental condition were not.
 
-#### Participants
+#### Participants {#sec-glmm-data-participants}
 
 In Study 1, 41 children aged 9-10 years completed the word learning task and completed semantic and orthographic assessments one week after learning (Time 1), and eight months later (Time 2).
 We tested children from one socially mixed school in the South-East of England ($M_{age} = 9.95, SD = .53$).
 
-#### Stimulus materials
+#### Stimulus materials {#sec-glmm-data-materials}
 
 Stimuli comprised 16 polysyllabic words, all of which were nouns.
 We indexed consistency at the whole word level using the H uncertainty statistic (after Mousikou et al., 2017; Treiman, Mullennix, Bijeljac-Babic, & Richmond-Welty, 1995). 
@@ -433,7 +423,7 @@ An H value of 0 would indicate a consistent item (all participants producing the
 
 <!-- ### Study One Methods -- Procedure -->
 
-#### Procedure
+#### Procedure {#sec-glmm-data-procedure}
 
 A pre-test was conducted to establish participants’ knowledge of the stimulus words before i.e. \emph{pre-} training was administered. 
 Then, each child was seen for three 45-minute sessions to complete training (Sessions 1 and 2) and post-tests (Session 3). 
@@ -445,7 +435,7 @@ They were then given post-tests again, about eight months later at Time 2.
 <!-- In Study 2, the Study 1 sample was combined with an older sample of children. -->
 <!-- The additional Study 2 children were not tested at Time 2, and the analysis of Study 2 data did not incorporate test time as a factor. -->
 
-#### Outcome (dependent) variables -- Orthographic post-test
+#### Outcome (dependent) variables -- Orthographic post-test {#sec-glmm-data-outcome}
 
 This post-test was used to examine orthographic knowledge after training. 
 Children were asked to spell each word to dictation and spelling productions were transcribed for scoring. 
@@ -470,7 +460,7 @@ In the published report (Ricketts et al., 2021) we focus our analysis of the ort
 <!-- The WASI-II indexes expressive vocabulary by asking children to verbally define words.  -->
 <!-- The BPVS-3 is a receptive vocabulary measure for which children are asked to indicate which of four pictures represents the meaning of each word. -->
 
-### Locate and download the data file {#access}
+### Locate and download the data file {#sec-glmm-data-download}
 
 Go to the 402 Moodle folder for Week 20, find and download the data file we need from the Week 20 resources folder:
 
@@ -487,7 +477,7 @@ We will be working with the data about the orthographic post-test outcome for th
 Where **long** indicates the longitudinal nature of the data-set.
 The `.csv` file is a *comma separated values* file and can be opened in Excel.
 
-## Tidy the data
+## Tidy the data {#sec-glmm-data-tidy}
 
 The data are already *tidy*: each column in `long.orth_2020-08-11.csv` corresponds to a variable and each row corresponds to an observation.
 <!-- Because the design of the study involves the collection of repeated observations, the data can be understood to be in a *long* format. -->
@@ -515,7 +505,7 @@ library(tidyverse)
 
 ```
 
-### Read-in the data file using read_csv {#import}
+### Read-in the data file using read_csv {#sec-glmm-data-import}
 
 I am going to assume you have downloaded the data file, and that you know where it is.
 We use `read_csv` to read the data file into R.
@@ -583,7 +573,7 @@ Outcome variable -- for the orthographic post-test, responses were scored as:
 The summary will show you that we have a number of other variables available, including measures of individual differences in reading or reading-related abilities or knowledge, but we do not need to pay attention to them, for our exercises.
 If you are interested in the dataset, you can find more information about the variables in the Appendix for this chapter and, of course, in Ricketts et al. (2021).
 
-### Code categorical factors {#recode}
+### Code categorical factors {#sec-glmm-data-recode}
 
 The data are tidy but we need to do a bit of work, before we can run any analyses, to fix the coding of the categorical predictor (or independent) variables, the factors Orthography, Instructions, and Time.
 By default, R will \emph{dummy code} observations at different levels of a factor.
@@ -652,7 +642,7 @@ You can read more about effect coding here:
 
 <!-- \url{https://stats.idre.ucla.edu/r/library/r-library-contrast-coding-systems-for-categorical-variables/} -->
 
-#### Category coding practicalities
+#### Category coding practicalities {#sec-glmm-data-category-coding}
 
 We follow recommendations to use sum contrast coding for the experimental factors.
 Further, to make interpretation easier, we want the coding to work so that for both orthography and presentation conditions, doing something is the "high" level in the factor -- hence:
@@ -727,7 +717,7 @@ contrasts(long.orth$Time)
 I use \verb:contr.sum(a, base = b): to do the coding, where a is the number of levels in a factor, and b tells R which level to use as the baseline or reference level.
 I usually need to check the coding before and after I specify it.
 
-## Working with GLMMs in R
+## Working with GLMMs in R {#sec-glmm-working}
 
 A small change in R \verb:lmer: code allows us to extend what we know about linear mixed-effects models to conduct \emph{Generalized Linear Mixed-effects Models}.
 We change the function call from \verb:lmer(): to \verb:glmer():.
@@ -752,7 +742,7 @@ Interaction between the effects of Orthography and consistency
 
 We will begin by keeping the random effects structure simple.
 
-### Specify a random intercepts model
+### Specify a random intercepts model {#sec-glmm-random-intercepts}
 
 In our first model, we will specify just random effects of participants and items on intercepts.
 
@@ -848,7 +838,7 @@ Score ~ Orthography + Instructions + Orthography:Instructions
 
 I would be making explicit that I want estimates for the effects of Orthography, Instruction and the interaction between the effects of Orthography and Instructions.
 
-### Read the results
+### Read the results {#sec-glmm-read-results}
 
 If you run the model code, you will get the results shown in the output.
 
@@ -912,13 +902,13 @@ The positive coefficient tells us that the log odds that a response will be corr
 We can also see an effect of consistency that can be considered to be marginal or near-significant by some standards.
 The estimate for the effect of \verb:zConsistency_H: is \verb:-0.618093: indicating that the log odds of a response being correct decrease for unit increase in the standardized H consistency measure.
 
-### GLMMs and hypothesis tests {#hypothesis}
+### GLMMs and hypothesis tests {#sec-glmm-hypothesis}
 
 As we discussed in the last chaptr, we can conduct null hypothesis significance tests by comparing models that differ in the presence or absence of a fixed effect or a random effect, using the Likelihood Ratio Test.
 In the results output for a GLMM by the \verb:glmer(): function, you can see that alongside the estimates of the coefficients (and standard error) for the fixed effects we also have z and p-values.
 Wald z tests for GLMMs test the null hypothesis of no effect by comparing the effect estimate with their standard error, and comparing the resulting test statistic to zero (Bolker et al., 2009).
 
-### Presenting and visualizing the effects
+### Presenting and visualizing the effects {#sec-glmm-visualizing}
 
 We usually want to do more than just report whether experimental effects are or are not significant.
 It helps us to present and interpret the estimates from a model if we can visualize the model prediction.
@@ -1058,7 +1048,7 @@ And see the library manual for detailed technical information:
 <!-- Go deeper and vary plot settings relating to the composition and the appearance of the plot: labelling, label placement, label text size, theme, colour, line type etc. -->
 <!-- \end{enumerate} -->
 
-## Examining if we should include random effects
+## Examining if we should include random effects {#sec-glmm-random-effects}
 
 So far, we have been considering the results of a \emph{random intercepts} model in which we take into account the random effects of participants and stimulus word differences on intercepts.
 We have ignored the possibility that the slopes of the experimental variables might vary between participants or between words.
@@ -1305,7 +1295,7 @@ I am going to take his advice and simplify the random effects part of the model.
 We know that the random intercepts model converges fine and now we know that the maximal model does not.
 Thus, our task is now to identify a model that includes random effects of participants or items on slopes and still converges without warnings.
 
-### Examine the utility of random effects by comparing models with the same fixed effects but varying random effects
+### Examine the utility of random effects by comparing models with the same fixed effects but varying random effects {#sec-glmm-comparing-models}
 
 I am just going to assume we need both random effects of subjects and of items on intercepts so I focus on \emph{random slopes} here.
 (This assumption may not always be true but is often useful.)
@@ -1314,7 +1304,7 @@ We can fit a series of models as follows.
 Note that I will not show the results for every model, to save space, but you should run the code to see what happens.
 Look out for convergence or singularity warnings, where they appear.
 
-#### Random effects of subjects and stimulus items on intercepts
+#### Random effects of subjects and stimulus items on intercepts {#sec-glmm-random-effects-subjects-items-intercepts}
 
 In the first model, we have just random effects of participants or items on intercepts.
 This is where we started.
@@ -1344,7 +1334,7 @@ We saw that the model converged, and we looked at the results previously.
 What next?
 A simple approach we can take is to see if we can add each fixed effect to be included in our random effects terms, one effect at a time.
 
-#### Random effects of subjects and stimulus words on the slope of the Orthography effect
+#### Random effects of subjects and stimulus words on the slope of the Orthography effect {#sec-glmm-random-effects-subjects-items-slopes}
 
 In our second model, we change the random effects terms so that we can account for the random effects of participants and of items on intercepts as well as on the slopes of the Orthography effect.
 (The Orthography effect is both within-subjects and within-items.)
@@ -1396,7 +1386,7 @@ You can see what impact it has by specifying, instead, the naked random effect:
 
 \verb: e.g. (Orthography + 1 || Participant):.
 
-#### Random effects of subjects and stimulus words on the slope of the Instructions effect
+#### Random effects of subjects and stimulus words on the slope of the Instructions effect  {#sec-glmm-random-effects-subjects-items-slopes-2}
 
 Next we can add \verb:Instructions: to take into account random differences between words in the slope of this effect.
 We show the results for this model as they are instructive.
@@ -1446,7 +1436,7 @@ Also, we can suspect that adding the requirement to estimate covariances will bl
 The maximal model, including random slopes variances *and* covariances clearly did not converge.
 Secondly, at least two of the correlations listed in the random effects, for the maximal model, were pretty extreme with \verb:Corr: $=-0.01$ and $=0.99$; such extreme values ($r \sim \pm 1$) are bad signs; see the discussion in \@ref(bad-signs).
 
-#### Adding effects a bit at a time
+#### Adding effects a bit at a time {#sec-glmm-random-effects-add}
 
 In the following models, because we can see that we can get a model to converge with random effects of participants or items on Orthography, and random effect of participants on Instructions, I am going to keep these random effects in the model.
 I will check if adding further effects is OK too, in terms of successful convergence.
@@ -1458,7 +1448,7 @@ I am going to treat all the following models as variations on a theme, the theme
                              (dummy(Orthography) + dummy(Instructions) + 1 || Word),
 ```
 
-#### Random effects of subjects on the slope of the consistency effect
+#### Random effects of subjects on the slope of the consistency effect  {#sec-glmm-random-effects-subjects-items-slopes-3}
 
 Next we see if we can add `zConsistency_H`.
 
@@ -1494,7 +1484,7 @@ Note, also, we see the random effects variance estimate \verb:Participant.2 zCon
 These two things are possibly connected: the singularity warning; and the estimated variance of $1.259e-10$ (i.e. a very very small number) associated with the random effect of participants on the slope of the `zConsistency_H`.
 We can expect that the model fitting algorithm is going to have difficulty estimating nothing, or something close to nothing: here, the very very small variance associated with the between-participant differences in the slope of the non-significant effect of word spelling-sound consistency on response accuracy.
 
-#### Random effects of subjects and stimulus words on the slope of the time effect
+#### Random effects of subjects and stimulus words on the slope of the time effect  {#sec-glmm-random-effects-subjects-items-slopes-4}
 
 What about the random effects of participants or of words on the slope of the effect of Time?
 
@@ -1536,7 +1526,7 @@ Possibly, these two things are connected too: we are perhaps unlikely to see ran
 Possibly, we may see the effect of an experimental variable which is very very consistent.
 Think back to Week 16 and the effect associated with the relation between maths and physics scores where there seemed to be little variation between classes in the slope representing the relation.
 
-### Bad signs {#bad-signs}
+### Bad signs {#sec-glmm-bad-signs}
 
 We can see that a model has difficulty if we see things like:
 
@@ -1573,7 +1563,7 @@ If we see a warning that the model fitting algorithm nearly failed to converge: 
 If the variances for the random effects of participants or stimulus items on the slopes of an experimental variable are very small this suggests that the level of complexity in the model cannot really be justified or that the model will have difficulty estimating it.
 Extreme correlations (near 0 or 1) between random effects on intercepts and on slopes of fixed effects suggest the level of complexity in the model cannot really be justified (see also the discussion in Bates et al., 2015; Matuschek et al., 2017).
 
-### Comparison of models varying in random effects
+### Comparison of models varying in random effects {#sec-glmm-comparing0-models-2}
 
 There is no point comparing the models that do not converge, so we focus on those that do.
 
@@ -1608,7 +1598,7 @@ Matuschek et al. (2017) argue that when we are engaged in model selection -- her
 The $\chi^2$ alpha level cannot be interpreted as the expected model selection Type I error rate (in Null Hypothesis Significance Test terms) but rather as the relative weight of model complexity and goodness-of-fit (look back at the discussion of model comparison in the previous chapter).
 In this sense, setting a threshold such that we include an effect only if $\chi^2, p < .05$ will always tend to penalize model complexity, and tend therefore to lead us to choose simpler (perhaps too simple) models.
 
-### Addressing convergence problems
+### Addressing convergence problems {#sec-glmm-addressing-convergence}
 
 Sometimes (g)lmer() has difficulty finding estimates for effects in a model given a dataset.
 If it encounters problems, the problems are expressed as warnings about convergence failures.
@@ -1650,7 +1640,7 @@ Without using the modification to the model fitting code, i.e. deleting the line
 Making the last most complex model more complex by adding further random effects of subjects or items on the slopes of both main effects and the interaction
 \end{enumerate}
 
-#### Summary advice
+#### Summary advice {#sec-glmm-advice-summary}
 
 My advice, then, is to consider whether random effects should be included in a model based on
 
@@ -1707,7 +1697,7 @@ Matuschek et al. (2017; p.312) argue that "The goal of model selection is not to
 This makes sense to me.
 And their analyses show that determining a parsimonious model with a standard model selection criterion is a defensible choice, a way to take into account random effects, while controlling for both the risk of false positives, and the risk of false negatives.
 
-## Reporting model results
+## Reporting model results {#sec-glmm-reporting-results}
 
 We have discussed how to report the results of mixed-effects models previously.
 The same conceptual structure, and similar language, can be used to report the results of Generalized Linear Mixed-effects Models (GLMMs).
@@ -1949,7 +1939,7 @@ The model appears to include the most comprehensive account of random effects wh
 
 <!-- Now it's over to you: what next? -->
 
-## Summary
+## Summary {#sec-glmm-summary}
 
 We focused on the need to use Generalized Linear Mixed-effects Models (GLMMs).
 We identified the kind of outcome data (like response accuracy) that requires analysis using GLMMs.
@@ -1970,7 +1960,7 @@ We looked at some warning signs, what they indicate, and how to deal with them.
 
 We considered how to report the model selection (or comparison, or building) process, and how to report the model for presentation of results.
 
-### Useful functions
+### Glossary: useful functions {#sec-glmm-glossary-useful-functions}
 
 We used two functions to fit and evaluate mixed-effects models.
 
@@ -2015,9 +2005,7 @@ These resources can be downloaded as part of the same folder and comprise a  dat
 - `402-04-GLMM-exercise-gavagai-data-analysis-notes.R`
 - `noun-verb-learning-study.csv`
 
-## References 
-
-### Recommended reading
+## Recommended reading {#sec-glmm-recommended-reading}
 
 The example studies referred to in this chapter are published in (Monaghan et al., 2015; Ricketts et al., in press).
 
