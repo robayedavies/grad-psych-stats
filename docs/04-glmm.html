@@ -301,7 +301,7 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#a-very-useful-faq-by-ben-bolker" id="toc-a-very-useful-faq-by-ben-bolker" class="nav-link" data-scroll-target="#a-very-useful-faq-by-ben-bolker"><span class="toc-section-number">6.13.1</span>  A <em>very</em> useful FAQ by Ben Bolker</a></li>
   </ul></li>
-  <li><a href="#appendix-example-dataset-variable-information" id="toc-appendix-example-dataset-variable-information" class="nav-link" data-scroll-target="#appendix-example-dataset-variable-information"><span class="toc-section-number">6.14</span>  Appendix: Example dataset variable information</a></li>
+  <li><a href="#sec-glmm-appendix" id="toc-sec-glmm-appendix" class="nav-link" data-scroll-target="#sec-glmm-appendix"><span class="toc-section-number">6.14</span>  Appendix: Example dataset variable information</a></li>
   </ul>
 </nav>
     </div>
@@ -396,7 +396,7 @@ Important
 <h4 data-number="6.5.1.1" class="anchored" data-anchor-id="sec-glmm-data-background"><span class="header-section-number">6.5.1.1</span> Introduction: the background for the study</h4>
 <p>Vocabulary knowledge is essential for processing language in everyday life and it is vital that we know how to optimize vocabulary teaching. One strategy with growing empirical support is orthographic facilitation: children and adults are more likely to learn new spoken words that are taught with their orthography [visual word forms; for a systematic review, see <span class="citation" data-cites="colenbrander2019">Colenbrander et al. (<a href="references.html#ref-colenbrander2019" role="doc-biblioref">2019</a>)</span>]. Why might orthographic facilitation occur? Compared to spoken inputs, written inputs are less transient across time and less variable across contexts. In addition, orthography is more clearly marked (e.g., the ends of letters and words) than the continuous speech stream. Therefore, orthographic forms may be more readily learned than phonological forms.</p>
 <p><span class="citation" data-cites="ricketts2021">Ricketts et al. (<a href="references.html#ref-ricketts2021" role="doc-biblioref">2021</a>)</span> investigated how school-aged children learn words. We conducted two studies in which children learned phonological forms and meanings of 16 polysyllabic words in the same experimental paradigm. To test whether orthographic facilitation would occur, half of the words were taught with access to the orthographic form (orthography present condition) and the other half were taught without orthographic forms (orthography absent condition). In addition, we manipulated the instructions that children received: approximately half of the children were told that some words would appear with their written form (explicit group); the remaining children did not receive these instructions (incidental group). Finally, we investigated the impact of spelling-sound consistency of word targets for learning, by including words that varied continuously on a measure of pronunciation consistency <span class="citation" data-cites="mousikou2017">(after <a href="references.html#ref-mousikou2017" role="doc-biblioref">Mousikou et al., 2017</a>)</span>.</p>
-<p>The quality of lexical representations was measured in two ways. A cuing hierarchical response task (definition, cued definition, recognition) was used to elicit semantic knowledge from the phonological forms, providing a fine-grained measure of semantic learning. A spelling task indexed the extent of orthographic learning for each word. We focus on the analysis of the spelling task responses.</p>
+<p>The quality of lexical representations was measured in two ways. A cuing hierarchical response task (definition, cued definition, recognition) was used to elicit semantic knowledge from the phonological forms, providing a fine-grained measure of semantic learning. A spelling task indexed the extent of orthographic learning for each word. We focus on the analysis of the spelling task responses in this chapter (you may be interested in reviewing our other analyses, see <a href="#sec-glmm-data-download"><span>Section&nbsp;6.5.2</span></a>).</p>
 <p><span class="citation" data-cites="ricketts2021">Ricketts et al. (<a href="references.html#ref-ricketts2021" role="doc-biblioref">2021</a>)</span> reported two studies. We focus on Study 1, in which <span class="citation" data-cites="ricketts2021">Ricketts et al. (<a href="references.html#ref-ricketts2021" role="doc-biblioref">2021</a>)</span> measured knowledge of newly learned words at two intervals: first one week and then, again, eight months after training. Longitudinal studies of word learning are rare and this is the first longitudinal investigation of orthographic facilitation.</p>
 <p>We addressed three research questions.</p>
 <div class="callout-note callout callout-style-default callout-captioned">
@@ -449,8 +449,8 @@ Note
 </section>
 <section id="sec-glmm-data-outcome" class="level4" data-number="6.5.1.6">
 <h4 data-number="6.5.1.6" class="anchored" data-anchor-id="sec-glmm-data-outcome"><span class="header-section-number">6.5.1.6</span> Outcome (dependent) variables</h4>
-<p>The Orthographic post-test was used to examine orthographic knowledge after training. Children were asked to spell each word to dictation and spelling productions were transcribed for scoring. For the purposes of our learning in Week 20, we focus on the accuracy of responses. Each response made by a child to a target word was coded as correct or incorrect.</p>
-<p>Note that a more sensitive outcome measure of orthographic knowledge was also taken. Responses were also scored using a Levenshtein distance measure, using the <code>{stringdist}</code> library <span class="citation" data-cites="loo2022">(<a href="references.html#ref-loo2022" role="doc-biblioref">Loo et al., 2022</a>)</span>. This score indexes the number of letter deletions, insertions and substitutions that distinguish between the target and child’s response. In the published report (<span class="citation" data-cites="ricketts2021">Ricketts et al. (<a href="references.html#ref-ricketts2021" role="doc-biblioref">2021</a>)</span>) we focus our analysis of the orthographic outcome on the Levenshtein distance measure of response spelling accuracy, and further details on the analysis approach (Poisson rather than Binomial Generalized Linear Mixed-effects Models) can be found in the paper.</p>
+<p>The Orthographic post-test was used to examine orthographic knowledge after training. Children were asked to spell each word to dictation and spelling productions were transcribed for scoring. For the purposes of our learning in this chapter, we focus on the accuracy of responses. Each response made by a child to a target word was coded as correct or incorrect.</p>
+<p>A more sensitive outcome measure of orthographic knowledge was also taken. Responses were also scored using a Levenshtein distance measure, using the <code>{stringdist}</code> library <span class="citation" data-cites="loo2022">(<a href="references.html#ref-loo2022" role="doc-biblioref">Loo et al., 2022</a>)</span>. This score indexes the number of letter deletions, insertions and substitutions that distinguish between the target and child’s response. In the published report (<span class="citation" data-cites="ricketts2021">Ricketts et al. (<a href="references.html#ref-ricketts2021" role="doc-biblioref">2021</a>)</span>) we focus our analysis of the orthographic outcome on the Levenshtein distance measure of response spelling accuracy, and further details on the analysis approach (Poisson rather than Binomial Generalized Linear Mixed-effects Models) can be found in the paper.</p>
 </section>
 </section>
 <section id="sec-glmm-data-download" class="level3" data-number="6.5.2">
@@ -474,7 +474,7 @@ Note
 <ul>
 <li><code>402-04-GLMM-exercise-gavagai-data-analysis-notes.R</code></li>
 </ul>
-<p>The paper can be accessed <a href="https://onlinelibrary.wiley.com/doi/10.1111/cogs.12186">here</a>.</p>
+<p>The <span class="citation" data-cites="monaghan2015">Monaghan et al. (<a href="references.html#ref-monaghan2015" role="doc-biblioref">2015</a>)</span> paper can be accessed <a href="https://onlinelibrary.wiley.com/doi/10.1111/cogs.12186">here</a>.</p>
 </section>
 <section id="sec-glmm-data-import" class="level3" data-number="6.5.3">
 <h3 data-number="6.5.3" class="anchored" data-anchor-id="sec-glmm-data-import"><span class="header-section-number">6.5.3</span> Read-in the data file using read_csv</h3>
@@ -494,7 +494,7 @@ Note
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                      )</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>You can see, here, that within the <code>read_csv()</code> function call, I specify <code>col_types</code>, instructing R how to treat a number of different variables. You can read more about this <a href="https://readr.tidyverse.org/articles/readr.html">here</a>.</p>
+<p>You can see, here, that within the <code>read_csv()</code> function call, I specify <code>col_types</code>, instructing R how to treat a number of different variables. Recall that in <a href="02-mixed.html#sec-intro-mixed-data-load"><span>Section&nbsp;4.9.1</span></a>, we saw how we can determine how R treats variables at the read-in stage, using <code>col_types()</code> specification. You can read more about this <a href="https://readr.tidyverse.org/articles/readr.html">here</a>.</p>
 </section>
 <section id="sec-glmm-data-inspect" class="level3" data-number="6.5.4">
 <h3 data-number="6.5.4" class="anchored" data-anchor-id="sec-glmm-data-inspect"><span class="header-section-number">6.5.4</span> Inspect the data</h3>
@@ -512,15 +512,15 @@ Note
 <li><code>Consistency-H</code> – Calculated orthography-to-phonology consistency value for each word. -<code>zConsistency-H</code> – Standardized Consistency H scores</li>
 <li><code>Score</code> – Outcome variable – for the orthographic post-test, responses were scored as <code>1</code> (correct, if the target spelling was produced in full) or <code>0</code> (incorrect, if the target spelling was not produced).</li>
 </ul>
-<p>The summary will show you that we have a number of other variables available, including measures of individual differences in reading or reading-related abilities or knowledge, but we do not need to pay attention to them, for our exercises. If you are interested in the dataset, you can find more information about the variables in the Appendix for this chapter and, of course, in <span class="citation" data-cites="ricketts2021">Ricketts et al. (<a href="references.html#ref-ricketts2021" role="doc-biblioref">2021</a>)</span>.</p>
+<p>The summary will show you that we have a number of other variables available, including measures of individual differences in reading or reading-related abilities or knowledge, but we do not need to pay attention to them, for our exercises. If you are interested in the dataset, you can find more information about the variables in the Appendix for this chapter (<a href="#sec-glmm-appendix"><span>Section&nbsp;6.14</span></a>) and, of course, in <span class="citation" data-cites="ricketts2021">Ricketts et al. (<a href="references.html#ref-ricketts2021" role="doc-biblioref">2021</a>)</span>.</p>
 </section>
 </section>
 <section id="sec-glmm-data-tidy" class="level2" data-number="6.6">
 <h2 data-number="6.6" class="anchored" data-anchor-id="sec-glmm-data-tidy"><span class="header-section-number">6.6</span> Tidy the data</h2>
-<p>The data are already <em>tidy</em>: each column in <code>long.orth_2020-08-11.csv</code> corresponds to a variable and each row corresponds to an observation.</p>
+<p>The data are already <em>tidy</em>: each column in <code>long.orth_2020-08-11.csv</code> corresponds to a variable and each row corresponds to an observation. However, we need to do a bit of work, before we can run any analyses, to fix the coding of the categorical predictor (or independent) variables, the factors Orthography, Instructions, and Time.</p>
 <section id="sec-glmm-data-recode" class="level3" data-number="6.6.1">
 <h3 data-number="6.6.1" class="anchored" data-anchor-id="sec-glmm-data-recode"><span class="header-section-number">6.6.1</span> Code categorical factors</h3>
-<p>The data are tidy but we need to do a bit of work, before we can run any analyses, to fix the coding of the categorical predictor (or independent) variables, the factors Orthography, Instructions, and Time. By default, R will <em>dummy code</em> observations at different levels of a factor. So, for a factor or a categorical variable like <code>Orthography</code> (present, absent), R will code one level name e.g.&nbsp;<code>absent</code> as <code>0</code> and the other e.g.&nbsp;<code>present</code> as <code>1</code>. The 0-coded level is termed the <em>reference level</em>, which you could call the baseline level, and by default R will code the level with the name appearing earlier in the alphabet as the reference level.</p>
+<p>By default, R will <em>dummy code</em> observations at different levels of a factor. So, for a factor or a categorical variable like <code>Orthography</code> (present, absent), R will code one level name e.g.&nbsp;<code>absent</code> as <code>0</code> and the other e.g.&nbsp;<code>present</code> as <code>1</code>. The 0-coded level is termed the <em>reference level</em>, which you could call the baseline level, and by default R will code the level with the name appearing earlier in the alphabet as the reference level.</p>
 <p>All this is usually not important. When you specify a model in R where you are asking to estimate the effect of a categorical variable like <code>Orthography</code> (present, absent) then, by default, what you will get is an estimate of the average difference in outcome, when all other factors are set to zero, estimated as the difference in outcomes comparing the reference level and the other level or levels of the factor. This will be presented, for example, like the output shown following, for a Generalized Linear Model (i.e., a logistic regression) analysis of the effect of Orthography condition, ignoring the random effects:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">glm</span>(Score <span class="sc">~</span> Orthography, <span class="at">family =</span> <span class="st">"binomial"</span>, <span class="at">data =</span> long.orth))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -659,7 +659,7 @@ incidental -1</code></pre>
 2  1</code></pre>
 </div>
 </div>
-<p>I use <code>contr.sum(a, base = b)</code> to do the coding, where <code>a</code> is the number of levels in a factor (replace <code>a</code> with the right number), and <code>b</code> tells R which level to use as the baseline or reference level (replace <code>b</code> with the right number). I usually need to check the coding before and after I specify it.</p>
+<p>In these chunks of code, I use <code>contr.sum(a, base = b)</code> to do the coding, where <code>a</code> is the number of levels in a factor (replace <code>a</code> with the right number), and <code>b</code> tells R which level to use as the baseline or reference level (replace <code>b</code> with the right number). I usually need to check the coding before and after I specify it.</p>
 </section>
 </section>
 <section id="sec-glmm-ideas-intro" class="level2" data-number="6.7">
@@ -710,48 +710,19 @@ Tip
 <section id="sec-glmm-bounded-outcomes" class="level4" data-number="6.8.1.1">
 <h4 data-number="6.8.1.1" class="anchored" data-anchor-id="sec-glmm-bounded-outcomes"><span class="header-section-number">6.8.1.1</span> Accuracy is bounded between 1 and 0, linear model model predictions or confidence intervals are not</h4>
 <p>To illustrate the problems associated with using traditional analysis methods (like ANOVA or multiple regression), when working with accuracy as an outcome, we start by looking at data from an artificial vocabulary learning study <span class="citation" data-cites="monaghan2015">(reported by <a href="references.html#ref-monaghan2015" role="doc-biblioref">Monaghan et al., 2015</a>)</span>. <span class="citation" data-cites="monaghan2015">Monaghan et al. (<a href="references.html#ref-monaghan2015" role="doc-biblioref">2015</a>)</span> recorded responses made by participants to stimuli in a test where the response was correct (coded <code>1</code>) or incorrect (coded <code>0</code>). In our study, we directly compared learning of noun-object pairings, verb-motion pairings, and learning of both noun and verb pairings simultaneously, using a cross-situational learning task. (Those interested in this dataset can read more about it at the online repository associated with this chapter.) The data will have a multilevel structure because you will have multiple responses recorded for each person, and for each stimulus. But what concerns us is that if you attempt to use a linear model to analyze the effects of the experimental variables then you will see some paradoxical results that are easily demonstrated.</p>
-<p>Let’s imagine that we wish to estimate the effects of experimental variables like learning condition: learning trial block (1-12); or vocabulary condition (noun-only, noun-verb, verb-only). We can calculate the proportion of responses correct made by each person for each condition and learning trial block. We can then plot the regression best fit lines indicating how proportion of responses correct varies by person and condition. <span class="quarto-unresolved-ref">?fig-word-learning-lm-per-subject-for-report</span> shows the results.</p>
+<p>Let’s imagine that we wish to estimate the effects of experimental variables like learning condition: learning trial block (1-12); or vocabulary condition (noun-only, noun-verb, verb-only). We can calculate the proportion of responses correct made by each person for each condition and learning trial block. We can then plot the regression best fit lines indicating how proportion of responses correct varies by person and condition. <a href="#fig-word-learning-lm-per-subject-for-report">Figure&nbsp;<span>6.1</span></a> shows the results.</p>
 <p><strong>Look at where the best fit lines go.</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This plot is enlightening</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -- each point shows per-subject accuracy proportion per block</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># -- each thin line shows the trend per-subject mis-estimated by lm rather than logit GLM but indicative</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># -- the thick lines show the group trend</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># -- the plot pretty much shows what the original arcsine analysis was doing</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># -- we can edit the plot for use</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co"># -- first, we need to calculate the proportion of responses that are correct per person for each block of (24) learning trials</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>gavagai <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"noun-verb-learning-study.csv"</span>, <span class="at">na =</span> <span class="st">"-999"</span>)</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>correct <span class="ot">&lt;-</span> gavagai <span class="sc">%&gt;%</span></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">group_by</span>(Experiment, Subjecta, block) <span class="sc">%&gt;%</span></span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>                      <span class="co"># group data by subject ID (Subjecta) and block, to get summary of</span></span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>                      <span class="co"># accuracy for each subject for each block, then</span></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">summarise</span>(<span class="at">sum =</span> <span class="fu">sum</span>(accuracy)) <span class="sc">%&gt;%</span></span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>                      <span class="co"># calculate accuracy of responses per person per block then</span></span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">mutate</span>(<span class="at">proportion =</span> sum<span class="sc">/</span><span class="dv">24</span>)</span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>pcorrect <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(correct, <span class="fu">aes</span>(<span class="at">x =</span> block, <span class="at">y =</span> proportion))</span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>pcorrect <span class="sc">+</span></span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> .<span class="dv">3</span>) <span class="sc">+</span> <span class="co"># jitter points, adding random noise to x,y coordinates; use alpha() to modify transparency</span></span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group =</span> Subjecta), <span class="at">method=</span><span class="st">"lm"</span>, <span class="at">se =</span> F, <span class="at">alpha =</span> .<span class="dv">65</span>, <span class="at">colour =</span> <span class="st">"darkgrey"</span>) <span class="sc">+</span> <span class="co"># add a learning model line for each person</span></span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>), <span class="at">method=</span><span class="st">"lm"</span>, <span class="at">se =</span> F, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="co"># add a line to show average group learning</span></span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">2</span>,<span class="dv">12</span>, <span class="at">by =</span> <span class="dv">2</span>)) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Block"</span>) <span class="sc">+</span> <span class="co"># modify scale axis labeling</span></span>
-<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="at">by =</span> .<span class="dv">2</span>)) <span class="sc">+</span>  <span class="fu">ylab</span>(<span class="st">"Proportion correct"</span>) <span class="sc">+</span> <span class="co"># modify scale axis labeling</span></span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="co"># use black and white theme</span></span>
-<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">25</span>), <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">25</span>), <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>)) <span class="sc">+</span></span>
-<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(.<span class="sc">~</span>Experiment) <span class="sc">+</span> <span class="co"># create a separate plot for each experimental condition</span></span>
-<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">strip.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>)) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">strip.background =</span> <span class="fu">element_rect</span>(<span class="at">colour =</span> <span class="st">"grey"</span>)) <span class="co"># modify appearance of subplots</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div id="fig-word-learning-lm-per-subject-for-report" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="04-glmm_files/figure-html/word-learning-lm-per-subject-for-report-1.png" class="img-fluid figure-img" alt="Monaghan et al. (2015) artificial word learning study: plot showing the proportion of responses correct for each participant, in each of 12 blocks of 24 learning trials, in each learning condition; each grey line shows the linear model prediction of the proportion correct, for each person, by learning block, in each condition; black lines show the average prediction of the proportion correct, by learning block, in each condition. The position of points has been jittered." width="960"></p>
-<p></p><figcaption class="figure-caption">Monaghan et al.&nbsp;(2015) artificial word learning study: plot showing the proportion of responses correct for each participant, in each of 12 blocks of 24 learning trials, in each learning condition; each grey line shows the linear model prediction of the proportion correct, for each person, by learning block, in each condition; black lines show the average prediction of the proportion correct, by learning block, in each condition. The position of points has been jittered.</figcaption><p></p>
+<p><img src="04-glmm_files/figure-html/fig-word-learning-lm-per-subject-for-report-1.png" class="img-fluid figure-img" alt="The figure shows a grid of three scatterplots. In each plot, grey points represent individual scores for proportion of responses correct under different word learning conditions, over blocks (1-12) of learning trials. Superimposed on the points, thin grey lines indicate the individual learning gain (or loss) over blocks for each participant. In each plot, a thicker black line indicates the average learning, across all participants. Learning appears to occur most quickly in the noun only condition compared to the noun and verb learning condition (shown in middle plot) or the verb only condition (shown in rightmost plot)." width="960"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;6.1: Monaghan et al.&nbsp;(2015) artificial word learning study: plot showing the proportion of responses correct for each participant, in each of 12 blocks of 24 learning trials, in each learning condition; each grey line shows the linear model prediction of the proportion correct, for each person, by learning block, in each condition; black lines show the average prediction of the proportion correct, by learning block, in each condition. The position of points has been jittered.</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-<p><span class="quarto-unresolved-ref">?fig-word-learning-lm-per-subject-for-report</span> shows how variation in the outcome, here, the proportion of responses that are correct, is bounded between the y-axis limits of 0 and 1 while the best fit lines exceed those limits. Clearly, if you consider the accuracy of a person’s responses in any set of trials, for any condition in an experiment, the proportion of responses that can be correct can vary only between 0 (no responses are correct) and 1 (all responses are correct). There is no inbuilt or intrinsic limits to the proportion of responses that a <em>linear model</em> can predict would be correct. According to linear model predictions, if you follow the best fit lines in <span class="quarto-unresolved-ref">?fig-word-learning-lm-per-subject-for-report</span> then there are conditions, or there are participants, in which the proportion of a person’s responses that could be correct will be <em>greater than 1</em>. That is impossible.</p>
+<p><a href="#fig-word-learning-lm-per-subject-for-report">Figure&nbsp;<span>6.1</span></a> shows how variation in the outcome, here, the proportion of responses that are correct, is bounded between the y-axis limits of 0 and 1 while the best fit lines exceed those limits. Clearly, if you consider the accuracy of a person’s responses in any set of trials, for any condition in an experiment, the proportion of responses that can be correct can vary only between 0 (no responses are correct) and 1 (all responses are correct). There is no inbuilt or intrinsic limits to the proportion of responses that a <em>linear model</em> can predict would be correct. According to linear model predictions, if you follow the best fit lines in <a href="#fig-word-learning-lm-per-subject-for-report">Figure&nbsp;<span>6.1</span></a> then there are conditions, or there are participants, in which the proportion of a person’s responses that could be correct will be <em>greater than 1</em>. That is impossible.</p>
 </section>
 <section id="sec-glmm-anova-assumptions" class="level4" data-number="6.8.1.2">
 <h4 data-number="6.8.1.2" class="anchored" data-anchor-id="sec-glmm-anova-assumptions"><span class="header-section-number">6.8.1.2</span> ANOVA or regression require the assumption of homogeneity of variance but for binary outcomes like accuracy the variance is proportional to the mean</h4>
@@ -762,8 +733,8 @@ Tip
 <li>The variance of the proportion of trials (per condition) with correct responses is dependent on <span class="math inline">\(p\)</span>, and it is greater when <span class="math inline">\(p \sim .5\)</span>, the probability that a response will be correct.</li>
 </ol>
 <p><span class="citation" data-cites="jaeger2008">Jaeger (<a href="references.html#ref-jaeger2008" role="doc-biblioref">2008</a>)</span> (p.&nbsp;3) then explains the problem like this. If the probability of a binomially distributed outcome like response accuracy differs between two conditions (call them conditions 1 and 2), the variances will only be identical if <span class="math inline">\(p1\)</span> (the proportion of correct responses in condition 1) and p2 (the proportion of correct responses in condition 1) are equally distant from 0.5 (e.g.&nbsp;<span class="math inline">\(p1 = .4\)</span> and <span class="math inline">\(p2 = .6\)</span>). The bigger the difference in distance from 0.5, comparing the conditions, the less similar the variances will be.</p>
-<p>Differences close to 0.5 will matter less than differences closer to 0 or 1. Even if p1 and p2 are unequally distant from 0.5, as long as they are close to 0.5, the variances of the sample proportions will be similar. Sample proportions between 0.3 and 0.7 are considered close enough to 0.5 to assume homogeneous variances (Agresti, 2002).</p>
-<p>Unfortunately, we usually cannot determine a priori the range of sample proportions in our experiment. In general, variances in two binomially distributed conditions will not be homogeneous but, as you will recall, in both ANOVA and regression analysis, we assume homogeneity of variance in the outcome variable when we compare the effect of differences (in the mean outcome) between the different levels of a factor. This means that if we design a study in which the outcome variable is the accuracy of responses in different experimental conditions and we plan to use ANOVA or regression to estimate the effect of variation in experimental conditions on response accuracy then unless we get lucky} our estimation of the experimental effect will take place under circumstances in which the application of the analysis method (ANOVA or regression) and thus the analysis results will be invalid.</p>
+<p>Sample proportions between 0.3 and 0.7 are considered close enough to 0.5 to assume homogeneous variances (Agresti, 2002). Unfortunately, we usually cannot determine a priori the range of sample proportions in our experiment.</p>
+<p>In general, variances in two binomially distributed conditions will not be homogeneous but, as you will recall, in both ANOVA and regression analysis, we assume homogeneity of variance in the outcome variable when we compare the effect of differences (in the mean outcome) between the different levels of a factor. This means that if we design a study in which the outcome variable is the accuracy of responses in different experimental conditions and we plan to use ANOVA or regression to estimate the effect of variation in experimental conditions on response accuracy then <em>unless we get lucky</em> our estimation of the experimental effect will take place under circumstances in which the application of the analysis method (ANOVA or regression) and thus the analysis results will be invalid.</p>
 </section>
 <section id="sec-glmm-limitations-summary" class="level4" data-number="6.8.1.3">
 <h4 data-number="6.8.1.3" class="anchored" data-anchor-id="sec-glmm-limitations-summary"><span class="header-section-number">6.8.1.3</span> Summary: Recognize the limitations of traditional methods for analyzing response accuracy</h4>
@@ -788,13 +759,13 @@ Tip
 <ul>
 <li>Odds are, for example, the ratio of the probability of the occurrence of an event compared to the probability of the non-occurrence of an event, or, in terms of a response accuracy variable, the ratio of the probability of the response being correct compared to the probability of the response being incorrect.</li>
 <li>And odds are continuous numeric quantities that are scaled from zero to infinity.</li>
-<li>You can see how this works if you run the calculations using the equation <span class="math inline">\(o = \frac{p}{1-p}\)</span> in R as <code>odds &lt;- p/(1-p)</code>: replacing p with various numbers (e.g.&nbsp;<span class="math inline">\(p = 0.1, 0.01, 0.001\)</span>).</li>
+<li>You can see how this works if you run the calculations using the equation <span class="math inline">\(o = \frac{p}{1-p}\)</span> in R as <code>odds &lt;- p/(1-p)</code>: replacing p with various numbers (e.g.&nbsp;<code>p = 0.1, 0.01, 0.001</code>).</li>
 </ul>
 <ol start="2" type="1">
 <li>We can then use the (natural) logarithm of the odds <span class="math inline">\(logit = ln\frac{p}{1-p}\)</span> because using the logarithm removes the boundary at zero because log odds range from negative to positive infinity.</li>
 </ol>
 <ul>
-<li>You can see how this works if you run the calculations using the equation <span class="math inline">\(logit = ln\frac{p}{1-p}\)</span> in R as <code>logit &lt;- log(p/(1-p))</code>: replacing p with smaller and smaller numbers (e.g.&nbsp;<span class="math inline">\(p = 0.1, 0.01, 0.001\)</span>) gets you increasing negative log odds.</li>
+<li>You can see how this works if you run the calculations using the equation <span class="math inline">\(logit = ln\frac{p}{1-p}\)</span> in R as <code>logit &lt;- log(p/(1-p))</code>: replacing p with smaller and smaller numbers (e.g.&nbsp;<code>p = 0.1, 0.01, 0.001</code>) gets you increasing negative log odds.</li>
 </ul>
 <p>When we model the log odds (logit) that a response will be correct, the model is called a <em>logistic regression</em> or logistic model. We can think of logistic models as working like linear models with log-odds outcomes.</p>
 <p><span class="math display">\[
@@ -821,23 +792,23 @@ ln\frac{p}{1-p} = logitp = \beta_0 + \beta_1X_1 \dots
 <h3 data-number="6.9.1" class="anchored" data-anchor-id="sec-glmm-random-intercepts"><span class="header-section-number">6.9.1</span> Specify a random intercepts model</h3>
 <p>In our first model, we will specify just random effects of participants and items on intercepts.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>long.orth.min.glmer <span class="ot">&lt;-</span> <span class="fu">glmer</span>(Score <span class="sc">~</span> </span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                               Time <span class="sc">+</span> Orthography <span class="sc">+</span> Instructions <span class="sc">+</span> zConsistency_H <span class="sc">+</span> </span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                               </span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                               Orthography<span class="sc">:</span>Instructions <span class="sc">+</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>                               </span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>                               Orthography<span class="sc">:</span>zConsistency_H <span class="sc">+</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>                               </span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>                               (<span class="dv">1</span> <span class="sc">|</span> Participant) <span class="sc">+</span> </span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>                               </span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>                               (<span class="dv">1</span> <span class="sc">|</span> Word),</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>                             </span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>                             <span class="at">family =</span> <span class="st">"binomial"</span>, </span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">glmerControl</span>(<span class="at">optimizer=</span><span class="st">"bobyqa"</span>, <span class="at">optCtrl=</span><span class="fu">list</span>(<span class="at">maxfun=</span><span class="fl">2e5</span>)),</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>                             </span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>                             <span class="at">data =</span> long.orth)</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(long.orth.min.glmer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>long.orth.min.glmer <span class="ot">&lt;-</span> <span class="fu">glmer</span>(Score <span class="sc">~</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                               Time <span class="sc">+</span> Orthography <span class="sc">+</span> Instructions <span class="sc">+</span> zConsistency_H <span class="sc">+</span> </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                               </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>                               Orthography<span class="sc">:</span>Instructions <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>                               </span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>                               Orthography<span class="sc">:</span>zConsistency_H <span class="sc">+</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>                               </span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>                               (<span class="dv">1</span> <span class="sc">|</span> Participant) <span class="sc">+</span> </span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>                               </span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>                               (<span class="dv">1</span> <span class="sc">|</span> Word),</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>                             </span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>                             <span class="at">family =</span> <span class="st">"binomial"</span>, </span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">glmerControl</span>(<span class="at">optimizer=</span><span class="st">"bobyqa"</span>, <span class="at">optCtrl=</span><span class="fu">list</span>(<span class="at">maxfun=</span><span class="fl">2e5</span>)),</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>                             </span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>                             <span class="at">data =</span> long.orth)</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(long.orth.min.glmer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The code works as follows.</p>
 <p>First, we have a chunk of code mostly similar to what we have done before, but changing the function.</p>
@@ -851,7 +822,7 @@ ln\frac{p}{1-p} = logitp = \beta_0 + \beta_1X_1 \dots
 </ul>
 <p>Second, we have the bit that is specific to <em>generalized</em> models.</p>
 <ul>
-<li><code>family = binomial</code> is entered because accuracy is a binary outcome variable (correct, incorrect) so we assume a binomial probability distribution.</li>
+<li><code>family = "binomial"</code> is entered because accuracy is a binary outcome variable (correct, incorrect) so we assume a binomial probability distribution.</li>
 </ul>
 <p>We then specify:</p>
 <ul>
@@ -862,13 +833,13 @@ ln\frac{p}{1-p} = logitp = \beta_0 + \beta_1X_1 \dots
 <p>Notice how we specify the fixed effects. We want <code>glmer()</code> to estimate “main effects and interactions” that we hypothesized.</p>
 <p>We specify the <em>main</em> effects with:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>Time <span class="sc">+</span> Orthography <span class="sc">+</span> Instructions <span class="sc">+</span> zConsistency_H <span class="sc">+</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>Time <span class="sc">+</span> Orthography <span class="sc">+</span> Instructions <span class="sc">+</span> zConsistency_H <span class="sc">+</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We specify the <em>interaction</em> effects with:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>Orthography<span class="sc">:</span>Instructions <span class="sc">+</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                               </span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>Orthography<span class="sc">:</span>zConsistency_H <span class="sc">+</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>Orthography<span class="sc">:</span>Instructions <span class="sc">+</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>                               </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>Orthography<span class="sc">:</span>zConsistency_H <span class="sc">+</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Where we ask for estimates of the fixed effects associated with:</p>
 <ul>
@@ -879,7 +850,7 @@ ln\frac{p}{1-p} = logitp = \beta_0 + \beta_1X_1 \dots
 <h4 data-number="6.9.1.1" class="anchored" data-anchor-id="sec-glmm-coding-interactions"><span class="header-section-number">6.9.1.1</span> Coding for interaction effects</h4>
 <p>There are two forms of notation we can use to specify interactions in R. The simplest form is to use something like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>Orthography<span class="sc">*</span>Instructions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>Orthography<span class="sc">*</span>Instructions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This will get you estimates of:</p>
 <ul>
@@ -891,7 +862,7 @@ ln\frac{p}{1-p} = logitp = \beta_0 + \beta_1X_1 \dots
 <p>We can also use the colon symbol to specify only the interaction, i.e., ignoring main effects, so if you specify <code>A:B</code> then you will get an estimate of the interaction A x B but not the effects A, B.</p>
 <p>With the coding:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>Score <span class="sc">~</span> Orthography <span class="sc">+</span> Instructions <span class="sc">+</span> Orthography<span class="sc">:</span>Instructions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>Score <span class="sc">~</span> Orthography <span class="sc">+</span> Instructions <span class="sc">+</span> Orthography<span class="sc">:</span>Instructions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>I would be making explicit that I want estimates for the effects of <code>Orthography</code>, <code>Instruction</code> and the interaction between the effects of <code>Orthography</code> and <code>Instructions</code>.</p>
 </section>
@@ -951,7 +922,6 @@ Orthgr2:C_H -0.027  0.001  0.179  0.000 -0.035 -0.007</code></pre>
 <li>Then, we see the model formula including main effects <code>Score ~ Time + Orthography + Instructions + zConsistencyH</code>,</li>
 <li>As well as the interactions <code>Orthography:Instructions + Orthography:zConsistencyH</code>,</li>
 <li>And the random effects <code>(1 | Participant) + (1 |Word)</code>.</li>
-<li>Then we see <code>REML criterion at convergence</code> about the model fitting process, which we can usually ignore.</li>
 <li>Then we see information about the model algorithm</li>
 <li>Then we see model fit statistics, including <code>AIC BIC logLik</code></li>
 <li>Then we see information about the distribution of residuals</li>
@@ -965,10 +935,10 @@ Orthgr2:C_H -0.027  0.001  0.179  0.000 -0.035 -0.007</code></pre>
 <li>The random differences between the average intercept (over all data) and the intercept for each participant;</li>
 <li>The random differences between the average intercept (over all data) and the intercept for responses to each word stimulus.</li>
 </ul>
-<ol start="9" type="1">
+<ol start="8" type="1">
 <li>Lastly, just as for linear models, we see estimates of the coefficients of the fixed effects, the intercept and the slopes of the experimental variables.</li>
 </ol>
-<p>Note that we get p-values for what are called Wald null hypothesis significance tests on the coefficients.</p>
+<p>Note that we get p-values (<code>Pr(&gt;|z|)</code>) for what are called Wald null hypothesis significance tests on the coefficients.</p>
 <p>We can see that one effect is significant. The estimate for the effect of the presence compared to the absence of Orthography is <code>0.455009</code>. The positive coefficient tells us that the log odds that a response will be correct is higher when Orthography is present compared to when it is absent.</p>
 <p>We can also see an effect of consistency that can be considered to be marginal or near-significant by some standards. The estimate for the effect of <code>zConsistency_H</code> is <code>-0.618093</code> indicating that the log odds of a response being correct decrease for unit increase in the standardized H consistency measure.</p>
 <section id="sec-glmm-hypothesis" class="level4" data-number="6.9.2.1">
@@ -983,32 +953,32 @@ Orthgr2:C_H -0.027  0.001  0.179  0.000 -0.035 -0.007</code></pre>
 <h4 data-number="6.9.3.1" class="anchored" data-anchor-id="sjplot-library"><span class="header-section-number">6.9.3.1</span> sjPlot library</h4>
 <p>We can use the <code>plot_model</code> function from the <code>{sjPlot}</code> library. The following sequence of code takes information from the model we have just run, then generates model predictions, of change in the probablity of a correct response (<code>Score</code>) for different levels of the Orthography factor and the consistency variable. I chose these variables because they are the significant or near-significant effects.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>porth <span class="ot">&lt;-</span> <span class="fu">plot_model</span>(long.orth.min.glmer,</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">type=</span><span class="st">"pred"</span>,</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">terms =</span> <span class="st">"Orthography"</span>) <span class="sc">+</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>         <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>         <span class="fu">ggtitle</span>(<span class="st">"Predicted probability"</span>) <span class="sc">+</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>         <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">1</span>)</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>pzconsH <span class="ot">&lt;-</span> <span class="fu">plot_model</span>(long.orth.min.glmer,</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">type=</span><span class="st">"pred"</span>,</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">terms =</span> <span class="st">"zConsistency_H"</span>) <span class="sc">+</span></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>         <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>         <span class="fu">ggtitle</span>(<span class="st">"Predicted probability"</span>) <span class="sc">+</span></span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>         <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">1</span>)</span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(porth, pzconsH,</span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">ncol=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>porth <span class="ot">&lt;-</span> <span class="fu">plot_model</span>(long.orth.min.glmer,</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">type=</span><span class="st">"pred"</span>,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">terms =</span> <span class="st">"Orthography"</span>) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>         <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>         <span class="fu">ggtitle</span>(<span class="st">"Predicted probability"</span>) <span class="sc">+</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>         <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>pzconsH <span class="ot">&lt;-</span> <span class="fu">plot_model</span>(long.orth.min.glmer,</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">type=</span><span class="st">"pred"</span>,</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">terms =</span> <span class="st">"zConsistency_H"</span>) <span class="sc">+</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>         <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>         <span class="fu">ggtitle</span>(<span class="st">"Predicted probability"</span>) <span class="sc">+</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>         <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(porth, pzconsH,</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">ncol=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-sjplot-orthography" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="04-glmm_files/figure-html/fig-sjplot-orthography-1.png" class="img-fluid figure-img" alt="Effect of orthography condition (present versus absent) on probability of a response being correct." width="672"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;6.1: Effect of orthography condition (present versus absent) on probability of a response being correct</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;6.2: Effect of orthography condition (present versus absent) on probability of a response being correct</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-<p>The plots in <a href="#fig-sjplot-orthography">Figure&nbsp;<span>6.1</span></a> show clearly how the probability of a correct response is greater for the conditions where Orthography had been present (versus absent) during the word learning phase of the study. We can also see a trend such that the probability of a response being correct decreases as the (in-)consistency of a target word tends to increase.</p>
+<p>The plots in <a href="#fig-sjplot-orthography">Figure&nbsp;<span>6.2</span></a> show clearly how the probability of a correct response is greater for the conditions where Orthography had been present (versus absent) during the word learning phase of the study. We can also see a trend such that the probability of a response being correct decreases as the (in-)consistency of a target word tends to increase.</p>
 <p>To produce this plot, you will need to install the <code>{sjPlot}</code> library first, and then run the command <code>library(sjPlot)</code> before creating your plot.</p>
 <p>Notice:</p>
 <ul>
@@ -1060,7 +1030,7 @@ Tip
 </div>
 </div>
 <p>If you go back to the description of the study design, then you will be able to see that a number of possibilities follow, theoretically, from the design.</p>
-<p>A currently influential set of recommendations (Barr et al., 2013; but see discussions in Bates et al., 2015; Matuschek et al., 2017; Meteyard &amp; Davies, 2020) has been labeled <em>Keep it maximal</em>.</p>
+<p>A currently influential set of recommendations <span class="citation" data-cites="Barr2013a bates2015parsimonious">Matuschek et al. (<a href="references.html#ref-matuschek2017" role="doc-biblioref">2017</a>)</span> has been labeled <em>Keep it maximal</em>.</p>
 <p>In this approach, if you are testing effects manipulated according to a pre-specified design then you should:</p>
 <ul>
 <li>Test random intercepts – due to random differences between subjects or between items (or other sample grouping variables);</li>
@@ -1094,27 +1064,27 @@ Tip
 <p>These considerations suggests that we should specify a model with the random effects:</p>
 <ol type="1">
 <li>The random effects of participants on intercepts, and on the slopes of the effects of Time, Orthography and spelling-sound consistency, as well as all corresponding covariances.</li>
-<li>he random effects of stimulus words on intercepts, and on the slopes of the effects of Time, Orthography and Instructions, as well as all corresponding covariances.</li>
+<li>The random effects of stimulus words on intercepts, and on the slopes of the effects of Time, Orthography and Instructions, as well as all corresponding covariances.</li>
 </ol>
 <p>This is simple to do using the code shown following.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>long.orth.max.glmer <span class="ot">&lt;-</span> <span class="fu">glmer</span>(Score <span class="sc">~</span> </span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                           Time <span class="sc">+</span> Orthography <span class="sc">+</span> Instructions <span class="sc">+</span> zConsistency_H <span class="sc">+</span> </span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>                           </span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>                           Orthography<span class="sc">:</span>Instructions <span class="sc">+</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                           </span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>                           Orthography<span class="sc">:</span>zConsistency_H <span class="sc">+</span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>                           </span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>                           (Time <span class="sc">+</span> Orthography <span class="sc">+</span> zConsistency_H <span class="sc">+</span> <span class="dv">1</span> <span class="sc">|</span> Participant) <span class="sc">+</span> </span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>                           </span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>                           (Time <span class="sc">+</span> Orthography <span class="sc">+</span> Instructions <span class="sc">+</span> <span class="dv">1</span> <span class="sc">|</span>Word),</span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>                         </span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>                         <span class="at">family =</span> <span class="st">"binomial"</span>,</span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">glmerControl</span>(<span class="at">optimizer=</span><span class="st">"bobyqa"</span>, <span class="at">optCtrl=</span><span class="fu">list</span>(<span class="at">maxfun=</span><span class="fl">2e5</span>)),</span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>                         </span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> long.orth)</span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(long.orth.max.glmer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>long.orth.max.glmer <span class="ot">&lt;-</span> <span class="fu">glmer</span>(Score <span class="sc">~</span> </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                           Time <span class="sc">+</span> Orthography <span class="sc">+</span> Instructions <span class="sc">+</span> zConsistency_H <span class="sc">+</span> </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                           </span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                           Orthography<span class="sc">:</span>Instructions <span class="sc">+</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>                           </span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>                           Orthography<span class="sc">:</span>zConsistency_H <span class="sc">+</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>                           </span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>                           (Time <span class="sc">+</span> Orthography <span class="sc">+</span> zConsistency_H <span class="sc">+</span> <span class="dv">1</span> <span class="sc">|</span> Participant) <span class="sc">+</span> </span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>                           </span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>                           (Time <span class="sc">+</span> Orthography <span class="sc">+</span> Instructions <span class="sc">+</span> <span class="dv">1</span> <span class="sc">|</span>Word),</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>                         </span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>                         <span class="at">family =</span> <span class="st">"binomial"</span>,</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">glmerControl</span>(<span class="at">optimizer=</span><span class="st">"bobyqa"</span>, <span class="at">optCtrl=</span><span class="fu">list</span>(<span class="at">maxfun=</span><span class="fl">2e5</span>)),</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>                         </span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> long.orth)</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(long.orth.max.glmer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Where we have the critical terms:</p>
 <ul>
@@ -1182,7 +1152,7 @@ boundary (singular) fit: see help('isSingular')</code></pre>
 </div>
 <p>Notice, especially, the warning:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boundary</span> (singular) fit<span class="sc">:</span> see ?isSingular</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boundary</span> (singular) fit<span class="sc">:</span> see ?isSingular</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>If you put the warning message text into a search engine, then you will get directed to a variety of discussions about what they mean and what you should do about them.</p>
 <p>A highly instructive blog post by (I think) Ben Bolker provides some very useful advice <a href="https://rstudio-pubs-static.s3.amazonaws.com/33653_57fc7b8e5d484c909b615d8633c01d51.html">here</a>.</p>
@@ -1202,23 +1172,23 @@ boundary (singular) fit: see help('isSingular')</code></pre>
 <h4 data-number="6.10.1.1" class="anchored" data-anchor-id="sec-glmm-random-effects-subjects-items-intercepts"><span class="header-section-number">6.10.1.1</span> Random effects of subjects and stimulus items on intercepts</h4>
 <p>In the first model, we have just random effects of participants or items on intercepts. This is where we started.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>long.orth.min.glmer <span class="ot">&lt;-</span> <span class="fu">glmer</span>(Score <span class="sc">~</span> </span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>                               Time <span class="sc">+</span> Orthography <span class="sc">+</span> Instructions <span class="sc">+</span> zConsistency_H <span class="sc">+</span> </span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                               </span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>                               Orthography<span class="sc">:</span>Instructions <span class="sc">+</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>                               </span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>                               Orthography<span class="sc">:</span>zConsistency_H <span class="sc">+</span></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>                               </span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>                               (<span class="dv">1</span> <span class="sc">|</span> Participant) <span class="sc">+</span> </span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>                               </span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>                               (<span class="dv">1</span> <span class="sc">|</span> Word),</span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>                             </span>
-<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>                             <span class="at">family =</span> <span class="st">"binomial"</span>, </span>
-<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">glmerControl</span>(<span class="at">optimizer=</span><span class="st">"bobyqa"</span>, <span class="at">optCtrl=</span><span class="fu">list</span>(<span class="at">maxfun=</span><span class="fl">2e5</span>)),</span>
-<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>                             </span>
-<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>                             <span class="at">data =</span> long.orth)</span>
-<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(long.orth.min.glmer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>long.orth.min.glmer <span class="ot">&lt;-</span> <span class="fu">glmer</span>(Score <span class="sc">~</span> </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>                               Time <span class="sc">+</span> Orthography <span class="sc">+</span> Instructions <span class="sc">+</span> zConsistency_H <span class="sc">+</span> </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>                               </span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>                               Orthography<span class="sc">:</span>Instructions <span class="sc">+</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>                               </span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>                               Orthography<span class="sc">:</span>zConsistency_H <span class="sc">+</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>                               </span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>                               (<span class="dv">1</span> <span class="sc">|</span> Participant) <span class="sc">+</span> </span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>                               </span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>                               (<span class="dv">1</span> <span class="sc">|</span> Word),</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>                             </span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>                             <span class="at">family =</span> <span class="st">"binomial"</span>, </span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">glmerControl</span>(<span class="at">optimizer=</span><span class="st">"bobyqa"</span>, <span class="at">optCtrl=</span><span class="fu">list</span>(<span class="at">maxfun=</span><span class="fl">2e5</span>)),</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>                             </span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>                             <span class="at">data =</span> long.orth)</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(long.orth.min.glmer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We saw that the model converged, and we looked at the results previously.</p>
 <p>What next? A simple approach we can take is to see if we can add each fixed effect to be included in our random effects terms, one effect at a time.</p>
@@ -1227,23 +1197,23 @@ boundary (singular) fit: see help('isSingular')</code></pre>
 <h4 data-number="6.10.1.2" class="anchored" data-anchor-id="sec-glmm-random-effects-subjects-items-slopes"><span class="header-section-number">6.10.1.2</span> Random effects of subjects and stimulus words on the slope of the Orthography effect</h4>
 <p>In our second model, we change the random effects terms so that we can account for the random effects of participants and of items on intercepts as well as on the slopes of the Orthography effect. (The Orthography effect is both within-subjects and within-items.)</p>
 <div class="cell" data-information="false" data-hash="04-glmm_cache/html/orth-2-glmer_e5a54126149ecba17b83e3e04a3cdb63">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>long.orth.<span class="fl">2.</span>glmer <span class="ot">&lt;-</span> <span class="fu">glmer</span>(Score <span class="sc">~</span> </span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>                             Time <span class="sc">+</span> Orthography <span class="sc">+</span> Instructions <span class="sc">+</span> zConsistency_H <span class="sc">+</span> </span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>                             </span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>                             Orthography<span class="sc">:</span>Instructions <span class="sc">+</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>                             </span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>                             Orthography<span class="sc">:</span>zConsistency_H <span class="sc">+</span></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>                             </span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>                             (<span class="fu">dummy</span>(Orthography) <span class="sc">+</span> <span class="dv">1</span> <span class="sc">||</span> Participant) <span class="sc">+</span> </span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>                             </span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>                             (<span class="fu">dummy</span>(Orthography) <span class="sc">+</span> <span class="dv">1</span> <span class="sc">||</span> Word),</span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>                           </span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>                           <span class="at">family =</span> <span class="st">"binomial"</span>, </span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">glmerControl</span>(<span class="at">optimizer=</span><span class="st">"bobyqa"</span>, <span class="at">optCtrl=</span><span class="fu">list</span>(<span class="at">maxfun=</span><span class="fl">2e5</span>)),</span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>                           </span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>                           <span class="at">data =</span> long.orth)</span>
-<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(long.orth.<span class="fl">2.</span>glmer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>long.orth.<span class="fl">2.</span>glmer <span class="ot">&lt;-</span> <span class="fu">glmer</span>(Score <span class="sc">~</span> </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>                             Time <span class="sc">+</span> Orthography <span class="sc">+</span> Instructions <span class="sc">+</span> zConsistency_H <span class="sc">+</span> </span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                             </span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>                             Orthography<span class="sc">:</span>Instructions <span class="sc">+</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>                             </span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>                             Orthography<span class="sc">:</span>zConsistency_H <span class="sc">+</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>                             </span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>                             (<span class="fu">dummy</span>(Orthography) <span class="sc">+</span> <span class="dv">1</span> <span class="sc">||</span> Participant) <span class="sc">+</span> </span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>                             </span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>                             (<span class="fu">dummy</span>(Orthography) <span class="sc">+</span> <span class="dv">1</span> <span class="sc">||</span> Word),</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>                           </span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>                           <span class="at">family =</span> <span class="st">"binomial"</span>, </span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">glmerControl</span>(<span class="at">optimizer=</span><span class="st">"bobyqa"</span>, <span class="at">optCtrl=</span><span class="fu">list</span>(<span class="at">maxfun=</span><span class="fl">2e5</span>)),</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>                           </span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>                           <span class="at">data =</span> long.orth)</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(long.orth.<span class="fl">2.</span>glmer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This model converges without warnings.</p>
 <p>Notice that we specify that we <code>||</code> do not want random covariances; we are keeping things simple in each step.</p>
@@ -1256,23 +1226,23 @@ boundary (singular) fit: see help('isSingular')</code></pre>
 <h4 data-number="6.10.1.3" class="anchored" data-anchor-id="sec-glmm-random-effects-subjects-items-slopes-2"><span class="header-section-number">6.10.1.3</span> Random effects of subjects and stimulus words on the slope of the Instructions effect</h4>
 <p>Next we can add <code>Instructions</code> to take into account random differences between words in the slope of this effect. We show the results for this model as they are instructive.</p>
 <div class="cell" data-hash="04-glmm_cache/html/orth-3-glmer_a0209cd36a1c2aa0fbb24a279aafc9b1">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>long.orth.<span class="fl">3.</span>glmer <span class="ot">&lt;-</span> <span class="fu">glmer</span>(Score <span class="sc">~</span> </span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>                             Time <span class="sc">+</span> Orthography <span class="sc">+</span> Instructions <span class="sc">+</span> zConsistency_H <span class="sc">+</span> </span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>                             </span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>                             Orthography<span class="sc">:</span>Instructions <span class="sc">+</span></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>                             </span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>                             Orthography<span class="sc">:</span>zConsistency_H <span class="sc">+</span></span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>                             </span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>                             (<span class="fu">dummy</span>(Orthography) <span class="sc">+</span> <span class="dv">1</span> <span class="sc">||</span> Participant) <span class="sc">+</span> </span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>                             </span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>                             (<span class="fu">dummy</span>(Orthography) <span class="sc">+</span> <span class="fu">dummy</span>(Instructions) <span class="sc">+</span> <span class="dv">1</span> <span class="sc">||</span> Word),</span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>                           </span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>                           <span class="at">family =</span> <span class="st">"binomial"</span>, </span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">glmerControl</span>(<span class="at">optimizer=</span><span class="st">"bobyqa"</span>, <span class="at">optCtrl=</span><span class="fu">list</span>(<span class="at">maxfun=</span><span class="fl">2e5</span>)),</span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>                           </span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>                           <span class="at">data =</span> long.orth)</span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(long.orth.<span class="fl">3.</span>glmer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>long.orth.<span class="fl">3.</span>glmer <span class="ot">&lt;-</span> <span class="fu">glmer</span>(Score <span class="sc">~</span> </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>                             Time <span class="sc">+</span> Orthography <span class="sc">+</span> Instructions <span class="sc">+</span> zConsistency_H <span class="sc">+</span> </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>                             </span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>                             Orthography<span class="sc">:</span>Instructions <span class="sc">+</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>                             </span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>                             Orthography<span class="sc">:</span>zConsistency_H <span class="sc">+</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>                             </span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>                             (<span class="fu">dummy</span>(Orthography) <span class="sc">+</span> <span class="dv">1</span> <span class="sc">||</span> Participant) <span class="sc">+</span> </span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>                             </span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>                             (<span class="fu">dummy</span>(Orthography) <span class="sc">+</span> <span class="fu">dummy</span>(Instructions) <span class="sc">+</span> <span class="dv">1</span> <span class="sc">||</span> Word),</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>                           </span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>                           <span class="at">family =</span> <span class="st">"binomial"</span>, </span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">glmerControl</span>(<span class="at">optimizer=</span><span class="st">"bobyqa"</span>, <span class="at">optCtrl=</span><span class="fu">list</span>(<span class="at">maxfun=</span><span class="fl">2e5</span>)),</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>                           </span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>                           <span class="at">data =</span> long.orth)</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(long.orth.<span class="fl">3.</span>glmer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Generalized linear mixed model fit by maximum likelihood (Laplace
   Approximation) [glmerMod]
@@ -1338,34 +1308,34 @@ Orthgr2:C_H -0.030  0.002  0.182  0.002 -0.026 -0.018</code></pre>
 <h4 data-number="6.10.1.4" class="anchored" data-anchor-id="sec-glmm-random-effects-add"><span class="header-section-number">6.10.1.4</span> Adding effects a bit at a time</h4>
 <p>In the following models, because we can see that we can get a model to converge with random effects of participants or items on Orthography, and random effect of participants on Instructions, I am going to keep these random effects in the model. I will check if adding further effects is OK too, in terms of successful convergence. I am going to treat all the following models as variations on a theme, the theme being: can we add anything else to:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>                             (<span class="fu">dummy</span>(Orthography) <span class="sc">+</span> <span class="dv">1</span> <span class="sc">||</span> Participant) <span class="sc">+</span> </span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>                             </span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>                             (<span class="fu">dummy</span>(Orthography) <span class="sc">+</span> <span class="fu">dummy</span>(Instructions) <span class="sc">+</span> <span class="dv">1</span> <span class="sc">||</span> Word),</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>                             (<span class="fu">dummy</span>(Orthography) <span class="sc">+</span> <span class="dv">1</span> <span class="sc">||</span> Participant) <span class="sc">+</span> </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>                             </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>                             (<span class="fu">dummy</span>(Orthography) <span class="sc">+</span> <span class="fu">dummy</span>(Instructions) <span class="sc">+</span> <span class="dv">1</span> <span class="sc">||</span> Word),</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="sec-glmm-random-effects-subjects-items-slopes-3" class="level4" data-number="6.10.1.5">
 <h4 data-number="6.10.1.5" class="anchored" data-anchor-id="sec-glmm-random-effects-subjects-items-slopes-3"><span class="header-section-number">6.10.1.5</span> Random effects of subjects on the slope of the consistency effect</h4>
 <p>Next we see if we can add <code>zConsistency_H</code>.</p>
 <div class="cell" data-hash="04-glmm_cache/html/orth-4-a-glmer_00d41764ff87f4152dddb3eb96de69be">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>long.orth.<span class="fl">4.</span>a.glmer <span class="ot">&lt;-</span> <span class="fu">glmer</span>(Score <span class="sc">~</span> </span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>                             Time <span class="sc">+</span> Orthography <span class="sc">+</span> Instructions <span class="sc">+</span> zConsistency_H <span class="sc">+</span> </span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>                             </span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>                             Orthography<span class="sc">:</span>Instructions <span class="sc">+</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>                             </span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>                             Orthography<span class="sc">:</span>zConsistency_H <span class="sc">+</span></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>                             </span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>                             (<span class="fu">dummy</span>(Orthography) <span class="sc">+</span> zConsistency_H <span class="sc">+</span> <span class="dv">1</span> <span class="sc">||</span> Participant) <span class="sc">+</span> </span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>                             </span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>                             (<span class="fu">dummy</span>(Orthography) <span class="sc">+</span> <span class="fu">dummy</span>(Instructions) <span class="sc">+</span> <span class="dv">1</span> <span class="sc">||</span> Word),</span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>                           </span>
-<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>                           <span class="at">family =</span> <span class="st">"binomial"</span>, </span>
-<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">glmerControl</span>(<span class="at">optimizer=</span><span class="st">"bobyqa"</span>, <span class="at">optCtrl=</span><span class="fu">list</span>(<span class="at">maxfun=</span><span class="fl">2e5</span>)),</span>
-<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>                           </span>
-<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>                           <span class="at">data =</span> long.orth)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>long.orth.<span class="fl">4.</span>a.glmer <span class="ot">&lt;-</span> <span class="fu">glmer</span>(Score <span class="sc">~</span> </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>                             Time <span class="sc">+</span> Orthography <span class="sc">+</span> Instructions <span class="sc">+</span> zConsistency_H <span class="sc">+</span> </span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>                             </span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>                             Orthography<span class="sc">:</span>Instructions <span class="sc">+</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>                             </span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>                             Orthography<span class="sc">:</span>zConsistency_H <span class="sc">+</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>                             </span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>                             (<span class="fu">dummy</span>(Orthography) <span class="sc">+</span> zConsistency_H <span class="sc">+</span> <span class="dv">1</span> <span class="sc">||</span> Participant) <span class="sc">+</span> </span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>                             </span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>                             (<span class="fu">dummy</span>(Orthography) <span class="sc">+</span> <span class="fu">dummy</span>(Instructions) <span class="sc">+</span> <span class="dv">1</span> <span class="sc">||</span> Word),</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>                           </span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>                           <span class="at">family =</span> <span class="st">"binomial"</span>, </span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">glmerControl</span>(<span class="at">optimizer=</span><span class="st">"bobyqa"</span>, <span class="at">optCtrl=</span><span class="fu">list</span>(<span class="at">maxfun=</span><span class="fl">2e5</span>)),</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>                           </span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>                           <span class="at">data =</span> long.orth)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>boundary (singular) fit: see help('isSingular')</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(long.orth.<span class="fl">4.</span>a.glmer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(long.orth.<span class="fl">4.</span>a.glmer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Generalized linear mixed model fit by maximum likelihood (Laplace
   Approximation) [glmerMod]
@@ -1429,25 +1399,25 @@ boundary (singular) fit: see help('isSingular')</code></pre>
 <h4 data-number="6.10.1.6" class="anchored" data-anchor-id="sec-glmm-random-effects-subjects-items-slopes-4"><span class="header-section-number">6.10.1.6</span> Random effects of subjects and stimulus words on the slope of the time effect</h4>
 <p>What about the random effects of participants or of words on the slope of the effect of Time?</p>
 <div class="cell" data-hash="04-glmm_cache/html/orth-4-b-glmer_4f4edcceda6e6f46d0346a63df5006f0">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>long.orth.<span class="fl">4.</span>b.glmer <span class="ot">&lt;-</span> <span class="fu">glmer</span>(Score <span class="sc">~</span> </span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>                             Time <span class="sc">+</span> Orthography <span class="sc">+</span> Instructions <span class="sc">+</span> zConsistency_H <span class="sc">+</span> </span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>                             </span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>                             Orthography<span class="sc">:</span>Instructions <span class="sc">+</span></span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>                             </span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>                             Orthography<span class="sc">:</span>zConsistency_H <span class="sc">+</span></span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>                             </span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>                             (<span class="fu">dummy</span>(Orthography) <span class="sc">+</span> <span class="fu">dummy</span>(Time) <span class="sc">+</span> <span class="dv">1</span> <span class="sc">||</span> Participant) <span class="sc">+</span> </span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>                             </span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>                             (<span class="fu">dummy</span>(Orthography) <span class="sc">+</span> <span class="fu">dummy</span>(Instructions) <span class="sc">+</span> <span class="fu">dummy</span>(Time) <span class="sc">+</span> <span class="dv">1</span> <span class="sc">||</span> Word),</span>
-<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>                           </span>
-<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>                           <span class="at">family =</span> <span class="st">"binomial"</span>, </span>
-<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">glmerControl</span>(<span class="at">optimizer=</span><span class="st">"bobyqa"</span>, <span class="at">optCtrl=</span><span class="fu">list</span>(<span class="at">maxfun=</span><span class="fl">2e5</span>)),</span>
-<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>                           </span>
-<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>                           <span class="at">data =</span> long.orth)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>long.orth.<span class="fl">4.</span>b.glmer <span class="ot">&lt;-</span> <span class="fu">glmer</span>(Score <span class="sc">~</span> </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>                             Time <span class="sc">+</span> Orthography <span class="sc">+</span> Instructions <span class="sc">+</span> zConsistency_H <span class="sc">+</span> </span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>                             </span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>                             Orthography<span class="sc">:</span>Instructions <span class="sc">+</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>                             </span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>                             Orthography<span class="sc">:</span>zConsistency_H <span class="sc">+</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>                             </span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>                             (<span class="fu">dummy</span>(Orthography) <span class="sc">+</span> <span class="fu">dummy</span>(Time) <span class="sc">+</span> <span class="dv">1</span> <span class="sc">||</span> Participant) <span class="sc">+</span> </span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>                             </span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>                             (<span class="fu">dummy</span>(Orthography) <span class="sc">+</span> <span class="fu">dummy</span>(Instructions) <span class="sc">+</span> <span class="fu">dummy</span>(Time) <span class="sc">+</span> <span class="dv">1</span> <span class="sc">||</span> Word),</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>                           </span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>                           <span class="at">family =</span> <span class="st">"binomial"</span>, </span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">glmerControl</span>(<span class="at">optimizer=</span><span class="st">"bobyqa"</span>, <span class="at">optCtrl=</span><span class="fu">list</span>(<span class="at">maxfun=</span><span class="fl">2e5</span>)),</span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>                           </span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>                           <span class="at">data =</span> long.orth)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>boundary (singular) fit: see help('isSingular')</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(long.orth.<span class="fl">4.</span>b.glmer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(long.orth.<span class="fl">4.</span>b.glmer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Generalized linear mixed model fit by maximum likelihood (Laplace
   Approximation) [glmerMod]
@@ -1528,7 +1498,7 @@ boundary (singular) fit: see help('isSingular')</code></pre>
 <p>Does the addition of random slopes improve model fit? We can compare the model in pairs, as follows, to test whether each addition in model complexity improves model fit. We run the code for the model comparisons as follows.</p>
 <p>First, we compare the model <code>long.orth.min.glmer</code> (just random intercepts) with <code>long.orth.2.glmer</code> to check if increasing model complexity, by accounting for random differences between participants or words in the slope of the Orthography effect improves model fit to data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(long.orth.min.glmer, long.orth.<span class="fl">2.</span>glmer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(long.orth.min.glmer, long.orth.<span class="fl">2.</span>glmer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Data: long.orth
 Models:
@@ -1541,7 +1511,7 @@ long.orth.2.glmer     11 1041.0 1097.6 -509.51   1019.0 3.3909  2     0.1835</co
 </div>
 <p>Second, we compare the model <code>long.orth.min.glmer</code> (just random intercepts) with <code>long.orth.3.glmer</code> to check if increasing model complexity, by accounting for random differences between participants or words in the slope of the Instructions effect improves model fit to data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(long.orth.min.glmer, long.orth.<span class="fl">3.</span>glmer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(long.orth.min.glmer, long.orth.<span class="fl">3.</span>glmer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Data: long.orth
 Models:
@@ -1719,8 +1689,8 @@ Tip
 <p>Other helpful online advice by Ben Bolker (besides his numerous helpful interventions on StackOverflow) can be found <a href="https://bbolker.github.io/mixedmodels-misc/ecostats_chap.html">here</a> and <a href="https://rstudio-pubs-static.s3.amazonaws.com/33653_57fc7b8e5d484c909b615d8633c01d51.html">here</a>.</p>
 </section>
 </section>
-<section id="appendix-example-dataset-variable-information" class="level2" data-number="6.14">
-<h2 data-number="6.14" class="anchored" data-anchor-id="appendix-example-dataset-variable-information"><span class="header-section-number">6.14</span> Appendix: Example dataset variable information</h2>
+<section id="sec-glmm-appendix" class="level2" data-number="6.14">
+<h2 data-number="6.14" class="anchored" data-anchor-id="sec-glmm-appendix"><span class="header-section-number">6.14</span> Appendix: Example dataset variable information</h2>
 <p>Further information about the variables in the <code>long.orth_2020-08-11.csv</code> dataset is listed following.</p>
 <ul>
 <li><code>Participant</code></li>

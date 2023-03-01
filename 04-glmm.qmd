@@ -86,7 +86,7 @@ Vocabulary knowledge is essential for processing language in everyday life and i
 
 @ricketts2021 investigated how school-aged children learn words. We conducted two studies in which children learned phonological forms and meanings of 16 polysyllabic words in the same experimental paradigm. To test whether orthographic facilitation would occur, half of the words were taught with access to the orthographic form (orthography present condition) and the other half were taught without orthographic forms (orthography absent condition). In addition, we manipulated the instructions that children received: approximately half of the children were told that some words would appear with their written form (explicit group); the remaining children did not receive these instructions (incidental group). Finally, we investigated the impact of spelling-sound consistency of word targets for learning, by including words that varied continuously on a measure of pronunciation consistency [after @mousikou2017].
 
-The quality of lexical representations was measured in two ways. A cuing hierarchical response task (definition, cued definition, recognition) was used to elicit semantic knowledge from the phonological forms, providing a fine-grained measure of semantic learning. A spelling task indexed the extent of orthographic learning for each word. We focus on the analysis of the spelling task responses.
+The quality of lexical representations was measured in two ways. A cuing hierarchical response task (definition, cued definition, recognition) was used to elicit semantic knowledge from the phonological forms, providing a fine-grained measure of semantic learning. A spelling task indexed the extent of orthographic learning for each word. We focus on the analysis of the spelling task responses in this chapter (you may be interested in reviewing our other analyses, see @sec-glmm-data-download).
 
 @ricketts2021 reported two studies. We focus on Study 1, in which @ricketts2021 measured knowledge of newly learned words at two intervals: first one week and then, again, eight months after training. Longitudinal studies of word learning are rare and this is the first longitudinal investigation of orthographic facilitation.
 
@@ -126,9 +126,9 @@ In Study 1, longitudinal post-test data were collected because children were pos
 
 #### Outcome (dependent) variables {#sec-glmm-data-outcome}
 
-The Orthographic post-test was used to examine orthographic knowledge after training. Children were asked to spell each word to dictation and spelling productions were transcribed for scoring. For the purposes of our learning in Week 20, we focus on the accuracy of responses. Each response made by a child to a target word was coded as correct or incorrect.
+The Orthographic post-test was used to examine orthographic knowledge after training. Children were asked to spell each word to dictation and spelling productions were transcribed for scoring. For the purposes of our learning in this chapter, we focus on the accuracy of responses. Each response made by a child to a target word was coded as correct or incorrect.
 
-Note that a more sensitive outcome measure of orthographic knowledge was also taken. Responses were also scored using a Levenshtein distance measure, using the `{stringdist}` library [@loo2022]. This score indexes the number of letter deletions, insertions and substitutions that distinguish between the target and child's response. In the published report (@ricketts2021) we focus our analysis of the orthographic outcome on the Levenshtein distance measure of response spelling accuracy, and further details on the analysis approach (Poisson rather than Binomial Generalized Linear Mixed-effects Models) can be found in the paper.
+A more sensitive outcome measure of orthographic knowledge was also taken. Responses were also scored using a Levenshtein distance measure, using the `{stringdist}` library [@loo2022]. This score indexes the number of letter deletions, insertions and substitutions that distinguish between the target and child's response. In the published report (@ricketts2021) we focus our analysis of the orthographic outcome on the Levenshtein distance measure of response spelling accuracy, and further details on the analysis approach (Poisson rather than Binomial Generalized Linear Mixed-effects Models) can be found in the paper.
 
 ### Locate and download the data file {#sec-glmm-data-download}
 
@@ -153,7 +153,7 @@ Along with additional .R you can work with to develop your skills:
 
 -   `402-04-GLMM-exercise-gavagai-data-analysis-notes.R`
 
-The paper can be accessed [here](https://onlinelibrary.wiley.com/doi/10.1111/cogs.12186).
+The @monaghan2015 paper can be accessed [here](https://onlinelibrary.wiley.com/doi/10.1111/cogs.12186).
 
 ### Read-in the data file using read_csv {#sec-glmm-data-import}
 
@@ -177,7 +177,7 @@ long.orth <- read_csv("long.orth_2020-08-11.csv",
                     )
 ```
 
-You can see, here, that within the `read_csv()` function call, I specify `col_types`, instructing R how to treat a number of different variables. You can read more about this [here](https://readr.tidyverse.org/articles/readr.html).
+You can see, here, that within the `read_csv()` function call, I specify `col_types`, instructing R how to treat a number of different variables. Recall that in @sec-intro-mixed-data-load, we saw how we can determine how R treats variables at the read-in stage, using `col_types()` specification. You can read more about this [here](https://readr.tidyverse.org/articles/readr.html).
 
 ### Inspect the data {#sec-glmm-data-inspect}
 
@@ -199,15 +199,15 @@ Some of the variables included in the `.csv` file are listed, following, with in
 -   `Consistency-H` -- Calculated orthography-to-phonology consistency value for each word. -`zConsistency-H` -- Standardized Consistency H scores
 -   `Score` -- Outcome variable -- for the orthographic post-test, responses were scored as `1` (correct, if the target spelling was produced in full) or `0` (incorrect, if the target spelling was not produced).
 
-The summary will show you that we have a number of other variables available, including measures of individual differences in reading or reading-related abilities or knowledge, but we do not need to pay attention to them, for our exercises. If you are interested in the dataset, you can find more information about the variables in the Appendix for this chapter and, of course, in @ricketts2021.
+The summary will show you that we have a number of other variables available, including measures of individual differences in reading or reading-related abilities or knowledge, but we do not need to pay attention to them, for our exercises. If you are interested in the dataset, you can find more information about the variables in the Appendix for this chapter (@sec-glmm-appendix) and, of course, in @ricketts2021.
 
 ## Tidy the data {#sec-glmm-data-tidy}
 
-The data are already *tidy*: each column in `long.orth_2020-08-11.csv` corresponds to a variable and each row corresponds to an observation.
+The data are already *tidy*: each column in `long.orth_2020-08-11.csv` corresponds to a variable and each row corresponds to an observation. However, we need to do a bit of work, before we can run any analyses, to fix the coding of the categorical predictor (or independent) variables, the factors Orthography, Instructions, and Time.
 
 ### Code categorical factors {#sec-glmm-data-recode}
 
-The data are tidy but we need to do a bit of work, before we can run any analyses, to fix the coding of the categorical predictor (or independent) variables, the factors Orthography, Instructions, and Time. By default, R will *dummy code* observations at different levels of a factor. So, for a factor or a categorical variable like `Orthography` (present, absent), R will code one level name e.g. `absent` as `0` and the other e.g. `present` as `1`. The 0-coded level is termed the *reference level*, which you could call the baseline level, and by default R will code the level with the name appearing earlier in the alphabet as the reference level.
+By default, R will *dummy code* observations at different levels of a factor. So, for a factor or a categorical variable like `Orthography` (present, absent), R will code one level name e.g. `absent` as `0` and the other e.g. `present` as `1`. The 0-coded level is termed the *reference level*, which you could call the baseline level, and by default R will code the level with the name appearing earlier in the alphabet as the reference level.
 
 All this is usually not important. When you specify a model in R where you are asking to estimate the effect of a categorical variable like `Orthography` (present, absent) then, by default, what you will get is an estimate of the average difference in outcome, when all other factors are set to zero, estimated as the difference in outcomes comparing the reference level and the other level or levels of the factor. This will be presented, for example, like the output shown following, for a Generalized Linear Model (i.e., a logistic regression) analysis of the effect of Orthography condition, ignoring the random effects:
 
@@ -302,7 +302,7 @@ contrasts(long.orth$Time) <- contr.sum(2, base = 1)
 contrasts(long.orth$Time)
 ```
 
-I use `contr.sum(a, base = b)` to do the coding, where `a` is the number of levels in a factor (replace `a` with the right number), and `b` tells R which level to use as the baseline or reference level (replace `b` with the right number). I usually need to check the coding before and after I specify it.
+In these chunks of code, I use `contr.sum(a, base = b)` to do the coding, where `a` is the number of levels in a factor (replace `a` with the right number), and `b` tells R which level to use as the baseline or reference level (replace `b` with the right number). I usually need to check the coding before and after I specify it.
 
 ## Introduction to thinking about the need for generalized models {#sec-glmm-ideas-intro}
 
@@ -351,11 +351,12 @@ Let's imagine that we wish to estimate the effects of experimental variables lik
 **Look at where the best fit lines go.**
 
 ```{r}
-#| label: word-learning-lm-per-subject-for-report
+#| label: fig-word-learning-lm-per-subject-for-report
 #| fig-cap: "Monaghan et al. (2015) artificial word learning study: plot showing the proportion of responses correct for each participant, in each of 12 blocks of 24 learning trials, in each learning condition; each grey line shows the linear model prediction of the proportion correct, for each person, by learning block, in each condition; black lines show the average prediction of the proportion correct, by learning block, in each condition. The position of points has been jittered."
-#| fig-alt: "Monaghan et al. (2015) artificial word learning study: plot showing the proportion of responses correct for each participant, in each of 12 blocks of 24 learning trials, in each learning condition; each grey line shows the linear model prediction of the proportion correct, for each person, by learning block, in each condition; black lines show the average prediction of the proportion correct, by learning block, in each condition. The position of points has been jittered."
+#| fig-alt: "The figure shows a grid of three scatterplots. In each plot, grey points represent individual scores for proportion of responses correct under different word learning conditions, over blocks (1-12) of learning trials. Superimposed on the points, thin grey lines indicate the individual learning gain (or loss) over blocks for each participant. In each plot, a thicker black line indicates the average learning, across all participants. Learning appears to occur most quickly in the noun only condition compared to the noun and verb learning condition (shown in middle plot) or the verb only condition (shown in rightmost plot)."
 #| warning: false
 #| message: false
+#| echo: false
 #| fig-height: 10
 #| fig-width: 10
 # This plot is enlightening
@@ -403,9 +404,9 @@ The logic of the problem can be set out as follows:
 
 @jaeger2008 (p. 3) then explains the problem like this. If the probability of a binomially distributed outcome like response accuracy differs between two conditions (call them conditions 1 and 2), the variances will only be identical if $p1$ (the proportion of correct responses in condition 1) and p2 (the proportion of correct responses in condition 1) are equally distant from 0.5 (e.g. $p1 = .4$ and $p2 = .6$). The bigger the difference in distance from 0.5, comparing the conditions, the less similar the variances will be.
 
-Differences close to 0.5 will matter less than differences closer to 0 or 1. Even if p1 and p2 are unequally distant from 0.5, as long as they are close to 0.5, the variances of the sample proportions will be similar. Sample proportions between 0.3 and 0.7 are considered close enough to 0.5 to assume homogeneous variances (Agresti, 2002).
+Sample proportions between 0.3 and 0.7 are considered close enough to 0.5 to assume homogeneous variances (Agresti, 2002). Unfortunately, we usually cannot determine a priori the range of sample proportions in our experiment.
 
-Unfortunately, we usually cannot determine a priori the range of sample proportions in our experiment. In general, variances in two binomially distributed conditions will not be homogeneous but, as you will recall, in both ANOVA and regression analysis, we assume homogeneity of variance in the outcome variable when we compare the effect of differences (in the mean outcome) between the different levels of a factor. This means that if we design a study in which the outcome variable is the accuracy of responses in different experimental conditions and we plan to use ANOVA or regression to estimate the effect of variation in experimental conditions on response accuracy then unless we get lucky} our estimation of the experimental effect will take place under circumstances in which the application of the analysis method (ANOVA or regression) and thus the analysis results will be invalid.
+In general, variances in two binomially distributed conditions will not be homogeneous but, as you will recall, in both ANOVA and regression analysis, we assume homogeneity of variance in the outcome variable when we compare the effect of differences (in the mean outcome) between the different levels of a factor. This means that if we design a study in which the outcome variable is the accuracy of responses in different experimental conditions and we plan to use ANOVA or regression to estimate the effect of variation in experimental conditions on response accuracy then *unless we get lucky* our estimation of the experimental effect will take place under circumstances in which the application of the analysis method (ANOVA or regression) and thus the analysis results will be invalid.
 
 #### Summary: Recognize the limitations of traditional methods for analyzing response accuracy {#sec-glmm-limitations-summary}
 
@@ -431,11 +432,11 @@ The logistic transformation takes $p$ the probability of an event with two possi
 
 -   Odds are, for example, the ratio of the probability of the occurrence of an event compared to the probability of the non-occurrence of an event, or, in terms of a response accuracy variable, the ratio of the probability of the response being correct compared to the probability of the response being incorrect.
 -   And odds are continuous numeric quantities that are scaled from zero to infinity.
--   You can see how this works if you run the calculations using the equation $o = \frac{p}{1-p}$ in R as `odds <- p/(1-p)`: replacing p with various numbers (e.g. $p = 0.1, 0.01, 0.001$).
+-   You can see how this works if you run the calculations using the equation $o = \frac{p}{1-p}$ in R as `odds <- p/(1-p)`: replacing p with various numbers (e.g. `p = 0.1, 0.01, 0.001`).
 
 2.  We can then use the (natural) logarithm of the odds $logit = ln\frac{p}{1-p}$ because using the logarithm removes the boundary at zero because log odds range from negative to positive infinity.
 
--   You can see how this works if you run the calculations using the equation $logit = ln\frac{p}{1-p}$ in R as `logit <- log(p/(1-p))`: replacing p with smaller and smaller numbers (e.g. $p = 0.1, 0.01, 0.001$) gets you increasing negative log odds.
+-   You can see how this works if you run the calculations using the equation $logit = ln\frac{p}{1-p}$ in R as `logit <- log(p/(1-p))`: replacing p with smaller and smaller numbers (e.g. `p = 0.1, 0.01, 0.001`) gets you increasing negative log odds.
 
 When we model the log odds (logit) that a response will be correct, the model is called a *logistic regression* or logistic model. We can think of logistic models as working like linear models with log-odds outcomes.
 
@@ -500,7 +501,7 @@ The model specification includes information about fixed effects and about rando
 
 Second, we have the bit that is specific to *generalized* models.
 
--   `family = binomial` is entered because accuracy is a binary outcome variable (correct, incorrect) so we assume a binomial probability distribution.
+-   `family = "binomial"` is entered because accuracy is a binary outcome variable (correct, incorrect) so we assume a binomial probability distribution.
 
 We then specify:
 
@@ -588,10 +589,9 @@ The output from the model summary first gives us **information about the model**
 2.  Then, we see the model formula including main effects `Score ~ Time + Orthography + Instructions + zConsistencyH`,
 3.  As well as the interactions `Orthography:Instructions + Orthography:zConsistencyH`,
 4.  And the random effects `(1 | Participant) + (1 |Word)`.
-5.  Then we see `REML criterion at convergence` about the model fitting process, which we can usually ignore.
-6.  Then we see information about the model algorithm
-7.  Then we see model fit statistics, including `AIC BIC logLik`
-8.  Then we see information about the distribution of residuals
+5.  Then we see information about the model algorithm
+6.  Then we see model fit statistics, including `AIC BIC logLik`
+7.  Then we see information about the distribution of residuals
 
 We then see information listed under `Random Effects`: this is where you can see information about the error variance terms estimated by the model.
 
@@ -602,9 +602,9 @@ We see in the `Random Effects` section, the variances associated with:
 -   The random differences between the average intercept (over all data) and the intercept for each participant;
 -   The random differences between the average intercept (over all data) and the intercept for responses to each word stimulus.
 
-9.  Lastly, just as for linear models, we see estimates of the coefficients of the fixed effects, the intercept and the slopes of the experimental variables.
+8.  Lastly, just as for linear models, we see estimates of the coefficients of the fixed effects, the intercept and the slopes of the experimental variables.
 
-Note that we get p-values for what are called Wald null hypothesis significance tests on the coefficients.
+Note that we get p-values (`Pr(>|z|)`) for what are called Wald null hypothesis significance tests on the coefficients.
 
 We can see that one effect is significant. The estimate for the effect of the presence compared to the absence of Orthography is `0.455009`. The positive coefficient tells us that the log odds that a response will be correct is higher when Orthography is present compared to when it is absent.
 
@@ -689,7 +689,7 @@ The question is:
 
 If you go back to the description of the study design, then you will be able to see that a number of possibilities follow, theoretically, from the design.
 
-A currently influential set of recommendations (Barr et al., 2013; but see discussions in Bates et al., 2015; Matuschek et al., 2017; Meteyard & Davies, 2020) has been labeled *Keep it maximal*.
+A currently influential set of recommendations [@Barr2013a; but see discussions in @bates2015parsimonious,@eager and @matuschek2017] has been labeled *Keep it maximal*.
 
 In this approach, if you are testing effects manipulated according to a pre-specified design then you should:
 
@@ -730,7 +730,7 @@ We can spell out how the experimental conditions were manipulated for the exampl
 These considerations suggests that we should specify a model with the random effects:
 
 1.  The random effects of participants on intercepts, and on the slopes of the effects of Time, Orthography and spelling-sound consistency, as well as all corresponding covariances.
-2.  he random effects of stimulus words on intercepts, and on the slopes of the effects of Time, Orthography and Instructions, as well as all corresponding covariances.
+2.  The random effects of stimulus words on intercepts, and on the slopes of the effects of Time, Orthography and Instructions, as well as all corresponding covariances.
 
 This is simple to do using the code shown following.
 
@@ -1175,7 +1175,7 @@ Can be found [here](https://bbolker.github.io/mixedmodels-misc/glmmFAQ.html).
 
 Other helpful online advice by Ben Bolker (besides his numerous helpful interventions on StackOverflow) can be found [here](https://bbolker.github.io/mixedmodels-misc/ecostats_chap.html) and [here](https://rstudio-pubs-static.s3.amazonaws.com/33653_57fc7b8e5d484c909b615d8633c01d51.html).
 
-## Appendix: Example dataset variable information
+## Appendix: Example dataset variable information {#sec-glmm-appendix}
 
 Further information about the variables in the `long.orth_2020-08-11.csv` dataset is listed following.
 
