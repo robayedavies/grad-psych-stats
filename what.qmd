@@ -1,105 +1,207 @@
 # What {#sec-what}
 
-## The research report -- what you are expected to do
-
 We present the following guidelines to help you to complete the coursework assessment. If you have any questions, email Rob Davies at: `r.davies1@lancaster.ac.uk`
 
 - You can read more about the motivations for the exercise, and the benefits to learning, in @sec-report-intro-why.
 - You can read about ways -- methods -- to approach the exercise in @sec-how.
 
 ::: callout-important
-Here I outline what we expect you to do.
+Here we outline what we expect you to do.
 :::
 
-### What data can I analyse?
+## What data can I analyse?
 
-Reports will concern, usually, findings from analyses of data-sets we have provided to you. Some students may wish to analyse data collected in previous studies or data accessed from online sources: they should correspond with Padraic Monaghan or Rob Davies if they wish to do so.
+Students have taken a variety of approaches to the assignment (see @sec-how for a discussion of these options).
 
-The evaluation of reports will focus on clarity, read the following for discussion of what is required.
+-   Some students choose to complete an analysis of a publicly available dataset, analyzed previously, data for which the report has been published in a journal article.
+-   Some students choose to complete an analysis of a publicly available dataset that has been made available (for a report published as a data journal) but has not been analysed previously.
+-   Some students choose to complete an analysis of one of the data-sets used for practical exercises in class: the example or demonstration data we collect together as the *curated data*.
 
-We expect students to use one of the analysis methods taught in the module. Marks will be awarded depending:
+## How will we evaluate reports?
 
--   on how appropriate the method is to the context, to the study design, to answering the research question, and to the features of the data; the appropriateness of methods to contexts will be taught in class;
+The marks for the report will be depend primarily on the quality of the Results and Discussion sections of the report. 
+This is because, in most cases, you will be using data for your analysis that were collected, previously, by other authors for an already published report. 
 
--   on how effectively the analysis is explained; students must explain the motivations for their decisions, explain their methods, and explain their findings effectively to gain points.
+We cannot give you much credit for writing about the background research literature in the Introduction or about the Method of data collection because the authors of the original report did that work if you are using published data, or because Rob did that work if you are using demonstration data. 
+We *can* give you credit for concisely and clearly summarizing the background research literature and method of data collection.
 
-### What structure should reports take?
+While we cannot give you much credit for the Introduction and Methods, we advise you that these sections will need to be effective in preparing the reader to:
 
-1.  The reports should include abstract, introduction, methods, results, discussion and references sections, like a short research article in the journal *Psychological Science*. You can view examples of articles here
+- understand the nature of the research question(-s) or prediction(-s), their background and their motivation;
+- understand the nature of the dataset analyzed, the measures taken, the participants or stimuli sampled;
+- understand the motivation for, and the decision making involved in, the analysis approach adopted.
 
-<https://journals.sagepub.com/toc/PSS/current>
+In short: what you write in the Introduction and Method sections will have function in making the results and Discussion effective.
 
-2.  Word count limit: no more than 1500 words are allowed for all materials.
+We expect students to use one of the analysis methods taught in the module. 
 
-3.  Unlike a published research article, for PSYC401, the Results and Discussion sections must be written in full, but the Introduction and Methods sections can be written in the form of notes.
+::: callout-tip
+Marks will be awarded depending:
 
-### What content should reports present?
+-   on how appropriate the method is to the context, to the study design, to answering the research question, and to the features of the data;
+-   on how effectively the analysis is explained -- students must explain the motivations for their decisions, explain their methods, and explain their findings effectively to gain points.
+:::
 
-#### Introduction and Method sections
+Of course, some interests, datasets, or questions warrant the use of methods that are not taught but that students can learn independently.
 
-The focus of marking will be on the quality of the Results and Discussion sections. This means you can write your notes in the Introduction and Methods sections as short answers to the following questions:-
+::: callout-important
+If you want to use a method that has not been taught in the module then you *must* discuss this first with Rob Davies.
+:::
 
-##### Introduction
+## How should reports be written?
+
+You will prepare your report in the style of a short research article in the journal *Psychological Science*. You can view examples of articles [here](https://journals.sagepub.com/toc/PSS/current).
+
+For the journal *Psychological Science*, a research article has to be written in a specific format with specific properties: we want something a bit different for this coursework, and we specify what we want here.
+
+We require information about the background for the study, the research question, the hypotheses, the method of data collection, the method of data analysis, the results of the analysis, and the psychological interpretation of those results.
+
+::: callout-important
+- Word count limit: no more than **2000 words** are allowed for all materials.
+- The reports should include abstract, introduction, methods, results, discussion and references sections, like most psychological research articles.
+- Write in **complete sentences in full paragraphs**.
+:::
+
+## What structure should reports take?
+
+The reports should include Abstract, Introduction, Methods, Results, Discussion and References sections, like a short research article in the journal *Psychological Science*.
+
+The focus of marking will be on the quality of the Results and Discussion sections. 
+Nevertheless, as explained, the Introduction and Method sections need to be effective so that the Results and Discussion sections can be effective.
+
+One way to check that what you say in earlier sections is sufficient to prepare the reader for what they encounter in later sections is to write *forwards* and then review *backwards* through the text of your report.
+
+::: callout-tip
+1. Write *forwards*: enter information, as appropriate, progressing from Introduction to Methods to Results to Discussion.
+2. Then, in review, work *backwards*: 
+
+- Can the reader understand the Discussion given what was presented in the Results? 
+- Can they understand the analysis, what you did, why and how, given the information in the Method? 
+- Can they understand the Method, what the measures are, what was done, and why, given the motivations and aims explained in the Introduction?
+:::
+
+### Introduction and Method sections
+
+Some general advice on what you need to communicate in the Introduction and Methods sections is that what you write in these sections should provide the reader with the information they need to answer the following questions:
+
+1. **Introduction**
 
 -   What did the researchers do and why did the researchers do it?
-
 -   What was the question addressed in the study and why is it interesting?
-
--   What were the hypotheses?
-
+-   What were the hypotheses or predictions?
 -   What results were expected and how would they relate to the hypotheses?
 
-How can you write this as a set of notes? We require main points of information on the hypotheses concerning expected results. We will ignore the absence of citations, or of explanations of critical previous experimental work, in the Introduction.
-
-##### Method
-
-Note the origin of the data at the start of the method section. As for the Introduction, your method section writing needs to furnish answers to questions like the following:-
+2. **Method**
 
 -   What was done to collect the data?
-
 -   Who were tested (Participants)?
-
 -   What materials were used in testing (Materials)?
-
 -   What was the design of the study?
-
 -   What procedure was used?
 
-How can you write this as a set of notes? We require main points of information, especially the main features of the data analyzed -- what were the variables, how many observations were recorded, what exclusions or other data treatment steps were applied?
+You will need to rely on your experience reading primary research articles to help you to judge *how much* information you need to present and *when* you need to present it.
 
-#### Results and Discussion sections
+::: callout-tip
+If you are unsure, pick an article you admire in a journal and *analyze* how they present information, what they explain, and to what level of detail.
+:::
 
-The focus of marking will be on the quality of the Results and Discussion sections. This means you must write in complete sentences in full paragraphs in a style appropriate for a research article appearing in a journal like *Psychological Science*. You must not use notes for these sections. You must write text that explains to the reader the analysis you did, why you did it, the results you found, and the implications of those results. You should write the text for the sections so that the questions listed following are answered fully.
+### Results and Discussion sections
 
-If you use a data set that is already published in a journal such as *Psychological Science*, then your presentation of the results must differ from that in the article in ways that highlight new features of the data.
+You must write text that explains to the reader what analysis you did, why you did it, what results you found, and what you think the implications of those results may be. 
 
-##### Results
+:: callout-tip
+Be clear on:
 
-Be clear on what the outcome measure or dependent variable for analysis was, and on what factors or predictor variables were brought into the analysis of that outcome. You then need to ensure the results section answers the following questions:-
+- what the outcome measure or dependent variable for analysis was,
+- and what factors or predictor variables were brought into the analysis of that outcome
+:::
+
+You need to be clear about these things because the reader needs to understand these things well to be able to understand your results reporting.
+
+You need to ensure that the text you write for the Results section provides the reader with the information they need to answer the following questions:-
+
+3. **Results**
 
 -   What hypotheses were tested?
-
 -   What methods were used to test the hypotheses?
-
 -   Why are they appropriate?
-
 -   What were the results? What were the direction and relative size of effects?
 
-Do what seems reasonable using one or more of the analysis methods practiced in class, or practiced in association with the workbooks, and explain your reasoning.
+Students often ask what analysis methods they can use.
+The answer to that question depends on the question or hypothesis, the nature of the dataset, and the appropriateness of the different analysis options.
 
-##### Discussion
+You can read a discuss of the nature of the choices open to any data analysis job in @sec-multiverse.
+You can read about ways to identify how you can approach the analysis task in @sec-whatanalysis or @sec-try-multiverse.
 
-What the reader must be able to do, given your report, is understand the answer to the following questions:
+:: callout-tip
+- Do what seems reasonable using one or more of the analysis methods practiced in class
+- And **explain your reasoning**
+:::
+
+If you use a dataset that is already published in a journal such as *Psychological Science*, then your presentation of the results may differ from the presentation in the article in ways that highlight new features of the data.
+You may wish to identify the specific difference between the analysis you do and the analysis that was reported in the article that is the source for your data, if you derive your data from a published article, and if that article includes a statistical analysis.
+
+It will help the reader and, sometimes, you if you indicate the source of the data and share your analysis code directly.
+
+::: callout-tip
+- If you get your data from a published article then you will cite that article but it may be helpful if, in the Method section, you add a link to the data repository (e.g. on OSF) so that your reader can access the data if necessary.
+- Put the code for the analysis you do and report, with comments, in an Appendix. The appendix will not be counted towards word count limits.
+:::
+
+By the time the reader gets to the Discussion, they should be prepared for your outline of the questions or predictions, your identification of the main findings, and your critical evaluation of those findings, in context, and in relation to theoretical or practical implications.
+
+You need to ensure that the text you write for the Discussion section enables the reader to understand the answer to the following questions:
+
+4. **Discussion**
 
 -   What are the theoretical implications of the study findings?
-
 -   What are the practical implications?
 
-Reports should present **enough information that the reader can understand**: the background and motivation for a study; the features of the data analyzed and the methods of data collection; the approach taken in analysis, the analysis steps, and the results; the relationship between the observed results and the expected results, and the interpretation of findings in relation to previous work. To be clear about clarity: explain, spell things out (decisions, reasoning, interpretations) as if you were explaining them to a reasonably intelligent reader, a Psychologist who is not a specialist in the area of study occupied by the study reported, i.e. me. The main point is that you should keep in mind what the reader should get out of (what benefit) reading your report.
+You will understand that not every dataset can be analyzed in ways that have either or both theoretical or practical implications.
 
-### What format?
+The main point is that you should keep in mind what the reader should get out of (what benefit) reading your report.
 
-#### Statistics, tables and figures should follow APA guidelines. See here for a free guide:
+::: callout-tip
+One way to think about the task for the Discussion is that you need to *make sense* of the results for the reader.
+:::
+
+You will want to:
+
+- locate the ways in which your results fit into a wider (research or practice or theoretical) context;
+- explain how the results do or do not add to or change understanding;
+- explain if there are limitations in the data (maybe inherited from the source) or analysis;
+- explain what future research may usefully do;
+- identify the conclusions that can be drawn from the report.
+
+::: callout-tip
+Any or every analysis will have limitations so you would be well advised to be *selective* and *constructive*:
+
+- *selective*: are the limitations you identify likely to affect or bias results? 
+- *constructive*: in what ways would practicable future research address these limitations?
+:::
+
+Explaining implications or limitations is not a box to tick in this exercise so that you can say you have met a criterion for assessment.
+This is an opportunity for you to work in a *scholarly* way and for you to present your work in a *scholarly* way.
+This will require reflection, critical evaluation, and a grasp of elements of the relevant literature.
+
+## Summary
+
+Reports should present **enough information that the reader can understand**: 
+
+- the background and motivation for a study; 
+- the features of the data analyzed and the methods of data collection; 
+- the approach taken in analysis, the analysis steps, and the results; 
+- the relationship between the observed results and the expected results, and the interpretation of findings in relation to previous work. 
+
+::: callout-tip
+To be clear about clarity: 
+
+- explain, spell things out (decisions, reasoning, interpretations) as if you were explaining them to a reasonably intelligent reader, a Psychologist who is not a specialist in the area of study occupied by the study reported, i.e. me. 
+:::
+
+## What format is required?
+
+### Statistics, tables and figures should follow APA guidelines. See here for a free guide:
 
 For general APA formatting of reports:
 
@@ -110,5 +212,3 @@ And for APA formatting of statistics and numbers:
 <https://owl.purdue.edu/owl/research_and_citation/apa_style/apa_formatting_and_style_guide/apa_numbers_statistics.html>
 
 Though the APA guidelines are the authoritative guide.
-
-#### Add a link to the data analysed for the report
