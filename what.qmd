@@ -109,7 +109,7 @@ If you are unsure, pick an article you admire in a journal and *analyze* how the
 
 You must write text that explains to the reader what analysis you did, why you did it, what results you found, and what you think the implications of those results may be. 
 
-:: callout-tip
+::: callout-tip
 Be clear on:
 
 - what the outcome measure or dependent variable for analysis was,
