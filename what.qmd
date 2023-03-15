@@ -133,7 +133,7 @@ The answer to that question depends on the question or hypothesis, the nature of
 You can read a discuss of the nature of the choices open to any data analysis job in @sec-multiverse.
 You can read about ways to identify how you can approach the analysis task in @sec-whatanalysis or @sec-try-multiverse.
 
-:: callout-tip
+::: callout-tip
 - Do what seems reasonable using one or more of the analysis methods practiced in class
 - And **explain your reasoning**
 :::
