@@ -1,9 +1,5 @@
 # How {#sec-how}
 
-::: callout-warning
-This chapter is still under construction.
-:::
-
 The research report assignment requires students to locate, access, analyse and report previously collected data. Here, we answer the question:
 
 -   How can the assignment be done?
