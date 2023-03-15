@@ -1,4 +1,4 @@
-# Introduction: the why
+# Introduction: the why {#sec-report-intro-why}
 
 The research report assignment requires students to locate, access, analyse and report previously collected data. This introduction is intended to answer the first question anybody might ask.
 
