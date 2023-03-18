@@ -17,6 +17,7 @@ book:
     - 02-mixed.qmd
     - 03-mixed.qmd
     - 04-glmm.qmd
+    - 05-ordinal.qmd
     - part: "WRITING ABOUT RESEARCH"
     - intro.qmd
     - what.qmd
