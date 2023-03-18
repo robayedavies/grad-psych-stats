@@ -1,0 +1,348 @@
+# Introduction to Ordinal Models {#sec-ordinal-intro}
+
+```{r libraries-hide}
+#| warning: false
+#| echo: false
+library(ggeffects)
+library(here)
+library(lme4)
+library(memisc)
+library(ordinal)
+library(patchwork)
+library(tidyverse)
+```
+
+::: callout-warning
+This chapter is under construcion
+:::
+
+## Motivations: working with ordinal outcomes {#sec-ordinal-motivations}
+
+
+## The key idea to get us started {#sec-ordinal-ideas}
+
+::: callout-important
+-
+:::
+
+## Targets {#sec-ordinal-targets}
+
+1.  Recognize the limitations of alternative methods for analyzing such outcomes, @sec-tradition-limitations.
+2.  Understand practically the reasons for using GLMMs when we analyze discrete outcome variables, @sec-ordinal-practical-understanding.
+3.  Practice running GLMMs with varying random effects structures.
+4.  Practice reporting the results of GLMMs, including through the use of model plots.
+
+## Study guide {#sec-ordinal-study-guide}
+
+I have provided a collection of materials you can use. Here, I explain what they are and how I suggest you use them.
+
+**1. Chapter: 05-ordinal**
+
+1.1. I have written this chapter to discuss the main ideas and set out the practical steps you can follow to start to develop the skills required to work with categorical outcomes data using GLMMs.
+
+1.2. The practical elements include data tidying, visualization and analysis steps.
+
+1.3. You can read the chapter, run the code, and do the exercises.
+
+-   Read in the example dataset.
+-   Experiment with the .R code used to work with the example data.
+-   Run GLMMs of demonstration data.
+-   Run GLMMs of alternate data sets.
+-   Review the recommended readings (@sec-ordinal-recommended-reading).
+
+**2. Practical workbook materials**
+
+2.1 In the following sections, I describe the practical steps, and associated resources, you can use for your learning.
+
+## The data we will work with: {#sec-ordinal-data}
+
+### Study information {#sec-ordinal-data-study}
+
+#### Introduction: the background for the study {#sec-ordinal-data-background}
+
+
+We addressed research questions.
+
+::: callout-note
+-
+:::
+
+#### Design {#sec-ordinal-data-study-design}
+
+
+#### Participants {#sec-ordinal-data-participants}
+
+
+#### Stimulus materials {#sec-ordinal-data-materials}
+
+
+#### Procedure {#sec-ordinal-data-procedure}
+
+
+#### Outcome (dependent) variables {#sec-ordinal-data-outcome}
+
+
+### Locate and download the data file {#sec-ordinal-data-download}
+
+You can download the [data-05-ordinal.zip](files/data-05-ordinal.zip) files folder for this chapter.
+
+
+
+### Read-in the data file using read_csv {#sec-ordinal-data-import}
+
+I am going to assume you have downloaded the data file, and that you know where it is. We use `read_csv` to read the data file into R.
+
+<!-- ```{r} -->
+<!-- #| label: readinall -->
+<!-- #| message: false -->
+<!-- long.orth <- read_csv("long.orth_2020-08-11.csv",  -->
+<!--                       col_types = cols( -->
+<!--                         Participant = col_factor(), -->
+<!--                         Time = col_factor(), -->
+<!--                         Study = col_factor(), -->
+<!--                         Instructions = col_factor(), -->
+<!--                         Version = col_factor(), -->
+<!--                         Word = col_factor(), -->
+<!--                         Orthography = col_factor(), -->
+<!--                         Measure = col_factor(), -->
+<!--                         Spelling.transcription = col_factor() -->
+<!--                       ) -->
+<!--                     ) -->
+<!-- ``` -->
+
+
+### Inspect the data {#sec-ordinal-data-inspect}
+
+It is always a good to inspect what you have got when you read a data file in to R.
+
+<!-- ```{r} -->
+<!-- #| label: data-summary -->
+<!-- #| eval: false -->
+<!-- summary(long.orth) -->
+<!-- ``` -->
+
+
+
+## Tidy the data {#sec-ordinal-data-tidy}
+
+
+### Code categorical factors {#sec-ordinal-data-recode}
+
+
+<!-- ```{r} -->
+<!-- #| label: glm-summary -->
+<!-- summary(glm(Score ~ Orthography, family = "binomial", data = long.orth)) -->
+<!-- ``` -->
+
+
+::: callout-tip
+-
+:::
+
+
+
+## Introduction to thinking about the need for generalized models {#sec-ordinal-ideas-intro}
+
+## Our focus is on the analysis of catgorical outcome variables {#sec-ordinal-categorical-outcomes}
+
+
+
+### Recognize the limitations of alternative methods for analyzing response accuracy {#sec-tradition-limitations}
+
+
+
+::: callout-tip
+-
+:::
+
+#### Accuracy is bounded between 1 and 0, linear model model predictions or confidence intervals are not {#sec-ordinal-bounded-outcomes}
+
+
+
+#### ANOVA or regression require the assumption of homogeneity of variance but for binary outcomes like accuracy the variance is proportional to the mean {#sec-ordinal-anova-assumptions}
+
+
+
+#### Summary: Recognize the limitations of traditional methods for analyzing response accuracy {#sec-ordinal-limitations-summary}
+
+
+
+### Understanding the Generalized part of the Generalized Linear Mixed-effects Models in practical terms {#sec-ordinal-practical-understanding}
+
+
+
+## Working with Cumulative Link Mixed-effects Models in R {#sec-ordinal-working-models}
+
+
+
+### Specify a random intercepts model {#sec-ordinal-random-intercepts}
+
+In our first model, we will specify just random effects of participants and items on intercepts.
+
+<!-- ```{r} -->
+<!-- #| eval: false -->
+<!-- long.orth.min.glmer <- glmer(Score ~  -->
+<!--                                Time + Orthography + Instructions + zConsistency_H +  -->
+
+<!--                                Orthography:Instructions + -->
+
+<!--                                Orthography:zConsistency_H + -->
+
+<!--                                (1 | Participant) +  -->
+
+<!--                                (1 | Word), -->
+
+<!--                              family = "binomial",  -->
+<!--                              glmerControl(optimizer="bobyqa", optCtrl=list(maxfun=2e5)), -->
+
+<!--                              data = long.orth) -->
+
+<!-- summary(long.orth.min.glmer) -->
+<!-- ``` -->
+
+The code works as follows.
+
+First, we have a chunk of code mostly similar to what we have done before, but changing the function.
+
+-   `glmer()` the function name changes because now we want a *generalized* linear mixed-effects model of accuracy.
+
+The model specification includes information about fixed effects and about random effects.
+
+-   With `(1 | Participant)` we include random effects of participants on on intercepts.
+-   With `(1 | Word)` we include random effects of stimulus on on intercepts.
+
+Second, we have the bit that is specific to *generalized* models.
+
+-   `family = "binomial"` is entered because accuracy is a binary outcome variable (correct, incorrect) so we assume a binomial probability distribution.
+
+We then specify:
+
+-   `glmerControl(optimizer="bobyqa", ...)` to change the underlying mathematical engine (the optimizer) to cope with greater model complexity\
+-   and we allow the model fitting functions to take longer to find estimates with `optCtrl=list(maxfun=2e5)`.
+
+Notice how we specify the fixed effects. We want `glmer()` to estimate "main effects and interactions" that we hypothesized.
+
+We specify the *main* effects with:
+
+<!-- ```{r} -->
+<!-- #| eval: false -->
+<!-- Time + Orthography + Instructions + zConsistency_H + -->
+<!-- ``` -->
+
+We specify the *interaction* effects with:
+
+<!-- ```{r} -->
+<!-- #| eval: false -->
+<!-- Orthography:Instructions + -->
+
+<!-- Orthography:zConsistency_H + -->
+<!-- ``` -->
+
+
+
+
+### Read the results {#sec-ordinal-results}
+
+If you run the model code, you will get the results shown in the output.
+
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- long.orth.min.glmer <- glmer(Score ~  -->
+<!--                                Time + Orthography + Instructions + zConsistency_H +  -->
+
+<!--                                Orthography:Instructions + -->
+
+<!--                                Orthography:zConsistency_H + -->
+
+<!--                                (1 | Participant) +  -->
+
+<!--                                (1 |Word), -->
+
+<!--                              family = "binomial",  -->
+<!--                              glmerControl(optimizer="bobyqa", optCtrl=list(maxfun=2e5)), -->
+
+<!--                              data = long.orth) -->
+<!-- summary(long.orth.min.glmer) -->
+<!-- ``` -->
+
+
+#### Ordinal models and hypothesis tests {#sec-ordinal-hypothesis}
+
+
+
+### Presenting and visualizing the effects {#sec-ordinal-visualizing}
+
+
+
+
+## Examining if we should include random effects {#sec-ordinal-random-effects}
+
+
+
+#### Getting started {#sec-ordinal-random-effects-start}
+
+::: callout-tip
+The question is:
+
+-   So, what random effects should we include?
+:::
+
+
+#### Random effects of subjects and stimulus items on intercepts {#sec-ordinal-random-effects-subjects-items-intercepts}
+
+#### Random effects of subjects and stimulus words on the slope of the Orthography effect {#sec-ordinal-random-effects-subjects-items-slopes}
+
+
+
+#### Random effects of subjects and stimulus words on the slope of the Instructions effect {#sec-ordinal-random-effects-subjects-items-slopes-2}
+
+
+
+#### Adding effects a bit at a time {#sec-ordinal-random-effects-add}
+
+
+
+#### Random effects of subjects on the slope of the consistency effect {#sec-ordinal-random-effects-subjects-items-slopes-3}
+
+
+
+#### Random effects of subjects and stimulus words on the slope of the time effect {#sec-ordinal-random-effects-subjects-items-slopes-4}
+
+
+
+### Bad signs {#sec-ordinal-bad-signs}
+
+
+
+### Comparison of models varying in random effects {#sec-ordinal-comparing0-models-2}
+
+
+
+### Addressing convergence problems {#sec-ordinal-addressing-convergence}
+
+
+#### Exercises
+
+
+
+#### Summary advice {#sec-ordinal-advice-summary}
+
+
+
+## Reporting model results {#sec-ordinal-reporting-results}
+
+
+
+## Summary {#sec-ordinal-summary}
+
+
+
+### Glossary: useful functions {#sec-ordinal-glossary-useful-functions}
+
+
+
+## Recommended reading {#sec-ordinal-recommended-reading}
+
+The example studies referred to in this chapter are published in [@monaghan2015; @ricketts2021].
+
+
