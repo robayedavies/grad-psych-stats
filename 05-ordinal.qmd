@@ -15,6 +15,7 @@ library(memisc)
 library(ordinal)
 library(patchwork)
 library(tidyverse)
+library(viridis)
 ```
 
 ```{r}
@@ -289,27 +290,37 @@ health <- read_csv("2021-22_PSYC304-health-comprehension.csv",
 ```
 
 Notice that we use `col_types = cols(...)` to require `read_csv()` to class some columns as factors.
+
 Importantly, we ask R to treat the `rating` variable as a *factor* with `rating = col_factor()`.
 
 :::callout-tip
 In the practical work we do, we will be using functions from the `{ordinal}` library to model ordinal data.
 
-- Importantly, in using these functions, we need ask R to treat the ordinal outcome variable as a *factor*.
+- In using these functions, we need ask R to treat the ordinal outcome variable as a *factor*.
 :::
 
 ### Inspect the data {#sec-ordinal-data-inspect}
 
 It is always a good to inspect what you have got when you read a data file in to R.
+Here, what may most concern us is the distribution of observed responses on the rating scale (responses to the "How well do you understand?" question).
 
-<!-- ```{r} -->
+```{r}
 
-<!-- #| label: data-summary -->
+health <- health %>% mutate(rating = fct_relevel(rating, sort))
 
-<!-- #| eval: false -->
+health %>%
+  group_by(rating) %>%
+  summarise(count = n()) %>%
+  ggplot(aes(x = rating, y = count, colour = rating)) + 
+  geom_point(size = 3) +
+  scale_color_viridis(discrete=TRUE, option = "mako") + theme_bw() +
+  theme(
+    panel.grid.major.y = element_blank()  # No horizontal grid lines
+  ) +
+  coord_flip()
+```
 
-<!-- summary(long.orth) -->
 
-<!-- ``` -->
 
 ## Tidy the data {#sec-ordinal-data-tidy}
 

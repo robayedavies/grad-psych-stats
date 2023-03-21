@@ -499,7 +499,8 @@ Note
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                                 )</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                               )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Notice that we use <code>col_types = cols(...)</code> to require <code>read_csv()</code> to class some columns as factors. Importantly, we ask R to treat the <code>rating</code> variable as a <em>factor</em> with <code>rating = col_factor()</code>.</p>
+<p>Notice that we use <code>col_types = cols(...)</code> to require <code>read_csv()</code> to class some columns as factors.</p>
+<p>Importantly, we ask R to treat the <code>rating</code> variable as a <em>factor</em> with <code>rating = col_factor()</code>.</p>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -512,19 +513,31 @@ Tip
 <div class="callout-body-container callout-body">
 <p>In the practical work we do, we will be using functions from the <code>{ordinal}</code> library to model ordinal data.</p>
 <ul>
-<li>Importantly, in using these functions, we need ask R to treat the ordinal outcome variable as a <em>factor</em>.</li>
+<li>In using these functions, we need ask R to treat the ordinal outcome variable as a <em>factor</em>.</li>
 </ul>
 </div>
 </div>
 </section>
 <section id="sec-ordinal-data-inspect" class="level3" data-number="7.5.4">
 <h3 data-number="7.5.4" class="anchored" data-anchor-id="sec-ordinal-data-inspect"><span class="header-section-number">7.5.4</span> Inspect the data</h3>
-<p>It is always a good to inspect what you have got when you read a data file in to R.</p>
-<!-- ```{r} -->
-<!-- #| label: data-summary -->
-<!-- #| eval: false -->
-<!-- summary(long.orth) -->
-<!-- ``` -->
+<p>It is always a good to inspect what you have got when you read a data file in to R. Here, what may most concern us is the distribution of observed responses on the rating scale (responses to the “How well do you understand?” question).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>health <span class="ot">&lt;-</span> health <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">rating =</span> <span class="fu">fct_relevel</span>(rating, sort))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>health <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(rating) <span class="sc">%&gt;%</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> rating, <span class="at">y =</span> count, <span class="at">colour =</span> rating)) <span class="sc">+</span> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis</span>(<span class="at">discrete=</span><span class="cn">TRUE</span>, <span class="at">option =</span> <span class="st">"mako"</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>()  <span class="co"># No horizontal grid lines</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="05-ordinal_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 </section>
 </section>
 <section id="sec-ordinal-data-tidy" class="level2" data-number="7.6">
