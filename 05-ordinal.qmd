@@ -1,8 +1,13 @@
+---
+bibliography: references.bib
+---
+
 # Introduction to Ordinal Models {#sec-ordinal-intro}
 
 ```{r libraries-hide}
 #| warning: false
 #| echo: false
+library(ggdist)
 library(ggeffects)
 library(here)
 library(lme4)
@@ -13,24 +18,90 @@ library(tidyverse)
 ```
 
 ::: callout-warning
-This chapter is under construcion
+This chapter is under construction
 :::
 
 ## Motivations: working with ordinal outcomes {#sec-ordinal-motivations}
 
+Ordinal data are very common in psychological science.
+Often, we will encounter ordinal data recorded as responses to Likert-style items in which the participant is asked to indicate a response on an ordered scale ranging between two end points [@bürkner2019; @liddell2018].
+An example of a Likert question item might be: *How well do you think you have understood this text? (Please check one response)* where the participant must respond by checking an option, given 5 options ranging from 1 (not well at all) to 5 (very well).
+The critical characteristics of such responses are that:
+
+- The responses are ordered, as indicated by the number labels;
+- Response types are categorical or qualitative, not numeric.
+
+We will be working with study data in which the outcome that is the target for our analyses comprise responses to questions designed to elicit ratings.
+Ordinal data may, however, also derive from situations in which ordered categorical responses do not derive from ratings items [we will look briefly at sequential responses, @bürkner2019].
+
+The challenge we face is that we will aim to develop skills in using *ordinal models* when, in contrast, most psychological research articles will report analyses of ordinal data using conventional methods like ANOVA or linear regression.
+We will work to understand why ordinal models are better.
+We will learn that applying conventional methods to ordinal data will, in principle, involve a poor account of the data and, in practice, will create the risk of producing misleading results.
+And we will learn how to work with and interpret the results from ordinal models with or without random effects.
+
+In our work in this chapter, we will rely extensively on the ideas set out by @liddell2018, see @sec-ordinal-recommended-reading.
 
 ## The key idea to get us started {#sec-ordinal-ideas}
 
 ::: callout-important
--
+Ordinal responses are labelled with numbers but ordinal data are *not* numeric.
 :::
+
+Ordinal responses are coded with numeric labels.
+These number labels may indicate order but we do not know that the difference between e.g. response options `1` versus `2` is the same as the difference between `2` versus `3` or `3` versus `4`.
+Ordinal data contrast with *metric* data [@liddell2018] which are recorded on scales for which we assume *both* order and equal intervals.
+When researchers apply metric models to ordinal data, they incorrectly assume that the response options e.g. in ratings are separated by equal intervals.
+Yet, in a review of the 68 recently articles that mentioned the term "Likert" in a sample of highly ranked Psychology journals, @liddell2018 found that ordinal data were treated as metric and the articles presented results from metric models.
+
+One way to think about ordinal data is that often (but not always) ratings  may be understood to come from psychological processes in which
+the participant, in response to the Likert question, divides some latent (unobserved) psychological continuum or scale into categories in order to select a response option.
+Imagine, for example, that you have been asked the question "How well do you understand this text? (on a scale from 1-5)".
+Presumably, to answer this question, you will have to choose a response based on where you think you are on your unobserved measure of your understanding.
+
+You may be able to evaluate the cohesion, or some other internal measure, of your understanding of the text. 
+Simplifying a bit, we might assume that your internal measure of understanding is associated with a normal probability distribution so that it peaks over some value (e.g., `3`) of the strength of understanding though other values are possible.
+As @fig-latent-normal-splits suggests, a participant in this common situation will have to map the internal measure (the latent scale, e.g., of understanding) to a number from the response options you are given (e.g., rating scale values ranging 1-5).
+But there is no reason to suppose that your internal measure of your understanding is divided into an ordered metric scale.
+
+```{r}
+#| label: fig-latent-normal-splits
+#| fig-cap: "A latent scale on the horizontal axis is divided into intervals or bins divided by thresholds marked by dotted lines. The cumulative normal probability in the intervals is the probability of the ordinal values."
+#| fig-alt: "The figure shows a normal curve, split by dotted lines shown at x-axis points labelled 1-5."
+#| warning: false
+#| message: false
+#| echo: false
+#| fig-height: 5
+#| fig-width: 5
+ggplot(data = data.frame(x = c(-5, 5)), aes(x)) +
+  stat_function(fun = dnorm, n = 100, 
+                args = list(mean = 0, sd = 1)) + 
+  ylab("") +
+  xlab("Rating scale") +
+  scale_y_continuous(breaks = NULL) +
+  scale_x_continuous(breaks = c(-2, -1.5, 0, 1.5, 2), 
+                     labels = c("1", "2", "3", "4", "5")) +
+  geom_vline(xintercept = c(-2, -1.5, 0, 1.5, 2),
+             linetype = "dotted", 
+             colour = "red") +
+  theme_bw() +
+  theme(panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank())
+```
+
+In conducting analyses of ordinal data with ordinal models, we often fit models that describe the cumulative probability that a rating response is located at some value (typically, understood in terms of threshold) on an underlying latent continuum.
+In ordinal models, we do not assume that the ordinal responses map to equally spaced intervals on the latent scale: the values or thresholds at which the continuum are split are to be estimated.
+
+In applying metric models to ordinal data, we *do* assume that intervals are equal though this assumption is unlikely to be true or, at least, is unlikely to be verifiable.
+This faulty assumption has consequences.
+Because the mis-application of metric models (e.g. ANOVA, linear models) to ordinal data is both commonplace and *risky*.
+As @liddell2018 demonstrate, mis-applying metric models to ordinal data can result in false positives (detecting a difference when none is present), false negatives (missing a difference that is present) and inversions (swapping the difference so that is positive instead of negative or vice versa).   
+These kinds of misrepresentions cannot be avoided and are not fixed by, for example, averaging ratings scales data together.
 
 ## Targets {#sec-ordinal-targets}
 
-1.  Recognize the limitations of alternative methods for analyzing such outcomes, @sec-tradition-limitations.
-2.  Understand practically the reasons for using GLMMs when we analyze discrete outcome variables, @sec-ordinal-practical-understanding.
-3.  Practice running GLMMs with varying random effects structures.
-4.  Practice reporting the results of GLMMs, including through the use of model plots.
+1.  Understand practically the reasons for using ordinal models when we analyze ordinal outcome variables, @sec-ordinal-practical-understanding.
+3.  Practice running ordinal models with varying random effects structures.
+4.  Practice reporting the results of ordinal models, including through the use of prediction plots.
 
 ## Study guide {#sec-ordinal-study-guide}
 
@@ -38,7 +109,7 @@ I have provided a collection of materials you can use. Here, I explain what they
 
 **1. Chapter: 05-ordinal**
 
-1.1. I have written this chapter to discuss the main ideas and set out the practical steps you can follow to start to develop the skills required to work with categorical outcomes data using GLMMs.
+1.1. I have written this chapter to discuss the main ideas and set out the practical steps you can follow to start to develop the skills required to work with ordered categorical outcomes i.e. *ordinal data* using ordinal models.
 
 1.2. The practical elements include data tidying, visualization and analysis steps.
 
@@ -46,8 +117,8 @@ I have provided a collection of materials you can use. Here, I explain what they
 
 -   Read in the example dataset.
 -   Experiment with the .R code used to work with the example data.
--   Run GLMMs of demonstration data.
--   Run GLMMs of alternate data sets.
+-   Run ordinal models of demonstration data.
+-   Run ordinal models of alternate data sets.
 -   Review the recommended readings (@sec-ordinal-recommended-reading).
 
 **2. Practical workbook materials**
@@ -60,128 +131,124 @@ I have provided a collection of materials you can use. Here, I explain what they
 
 #### Introduction: the background for the study {#sec-ordinal-data-background}
 
-
 We addressed research questions.
 
 ::: callout-note
--
+-   
 :::
 
 #### Design {#sec-ordinal-data-study-design}
 
-
 #### Participants {#sec-ordinal-data-participants}
-
 
 #### Stimulus materials {#sec-ordinal-data-materials}
 
-
 #### Procedure {#sec-ordinal-data-procedure}
 
-
 #### Outcome (dependent) variables {#sec-ordinal-data-outcome}
-
 
 ### Locate and download the data file {#sec-ordinal-data-download}
 
 You can download the [data-05-ordinal.zip](files/data-05-ordinal.zip) files folder for this chapter.
-
-
 
 ### Read-in the data file using read_csv {#sec-ordinal-data-import}
 
 I am going to assume you have downloaded the data file, and that you know where it is. We use `read_csv` to read the data file into R.
 
 <!-- ```{r} -->
-<!-- #| label: readinall -->
-<!-- #| message: false -->
-<!-- long.orth <- read_csv("long.orth_2020-08-11.csv",  -->
-<!--                       col_types = cols( -->
-<!--                         Participant = col_factor(), -->
-<!--                         Time = col_factor(), -->
-<!--                         Study = col_factor(), -->
-<!--                         Instructions = col_factor(), -->
-<!--                         Version = col_factor(), -->
-<!--                         Word = col_factor(), -->
-<!--                         Orthography = col_factor(), -->
-<!--                         Measure = col_factor(), -->
-<!--                         Spelling.transcription = col_factor() -->
-<!--                       ) -->
-<!--                     ) -->
-<!-- ``` -->
 
+<!-- #| label: readinall -->
+
+<!-- #| message: false -->
+
+<!-- long.orth <- read_csv("long.orth_2020-08-11.csv",  -->
+
+<!--                       col_types = cols( -->
+
+<!--                         Participant = col_factor(), -->
+
+<!--                         Time = col_factor(), -->
+
+<!--                         Study = col_factor(), -->
+
+<!--                         Instructions = col_factor(), -->
+
+<!--                         Version = col_factor(), -->
+
+<!--                         Word = col_factor(), -->
+
+<!--                         Orthography = col_factor(), -->
+
+<!--                         Measure = col_factor(), -->
+
+<!--                         Spelling.transcription = col_factor() -->
+
+<!--                       ) -->
+
+<!--                     ) -->
+
+<!-- ``` -->
 
 ### Inspect the data {#sec-ordinal-data-inspect}
 
 It is always a good to inspect what you have got when you read a data file in to R.
 
 <!-- ```{r} -->
+
 <!-- #| label: data-summary -->
+
 <!-- #| eval: false -->
+
 <!-- summary(long.orth) -->
+
 <!-- ``` -->
-
-
 
 ## Tidy the data {#sec-ordinal-data-tidy}
 
-
 ### Code categorical factors {#sec-ordinal-data-recode}
 
-
 <!-- ```{r} -->
+
 <!-- #| label: glm-summary -->
+
 <!-- summary(glm(Score ~ Orthography, family = "binomial", data = long.orth)) -->
+
 <!-- ``` -->
 
-
 ::: callout-tip
--
+-   
 :::
-
-
 
 ## Introduction to thinking about the need for generalized models {#sec-ordinal-ideas-intro}
 
 ## Our focus is on the analysis of catgorical outcome variables {#sec-ordinal-categorical-outcomes}
 
-
-
 ### Recognize the limitations of alternative methods for analyzing response accuracy {#sec-tradition-limitations}
 
-
-
 ::: callout-tip
--
+-   
 :::
 
 #### Accuracy is bounded between 1 and 0, linear model model predictions or confidence intervals are not {#sec-ordinal-bounded-outcomes}
 
-
-
 #### ANOVA or regression require the assumption of homogeneity of variance but for binary outcomes like accuracy the variance is proportional to the mean {#sec-ordinal-anova-assumptions}
-
-
 
 #### Summary: Recognize the limitations of traditional methods for analyzing response accuracy {#sec-ordinal-limitations-summary}
 
-
-
 ### Understanding the Generalized part of the Generalized Linear Mixed-effects Models in practical terms {#sec-ordinal-practical-understanding}
 
-
-
 ## Working with Cumulative Link Mixed-effects Models in R {#sec-ordinal-working-models}
-
-
 
 ### Specify a random intercepts model {#sec-ordinal-random-intercepts}
 
 In our first model, we will specify just random effects of participants and items on intercepts.
 
 <!-- ```{r} -->
+
 <!-- #| eval: false -->
+
 <!-- long.orth.min.glmer <- glmer(Score ~  -->
+
 <!--                                Time + Orthography + Instructions + zConsistency_H +  -->
 
 <!--                                Orthography:Instructions + -->
@@ -193,11 +260,13 @@ In our first model, we will specify just random effects of participants and item
 <!--                                (1 | Word), -->
 
 <!--                              family = "binomial",  -->
+
 <!--                              glmerControl(optimizer="bobyqa", optCtrl=list(maxfun=2e5)), -->
 
 <!--                              data = long.orth) -->
 
 <!-- summary(long.orth.min.glmer) -->
+
 <!-- ``` -->
 
 The code works as follows.
@@ -225,29 +294,35 @@ Notice how we specify the fixed effects. We want `glmer()` to estimate "main eff
 We specify the *main* effects with:
 
 <!-- ```{r} -->
+
 <!-- #| eval: false -->
+
 <!-- Time + Orthography + Instructions + zConsistency_H + -->
+
 <!-- ``` -->
 
 We specify the *interaction* effects with:
 
 <!-- ```{r} -->
+
 <!-- #| eval: false -->
+
 <!-- Orthography:Instructions + -->
 
 <!-- Orthography:zConsistency_H + -->
+
 <!-- ``` -->
-
-
-
 
 ### Read the results {#sec-ordinal-results}
 
 If you run the model code, you will get the results shown in the output.
 
 <!-- ```{r} -->
+
 <!-- #| echo: false -->
+
 <!-- long.orth.min.glmer <- glmer(Score ~  -->
+
 <!--                                Time + Orthography + Instructions + zConsistency_H +  -->
 
 <!--                                Orthography:Instructions + -->
@@ -259,25 +334,20 @@ If you run the model code, you will get the results shown in the output.
 <!--                                (1 |Word), -->
 
 <!--                              family = "binomial",  -->
+
 <!--                              glmerControl(optimizer="bobyqa", optCtrl=list(maxfun=2e5)), -->
 
 <!--                              data = long.orth) -->
-<!-- summary(long.orth.min.glmer) -->
-<!-- ``` -->
 
+<!-- summary(long.orth.min.glmer) -->
+
+<!-- ``` -->
 
 #### Ordinal models and hypothesis tests {#sec-ordinal-hypothesis}
 
-
-
 ### Presenting and visualizing the effects {#sec-ordinal-visualizing}
 
-
-
-
 ## Examining if we should include random effects {#sec-ordinal-random-effects}
-
-
 
 #### Getting started {#sec-ordinal-random-effects-start}
 
@@ -287,62 +357,42 @@ The question is:
 -   So, what random effects should we include?
 :::
 
-
 #### Random effects of subjects and stimulus items on intercepts {#sec-ordinal-random-effects-subjects-items-intercepts}
 
 #### Random effects of subjects and stimulus words on the slope of the Orthography effect {#sec-ordinal-random-effects-subjects-items-slopes}
 
-
-
 #### Random effects of subjects and stimulus words on the slope of the Instructions effect {#sec-ordinal-random-effects-subjects-items-slopes-2}
-
-
 
 #### Adding effects a bit at a time {#sec-ordinal-random-effects-add}
 
-
-
 #### Random effects of subjects on the slope of the consistency effect {#sec-ordinal-random-effects-subjects-items-slopes-3}
-
-
 
 #### Random effects of subjects and stimulus words on the slope of the time effect {#sec-ordinal-random-effects-subjects-items-slopes-4}
 
-
-
 ### Bad signs {#sec-ordinal-bad-signs}
-
-
 
 ### Comparison of models varying in random effects {#sec-ordinal-comparing0-models-2}
 
-
-
 ### Addressing convergence problems {#sec-ordinal-addressing-convergence}
-
 
 #### Exercises
 
-
-
 #### Summary advice {#sec-ordinal-advice-summary}
-
-
 
 ## Reporting model results {#sec-ordinal-reporting-results}
 
-
-
 ## Summary {#sec-ordinal-summary}
-
-
 
 ### Glossary: useful functions {#sec-ordinal-glossary-useful-functions}
 
-
-
 ## Recommended reading {#sec-ordinal-recommended-reading}
 
-The example studies referred to in this chapter are published in [@monaghan2015; @ricketts2021].
+The published example studies referred to in this chapter are published in [@ricketts2021; @rodríguez-ferreiro2020a].
 
+@liddell2018 present a clear account of the problems associated with treating ordinal data as metric, and explain how we can better account for ordinal data.
 
+@bürkner2019 present a clear tutorial on cumulative and sequential ratio models.
+
+Both @liddell2018 and @bürkner2019 work from a Bayesian perspective but the insights are generally applicable.
+
+Guides to the `{ordinal}` model functions `clm()` and `clmm()` are presented in [@christensen2022; @christensen2015].
