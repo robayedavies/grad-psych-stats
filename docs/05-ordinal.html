@@ -20,6 +20,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
@@ -311,7 +374,7 @@ Important
 <div class="cell-output-display">
 <div id="fig-latent-normal-splits" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="05-ordinal_files/figure-html/fig-latent-normal-splits-1.png" class="img-fluid figure-img" alt="The figure shows a normal curve, split by dotted lines shown at x-axis points labelled 1-5." width="480"></p>
+<p><img src="05-ordinal_files/figure-html/fig-latent-normal-splits-1.png" class="img-fluid figure-img" alt="The figure shows a normal curve, split by dotted lines shown at x-axis points labelled 1-5." width="576"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;7.1: A latent scale on the horizontal axis is divided into intervals or bins divided by thresholds marked by dotted lines. The cumulative normal probability in the intervals is the probability of the ordinal values.</figcaption><p></p>
 </figure>
 </div>
@@ -383,18 +446,33 @@ Note
 <div class="cell-output-display">
 <div id="fig-histogram-grid-" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="05-ordinal_files/figure-html/fig-histogram-grid--1.png" class="img-fluid figure-img" alt="The figure presents a grid of histograms indicating the distribution of (x-axis) scores on a range of participant attribute variables. The grid includes histograms of the distributions of: self-rated accuracy; vocabulary (SHIPLEY); health literacy (HLVA); reading strategy (FACTOR3); age (years); gender; education, and ethnicity. The plots indicate: (1.) most self-rated accuracy scores are high (over 6); (2.) many participants with vocabulary scores greater than 30, a few present lower scores; (3.) health literacy scores centered on 8 or some, with lower and higher scores; (4.) a skewed distribution of reading strategy scores, with many around 20-40, and a tail of higher scores; (5.) most participants are 20-40 years of age, some older; (6.) many more female than male participants, very few non-binary reported; (7.) many more participants with higher education than further, very few with secondary; and (8.) many White participants (ONS categories), far fewer Asian or Mixed or Black ethnicity participants." width="1152"></p>
+<p><img src="05-ordinal_files/figure-html/fig-histogram-grid--1.png" class="img-fluid figure-img" alt="The figure presents a grid of histograms indicating the distribution of (x-axis) scores on a range of participant attribute variables. The grid includes histograms of the distributions of: self-rated accuracy; vocabulary (SHIPLEY); health literacy (HLVA); reading strategy (FACTOR3); age (years); gender; education, and ethnicity. The plots indicate: (1.) most self-rated accuracy scores are high (over 6); (2.) many participants with vocabulary scores greater than 30, a few present lower scores; (3.) health literacy scores centered on 8 or some, with lower and higher scores; (4.) a skewed distribution of reading strategy scores, with many around 20-40, and a tail of higher scores; (5.) most participants are 20-40 years of age, some older; (6.) many more female than male participants, very few non-binary reported; (7.) many more participants with higher education than further, very few with secondary; and (8.) many White participants (ONS categories), far fewer Asian or Mixed or Black ethnicity participants." width="1344"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;7.2: Grid of plots showing the distribution of participant attributes. The grid includes histograms of the distributions of: self-rated accuracy; vocabulary (SHIPLEY); health literacy (HLVA); reading strategy (FACTOR3); and age (years). We also see dot plots presenting counts of numbers of participants of different self-reported gender, education, and ethnicity categories.</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
+<p>The plots indicate:</p>
+<ol type="1">
+<li>most self-rated accuracy scores are high (over 6);</li>
+<li>many participants with vocabulary scores greater than 30, a few present lower scores;</li>
+<li>health literacy scores centered on 8 or some, with lower and higher scores;</li>
+<li>a skewed distribution of reading strategy scores, with many around 20-40, and a tail of higher scores;</li>
+<li>most participants are 20-40 years of age, some older;</li>
+<li>many more female than male participants, very few non-binary reported;</li>
+<li>many more participants with higher education than further, very few with secondary;</li>
+<li>and many White participants (<em>Office of National Statistics</em> categories), far fewer Asian or Mixed or Black ethnicity participants.</li>
+</ol>
 </section>
 <section id="sec-ordinal-data-materials-procedure" class="level4" data-number="7.5.1.3">
 <h4 data-number="7.5.1.3" class="anchored" data-anchor-id="sec-ordinal-data-materials-procedure"><span class="header-section-number">7.5.1.3</span> Stimulus materials and data collection procedure</h4>
-</section>
-<section id="sec-ordinal-data-outcome" class="level4" data-number="7.5.1.4">
-<h4 data-number="7.5.1.4" class="anchored" data-anchor-id="sec-ordinal-data-outcome"><span class="header-section-number">7.5.1.4</span> Outcome (dependent) variables</h4>
+<p>We collected data through an online survey administered through Qualtrics.</p>
+<p>We used the Shipley vocabulary sub-test <span class="citation" data-cites="shipley2009shipley">(<a href="references.html#ref-shipley2009shipley" role="doc-biblioref">Shipley et al., 2009</a>)</span> to estimate vocabulary knowledge.</p>
+<p>We used the Health Literacy Vocabulary Assessment (HLVA, Ratajczak, 2020; adapted for online presentation, Chadwick, 2020) to estimate health literacy.</p>
+<p>We used an instrument drawn from unpublished work by Calloway (2019) to assess the approach participants took to reading and understanding written information.</p>
+<p>We presented participants with a sample of 20 health information texts. In the data collection process for this dataset, participants were recruited in multiple different studies. In each study, any one participant was presented with a randomly selected subset of the total of 20 texts.</p>
+<p>We asked participants to rate their level of understanding of the health-related texts that we presented in the study. We used a nine-point judgment scales because they have been found to outperform alternative scales with fewer categories in terms of criterion validity, internal consistency, test-retest reliability, and discriminating power <span class="citation" data-cites="preston2000">(<a href="references.html#ref-preston2000" role="doc-biblioref">Preston &amp; Colman, 2000</a>)</span>.</p>
+<p>We recorded participants’ demographic characteristics: gender (coded: Male, Female, non-binary, prefer not to say); education (coded: Secondary, Further, Higher); and ethnicity (coded: White, Black, Asian, Mixed, Other).</p>
 </section>
 </section>
 <section id="sec-ordinal-data-download" class="level3" data-number="7.5.2">
@@ -404,23 +482,40 @@ Note
 <section id="sec-ordinal-data-import" class="level3" data-number="7.5.3">
 <h3 data-number="7.5.3" class="anchored" data-anchor-id="sec-ordinal-data-import"><span class="header-section-number">7.5.3</span> Read-in the data file using read_csv</h3>
 <p>I am going to assume you have downloaded the data file, and that you know where it is. We use <code>read_csv</code> to read the data file into R.</p>
-<!-- ```{r} -->
-<!-- #| label: readinall -->
-<!-- #| message: false -->
-<!-- long.orth <- read_csv("long.orth_2020-08-11.csv",  -->
-<!--                       col_types = cols( -->
-<!--                         Participant = col_factor(), -->
-<!--                         Time = col_factor(), -->
-<!--                         Study = col_factor(), -->
-<!--                         Instructions = col_factor(), -->
-<!--                         Version = col_factor(), -->
-<!--                         Word = col_factor(), -->
-<!--                         Orthography = col_factor(), -->
-<!--                         Measure = col_factor(), -->
-<!--                         Spelling.transcription = col_factor() -->
-<!--                       ) -->
-<!--                     ) -->
-<!-- ``` -->
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>health <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"2021-22_PSYC304-health-comprehension.csv"</span>, </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">na =</span> <span class="st">"-999"</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">ResponseId =</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">rating =</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">GENDER =</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">EDUCATION =</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">ETHNICITY =</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">NATIVE.LANGUAGE =</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">OTHER.LANGUAGE =</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">text.id =</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">text.question.id =</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">study =</span> <span class="fu">col_factor</span>()</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                                 )</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                               )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Notice that we use <code>col_types = cols(...)</code> to require <code>read_csv()</code> to class some columns as factors. Importantly, we ask R to treat the <code>rating</code> variable as a <em>factor</em> with <code>rating = col_factor()</code>.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In the practical work we do, we will be using functions from the <code>{ordinal}</code> library to model ordinal data.</p>
+<ul>
+<li>Importantly, in using these functions, we need ask R to treat the ordinal outcome variable as a <em>factor</em>.</li>
+</ul>
+</div>
+</div>
 </section>
 <section id="sec-ordinal-data-inspect" class="level3" data-number="7.5.4">
 <h3 data-number="7.5.4" class="anchored" data-anchor-id="sec-ordinal-data-inspect"><span class="header-section-number">7.5.4</span> Inspect the data</h3>
@@ -657,11 +752,17 @@ Dunlosky, J., &amp; Lipko, A. R. (2007). Metacomprehension. <em>Current Directio
 <div id="ref-liddell2018" class="csl-entry" role="doc-biblioentry">
 Liddell, T. M., &amp; Kruschke, J. K. (2018). Analyzing ordinal data with metric models: What could possibly go wrong? <em>Journal of Experimental Social Psychology</em>, <em>79</em>, 328–348. <a href="https://doi.org/10.1016/j.jesp.2018.08.009">https://doi.org/10.1016/j.jesp.2018.08.009</a>
 </div>
+<div id="ref-preston2000" class="csl-entry" role="doc-biblioentry">
+Preston, C. C., &amp; Colman, A. M. (2000). Optimal number of response categories in rating scales: Reliability, validity, discriminating power, and respondent preferences. <em>Acta Psychologica</em>, <em>104</em>(1), 1–15. <a href="https://doi.org/10.1016/S0001-6918(99)00050-5">https://doi.org/10.1016/S0001-6918(99)00050-5</a>
+</div>
 <div id="ref-ricketts2021" class="csl-entry" role="doc-biblioentry">
 Ricketts, J., Dawson, N., &amp; Davies, R. (2021). The hidden depths of new word knowledge: Using graded measures of orthographic and semantic learning to measure vocabulary acquisition. <em>Learning and Instruction</em>, <em>74</em>, 101468. <a href="https://doi.org/10.1016/j.learninstruc.2021.101468">https://doi.org/10.1016/j.learninstruc.2021.101468</a>
 </div>
 <div id="ref-rodríguez-ferreiro2020a" class="csl-entry" role="doc-biblioentry">
 Rodríguez-Ferreiro, J., Aguilera, M., &amp; Davies, R. (2020). Positive schizotypy increases the acceptance of unpresented materials in false memory tasks in non-clinical individuals. <em>Frontiers in Psychology</em>, <em>11</em>. <a href="https://doi.org/10.3389/fpsyg.2020.00262">https://doi.org/10.3389/fpsyg.2020.00262</a>
+</div>
+<div id="ref-shipley2009shipley" class="csl-entry" role="doc-biblioentry">
+Shipley, W. C., Gruber, C. P., Martin, T. A., &amp; Klein, A. M. (2009). Shipley-2 manual western psychological services. <em>Western Psychological Services</em>, 65.
 </div>
 </div>
 </section>

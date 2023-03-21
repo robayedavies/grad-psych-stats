@@ -82,9 +82,9 @@ You may be able to evaluate the cohesion, or some other internal measure, of you
 #| warning: false
 #| message: false
 #| echo: false
-#| fig-height: 5
-#| fig-width: 5
-ggplot(data = data.frame(x = c(-5, 5)), aes(x)) +
+#| fig-height: 3.5
+#| fig-width: 6
+ggplot(data = data.frame(x = c(-6, 6)), aes(x)) +
   stat_function(fun = dnorm, n = 100, 
                 args = list(mean = 0, sd = 1)) + 
   ylab("") +
@@ -152,14 +152,12 @@ For these reasons, we conducted studies in which we presented adult participants
 For each text, in response to this question, participants were asked to click on one option from an array of response options ranging from (1) `Not well at all` to (9) `Extremely well`. The data we collected in this element of our studies comprise, clearly, *ordinal responses*. Thus, we may use these data to address the following research question.
 
 ::: callout-note
-- What factors predict self-evaluated *rated* understanding of health information.
+-   What factors predict self-evaluated *rated* understanding of health information.
 :::
 
 #### Participants {#sec-ordinal-data-participants}
 
-We will work with a sample of participant data drawn from a series of Lancaster University undergraduate dissertation studies connected to the **Clearly understood** project.
-In these studies, we collected data from `r length(health.subjects$ResponseId)` participants on a series of measures (@sec-ordinal-data-materials-procedure) of vocabulary knowledge, health literacy, reading strategy, as well as responses to health information texts.
-The distributions of participants' scores on each of a range of attribute variables
+We will work with a sample of participant data drawn from a series of Lancaster University undergraduate dissertation studies connected to the **Clearly understood** project. In these studies, we collected data from `r length(health.subjects$ResponseId)` participants on a series of measures (@sec-ordinal-data-materials-procedure) of vocabulary knowledge, health literacy, reading strategy, as well as responses to health information texts. The distributions of participants' scores on each of a range of attribute variables
 
 ```{r}
 #| warning: false
@@ -167,8 +165,8 @@ The distributions of participants' scores on each of a range of attribute variab
 #| label: fig-histogram-grid-
 #| fig-cap: "Grid of plots showing the distribution of participant attributes. The grid includes histograms of the distributions of: self-rated accuracy; vocabulary (SHIPLEY); health literacy (HLVA); reading strategy (FACTOR3); and age (years). We also see dot plots presenting counts of numbers of participants of different self-reported gender, education, and ethnicity categories."
 #| fig-alt: "The figure presents a grid of histograms indicating the distribution of (x-axis) scores on a range of participant attribute variables. The grid includes histograms of the distributions of: self-rated accuracy; vocabulary (SHIPLEY); health literacy (HLVA); reading strategy (FACTOR3); age (years); gender; education, and ethnicity. The plots indicate: (1.) most self-rated accuracy scores are high (over 6); (2.) many participants with vocabulary scores greater than 30, a few present lower scores; (3.) health literacy scores centered on 8 or some, with lower and higher scores; (4.) a skewed distribution of reading strategy scores, with many around 20-40, and a tail of higher scores; (5.) most participants are 20-40 years of age, some older; (6.) many more female than male participants, very few non-binary reported; (7.) many more participants with higher education than further, very few with secondary; and (8.) many White participants (ONS categories), far fewer Asian or Mixed or Black ethnicity participants."
-#| fig-width: 12
-#| fig-height: 7
+#| fig-width: 14
+#| fig-height: 10
 
 p.self <- ggplot(data = health.subjects, aes(x = mean.self)) + 
   geom_histogram(binwidth = 1) +
@@ -234,11 +232,32 @@ p.self + p.shipley + p.HLVA + p.FACTOR3 + p.age + p.GENDER + p.EDUCATION + p.ETH
   plot_layout(ncol = 3)
 ```
 
+The plots indicate:
+
+1.  most self-rated accuracy scores are high (over 6);
+2.  many participants with vocabulary scores greater than 30, a few present lower scores;
+3.  health literacy scores centered on 8 or some, with lower and higher scores;
+4.  a skewed distribution of reading strategy scores, with many around 20-40, and a tail of higher scores;
+5.  most participants are 20-40 years of age, some older;
+6.  many more female than male participants, very few non-binary reported;
+7.  many more participants with higher education than further, very few with secondary;
+8.  and many White participants (*Office of National Statistics* categories), far fewer Asian or Mixed or Black ethnicity participants.
+
 #### Stimulus materials and data collection procedure {#sec-ordinal-data-materials-procedure}
 
+We collected data through an online survey administered through Qualtrics.
 
+We used the Shipley vocabulary sub-test [@shipley2009shipley] to estimate vocabulary knowledge.
 
-#### Outcome (dependent) variables {#sec-ordinal-data-outcome}
+We used the Health Literacy Vocabulary Assessment (HLVA, Ratajczak, 2020; adapted for online presentation, Chadwick, 2020) to estimate health literacy.
+
+We used an instrument drawn from unpublished work by Calloway (2019) to assess the approach participants took to reading and understanding written information.
+
+We presented participants with a sample of 20 health information texts. In the data collection process for this dataset, participants were recruited in multiple different studies. In each study, any one participant was presented with a randomly selected subset of the total of 20 texts.
+
+We asked participants to rate their level of understanding of the health-related texts that we presented in the study. We used a nine-point judgment scales because they have been found to outperform alternative scales with fewer categories in terms of criterion validity, internal consistency, test-retest reliability, and discriminating power [@preston2000].
+
+We recorded participants' demographic characteristics: gender (coded: Male, Female, non-binary, prefer not to say); education (coded: Secondary, Further, Higher); and ethnicity (coded: White, Black, Asian, Mixed, Other).
 
 ### Locate and download the data file {#sec-ordinal-data-download}
 
@@ -248,39 +267,35 @@ You can download the [2021-22_PSYC304-health-comprehension.csv](files/2021-22_PS
 
 I am going to assume you have downloaded the data file, and that you know where it is. We use `read_csv` to read the data file into R.
 
-<!-- ```{r} -->
+```{r}
+#| label: readin-false
+#| echo: true
+#| eval: false
+health <- read_csv("2021-22_PSYC304-health-comprehension.csv", 
+                                 na = "-999",
+                                 col_types = cols(
+                                   ResponseId = col_factor(),
+                                   rating = col_factor(),
+                                   GENDER = col_factor(),
+                                   EDUCATION = col_factor(),
+                                   ETHNICITY = col_factor(),
+                                   NATIVE.LANGUAGE = col_factor(),
+                                   OTHER.LANGUAGE = col_factor(),
+                                   text.id = col_factor(),
+                                   text.question.id = col_factor(),
+                                   study = col_factor()
+                                 )
+                               )
+```
 
-<!-- #| label: readinall -->
+Notice that we use `col_types = cols(...)` to require `read_csv()` to class some columns as factors.
+Importantly, we ask R to treat the `rating` variable as a *factor* with `rating = col_factor()`.
 
-<!-- #| message: false -->
+:::callout-tip
+In the practical work we do, we will be using functions from the `{ordinal}` library to model ordinal data.
 
-<!-- long.orth <- read_csv("long.orth_2020-08-11.csv",  -->
-
-<!--                       col_types = cols( -->
-
-<!--                         Participant = col_factor(), -->
-
-<!--                         Time = col_factor(), -->
-
-<!--                         Study = col_factor(), -->
-
-<!--                         Instructions = col_factor(), -->
-
-<!--                         Version = col_factor(), -->
-
-<!--                         Word = col_factor(), -->
-
-<!--                         Orthography = col_factor(), -->
-
-<!--                         Measure = col_factor(), -->
-
-<!--                         Spelling.transcription = col_factor() -->
-
-<!--                       ) -->
-
-<!--                     ) -->
-
-<!-- ``` -->
+- Importantly, in using these functions, we need ask R to treat the ordinal outcome variable as a *factor*.
+:::
 
 ### Inspect the data {#sec-ordinal-data-inspect}
 
