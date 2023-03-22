@@ -572,6 +572,7 @@ We will then get the results shown in the output.
 
 ```{r}
 #| echo: false
+#| cache: true
 health.clmm <- clmm(rating ~
                       
                       z_AGE + z_SHIPLEY + z_HLVA + z_FACTOR3 + z_RDFKGL +
@@ -719,6 +720,40 @@ Few people in our sample made rating responses by choosing ratings of `1` or `2`
 - For these data, and this model, we can see that the probability shifts suggesting that participants in our sample were more likely to choose a higher value rating if they were also presenting high scores on the `z_FACTOR3` measure of reading strategy.
 
 ## Reporting model results {#sec-ordinal-reporting-results}
+
+As the review reported by @liddell2018 suggests, we may have many many studies in which ordinal outcome data are analysed but very few published research reports that present analyses of *ordinal data* using *ordinal models*.
+
+You can see two examples in the papers published by @ricketts2021 and by @rodríguez-ferreiro2020a.
+These papers are both published open accessible, so that they are freely available, and they are both associated with accessible data repositories.
+
+- You can find the repository for @ricketts2021 [here](https://osf.io/76ev2/).
+- You can find the repository for @rodríguez-ferreiro2020a [here](https://osf.io/e5gzk/?view_only=038118528c7c426c9729983f54138c88).
+
+The @rodríguez-ferreiro2020a shares a data .csv only.
+
+The @ricketts2021 repository shares data and analysis code as well as a fairly detailed guide to the analysis methods.
+Note that the core analysis approach taken in @ricketts2021 is based on Bayesian methods but that we also conduct `clmm()` models using the `{ordinal}` library functions discussed here; these models are labelled *frequentist* models and can be found under *sensitivity analyses*.
+
+For what it's worth, the @ricketts2021 is much more representative of the analysis approach I would recommend now.
+
+Whatever the specifics of your research question, dataset, analysis approach or model choices, I would recommend the following for your results report.
+
+1. Explain the model -- the advice extended by @meteyard2020a still apply: the reader will need to know:
+
+- The identity of the outcome and predictor variables;
+- The reason why you are using an ordinal approach, explaining the *ordinal* (ordered, categorical) nature of the outcome;
+- The structure of the fixed effects part of the model, i.e. the effects, in what form (main effects, interactions) you are seeking to estimate;
+- And the structure of the random effects part of the model, i.e. what grouping variable (participants? items?), whether they encompass random intercepts or random slopes or covariances.
+
+You can report or indicate some of this information by presenting a table summary of the effects estimated in your model [e.g., see Table 5, @rodríguez-ferreiro2020a; see tables 2 and 3, @ricketts2021].
+Journal formatting restrictions or other conventions may limit what information you can present.
+
+Notice that I do not present information on threshold estimates.
+
+2. Explain the results -- I prefer to *show and tell*. 
+
+- Present conditional or marginal effects plots [see figures 2 and 3, @ricketts2021] to indicate the predictions you can make given your model estimates.
+- And explain what the estimates or what the prediction plots appear to show.
 
 ## Summary {#sec-ordinal-summary}
 

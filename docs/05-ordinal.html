@@ -891,7 +891,7 @@ Tip
 <section id="sec-ordinal-results-clmm" class="level3" data-number="7.8.1">
 <h3 data-number="7.8.1" class="anchored" data-anchor-id="sec-ordinal-results-clmm"><span class="header-section-number">7.8.1</span> Read the results</h3>
 <p>If you run the model code, you will see that the model may take several seconds, possibly a minute or two to complete. We will then get the results shown in the output.</p>
-<div class="cell">
+<div class="cell" data-hash="05-ordinal_cache/html/unnamed-chunk-17_2f38adeaddb6cca055dac5f61543e105">
 <div class="cell-output cell-output-stdout">
 <pre><code>Cumulative Link Mixed Model fitted with the Laplace approximation
 
@@ -1018,6 +1018,34 @@ Threshold coefficients:
 </section>
 <section id="sec-ordinal-reporting-results" class="level2" data-number="7.9">
 <h2 data-number="7.9" class="anchored" data-anchor-id="sec-ordinal-reporting-results"><span class="header-section-number">7.9</span> Reporting model results</h2>
+<p>As the review reported by <span class="citation" data-cites="liddell2018">Liddell &amp; Kruschke (<a href="references.html#ref-liddell2018" role="doc-biblioref">2018</a>)</span> suggests, we may have many many studies in which ordinal outcome data are analysed but very few published research reports that present analyses of <em>ordinal data</em> using <em>ordinal models</em>.</p>
+<p>You can see two examples in the papers published by <span class="citation" data-cites="ricketts2021">Ricketts et al. (<a href="references.html#ref-ricketts2021" role="doc-biblioref">2021</a>)</span> and by <span class="citation" data-cites="rodríguez-ferreiro2020a">Rodríguez-Ferreiro et al. (<a href="references.html#ref-rodríguez-ferreiro2020a" role="doc-biblioref">2020</a>)</span>. These papers are both published open accessible, so that they are freely available, and they are both associated with accessible data repositories.</p>
+<ul>
+<li>You can find the repository for <span class="citation" data-cites="ricketts2021">Ricketts et al. (<a href="references.html#ref-ricketts2021" role="doc-biblioref">2021</a>)</span> <a href="https://osf.io/76ev2/">here</a>.</li>
+<li>You can find the repository for <span class="citation" data-cites="rodríguez-ferreiro2020a">Rodríguez-Ferreiro et al. (<a href="references.html#ref-rodríguez-ferreiro2020a" role="doc-biblioref">2020</a>)</span> <a href="https://osf.io/e5gzk/?view_only=038118528c7c426c9729983f54138c88">here</a>.</li>
+</ul>
+<p>The <span class="citation" data-cites="rodríguez-ferreiro2020a">Rodríguez-Ferreiro et al. (<a href="references.html#ref-rodríguez-ferreiro2020a" role="doc-biblioref">2020</a>)</span> shares a data .csv only.</p>
+<p>The <span class="citation" data-cites="ricketts2021">Ricketts et al. (<a href="references.html#ref-ricketts2021" role="doc-biblioref">2021</a>)</span> repository shares data and analysis code as well as a fairly detailed guide to the analysis methods. Note that the core analysis approach taken in <span class="citation" data-cites="ricketts2021">Ricketts et al. (<a href="references.html#ref-ricketts2021" role="doc-biblioref">2021</a>)</span> is based on Bayesian methods but that we also conduct <code>clmm()</code> models using the <code>{ordinal}</code> library functions discussed here; these models are labelled <em>frequentist</em> models and can be found under <em>sensitivity analyses</em>.</p>
+<p>For what it’s worth, the <span class="citation" data-cites="ricketts2021">Ricketts et al. (<a href="references.html#ref-ricketts2021" role="doc-biblioref">2021</a>)</span> is much more representative of the analysis approach I would recommend now.</p>
+<p>Whatever the specifics of your research question, dataset, analysis approach or model choices, I would recommend the following for your results report.</p>
+<ol type="1">
+<li>Explain the model – the advice extended by <span class="citation" data-cites="meteyard2020a">Meteyard &amp; Davies (<a href="references.html#ref-meteyard2020a" role="doc-biblioref">2020</a>)</span> still apply: the reader will need to know:</li>
+</ol>
+<ul>
+<li>The identity of the outcome and predictor variables;</li>
+<li>The reason why you are using an ordinal approach, explaining the <em>ordinal</em> (ordered, categorical) nature of the outcome;</li>
+<li>The structure of the fixed effects part of the model, i.e.&nbsp;the effects, in what form (main effects, interactions) you are seeking to estimate;</li>
+<li>And the structure of the random effects part of the model, i.e.&nbsp;what grouping variable (participants? items?), whether they encompass random intercepts or random slopes or covariances.</li>
+</ul>
+<p>You can report or indicate some of this information by presenting a table summary of the effects estimated in your model <span class="citation" data-cites="rodríguez-ferreiro2020a ricketts2021">(e.g., see Table 5, <a href="references.html#ref-rodríguez-ferreiro2020a" role="doc-biblioref">Rodríguez-Ferreiro et al., 2020</a>; see tables 2 and 3, <a href="references.html#ref-ricketts2021" role="doc-biblioref">Ricketts et al., 2021</a>)</span>. Journal formatting restrictions or other conventions may limit what information you can present.</p>
+<p>Notice that I do not present information on threshold estimates.</p>
+<ol start="2" type="1">
+<li>Explain the results – I prefer to <em>show and tell</em>.</li>
+</ol>
+<ul>
+<li>Present conditional or marginal effects plots <span class="citation" data-cites="ricketts2021">(see figures 2 and 3, <a href="references.html#ref-ricketts2021" role="doc-biblioref">Ricketts et al., 2021</a>)</span> to indicate the predictions you can make given your model estimates.</li>
+<li>And explain what the estimates or what the prediction plots appear to show.</li>
+</ul>
 </section>
 <section id="sec-ordinal-summary" class="level2" data-number="7.10">
 <h2 data-number="7.10" class="anchored" data-anchor-id="sec-ordinal-summary"><span class="header-section-number">7.10</span> Summary</h2>
@@ -1049,6 +1077,9 @@ Dunlosky, J., &amp; Lipko, A. R. (2007). Metacomprehension. <em>Current Directio
 </div>
 <div id="ref-liddell2018" class="csl-entry" role="doc-biblioentry">
 Liddell, T. M., &amp; Kruschke, J. K. (2018). Analyzing ordinal data with metric models: What could possibly go wrong? <em>Journal of Experimental Social Psychology</em>, <em>79</em>, 328–348. <a href="https://doi.org/10.1016/j.jesp.2018.08.009">https://doi.org/10.1016/j.jesp.2018.08.009</a>
+</div>
+<div id="ref-meteyard2020a" class="csl-entry" role="doc-biblioentry">
+Meteyard, L., &amp; Davies, R. A. I. (2020). Best practice guidance for linear mixed-effects models in psychological science. <em>Journal of Memory and Language</em>, <em>112</em>, 104092. <a href="https://doi.org/10.1016/j.jml.2020.104092">https://doi.org/10.1016/j.jml.2020.104092</a>
 </div>
 <div id="ref-preston2000" class="csl-entry" role="doc-biblioentry">
 Preston, C. C., &amp; Colman, A. M. (2000). Optimal number of response categories in rating scales: Reliability, validity, discriminating power, and respondent preferences. <em>Acta Psychologica</em>, <em>104</em>(1), 1–15. <a href="https://doi.org/10.1016/S0001-6918(99)00050-5">https://doi.org/10.1016/S0001-6918(99)00050-5</a>
