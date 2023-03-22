@@ -404,6 +404,7 @@ health$rating <- ordered(health$rating,
 ```
 
 We can then do a check to see that we have got what we want.
+We *do not* want`rating` to be treated as numeric, we *do* want it to be treated as an ordered factor.
 
 ```{r}
 is.numeric(health$rating)
@@ -412,7 +413,7 @@ str(health$rating)
 is.ordered(health$rating)
 ```
 
-Yes we do.
+It is.
 
 Next, before doing any modelling, it will be sensible to standardize potential predictors
 
@@ -443,145 +444,279 @@ We can then check that we have produced the standardized variables as required.
 summary(health)
 ```
 
-## Working with Cumulative Link Mixed-effects Models in R {#sec-ordinal-working-models}
+## Working with Cumulative Link Models in R {#sec-ordinal-working-models-clm}
 
-In our working model, we will specify just random effects of participants on intercepts.
+In our first analysis, we can begin by assuming no random effects.
+We keep things simple at this point so that we can focus on the key changes in model coding.
 
-<!-- ```{r} -->
+The model is conducted to examine what shapes the variation in `rating` responses that we see in @fig-rating-dotplots.
 
-<!-- #| eval: false -->
+::: callout-note
+-   What factors predict self-evaluated *rated* understanding of health information.
+:::
 
-<!-- long.orth.min.glmer <- glmer(Score ~  -->
+In our analysis, the outcome variable is the ordinal response variable `rating`.
+The predictors consist of the variables we standardized earlier.
+We use the `clm()` function from the `{ordinal}` library to do the analysis.
+I will give information in outline here, the interested reader can see more detailed information in @christensen2022 and @christensen2015.
+You can also find the manual for the `{ordinal}` library functions [here](https://cran.r-project.org/web/packages/ordinal/index.html)
 
-<!--                                Time + Orthography + Instructions + zConsistency_H +  -->
+We code the model as follows.
 
-<!--                                Orthography:Instructions + -->
+```{r}
+#| eval: false
+health.clm <- clm(rating ~
+                    
+                    z_AGE + z_SHIPLEY + z_HLVA + z_FACTOR3 + z_RDFKGL,
+                  
+                  Hess = TRUE, link = "logit",
+                  data = health)
 
-<!--                                Orthography:zConsistency_H + -->
-
-<!--                                (1 | Participant) +  -->
-
-<!--                                (1 | Word), -->
-
-<!--                              family = "binomial",  -->
-
-<!--                              glmerControl(optimizer="bobyqa", optCtrl=list(maxfun=2e5)), -->
-
-<!--                              data = long.orth) -->
-
-<!-- summary(long.orth.min.glmer) -->
-
-<!-- ``` -->
+summary(health.clm)
+```
 
 The code works as follows.
 
 First, we have a chunk of code mostly similar to what we have done before, but changing the function.
 
--   `glmer()` the function name changes because now we want a *generalized* linear mixed-effects model of accuracy.
+-   `clm()` the function name changes because now we want a *cumulative link* model of the ordinal responses.
 
-The model specification includes information about fixed effects and about random effects.
+The model specification includes information about the fixed effects, the predictors: `z_AGE + z_SHIPLEY + z_HLVA + z_FACTOR3 + z_RDFKGL`.
+
+Second, we have the bit that is specific to *cumulative link* models fitted using the `clm()` function.
+
+-   `Hess = TRUE` is required if we want to get a summary of the model fit; the default is `TRUE` but it is worth being explicit about it.
+- `link = "logit"` specifies that we want to model the ordinal responses in terms of the log odds (hence, the probability) that a response is a low or a high rating value (compare @sec-glmm-practical-understanding).
+
+### Read the results {#sec-ordinal-results-clm}
+
+If you run the model code, it may take a few seconds to run.
+Then you will get the results shown in the output.
+
+```{r}
+#| echo: false
+health.clm <- clm(rating ~
+                    
+                    z_AGE + z_SHIPLEY + z_HLVA + z_FACTOR3 + z_RDFKGL,
+                  
+                  Hess = TRUE, link = "logit",
+                  data = health)
+
+summary(health.clm)
+```
+
+The `summary()` output for the model is similar to the outputs you have seen for other model types.
+
+1. We first get `formula:` information about the model you have specified.
+2. R will tell us what `data:` we are working with.
+3. We then get `Coefficients:` estimates.
+
+The table summary of coefficients arranges information in ways that will be familiar you:
+
+- For each predictor variable, we see 'Estimate, Std. Error, z value, and Pr(>|z|)` statistics.
+- The `Pr(>|z|)` p-values are based on Wald tests of the null hypothesis that a predictor has null impact.
+- The coefficient estimates can be interpreted based on whether they are positive or negative.
+
+A positive coefficient estimate indicates that higher values of the predictor variable are associated with greater probability of higher rating values.
+A negative coefficient estimate indicates that higher values of the predictor variable are associated with greater probability of lower rating values.
+
+4. We then get `Threshold coefficients:` indicating where the model fitted estimates the threshold locations: where the latent scale is cut, corresponding to different rating values.
+
+::: callout-tip
+In reporting ordinal (e.g., cumulative link) models, we typically focus on the coefficient estimates for the predictor variables.
+:::
+
+## Working with Cumulative Link Mixed-effects Models in R {#sec-ordinal-working-models-clmm}
+
+In our analysis, we begn by assuming no random effects.
+However, this is unlikely to be appropriate given the data collection process deployed in the **Clearly understood** projects, where:
+
+- a sample of participants were asked to respond to a sample of texts;
+- we have multiple observations of responses for each participant;
+- we have multiple observations of responses for each stimulus text;
+- participants were assigned to groups, and within a group all participants were asked to respond to the same stimulus texts.
+
+These features ensure that the data have a *multilevel* structure and this structure requires us to fit a *Cumulative Link Mixed-effects Model* (CLMM).
+
+We keep things simple at this point so that we can focus on the key changes in model coding.
+We can code a Cumulative Link Mixed-effects Model as follows.
+
+```{r}
+#| eval: false
+health.clmm <- clmm(rating ~
+                      
+                      z_AGE + z_SHIPLEY + z_HLVA + z_FACTOR3 + z_RDFKGL +
+                      
+                      (1|ResponseId),
+                    
+                    Hess = TRUE, link = "logit",
+                    data = health)
+
+summary(health.clmm)
+```
+
+If you inspect the code chunk, you can see that we have made two changes.
+
+First, we have changed the function.
+
+-   `clmm()` the function name changes because now we want a Cumulative Linear *Mixed-effects Model*.
+
+Secondly, the model specification includes information about fixed effects and *now about random effects*.
 
 -   With `(1 | Participant)` we include random effects of participants on on intercepts.
--   With `(1 | Word)` we include random effects of stimulus on on intercepts.
 
-Second, we have the bit that is specific to *generalized* models.
+### Read the results {#sec-ordinal-results-clmm}
 
--   `family = "binomial"` is entered because accuracy is a binary outcome variable (correct, incorrect) so we assume a binomial probability distribution.
+If you run the model code, you will see that the model may take several seconds, possibly a minute or two to complete.
+We will then get the results shown in the output.
 
-We then specify:
+```{r}
+#| echo: false
+health.clmm <- clmm(rating ~
+                      
+                      z_AGE + z_SHIPLEY + z_HLVA + z_FACTOR3 + z_RDFKGL +
+                      
+                      (1|ResponseId),
+                    
+                    Hess = TRUE, link = "logit",
+                    data = health)
 
--   `glmerControl(optimizer="bobyqa", ...)` to change the underlying mathematical engine (the optimizer) to cope with greater model complexity\
--   and we allow the model fitting functions to take longer to find estimates with `optCtrl=list(maxfun=2e5)`.
+summary(health.clmm)
+```
 
-Notice how we specify the fixed effects. We want `glmer()` to estimate "main effects and interactions" that we hypothesized.
+You can see that the output summary presents the same structure.
+If you compare the output you see in @sec-ordinal-results-clm, however, you will notice some similarities and some differences:
 
-We specify the *main* effects with:
+- If you focus first on the estimates of the coefficients for the predictor variables, you will see that the estimates have the same sign (positive or negative) as they had before.
+- However, you will see that the estimates have different magnitudes.
+- You will also see that the p-values are different.
 
-<!-- ```{r} -->
+Students often focus on p-values in reading model summaries. This is mistaken for multiple reasons. 
+The p-values correspond to the probabilities associated with the null hypothesis significance test: the test of the hypothesis that the effect of the predictor is *null* (i.e. the predictor has no impact).
+This null assumption is made whichever model we are looking at. The p-values *do not* indicate whether an effect is more or less probable. 
+But you *do* get such posterior probabilities in Bayesian analyses. 
+So it does not really mean much, though it is common, to talk about effects being *highly* significant.
+Thus it should not worry us too much if the p-values are significant in one analysis but not significant in another.
 
-<!-- #| eval: false -->
-
-<!-- Time + Orthography + Instructions + zConsistency_H + -->
-
-<!-- ``` -->
-
-We specify the *interaction* effects with:
-
-<!-- ```{r} -->
-
-<!-- #| eval: false -->
-
-<!-- Orthography:Instructions + -->
-
-<!-- Orthography:zConsistency_H + -->
-
-<!-- ``` -->
-
-### Read the results {#sec-ordinal-results}
-
-If you run the model code, you will get the results shown in the output.
-
-<!-- ```{r} -->
-
-<!-- #| echo: false -->
-
-<!-- long.orth.min.glmer <- glmer(Score ~  -->
-
-<!--                                Time + Orthography + Instructions + zConsistency_H +  -->
-
-<!--                                Orthography:Instructions + -->
-
-<!--                                Orthography:zConsistency_H + -->
-
-<!--                                (1 | Participant) +  -->
-
-<!--                                (1 |Word), -->
-
-<!--                              family = "binomial",  -->
-
-<!--                              glmerControl(optimizer="bobyqa", optCtrl=list(maxfun=2e5)), -->
-
-<!--                              data = long.orth) -->
-
-<!-- summary(long.orth.min.glmer) -->
-
-<!-- ``` -->
-
-#### Ordinal models and hypothesis tests {#sec-ordinal-hypothesis}
+That said, it *is* interesting, perhaps, that once we include random effects of participants on intercepts in our analysis then the effects of `z_AGE` and `z_HLVA` are no longer significant.
+I would be tempted to ask if the previously significant effects of these variables owed their impact to random differences between participants in their average or overall level of rating response.
 
 ### Presenting and visualizing the effects {#sec-ordinal-visualizing}
 
-## Examining if we should include random effects {#sec-ordinal-random-effects}
+It will be helpful for the interpretation of the estimates of the coefficients of these predictor variables if we visualize the predictions we can make, about how `rating` values vary, given differences in predictor variable values, given our model estimates.
+We can do this using functions from the `{ggeffects}` library.
+You can read more about the `{ggeffects}` library [here](https://strengejacke.github.io/ggeffects/index.html) where you will see a collection of articles explaining what you can do, and why, as well as technical information including some helpful tutorials.
 
-#### Getting started {#sec-ordinal-random-effects-start}
+The basic model prediction coding looks like this.
 
-::: callout-tip
-The question is:
+```{r}
+#| eval: false
+dat <- ggpredict(health.clmm, terms="z_FACTOR3 [all]")
+plot(dat)
+```
 
--   So, what random effects should we include?
-:::
+@fig-rating-clmm-factor3-predictions shows you the marginal effect of variation in the reading strategy attribute, i.e., the effect of differences between individuals in how they score on the `FACTOR3` measure of reading strategy.
+Note that the variable is listed as `z_FACTOR3` because, as you will recall, we standardized numeric predictor variables before entering them in our model.
 
-#### Random effects of subjects and stimulus items on intercepts {#sec-ordinal-random-effects-subjects-items-intercepts}
+These kinds of plots are understood to present what are variously called conditional effects, or adjusted predictions or marginal effects.
+You can find a discussion of marginal effects in the context of working with the `{ggeffects}` library [here](https://strengejacke.github.io/ggeffects/articles/ggeffects.html) and [here](https://strengejacke.github.io/ggeffects/articles/introduction_marginal_effects.html).
+You can find an extensive, helpful (with examples) discussion of marginal effects by Andrew Heiss [here](https://www.andrewheiss.com/blog/2022/05/20/marginalia/).
 
-#### Random effects of subjects and stimulus words on the slope of the Orthography effect {#sec-ordinal-random-effects-subjects-items-slopes}
+In short, what we want to do is to take the model coefficient estimates, and generate predictions with these estimates, given different values of the predictor variable, while holding the other predictor variables at some constant or some level (or some series of values).
 
-#### Random effects of subjects and stimulus words on the slope of the Instructions effect {#sec-ordinal-random-effects-subjects-items-slopes-2}
+If you look at the code chunk, you can see that we first:
 
-#### Adding effects a bit at a time {#sec-ordinal-random-effects-add}
+```{r}
+#| eval: false
+dat <- ggpredict(health.clmm, terms="z_FACTOR3 [all]")
+```
 
-#### Random effects of subjects on the slope of the consistency effect {#sec-ordinal-random-effects-subjects-items-slopes-3}
+- In this line, we use `ggpredict()` to work with some model information, assuming we previously fitted a model and gave it a name (here, `health.clmm`).
 
-#### Random effects of subjects and stimulus words on the slope of the time effect {#sec-ordinal-random-effects-subjects-items-slopes-4}
+Note that if you fit the model and call it `health.clmm`, as we did in @sec-ordinal-working-models-clmm, then an object of that name is created in the R workspace or environment.
+If you click on that object name in the environment window in R-Studio, you will see that there is a list of pieces of information about the model, including the coefficient estimates, the model formula etc. associated with that name.
 
-### Bad signs {#sec-ordinal-bad-signs}
+- So when we use `ggpredict()`, we ask R to take that model information and, for the term we specify, here, specify using `terms="z_FACTOR3 [all]"`, we ask R to generate some predictions.
+- `dat <- ggpredict(...)` asks R to put those predictions in an object called `dat`.
 
-### Comparison of models varying in random effects {#sec-ordinal-comparing0-models-2}
+If you click on that object name in the environment window in R-Studio, you will see that it comprises a dataset.
+The dataset includes the columns:
 
-### Addressing convergence problems {#sec-ordinal-addressing-convergence}
+- `x` giving different values of the predictor variable. `ggpredict()` will choose some 'representative' values for you but you can construct a set of values of the predictor for which you want predictions.
+- `predicted` holds predicted values, given different predictor `x` values.
 
-#### Exercises
+If you then run the line `plot(dat)` you can see what this gets us for these kinds of models.
+@fig-rating-clmm-factor3-predictions presents a grid of plots showing the model-predicted probabilities that a rating response will have one value for each of the 1-9 rating response values that are possible given the Likert rating scale used in data collection.
+In the grid, a different plot is shown for each possible response value, indicating how the probability varies that the rating response will take that value.
 
-#### Summary advice {#sec-ordinal-advice-summary}
+```{r}
+#| label: fig-rating-clmm-factor3-predictions
+#| fig-cap: "A grid of plots showing marginal or conditional predicted probabilities that a rating response will have one value (among the 1-9 rating values possible), indicating how these predicted probabilities vary given variation in values of the standardized reading strategy (FACTOR3) variable."
+#| fig-alt: "The figure presents a grid of plots showing marginal or conditional -- adjusted prediction values -- predicted ratings and how they vary given variation in values of the standardized reading strategy (FACTOR3) variable. We can see flat lines for plots corresponding to predictions concerning response options 1-4, suggesting little probability that a rating response will take one of these values. We see norml curves for plots corresponding to predictions concerning response options 5-9, suggesting how the probability that a response will take one of these values may rise and then fall, depending on the FACTOR3 score a person has. The plots suggest that for higher FACTOR3 scores the probability increases that a rating response will have a higher value."
+#| warning: false
+#| fig-width: 5
+#| fig-height: 5
+dat <- ggpredict(health.clmm, terms="z_FACTOR3 [all]")
+plot(dat)
+```
+
+If you examine @fig-rating-clmm-factor3-predictions, you can recognize that we have one plot for each different value of the response options available for the Likert-scale `rating` items: 1-9.
+You can also see that in each plot we get a curve.
+In some cases -- for `rating` response values `1-4` -- the curve is flat or flattens very quickly, for higher levels of the `z_FACTOR3` variable.
+In some cases -- for `rating` response values `5-9` -- the curve is more obvious, and resembles a normal distribution curve.
+
+If you think about it, what these plots indicate are the ways in which the probability that a `rating` response is a low value (e.g., a  rating of `1`) or a high value (e.g., a  rating of `9`) rises or falls.
+Each possible `rating` response is associated with a probability distribution.
+For example, look at the plot labelled `6`: that shows you the probability distribution indicating how the probability varies that a response will take the value `6`.
+We can see that the distribution is normal in shape, a bell-shaped curve.
+We can see that the peak of the curve is over the `z_FACTOR3` score (shown on the x-axis) of about 1.5.
+We can see that the probability represented by the height of the line showing the curve is lower for `z_FACTOR3` scores lower than the score under the peak (e.g. scores less than `z_FACTOR3` $=2$).
+The probability represented by the height of the line showing the curve is lower for `z_FACTOR3` scores higher than the score under the peak (e.g. scores greater than `z_FACTOR3` $=1$).
+
+We can see that the peak of the normal curve, in the case of `rating` response values `5-9`, is located at different places on the horizontal axis.
+Look at each of the plots labelled `5-9`.
+Notice how the horizontal location of the curves *shifts* as `z_FACTOR3` scores increase.
+If you go from left to right, i.e. from low to high values of `z_FACTOR3`, on each plot then you will see that the peak of the curve is located in different places: going from plot `5` to plot `9` the peak of the curve moves *rightwards*.
+These curves show how the probability that a `rating` response takes a high value (e.g. `9` instead of `8` or `8` instead of `7` etc.) is *higher* for *higher* values of `z_FACTOR3`.
+This idea might be a bit clearer if we draw the plot in a different way.
+
+@fig-rating-clmm-factor3-predictions-fancy shows the same model predictions but plots the predictions of the way that probability changes, for each `rating` response, by superimposing the plots for each response value, one on top of the other.
+I have drawn each probability curve in a different colour, and these colours match those used to present the counts of different response values shown in @fig-rating-dotplots.
+
+```{r}
+#| label: fig-rating-clmm-factor3-predictions-fancy
+#| fig-cap: "A plot showing marginal or conditional predicted probabilities that a rating response will have one value (among the 1-9 rating values possible), indicating how these predicted probabilities vary given variation in values of the standardized reading strategy (FACTOR3) variable"
+#| fig-alt: "The figure presents a plot showing marginal or conditional predicted probabilities that a rating rating will have one value (among the 1-9 rating values possible), indicating how these predicted probabilities vary given variation in values of the standardized reading strategy (FACTOR3) variable. We can see flat lines for plots corresponding to predictions concerning response options 1-4, suggesting little probability that a rating response will take one of these values. We see norml curves for plots corresponding to predictions concerning response options 5-9, suggesting how the probability that a response will take one of these values may rise and then fall, depending on the FACTOR3 score a person has. The plots suggest that for higher FACTOR3 scores the probability increases that a rating response will have a higher value."
+#| warning: false
+#| fig-width: 6
+#| fig-height: 5
+dat <- ggpredict(health.clmm, terms="z_FACTOR3 [all]")
+ggplot(dat, aes(x, predicted, 
+                colour = response.level)) + 
+  geom_line(size = 1.5) +
+  scale_color_viridis(discrete=TRUE, option = "mako") + 
+  labs(x = "Reading strategy (z_FACTOR3)", y = "Predicted probability of a rating") +
+  guides(colour = guide_legend(title = "Rating")) +
+  ylim(0, 1) +
+  theme_bw()
+```
+
+You can read @fig-rating-clmm-factor3-predictions-fancy by observing that:
+
+- For low value ratings e.g. for `rating` responses from 1-4, there is not much predicted probability that a response with such a value will be made (flat lines) but if they are going to be made they are likely to be made by people with low scores on the `z_FACTOR3`.
+
+You can see this because you can see how the curves peak around low values of `z_FACTOR3`.
+This should make sense: people with low scores on reading strategy are maybe not doing reading effectively, are maybe as a result not doing well in understanding the texts they are given to read, and thus are not confident about their understanding.
+(This is a speculative causal theory but it will suffice for now.)
+
+Recall, also, that as @fig-rating-dotplots indicated, in the **Clearly understood** health comprehension dataset, we saw that few `rating` responses were recorded for low value ratings of understanding.
+Few people in our sample made rating responses by choosing ratings of `1` or `2` to indicate low levels of understanding.
+
+@fig-rating-clmm-factor3-predictions-fancy also suggests that:
+
+- For higher value `rating` responses -- responses representing ratings from `5` to `9` -- there is variation in the probability that responses with such values will be made.
+- That variation in probability is shown by the probability distribution curves.
+- For these data, and this model, we can see that the probability shifts suggesting that participants in our sample were more likely to choose a higher value rating if they were also presenting high scores on the `z_FACTOR3` measure of reading strategy.
 
 ## Reporting model results {#sec-ordinal-reporting-results}
 

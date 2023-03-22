@@ -143,6 +143,7 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -273,16 +274,14 @@ div.csl-indent {
   <li><a href="#sec-ordinal-data-inspect" id="toc-sec-ordinal-data-inspect" class="nav-link" data-scroll-target="#sec-ordinal-data-inspect"><span class="toc-section-number">7.5.4</span>  Inspect the data</a></li>
   </ul></li>
   <li><a href="#sec-ordinal-data-tidy" id="toc-sec-ordinal-data-tidy" class="nav-link" data-scroll-target="#sec-ordinal-data-tidy"><span class="toc-section-number">7.6</span>  Tidy the data</a></li>
-  <li><a href="#sec-ordinal-working-models" id="toc-sec-ordinal-working-models" class="nav-link" data-scroll-target="#sec-ordinal-working-models"><span class="toc-section-number">7.7</span>  Working with Cumulative Link Mixed-effects Models in R</a>
+  <li><a href="#sec-ordinal-working-models-clm" id="toc-sec-ordinal-working-models-clm" class="nav-link" data-scroll-target="#sec-ordinal-working-models-clm"><span class="toc-section-number">7.7</span>  Working with Cumulative Link Models in R</a>
   <ul class="collapse">
-  <li><a href="#sec-ordinal-results" id="toc-sec-ordinal-results" class="nav-link" data-scroll-target="#sec-ordinal-results"><span class="toc-section-number">7.7.1</span>  Read the results</a></li>
-  <li><a href="#sec-ordinal-visualizing" id="toc-sec-ordinal-visualizing" class="nav-link" data-scroll-target="#sec-ordinal-visualizing"><span class="toc-section-number">7.7.2</span>  Presenting and visualizing the effects</a></li>
+  <li><a href="#sec-ordinal-results-clm" id="toc-sec-ordinal-results-clm" class="nav-link" data-scroll-target="#sec-ordinal-results-clm"><span class="toc-section-number">7.7.1</span>  Read the results</a></li>
   </ul></li>
-  <li><a href="#sec-ordinal-random-effects" id="toc-sec-ordinal-random-effects" class="nav-link" data-scroll-target="#sec-ordinal-random-effects"><span class="toc-section-number">7.8</span>  Examining if we should include random effects</a>
+  <li><a href="#sec-ordinal-working-models-clmm" id="toc-sec-ordinal-working-models-clmm" class="nav-link" data-scroll-target="#sec-ordinal-working-models-clmm"><span class="toc-section-number">7.8</span>  Working with Cumulative Link Mixed-effects Models in R</a>
   <ul class="collapse">
-  <li><a href="#sec-ordinal-bad-signs" id="toc-sec-ordinal-bad-signs" class="nav-link" data-scroll-target="#sec-ordinal-bad-signs"><span class="toc-section-number">7.8.1</span>  Bad signs</a></li>
-  <li><a href="#sec-ordinal-comparing0-models-2" id="toc-sec-ordinal-comparing0-models-2" class="nav-link" data-scroll-target="#sec-ordinal-comparing0-models-2"><span class="toc-section-number">7.8.2</span>  Comparison of models varying in random effects</a></li>
-  <li><a href="#sec-ordinal-addressing-convergence" id="toc-sec-ordinal-addressing-convergence" class="nav-link" data-scroll-target="#sec-ordinal-addressing-convergence"><span class="toc-section-number">7.8.3</span>  Addressing convergence problems</a></li>
+  <li><a href="#sec-ordinal-results-clmm" id="toc-sec-ordinal-results-clmm" class="nav-link" data-scroll-target="#sec-ordinal-results-clmm"><span class="toc-section-number">7.8.1</span>  Read the results</a></li>
+  <li><a href="#sec-ordinal-visualizing" id="toc-sec-ordinal-visualizing" class="nav-link" data-scroll-target="#sec-ordinal-visualizing"><span class="toc-section-number">7.8.2</span>  Presenting and visualizing the effects</a></li>
   </ul></li>
   <li><a href="#sec-ordinal-reporting-results" id="toc-sec-ordinal-reporting-results" class="nav-link" data-scroll-target="#sec-ordinal-reporting-results"><span class="toc-section-number">7.9</span>  Reporting model results</a></li>
   <li><a href="#sec-ordinal-summary" id="toc-sec-ordinal-summary" class="nav-link" data-scroll-target="#sec-ordinal-summary"><span class="toc-section-number">7.10</span>  Summary</a>
@@ -649,7 +648,7 @@ Tip
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>health<span class="sc">$</span>rating <span class="ot">&lt;-</span> <span class="fu">ordered</span>(health<span class="sc">$</span>rating,</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>, <span class="st">"6"</span>, <span class="st">"7"</span>, <span class="st">"8"</span>, <span class="st">"9"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We can then do a check to see that we have got what we want.</p>
+<p>We can then do a check to see that we have got what we want. We <em>do not</em> want<code>rating</code> to be treated as numeric, we <em>do</em> want it to be treated as an ordered factor.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>(health<span class="sc">$</span>rating)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -668,7 +667,7 @@ Tip
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
-<p>Yes we do.</p>
+<p>It is.</p>
 <p>Next, before doing any modelling, it will be sensible to standardize potential predictors</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>health <span class="ot">&lt;-</span> health <span class="sc">%&gt;%</span> </span>
@@ -751,82 +750,97 @@ Tip
 </div>
 </div>
 </section>
-<section id="sec-ordinal-working-models" class="level2" data-number="7.7">
-<h2 data-number="7.7" class="anchored" data-anchor-id="sec-ordinal-working-models"><span class="header-section-number">7.7</span> Working with Cumulative Link Mixed-effects Models in R</h2>
-<p>In our working model, we will specify just random effects of participants on intercepts.</p>
-<!-- ```{r} -->
-<!-- #| eval: false -->
-<!-- long.orth.min.glmer <- glmer(Score ~  -->
-<!--                                Time + Orthography + Instructions + zConsistency_H +  -->
-<!--                                Orthography:Instructions + -->
-<!--                                Orthography:zConsistency_H + -->
-<!--                                (1 | Participant) +  -->
-<!--                                (1 | Word), -->
-<!--                              family = "binomial",  -->
-<!--                              glmerControl(optimizer="bobyqa", optCtrl=list(maxfun=2e5)), -->
-<!--                              data = long.orth) -->
-<!-- summary(long.orth.min.glmer) -->
-<!-- ``` -->
+<section id="sec-ordinal-working-models-clm" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="sec-ordinal-working-models-clm"><span class="header-section-number">7.7</span> Working with Cumulative Link Models in R</h2>
+<p>In our first analysis, we can begin by assuming no random effects. We keep things simple at this point so that we can focus on the key changes in model coding.</p>
+<p>The model is conducted to examine what shapes the variation in <code>rating</code> responses that we see in <a href="#fig-rating-dotplots">Figure&nbsp;<span>7.3</span></a>.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>What factors predict self-evaluated <em>rated</em> understanding of health information.</li>
+</ul>
+</div>
+</div>
+<p>In our analysis, the outcome variable is the ordinal response variable <code>rating</code>. The predictors consist of the variables we standardized earlier. We use the <code>clm()</code> function from the <code>{ordinal}</code> library to do the analysis. I will give information in outline here, the interested reader can see more detailed information in <span class="citation" data-cites="christensen2022">Christensen (<a href="references.html#ref-christensen2022" role="doc-biblioref">2022</a>)</span> and <span class="citation" data-cites="christensen2015">Christensen (<a href="references.html#ref-christensen2015" role="doc-biblioref">2015</a>)</span>. You can also find the manual for the <code>{ordinal}</code> library functions <a href="https://cran.r-project.org/web/packages/ordinal/index.html">here</a></p>
+<p>We code the model as follows.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>health.clm <span class="ot">&lt;-</span> <span class="fu">clm</span>(rating <span class="sc">~</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                    </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                    z_AGE <span class="sc">+</span> z_SHIPLEY <span class="sc">+</span> z_HLVA <span class="sc">+</span> z_FACTOR3 <span class="sc">+</span> z_RDFKGL,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>                  </span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">Hess =</span> <span class="cn">TRUE</span>, <span class="at">link =</span> <span class="st">"logit"</span>,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> health)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(health.clm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>The code works as follows.</p>
 <p>First, we have a chunk of code mostly similar to what we have done before, but changing the function.</p>
 <ul>
-<li><code>glmer()</code> the function name changes because now we want a <em>generalized</em> linear mixed-effects model of accuracy.</li>
+<li><code>clm()</code> the function name changes because now we want a <em>cumulative link</em> model of the ordinal responses.</li>
 </ul>
-<p>The model specification includes information about fixed effects and about random effects.</p>
+<p>The model specification includes information about the fixed effects, the predictors: <code>z_AGE + z_SHIPLEY + z_HLVA + z_FACTOR3 + z_RDFKGL</code>.</p>
+<p>Second, we have the bit that is specific to <em>cumulative link</em> models fitted using the <code>clm()</code> function.</p>
 <ul>
-<li>With <code>(1 | Participant)</code> we include random effects of participants on on intercepts.</li>
-<li>With <code>(1 | Word)</code> we include random effects of stimulus on on intercepts.</li>
+<li><code>Hess = TRUE</code> is required if we want to get a summary of the model fit; the default is <code>TRUE</code> but it is worth being explicit about it.</li>
+<li><code>link = "logit"</code> specifies that we want to model the ordinal responses in terms of the log odds (hence, the probability) that a response is a low or a high rating value (compare <a href="04-glmm.html#sec-glmm-practical-understanding"><span>Section&nbsp;6.8.2</span></a>).</li>
 </ul>
-<p>Second, we have the bit that is specific to <em>generalized</em> models.</p>
+<section id="sec-ordinal-results-clm" class="level3" data-number="7.7.1">
+<h3 data-number="7.7.1" class="anchored" data-anchor-id="sec-ordinal-results-clm"><span class="header-section-number">7.7.1</span> Read the results</h3>
+<p>If you run the model code, it may take a few seconds to run. Then you will get the results shown in the output.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>formula: rating ~ z_AGE + z_SHIPLEY + z_HLVA + z_FACTOR3 + z_RDFKGL
+data:    health
+
+ link  threshold nobs logLik   AIC      niter max.grad cond.H 
+ logit flexible  4040 -6880.78 13787.55 5(0)  9.26e-07 7.3e+01
+
+Coefficients:
+          Estimate Std. Error z value Pr(&gt;|z|)    
+z_AGE     -0.17719    0.02966  -5.975 2.30e-09 ***
+z_SHIPLEY  0.34384    0.03393  10.135  &lt; 2e-16 ***
+z_HLVA     0.16174    0.03265   4.954 7.28e-07 ***
+z_FACTOR3  0.74535    0.03145  23.699  &lt; 2e-16 ***
+z_RDFKGL  -0.27220    0.02892  -9.412  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+    Estimate Std. Error z value
+1|2 -4.65066    0.12978 -35.836
+2|3 -4.13902    0.10395 -39.817
+3|4 -3.26845    0.07390 -44.228
+4|5 -2.56826    0.05804 -44.248
+5|6 -1.69333    0.04437 -38.160
+6|7 -0.87651    0.03671 -23.876
+7|8  0.24214    0.03402   7.117
+8|9  1.63049    0.04252  38.346</code></pre>
+</div>
+</div>
+<p>The <code>summary()</code> output for the model is similar to the outputs you have seen for other model types.</p>
+<ol type="1">
+<li>We first get <code>formula:</code> information about the model you have specified.</li>
+<li>R will tell us what <code>data:</code> we are working with.</li>
+<li>We then get <code>Coefficients:</code> estimates.</li>
+</ol>
+<p>The table summary of coefficients arranges information in ways that will be familiar you:</p>
 <ul>
-<li><code>family = "binomial"</code> is entered because accuracy is a binary outcome variable (correct, incorrect) so we assume a binomial probability distribution.</li>
+<li>For each predictor variable, we see ’Estimate, Std. Error, z value, and Pr(&gt;|z|)` statistics.</li>
+<li>The <code>Pr(&gt;|z|)</code> p-values are based on Wald tests of the null hypothesis that a predictor has null impact.</li>
+<li>The coefficient estimates can be interpreted based on whether they are positive or negative.</li>
 </ul>
-<p>We then specify:</p>
-<ul>
-<li><code>glmerControl(optimizer="bobyqa", ...)</code> to change the underlying mathematical engine (the optimizer) to cope with greater model complexity<br>
-</li>
-<li>and we allow the model fitting functions to take longer to find estimates with <code>optCtrl=list(maxfun=2e5)</code>.</li>
-</ul>
-<p>Notice how we specify the fixed effects. We want <code>glmer()</code> to estimate “main effects and interactions” that we hypothesized.</p>
-<p>We specify the <em>main</em> effects with:</p>
-<!-- ```{r} -->
-<!-- #| eval: false -->
-<!-- Time + Orthography + Instructions + zConsistency_H + -->
-<!-- ``` -->
-<p>We specify the <em>interaction</em> effects with:</p>
-<!-- ```{r} -->
-<!-- #| eval: false -->
-<!-- Orthography:Instructions + -->
-<!-- Orthography:zConsistency_H + -->
-<!-- ``` -->
-<section id="sec-ordinal-results" class="level3" data-number="7.7.1">
-<h3 data-number="7.7.1" class="anchored" data-anchor-id="sec-ordinal-results"><span class="header-section-number">7.7.1</span> Read the results</h3>
-<p>If you run the model code, you will get the results shown in the output.</p>
-<!-- ```{r} -->
-<!-- #| echo: false -->
-<!-- long.orth.min.glmer <- glmer(Score ~  -->
-<!--                                Time + Orthography + Instructions + zConsistency_H +  -->
-<!--                                Orthography:Instructions + -->
-<!--                                Orthography:zConsistency_H + -->
-<!--                                (1 | Participant) +  -->
-<!--                                (1 |Word), -->
-<!--                              family = "binomial",  -->
-<!--                              glmerControl(optimizer="bobyqa", optCtrl=list(maxfun=2e5)), -->
-<!--                              data = long.orth) -->
-<!-- summary(long.orth.min.glmer) -->
-<!-- ``` -->
-<section id="sec-ordinal-hypothesis" class="level4" data-number="7.7.1.1">
-<h4 data-number="7.7.1.1" class="anchored" data-anchor-id="sec-ordinal-hypothesis"><span class="header-section-number">7.7.1.1</span> Ordinal models and hypothesis tests</h4>
-</section>
-</section>
-<section id="sec-ordinal-visualizing" class="level3" data-number="7.7.2">
-<h3 data-number="7.7.2" class="anchored" data-anchor-id="sec-ordinal-visualizing"><span class="header-section-number">7.7.2</span> Presenting and visualizing the effects</h3>
-</section>
-</section>
-<section id="sec-ordinal-random-effects" class="level2" data-number="7.8">
-<h2 data-number="7.8" class="anchored" data-anchor-id="sec-ordinal-random-effects"><span class="header-section-number">7.8</span> Examining if we should include random effects</h2>
-<section id="sec-ordinal-random-effects-start" class="level4" data-number="7.8.0.1">
-<h4 data-number="7.8.0.1" class="anchored" data-anchor-id="sec-ordinal-random-effects-start"><span class="header-section-number">7.8.0.1</span> Getting started</h4>
+<p>A positive coefficient estimate indicates that higher values of the predictor variable are associated with greater probability of higher rating values. A negative coefficient estimate indicates that higher values of the predictor variable are associated with greater probability of lower rating values.</p>
+<ol start="4" type="1">
+<li>We then get <code>Threshold coefficients:</code> indicating where the model fitted estimates the threshold locations: where the latent scale is cut, corresponding to different rating values.</li>
+</ol>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -837,45 +851,169 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The question is:</p>
+<p>In reporting ordinal (e.g., cumulative link) models, we typically focus on the coefficient estimates for the predictor variables.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-ordinal-working-models-clmm" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="sec-ordinal-working-models-clmm"><span class="header-section-number">7.8</span> Working with Cumulative Link Mixed-effects Models in R</h2>
+<p>In our analysis, we begn by assuming no random effects. However, this is unlikely to be appropriate given the data collection process deployed in the <strong>Clearly understood</strong> projects, where:</p>
 <ul>
-<li>So, what random effects should we include?</li>
+<li>a sample of participants were asked to respond to a sample of texts;</li>
+<li>we have multiple observations of responses for each participant;</li>
+<li>we have multiple observations of responses for each stimulus text;</li>
+<li>participants were assigned to groups, and within a group all participants were asked to respond to the same stimulus texts.</li>
 </ul>
+<p>These features ensure that the data have a <em>multilevel</em> structure and this structure requires us to fit a <em>Cumulative Link Mixed-effects Model</em> (CLMM).</p>
+<p>We keep things simple at this point so that we can focus on the key changes in model coding. We can code a Cumulative Link Mixed-effects Model as follows.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>health.clmm <span class="ot">&lt;-</span> <span class="fu">clmm</span>(rating <span class="sc">~</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                      </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                      z_AGE <span class="sc">+</span> z_SHIPLEY <span class="sc">+</span> z_HLVA <span class="sc">+</span> z_FACTOR3 <span class="sc">+</span> z_RDFKGL <span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                      </span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>                      (<span class="dv">1</span><span class="sc">|</span>ResponseId),</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>                    </span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">Hess =</span> <span class="cn">TRUE</span>, <span class="at">link =</span> <span class="st">"logit"</span>,</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">data =</span> health)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(health.clmm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If you inspect the code chunk, you can see that we have made two changes.</p>
+<p>First, we have changed the function.</p>
+<ul>
+<li><code>clmm()</code> the function name changes because now we want a Cumulative Linear <em>Mixed-effects Model</em>.</li>
+</ul>
+<p>Secondly, the model specification includes information about fixed effects and <em>now about random effects</em>.</p>
+<ul>
+<li>With <code>(1 | Participant)</code> we include random effects of participants on on intercepts.</li>
+</ul>
+<section id="sec-ordinal-results-clmm" class="level3" data-number="7.8.1">
+<h3 data-number="7.8.1" class="anchored" data-anchor-id="sec-ordinal-results-clmm"><span class="header-section-number">7.8.1</span> Read the results</h3>
+<p>If you run the model code, you will see that the model may take several seconds, possibly a minute or two to complete. We will then get the results shown in the output.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: rating ~ z_AGE + z_SHIPLEY + z_HLVA + z_FACTOR3 + z_RDFKGL +  
+    (1 | ResponseId)
+data:    health
+
+ link  threshold nobs logLik   AIC     niter       max.grad cond.H 
+ logit flexible  4040 -4978.08 9984.16 1480(19002) 3.93e-03 3.5e+02
+
+Random effects:
+ Groups     Name        Variance Std.Dev.
+ ResponseId (Intercept) 9.825    3.134   
+Number of groups:  ResponseId 202 
+
+Coefficients:
+          Estimate Std. Error z value Pr(&gt;|z|)    
+z_AGE     -0.44313    0.23483  -1.887  0.05916 .  
+z_SHIPLEY  0.77130    0.26514   2.909  0.00363 ** 
+z_HLVA     0.20809    0.25617   0.812  0.41663    
+z_FACTOR3  1.68342    0.23836   7.063 1.63e-12 ***
+z_RDFKGL  -0.44345    0.03677 -12.059  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+    Estimate Std. Error z value
+1|2  -9.3297     0.3453 -27.019
+2|3  -8.1413     0.2948 -27.618
+3|4  -6.5243     0.2632 -24.786
+4|5  -5.2159     0.2491 -20.938
+5|6  -3.4668     0.2371 -14.623
+6|7  -1.8481     0.2316  -7.981
+7|8   0.2965     0.2296   1.292
+8|9   3.0417     0.2347  12.959</code></pre>
 </div>
 </div>
+<p>You can see that the output summary presents the same structure. If you compare the output you see in <a href="#sec-ordinal-results-clm"><span>Section&nbsp;7.7.1</span></a>, however, you will notice some similarities and some differences:</p>
+<ul>
+<li>If you focus first on the estimates of the coefficients for the predictor variables, you will see that the estimates have the same sign (positive or negative) as they had before.</li>
+<li>However, you will see that the estimates have different magnitudes.</li>
+<li>You will also see that the p-values are different.</li>
+</ul>
+<p>Students often focus on p-values in reading model summaries. This is mistaken for multiple reasons. The p-values correspond to the probabilities associated with the null hypothesis significance test: the test of the hypothesis that the effect of the predictor is <em>null</em> (i.e.&nbsp;the predictor has no impact). This null assumption is made whichever model we are looking at. The p-values <em>do not</em> indicate whether an effect is more or less probable. But you <em>do</em> get such posterior probabilities in Bayesian analyses. So it does not really mean much, though it is common, to talk about effects being <em>highly</em> significant. Thus it should not worry us too much if the p-values are significant in one analysis but not significant in another.</p>
+<p>That said, it <em>is</em> interesting, perhaps, that once we include random effects of participants on intercepts in our analysis then the effects of <code>z_AGE</code> and <code>z_HLVA</code> are no longer significant. I would be tempted to ask if the previously significant effects of these variables owed their impact to random differences between participants in their average or overall level of rating response.</p>
 </section>
-<section id="sec-ordinal-random-effects-subjects-items-intercepts" class="level4" data-number="7.8.0.2">
-<h4 data-number="7.8.0.2" class="anchored" data-anchor-id="sec-ordinal-random-effects-subjects-items-intercepts"><span class="header-section-number">7.8.0.2</span> Random effects of subjects and stimulus items on intercepts</h4>
-</section>
-<section id="sec-ordinal-random-effects-subjects-items-slopes" class="level4" data-number="7.8.0.3">
-<h4 data-number="7.8.0.3" class="anchored" data-anchor-id="sec-ordinal-random-effects-subjects-items-slopes"><span class="header-section-number">7.8.0.3</span> Random effects of subjects and stimulus words on the slope of the Orthography effect</h4>
-</section>
-<section id="sec-ordinal-random-effects-subjects-items-slopes-2" class="level4" data-number="7.8.0.4">
-<h4 data-number="7.8.0.4" class="anchored" data-anchor-id="sec-ordinal-random-effects-subjects-items-slopes-2"><span class="header-section-number">7.8.0.4</span> Random effects of subjects and stimulus words on the slope of the Instructions effect</h4>
-</section>
-<section id="sec-ordinal-random-effects-add" class="level4" data-number="7.8.0.5">
-<h4 data-number="7.8.0.5" class="anchored" data-anchor-id="sec-ordinal-random-effects-add"><span class="header-section-number">7.8.0.5</span> Adding effects a bit at a time</h4>
-</section>
-<section id="sec-ordinal-random-effects-subjects-items-slopes-3" class="level4" data-number="7.8.0.6">
-<h4 data-number="7.8.0.6" class="anchored" data-anchor-id="sec-ordinal-random-effects-subjects-items-slopes-3"><span class="header-section-number">7.8.0.6</span> Random effects of subjects on the slope of the consistency effect</h4>
-</section>
-<section id="sec-ordinal-random-effects-subjects-items-slopes-4" class="level4" data-number="7.8.0.7">
-<h4 data-number="7.8.0.7" class="anchored" data-anchor-id="sec-ordinal-random-effects-subjects-items-slopes-4"><span class="header-section-number">7.8.0.7</span> Random effects of subjects and stimulus words on the slope of the time effect</h4>
-</section>
-<section id="sec-ordinal-bad-signs" class="level3" data-number="7.8.1">
-<h3 data-number="7.8.1" class="anchored" data-anchor-id="sec-ordinal-bad-signs"><span class="header-section-number">7.8.1</span> Bad signs</h3>
-</section>
-<section id="sec-ordinal-comparing0-models-2" class="level3" data-number="7.8.2">
-<h3 data-number="7.8.2" class="anchored" data-anchor-id="sec-ordinal-comparing0-models-2"><span class="header-section-number">7.8.2</span> Comparison of models varying in random effects</h3>
-</section>
-<section id="sec-ordinal-addressing-convergence" class="level3" data-number="7.8.3">
-<h3 data-number="7.8.3" class="anchored" data-anchor-id="sec-ordinal-addressing-convergence"><span class="header-section-number">7.8.3</span> Addressing convergence problems</h3>
-<section id="exercises" class="level4" data-number="7.8.3.1">
-<h4 data-number="7.8.3.1" class="anchored" data-anchor-id="exercises"><span class="header-section-number">7.8.3.1</span> Exercises</h4>
-</section>
-<section id="sec-ordinal-advice-summary" class="level4" data-number="7.8.3.2">
-<h4 data-number="7.8.3.2" class="anchored" data-anchor-id="sec-ordinal-advice-summary"><span class="header-section-number">7.8.3.2</span> Summary advice</h4>
-</section>
+<section id="sec-ordinal-visualizing" class="level3" data-number="7.8.2">
+<h3 data-number="7.8.2" class="anchored" data-anchor-id="sec-ordinal-visualizing"><span class="header-section-number">7.8.2</span> Presenting and visualizing the effects</h3>
+<p>It will be helpful for the interpretation of the estimates of the coefficients of these predictor variables if we visualize the predictions we can make, about how <code>rating</code> values vary, given differences in predictor variable values, given our model estimates. We can do this using functions from the <code>{ggeffects}</code> library. You can read more about the <code>{ggeffects}</code> library <a href="https://strengejacke.github.io/ggeffects/index.html">here</a> where you will see a collection of articles explaining what you can do, and why, as well as technical information including some helpful tutorials.</p>
+<p>The basic model prediction coding looks like this.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(health.clmm, <span class="at">terms=</span><span class="st">"z_FACTOR3 [all]"</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><a href="#fig-rating-clmm-factor3-predictions">Figure&nbsp;<span>7.4</span></a> shows you the marginal effect of variation in the reading strategy attribute, i.e., the effect of differences between individuals in how they score on the <code>FACTOR3</code> measure of reading strategy. Note that the variable is listed as <code>z_FACTOR3</code> because, as you will recall, we standardized numeric predictor variables before entering them in our model.</p>
+<p>These kinds of plots are understood to present what are variously called conditional effects, or adjusted predictions or marginal effects. You can find a discussion of marginal effects in the context of working with the <code>{ggeffects}</code> library <a href="https://strengejacke.github.io/ggeffects/articles/ggeffects.html">here</a> and <a href="https://strengejacke.github.io/ggeffects/articles/introduction_marginal_effects.html">here</a>. You can find an extensive, helpful (with examples) discussion of marginal effects by Andrew Heiss <a href="https://www.andrewheiss.com/blog/2022/05/20/marginalia/">here</a>.</p>
+<p>In short, what we want to do is to take the model coefficient estimates, and generate predictions with these estimates, given different values of the predictor variable, while holding the other predictor variables at some constant or some level (or some series of values).</p>
+<p>If you look at the code chunk, you can see that we first:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(health.clmm, <span class="at">terms=</span><span class="st">"z_FACTOR3 [all]"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>In this line, we use <code>ggpredict()</code> to work with some model information, assuming we previously fitted a model and gave it a name (here, <code>health.clmm</code>).</li>
+</ul>
+<p>Note that if you fit the model and call it <code>health.clmm</code>, as we did in <a href="#sec-ordinal-working-models-clmm"><span>Section&nbsp;7.8</span></a>, then an object of that name is created in the R workspace or environment. If you click on that object name in the environment window in R-Studio, you will see that there is a list of pieces of information about the model, including the coefficient estimates, the model formula etc. associated with that name.</p>
+<ul>
+<li>So when we use <code>ggpredict()</code>, we ask R to take that model information and, for the term we specify, here, specify using <code>terms="z_FACTOR3 [all]"</code>, we ask R to generate some predictions.</li>
+<li><code>dat &lt;- ggpredict(...)</code> asks R to put those predictions in an object called <code>dat</code>.</li>
+</ul>
+<p>If you click on that object name in the environment window in R-Studio, you will see that it comprises a dataset. The dataset includes the columns:</p>
+<ul>
+<li><code>x</code> giving different values of the predictor variable. <code>ggpredict()</code> will choose some ‘representative’ values for you but you can construct a set of values of the predictor for which you want predictions.</li>
+<li><code>predicted</code> holds predicted values, given different predictor <code>x</code> values.</li>
+</ul>
+<p>If you then run the line <code>plot(dat)</code> you can see what this gets us for these kinds of models. <a href="#fig-rating-clmm-factor3-predictions">Figure&nbsp;<span>7.4</span></a> presents a grid of plots showing the model-predicted probabilities that a rating response will have one value for each of the 1-9 rating response values that are possible given the Likert rating scale used in data collection. In the grid, a different plot is shown for each possible response value, indicating how the probability varies that the rating response will take that value.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(health.clmm, <span class="at">terms=</span><span class="st">"z_FACTOR3 [all]"</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-rating-clmm-factor3-predictions" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="05-ordinal_files/figure-html/fig-rating-clmm-factor3-predictions-1.png" class="img-fluid figure-img" alt="The figure presents a grid of plots showing marginal or conditional -- adjusted prediction values -- predicted ratings and how they vary given variation in values of the standardized reading strategy (FACTOR3) variable. We can see flat lines for plots corresponding to predictions concerning response options 1-4, suggesting little probability that a rating response will take one of these values. We see norml curves for plots corresponding to predictions concerning response options 5-9, suggesting how the probability that a response will take one of these values may rise and then fall, depending on the FACTOR3 score a person has. The plots suggest that for higher FACTOR3 scores the probability increases that a rating response will have a higher value." width="480"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;7.4: A grid of plots showing marginal or conditional predicted probabilities that a rating response will have one value (among the 1-9 rating values possible), indicating how these predicted probabilities vary given variation in values of the standardized reading strategy (FACTOR3) variable.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>If you examine <a href="#fig-rating-clmm-factor3-predictions">Figure&nbsp;<span>7.4</span></a>, you can recognize that we have one plot for each different value of the response options available for the Likert-scale <code>rating</code> items: 1-9. You can also see that in each plot we get a curve. In some cases – for <code>rating</code> response values <code>1-4</code> – the curve is flat or flattens very quickly, for higher levels of the <code>z_FACTOR3</code> variable. In some cases – for <code>rating</code> response values <code>5-9</code> – the curve is more obvious, and resembles a normal distribution curve.</p>
+<p>If you think about it, what these plots indicate are the ways in which the probability that a <code>rating</code> response is a low value (e.g., a rating of <code>1</code>) or a high value (e.g., a rating of <code>9</code>) rises or falls. Each possible <code>rating</code> response is associated with a probability distribution. For example, look at the plot labelled <code>6</code>: that shows you the probability distribution indicating how the probability varies that a response will take the value <code>6</code>. We can see that the distribution is normal in shape, a bell-shaped curve. We can see that the peak of the curve is over the <code>z_FACTOR3</code> score (shown on the x-axis) of about 1.5. We can see that the probability represented by the height of the line showing the curve is lower for <code>z_FACTOR3</code> scores lower than the score under the peak (e.g.&nbsp;scores less than <code>z_FACTOR3</code> <span class="math inline">\(=2\)</span>). The probability represented by the height of the line showing the curve is lower for <code>z_FACTOR3</code> scores higher than the score under the peak (e.g.&nbsp;scores greater than <code>z_FACTOR3</code> <span class="math inline">\(=1\)</span>).</p>
+<p>We can see that the peak of the normal curve, in the case of <code>rating</code> response values <code>5-9</code>, is located at different places on the horizontal axis. Look at each of the plots labelled <code>5-9</code>. Notice how the horizontal location of the curves <em>shifts</em> as <code>z_FACTOR3</code> scores increase. If you go from left to right, i.e.&nbsp;from low to high values of <code>z_FACTOR3</code>, on each plot then you will see that the peak of the curve is located in different places: going from plot <code>5</code> to plot <code>9</code> the peak of the curve moves <em>rightwards</em>. These curves show how the probability that a <code>rating</code> response takes a high value (e.g.&nbsp;<code>9</code> instead of <code>8</code> or <code>8</code> instead of <code>7</code> etc.) is <em>higher</em> for <em>higher</em> values of <code>z_FACTOR3</code>. This idea might be a bit clearer if we draw the plot in a different way.</p>
+<p><a href="#fig-rating-clmm-factor3-predictions-fancy">Figure&nbsp;<span>7.5</span></a> shows the same model predictions but plots the predictions of the way that probability changes, for each <code>rating</code> response, by superimposing the plots for each response value, one on top of the other. I have drawn each probability curve in a different colour, and these colours match those used to present the counts of different response values shown in <a href="#fig-rating-dotplots">Figure&nbsp;<span>7.3</span></a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(health.clmm, <span class="at">terms=</span><span class="st">"z_FACTOR3 [all]"</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(x, predicted, </span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">colour =</span> response.level)) <span class="sc">+</span> </span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis</span>(<span class="at">discrete=</span><span class="cn">TRUE</span>, <span class="at">option =</span> <span class="st">"mako"</span>) <span class="sc">+</span> </span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Reading strategy (z_FACTOR3)"</span>, <span class="at">y =</span> <span class="st">"Predicted probability of a rating"</span>) <span class="sc">+</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">colour =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="st">"Rating"</span>)) <span class="sc">+</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-rating-clmm-factor3-predictions-fancy" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="05-ordinal_files/figure-html/fig-rating-clmm-factor3-predictions-fancy-1.png" class="img-fluid figure-img" alt="The figure presents a plot showing marginal or conditional predicted probabilities that a rating rating will have one value (among the 1-9 rating values possible), indicating how these predicted probabilities vary given variation in values of the standardized reading strategy (FACTOR3) variable. We can see flat lines for plots corresponding to predictions concerning response options 1-4, suggesting little probability that a rating response will take one of these values. We see norml curves for plots corresponding to predictions concerning response options 5-9, suggesting how the probability that a response will take one of these values may rise and then fall, depending on the FACTOR3 score a person has. The plots suggest that for higher FACTOR3 scores the probability increases that a rating response will have a higher value." width="576"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;7.5: A plot showing marginal or conditional predicted probabilities that a rating response will have one value (among the 1-9 rating values possible), indicating how these predicted probabilities vary given variation in values of the standardized reading strategy (FACTOR3) variable</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>You can read <a href="#fig-rating-clmm-factor3-predictions-fancy">Figure&nbsp;<span>7.5</span></a> by observing that:</p>
+<ul>
+<li>For low value ratings e.g.&nbsp;for <code>rating</code> responses from 1-4, there is not much predicted probability that a response with such a value will be made (flat lines) but if they are going to be made they are likely to be made by people with low scores on the <code>z_FACTOR3</code>.</li>
+</ul>
+<p>You can see this because you can see how the curves peak around low values of <code>z_FACTOR3</code>. This should make sense: people with low scores on reading strategy are maybe not doing reading effectively, are maybe as a result not doing well in understanding the texts they are given to read, and thus are not confident about their understanding. (This is a speculative causal theory but it will suffice for now.)</p>
+<p>Recall, also, that as <a href="#fig-rating-dotplots">Figure&nbsp;<span>7.3</span></a> indicated, in the <strong>Clearly understood</strong> health comprehension dataset, we saw that few <code>rating</code> responses were recorded for low value ratings of understanding. Few people in our sample made rating responses by choosing ratings of <code>1</code> or <code>2</code> to indicate low levels of understanding.</p>
+<p><a href="#fig-rating-clmm-factor3-predictions-fancy">Figure&nbsp;<span>7.5</span></a> also suggests that:</p>
+<ul>
+<li>For higher value <code>rating</code> responses – responses representing ratings from <code>5</code> to <code>9</code> – there is variation in the probability that responses with such values will be made.</li>
+<li>That variation in probability is shown by the probability distribution curves.</li>
+<li>For these data, and this model, we can see that the probability shifts suggesting that participants in our sample were more likely to choose a higher value rating if they were also presenting high scores on the <code>z_FACTOR3</code> measure of reading strategy.</li>
+</ul>
 </section>
 </section>
 <section id="sec-ordinal-reporting-results" class="level2" data-number="7.9">
