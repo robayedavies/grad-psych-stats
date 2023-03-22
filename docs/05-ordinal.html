@@ -284,11 +284,16 @@ div.csl-indent {
   <li><a href="#sec-ordinal-visualizing" id="toc-sec-ordinal-visualizing" class="nav-link" data-scroll-target="#sec-ordinal-visualizing"><span class="toc-section-number">7.8.2</span>  Presenting and visualizing the effects</a></li>
   </ul></li>
   <li><a href="#sec-ordinal-reporting-results" id="toc-sec-ordinal-reporting-results" class="nav-link" data-scroll-target="#sec-ordinal-reporting-results"><span class="toc-section-number">7.9</span>  Reporting model results</a></li>
-  <li><a href="#sec-ordinal-summary" id="toc-sec-ordinal-summary" class="nav-link" data-scroll-target="#sec-ordinal-summary"><span class="toc-section-number">7.10</span>  Summary</a>
+  <li><a href="#sec-ordinal-extensions" id="toc-sec-ordinal-extensions" class="nav-link" data-scroll-target="#sec-ordinal-extensions"><span class="toc-section-number">7.10</span>  Extensions</a>
   <ul class="collapse">
-  <li><a href="#sec-ordinal-glossary-useful-functions" id="toc-sec-ordinal-glossary-useful-functions" class="nav-link" data-scroll-target="#sec-ordinal-glossary-useful-functions"><span class="toc-section-number">7.10.1</span>  Glossary: useful functions</a></li>
+  <li><a href="#sec-ordinal-kinds" id="toc-sec-ordinal-kinds" class="nav-link" data-scroll-target="#sec-ordinal-kinds"><span class="toc-section-number">7.10.1</span>  Different kinds of ordinal data</a></li>
   </ul></li>
-  <li><a href="#sec-ordinal-recommended-reading" id="toc-sec-ordinal-recommended-reading" class="nav-link" data-scroll-target="#sec-ordinal-recommended-reading"><span class="toc-section-number">7.11</span>  Recommended reading</a></li>
+  <li><a href="#richly-parameterized-mixed-effects-models" id="toc-richly-parameterized-mixed-effects-models" class="nav-link" data-scroll-target="#richly-parameterized-mixed-effects-models"><span class="toc-section-number">7.11</span>  Richly parameterized mixed-effects models</a></li>
+  <li><a href="#sec-ordinal-summary" id="toc-sec-ordinal-summary" class="nav-link" data-scroll-target="#sec-ordinal-summary"><span class="toc-section-number">7.12</span>  Summary</a>
+  <ul class="collapse">
+  <li><a href="#sec-ordinal-glossary-useful-functions" id="toc-sec-ordinal-glossary-useful-functions" class="nav-link" data-scroll-target="#sec-ordinal-glossary-useful-functions"><span class="toc-section-number">7.12.1</span>  Glossary: useful functions</a></li>
+  </ul></li>
+  <li><a href="#sec-ordinal-recommended-reading" id="toc-sec-ordinal-recommended-reading" class="nav-link" data-scroll-target="#sec-ordinal-recommended-reading"><span class="toc-section-number">7.13</span>  Recommended reading</a></li>
   </ul>
 </nav>
     </div>
@@ -339,7 +344,7 @@ Warning
 </ul>
 <p>We will be working with study data in which the outcome that is the target for our analyses comprise responses to questions designed to elicit ratings. Ordinal data may, however, also derive from situations in which ordered categorical responses do not derive from ratings items <span class="citation" data-cites="bürkner2019">(we will look briefly at sequential responses, <a href="references.html#ref-bürkner2019" role="doc-biblioref">Bürkner &amp; Vuorre, 2019</a>)</span>.</p>
 <p>The challenge we face is that we will aim to develop skills in using <em>ordinal models</em> when, in contrast, most psychological research articles will report analyses of ordinal data using conventional methods like ANOVA or linear regression. We will work to understand why ordinal models are better. We will learn that applying conventional methods to ordinal data will, in principle, involve a poor account of the data and, in practice, will create the risk of producing misleading results. And we will learn how to work with and interpret the results from ordinal models with or without random effects.</p>
-<p>In our work in this chapter, we will rely extensively on the ideas set out by <span class="citation" data-cites="liddell2018">Liddell &amp; Kruschke (<a href="references.html#ref-liddell2018" role="doc-biblioref">2018</a>)</span>, see <a href="#sec-ordinal-recommended-reading"><span>Section&nbsp;7.11</span></a>.</p>
+<p>In our work in this chapter, we will rely extensively on the ideas set out by <span class="citation" data-cites="liddell2018">Liddell &amp; Kruschke (<a href="references.html#ref-liddell2018" role="doc-biblioref">2018</a>)</span>, see <a href="#sec-ordinal-recommended-reading"><span>Section&nbsp;7.13</span></a>.</p>
 </section>
 <section id="sec-ordinal-ideas" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="sec-ordinal-ideas"><span class="header-section-number">7.2</span> The key idea to get us started</h2>
@@ -370,8 +375,7 @@ Important
 </div>
 </div>
 <p>In conducting analyses of ordinal data with ordinal models, we often fit models that describe the cumulative probability that a rating response is located at some value (typically, understood in terms of threshold) on an underlying latent continuum. In ordinal models, we do not assume that the ordinal responses map to equally spaced intervals on the latent scale: the values or thresholds at which the continuum are split are to be estimated.</p>
-<p>In applying metric models to ordinal data, we <em>do</em> assume that intervals are equal though this assumption is unlikely to be true or, at least, is unlikely to be verifiable. This faulty assumption has consequences. Because the mis-application of metric models (e.g.&nbsp;ANOVA, linear models) to ordinal data is both commonplace and <em>risky</em>. As <span class="citation" data-cites="liddell2018">Liddell &amp; Kruschke (<a href="references.html#ref-liddell2018" role="doc-biblioref">2018</a>)</span> demonstrate, mis-applying metric models to ordinal data can result in false positives (detecting a difference when none is present), false negatives (missing a difference that is present) and inversions (swapping the difference so that is positive instead of negative or vice versa).<br>
-These kinds of misrepresentions cannot be avoided and are not fixed by, for example, averaging ratings scales data together.</p>
+<p>In applying metric models to ordinal data, we <em>do</em> assume that intervals are equal though this assumption is unlikely to be true or, at least, is unlikely to be verifiable. This faulty assumption has consequences because the mis-application of metric models (e.g.&nbsp;ANOVA, linear models) to ordinal data is both commonplace and <em>risky</em>. As <span class="citation" data-cites="liddell2018">Liddell &amp; Kruschke (<a href="references.html#ref-liddell2018" role="doc-biblioref">2018</a>)</span> demonstrate, mis-applying metric models to ordinal data can result in false positives (detecting a difference when none is present), false negatives (missing a difference that is present) and inversions (swapping the difference so that it appears to be positive instead of negative or vice versa). These kinds of misrepresentions cannot be avoided and are not fixed by, for example, averaging ratings scales data together.</p>
 </section>
 <section id="sec-ordinal-targets" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="sec-ordinal-targets"><span class="header-section-number">7.3</span> Targets</h2>
@@ -393,7 +397,7 @@ These kinds of misrepresentions cannot be avoided and are not fixed by, for exam
 <li>Experiment with the .R code used to work with the example data.</li>
 <li>Run ordinal models of demonstration data.</li>
 <li>Run ordinal models of alternate data sets.</li>
-<li>Review the recommended readings (<a href="#sec-ordinal-recommended-reading"><span>Section&nbsp;7.11</span></a>).</li>
+<li>Review the recommended readings (<a href="#sec-ordinal-recommended-reading"><span>Section&nbsp;7.13</span></a>).</li>
 </ul>
 <p><strong>2. Practical workbook materials</strong></p>
 <p>2.1 In the following sections, I describe the practical steps, and associated resources, you can use for your learning.</p>
@@ -1047,14 +1051,35 @@ Threshold coefficients:
 <li>And explain what the estimates or what the prediction plots appear to show.</li>
 </ul>
 </section>
-<section id="sec-ordinal-summary" class="level2" data-number="7.10">
-<h2 data-number="7.10" class="anchored" data-anchor-id="sec-ordinal-summary"><span class="header-section-number">7.10</span> Summary</h2>
-<section id="sec-ordinal-glossary-useful-functions" class="level3" data-number="7.10.1">
-<h3 data-number="7.10.1" class="anchored" data-anchor-id="sec-ordinal-glossary-useful-functions"><span class="header-section-number">7.10.1</span> Glossary: useful functions</h3>
+<section id="sec-ordinal-extensions" class="level2" data-number="7.10">
+<h2 data-number="7.10" class="anchored" data-anchor-id="sec-ordinal-extensions"><span class="header-section-number">7.10</span> Extensions</h2>
+<section id="sec-ordinal-kinds" class="level3" data-number="7.10.1">
+<h3 data-number="7.10.1" class="anchored" data-anchor-id="sec-ordinal-kinds"><span class="header-section-number">7.10.1</span> Different kinds of ordinal data</h3>
+<p>As I hint, when we discuss the concept that ordinal responses may map somehow to a latent unobserved underlying continuum (see <a href="#fig-latent-normal-splits">Figure&nbsp;<span>7.1</span></a>), there are other ways to think about ordinal data. Rather, there are other ways to think about the psychological mechanisms or the <em>data generating mechanisms</em> that give rise to the ordinal responses we analyse.</p>
+<p>In <span class="citation" data-cites="ricketts2021">Ricketts et al. (<a href="references.html#ref-ricketts2021" role="doc-biblioref">2021</a>)</span>, we explain:</p>
+<blockquote class="blockquote">
+<p>In the semantic post-test, participants worked their way through three steps, only progressing from one step to the next step if they provided an incorrect response or no response. Given the sequential nature of this task, we analysed data using sequential ratio ordinal models (Bürkner &amp; Vuorre, 2019). In sequential models, we account for variation in the probability that a response falls into one response category (out of k ordered categories), equal to the probability that it did not fall into one of the foregoing categories, given the linear sum of predictors. We estimate the k-1 thresholds and the coefficients of the predictors.</p>
+</blockquote>
+<p>What this explanation refers to is the fact that, in our study:</p>
+<blockquote class="blockquote">
+<p>The semantic post-test assessed knowledge for the meanings of newly trained words. We took a dynamic assessment or cuing hierarchy approach (Hasson &amp; Joffe, 2007), providing children with increasing support to capture partial knowledge and the incremental nature of acquiring such knowledge (Dale, 1965). Each word was taken one at a time and children were given the op- portunity to demonstrate knowledge in three steps: definition, cued definition, recognition.</p>
+</blockquote>
+<p>We follow advice set out by <span class="citation" data-cites="bürkner2019">Bürkner &amp; Vuorre (<a href="references.html#ref-bürkner2019" role="doc-biblioref">2019</a>)</span> in modeling the ordered categorical (i.e.&nbsp;ordinal) responses using a sequential ratio approach.</p>
 </section>
 </section>
-<section id="sec-ordinal-recommended-reading" class="level2" data-number="7.11">
-<h2 data-number="7.11" class="anchored" data-anchor-id="sec-ordinal-recommended-reading"><span class="header-section-number">7.11</span> Recommended reading</h2>
+<section id="richly-parameterized-mixed-effects-models" class="level2" data-number="7.11">
+<h2 data-number="7.11" class="anchored" data-anchor-id="richly-parameterized-mixed-effects-models"><span class="header-section-number">7.11</span> Richly parameterized mixed-effects models</h2>
+<p>You will have noticed that the mixed-effects model coded in <a href="#sec-ordinal-working-models-clmm"><span>Section&nbsp;7.8</span></a> incorporates a relatively simple random effect: a term specified to estimate the variance associated with the random effect of differences between participants in intercepts.</p>
+<p>As we we have seen, more complex random effects structures may be warranted <span class="citation" data-cites="Baayen2008">Matuschek et al. (<a href="references.html#ref-matuschek2017" role="doc-biblioref">2017</a>)</span>. When we attempt to fit models with more complex structures, as we have discussed, for example, in <a href="03-mixed.html#sec-dev-mixed-convergence-problems"><span>Section&nbsp;5.11.1</span></a> and <a href="04-glmm.html#sec-glmm-bad-signs"><span>Section&nbsp;6.10.2</span></a>, we may run into <em>convergence</em> problems. (Such convergence problems are one reason why I tend to favour Bayesian methods; see, for exampe, the discussions in <span class="citation" data-cites="bürkner2019">Bürkner &amp; Vuorre (<a href="references.html#ref-bürkner2019" role="doc-biblioref">2019</a>)</span> and <span class="citation" data-cites="liddell2018">Liddell &amp; Kruschke (<a href="references.html#ref-liddell2018" role="doc-biblioref">2018</a>)</span>.) There are ways to resolve these problems by changing the control parameters of the <code>{ordinal}</code> functions (see e.g.&nbsp;<a href="https://stat.ethz.ch/pipermail/r-sig-mixed-models/2011q2/016165.html">this discussion</a> or see the information <a href="https://cran.r-project.org/web/packages/ordinal/ordinal.pdf">here</a>) or by simplfying the model.</p>
+</section>
+<section id="sec-ordinal-summary" class="level2" data-number="7.12">
+<h2 data-number="7.12" class="anchored" data-anchor-id="sec-ordinal-summary"><span class="header-section-number">7.12</span> Summary</h2>
+<section id="sec-ordinal-glossary-useful-functions" class="level3" data-number="7.12.1">
+<h3 data-number="7.12.1" class="anchored" data-anchor-id="sec-ordinal-glossary-useful-functions"><span class="header-section-number">7.12.1</span> Glossary: useful functions</h3>
+</section>
+</section>
+<section id="sec-ordinal-recommended-reading" class="level2" data-number="7.13">
+<h2 data-number="7.13" class="anchored" data-anchor-id="sec-ordinal-recommended-reading"><span class="header-section-number">7.13</span> Recommended reading</h2>
 <p>The published example studies referred to in this chapter are published in <span class="citation" data-cites="ricketts2021 rodríguez-ferreiro2020a">(<a href="references.html#ref-ricketts2021" role="doc-biblioref">Ricketts et al., 2021</a>; <a href="references.html#ref-rodríguez-ferreiro2020a" role="doc-biblioref">Rodríguez-Ferreiro et al., 2020</a>)</span>.</p>
 <p><span class="citation" data-cites="liddell2018">Liddell &amp; Kruschke (<a href="references.html#ref-liddell2018" role="doc-biblioref">2018</a>)</span> present a clear account of the problems associated with treating ordinal data as metric, and explain how we can better account for ordinal data.</p>
 <p><span class="citation" data-cites="bürkner2019">Bürkner &amp; Vuorre (<a href="references.html#ref-bürkner2019" role="doc-biblioref">2019</a>)</span> present a clear tutorial on cumulative and sequential ratio models.</p>
@@ -1063,6 +1088,15 @@ Threshold coefficients:
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography" style="display: none">
+<div id="ref-Baayen2008" class="csl-entry" role="doc-biblioentry">
+Baayen, R. H., Davidson, D. J., &amp; Bates, D. M. (2008). Mixed-effects modeling with crossed random effects for subjects and items. <em>Journal of Memory and Language</em>, <em>59</em>(4), 390–412. <a href="https://doi.org/10.1016/j.jml.2007.12.005">https://doi.org/10.1016/j.jml.2007.12.005</a>
+</div>
+<div id="ref-Barr2013a" class="csl-entry" role="doc-biblioentry">
+Barr, D. J., Levy, R., Scheepers, C., &amp; Tily, H. J. (2013). Random effects structure for confirmatory hypothesis testing: Keep it maximal. <em>Journal of Memory and Language</em>, <em>68</em>, 255–278.
+</div>
+<div id="ref-bates2015parsimonious" class="csl-entry" role="doc-biblioentry">
+Bates, D., Kliegl, R., Vasishth, S., &amp; Baayen, H. (2015). Parsimonious mixed models. <em>arXiv Preprint arXiv:1506.04967</em>.
+</div>
 <div id="ref-bürkner2019" class="csl-entry" role="doc-biblioentry">
 Bürkner, P.-C., &amp; Vuorre, M. (2019). Ordinal Regression Models in Psychology: A Tutorial. <em>Advances in Methods and Practices in Psychological Science</em>, <em>2</em>(1), 77–101. <a href="https://doi.org/10.1177/2515245918823199">https://doi.org/10.1177/2515245918823199</a>
 </div>
@@ -1077,6 +1111,9 @@ Dunlosky, J., &amp; Lipko, A. R. (2007). Metacomprehension. <em>Current Directio
 </div>
 <div id="ref-liddell2018" class="csl-entry" role="doc-biblioentry">
 Liddell, T. M., &amp; Kruschke, J. K. (2018). Analyzing ordinal data with metric models: What could possibly go wrong? <em>Journal of Experimental Social Psychology</em>, <em>79</em>, 328–348. <a href="https://doi.org/10.1016/j.jesp.2018.08.009">https://doi.org/10.1016/j.jesp.2018.08.009</a>
+</div>
+<div id="ref-matuschek2017" class="csl-entry" role="doc-biblioentry">
+Matuschek, H., Kliegl, R., Vasishth, S., Baayen, H., &amp; Bates, D. (2017). Balancing type i error and power in linear mixed models. <em>Journal of Memory and Language</em>, <em>94</em>, 305–315. <a href="https://doi.org/10.1016/j.jml.2017.01.001">https://doi.org/10.1016/j.jml.2017.01.001</a>
 </div>
 <div id="ref-meteyard2020a" class="csl-entry" role="doc-biblioentry">
 Meteyard, L., &amp; Davies, R. A. I. (2020). Best practice guidance for linear mixed-effects models in psychological science. <em>Journal of Memory and Language</em>, <em>112</em>, 104092. <a href="https://doi.org/10.1016/j.jml.2020.104092">https://doi.org/10.1016/j.jml.2020.104092</a>

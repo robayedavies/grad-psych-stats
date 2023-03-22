@@ -104,7 +104,7 @@ ggplot(data = data.frame(x = c(-6, 6)), aes(x)) +
 
 In conducting analyses of ordinal data with ordinal models, we often fit models that describe the cumulative probability that a rating response is located at some value (typically, understood in terms of threshold) on an underlying latent continuum. In ordinal models, we do not assume that the ordinal responses map to equally spaced intervals on the latent scale: the values or thresholds at which the continuum are split are to be estimated.
 
-In applying metric models to ordinal data, we *do* assume that intervals are equal though this assumption is unlikely to be true or, at least, is unlikely to be verifiable. This faulty assumption has consequences. Because the mis-application of metric models (e.g. ANOVA, linear models) to ordinal data is both commonplace and *risky*. As @liddell2018 demonstrate, mis-applying metric models to ordinal data can result in false positives (detecting a difference when none is present), false negatives (missing a difference that is present) and inversions (swapping the difference so that is positive instead of negative or vice versa).\
+In applying metric models to ordinal data, we *do* assume that intervals are equal though this assumption is unlikely to be true or, at least, is unlikely to be verifiable. This faulty assumption has consequences because the mis-application of metric models (e.g. ANOVA, linear models) to ordinal data is both commonplace and *risky*. As @liddell2018 demonstrate, mis-applying metric models to ordinal data can result in false positives (detecting a difference when none is present), false negatives (missing a difference that is present) and inversions (swapping the difference so that it appears to be positive instead of negative or vice versa).
 These kinds of misrepresentions cannot be avoided and are not fixed by, for example, averaging ratings scales data together.
 
 ## Targets {#sec-ordinal-targets}
@@ -754,6 +754,32 @@ Notice that I do not present information on threshold estimates.
 
 - Present conditional or marginal effects plots [see figures 2 and 3, @ricketts2021] to indicate the predictions you can make given your model estimates.
 - And explain what the estimates or what the prediction plots appear to show.
+
+## Extensions {#sec-ordinal-extensions}
+
+### Different kinds of ordinal data {#sec-ordinal-kinds}
+
+As I hint, when we discuss the concept that ordinal responses may map somehow to a latent unobserved underlying continuum (see @fig-latent-normal-splits), there are other ways to think about ordinal data.
+Rather, there are other ways to think about the psychological mechanisms or the *data generating mechanisms* that give rise to the ordinal responses we analyse.
+
+In @ricketts2021, we explain:
+
+> In the semantic post-test, participants worked their way through three steps, only progressing from one step to the next step if they provided an incorrect response or no response. Given the sequential nature of this task, we analysed data using sequential ratio ordinal models (Bürkner & Vuorre, 2019). In sequential models, we account for variation in the probability that a response falls into one response category (out of k ordered categories), equal to the probability that it did not fall into one of the foregoing categories, given the linear sum of predictors. We estimate the k-1 thresholds and the coefficients of the predictors. 
+
+What this explanation refers to is the fact that, in our study:
+
+> The semantic post-test assessed knowledge for the meanings of newly trained words. We took a dynamic assessment or cuing hierarchy approach (Hasson & Joffe, 2007), providing children with increasing support to capture partial knowledge and the incremental nature of acquiring such knowledge (Dale, 1965). Each word was taken one at a time and children were given the op- portunity to demonstrate knowledge in three steps: definition, cued definition, recognition.
+
+We follow advice set out by @bürkner2019 in modeling the ordered categorical (i.e. ordinal) responses using a sequential ratio approach.
+
+## Richly parameterized mixed-effects models
+
+You will have noticed that the mixed-effects model coded in @sec-ordinal-working-models-clmm incorporates a relatively simple random effect: a term specified to estimate the variance associated with the random effect of differences between participants in intercepts.
+
+As we we have seen, more complex random effects structures may be warranted [@Baayen2008, @bates2015parsimonious, @Barr2013a and @matuschek2017].
+When we attempt to fit models with more complex structures, as we have discussed, for example, in @sec-dev-mixed-convergence-problems and @sec-glmm-bad-signs, we may run into *convergence* problems.
+(Such convergence problems are one reason why I tend to favour Bayesian methods; see, for exampe, the discussions in @bürkner2019 and @liddell2018.)
+There are ways to resolve these problems by changing the control parameters of the `{ordinal}` functions (see e.g. [this discussion](https://stat.ethz.ch/pipermail/r-sig-mixed-models/2011q2/016165.html) or see the information [here](https://cran.r-project.org/web/packages/ordinal/ordinal.pdf)) or by simplfying the model.
 
 ## Summary {#sec-ordinal-summary}
 
