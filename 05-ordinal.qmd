@@ -47,10 +47,6 @@ health.subjects <- health %>%
   select(-c(rating:text.question.id))
 ```
 
-::: callout-warning
-This chapter is under construction
-:::
-
 ## Motivations: working with ordinal outcomes {#sec-ordinal-motivations}
 
 Ordinal data are very common in psychological science. Often, we will encounter ordinal data recorded as responses to Likert-style items in which the participant is asked to indicate a response on an ordered scale ranging between two end points [@bürkner2019; @liddell2018]. An example of a Likert question item might be: *How well do you think you have understood this text? (Please check one response)* where the participant must respond by checking an option, given 5 options ranging from 1 (not well at all) to 5 (very well). The critical characteristics of such responses are that:
