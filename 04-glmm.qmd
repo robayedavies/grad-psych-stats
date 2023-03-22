@@ -1131,7 +1131,7 @@ Use figures -- model prediction plots, as seen -- to help the reader to see what
 ::: callout-tip
 Which model do we report?
 
--   Note that given the model comparison results we have seen, I would probably report the estimates from \`long.orth.3.glmer:. The model appears to include the most comprehensive account of random effects while still being capable of converging.
+-   Note that given the model comparison results we have seen, I would probably report the estimates from `long.orth.3.glmer`. The model appears to include the most comprehensive account of random effects while still being capable of converging.
 :::
 
 ## Summary {#sec-glmm-summary}

@@ -123,17 +123,18 @@ I have provided a collection of materials you can use. Here, I explain what they
 
 1.2. The practical elements include data tidying, visualization and analysis steps.
 
-1.3. You can read the chapter, run the code, and do the exercises.
+1.3. You can read the chapter and run the code to gain experience and encounter code you can adapt for your own purposes.
 
 -   Read in the example dataset.
 -   Experiment with the .R code used to work with the example data.
 -   Run ordinal models of demonstration data.
--   Run ordinal models of alternate data sets.
+-   Run ordinal models of alternate data sets (see links in @sec-ordinal-reporting-results).
 -   Review the recommended readings (@sec-ordinal-recommended-reading).
 
-**2. Practical workbook materials**
+**2. Practical materials**
 
 2.1 In the following sections, I describe the practical steps, and associated resources, you can use for your learning.
+I set out the data tidying, analysis and visualization steps you can follow, working with the example dataset, described next.
 
 ## The data we will work with: {#sec-ordinal-data}
 
@@ -783,7 +784,22 @@ There are ways to resolve these problems by changing the control parameters of t
 
 ## Summary {#sec-ordinal-summary}
 
+We discussed ordinal data and the reasons why we are motivated to analyze ordinal data using ordinal models.
+
+We examine the coding required to fit ordinal models.
+
+We look at the results outputs from ordinal models, and visualizations representing the predictions that can be generated given ordinal model estimates.
+
+We consider the kinds of information that results reports should include.
+
+We examine possible extensions to ordinal models.
+
 ### Glossary: useful functions {#sec-ordinal-glossary-useful-functions}
+
+We used two functions from the `{ordinal}` library to fit and evaluate ordinal models.
+
+-   We used `clm()` to fit an ordinal model without random effects.
+-   We used `clmm()` to fit an ordinal mixed-effects model with fixed effects and random effects.
 
 ## Recommended reading {#sec-ordinal-recommended-reading}
 

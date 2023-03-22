@@ -391,16 +391,16 @@ Important
 <p><strong>1. Chapter: 05-ordinal</strong></p>
 <p>1.1. I have written this chapter to discuss the main ideas and set out the practical steps you can follow to start to develop the skills required to work with ordered categorical outcomes i.e.&nbsp;<em>ordinal data</em> using ordinal models.</p>
 <p>1.2. The practical elements include data tidying, visualization and analysis steps.</p>
-<p>1.3. You can read the chapter, run the code, and do the exercises.</p>
+<p>1.3. You can read the chapter and run the code to gain experience and encounter code you can adapt for your own purposes.</p>
 <ul>
 <li>Read in the example dataset.</li>
 <li>Experiment with the .R code used to work with the example data.</li>
 <li>Run ordinal models of demonstration data.</li>
-<li>Run ordinal models of alternate data sets.</li>
+<li>Run ordinal models of alternate data sets (see links in <a href="#sec-ordinal-reporting-results"><span>Section&nbsp;7.9</span></a>).</li>
 <li>Review the recommended readings (<a href="#sec-ordinal-recommended-reading"><span>Section&nbsp;7.13</span></a>).</li>
 </ul>
-<p><strong>2. Practical workbook materials</strong></p>
-<p>2.1 In the following sections, I describe the practical steps, and associated resources, you can use for your learning.</p>
+<p><strong>2. Practical materials</strong></p>
+<p>2.1 In the following sections, I describe the practical steps, and associated resources, you can use for your learning. I set out the data tidying, analysis and visualization steps you can follow, working with the example dataset, described next.</p>
 </section>
 <section id="sec-ordinal-data" class="level2" data-number="7.5">
 <h2 data-number="7.5" class="anchored" data-anchor-id="sec-ordinal-data"><span class="header-section-number">7.5</span> The data we will work with:</h2>
@@ -1074,8 +1074,18 @@ Threshold coefficients:
 </section>
 <section id="sec-ordinal-summary" class="level2" data-number="7.12">
 <h2 data-number="7.12" class="anchored" data-anchor-id="sec-ordinal-summary"><span class="header-section-number">7.12</span> Summary</h2>
+<p>We discussed ordinal data and the reasons why we are motivated to analyze ordinal data using ordinal models.</p>
+<p>We examine the coding required to fit ordinal models.</p>
+<p>We look at the results outputs from ordinal models, and visualizations representing the predictions that can be generated given ordinal model estimates.</p>
+<p>We consider the kinds of information that results reports should include.</p>
+<p>We examine possible extensions to ordinal models.</p>
 <section id="sec-ordinal-glossary-useful-functions" class="level3" data-number="7.12.1">
 <h3 data-number="7.12.1" class="anchored" data-anchor-id="sec-ordinal-glossary-useful-functions"><span class="header-section-number">7.12.1</span> Glossary: useful functions</h3>
+<p>We used two functions from the <code>{ordinal}</code> library to fit and evaluate ordinal models.</p>
+<ul>
+<li>We used <code>clm()</code> to fit an ordinal model without random effects.</li>
+<li>We used <code>clmm()</code> to fit an ordinal mixed-effects model with fixed effects and random effects.</li>
+</ul>
 </section>
 </section>
 <section id="sec-ordinal-recommended-reading" class="level2" data-number="7.13">
