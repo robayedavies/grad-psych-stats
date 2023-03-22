@@ -72,8 +72,9 @@ Ordinal responses are labelled with numbers but ordinal data are *not* numeric.
 
 Ordinal responses are coded with numeric labels. These number labels may indicate order but we do not know that the difference between e.g. response options `1` versus `2` is the same as the difference between `2` versus `3` or `3` versus `4`. Ordinal data contrast with *metric* data [@liddell2018] which are recorded on scales for which we assume *both* order and equal intervals. When researchers apply metric models to ordinal data, they incorrectly assume that the response options e.g. in ratings are separated by equal intervals. Yet, in a review of the 68 recently articles that mentioned the term "Likert" in a sample of highly ranked Psychology journals, @liddell2018 found that ordinal data were treated as metric and the articles presented results from metric models.
 
-One way to think about ordinal data is that often (but not always) ratings may be understood to come from psychological processes in which the participant, in response to the Likert question, divides some latent (unobserved) psychological continuum or scale into categories in order to select a response option. Imagine, for example, that you have been asked the question "How well do you understand this text? (on a scale from 1-5)". Presumably, to answer this question, you will have to choose a response based on where you think you are on your unobserved measure of your understanding.
+One way to think about ordinal data is that often (but not always) ratings may be understood to come from psychological processes in which the participant, in response to the Likert question, divides some latent (unobserved) psychological continuum or scale into categories in order to select a response option. 
 
+Imagine, for example, that you have been asked the question "How well do you understand this text? (on a scale from 1-5)". Presumably, to answer this question, you will have to choose a response based on where you think you are on your unobserved measure of your understanding.
 You may be able to evaluate the cohesion, or some other internal measure, of your understanding of the text. Simplifying a bit, we might assume that your internal measure of understanding is associated with a normal probability distribution so that it peaks over some value (e.g., `3`) of the strength of understanding though other values are possible. As @fig-latent-normal-splits suggests, a participant in this common situation will have to map the internal measure (the latent scale, e.g., of understanding) to a number from the response options you are given (e.g., rating scale values ranging 1-5). But there is no reason to suppose that your internal measure of your understanding is divided into an ordered metric scale.
 
 ```{r}
@@ -303,9 +304,15 @@ In the practical work we do, we will be using functions from the `{ordinal}` lib
 
 It is always a good to inspect what you have got when you read a data file in to R.
 Here, what may most concern us is the distribution of observed responses on the rating scale (responses to the "How well do you understand?" question).
+@fig-rating-dotplots is a dot plot showing the distribution of ratings responses. The Likert-style questions in the surveys asked participants to rate their level of understanding of the texts they saw on a scale from 1 (not well) to 9 (extremely well). The plot shows the number of responses recorded for each response option, over all participants and all texts. 
 
 ```{r}
-
+#| label: fig-rating-dotplots
+#| fig-cap: "Dot plot showing the distribution of ratings responses. The Likert-style questions in the surveys asked participants to rate their level of understanding of the texts they saw on a scale from 1 (not well) to 9 (extremely well). The plot shows the number of responses recorded for each response option, over all participants and all texts."
+#| fig-alt: "The figure presents a dot plot showing the distribution of ratings responses. The plot shows the number of responses recorded for each response option, over all participants and all texts. Points are coloured to distinguish different response options. The plot indicates that most participants rated their understanding very high to most texts, choosing ratings from 5-6 or above."
+#| warning: false
+#| fig-width: 6.5
+#| fig-height: 4.5
 health <- health %>% mutate(rating = fct_relevel(rating, sort))
 
 health %>%
@@ -320,47 +327,125 @@ health %>%
   coord_flip()
 ```
 
+The plot indicates that most participants chose response options 5-9, while very few rated their understanding at the lowest levels (options 1-4).
+Interestingly, many ratings responses around 7-8 were recorded: many more than responses at 5-6.
 
+In analyzing these data, we will seek to estimate what information available to us can be used to predict whether a participant's rating of their understanding is more likely to be, say, `1` or `2`, `2` or `3` ... `7` or `8`, `8` or `9`. 
+
+::: calllout-tip
+One practical way to think about the estimation problem when working with ratings-style ordinal data is this:
+
+- What factors move or how do influential factors move the probability that the ordinal response is a relatively low or relatively high order response option?
+- In doing this, we do not have to assume that rating scale points map to equal sized intervals on the underlying latent scale where the scale may be an unobserved psychological continuum (like understanding).
+:::
+
+Here, we mostly have information on participant attributes and some information on text properties to do our prediction analyses.
+In other studies, we may be using information about experimental conditions, or selected groups of participants to estimate effects on variation in ratings responses.
 
 ## Tidy the data {#sec-ordinal-data-tidy}
 
-### Code categorical factors {#sec-ordinal-data-recode}
+The **Clearly understood** health comprehension project dataset is tidy (@sec-intro-mixed-data-tidy):
 
-<!-- ```{r} -->
+1.  Each variable has its own column.
+2.  Each observation has its own row.
+3.  Each value has its own cell.
 
-<!-- #| label: glm-summary -->
+However, there are aspects of the data structure or properties of the dataset variables that will cause inefficiencies or problems in later data analysis if we do not fix them first.
 
-<!-- summary(glm(Score ~ Orthography, family = "binomial", data = long.orth)) -->
+You can see what we have if you look at the results we get from using `summary()` and `str()` to inspect the dataset.
 
-<!-- ``` -->
+```{r}
+summary(health)
+```
 
-::: callout-tip
--   
-:::
+You should be used to seeing the `summary()` of a dataset, showing summary statistics of numeric variables and counts of the numbers of observations of data coded at different levels for each categorical or nominal variable classed as a factor.
 
-## Introduction to thinking about the need for generalized models {#sec-ordinal-ideas-intro}
+Using the `str()` function may be new to you and, as you can see, the output from the function call gives you a bit more information on how R interprets the data in the variable columns. 
+You can see that each variable is listed alongside information about how the data in the column are interpreted (as `Factor` or `num` numeric).
+Where we have columns holding information on factors there we see information about the levels.
 
-## Our focus is on the analysis of catgorical outcome variables {#sec-ordinal-categorical-outcomes}
+Recall that for a categorical or nominal variable e.g. `ETHNICITY`, provided R interprets the variable as a factor, each data value in the column is coded as corresponding to one `level` i.e. group or class or category (e.g., we have `ETHNICITY` classes `"Asian"` etc.)
+Recall, also, that at the data read-in stage, we instructed R how we wanted it to interpret each column using `col_types = cols()`.
 
-### Recognize the limitations of alternative methods for analyzing response accuracy {#sec-tradition-limitations}
+```{r}
+str(health)
+```
 
-::: callout-tip
--   
-:::
+Our specific concern, here, is that the `rating` response variable is treated as a factor because the `{ordinal}` library we are going to use to do the modeling *must* find the outcome variable is a factor.
 
-#### Accuracy is bounded between 1 and 0, linear model model predictions or confidence intervals are not {#sec-ordinal-bounded-outcomes}
+We can focus `str()` on the `rating` variable.
+We see that it *is* being treated as a factor.
 
-#### ANOVA or regression require the assumption of homogeneity of variance but for binary outcomes like accuracy the variance is proportional to the mean {#sec-ordinal-anova-assumptions}
+```{r}
+str(health$rating)
+```
 
-#### Summary: Recognize the limitations of traditional methods for analyzing response accuracy {#sec-ordinal-limitations-summary}
+However, we also need to make sure that the `rating` outcome variable is being treated as an *ordered* factor.
 
-### Understanding the Generalized part of the Generalized Linear Mixed-effects Models in practical terms {#sec-ordinal-practical-understanding}
+We can perform a check as follows.
+(I found how to do this [here](https://bookdown.org/Tazinho/Tidyverse-Cookbook/factors.html))
+
+```{r}
+is.ordered(factor(health$rating))
+```
+
+We can see that the variable is not being treated as an ordered factor.
+We need to fix that.
+
+The ordinal model estimates the locations (thresholds) for where to split the latent scale (the continuum underlying the ratings) corresponding to different ratings values.
+If we do not make sure that the outcome factor variable is split as it should be then there is no guarantee that `{ordinal}` functions will estimate the thresholds in the right order (i.e., `1,2,3 ...` rather than `3,2,1...`).
+
+We can make sure that the confidence rating factor is ordered precisely as we wish using the `ordered()` function.
+
+```{r}
+health$rating <- ordered(health$rating,
+                         levels = c("1", "2", "3", "4", "5", "6", "7", "8", "9"))
+
+```
+
+We can then do a check to see that we have got what we want.
+
+```{r}
+is.numeric(health$rating)
+is.factor(health$rating)
+str(health$rating)
+is.ordered(health$rating)
+```
+
+Yes we do.
+
+Next, before doing any modelling, it will be sensible to standardize potential predictors
+
+```{r}
+health <- health %>% 
+  mutate(across(c(AGE, SHIPLEY, HLVA, FACTOR3, RDFKGL), 
+                scale, center = TRUE, scale = TRUE,
+                .names = "z_{.col}"))
+```
+
+You can see that in this chunk of code, we are doing a number of things:
+
+1. `health <- health %>% ` recreates the `health` dataset from the following steps.
+2. `mutate(...)` do an operation which retains the existing variables in the dataset, to change the variables as further detailed.
+3. `across(...)` work with the multple column variables that are named in the `c(AGE, SHIPLEY, HLVA, FACTOR3, RDFKGL)` set.
+4. `...scale, center = TRUE, scale = TRUE...` here is where we do the standardization work.
+
+What we are asking for is that R takes the variables we name and standardizes each of them.
+
+5. `.names = "z_{.col}")` creates the standardized variables under adapted names, adding `z_` to the original column name so that we can distinguish between the standardized and original raw versions of the data columns.
+
+Note that the `across()` function is a useful function for applying a function across multiple column variables [see information here](https://dplyr.tidyverse.org/reference/across.html)
+There is a helpful discussion on how we can do this task [here](https://stackoverflow.com/questions/62714796/standardize-variables-using-dplyr-r)
+
+We can then check that we have produced the standardized variables as required.
+
+```{r}
+summary(health)
+```
 
 ## Working with Cumulative Link Mixed-effects Models in R {#sec-ordinal-working-models}
 
-### Specify a random intercepts model {#sec-ordinal-random-intercepts}
-
-In our first model, we will specify just random effects of participants and items on intercepts.
+In our working model, we will specify just random effects of participants on intercepts.
 
 <!-- ```{r} -->
 
