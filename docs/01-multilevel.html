@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.189">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,48 +47,19 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -101,8 +73,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -139,10 +110,12 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
@@ -151,11 +124,16 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to multilevel data</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-multilevel.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to multilevel data</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -163,145 +141,168 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Psychological data analysis for graduate students</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">MAKING THE MOST OF R</span>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">MAKING THE MOST OF R</span></span>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./knowledge-ecosystem.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R knowledge</span></a>
+  <a href="./knowledge-ecosystem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R knowledge</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./visualization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data visualization</span></a>
+  <a href="./visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data visualization</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">MODELS</span>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">MODELS</span></span>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-multilevel.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to multilevel data</span></a>
+  <a href="./01-multilevel.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to multilevel data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-mixed.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to linear mixed-effects models</span></a>
+  <a href="./02-mixed.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to linear mixed-effects models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-mixed.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Developing linear mixed-effects models</span></a>
+  <a href="./03-mixed.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Developing linear mixed-effects models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-glmm.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to Generalized Linear Mixed-effects Models</span></a>
+  <a href="./04-glmm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to Generalized Linear Mixed-effects Models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-ordinal.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to Ordinal Models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">WRITING ABOUT RESEARCH</span>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">WRITING ABOUT RESEARCH</span></span>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction: the why</span></a>
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Introduction: the why</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./what.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">What</span></a>
+  <a href="./what.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">What</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./how.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">How</span></a>
+  <a href="./how.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">How</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">END</span>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">END</span></span>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  <a href="./summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-multi-motivations" id="toc-sec-multi-motivations" class="nav-link active" data-scroll-target="#sec-multi-motivations"><span class="toc-section-number">3.1</span>  Motivations</a>
+  <li><a href="#sec-multi-motivations" id="toc-sec-multi-motivations" class="nav-link active" data-scroll-target="#sec-multi-motivations"><span class="header-section-number">3.1</span> Motivations</a>
   <ul class="collapse">
-  <li><a href="#sec-multi-names" id="toc-sec-multi-names" class="nav-link" data-scroll-target="#sec-multi-names"><span class="toc-section-number">3.1.1</span>  A word about names</a></li>
+  <li><a href="#sec-multi-names" id="toc-sec-multi-names" class="nav-link" data-scroll-target="#sec-multi-names"><span class="header-section-number">3.1.1</span> A word about names</a></li>
   </ul></li>
-  <li><a href="#sec-multi-challenges" id="toc-sec-multi-challenges" class="nav-link" data-scroll-target="#sec-multi-challenges"><span class="toc-section-number">3.2</span>  Challenges</a></li>
-  <li><a href="#the-key-idea-to-get-us-started" id="toc-the-key-idea-to-get-us-started" class="nav-link" data-scroll-target="#the-key-idea-to-get-us-started"><span class="toc-section-number">3.3</span>  The key idea to get us started</a></li>
-  <li><a href="#sec-multi-approach" id="toc-sec-multi-approach" class="nav-link" data-scroll-target="#sec-multi-approach"><span class="toc-section-number">3.4</span>  The approach we take</a></li>
-  <li><a href="#sec-multi-targets" id="toc-sec-multi-targets" class="nav-link" data-scroll-target="#sec-multi-targets"><span class="toc-section-number">3.5</span>  Targets</a></li>
-  <li><a href="#sec-multi-guide" id="toc-sec-multi-guide" class="nav-link" data-scroll-target="#sec-multi-guide"><span class="toc-section-number">3.6</span>  Study guide</a></li>
-  <li><a href="#sec-multi-data-intro" id="toc-sec-multi-data-intro" class="nav-link" data-scroll-target="#sec-multi-data-intro"><span class="toc-section-number">3.7</span>  The data we will work with: Brazilian school children</a>
+  <li><a href="#sec-multi-challenges" id="toc-sec-multi-challenges" class="nav-link" data-scroll-target="#sec-multi-challenges"><span class="header-section-number">3.2</span> Challenges</a></li>
+  <li><a href="#the-key-idea-to-get-us-started" id="toc-the-key-idea-to-get-us-started" class="nav-link" data-scroll-target="#the-key-idea-to-get-us-started"><span class="header-section-number">3.3</span> The key idea to get us started</a></li>
+  <li><a href="#sec-multi-approach" id="toc-sec-multi-approach" class="nav-link" data-scroll-target="#sec-multi-approach"><span class="header-section-number">3.4</span> The approach we take</a></li>
+  <li><a href="#sec-multi-targets" id="toc-sec-multi-targets" class="nav-link" data-scroll-target="#sec-multi-targets"><span class="header-section-number">3.5</span> Targets</a></li>
+  <li><a href="#sec-multi-guide" id="toc-sec-multi-guide" class="nav-link" data-scroll-target="#sec-multi-guide"><span class="header-section-number">3.6</span> Study guide</a></li>
+  <li><a href="#sec-multi-data-intro" id="toc-sec-multi-data-intro" class="nav-link" data-scroll-target="#sec-multi-data-intro"><span class="header-section-number">3.7</span> The data we will work with: Brazilian school children</a>
   <ul class="collapse">
-  <li><a href="#sec-multi-data-download" id="toc-sec-multi-data-download" class="nav-link" data-scroll-target="#sec-multi-data-download"><span class="toc-section-number">3.7.1</span>  Locate and download the data file</a></li>
-  <li><a href="#sec-multi-data-load" id="toc-sec-multi-data-load" class="nav-link" data-scroll-target="#sec-multi-data-load"><span class="toc-section-number">3.7.2</span>  Read in the data file using the load() function</a></li>
-  <li><a href="#sec-multi-data-inspect" id="toc-sec-multi-data-inspect" class="nav-link" data-scroll-target="#sec-multi-data-inspect"><span class="toc-section-number">3.7.3</span>  Inspect the data</a></li>
+  <li><a href="#sec-multi-data-download" id="toc-sec-multi-data-download" class="nav-link" data-scroll-target="#sec-multi-data-download"><span class="header-section-number">3.7.1</span> Locate and download the data file</a></li>
+  <li><a href="#sec-multi-data-load" id="toc-sec-multi-data-load" class="nav-link" data-scroll-target="#sec-multi-data-load"><span class="header-section-number">3.7.2</span> Read in the data file using the load() function</a></li>
+  <li><a href="#sec-multi-data-inspect" id="toc-sec-multi-data-inspect" class="nav-link" data-scroll-target="#sec-multi-data-inspect"><span class="header-section-number">3.7.3</span> Inspect the data</a></li>
   </ul></li>
-  <li><a href="#sec-multi-data-tidy" id="toc-sec-multi-data-tidy" class="nav-link" data-scroll-target="#sec-multi-data-tidy"><span class="toc-section-number">3.8</span>  Tidy the data</a>
+  <li><a href="#sec-multi-data-tidy" id="toc-sec-multi-data-tidy" class="nav-link" data-scroll-target="#sec-multi-data-tidy"><span class="header-section-number">3.8</span> Tidy the data</a>
   <ul class="collapse">
-  <li><a href="#sec-multi-data-select" id="toc-sec-multi-data-select" class="nav-link" data-scroll-target="#sec-multi-data-select"><span class="toc-section-number">3.8.1</span>  Select the variables</a></li>
-  <li><a href="#sec-multi-data-remove-na" id="toc-sec-multi-data-remove-na" class="nav-link" data-scroll-target="#sec-multi-data-remove-na"><span class="toc-section-number">3.8.2</span>  Remove missing values</a></li>
-  <li><a href="#sec-multi-data-coerce" id="toc-sec-multi-data-coerce" class="nav-link" data-scroll-target="#sec-multi-data-coerce"><span class="toc-section-number">3.8.3</span>  Getting R to treat a variable as an object of the type required using the <code>as...()</code> family of functions</a></li>
+  <li><a href="#sec-multi-data-select" id="toc-sec-multi-data-select" class="nav-link" data-scroll-target="#sec-multi-data-select"><span class="header-section-number">3.8.1</span> Select the variables</a></li>
+  <li><a href="#sec-multi-data-remove-na" id="toc-sec-multi-data-remove-na" class="nav-link" data-scroll-target="#sec-multi-data-remove-na"><span class="header-section-number">3.8.2</span> Remove missing values</a></li>
+  <li><a href="#sec-multi-data-coerce" id="toc-sec-multi-data-coerce" class="nav-link" data-scroll-target="#sec-multi-data-coerce"><span class="header-section-number">3.8.3</span> Getting R to treat a variable as an object of the type required using the <code>as...()</code> family of functions</a></li>
   </ul></li>
-  <li><a href="#sec-multilevel-ideas-intro" id="toc-sec-multilevel-ideas-intro" class="nav-link" data-scroll-target="#sec-multilevel-ideas-intro"><span class="toc-section-number">3.9</span>  Introduction to thinking about multilevel models</a>
+  <li><a href="#sec-multilevel-ideas-intro" id="toc-sec-multilevel-ideas-intro" class="nav-link" data-scroll-target="#sec-multilevel-ideas-intro"><span class="header-section-number">3.9</span> Introduction to thinking about multilevel models</a>
   <ul class="collapse">
-  <li><a href="#sec-multilevel-ideas-main" id="toc-sec-multilevel-ideas-main" class="nav-link" data-scroll-target="#sec-multilevel-ideas-main"><span class="toc-section-number">3.9.1</span>  Main ideas – Phenomena and data sets in the social sciences often have a multilevel structure</a></li>
-  <li><a href="#sec-multilevel-models-utility" id="toc-sec-multilevel-models-utility" class="nav-link" data-scroll-target="#sec-multilevel-models-utility"><span class="toc-section-number">3.9.2</span>  Multilevel models – why they are more used and more useful than traditional methods</a></li>
-  <li><a href="#sec-multilevel-practical-application" id="toc-sec-multilevel-practical-application" class="nav-link" data-scroll-target="#sec-multilevel-practical-application"><span class="toc-section-number">3.9.3</span>  Practical applications: children sampled within classes</a></li>
-  <li><a href="#sec-multilevel-ignore" id="toc-sec-multilevel-ignore" class="nav-link" data-scroll-target="#sec-multilevel-ignore"><span class="toc-section-number">3.9.4</span>  To understand the application of multilevel models: first, we ignore the multilevel structure in the data</a></li>
-  <li><a href="#sec-multi-lm-ignore" id="toc-sec-multi-lm-ignore" class="nav-link" data-scroll-target="#sec-multi-lm-ignore"><span class="toc-section-number">3.9.5</span>  A linear model ignores the multilevel structure in the data</a></li>
-  <li><a href="#sec-multi-notation" id="toc-sec-multi-notation" class="nav-link" data-scroll-target="#sec-multi-notation"><span class="toc-section-number">3.9.6</span>  Notation</a></li>
-  <li><a href="#sec-multi-plot-lattice" id="toc-sec-multi-plot-lattice" class="nav-link" data-scroll-target="#sec-multi-plot-lattice"><span class="toc-section-number">3.9.7</span>  Can we really ignore the multilevel structure?</a></li>
-  <li><a href="#sec-multi-lm-address" id="toc-sec-multi-lm-address" class="nav-link" data-scroll-target="#sec-multi-lm-address"><span class="toc-section-number">3.9.8</span>  Linear models for multilevel data – dealing with the hierarchical structure</a></li>
-  <li><a href="#sec-multi-lm-two-step" id="toc-sec-multi-lm-two-step" class="nav-link" data-scroll-target="#sec-multi-lm-two-step"><span class="toc-section-number">3.9.9</span>  Two-step or slopes-as-outcomes linear models as approximations to the Linear Mixed-effects or Multilevel modeling approach</a></li>
-  <li><a href="#sec-multilevel-models-outline" id="toc-sec-multilevel-models-outline" class="nav-link" data-scroll-target="#sec-multilevel-models-outline"><span class="toc-section-number">3.9.10</span>  Multilevel models</a></li>
-  <li><a href="#sec-multi-class-differences" id="toc-sec-multi-class-differences" class="nav-link" data-scroll-target="#sec-multi-class-differences"><span class="toc-section-number">3.9.11</span>  How should we think about the differences between the classes?</a></li>
-  <li><a href="#sec-multi-lmer" id="toc-sec-multi-lmer" class="nav-link" data-scroll-target="#sec-multi-lmer"><span class="toc-section-number">3.9.12</span>  Fitting a multilevel model using the lmer() function</a></li>
-  <li><a href="#sec-multi-lmer-read" id="toc-sec-multi-lmer-read" class="nav-link" data-scroll-target="#sec-multi-lmer-read"><span class="toc-section-number">3.9.13</span>  Reading the <em>lmer</em> results</a></li>
-  <li><a href="#sec-fixed-random" id="toc-sec-fixed-random" class="nav-link" data-scroll-target="#sec-fixed-random"><span class="toc-section-number">3.9.14</span>  Fixed and random effects</a></li>
-  <li><a href="#sec-multi-lm-vs-lmer" id="toc-sec-multi-lm-vs-lmer" class="nav-link" data-scroll-target="#sec-multi-lm-vs-lmer"><span class="toc-section-number">3.9.15</span>  Is there a difference between linear model and linear mixed-effects model results?</a></li>
+  <li><a href="#sec-multilevel-ideas-main" id="toc-sec-multilevel-ideas-main" class="nav-link" data-scroll-target="#sec-multilevel-ideas-main"><span class="header-section-number">3.9.1</span> Main ideas – Phenomena and data sets in the social sciences often have a multilevel structure</a></li>
+  <li><a href="#sec-multilevel-models-utility" id="toc-sec-multilevel-models-utility" class="nav-link" data-scroll-target="#sec-multilevel-models-utility"><span class="header-section-number">3.9.2</span> Multilevel models – why they are more used and more useful than traditional methods</a></li>
+  <li><a href="#sec-multilevel-practical-application" id="toc-sec-multilevel-practical-application" class="nav-link" data-scroll-target="#sec-multilevel-practical-application"><span class="header-section-number">3.9.3</span> Practical applications: children sampled within classes</a></li>
+  <li><a href="#sec-multilevel-ignore" id="toc-sec-multilevel-ignore" class="nav-link" data-scroll-target="#sec-multilevel-ignore"><span class="header-section-number">3.9.4</span> To understand the application of multilevel models: first, we ignore the multilevel structure in the data</a></li>
+  <li><a href="#sec-multi-lm-ignore" id="toc-sec-multi-lm-ignore" class="nav-link" data-scroll-target="#sec-multi-lm-ignore"><span class="header-section-number">3.9.5</span> A linear model ignores the multilevel structure in the data</a></li>
+  <li><a href="#sec-multi-notation" id="toc-sec-multi-notation" class="nav-link" data-scroll-target="#sec-multi-notation"><span class="header-section-number">3.9.6</span> Notation</a></li>
+  <li><a href="#sec-multi-plot-lattice" id="toc-sec-multi-plot-lattice" class="nav-link" data-scroll-target="#sec-multi-plot-lattice"><span class="header-section-number">3.9.7</span> Can we really ignore the multilevel structure?</a></li>
+  <li><a href="#sec-multi-lm-address" id="toc-sec-multi-lm-address" class="nav-link" data-scroll-target="#sec-multi-lm-address"><span class="header-section-number">3.9.8</span> Linear models for multilevel data – dealing with the hierarchical structure</a></li>
+  <li><a href="#sec-multi-lm-two-step" id="toc-sec-multi-lm-two-step" class="nav-link" data-scroll-target="#sec-multi-lm-two-step"><span class="header-section-number">3.9.9</span> Two-step or slopes-as-outcomes linear models as approximations to the Linear Mixed-effects or Multilevel modeling approach</a></li>
+  <li><a href="#sec-multilevel-models-outline" id="toc-sec-multilevel-models-outline" class="nav-link" data-scroll-target="#sec-multilevel-models-outline"><span class="header-section-number">3.9.10</span> Multilevel models</a></li>
+  <li><a href="#sec-multi-class-differences" id="toc-sec-multi-class-differences" class="nav-link" data-scroll-target="#sec-multi-class-differences"><span class="header-section-number">3.9.11</span> How should we think about the differences between the classes?</a></li>
+  <li><a href="#sec-multi-lmer" id="toc-sec-multi-lmer" class="nav-link" data-scroll-target="#sec-multi-lmer"><span class="header-section-number">3.9.12</span> Fitting a multilevel model using the lmer() function</a></li>
+  <li><a href="#sec-multi-lmer-read" id="toc-sec-multi-lmer-read" class="nav-link" data-scroll-target="#sec-multi-lmer-read"><span class="header-section-number">3.9.13</span> Reading the <em>lmer</em> results</a></li>
+  <li><a href="#sec-fixed-random" id="toc-sec-fixed-random" class="nav-link" data-scroll-target="#sec-fixed-random"><span class="header-section-number">3.9.14</span> Fixed and random effects</a></li>
+  <li><a href="#sec-multi-lm-vs-lmer" id="toc-sec-multi-lm-vs-lmer" class="nav-link" data-scroll-target="#sec-multi-lm-vs-lmer"><span class="header-section-number">3.9.15</span> Is there a difference between linear model and linear mixed-effects model results?</a></li>
   </ul></li>
-  <li><a href="#sec-multi-conclusions" id="toc-sec-multi-conclusions" class="nav-link" data-scroll-target="#sec-multi-conclusions"><span class="toc-section-number">3.10</span>  Conclusions</a>
+  <li><a href="#sec-multi-conclusions" id="toc-sec-multi-conclusions" class="nav-link" data-scroll-target="#sec-multi-conclusions"><span class="header-section-number">3.10</span> Conclusions</a>
   <ul class="collapse">
-  <li><a href="#sec-multi-summary" id="toc-sec-multi-summary" class="nav-link" data-scroll-target="#sec-multi-summary"><span class="toc-section-number">3.10.1</span>  Summary</a></li>
-  <li><a href="#sec-multi-glossary" id="toc-sec-multi-glossary" class="nav-link" data-scroll-target="#sec-multi-glossary"><span class="toc-section-number">3.10.2</span>  Glossary: useful functions</a></li>
+  <li><a href="#sec-multi-summary" id="toc-sec-multi-summary" class="nav-link" data-scroll-target="#sec-multi-summary"><span class="header-section-number">3.10.1</span> Summary</a></li>
+  <li><a href="#sec-multi-glossary" id="toc-sec-multi-glossary" class="nav-link" data-scroll-target="#sec-multi-glossary"><span class="header-section-number">3.10.2</span> Glossary: useful functions</a></li>
   </ul></li>
-  <li><a href="#sec-multi-reading" id="toc-sec-multi-reading" class="nav-link" data-scroll-target="#sec-multi-reading"><span class="toc-section-number">3.11</span>  Recommended reading</a></li>
+  <li><a href="#sec-multi-reading" id="toc-sec-multi-reading" class="nav-link" data-scroll-target="#sec-multi-reading"><span class="header-section-number">3.11</span> Recommended reading</a></li>
   </ul>
 </nav>
     </div>
@@ -310,7 +311,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-intro-multilevel" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to multilevel data</span></span></h1>
+<h1 class="title"><span id="sec-intro-multilevel" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to multilevel data</span></span></h1>
 </div>
 
 
@@ -318,24 +319,22 @@ div.csl-indent {
 <div class="quarto-title-meta">
 
     
+  
     
   </div>
   
 
 </header>
 
-<div class="cell">
-
-</div>
 <section id="sec-multi-motivations" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="sec-multi-motivations"><span class="header-section-number">3.1</span> Motivations</h2>
 <p>In this chapter, we shall start to develop skills in using a method or approach that is essential in modern data analysis: <em>multilevel modeling</em>. We are going to invest four weeks in working on this approach. This investment is designed to give you a specific, important, advantage in your work as a psychologist, or as someone who produces or consumes psychological research.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -347,7 +346,7 @@ Note
 <div id="fig-meteyard-davies-2020-fig-5-lme-growth" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="meteyard-davies-2020-fig-5-lme-growth.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3.1: Number of Pubmed citations for ‘Linear Mixed Models’ by year. Generated using the tool available at http://dan.corlan.net/medline-trend.html, entering “Linear Mixed Models” as the phrase search term and using data from 2000 to 2018, from Meteyard and Davies (2020) – used without permission</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;3.1: Number of Pubmed citations for ‘Linear Mixed Models’ by year. Generated using the tool available at http://dan.corlan.net/medline-trend.html, entering “Linear Mixed Models” as the phrase search term and using data from 2000 to 2018, from Meteyard and Davies (2020) – used without permission</figcaption>
 </figure>
 </div>
 <p>We continue to teach ANOVA and multiple regression (linear models) in our courses because the research literature is full of the results of analyses done using these methods and because many psychologists continue to use these methods in their research. However, there is increasingly wide-spread recognition that these classical methods have serious problems when applied to data with hierarchical structure. Because most psychological data (not all) will have hierarchical structure, this makes learning about multilevel or mixed-effects methods a key learning objective.</p>
@@ -356,12 +355,12 @@ Note
 <h3 data-number="3.1.1" class="anchored" data-anchor-id="sec-multi-names"><span class="header-section-number">3.1.1</span> A word about names</h3>
 <p>Multilevel models are also known as hierarchical models or linear mixed-effects models or random effects models. People use these terms interchangeably. They also use the abbreviations LMMs or LMEs. Sorry about that: humans make methods, and the names we use for things do vary.</p>
 <p>I will only use the terms <em>multilevel</em> or <em>linear mixed-effects</em> models.</p>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Warning
 </div>
 </div>
@@ -388,12 +387,12 @@ Warning
 </section>
 <section id="the-key-idea-to-get-us-started" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="the-key-idea-to-get-us-started"><span class="header-section-number">3.3</span> The key idea to get us started</h2>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -523,12 +522,12 @@ Important
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                      portuguese, english, math, physics</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                      )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -562,12 +561,12 @@ Tip
 <section id="sec-multi-data-remove-na" class="level3" data-number="3.8.2">
 <h3 data-number="3.8.2" class="anchored" data-anchor-id="sec-multi-data-remove-na"><span class="header-section-number">3.8.2</span> Remove missing values</h3>
 <p>If you look at the results of the selection, you can see that there are missing values, written as e.g.&nbsp;<code>NA's 62</code> at the bottom of each summary of each variable (if a variable column includes missing values).</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -692,12 +691,12 @@ Tip
 <p>Imagine testing a number of subjects by giving them all the same test. In that test, you might present them all with the same stimuli over a series of trials, so that everybody sees the same set of stimuli. Do you think an observed response recorded for any one individual will be uncorrelated i.e.&nbsp;independent of that person’s other responses?</p>
 <p>People are different and one usually finds that a slow or inaccurate subject is slow or inaccurate for most of their responses. That means that if you have information about one of their responses you can predict, in part, what the time or accuracy of one of their other responses would be. That capacity to predict one response from another is what we mean when we talk about a lack of independence.</p>
 <p>Alternatively, imagine going to test children in a school. Will the children in one class be more like each other than they are like children in other classes? In other words, is there an effect of class – maybe due to the approach of the teacher, the effect of the class environment etc. – so that outcomes for children in a class are correlated with each other?</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -721,8 +720,8 @@ Important
 <div class="cell-output-display">
 <div id="fig-hierarchy" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p>
-<svg width="480" height="480" viewbox="0.00 0.00 422.00 188.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<div>
+<svg width="480" height="480" viewbox="0.00 0.00 422.00 188.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 184)">
 <title>
 D
@@ -797,8 +796,8 @@ B2-&gt;C6
 </title>
 <path fill="none" stroke="black" d="M297.81,-76.81C315,-65.67 340.62,-49.06 359.99,-36.5"></path> <polygon fill="black" stroke="black" points="361.92,-39.43 368.4,-31.05 358.11,-33.56 361.92,-39.43"></polygon> </g> </g>
 </svg>
-</p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3.2: Multilevel or hierarchically structured data</figcaption><p></p>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;3.2: Multilevel or hierarchically structured data</figcaption>
 </figure>
 </div>
 </div>
@@ -842,12 +841,12 @@ B2-&gt;C6
 <h3 data-number="3.9.4" class="anchored" data-anchor-id="sec-multilevel-ignore"><span class="header-section-number">3.9.4</span> To understand the application of multilevel models: first, we ignore the multilevel structure in the data</h3>
 <p>Recognizing that the children’s scores data are observed within classes means that, when we examine the factors that influence variance in observed outcomes, we need to take into account the fact that the children can be grouped by (or under) the class they were in when their grades were recorded. We can develop an understanding of what this means by moving through a series of steps.</p>
 <p>To illustrate the understanding we need to develop, we analyze the end-of-year school subject grades for the sample of 292 children studied by <span class="citation" data-cites="golino2014">Golino &amp; Gomes (<a href="references.html#ref-golino2014" role="doc-biblioref">2014</a>)</span>. With these data, we can examine whether differences between children in their Portuguese language grades predicts differences in their English language grades. (We do not have a theoretical reason to make this prediction though it does not seem unreasonable.) Let’s make this our research question.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -870,7 +869,7 @@ Note
 <div id="fig-brazil-all" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="01-multilevel_files/figure-html/fig-brazil-all-1.png" class="img-fluid figure-img" alt="The figure shows scatterplot: each point represents the English and the Portuguese scores for one child. A red line drawn through the points indicates a trend such that higher Portuguese scores are associated with higher English scores." width="480"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3.3: Portuguese compared to English grades: each point represents the scores for one child</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;3.3: Portuguese compared to English grades: each point represents the scores for one child</figcaption>
 </figure>
 </div>
 </div>
@@ -929,12 +928,12 @@ F-statistic: 35.43 on 1 and 228 DF,  p-value: 9.906e-09</code></pre>
 </div>
 </div>
 <p>The linear model yields the estimate that for unit increase in Portuguese grade there is an associated increase of about .47 in English grade, on average (for the model, <span class="math inline">\(F(1, 228) = 35, p &lt; .001; adj. R^2 = .13\)</span>). So, we have a preliminary answer to our research question.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -946,12 +945,12 @@ Note
 </div>
 </div>
 <p>We shall see that we will need to revise this estimate when we do an analysis that <em>does</em> take school class differences into account.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -1015,7 +1014,7 @@ Tip
 <div id="fig-porteng-class" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="01-multilevel_files/figure-html/fig-porteng-class-1.png" class="img-fluid figure-img" alt="The figure shows a grid of scatterplots: each point represents the English and the Portuguese scores for one child. There are separate scatterplots showing the potential association between child English versus Portuguese scores for different children in different clases. A line indicates the trend for the association in each class. Trends vary betwen classes." width="768"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3.4: Plot of child grades, comparing English with Portuguese grades, shown separately for each school class</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;3.4: Plot of child grades, comparing English with Portuguese grades, shown separately for each school class</figcaption>
 </figure>
 </div>
 </div>
@@ -1023,12 +1022,12 @@ Tip
 <p><a href="#fig-porteng-class">Figure&nbsp;<span>3.4</span></a> presents a grid of scatterplots, with a different scatterplot to show the relationship between children’s Portuguese and English grades for the children in each different class. We can see that the relationship between Portuguese and English grades is (roughly) similar across classes: in general, children with higher Portuguese grades also tend to have higher English grades. However, <a href="#fig-porteng-class">Figure&nbsp;<span>3.4</span></a> makes it obvious that there are important differences between classes.</p>
 <p>We can see that the slope of the best fit line (shown in black) varies between classes. And we can see that the intercept (where the line meets the y-axis) also varies between classes. Further, we can see that in some classes, there is no relationship or a negative relationship between Portuguese and English grades.</p>
 <p>Critically, we can see that classes differ in how much data we have for each. For some classes, we have many observations (e.g., M11) and for other classes we have few or one observation (e.g., M22, with one child). We know, in advance, that variation in sample size will be associated with variation in the uncertainty we have about the estimated relationship between Portuguese and English grades. You will remember that the Central Limit Theorem allows us to calculate the standard error of an estimate like the mean, given the sample size, and that the standard error is an index of our uncertainty of the estimate.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -1042,12 +1041,12 @@ Tip
 </div>
 </div>
 <p>The production of a grid or lattice of plots is a useful method for comparing patterns between data sub-sets or groups. You can see more information about <code>facet_wrap()</code> <a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">here</a></p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -1095,12 +1094,12 @@ y_{ij} = \beta_{0j} + \beta_{1j}X_{ij} + e_{ij}
 <p>The problem with the approach is apparent in <a href="#fig-pointclass">Figure&nbsp;<span>3.5</span></a>: the figure shows the estimated intercept and coefficient of the slope of the ‘Portuguese’ effect for each class, when we have analyzed the data for each class in a separate linear model.</p>
 <p>The estimate for each class is shown as a black dot. The standard error of the estimate is shown as a black vertical line, shown above and below a point.</p>
 <p>You can say that where there is a longer line there we have more uncertainty about the location of the estimate. Notice that <strong>the standard errors vary</strong> a lot between classes. In some classes, the standard error is small (the black line is short) so we can maybe have more certainty over the estimated intercept or slope for those classes. In other classes, the standard error is large (the black line is long) so we can maybe have less certainty over the estimated intercept or slope for those classes.</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -1113,17 +1112,17 @@ Important
 <div id="fig-pointclass" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="01-multilevel_files/figure-html/fig-pointclass-1.png" class="img-fluid figure-img" alt="The figure shows a grid of two scatterplots. The plots are generated by estimating the slope of the association between English scores (as outcome) and Portuguese scores (as predictor), using linear models fitted separately for data on children in different classes. On the left, we show variation between classes in the estimate for the intercept (shown as dots) and associated standard error (shown as lines), on the right we show variation betwen classes in the estimate for the slope and the associated standard error." width="768"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3.5: Plot showing the estimated intercept and coefficient of the slope of the Portuguese effect for each class analysed separately</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;3.5: Plot showing the estimated intercept and coefficient of the slope of the Portuguese effect for each class analysed separately</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -1191,12 +1190,12 @@ y_{ij} = \gamma_0 + \gamma_1X_{ij} + U_{0j} + U_{1j}X_{ij} + e_{ij}
 <li>We can understand these differences between the average (intercept or class) and the class differences as class-level residuals <span class="math inline">\(U_{0j} + U_{1j}\)</span> in addition to the child-level residuals <span class="math inline">\(e_{ij}\)</span>.</li>
 </ul>
 <p>This leads us to a conclusion that represents a critical way to understand multilevel models.</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -1326,12 +1325,12 @@ portuguese -0.943</code></pre>
 <section id="sec-multi-lm-vs-lmer" class="level3" data-number="3.9.15">
 <h3 data-number="3.9.15" class="anchored" data-anchor-id="sec-multi-lm-vs-lmer"><span class="header-section-number">3.9.15</span> Is there a difference between linear model and linear mixed-effects model results?</h3>
 <p>Recall that the linear model yields the estimate that for unit increase in Portuguese grade there is an associated .5 increase in English grade, on average (<span class="math inline">\(F(1, 228) = 35, p &lt; .001; adj. R^2 = .13\)</span>). We can see that the estimate of the effect <strong>for the mixed-effects model</strong> is <span class="math inline">\(\beta = .659\)</span> which is somewhat different from the effect estimate we got from the linear model.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -1347,7 +1346,7 @@ Note
 <section id="sec-multi-conclusions" class="level2" data-number="3.10">
 <h2 data-number="3.10" class="anchored" data-anchor-id="sec-multi-conclusions"><span class="header-section-number">3.10</span> Conclusions</h2>
 <p>Psychological studies frequently result in hierarchically structured data. The structure can be understood in terms of the grouping of observations, as when there are multiple observations per group, participant or stimulus. The existence of such structure must be taken into account in analyses. Multilevel or mixed-effects models can be specified by the researcher to include random effects parameters that capture unexplained differences between participants or other sampling units in the intercepts or the slopes of explanatory variables. Where a sample of participants is asked to respond to a sample of stimuli, structure relating both to participants and to stimuli can be incorporated.</p>
-<p>Many researchers will be aware of concerns over the non-replication of published effects in psychological science (see <a href="intro.html#sec-context-replication"><span>Section&nbsp;7.2.1</span></a>). As <span class="citation" data-cites="gelman2014b">Gelman (<a href="references.html#ref-gelman2014b" role="doc-biblioref">2014</a>)</span> discusses, non-replication of results may arise if effects vary between contexts groups while traditional analytic methods assume that effects are constant. Psychological researchers can expect average outcomes and the effects of independent variables to vary among sampling units, whether their investigations involve multiple observations per child or stimulus, or children sampled within classes, clinics or schools. However, traditional analytic methods often require us to ignore this variation by averaging, say, responses over multiple trials for each child, to collapse an inherently multilevel data structure into a single level of observations that can be analysed using regression or ANOVA. By using multilevel models, researchers will, instead, be able to properly estimate the effects of theoretical interest, and better understand how those effects vary.</p>
+<p>Many researchers will be aware of concerns over the non-replication of published effects in psychological science (see <a href="intro.html#sec-context-replication"><span>Section&nbsp;8.2.1</span></a>). As <span class="citation" data-cites="gelman2014b">Gelman (<a href="references.html#ref-gelman2014b" role="doc-biblioref">2014</a>)</span> discusses, non-replication of results may arise if effects vary between contexts groups while traditional analytic methods assume that effects are constant. Psychological researchers can expect average outcomes and the effects of independent variables to vary among sampling units, whether their investigations involve multiple observations per child or stimulus, or children sampled within classes, clinics or schools. However, traditional analytic methods often require us to ignore this variation by averaging, say, responses over multiple trials for each child, to collapse an inherently multilevel data structure into a single level of observations that can be analysed using regression or ANOVA. By using multilevel models, researchers will, instead, be able to properly estimate the effects of theoretical interest, and better understand how those effects vary.</p>
 <section id="sec-multi-summary" class="level3" data-number="3.10.1">
 <h3 data-number="3.10.1" class="anchored" data-anchor-id="sec-multi-summary"><span class="header-section-number">3.10.1</span> Summary</h3>
 <ol type="1">
@@ -1380,41 +1379,41 @@ Note
 <p><span class="citation" data-cites="Gelman2007g">Gelman &amp; Hill (<a href="references.html#ref-Gelman2007g" role="doc-biblioref">2007</a>)</span> present a more in-depth treatment of multilevel models.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography" style="display: none">
-<div id="ref-Baayen2008" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-Baayen2008" class="csl-entry" role="listitem">
 Baayen, R. H., Davidson, D. J., &amp; Bates, D. M. (2008). Mixed-effects modeling with crossed random effects for subjects and items. <em>Journal of Memory and Language</em>, <em>59</em>(4), 390–412. <a href="https://doi.org/10.1016/j.jml.2007.12.005">https://doi.org/10.1016/j.jml.2007.12.005</a>
 </div>
-<div id="ref-balota2004" class="csl-entry" role="doc-biblioentry">
+<div id="ref-balota2004" class="csl-entry" role="listitem">
 Balota, D. A., Cortese, M. J., Sergent-Marshall, S. D., Spieler, D. H., &amp; Yap, M. J. (2004). Visual Word Recognition of Single-Syllable Words. <em>Journal of Experimental Psychology: General</em>, <em>133</em>(2), 283–316. <a href="https://doi.org/10.1037/0096-3445.133.2.283">https://doi.org/10.1037/0096-3445.133.2.283</a>
 </div>
-<div id="ref-barr2013" class="csl-entry" role="doc-biblioentry">
+<div id="ref-barr2013" class="csl-entry" role="listitem">
 Barr, D. J., Levy, R., Scheepers, C., &amp; Tily, H. J. (2013). Random effects structure for confirmatory hypothesis testing: Keep it maximal. <em>Journal of Memory and Language</em>, <em>68</em>(3), 255–278. <a href="https://doi.org/10.1016/j.jml.2012.11.001">https://doi.org/10.1016/j.jml.2012.11.001</a>
 </div>
-<div id="ref-gelman2014b" class="csl-entry" role="doc-biblioentry">
+<div id="ref-gelman2014b" class="csl-entry" role="listitem">
 Gelman, A. (2014). The Connection Between Varying Treatment Effects and the Crisis of Unreplicable Research. <em>Journal of Management</em>, <em>41</em>(2), 632–643. <a href="https://doi.org/10.1177/0149206314525208">https://doi.org/10.1177/0149206314525208</a>
 </div>
-<div id="ref-Gelman2007g" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Gelman2007g" class="csl-entry" role="listitem">
 Gelman, A., &amp; Hill, J. (2007). <em>Data analysis using regression and multilevel/hierarchical models</em>. Cambridge University Press.
 </div>
-<div id="ref-Goldstein1995a" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Goldstein1995a" class="csl-entry" role="listitem">
 Goldstein, H. (1995). <em>Multilevel statistical models</em>. Edward Arnold.
 </div>
-<div id="ref-golino2014" class="csl-entry" role="doc-biblioentry">
+<div id="ref-golino2014" class="csl-entry" role="listitem">
 Golino, H., &amp; Gomes, C. (2014). Psychology data from the <span>“</span>BAFACALO project: The Brazilian Intelligence Battery based on two state-of-the-art models <span></span> Carroll<span>’</span>s Model and the CHC model<span>”</span>. <em>Journal of Open Psychology Data</em>, <em>2</em>(1), e6. <a href="https://doi.org/10.5334/jopd.af">https://doi.org/10.5334/jopd.af</a>
 </div>
-<div id="ref-kreft1998" class="csl-entry" role="doc-biblioentry">
+<div id="ref-kreft1998" class="csl-entry" role="listitem">
 Kreft, I., &amp; Leeuw, J. de. (1998). <em>Introducing multilevel modeling</em> (D. Wright, Ed.). Sage Publications.
 </div>
-<div id="ref-Lorch1990a" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Lorch1990a" class="csl-entry" role="listitem">
 Lorch, R. F., &amp; Myers, J. L. (1990). Regression analyses of repeated measures data in cognitive research. <em>Journal of Experimental Psychology: Learning, Memory and Cognition</em>, <em>16</em>(1), 149–157.
 </div>
-<div id="ref-meteyard2020a" class="csl-entry" role="doc-biblioentry">
+<div id="ref-meteyard2020a" class="csl-entry" role="listitem">
 Meteyard, L., &amp; Davies, R. A. I. (2020). Best practice guidance for linear mixed-effects models in psychological science. <em>Journal of Memory and Language</em>, <em>112</em>, 104092. <a href="https://doi.org/10.1016/j.jml.2020.104092">https://doi.org/10.1016/j.jml.2020.104092</a>
 </div>
-<div id="ref-raudenbush2002hierarchical" class="csl-entry" role="doc-biblioentry">
+<div id="ref-raudenbush2002hierarchical" class="csl-entry" role="listitem">
 Raudenbush, S. W., &amp; Bryk, A. S. (2002). <em>Hierarchical linear models: Applications and data analysis methods</em> (Vol. 1). sage.
 </div>
-<div id="ref-Snijders2004a" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Snijders2004a" class="csl-entry" role="listitem">
 Snijders, T. A. B., &amp; Bosker, R. J. (2004). <em>Multilevel analysis: An introduction to basic and advanced multilevel modeling</em>. Sage Publications Ltd.
 </div>
 </div>
@@ -1448,9 +1447,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1462,7 +1475,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -1498,24 +1528,128 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -1523,7 +1657,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
-    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {

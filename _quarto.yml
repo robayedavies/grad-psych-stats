@@ -4,7 +4,6 @@ project:
 
 book:
   title: "Psychological data analysis for graduate students"
-  number-sections: true
   author: "Rob Davies"
   date: "2023-02-08"
   chapters:
@@ -34,7 +33,5 @@ format:
     theme: cosmo
     link-external-icon: true
     link-external-newwindow: true
-  pdf:
-    documentclass: scrreprt
 
 editor: visual

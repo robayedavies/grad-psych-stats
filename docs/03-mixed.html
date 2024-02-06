@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.189">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,48 +47,19 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -101,8 +73,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -139,13 +110,15 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
 <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
@@ -154,11 +127,16 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Developing linear mixed-effects models</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-mixed.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Developing linear mixed-effects models</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -166,165 +144,188 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Psychological data analysis for graduate students</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">MAKING THE MOST OF R</span>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">MAKING THE MOST OF R</span></span>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./knowledge-ecosystem.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R knowledge</span></a>
+  <a href="./knowledge-ecosystem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R knowledge</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./visualization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data visualization</span></a>
+  <a href="./visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data visualization</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">MODELS</span>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">MODELS</span></span>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-multilevel.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to multilevel data</span></a>
+  <a href="./01-multilevel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to multilevel data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-mixed.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to linear mixed-effects models</span></a>
+  <a href="./02-mixed.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to linear mixed-effects models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-mixed.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Developing linear mixed-effects models</span></a>
+  <a href="./03-mixed.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Developing linear mixed-effects models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-glmm.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to Generalized Linear Mixed-effects Models</span></a>
+  <a href="./04-glmm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to Generalized Linear Mixed-effects Models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-ordinal.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to Ordinal Models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">WRITING ABOUT RESEARCH</span>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">WRITING ABOUT RESEARCH</span></span>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction: the why</span></a>
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Introduction: the why</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./what.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">What</span></a>
+  <a href="./what.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">What</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./how.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">How</span></a>
+  <a href="./how.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">How</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">END</span>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">END</span></span>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  <a href="./summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-dev-mixed-motivations" id="toc-sec-dev-mixed-motivations" class="nav-link active" data-scroll-target="#sec-dev-mixed-motivations"><span class="toc-section-number">5.1</span>  Motivations: to grow in sophistication</a></li>
-  <li><a href="#sec-dev-mixed-ideas" id="toc-sec-dev-mixed-ideas" class="nav-link" data-scroll-target="#sec-dev-mixed-ideas"><span class="toc-section-number">5.2</span>  The key idea to get us started</a></li>
-  <li><a href="#sec-dev-mixed-targets" id="toc-sec-dev-mixed-targets" class="nav-link" data-scroll-target="#sec-dev-mixed-targets"><span class="toc-section-number">5.3</span>  Targets</a></li>
-  <li><a href="#sec-dev-mixed-guide" id="toc-sec-dev-mixed-guide" class="nav-link" data-scroll-target="#sec-dev-mixed-guide"><span class="toc-section-number">5.4</span>  Study guide</a></li>
-  <li><a href="#sec-dev-mixed-data" id="toc-sec-dev-mixed-data" class="nav-link" data-scroll-target="#sec-dev-mixed-data"><span class="toc-section-number">5.5</span>  The data we will work with: ML word recognition study</a>
+  <li><a href="#sec-dev-mixed-motivations" id="toc-sec-dev-mixed-motivations" class="nav-link active" data-scroll-target="#sec-dev-mixed-motivations"><span class="header-section-number">5.1</span> Motivations: to grow in sophistication</a></li>
+  <li><a href="#sec-dev-mixed-ideas" id="toc-sec-dev-mixed-ideas" class="nav-link" data-scroll-target="#sec-dev-mixed-ideas"><span class="header-section-number">5.2</span> The key idea to get us started</a></li>
+  <li><a href="#sec-dev-mixed-targets" id="toc-sec-dev-mixed-targets" class="nav-link" data-scroll-target="#sec-dev-mixed-targets"><span class="header-section-number">5.3</span> Targets</a></li>
+  <li><a href="#sec-dev-mixed-guide" id="toc-sec-dev-mixed-guide" class="nav-link" data-scroll-target="#sec-dev-mixed-guide"><span class="header-section-number">5.4</span> Study guide</a></li>
+  <li><a href="#sec-dev-mixed-data" id="toc-sec-dev-mixed-data" class="nav-link" data-scroll-target="#sec-dev-mixed-data"><span class="header-section-number">5.5</span> The data we will work with: ML word recognition study</a>
   <ul class="collapse">
-  <li><a href="#sec-dev-mixed-hypotheses" id="toc-sec-dev-mixed-hypotheses" class="nav-link" data-scroll-target="#sec-dev-mixed-hypotheses"><span class="toc-section-number">5.5.1</span>  Research hypotheses</a></li>
-  <li><a href="#sec-dev-mixed-data-variables" id="toc-sec-dev-mixed-data-variables" class="nav-link" data-scroll-target="#sec-dev-mixed-data-variables"><span class="toc-section-number">5.5.2</span>  The ML recognition study data variables</a></li>
-  <li><a href="#sec-dev-mixed-data-download" id="toc-sec-dev-mixed-data-download" class="nav-link" data-scroll-target="#sec-dev-mixed-data-download"><span class="toc-section-number">5.5.3</span>  Locate and download the data file</a></li>
+  <li><a href="#sec-dev-mixed-hypotheses" id="toc-sec-dev-mixed-hypotheses" class="nav-link" data-scroll-target="#sec-dev-mixed-hypotheses"><span class="header-section-number">5.5.1</span> Research hypotheses</a></li>
+  <li><a href="#sec-dev-mixed-data-variables" id="toc-sec-dev-mixed-data-variables" class="nav-link" data-scroll-target="#sec-dev-mixed-data-variables"><span class="header-section-number">5.5.2</span> The ML recognition study data variables</a></li>
+  <li><a href="#sec-dev-mixed-data-download" id="toc-sec-dev-mixed-data-download" class="nav-link" data-scroll-target="#sec-dev-mixed-data-download"><span class="header-section-number">5.5.3</span> Locate and download the data file</a></li>
   </ul></li>
-  <li><a href="#sec-dev-mixed-tidy" id="toc-sec-dev-mixed-tidy" class="nav-link" data-scroll-target="#sec-dev-mixed-tidy"><span class="toc-section-number">5.6</span>  Tidy the data</a>
+  <li><a href="#sec-dev-mixed-tidy" id="toc-sec-dev-mixed-tidy" class="nav-link" data-scroll-target="#sec-dev-mixed-tidy"><span class="header-section-number">5.6</span> Tidy the data</a>
   <ul class="collapse">
-  <li><a href="#sec-dev-mixed-import" id="toc-sec-dev-mixed-import" class="nav-link" data-scroll-target="#sec-dev-mixed-import"><span class="toc-section-number">5.6.1</span>  Read-in the data file using the read_csv() function</a></li>
-  <li><a href="#sec-dev-mixed-EDA" id="toc-sec-dev-mixed-EDA" class="nav-link" data-scroll-target="#sec-dev-mixed-EDA"><span class="toc-section-number">5.6.2</span>  Examine the distribution of raw RT data using density plots</a></li>
-  <li><a href="#sec-dev-mixed-data-filter" id="toc-sec-dev-mixed-data-filter" class="nav-link" data-scroll-target="#sec-dev-mixed-data-filter"><span class="toc-section-number">5.6.3</span>  Filter observations</a></li>
-  <li><a href="#sec-dev-mixed-data-transform" id="toc-sec-dev-mixed-data-transform" class="nav-link" data-scroll-target="#sec-dev-mixed-data-transform"><span class="toc-section-number">5.6.4</span>  Select or transform the variables: the log10 transformation of RT</a></li>
-  <li><a href="#sec-dev-mixed-data-tidy-conclusions" id="toc-sec-dev-mixed-data-tidy-conclusions" class="nav-link" data-scroll-target="#sec-dev-mixed-data-tidy-conclusions"><span class="toc-section-number">5.6.5</span>  Data tidying – conclusions</a></li>
+  <li><a href="#sec-dev-mixed-import" id="toc-sec-dev-mixed-import" class="nav-link" data-scroll-target="#sec-dev-mixed-import"><span class="header-section-number">5.6.1</span> Read-in the data file using the read_csv() function</a></li>
+  <li><a href="#sec-dev-mixed-EDA" id="toc-sec-dev-mixed-EDA" class="nav-link" data-scroll-target="#sec-dev-mixed-EDA"><span class="header-section-number">5.6.2</span> Examine the distribution of raw RT data using density plots</a></li>
+  <li><a href="#sec-dev-mixed-data-filter" id="toc-sec-dev-mixed-data-filter" class="nav-link" data-scroll-target="#sec-dev-mixed-data-filter"><span class="header-section-number">5.6.3</span> Filter observations</a></li>
+  <li><a href="#sec-dev-mixed-data-transform" id="toc-sec-dev-mixed-data-transform" class="nav-link" data-scroll-target="#sec-dev-mixed-data-transform"><span class="header-section-number">5.6.4</span> Select or transform the variables: the log10 transformation of RT</a></li>
+  <li><a href="#sec-dev-mixed-data-tidy-conclusions" id="toc-sec-dev-mixed-data-tidy-conclusions" class="nav-link" data-scroll-target="#sec-dev-mixed-data-tidy-conclusions"><span class="header-section-number">5.6.5</span> Data tidying – conclusions</a></li>
   </ul></li>
-  <li><a href="#sec-dev-mixed-crossed-random" id="toc-sec-dev-mixed-crossed-random" class="nav-link" data-scroll-target="#sec-dev-mixed-crossed-random"><span class="toc-section-number">5.7</span>  Repeated measures designs and crossed random effects</a></li>
-  <li><a href="#sec-dev-mixed-working-lme" id="toc-sec-dev-mixed-working-lme" class="nav-link" data-scroll-target="#sec-dev-mixed-working-lme"><span class="toc-section-number">5.8</span>  Working with mixed-effects models</a>
+  <li><a href="#sec-dev-mixed-crossed-random" id="toc-sec-dev-mixed-crossed-random" class="nav-link" data-scroll-target="#sec-dev-mixed-crossed-random"><span class="header-section-number">5.7</span> Repeated measures designs and crossed random effects</a></li>
+  <li><a href="#sec-dev-mixed-working-lme" id="toc-sec-dev-mixed-working-lme" class="nav-link" data-scroll-target="#sec-dev-mixed-working-lme"><span class="header-section-number">5.8</span> Working with mixed-effects models</a>
   <ul class="collapse">
-  <li><a href="#sec-dev-mixed-viz-facetting" id="toc-sec-dev-mixed-viz-facetting" class="nav-link" data-scroll-target="#sec-dev-mixed-viz-facetting"><span class="toc-section-number">5.8.1</span>  Use facetting in ggplot to examine data by person</a></li>
-  <li><a href="#sec-dev-mixed-complete-pooling" id="toc-sec-dev-mixed-complete-pooling" class="nav-link" data-scroll-target="#sec-dev-mixed-complete-pooling"><span class="toc-section-number">5.8.2</span>  Approximations to Linear Mixed-effects models: complete pooling</a></li>
-  <li><a href="#sec-dev-mixed-no-pooling" id="toc-sec-dev-mixed-no-pooling" class="nav-link" data-scroll-target="#sec-dev-mixed-no-pooling"><span class="toc-section-number">5.8.3</span>  Approximations to Linear Mixed-effects models: no pooling</a></li>
+  <li><a href="#sec-dev-mixed-viz-facetting" id="toc-sec-dev-mixed-viz-facetting" class="nav-link" data-scroll-target="#sec-dev-mixed-viz-facetting"><span class="header-section-number">5.8.1</span> Use facetting in ggplot to examine data by person</a></li>
+  <li><a href="#sec-dev-mixed-complete-pooling" id="toc-sec-dev-mixed-complete-pooling" class="nav-link" data-scroll-target="#sec-dev-mixed-complete-pooling"><span class="header-section-number">5.8.2</span> Approximations to Linear Mixed-effects models: complete pooling</a></li>
+  <li><a href="#sec-dev-mixed-no-pooling" id="toc-sec-dev-mixed-no-pooling" class="nav-link" data-scroll-target="#sec-dev-mixed-no-pooling"><span class="header-section-number">5.8.3</span> Approximations to Linear Mixed-effects models: no pooling</a></li>
   </ul></li>
-  <li><a href="#sec-dev-mixed-lme" id="toc-sec-dev-mixed-lme" class="nav-link" data-scroll-target="#sec-dev-mixed-lme"><span class="toc-section-number">5.9</span>  The linear mixed-effects model</a>
+  <li><a href="#sec-dev-mixed-lme" id="toc-sec-dev-mixed-lme" class="nav-link" data-scroll-target="#sec-dev-mixed-lme"><span class="header-section-number">5.9</span> The linear mixed-effects model</a>
   <ul class="collapse">
-  <li><a href="#sec-dev-mixed-fixed-random" id="toc-sec-dev-mixed-fixed-random" class="nav-link" data-scroll-target="#sec-dev-mixed-fixed-random"><span class="toc-section-number">5.9.1</span>  Fixed and random effects</a></li>
-  <li><a href="#sec-dev-mixed-variance-covariance" id="toc-sec-dev-mixed-variance-covariance" class="nav-link" data-scroll-target="#sec-dev-mixed-variance-covariance"><span class="toc-section-number">5.9.2</span>  Variance and covariance</a></li>
-  <li><a href="#sec-dev-mixed-random-stimulus-effects" id="toc-sec-dev-mixed-random-stimulus-effects" class="nav-link" data-scroll-target="#sec-dev-mixed-random-stimulus-effects"><span class="toc-section-number">5.9.3</span>  Random effects of differences between stimuli</a></li>
-  <li><a href="#sec-dev-mixed-random-participants-stimuli" id="toc-sec-dev-mixed-random-participants-stimuli" class="nav-link" data-scroll-target="#sec-dev-mixed-random-participants-stimuli"><span class="toc-section-number">5.9.4</span>  A model including random effects of differences between stimuli as well as participants</a></li>
-  <li><a href="#sec-dev-mixed-lmer" id="toc-sec-dev-mixed-lmer" class="nav-link" data-scroll-target="#sec-dev-mixed-lmer"><span class="toc-section-number">5.9.5</span>  Fitting a mixed-effect model using lmer()</a></li>
-  <li><a href="#sec-dev-mixed-lmer-results" id="toc-sec-dev-mixed-lmer-results" class="nav-link" data-scroll-target="#sec-dev-mixed-lmer-results"><span class="toc-section-number">5.9.6</span>  Reading the lmer() results</a></li>
+  <li><a href="#sec-dev-mixed-fixed-random" id="toc-sec-dev-mixed-fixed-random" class="nav-link" data-scroll-target="#sec-dev-mixed-fixed-random"><span class="header-section-number">5.9.1</span> Fixed and random effects</a></li>
+  <li><a href="#sec-dev-mixed-variance-covariance" id="toc-sec-dev-mixed-variance-covariance" class="nav-link" data-scroll-target="#sec-dev-mixed-variance-covariance"><span class="header-section-number">5.9.2</span> Variance and covariance</a></li>
+  <li><a href="#sec-dev-mixed-random-stimulus-effects" id="toc-sec-dev-mixed-random-stimulus-effects" class="nav-link" data-scroll-target="#sec-dev-mixed-random-stimulus-effects"><span class="header-section-number">5.9.3</span> Random effects of differences between stimuli</a></li>
+  <li><a href="#sec-dev-mixed-random-participants-stimuli" id="toc-sec-dev-mixed-random-participants-stimuli" class="nav-link" data-scroll-target="#sec-dev-mixed-random-participants-stimuli"><span class="header-section-number">5.9.4</span> A model including random effects of differences between stimuli as well as participants</a></li>
+  <li><a href="#sec-dev-mixed-lmer" id="toc-sec-dev-mixed-lmer" class="nav-link" data-scroll-target="#sec-dev-mixed-lmer"><span class="header-section-number">5.9.5</span> Fitting a mixed-effect model using lmer()</a></li>
+  <li><a href="#sec-dev-mixed-lmer-results" id="toc-sec-dev-mixed-lmer-results" class="nav-link" data-scroll-target="#sec-dev-mixed-lmer-results"><span class="header-section-number">5.9.6</span> Reading the lmer() results</a></li>
   </ul></li>
-  <li><a href="#sec-dev-mixed-regularisation" id="toc-sec-dev-mixed-regularisation" class="nav-link" data-scroll-target="#sec-dev-mixed-regularisation"><span class="toc-section-number">5.10</span>  Mixed-effects models, partial pooling, and shrinkage or regularisation of estimates</a>
+  <li><a href="#sec-dev-mixed-regularisation" id="toc-sec-dev-mixed-regularisation" class="nav-link" data-scroll-target="#sec-dev-mixed-regularisation"><span class="header-section-number">5.10</span> Mixed-effects models, partial pooling, and shrinkage or regularisation of estimates</a>
   <ul class="collapse">
-  <li><a href="#sec-dev-mixed-overfitting" id="toc-sec-dev-mixed-overfitting" class="nav-link" data-scroll-target="#sec-dev-mixed-overfitting"><span class="toc-section-number">5.10.1</span>  Overfitting</a></li>
-  <li><a href="#sec-dev-mixed-partial-pooling" id="toc-sec-dev-mixed-partial-pooling" class="nav-link" data-scroll-target="#sec-dev-mixed-partial-pooling"><span class="toc-section-number">5.10.2</span>  Partial pooling: shrinkage or borrowing strength</a></li>
+  <li><a href="#sec-dev-mixed-overfitting" id="toc-sec-dev-mixed-overfitting" class="nav-link" data-scroll-target="#sec-dev-mixed-overfitting"><span class="header-section-number">5.10.1</span> Overfitting</a></li>
+  <li><a href="#sec-dev-mixed-partial-pooling" id="toc-sec-dev-mixed-partial-pooling" class="nav-link" data-scroll-target="#sec-dev-mixed-partial-pooling"><span class="header-section-number">5.10.2</span> Partial pooling: shrinkage or borrowing strength</a></li>
   </ul></li>
-  <li><a href="#sec-dev-mixed-estimation" id="toc-sec-dev-mixed-estimation" class="nav-link" data-scroll-target="#sec-dev-mixed-estimation"><span class="toc-section-number">5.11</span>  Estimation methods – An intuitive account of estimation in mixed-effects models</a>
+  <li><a href="#sec-dev-mixed-estimation" id="toc-sec-dev-mixed-estimation" class="nav-link" data-scroll-target="#sec-dev-mixed-estimation"><span class="header-section-number">5.11</span> Estimation methods – An intuitive account of estimation in mixed-effects models</a>
   <ul class="collapse">
-  <li><a href="#sec-dev-mixed-convergence-problems" id="toc-sec-dev-mixed-convergence-problems" class="nav-link" data-scroll-target="#sec-dev-mixed-convergence-problems"><span class="toc-section-number">5.11.1</span>  Convergence problems</a></li>
+  <li><a href="#sec-dev-mixed-convergence-problems" id="toc-sec-dev-mixed-convergence-problems" class="nav-link" data-scroll-target="#sec-dev-mixed-convergence-problems"><span class="header-section-number">5.11.1</span> Convergence problems</a></li>
   </ul></li>
-  <li><a href="#sec-dev-mixed-evaluating" id="toc-sec-dev-mixed-evaluating" class="nav-link" data-scroll-target="#sec-dev-mixed-evaluating"><span class="toc-section-number">5.12</span>  Fitting and evaluating Linear Mixed-effects models</a>
+  <li><a href="#sec-dev-mixed-evaluating" id="toc-sec-dev-mixed-evaluating" class="nav-link" data-scroll-target="#sec-dev-mixed-evaluating"><span class="header-section-number">5.12</span> Fitting and evaluating Linear Mixed-effects models</a>
   <ul class="collapse">
-  <li><a href="#sec-dev-mixed-model-comparison" id="toc-sec-dev-mixed-model-comparison" class="nav-link" data-scroll-target="#sec-dev-mixed-model-comparison"><span class="toc-section-number">5.12.1</span>  Model comparison approach</a></li>
-  <li><a href="#sec-dev-mixed-IC" id="toc-sec-dev-mixed-IC" class="nav-link" data-scroll-target="#sec-dev-mixed-IC"><span class="toc-section-number">5.12.2</span>  Model comparison using information criteria, AIC and BIC</a></li>
-  <li><a href="#sec-dev-mixed-LRT" id="toc-sec-dev-mixed-LRT" class="nav-link" data-scroll-target="#sec-dev-mixed-LRT"><span class="toc-section-number">5.12.3</span>  Model comparison using the Likelihood Ratio Test</a></li>
+  <li><a href="#sec-dev-mixed-model-comparison" id="toc-sec-dev-mixed-model-comparison" class="nav-link" data-scroll-target="#sec-dev-mixed-model-comparison"><span class="header-section-number">5.12.1</span> Model comparison approach</a></li>
+  <li><a href="#sec-dev-mixed-IC" id="toc-sec-dev-mixed-IC" class="nav-link" data-scroll-target="#sec-dev-mixed-IC"><span class="header-section-number">5.12.2</span> Model comparison using information criteria, AIC and BIC</a></li>
+  <li><a href="#sec-dev-mixed-LRT" id="toc-sec-dev-mixed-LRT" class="nav-link" data-scroll-target="#sec-dev-mixed-LRT"><span class="header-section-number">5.12.3</span> Model comparison using the Likelihood Ratio Test</a></li>
   </ul></li>
-  <li><a href="#sec-dev-mixed-model-steps" id="toc-sec-dev-mixed-model-steps" class="nav-link" data-scroll-target="#sec-dev-mixed-model-steps"><span class="toc-section-number">5.13</span>  Modeling steps recommendations</a>
+  <li><a href="#sec-dev-mixed-model-steps" id="toc-sec-dev-mixed-model-steps" class="nav-link" data-scroll-target="#sec-dev-mixed-model-steps"><span class="header-section-number">5.13</span> Modeling steps recommendations</a>
   <ul class="collapse">
-  <li><a href="#sec-dev-mixed-REML" id="toc-sec-dev-mixed-REML" class="nav-link" data-scroll-target="#sec-dev-mixed-REML"><span class="toc-section-number">5.13.1</span>  Maximum Likelihood and Restricted Maximum Likelihood</a></li>
-  <li><a href="#sec-dev-mixed-anova" id="toc-sec-dev-mixed-anova" class="nav-link" data-scroll-target="#sec-dev-mixed-anova"><span class="toc-section-number">5.13.2</span>  Comparing models of varying random effects but constant fixed effects</a></li>
-  <li><a href="#sec-dev-mixed-evaluate-random-effects" id="toc-sec-dev-mixed-evaluate-random-effects" class="nav-link" data-scroll-target="#sec-dev-mixed-evaluate-random-effects"><span class="toc-section-number">5.13.3</span>  Evaluating random effects of subjects or items on slopes</a></li>
-  <li><a href="#sec-dev-mixed-discussion-p-values" id="toc-sec-dev-mixed-discussion-p-values" class="nav-link" data-scroll-target="#sec-dev-mixed-discussion-p-values"><span class="toc-section-number">5.13.4</span>  Effects estimates and <em>significance</em> or p-values</a></li>
+  <li><a href="#sec-dev-mixed-REML" id="toc-sec-dev-mixed-REML" class="nav-link" data-scroll-target="#sec-dev-mixed-REML"><span class="header-section-number">5.13.1</span> Maximum Likelihood and Restricted Maximum Likelihood</a></li>
+  <li><a href="#sec-dev-mixed-anova" id="toc-sec-dev-mixed-anova" class="nav-link" data-scroll-target="#sec-dev-mixed-anova"><span class="header-section-number">5.13.2</span> Comparing models of varying random effects but constant fixed effects</a></li>
+  <li><a href="#sec-dev-mixed-evaluate-random-effects" id="toc-sec-dev-mixed-evaluate-random-effects" class="nav-link" data-scroll-target="#sec-dev-mixed-evaluate-random-effects"><span class="header-section-number">5.13.3</span> Evaluating random effects of subjects or items on slopes</a></li>
+  <li><a href="#sec-dev-mixed-discussion-p-values" id="toc-sec-dev-mixed-discussion-p-values" class="nav-link" data-scroll-target="#sec-dev-mixed-discussion-p-values"><span class="header-section-number">5.13.4</span> Effects estimates and <em>significance</em> or p-values</a></li>
   </ul></li>
-  <li><a href="#sec-dev-mixed-reporting-results" id="toc-sec-dev-mixed-reporting-results" class="nav-link" data-scroll-target="#sec-dev-mixed-reporting-results"><span class="toc-section-number">5.14</span>  Reporting results</a>
+  <li><a href="#sec-dev-mixed-reporting-results" id="toc-sec-dev-mixed-reporting-results" class="nav-link" data-scroll-target="#sec-dev-mixed-reporting-results"><span class="header-section-number">5.14</span> Reporting results</a>
   <ul class="collapse">
-  <li><a href="#sec-dev-mixed-reporting-comparisons" id="toc-sec-dev-mixed-reporting-comparisons" class="nav-link" data-scroll-target="#sec-dev-mixed-reporting-comparisons"><span class="toc-section-number">5.14.1</span>  Reporting comparisons of ML and REML models</a></li>
+  <li><a href="#sec-dev-mixed-reporting-comparisons" id="toc-sec-dev-mixed-reporting-comparisons" class="nav-link" data-scroll-target="#sec-dev-mixed-reporting-comparisons"><span class="header-section-number">5.14.1</span> Reporting comparisons of ML and REML models</a></li>
   </ul></li>
-  <li><a href="#sec-dev-mixed-summary" id="toc-sec-dev-mixed-summary" class="nav-link" data-scroll-target="#sec-dev-mixed-summary"><span class="toc-section-number">5.15</span>  Summary</a>
+  <li><a href="#sec-dev-mixed-summary" id="toc-sec-dev-mixed-summary" class="nav-link" data-scroll-target="#sec-dev-mixed-summary"><span class="header-section-number">5.15</span> Summary</a>
   <ul class="collapse">
-  <li><a href="#sec-dev-mixed-glossary-useful-functions" id="toc-sec-dev-mixed-glossary-useful-functions" class="nav-link" data-scroll-target="#sec-dev-mixed-glossary-useful-functions"><span class="toc-section-number">5.15.1</span>  Glossary: useful functions</a></li>
+  <li><a href="#sec-dev-mixed-glossary-useful-functions" id="toc-sec-dev-mixed-glossary-useful-functions" class="nav-link" data-scroll-target="#sec-dev-mixed-glossary-useful-functions"><span class="header-section-number">5.15.1</span> Glossary: useful functions</a></li>
   </ul></li>
-  <li><a href="#sec-dev-mixed-recommended-reading" id="toc-sec-dev-mixed-recommended-reading" class="nav-link" data-scroll-target="#sec-dev-mixed-recommended-reading"><span class="toc-section-number">5.16</span>  Recommended reading</a></li>
+  <li><a href="#sec-dev-mixed-recommended-reading" id="toc-sec-dev-mixed-recommended-reading" class="nav-link" data-scroll-target="#sec-dev-mixed-recommended-reading"><span class="header-section-number">5.16</span> Recommended reading</a></li>
   </ul>
 </nav>
     </div>
@@ -333,7 +334,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-dev-mixed" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Developing linear mixed-effects models</span></span></h1>
+<h1 class="title"><span id="sec-dev-mixed" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Developing linear mixed-effects models</span></span></h1>
 </div>
 
 
@@ -341,15 +342,13 @@ div.csl-indent {
 <div class="quarto-title-meta">
 
     
+  
     
   </div>
   
 
 </header>
 
-<div class="cell">
-
-</div>
 <section id="sec-dev-mixed-motivations" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="sec-dev-mixed-motivations"><span class="header-section-number">5.1</span> Motivations: to grow in sophistication</h2>
 <p>Linear mixed-effects models are important, interesting, and sometimes challenging. We have worked through two chapters (see <a href="01-multilevel.html"><span>Chapter&nbsp;3</span></a>, <a href="02-mixed.html"><span>Chapter&nbsp;4</span></a>) in which we have aimed to learn:</p>
@@ -363,12 +362,12 @@ div.csl-indent {
 </section>
 <section id="sec-dev-mixed-ideas" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="sec-dev-mixed-ideas"><span class="header-section-number">5.2</span> The key idea to get us started</h2>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -381,12 +380,12 @@ Important
 <section id="sec-dev-mixed-targets" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="sec-dev-mixed-targets"><span class="header-section-number">5.3</span> Targets</h2>
 <p>We are probably now at a stage, in the development of our skills and understanding, where we can be more specific about our targets for learning: what capacities or abilities we want to have by the time we complete the course. I have held back specifying the targets in this way because, first, we had to learn the basic vocabulary. Now that we have done that, we can lay out the targets against which we can assess the progression of our learning.</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -489,12 +488,12 @@ Important
 <li>Predicting that better (older) readers will show smaller effects of word attributes.</li>
 </ul>
 <p>In this chapter, we can focus on one specific prediction as we work through the practical steps of conducting an analysis using linear mixed-effects models.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -580,12 +579,12 @@ Note
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ML.all <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"subjects.behaviour.words-310114.csv"</span>, <span class="at">na =</span> <span class="st">"-999"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The data file <code>subjects.behaviour.words-310114.csv</code> holds all the data about everything (behaviour, participants, stimuli) we need for our analysis work.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -600,152 +599,154 @@ Tip
 <p>You can inspect the first few rows of the dataset using <code>head()</code>.</p>
 <div class="cell">
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning in subjectID == c("GB9", "NH1", "A15", "B18"): longer object length is
-not a multiple of shorter object length</code></pre>
+<pre><code>Warning: There was 1 warning in `filter()`.
+ℹ In argument: `subjectID == c("GB9", "NH1", "A15", "B18")`.
+Caused by warning in `subjectID == c("GB9", "NH1", "A15", "B18")`:
+! longer object length is not a multiple of shorter object length</code></pre>
 </div>
 <div class="cell-output-display">
-
-<table class="table" style="margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:right;"> item_number </th>
-   <th style="text-align:left;"> subjectID </th>
-   <th style="text-align:left;"> Test </th>
-   <th style="text-align:right;"> Age </th>
-   <th style="text-align:right;"> Years_in_education </th>
-   <th style="text-align:left;"> Gender </th>
-   <th style="text-align:right;"> TOWRE_wordacc </th>
-   <th style="text-align:right;"> TOWRE_nonwordacc </th>
-   <th style="text-align:right;"> ART_HRminusFR </th>
-   <th style="text-align:right;"> RT </th>
-   <th style="text-align:right;"> COT </th>
-   <th style="text-align:left;"> Subject </th>
-   <th style="text-align:right;"> Trial.order </th>
-   <th style="text-align:left;"> item_name </th>
-   <th style="text-align:right;"> Length </th>
-   <th style="text-align:right;"> Ortho_N </th>
-   <th style="text-align:right;"> BG_Sum </th>
-   <th style="text-align:right;"> BG_Mean </th>
-   <th style="text-align:right;"> BG_Freq_By_Pos </th>
-   <th style="text-align:left;"> item_type </th>
-   <th style="text-align:right;"> SUBTLWF </th>
-   <th style="text-align:right;"> LgSUBTLWF </th>
-   <th style="text-align:right;"> SUBTLCD </th>
-   <th style="text-align:right;"> LgSUBTLCD </th>
-   <th style="text-align:right;"> OLD </th>
-  </tr>
- </thead>
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">item_number</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">subjectID</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Test</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Age</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Years_in_education</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Gender</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">TOWRE_wordacc</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">TOWRE_nonwordacc</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">ART_HRminusFR</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">RT</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">COT</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Subject</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Trial.order</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">item_name</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Length</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Ortho_N</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">BG_Sum</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">BG_Mean</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">BG_Freq_By_Pos</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">item_type</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">SUBTLWF</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">LgSUBTLWF</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">SUBTLCD</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">LgSUBTLCD</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">OLD</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> GB9 </td>
-   <td style="text-align:left;"> ALT </td>
-   <td style="text-align:right;"> 21 </td>
-   <td style="text-align:right;"> 11 </td>
-   <td style="text-align:left;"> F </td>
-   <td style="text-align:right;"> 78 </td>
-   <td style="text-align:right;"> 41 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:right;"> 368.66 </td>
-   <td style="text-align:right;"> 134057.8 </td>
-   <td style="text-align:left;"> GB9 </td>
-   <td style="text-align:right;"> 54 </td>
-   <td style="text-align:left;"> went </td>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 15 </td>
-   <td style="text-align:right;"> 249 </td>
-   <td style="text-align:right;"> 198 </td>
-   <td style="text-align:right;"> 29 </td>
-   <td style="text-align:left;"> word </td>
-   <td style="text-align:right;"> 411.51 </td>
-   <td style="text-align:right;"> 4.322 </td>
-   <td style="text-align:right;"> 79.6 </td>
-   <td style="text-align:right;"> 3.825 </td>
-   <td style="text-align:right;"> 1.2 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> NH1 </td>
-   <td style="text-align:left;"> TAL </td>
-   <td style="text-align:right;"> 52 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:left;"> M </td>
-   <td style="text-align:right;"> 78 </td>
-   <td style="text-align:right;"> 56 </td>
-   <td style="text-align:right;"> 33 </td>
-   <td style="text-align:right;"> 724.83 </td>
-   <td style="text-align:right;"> 742737.4 </td>
-   <td style="text-align:left;"> NH1 </td>
-   <td style="text-align:right;"> 148 </td>
-   <td style="text-align:left;"> went </td>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 15 </td>
-   <td style="text-align:right;"> 249 </td>
-   <td style="text-align:right;"> 198 </td>
-   <td style="text-align:right;"> 29 </td>
-   <td style="text-align:left;"> word </td>
-   <td style="text-align:right;"> 411.51 </td>
-   <td style="text-align:right;"> 4.322 </td>
-   <td style="text-align:right;"> 79.6 </td>
-   <td style="text-align:right;"> 3.825 </td>
-   <td style="text-align:right;"> 1.2 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> A15 </td>
-   <td style="text-align:left;"> LTA </td>
-   <td style="text-align:right;"> 21 </td>
-   <td style="text-align:right;"> 16 </td>
-   <td style="text-align:left;"> F </td>
-   <td style="text-align:right;"> 95 </td>
-   <td style="text-align:right;"> 57 </td>
-   <td style="text-align:right;"> 9 </td>
-   <td style="text-align:right;"> 483.71 </td>
-   <td style="text-align:right;"> 861801.0 </td>
-   <td style="text-align:left;"> A15 </td>
-   <td style="text-align:right;"> 278 </td>
-   <td style="text-align:left;"> went </td>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 15 </td>
-   <td style="text-align:right;"> 249 </td>
-   <td style="text-align:right;"> 198 </td>
-   <td style="text-align:right;"> 29 </td>
-   <td style="text-align:left;"> word </td>
-   <td style="text-align:right;"> 411.51 </td>
-   <td style="text-align:right;"> 4.322 </td>
-   <td style="text-align:right;"> 79.6 </td>
-   <td style="text-align:right;"> 3.825 </td>
-   <td style="text-align:right;"> 1.2 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> B18 </td>
-   <td style="text-align:left;"> TLA </td>
-   <td style="text-align:right;"> 69 </td>
-   <td style="text-align:right;"> 11 </td>
-   <td style="text-align:left;"> M </td>
-   <td style="text-align:right;"> 85 </td>
-   <td style="text-align:right;"> 54 </td>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:right;"> 517.62 </td>
-   <td style="text-align:right;"> 1024583.4 </td>
-   <td style="text-align:left;"> b18 </td>
-   <td style="text-align:right;"> 318 </td>
-   <td style="text-align:left;"> went </td>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 15 </td>
-   <td style="text-align:right;"> 249 </td>
-   <td style="text-align:right;"> 198 </td>
-   <td style="text-align:right;"> 29 </td>
-   <td style="text-align:left;"> word </td>
-   <td style="text-align:right;"> 411.51 </td>
-   <td style="text-align:right;"> 4.322 </td>
-   <td style="text-align:right;"> 79.6 </td>
-   <td style="text-align:right;"> 3.825 </td>
-   <td style="text-align:right;"> 1.2 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">GB9</td>
+<td style="text-align: left;">ALT</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: right;">78</td>
+<td style="text-align: right;">41</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">368.66</td>
+<td style="text-align: right;">134057.8</td>
+<td style="text-align: left;">GB9</td>
+<td style="text-align: right;">54</td>
+<td style="text-align: left;">went</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">249</td>
+<td style="text-align: right;">198</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: left;">word</td>
+<td style="text-align: right;">411.51</td>
+<td style="text-align: right;">4.322</td>
+<td style="text-align: right;">79.6</td>
+<td style="text-align: right;">3.825</td>
+<td style="text-align: right;">1.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">NH1</td>
+<td style="text-align: left;">TAL</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: right;">78</td>
+<td style="text-align: right;">56</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">724.83</td>
+<td style="text-align: right;">742737.4</td>
+<td style="text-align: left;">NH1</td>
+<td style="text-align: right;">148</td>
+<td style="text-align: left;">went</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">249</td>
+<td style="text-align: right;">198</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: left;">word</td>
+<td style="text-align: right;">411.51</td>
+<td style="text-align: right;">4.322</td>
+<td style="text-align: right;">79.6</td>
+<td style="text-align: right;">3.825</td>
+<td style="text-align: right;">1.2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A15</td>
+<td style="text-align: left;">LTA</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: right;">95</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">483.71</td>
+<td style="text-align: right;">861801.0</td>
+<td style="text-align: left;">A15</td>
+<td style="text-align: right;">278</td>
+<td style="text-align: left;">went</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">249</td>
+<td style="text-align: right;">198</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: left;">word</td>
+<td style="text-align: right;">411.51</td>
+<td style="text-align: right;">4.322</td>
+<td style="text-align: right;">79.6</td>
+<td style="text-align: right;">3.825</td>
+<td style="text-align: right;">1.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">B18</td>
+<td style="text-align: left;">TLA</td>
+<td style="text-align: right;">69</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">54</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">517.62</td>
+<td style="text-align: right;">1024583.4</td>
+<td style="text-align: left;">b18</td>
+<td style="text-align: right;">318</td>
+<td style="text-align: left;">went</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">249</td>
+<td style="text-align: right;">198</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: left;">word</td>
+<td style="text-align: right;">411.51</td>
+<td style="text-align: right;">4.322</td>
+<td style="text-align: right;">79.6</td>
+<td style="text-align: right;">3.825</td>
+<td style="text-align: right;">1.2</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -830,7 +831,7 @@ not a multiple of shorter object length</code></pre>
 <div id="fig-rt-all-density" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="03-mixed_files/figure-html/fig-rt-all-density-1.png" class="img-fluid figure-img" alt="Density plot showing word recognition reaction time, correct and incorrect responses. The figure shows a black line, a curve peaking over RT = about 500 but ranging between -2000 and +2000. Under the curve, a series of black tick marks are shown under the x-axis border." width="480"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;5.1: Density plot showing word recognition reaction time, correct and incorrect responses</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;5.1: Density plot showing word recognition reaction time, correct and incorrect responses</figcaption>
 </figure>
 </div>
 </div>
@@ -886,12 +887,12 @@ not a multiple of shorter object length</code></pre>
 </div>
 </div>
 <p>If you run the <code>length()</code> function calls then you should see that the <em>length</em> or number of observations or rows in the <code>ML.all.correct</code> dataset should be smaller than the number of observations in the <code>ML.all</code> dataset.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -915,7 +916,7 @@ Tip
 <div id="fig-rt-correct-density" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="03-mixed_files/figure-html/fig-rt-correct-density-1.png" class="img-fluid figure-img" alt="Density plot showing word recognition reaction time, correct and incorrect responses. The figure shows a black line, a curve peaking over RT = about 500 now ranging between 0 and +2000. Under the curve, a series of black tick marks are shown under the x-axis border. The skew towards high values is now more obvious." width="480"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;5.2: Density plot showing word recognition reaction time, correct responses only</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;5.2: Density plot showing word recognition reaction time, correct responses only</figcaption>
 </figure>
 </div>
 </div>
@@ -951,12 +952,12 @@ Tip
 <h4 data-number="5.6.3.2" class="anchored" data-anchor-id="sec-dev-mixed-workflow-filter"><span class="header-section-number">5.6.3.2</span> Filtering observations as a decision in the psychological research workflow</h4>
 <p>I choose to filter out or exclude not only error responses (where <span class="math inline">\(RT &lt; 0ms\)</span>) but also short reaction times (where <span class="math inline">\(RT &lt; 200ms\)</span>). I think that any response in the lexical decision task that is recorded as less than 200ms cannot possibly represent a real word recognition response. Participants who complete experimental psychological tasks can and do press the button before they have time to engage the psychological processes (like word recognition) that the tasks we administer are designed to probe (like lexical decision).</p>
 <p>There is some relevant literature that concerns the speed at which neural word recognition processes operate. However, I think you should note that the threshold I am setting for exclusion, here, is essentially <em>arbitrary</em>. If you think about it, I could have set the threshold at any number from <span class="math inline">\(100-300ms\)</span> or some other range.</p>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Warning
 </div>
 </div>
@@ -974,7 +975,7 @@ Warning
 <li>Report analyses with and without exclusions, to indicate if their results are sensitive to their decisions.</li>
 </ul>
 <p>You can read further information about the practicalities of using R to do filtering <a href="https://r4ds.had.co.nz/transform.html?q=filter#filter-rows-with-filter">here</a>.</p>
-<p>You can read a brief discussion of the impacts of researcher choices in dataset construction in <a href="intro.html#sec-multiversedata"><span>Section&nbsp;7.2.4.2</span></a> and in <span class="citation" data-cites="steegen2016">Steegen et al. (<a href="references.html#ref-steegen2016" role="doc-biblioref">2016</a>)</span>.</p>
+<p>You can read a brief discussion of the impacts of researcher choices in dataset construction in <a href="intro.html#sec-multiversedata"><span>Section&nbsp;8.2.4.2</span></a> and in <span class="citation" data-cites="steegen2016">Steegen et al. (<a href="references.html#ref-steegen2016" role="doc-biblioref">2016</a>)</span>.</p>
 </section>
 </section>
 <section id="sec-dev-mixed-data-transform" class="level3" data-number="5.6.4">
@@ -1000,7 +1001,7 @@ Warning
 <div id="fig-rt-correct-log-density" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="03-mixed_files/figure-html/fig-rt-correct-log-density-1.png" class="img-fluid figure-img" alt="Density plot showing word recognition reaction time, correct and incorrect responses. The figure shows a black line, a curve peaking over logrt = about 2.8 ranging between 2.4 and 3.5. Under the curve, a series of black tick marks are shown under the x-axis border. The skew towards high values is now considerably reduced." width="480"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;5.3: Density plot showing log10 transformed reaction time, correct responses only</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;5.3: Density plot showing log10 transformed reaction time, correct responses only</figcaption>
 </figure>
 </div>
 </div>
@@ -1010,12 +1011,12 @@ Warning
 <li><code>ML.all.correct$logrt &lt;- log10(...)</code> creates a a new variable <code>logrt</code>, adding it to the <code>ML.all.correct</code> dataset. The variable is created using the transformation function <code>log10()</code>.</li>
 <li><code>log10(ML.all.correct$RT)</code> creates a the new variable by transforming (to log10) the values of the old variable, <code>RT</code>.</li>
 </ol>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -1066,7 +1067,7 @@ Tip
 <div id="fig-rt-correct-log-den-by-subj" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="03-mixed_files/figure-html/fig-rt-correct-log-den-by-subj-1.png" class="img-fluid figure-img" alt="The figure presents a grid of density plots showing log10 transformed reaction time, correct responses, separately for each participant. A dashed red line is drawn through all plots, indicating the mean RT. The curves vary in both the location of the peak and in the shape of the curve." width="768"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;5.4: Density plot showing log10 transformed reaction time, correct responses, separately for each participant</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;5.4: Density plot showing log10 transformed reaction time, correct responses, separately for each participant</figcaption>
 </figure>
 </div>
 </div>
@@ -1153,12 +1154,12 @@ Tip
 </section>
 <section id="sec-dev-mixed-exx-viz-histograms" class="level4" data-number="5.8.1.2">
 <h4 data-number="5.8.1.2" class="anchored" data-anchor-id="sec-dev-mixed-exx-viz-histograms"><span class="header-section-number">5.8.1.2</span> Exercises</h4>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -1180,12 +1181,12 @@ Tip
 <section id="sec-dev-mixed-complete-pooling" class="level3" data-number="5.8.2">
 <h3 data-number="5.8.2" class="anchored" data-anchor-id="sec-dev-mixed-complete-pooling"><span class="header-section-number">5.8.2</span> Approximations to Linear Mixed-effects models: complete pooling</h3>
 <p>As we have discussed in previous chapters, a good way to approach a mixed-effects analysis is by first estimating the effects of the experimental variables (here, frequency) using linear models, <em>ignoring</em> the hierarchical structure in the data.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -1235,12 +1236,12 @@ F-statistic: 234.8 on 1 and 5255 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>In the estimates from this linear model, we see an approximate first answer to our prediction.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -1280,12 +1281,12 @@ Note
 <section id="sec-dev-mixed-no-pooling" class="level3" data-number="5.8.3">
 <h3 data-number="5.8.3" class="anchored" data-anchor-id="sec-dev-mixed-no-pooling"><span class="header-section-number">5.8.3</span> Approximations to Linear Mixed-effects models: no pooling</h3>
 <p>We can examine variation between participants by analyzing the data for each participant’s responses separately, fitting a <em>different</em> linear model of the effect of word frequency on lexical decision RTs for each participant <em>separately</em>. <a href="#fig-no-vs-complete">Figure&nbsp;<span>5.5</span></a> presents a grid or trellis of plots, one plot per person. In each plot, you can see points corresponding to the log RT of the responses made by each participant to the stimulus words.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -1298,12 +1299,12 @@ Tip
 </div>
 <p>In all plots, the pink or red line represents the <em>complete pooling</em> model estimate of the effect of frequency on response RTs. The line is the same for each participant because there is only one estimated effect, based on all data for all participants.</p>
 <p>In addition, in each plot, you can see a green line. You can see that the line varies between participants. This represents the effect of frequency estimated using just the data for each participant, analyzed separately. These are the <em>no pooling</em> estimates. We call them the no pooling estimates because each is based just on the data from one participant.</p>
-<div class="cell" data-hash="03-mixed_cache/html/fig-no-vs-complete_2c5d61c6bf6a9a106c05adc05d7e9f4d">
+<div class="cell" data-hash="03-mixed_cache/html/fig-no-vs-complete_e63d409268d32affec03492b1df2a713">
 <div class="cell-output-display">
 <div id="fig-no-vs-complete" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="03-mixed_files/figure-html/fig-no-vs-complete-1.png" class="img-fluid figure-img" alt="The figure shows a grid of plots. Each plot shows the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant. A red-pink line shows the complete pooling estimate. Different blue-green lines shows the no-pooling estimate given the data for each participant." width="672"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;5.5: Plot showing the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant; red-pink line shows the complete pooling estimate, blue-green line shows the no-pooling estimate</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;5.5: Plot showing the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant; red-pink line shows the complete pooling estimate, blue-green line shows the no-pooling estimate</figcaption>
 </figure>
 </div>
 </div>
@@ -1313,12 +1314,12 @@ Tip
 <p>You will notice that the <em>no pooling</em> and <em>complete pooling</em> estimates tend to be quite similar. But for some participants – more than for others – there is variation between the estimates.</p>
 <p>You can reflect that the <em>complete pooling</em> is unsatisfactory because it ignores the variation between the participants: some people <em>are</em> slower than others; some people <em>do</em> show a larger frequency effect than others. You can also reflect that the <em>no pooling</em> is unsatisfactory because it ignores the similarities between the participants.</p>
 <p>While there <em>is</em> variation between participants there is also similarity across the group so that the effect of frequency is similar between participants.</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -1433,12 +1434,12 @@ Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + W_{0j} + e_{ij}
 <li><code>ML.all.correct.lmer  &lt;- lmer(...)</code> creates a <em>linear mixed-effects model</em> object using the <code>lmer()</code> function.</li>
 <li><code>logrt ~ LgSUBTLCD</code> the fixed effect in the model is expressed as a formula in which the outcome or dependent variable <code>logrt</code> is predicted <code>~</code> by the independent or predictor variable <code>LgSUBTLCD</code> word frequency.</li>
 </ol>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -1529,12 +1530,12 @@ LgSUBTLCD -0.764</code></pre>
 <li>Last, just as for linear models, we see estimates of the coefficients (of the slopes) of the fixed effects, the intercept and the slope of the <code>logrts ~ LgSUBTLCD</code> relationship.</li>
 </ol>
 <p>We can compare this estimate with our previous <code>lm()</code> estimate for the effect of frequency.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -1546,12 +1547,12 @@ Note
 </div>
 </div>
 <p>The estimate is different, a bit smaller. While the change in the estimate is also small, we may remember that we are looking at slope estimates for predicted change in <em>log RT</em>, in an experimental research area in which effects are often of the order of 10s of milliseconds. The estimates, and changes in the estimates, will tend to be quite small.</p>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Warning
 </div>
 </div>
@@ -1573,12 +1574,12 @@ Warning
 <p>The problem with ignoring the differences between groups (participants), as in the <em>complete pooling</em> model (here, the linear model), has been obvious when we examined the differences between participants (or between classes) in slopes and intercepts in previous weeks. The problem with focusing entirely on each participant, as in the <em>no pooling</em> model, has not been made apparent in our discussion yet.</p>
 <p>If we analyze each participant separately then we will get, for each participant, for our model of the frequency effect, the per-participant estimate of the intercept and the per-participant estimate of the slope of the frequency effect. These no-pooling estimates will tend to exaggerate or overstate the differences between participants <span class="citation" data-cites="Gelman2007ga">(<a href="references.html#ref-Gelman2007ga" role="doc-biblioref">Gelman &amp; Hill, 2007</a>)</span>. By basing the estimates on just the data for a person, in each per-participant analysis, the no-pooling approach <em>overfits</em> the data.</p>
 <p>You could say that the no-pooling approach gives us estimates that depend <em>too much</em> on the sample of data we have got, and are unlikely to be similar to the estimates we would see in other samples in future studies.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -1600,12 +1601,12 @@ Tip
 <p>For other participants, we have more information – maybe they made all correct responses. For these people, because we have more information, the intercept estimate will be based more on the data for each participant.</p>
 <p>To make sense of what this means, think about the differences between participants in how much reliable information we can have, given our sample, about their average level of response speed or about how they are affected by experimental variables. Think back to my comments about <a href="#fig-rt-correct-log-den-by-subj">Figure&nbsp;<span>5.4</span></a>, about the differences between participants in how spread out the distributions of their log RT values are. Recall that I said that where participants’ responses are more spread out – just as where we have less observations for some participants than for others – we shall inevitably have less certainty about our estimates for the effects that influence their performance if we base our account on just their data. Mixed-effects models perform better – as prediction models – than <em>no pooling</em> approaches because they are not relying, for any participant, on just their sometimes unreliable data.</p>
 <p>We can look again at a plot showing the data for each participant. <a href="#fig-no-vs-complete-vs-partial">Figure&nbsp;<span>5.6</span></a> presents a grid or trellis of plots, one plot per person. In each plot, you can see points corresponding to the RT of each response made by a participant to a stimulus word. In all plots, the pink line represents the <em>complete pooling</em> data model estimate of the effect of frequency on response RTs. In each plot, the green line represents the effect of frequency estimated using just the data for each participant, the <em>no pooling</em> estimates. Now, we also see blue lines that represent the mixed-effects model <em>partial pooling</em> estimates.</p>
-<div class="cell" data-hash="03-mixed_cache/html/fig-no-vs-complete-vs-partial_f8b07e44d11a09dc5883b1674817bb84">
+<div class="cell" data-hash="03-mixed_cache/html/fig-no-vs-complete-vs-partial_e39371f7254d69ad0c937f1127da151a">
 <div class="cell-output-display">
 <div id="fig-no-vs-complete-vs-partial" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="03-mixed_files/figure-html/fig-no-vs-complete-vs-partial-1.png" class="img-fluid figure-img" alt="The figure shows a grid of plots. Each plot shows the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant. A red-pink line shows the complete pooling estimate. Different blue-green lines shows the no-pooling estimate given the data for each participant. The blue lines show the linear mixed-effects model partial pooling estimate for each participant." width="672"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;5.6: Plot showing the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant; pink line shows the complete pooling estimate green line shows the no-pooling estimate; and blue line shows the linear mixed-effects model partial pooling estimate</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;5.6: Plot showing the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant; pink line shows the complete pooling estimate green line shows the no-pooling estimate; and blue line shows the linear mixed-effects model partial pooling estimate</figcaption>
 </figure>
 </div>
 </div>
@@ -1616,7 +1617,7 @@ Tip
 <div id="fig-no-vs-complete-vs-partial-zoom" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="03-mixed_files/figure-html/fig-no-vs-complete-vs-partial-zoom-1.png" class="img-fluid figure-img" alt="The figure shows a grid of 4 plots, one plot each for participants AA1, EB5, JL3 and JP3. Each plot shows the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant. A red-pink line shows the complete pooling estimate. Different blue-green lines shows the no-pooling estimate given the data for each participant. The blue lines show the linear mixed-effects model partial pooling estimate for each participant." width="1008"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;5.7: Plot showing the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant – for participants AA1, EB5, JL3 and JP3; pink line shows the complete pooling estimate green line shows the no-pooling estimate; and blue line shows the linear mixed-effects model partial pooling estimate</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;5.7: Plot showing the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant – for participants AA1, EB5, JL3 and JP3; pink line shows the complete pooling estimate green line shows the no-pooling estimate; and blue line shows the linear mixed-effects model partial pooling estimate</figcaption>
 </figure>
 </div>
 </div>
@@ -1625,12 +1626,12 @@ Tip
 <p>Formally, whether an estimate for a participant (in our example) is pulled more or less towards the overall estimate will depend not just on the number of data-points we have for that person. The optimal combined estimate for a participant is termed the <em>Empirical Bayes estimate</em> and the weighting – the extent to which the per-participant ‘estimate’ depends on the participant’s data or the overall data – depends on the reliability of the estimate (of the intercept or the frequency effect) given by analyzing that participant’s data <span class="citation" data-cites="Snijders2004a">(<a href="references.html#ref-Snijders2004a" role="doc-biblioref">Snijders &amp; Bosker, 2004</a>)</span>. If you think about it, smaller samples – e.g.&nbsp;where a participant completed less correct responses – will give you less reliable estimates (and so will samples that show more variation).</p>
 <p>What we are looking at, here, is a form of <em>regularization</em> in which we use all the sources of information we can to ensure we take into account the variability in the data while not getting over-excited by extreme differences <span class="citation" data-cites="mcelreath2020">(<a href="references.html#ref-mcelreath2020" role="doc-biblioref">McElreath, 2020</a>)</span>. We want to see estimates pulled towards an overall average where we have little data or unreliable estimates. We can see how strongly estimates can be shrunk in a plot like <a href="#fig-shrinkage">Figure&nbsp;<span>5.8</span></a>.</p>
 <p><a href="#fig-shrinkage">Figure&nbsp;<span>5.8</span></a> illustrates the shrinkage effect. I plotted a scatterplot of intercept and slope parameters from each model (models with different kinds of pooling), and connect estimates for the same participant. The plot uses arrows to connect the different estimates for each participant, different estimates from no-pooling (per-participant) compared to partial-pooling (mixed-effects) models. The plot shows how more extreme estimates are shrunk towards the global average estimate.</p>
-<div class="cell" data-hash="03-mixed_cache/html/fig-shrinkage_509134d145ce06a118dfaea5492dbfef">
+<div class="cell" data-hash="03-mixed_cache/html/fig-shrinkage_7d9fbf4c894787bd97137d2e06ff196a">
 <div class="cell-output-display">
 <div id="fig-shrinkage" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="03-mixed_files/figure-html/fig-shrinkage-1.png" class="img-fluid figure-img" alt="The figure presents a scatterplot. The points represent point slope and intercept estimates. There are big green and pink points showing the complete pooling and partial pooling (average) estimates for the slope and intercept. There are also orange and purple points show the no pooling (orange) and partial pooling (purple) estimates for each person: estimates for a person are connected by arrows to show the direction towards which no pooling estimates are pulled or shrunk. The figure shows that shrinkage, indicated by longer arrows, is greater for some participants with more extreme estimates relative to the complete pooling or average estimates." width="624"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;5.8: Plot illustrating shrinkage: big green and pink points show the complete pooling and partial pooling (average) estimates for the slope and intercept; orange and purple points show the no pooling (orange) and partial pooling (purple) estimates for each person; estimates for a person are connected by arrows to show the direction towards which no pooling estimates are pulled or shrunk</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;5.8: Plot illustrating shrinkage: big green and pink points show the complete pooling and partial pooling (average) estimates for the slope and intercept; orange and purple points show the no pooling (orange) and partial pooling (purple) estimates for each person; estimates for a person are connected by arrows to show the direction towards which no pooling estimates are pulled or shrunk</figcaption>
 </figure>
 </div>
 </div>
@@ -1662,13 +1663,13 @@ Tip
 <section id="sec-dev-mixed-evaluating" class="level2" data-number="5.12">
 <h2 data-number="5.12" class="anchored" data-anchor-id="sec-dev-mixed-evaluating"><span class="header-section-number">5.12</span> Fitting and evaluating Linear Mixed-effects models</h2>
 <p>Up to this point, we have discussed the empirical or conceptual reasons we should expect to take into account, in our model, the effects on the outcome due to systematic differences in the experimental variables, e.g., in stimulus word frequency frequency, or to random differences between participants or between stimuli. We can now think about how we should statistically evaluate the relative usefulness of these different fixed effects or random effects, where usefulness is judged in relation to our capacity to explain outcome variance, or to improve model fit to sample data. We shall take an approach that follows the approach set out by Baayen, Bates and others <span class="citation" data-cites="Baayen2008 bates2015parsimonious matuschek2017">(<a href="references.html#ref-Baayen2008" role="doc-biblioref">Baayen et al., 2008b</a>; <a href="references.html#ref-bates2015parsimonious" role="doc-biblioref">Bates et al., 2015</a>; <a href="references.html#ref-matuschek2017" role="doc-biblioref">Matuschek et al., 2017</a>)</span>.</p>
-<p>In this approach, we shall look at the choices that psychology researchers have to make. Researchers using statistical models are always faced with choices. As we have seen, these choices begin even before we start to do analyses, as when we make decisions about dataset construction <span class="citation" data-cites="steegen2016">(<a href="references.html#ref-steegen2016" role="doc-biblioref">Steegen et al., 2016</a>)</span>. The need to make choices is always present for all the kinds of models we work with (as I discuss in <a href="intro.html#sec-multiverse"><span>Section&nbsp;7.2.4</span></a>). This may not always be obvious because, for example, in using some data analysis software, researchers may rely on defaults with limited indication that that is what they are doing.</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<p>In this approach, we shall look at the choices that psychology researchers have to make. Researchers using statistical models are always faced with choices. As we have seen, these choices begin even before we start to do analyses, as when we make decisions about dataset construction <span class="citation" data-cites="steegen2016">(<a href="references.html#ref-steegen2016" role="doc-biblioref">Steegen et al., 2016</a>)</span>. The need to make choices is always present for all the kinds of models we work with (as I discuss in <a href="intro.html#sec-multiverse"><span>Section&nbsp;8.2.4</span></a>). This may not always be obvious because, for example, in using some data analysis software, researchers may rely on defaults with limited indication that that is what they are doing.</p>
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -1682,12 +1683,12 @@ Important
 <p>We will focus on building a series of models up to the <strong>most complex model supported by the data</strong>. What does <em>model complexity</em> mean here? I am talking about something like the difference between a model including just main effects (simpler) and a model including both main effects and the interaction between the effects (more complex), or, I am talking about a model included just fixed effects (simpler) versus a model including fixed effects as well as random effects (more complex).</p>
 <p>Researchers may engage in comparing models to examine <strong>if one or more random effects should be included</strong> in their linear mixed-effects model. They may not be sure if they should include all random effects, that is, all random effects that could be included, given a range of grouping variables, like participant, class or stimulus, and given a range of possible effects, such as whether slopes or intercepts might vary.</p>
 <p>Researchers may do model comparison to <strong>check if adding the effect of an experimental variable is justified</strong>. Maybe they are conducting an exploratory study in which they want to investigate if using some measurement variable helps to explain variation in the outcome. Perhaps they are conducting an experimental study in which they want to test if the experimental manipulation, or the difference between conditions, has an impact on the outcome.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -1763,12 +1764,12 @@ BIC = -2ln(l) + kln(N)
 <h3 data-number="5.12.3" class="anchored" data-anchor-id="sec-dev-mixed-LRT"><span class="header-section-number">5.12.3</span> Model comparison using the Likelihood Ratio Test</h3>
 <p><span class="citation" data-cites="Pinheiro2000aa Barr2013a matuschek2017">Pinheiro &amp; Bates (<a href="references.html#ref-Pinheiro2000aa" role="doc-biblioref">2000</a>; see also <a href="references.html#ref-Barr2013a" role="doc-biblioref">Barr et al., 2013</a>; <a href="references.html#ref-matuschek2017" role="doc-biblioref">Matuschek et al., 2017</a>)</span> recommend that models of varying predictor sets can be compared using Likelihood Ratio Test comparison (LRTs) where the simple model is <em>nested</em> inside the more complex model.</p>
 <p>The “nested”, here, means that the predictors in the simpler model are a subset of the predictors in the more complex model. For example, you might have just main effects in the simpler model but both main and interaction effects in the more complex model. Or, in another example, you might have just random effects of subjects or items on intercepts in the simpler model but both random effects on intercepts and random effects on slopes of fixed effects in the more complex model.</p>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Warning
 </div>
 </div>
@@ -1787,12 +1788,12 @@ Warning
 </section>
 <section id="sec-dev-mixed-model-steps" class="level2" data-number="5.13">
 <h2 data-number="5.13" class="anchored" data-anchor-id="sec-dev-mixed-model-steps"><span class="header-section-number">5.13</span> Modeling steps recommendations</h2>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -1806,12 +1807,12 @@ Important
 <p>In short, <em>if</em> you have <strong>pre-registered</strong> the design of your study and, as part of that registration, you recorded the hypotheses you plan to test, as well as the analysis method you plan to use to test your hypotheses, then the answer is simple: <strong>fit the model you said you were going to use</strong>.</p>
 <p>These days, if you have not pre-registered your analysis plans, you are practically-speaking engaged in exploratory work. <em>If</em> you are doing an <strong>exploratory</strong> study, then you will need to make some choices, in part, depending on the nature of the sample you are working with, and other aspects of the research context, but it will help to <strong>keep things simple</strong>.</p>
 <p>In an exploratory study, I would keep things simple by comparing a series of models, fitted with different sets of predictor variables (fixed effects).</p>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Warning
 </div>
 </div>
@@ -1829,12 +1830,12 @@ Warning
 </ul>
 <p>In my experience, the estimates <em>and associated significance levels</em> associated with fixed effects can vary quite a bit depending on what other variables are included in the model. This has led me to take an approach where I am <em>not</em> varying too much how predictors are included in the model.</p>
 <p>As noted, this will not really apply if you are doing an <em>confirmatory</em> study in which you are obliged to include the manipulated variables. However, if you are doing something a bit more <em>exploratory</em> then you might have to think about the kinds of predictors you include in your model, and how or when you include them.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -2113,12 +2114,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>I should acknowledge, here, that there is an on-going discussion over what random effects should be included in mixed-effects models (see <span class="citation" data-cites="meteyard2020a">Meteyard &amp; Davies (<a href="references.html#ref-meteyard2020a" role="doc-biblioref">2020</a>)</span> for an overview). The discussion can be seen from a number of different perspectives. Key articles include those published by <span class="citation" data-cites="Baayen2008">Baayen et al. (<a href="references.html#ref-Baayen2008" role="doc-biblioref">2008b</a>)</span>, <span class="citation" data-cites="bates2015parsimonious">Bates et al. (<a href="references.html#ref-bates2015parsimonious" role="doc-biblioref">2015</a>)</span>, <span class="citation" data-cites="Barr2013a">Barr et al. (<a href="references.html#ref-Barr2013a" role="doc-biblioref">2013</a>)</span> and <span class="citation" data-cites="matuschek2017">Matuschek et al. (<a href="references.html#ref-matuschek2017" role="doc-biblioref">2017</a>)</span>.</p>
 <p>You could be advised that a mixed-effects model should include all random effects that make sense a priori, so, here, we are talking about the random effects of participants on intercepts and on the slopes of all fixed effects that are in your model (variances and covariances) as well as all the random effects of items on intercepts and on slopes. This is characterized as the <em>keep it maximal</em> approach, associated with <span class="citation" data-cites="Barr2013a">Barr et al. (<a href="references.html#ref-Barr2013a" role="doc-biblioref">2013</a>)</span>, though the discussion in that article is more nuanced than this sounds.</p>
 <p>Or, you could be advised that a mixed-effects model should only include those random effects that appear to be justified or warranted by their usefulness in accounting for the data. In practice, this may mean, you should include only those random effects that appear justified by improved model fit to data, as indicated by a model comparison <span class="citation" data-cites="bates2015parsimonious matuschek2017">(see e.g. <a href="references.html#ref-bates2015parsimonious" role="doc-biblioref">Bates et al., 2015</a>; <a href="references.html#ref-matuschek2017" role="doc-biblioref">Matuschek et al., 2017</a>)</span>.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -2133,12 +2134,12 @@ Tip
 </div>
 <p>At present, viewpoints in discussions around the specification of random effects are associated with arguments that, as <span class="citation" data-cites="Barr2013a">Barr et al. (<a href="references.html#ref-Barr2013a" role="doc-biblioref">2013</a>)</span> discuss, more comprehensive models appear to control the Type I (false positive) error rate better, or that, as <span class="citation" data-cites="matuschek2017">Matuschek et al. (<a href="references.html#ref-matuschek2017" role="doc-biblioref">2017</a>)</span> argue, control over the risk of false positives may come at the cost of increasing the Type II (false negative) error rate).</p>
 <p>I think that it would seem to be axiomatic that a researcher <em>should</em> seek to account for all the potential sources of variance – fixed effects or random effects – that may influence observed outcomes. In practice, however, you may have insufficient data or inadequate measures to enable you to fit a model that converges with all the random effects, or to enable you to fit a model that converges that can estimate what may, in fact, be very small random effects variances or covariances. This is why some researchers are moving to adopt <em>Bayesian</em> mixed-effects modeling methods, as discussed by the developmental Psychologist, Michael Frank, for example, <a href="https://babieslearninglanguage.blogspot.com/2018/02/mixed-effects-models-is-it-time-to-go.html">here</a>. And as exemplified by my work <a href="https://peerj.com/articles/9511/">here</a>.</p>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Warning
 </div>
 </div>
@@ -2264,12 +2265,12 @@ LgSUBTLCD -0.764</code></pre>
 <blockquote class="blockquote">
 <p>We evaluated whether the inclusion of random effects was necessary in the final model (model 3) using LRT comparisons between models with the same fixed effects structure but differing random effects. Here, following Pinheiro &amp; Bates (2000; see, also, Baayen, 2008), models were fitted using the REML=TRUE setting in lmer. We compared models that included: (i.) both random effects of subjects and items, as specified for model 3; (ii.) just the random effect of subjects; (iii.) just the random effect of items.</p>
 </blockquote>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -2291,12 +2292,12 @@ Tip
 </blockquote>
 <p>If you look at the report, you will see, also, that present a summary table showing the estimates for the fixed effects, and a series of plots indicating the predicted change in outcome (reading RT) given variation in the values of the predictor variables.</p>
 <p>In summary, I think we can and should report both an outline of the process of development of the model or models we use to estimate the effects of interest, and the estimates we derive through the modeling.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -2340,86 +2341,86 @@ Tip
 <p>A <em>very</em> useful FAQ on the practicalities of working with mixed-effects models can be found <a href="https://bbolker.github.io/mixedmodels-misc/glmmFAQ.html">here</a>.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography" style="display: none">
-<div id="ref-Baayen2008" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-Baayen2008" class="csl-entry" role="listitem">
 Baayen, R. H., Davidson, D. J., &amp; Bates, D. M. (2008b). Mixed-effects modeling with crossed random effects for subjects and items. <em>Journal of Memory and Language</em>, <em>59</em>(4), 390–412. <a href="https://doi.org/10.1016/j.jml.2007.12.005">https://doi.org/10.1016/j.jml.2007.12.005</a>
 </div>
-<div id="ref-baayen2008" class="csl-entry" role="doc-biblioentry">
+<div id="ref-baayen2008" class="csl-entry" role="listitem">
 Baayen, R. H., Davidson, D. J., &amp; Bates, D. M. (2008a). Mixed-effects modeling with crossed random effects for subjects and items. <em>Journal of Memory and Language</em>, <em>59</em>(4), 390–412. <a href="https://doi.org/10.1016/j.jml.2007.12.005">https://doi.org/10.1016/j.jml.2007.12.005</a>
 </div>
-<div id="ref-Balota2007" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Balota2007" class="csl-entry" role="listitem">
 Balota, D. a., Yap, M. J., Cortese, M. J., Hutchison, K. a., Kessler, B., Loftis, B., Neely, J. H., Nelson, D. L., Simpson, G. B., &amp; Treiman, R. (2007). The english lexicon project. <em>Behavior Research Methods</em>, <em>39</em>(3), 445–459. <a href="https://doi.org/10.3758/BF03193014">https://doi.org/10.3758/BF03193014</a>
 </div>
-<div id="ref-Barr2013a" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Barr2013a" class="csl-entry" role="listitem">
 Barr, D. J., Levy, R., Scheepers, C., &amp; Tily, H. J. (2013). Random effects structure for confirmatory hypothesis testing: Keep it maximal. <em>Journal of Memory and Language</em>, <em>68</em>, 255–278.
 </div>
-<div id="ref-bates2015parsimonious" class="csl-entry" role="doc-biblioentry">
+<div id="ref-bates2015parsimonious" class="csl-entry" role="listitem">
 Bates, D., Kliegl, R., Vasishth, S., &amp; Baayen, H. (2015). Parsimonious mixed models. <em>arXiv Preprint arXiv:1506.04967</em>.
 </div>
-<div id="ref-box1976" class="csl-entry" role="doc-biblioentry">
+<div id="ref-box1976" class="csl-entry" role="listitem">
 Box, G. E. P. (1976). Science and statistics. <em>Journal of the American Statistical Association</em>, <em>71</em>(356), 791–799. <a href="https://doi.org/10.2307/2286841">https://doi.org/10.2307/2286841</a>
 </div>
-<div id="ref-Brysbaert2009a" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Brysbaert2009a" class="csl-entry" role="listitem">
 Brysbaert, M., &amp; New, B. (2009). Moving beyond kucera and francis: A critical evaluation of current word frequency norms and the introduction of a new and improved word frequency measure for american english. <em>Behavior Research Methods</em>, <em>41</em>(4), 977–990. <a href="https://doi.org/10.3758/BRM.41.4.977">https://doi.org/10.3758/BRM.41.4.977</a>
 </div>
-<div id="ref-Burnham2004" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Burnham2004" class="csl-entry" role="listitem">
 Burnham, K. P. (2004). Multimodel inference: Understanding AIC and BIC in model selection. <em>Sociological Methods &amp; Research</em>, <em>33</em>(2), 261–304. <a href="https://doi.org/10.1177/0049124104268644">https://doi.org/10.1177/0049124104268644</a>
 </div>
-<div id="ref-clark1973" class="csl-entry" role="doc-biblioentry">
+<div id="ref-clark1973" class="csl-entry" role="listitem">
 Clark, H. (Stanford. U. (1973). <em>Clark<span>_</span>1973<span>_</span>LanguageAsAFixedEffectFallacy.pdf</em>.
 </div>
-<div id="ref-Cohen2003c" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Cohen2003c" class="csl-entry" role="listitem">
 Cohen, J., Cohen, P., West, S. G., &amp; Aiken, L. S. (2003). <em>Applied multiple regression/correlation analysis for the behavioural sciences (3rd. edition)</em>. Lawrence Erlbaum Associates.
 </div>
-<div id="ref-Davies2013b" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Davies2013b" class="csl-entry" role="listitem">
 Davies, R., Barbon, A., &amp; Cuetos, F. (2013). Lexical and semantic age-of-acquisition effects on word naming in spanish. <em>Memory and Cognition</em>, <em>41</em>(2), 297–311.
 </div>
-<div id="ref-Forster2003a" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Forster2003a" class="csl-entry" role="listitem">
 Forster, K. I., &amp; Forster, J. C. (2003). DMDX: A windows display program with millisecond accuracy. <em>Behavior Research Methods, Instruments, &amp; Computers</em>, <em>35</em>, 116–124.
 </div>
-<div id="ref-Gelman2015a" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Gelman2015a" class="csl-entry" role="listitem">
 Gelman, a. (2015). The connection between varying treatment effects and the crisis of unreplicable research: A bayesian perspective. <em>Journal of Management</em>, <em>41</em>(2), 632–643. <a href="https://doi.org/10.1177/0149206314525208">https://doi.org/10.1177/0149206314525208</a>
 </div>
-<div id="ref-gelman2017" class="csl-entry" role="doc-biblioentry">
+<div id="ref-gelman2017" class="csl-entry" role="listitem">
 Gelman, A., &amp; Hennig, C. (2017). Beyond subjective and objective in statistics. <em>Journal of the Royal Statistical Society: Series A (Statistics in Society)</em>, <em>180</em>(4), 967–1033.
 </div>
-<div id="ref-Gelman2007ga" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Gelman2007ga" class="csl-entry" role="listitem">
 Gelman, A., &amp; Hill, J. (2007). <em>Data analysis using regression and multilevel/hierarchical models</em>. Cambridge University Press.
 </div>
-<div id="ref-howell2016fundamental" class="csl-entry" role="doc-biblioentry">
+<div id="ref-howell2016fundamental" class="csl-entry" role="listitem">
 Howell, D. C. (2016). <em>Fundamental statistics for the behavioral sciences</em>. Cengage learning.
 </div>
-<div id="ref-judd2012" class="csl-entry" role="doc-biblioentry">
+<div id="ref-judd2012" class="csl-entry" role="listitem">
 Judd, C. M., Westfall, J., &amp; Kenny, D. A. (2012). <em>Treating stimuli as a random factor in social psychology : A new and comprehensive solution to a pervasive but largely ignored problem</em>. <em>103</em>(1), 54–69. <a href="https://doi.org/10.1037/a0028347">https://doi.org/10.1037/a0028347</a>
 </div>
-<div id="ref-Masterson2007c" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Masterson2007c" class="csl-entry" role="listitem">
 Masterson, J., &amp; Hayes, M. (2007). Development and data for UK versions of an author and title recognition test for adults. <em>Journal of Research in Reading</em>, <em>30</em>, 212–219.
 </div>
-<div id="ref-matuschek2017" class="csl-entry" role="doc-biblioentry">
+<div id="ref-matuschek2017" class="csl-entry" role="listitem">
 Matuschek, H., Kliegl, R., Vasishth, S., Baayen, H., &amp; Bates, D. (2017). Balancing type i error and power in linear mixed models. <em>Journal of Memory and Language</em>, <em>94</em>, 305–315. <a href="https://doi.org/10.1016/j.jml.2017.01.001">https://doi.org/10.1016/j.jml.2017.01.001</a>
 </div>
-<div id="ref-mcelreath2020" class="csl-entry" role="doc-biblioentry">
+<div id="ref-mcelreath2020" class="csl-entry" role="listitem">
 McElreath, R. (2020). <em>: A bayesian course with examples in r and STAN</em> (2nd ed.). Chapman; Hall/CRC. <a href="https://doi.org/10.1201/9780429029608">https://doi.org/10.1201/9780429029608</a>
 </div>
-<div id="ref-meteyard2020a" class="csl-entry" role="doc-biblioentry">
+<div id="ref-meteyard2020a" class="csl-entry" role="listitem">
 Meteyard, L., &amp; Davies, R. A. I. (2020). Best practice guidance for linear mixed-effects models in psychological science. <em>Journal of Memory and Language</em>, <em>112</em>, 104092. <a href="https://doi.org/10.1016/j.jml.2020.104092">https://doi.org/10.1016/j.jml.2020.104092</a>
 </div>
-<div id="ref-Pinheiro2000aa" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Pinheiro2000aa" class="csl-entry" role="listitem">
 Pinheiro, J. C., &amp; Bates, D. M. (2000). <em>Mixed-effects models in s and s-plus (statistics and computing)</em>. Springer.
 </div>
-<div id="ref-raaijmakers1999" class="csl-entry" role="doc-biblioentry">
+<div id="ref-raaijmakers1999" class="csl-entry" role="listitem">
 Raaijmakers, J. G. W., Schrijnemakers, J. M. C., &amp; Gremmen, F. (1999). How to deal with <span>"</span>the language-as-fixed-effect fallacy<span>"</span>: Common misconceptions and alternative solutions. <em>Journal of Memory and Language</em>, <em>41</em>(3), 416–426. <a href="https://doi.org/10.1006/jmla.1999.2650">https://doi.org/10.1006/jmla.1999.2650</a>
 </div>
-<div id="ref-Snijders2004a" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Snijders2004a" class="csl-entry" role="listitem">
 Snijders, T. A. B., &amp; Bosker, R. J. (2004). <em>Multilevel analysis: An introduction to basic and advanced multilevel modeling</em>. Sage Publications Ltd.
 </div>
-<div id="ref-steegen2016" class="csl-entry" role="doc-biblioentry">
+<div id="ref-steegen2016" class="csl-entry" role="listitem">
 Steegen, S., Tuerlinckx, F., Gelman, A., &amp; Vanpaemel, W. (2016). Increasing transparency through a multiverse analysis. <em>Perspectives on Psychological Science</em>, <em>11</em>(5), 702–712.
 </div>
-<div id="ref-torgesen1999towre" class="csl-entry" role="doc-biblioentry">
+<div id="ref-torgesen1999towre" class="csl-entry" role="listitem">
 Torgesen, J. K., Rashotte, C. A., &amp; Wagner, R. K. (1999). <em>TOWRE: Test of word reading efficiency</em>. Pro-ed Austin, TX.
 </div>
-<div id="ref-Yarkoni2008b" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Yarkoni2008b" class="csl-entry" role="listitem">
 Yarkoni, T., Balota, D., &amp; Yap, M. (2008). Moving beyond coltheart’s n: A new measure of orthographic similarity. <em>Psychonomic Bulletin &amp; Review</em>, <em>15</em>(5), 971–979. <a href="https://doi.org/10.3758/PBR.15.5.971">https://doi.org/10.3758/PBR.15.5.971</a>
 </div>
 </div>
@@ -2459,9 +2460,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -2473,7 +2488,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -2509,24 +2541,128 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -2534,7 +2670,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
-    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {

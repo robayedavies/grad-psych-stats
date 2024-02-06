@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.189">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,48 +47,19 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -101,8 +73,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -139,10 +110,12 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
@@ -151,11 +124,16 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to Ordinal Models</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-ordinal.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to Ordinal Models</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -163,137 +141,155 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Psychological data analysis for graduate students</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">MAKING THE MOST OF R</span>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">MAKING THE MOST OF R</span></span>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./knowledge-ecosystem.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R knowledge</span></a>
+  <a href="./knowledge-ecosystem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R knowledge</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./visualization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data visualization</span></a>
+  <a href="./visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data visualization</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">MODELS</span>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">MODELS</span></span>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-multilevel.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to multilevel data</span></a>
+  <a href="./01-multilevel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to multilevel data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-mixed.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to linear mixed-effects models</span></a>
+  <a href="./02-mixed.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to linear mixed-effects models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-mixed.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Developing linear mixed-effects models</span></a>
+  <a href="./03-mixed.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Developing linear mixed-effects models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-glmm.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to Generalized Linear Mixed-effects Models</span></a>
+  <a href="./04-glmm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to Generalized Linear Mixed-effects Models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-ordinal.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to Ordinal Models</span></a>
+  <a href="./05-ordinal.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to Ordinal Models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">WRITING ABOUT RESEARCH</span>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">WRITING ABOUT RESEARCH</span></span>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Introduction: the why</span></a>
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Introduction: the why</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./what.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">What</span></a>
+  <a href="./what.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">What</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./how.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">How</span></a>
+  <a href="./how.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">How</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">END</span>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">END</span></span>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  <a href="./summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-ordinal-motivations" id="toc-sec-ordinal-motivations" class="nav-link active" data-scroll-target="#sec-ordinal-motivations"><span class="toc-section-number">7.1</span>  Motivations: working with ordinal outcomes</a></li>
-  <li><a href="#sec-ordinal-ideas" id="toc-sec-ordinal-ideas" class="nav-link" data-scroll-target="#sec-ordinal-ideas"><span class="toc-section-number">7.2</span>  The key idea to get us started</a></li>
-  <li><a href="#sec-ordinal-targets" id="toc-sec-ordinal-targets" class="nav-link" data-scroll-target="#sec-ordinal-targets"><span class="toc-section-number">7.3</span>  Targets</a></li>
-  <li><a href="#sec-ordinal-study-guide" id="toc-sec-ordinal-study-guide" class="nav-link" data-scroll-target="#sec-ordinal-study-guide"><span class="toc-section-number">7.4</span>  Study guide</a></li>
-  <li><a href="#sec-ordinal-data" id="toc-sec-ordinal-data" class="nav-link" data-scroll-target="#sec-ordinal-data"><span class="toc-section-number">7.5</span>  The data we will work with:</a>
+  <li><a href="#sec-ordinal-motivations" id="toc-sec-ordinal-motivations" class="nav-link active" data-scroll-target="#sec-ordinal-motivations"><span class="header-section-number">7.1</span> Motivations: working with ordinal outcomes</a></li>
+  <li><a href="#sec-ordinal-ideas" id="toc-sec-ordinal-ideas" class="nav-link" data-scroll-target="#sec-ordinal-ideas"><span class="header-section-number">7.2</span> The key idea to get us started</a></li>
+  <li><a href="#sec-ordinal-targets" id="toc-sec-ordinal-targets" class="nav-link" data-scroll-target="#sec-ordinal-targets"><span class="header-section-number">7.3</span> Targets</a></li>
+  <li><a href="#sec-ordinal-study-guide" id="toc-sec-ordinal-study-guide" class="nav-link" data-scroll-target="#sec-ordinal-study-guide"><span class="header-section-number">7.4</span> Study guide</a></li>
+  <li><a href="#sec-ordinal-data" id="toc-sec-ordinal-data" class="nav-link" data-scroll-target="#sec-ordinal-data"><span class="header-section-number">7.5</span> The data we will work with:</a>
   <ul class="collapse">
-  <li><a href="#sec-ordinal-data-study" id="toc-sec-ordinal-data-study" class="nav-link" data-scroll-target="#sec-ordinal-data-study"><span class="toc-section-number">7.5.1</span>  Study information</a></li>
-  <li><a href="#sec-ordinal-data-download" id="toc-sec-ordinal-data-download" class="nav-link" data-scroll-target="#sec-ordinal-data-download"><span class="toc-section-number">7.5.2</span>  Locate and download the data file</a></li>
-  <li><a href="#sec-ordinal-data-import" id="toc-sec-ordinal-data-import" class="nav-link" data-scroll-target="#sec-ordinal-data-import"><span class="toc-section-number">7.5.3</span>  Read-in the data file using read_csv</a></li>
-  <li><a href="#sec-ordinal-data-inspect" id="toc-sec-ordinal-data-inspect" class="nav-link" data-scroll-target="#sec-ordinal-data-inspect"><span class="toc-section-number">7.5.4</span>  Inspect the data</a></li>
+  <li><a href="#sec-ordinal-data-study" id="toc-sec-ordinal-data-study" class="nav-link" data-scroll-target="#sec-ordinal-data-study"><span class="header-section-number">7.5.1</span> Study information</a></li>
+  <li><a href="#sec-ordinal-data-download" id="toc-sec-ordinal-data-download" class="nav-link" data-scroll-target="#sec-ordinal-data-download"><span class="header-section-number">7.5.2</span> Locate and download the data file</a></li>
+  <li><a href="#sec-ordinal-data-import" id="toc-sec-ordinal-data-import" class="nav-link" data-scroll-target="#sec-ordinal-data-import"><span class="header-section-number">7.5.3</span> Read-in the data file using read_csv</a></li>
+  <li><a href="#sec-ordinal-data-inspect" id="toc-sec-ordinal-data-inspect" class="nav-link" data-scroll-target="#sec-ordinal-data-inspect"><span class="header-section-number">7.5.4</span> Inspect the data</a></li>
   </ul></li>
-  <li><a href="#sec-ordinal-data-tidy" id="toc-sec-ordinal-data-tidy" class="nav-link" data-scroll-target="#sec-ordinal-data-tidy"><span class="toc-section-number">7.6</span>  Tidy the data</a></li>
-  <li><a href="#sec-ordinal-working-models-clm" id="toc-sec-ordinal-working-models-clm" class="nav-link" data-scroll-target="#sec-ordinal-working-models-clm"><span class="toc-section-number">7.7</span>  Working with Cumulative Link Models in R</a>
+  <li><a href="#sec-ordinal-data-tidy" id="toc-sec-ordinal-data-tidy" class="nav-link" data-scroll-target="#sec-ordinal-data-tidy"><span class="header-section-number">7.6</span> Tidy the data</a></li>
+  <li><a href="#sec-ordinal-working-models-clm" id="toc-sec-ordinal-working-models-clm" class="nav-link" data-scroll-target="#sec-ordinal-working-models-clm"><span class="header-section-number">7.7</span> Working with Cumulative Link Models in R</a>
   <ul class="collapse">
-  <li><a href="#sec-ordinal-results-clm" id="toc-sec-ordinal-results-clm" class="nav-link" data-scroll-target="#sec-ordinal-results-clm"><span class="toc-section-number">7.7.1</span>  Read the results</a></li>
+  <li><a href="#sec-ordinal-results-clm" id="toc-sec-ordinal-results-clm" class="nav-link" data-scroll-target="#sec-ordinal-results-clm"><span class="header-section-number">7.7.1</span> Read the results</a></li>
   </ul></li>
-  <li><a href="#sec-ordinal-working-models-clmm" id="toc-sec-ordinal-working-models-clmm" class="nav-link" data-scroll-target="#sec-ordinal-working-models-clmm"><span class="toc-section-number">7.8</span>  Working with Cumulative Link Mixed-effects Models in R</a>
+  <li><a href="#sec-ordinal-working-models-clmm" id="toc-sec-ordinal-working-models-clmm" class="nav-link" data-scroll-target="#sec-ordinal-working-models-clmm"><span class="header-section-number">7.8</span> Working with Cumulative Link Mixed-effects Models in R</a>
   <ul class="collapse">
-  <li><a href="#sec-ordinal-results-clmm" id="toc-sec-ordinal-results-clmm" class="nav-link" data-scroll-target="#sec-ordinal-results-clmm"><span class="toc-section-number">7.8.1</span>  Read the results</a></li>
-  <li><a href="#sec-ordinal-visualizing" id="toc-sec-ordinal-visualizing" class="nav-link" data-scroll-target="#sec-ordinal-visualizing"><span class="toc-section-number">7.8.2</span>  Presenting and visualizing the effects</a></li>
+  <li><a href="#sec-ordinal-results-clmm" id="toc-sec-ordinal-results-clmm" class="nav-link" data-scroll-target="#sec-ordinal-results-clmm"><span class="header-section-number">7.8.1</span> Read the results</a></li>
+  <li><a href="#sec-ordinal-visualizing" id="toc-sec-ordinal-visualizing" class="nav-link" data-scroll-target="#sec-ordinal-visualizing"><span class="header-section-number">7.8.2</span> Presenting and visualizing the effects</a></li>
   </ul></li>
-  <li><a href="#sec-ordinal-reporting-results" id="toc-sec-ordinal-reporting-results" class="nav-link" data-scroll-target="#sec-ordinal-reporting-results"><span class="toc-section-number">7.9</span>  Reporting model results</a></li>
-  <li><a href="#sec-ordinal-extensions" id="toc-sec-ordinal-extensions" class="nav-link" data-scroll-target="#sec-ordinal-extensions"><span class="toc-section-number">7.10</span>  Extensions</a>
+  <li><a href="#sec-ordinal-reporting-results" id="toc-sec-ordinal-reporting-results" class="nav-link" data-scroll-target="#sec-ordinal-reporting-results"><span class="header-section-number">7.9</span> Reporting model results</a></li>
+  <li><a href="#sec-ordinal-extensions" id="toc-sec-ordinal-extensions" class="nav-link" data-scroll-target="#sec-ordinal-extensions"><span class="header-section-number">7.10</span> Extensions</a>
   <ul class="collapse">
-  <li><a href="#sec-ordinal-kinds" id="toc-sec-ordinal-kinds" class="nav-link" data-scroll-target="#sec-ordinal-kinds"><span class="toc-section-number">7.10.1</span>  Different kinds of ordinal data</a></li>
+  <li><a href="#sec-ordinal-kinds" id="toc-sec-ordinal-kinds" class="nav-link" data-scroll-target="#sec-ordinal-kinds"><span class="header-section-number">7.10.1</span> Different kinds of ordinal data</a></li>
   </ul></li>
-  <li><a href="#richly-parameterized-mixed-effects-models" id="toc-richly-parameterized-mixed-effects-models" class="nav-link" data-scroll-target="#richly-parameterized-mixed-effects-models"><span class="toc-section-number">7.11</span>  Richly parameterized mixed-effects models</a></li>
-  <li><a href="#sec-ordinal-summary" id="toc-sec-ordinal-summary" class="nav-link" data-scroll-target="#sec-ordinal-summary"><span class="toc-section-number">7.12</span>  Summary</a>
+  <li><a href="#richly-parameterized-mixed-effects-models" id="toc-richly-parameterized-mixed-effects-models" class="nav-link" data-scroll-target="#richly-parameterized-mixed-effects-models"><span class="header-section-number">7.11</span> Richly parameterized mixed-effects models</a></li>
+  <li><a href="#sec-ordinal-summary" id="toc-sec-ordinal-summary" class="nav-link" data-scroll-target="#sec-ordinal-summary"><span class="header-section-number">7.12</span> Summary</a>
   <ul class="collapse">
-  <li><a href="#sec-ordinal-glossary-useful-functions" id="toc-sec-ordinal-glossary-useful-functions" class="nav-link" data-scroll-target="#sec-ordinal-glossary-useful-functions"><span class="toc-section-number">7.12.1</span>  Glossary: useful functions</a></li>
+  <li><a href="#sec-ordinal-glossary-useful-functions" id="toc-sec-ordinal-glossary-useful-functions" class="nav-link" data-scroll-target="#sec-ordinal-glossary-useful-functions"><span class="header-section-number">7.12.1</span> Glossary: useful functions</a></li>
   </ul></li>
-  <li><a href="#sec-ordinal-recommended-reading" id="toc-sec-ordinal-recommended-reading" class="nav-link" data-scroll-target="#sec-ordinal-recommended-reading"><span class="toc-section-number">7.13</span>  Recommended reading</a></li>
+  <li><a href="#sec-ordinal-recommended-reading" id="toc-sec-ordinal-recommended-reading" class="nav-link" data-scroll-target="#sec-ordinal-recommended-reading"><span class="header-section-number">7.13</span> Recommended reading</a></li>
   </ul>
 </nav>
     </div>
@@ -302,7 +298,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-ordinal-intro" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to Ordinal Models</span></span></h1>
+<h1 class="title"><span id="sec-ordinal-intro" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to Ordinal Models</span></span></h1>
 </div>
 
 
@@ -310,18 +306,13 @@ div.csl-indent {
 <div class="quarto-title-meta">
 
     
+  
     
   </div>
   
 
 </header>
 
-<div class="cell">
-
-</div>
-<div class="cell">
-
-</div>
 <section id="sec-ordinal-motivations" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="sec-ordinal-motivations"><span class="header-section-number">7.1</span> Motivations: working with ordinal outcomes</h2>
 <p>Ordinal data are very common in psychological science. Often, we will encounter ordinal data recorded as responses to Likert-style items in which the participant is asked to indicate a response on an ordered scale ranging between two end points <span class="citation" data-cites="bürkner2019 liddell2018">(<a href="references.html#ref-bürkner2019" role="doc-biblioref">Bürkner &amp; Vuorre, 2019</a>; <a href="references.html#ref-liddell2018" role="doc-biblioref">Liddell &amp; Kruschke, 2018</a>)</span>. An example of a Likert question item might be: <em>How well do you think you have understood this text? (Please check one response)</em> where the participant must respond by checking an option, given 5 options ranging from 1 (not well at all) to 5 (very well). The critical characteristics of such responses are that:</p>
@@ -335,12 +326,12 @@ div.csl-indent {
 </section>
 <section id="sec-ordinal-ideas" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="sec-ordinal-ideas"><span class="header-section-number">7.2</span> The key idea to get us started</h2>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -356,7 +347,7 @@ Important
 <div id="fig-latent-normal-splits" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="05-ordinal_files/figure-html/fig-latent-normal-splits-1.png" class="img-fluid figure-img" alt="The figure shows a normal curve, split by dotted lines shown at x-axis points labelled 1-5." width="576"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;7.1: A latent scale on the horizontal axis is divided into intervals or bins divided by thresholds marked by dotted lines. The cumulative normal probability in the intervals is the probability of the ordinal values.</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;7.1: A latent scale on the horizontal axis is divided into intervals or bins divided by thresholds marked by dotted lines. The cumulative normal probability in the intervals is the probability of the ordinal values.</figcaption>
 </figure>
 </div>
 </div>
@@ -403,12 +394,12 @@ Important
 <li><code>How well do you think you have understood this text? (Please check one response)</code></li>
 </ul>
 <p>For each text, in response to this question, participants were asked to click on one option from an array of response options ranging from (1) <code>Not well at all</code> to (9) <code>Extremely well</code>. The data we collected in this element of our studies comprise, clearly, <em>ordinal responses</em>. Thus, we may use these data to address the following research question.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -427,7 +418,7 @@ Note
 <div id="fig-histogram-grid-" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="05-ordinal_files/figure-html/fig-histogram-grid--1.png" class="img-fluid figure-img" alt="The figure presents a grid of histograms indicating the distribution of (x-axis) scores on a range of participant attribute variables. The grid includes histograms of the distributions of: self-rated accuracy; vocabulary (SHIPLEY); health literacy (HLVA); reading strategy (FACTOR3); age (years); gender; education, and ethnicity. The plots indicate: (1.) most self-rated accuracy scores are high (over 6); (2.) many participants with vocabulary scores greater than 30, a few present lower scores; (3.) health literacy scores centered on 8 or some, with lower and higher scores; (4.) a skewed distribution of reading strategy scores, with many around 20-40, and a tail of higher scores; (5.) most participants are 20-40 years of age, some older; (6.) many more female than male participants, very few non-binary reported; (7.) many more participants with higher education than further, very few with secondary; and (8.) many White participants (ONS categories), far fewer Asian or Mixed or Black ethnicity participants." width="1344"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;7.2: Grid of plots showing the distribution of participant attributes. The grid includes histograms of the distributions of: self-rated accuracy; vocabulary (SHIPLEY); health literacy (HLVA); reading strategy (FACTOR3); and age (years). We also see dot plots presenting counts of numbers of participants of different self-reported gender, education, and ethnicity categories.</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;7.2: Grid of plots showing the distribution of participant attributes. The grid includes histograms of the distributions of: self-rated accuracy; vocabulary (SHIPLEY); health literacy (HLVA); reading strategy (FACTOR3); and age (years). We also see dot plots presenting counts of numbers of participants of different self-reported gender, education, and ethnicity categories.</figcaption>
 </figure>
 </div>
 </div>
@@ -481,12 +472,12 @@ Note
 </div>
 <p>Notice that we use <code>col_types = cols(...)</code> to require <code>read_csv()</code> to class some columns as factors.</p>
 <p>Importantly, we ask R to treat the <code>rating</code> variable as a <em>factor</em> with <code>rating = col_factor()</code>.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -518,7 +509,7 @@ Tip
 <div id="fig-rating-dotplots" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="05-ordinal_files/figure-html/fig-rating-dotplots-1.png" class="img-fluid figure-img" alt="The figure presents a dot plot showing the distribution of ratings responses. The plot shows the number of responses recorded for each response option, over all participants and all texts. Points are coloured to distinguish different response options. The plot indicates that most participants rated their understanding very high to most texts, choosing ratings from 5-6 or above." width="624"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;7.3: Dot plot showing the distribution of ratings responses. The Likert-style questions in the surveys asked participants to rate their level of understanding of the texts they saw on a scale from 1 (not well) to 9 (extremely well). The plot shows the number of responses recorded for each response option, over all participants and all texts.</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;7.3: Dot plot showing the distribution of ratings responses. The Likert-style questions in the surveys asked participants to rate their level of understanding of the texts they saw on a scale from 1 (not well) to 9 (extremely well). The plot shows the number of responses recorded for each response option, over all participants and all texts.</figcaption>
 </figure>
 </div>
 </div>
@@ -665,6 +656,19 @@ Tip
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(AGE, SHIPLEY, HLVA, FACTOR3, RDFKGL), </span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                scale, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">.names =</span> <span class="st">"z_{.col}"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: There was 1 warning in `mutate()`.
+ℹ In argument: `across(...)`.
+Caused by warning:
+! The `...` argument of `across()` is deprecated as of dplyr 1.1.0.
+Supply arguments directly to `.fns` through an anonymous function instead.
+
+  # Previously
+  across(a:b, mean, na.rm = TRUE)
+
+  # Now
+  across(a:b, \(x) mean(x, na.rm = TRUE))</code></pre>
+</div>
 </div>
 <p>You can see that in this chunk of code, we are doing a number of things:</p>
 <ol type="1">
@@ -680,7 +684,7 @@ Tip
 <p>Note that the <code>across()</code> function is a useful function for applying a function across multiple column variables <a href="https://dplyr.tidyverse.org/reference/across.html">see information here</a> There is a helpful discussion on how we can do this task <a href="https://stackoverflow.com/questions/62714796/standardize-variables-using-dplyr-r">here</a></p>
 <p>We can then check that we have produced the standardized variables as required.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(health)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(health)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             ResponseId        AGE                     GENDER    
  R_sKW4OJnOlidPxrH:  20   Min.   :18.0   Female           :2900  
@@ -745,12 +749,12 @@ Tip
 <h2 data-number="7.7" class="anchored" data-anchor-id="sec-ordinal-working-models-clm"><span class="header-section-number">7.7</span> Working with Cumulative Link Models in R</h2>
 <p>In our first analysis, we can begin by assuming no random effects. We keep things simple at this point so that we can focus on the key changes in model coding.</p>
 <p>The model is conducted to examine what shapes the variation in <code>rating</code> responses that we see in <a href="#fig-rating-dotplots">Figure&nbsp;<span>7.3</span></a>.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -763,14 +767,14 @@ Note
 <p>In our analysis, the outcome variable is the ordinal response variable <code>rating</code>. The predictors consist of the variables we standardized earlier. We use the <code>clm()</code> function from the <code>{ordinal}</code> library to do the analysis. I will give information in outline here, the interested reader can see more detailed information in <span class="citation" data-cites="christensen2022">Christensen (<a href="references.html#ref-christensen2022" role="doc-biblioref">2022</a>)</span> and <span class="citation" data-cites="christensen2015">Christensen (<a href="references.html#ref-christensen2015" role="doc-biblioref">2015</a>)</span>. You can also find the manual for the <code>{ordinal}</code> library functions <a href="https://cran.r-project.org/web/packages/ordinal/index.html">here</a></p>
 <p>We code the model as follows.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>health.clm <span class="ot">&lt;-</span> <span class="fu">clm</span>(rating <span class="sc">~</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                    </span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                    z_AGE <span class="sc">+</span> z_SHIPLEY <span class="sc">+</span> z_HLVA <span class="sc">+</span> z_FACTOR3 <span class="sc">+</span> z_RDFKGL,</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>                  </span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">Hess =</span> <span class="cn">TRUE</span>, <span class="at">link =</span> <span class="st">"logit"</span>,</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> health)</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(health.clm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>health.clm <span class="ot">&lt;-</span> <span class="fu">clm</span>(rating <span class="sc">~</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>                    </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                    z_AGE <span class="sc">+</span> z_SHIPLEY <span class="sc">+</span> z_HLVA <span class="sc">+</span> z_FACTOR3 <span class="sc">+</span> z_RDFKGL,</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                  </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">Hess =</span> <span class="cn">TRUE</span>, <span class="at">link =</span> <span class="st">"logit"</span>,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> health)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(health.clm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The code works as follows.</p>
 <p>First, we have a chunk of code mostly similar to what we have done before, but changing the function.</p>
@@ -832,12 +836,12 @@ Threshold coefficients:
 <ol start="4" type="1">
 <li>We then get <code>Threshold coefficients:</code> indicating where the model fitted estimates the threshold locations: where the latent scale is cut, corresponding to different rating values.</li>
 </ol>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -859,16 +863,16 @@ Tip
 <p>These features ensure that the data have a <em>multilevel</em> structure and this structure requires us to fit a <em>Cumulative Link Mixed-effects Model</em> (CLMM).</p>
 <p>We keep things simple at this point so that we can focus on the key changes in model coding. We can code a Cumulative Link Mixed-effects Model as follows.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>health.clmm <span class="ot">&lt;-</span> <span class="fu">clmm</span>(rating <span class="sc">~</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                      </span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                      z_AGE <span class="sc">+</span> z_SHIPLEY <span class="sc">+</span> z_HLVA <span class="sc">+</span> z_FACTOR3 <span class="sc">+</span> z_RDFKGL <span class="sc">+</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                      </span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>                      (<span class="dv">1</span><span class="sc">|</span>ResponseId),</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>                    </span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">Hess =</span> <span class="cn">TRUE</span>, <span class="at">link =</span> <span class="st">"logit"</span>,</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">data =</span> health)</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(health.clmm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>health.clmm <span class="ot">&lt;-</span> <span class="fu">clmm</span>(rating <span class="sc">~</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                      </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>                      z_AGE <span class="sc">+</span> z_SHIPLEY <span class="sc">+</span> z_HLVA <span class="sc">+</span> z_FACTOR3 <span class="sc">+</span> z_RDFKGL <span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>                      </span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                      (<span class="dv">1</span><span class="sc">|</span>ResponseId),</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>                    </span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">Hess =</span> <span class="cn">TRUE</span>, <span class="at">link =</span> <span class="st">"logit"</span>,</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">data =</span> health)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(health.clmm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>If you inspect the code chunk, you can see that we have made two changes.</p>
 <p>First, we have changed the function.</p>
@@ -934,15 +938,15 @@ Threshold coefficients:
 <p>It will be helpful for the interpretation of the estimates of the coefficients of these predictor variables if we visualize the predictions we can make, about how <code>rating</code> values vary, given differences in predictor variable values, given our model estimates. We can do this using functions from the <code>{ggeffects}</code> library. You can read more about the <code>{ggeffects}</code> library <a href="https://strengejacke.github.io/ggeffects/index.html">here</a> where you will see a collection of articles explaining what you can do, and why, as well as technical information including some helpful tutorials.</p>
 <p>The basic model prediction coding looks like this.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(health.clmm, <span class="at">terms=</span><span class="st">"z_FACTOR3 [all]"</span>)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(health.clmm, <span class="at">terms=</span><span class="st">"z_FACTOR3 [all]"</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><a href="#fig-rating-clmm-factor3-predictions">Figure&nbsp;<span>7.4</span></a> shows you the marginal effect of variation in the reading strategy attribute, i.e., the effect of differences between individuals in how they score on the <code>FACTOR3</code> measure of reading strategy. Note that the variable is listed as <code>z_FACTOR3</code> because, as you will recall, we standardized numeric predictor variables before entering them in our model.</p>
 <p>These kinds of plots are understood to present what are variously called conditional effects, or adjusted predictions or marginal effects. You can find a discussion of marginal effects in the context of working with the <code>{ggeffects}</code> library <a href="https://strengejacke.github.io/ggeffects/articles/ggeffects.html">here</a> and <a href="https://strengejacke.github.io/ggeffects/articles/introduction_marginal_effects.html">here</a>. You can find an extensive, helpful (with examples) discussion of marginal effects by Andrew Heiss <a href="https://www.andrewheiss.com/blog/2022/05/20/marginalia/">here</a>.</p>
 <p>In short, what we want to do is to take the model coefficient estimates, and generate predictions with these estimates, given different values of the predictor variable, while holding the other predictor variables at some constant or some level (or some series of values).</p>
 <p>If you look at the code chunk, you can see that we first:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(health.clmm, <span class="at">terms=</span><span class="st">"z_FACTOR3 [all]"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(health.clmm, <span class="at">terms=</span><span class="st">"z_FACTOR3 [all]"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>In this line, we use <code>ggpredict()</code> to work with some model information, assuming we previously fitted a model and gave it a name (here, <code>health.clmm</code>).</li>
@@ -959,13 +963,13 @@ Threshold coefficients:
 </ul>
 <p>If you then run the line <code>plot(dat)</code> you can see what this gets us for these kinds of models. <a href="#fig-rating-clmm-factor3-predictions">Figure&nbsp;<span>7.4</span></a> presents a grid of plots showing the model-predicted probabilities that a rating response will have one value for each of the 1-9 rating response values that are possible given the Likert rating scale used in data collection. In the grid, a different plot is shown for each possible response value, indicating how the probability varies that the rating response will take that value.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(health.clmm, <span class="at">terms=</span><span class="st">"z_FACTOR3 [all]"</span>)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(health.clmm, <span class="at">terms=</span><span class="st">"z_FACTOR3 [all]"</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-rating-clmm-factor3-predictions" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="05-ordinal_files/figure-html/fig-rating-clmm-factor3-predictions-1.png" class="img-fluid figure-img" alt="The figure presents a grid of plots showing marginal or conditional -- adjusted prediction values -- predicted ratings and how they vary given variation in values of the standardized reading strategy (FACTOR3) variable. We can see flat lines for plots corresponding to predictions concerning response options 1-4, suggesting little probability that a rating response will take one of these values. We see norml curves for plots corresponding to predictions concerning response options 5-9, suggesting how the probability that a response will take one of these values may rise and then fall, depending on the FACTOR3 score a person has. The plots suggest that for higher FACTOR3 scores the probability increases that a rating response will have a higher value." width="480"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;7.4: A grid of plots showing marginal or conditional predicted probabilities that a rating response will have one value (among the 1-9 rating values possible), indicating how these predicted probabilities vary given variation in values of the standardized reading strategy (FACTOR3) variable.</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;7.4: A grid of plots showing marginal or conditional predicted probabilities that a rating response will have one value (among the 1-9 rating values possible), indicating how these predicted probabilities vary given variation in values of the standardized reading strategy (FACTOR3) variable.</figcaption>
 </figure>
 </div>
 </div>
@@ -975,20 +979,20 @@ Threshold coefficients:
 <p>We can see that the peak of the normal curve, in the case of <code>rating</code> response values <code>5-9</code>, is located at different places on the horizontal axis. Look at each of the plots labelled <code>5-9</code>. Notice how the horizontal location of the curves <em>shifts</em> as <code>z_FACTOR3</code> scores increase. If you go from left to right, i.e.&nbsp;from low to high values of <code>z_FACTOR3</code>, on each plot then you will see that the peak of the curve is located in different places: going from plot <code>5</code> to plot <code>9</code> the peak of the curve moves <em>rightwards</em>. These curves show how the probability that a <code>rating</code> response takes a high value (e.g.&nbsp;<code>9</code> instead of <code>8</code> or <code>8</code> instead of <code>7</code> etc.) is <em>higher</em> for <em>higher</em> values of <code>z_FACTOR3</code>. This idea might be a bit clearer if we draw the plot in a different way.</p>
 <p><a href="#fig-rating-clmm-factor3-predictions-fancy">Figure&nbsp;<span>7.5</span></a> shows the same model predictions but plots the predictions of the way that probability changes, for each <code>rating</code> response, by superimposing the plots for each response value, one on top of the other. I have drawn each probability curve in a different colour, and these colours match those used to present the counts of different response values shown in <a href="#fig-rating-dotplots">Figure&nbsp;<span>7.3</span></a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(health.clmm, <span class="at">terms=</span><span class="st">"z_FACTOR3 [all]"</span>)</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(x, predicted, </span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">colour =</span> response.level)) <span class="sc">+</span> </span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis</span>(<span class="at">discrete=</span><span class="cn">TRUE</span>, <span class="at">option =</span> <span class="st">"mako"</span>) <span class="sc">+</span> </span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Reading strategy (z_FACTOR3)"</span>, <span class="at">y =</span> <span class="st">"Predicted probability of a rating"</span>) <span class="sc">+</span></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">colour =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="st">"Rating"</span>)) <span class="sc">+</span></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(health.clmm, <span class="at">terms=</span><span class="st">"z_FACTOR3 [all]"</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(x, predicted, </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">colour =</span> response.level)) <span class="sc">+</span> </span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis</span>(<span class="at">discrete=</span><span class="cn">TRUE</span>, <span class="at">option =</span> <span class="st">"mako"</span>) <span class="sc">+</span> </span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Reading strategy (z_FACTOR3)"</span>, <span class="at">y =</span> <span class="st">"Predicted probability of a rating"</span>) <span class="sc">+</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">colour =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="st">"Rating"</span>)) <span class="sc">+</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-rating-clmm-factor3-predictions-fancy" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="05-ordinal_files/figure-html/fig-rating-clmm-factor3-predictions-fancy-1.png" class="img-fluid figure-img" alt="The figure presents a plot showing marginal or conditional predicted probabilities that a rating rating will have one value (among the 1-9 rating values possible), indicating how these predicted probabilities vary given variation in values of the standardized reading strategy (FACTOR3) variable. We can see flat lines for plots corresponding to predictions concerning response options 1-4, suggesting little probability that a rating response will take one of these values. We see norml curves for plots corresponding to predictions concerning response options 5-9, suggesting how the probability that a response will take one of these values may rise and then fall, depending on the FACTOR3 score a person has. The plots suggest that for higher FACTOR3 scores the probability increases that a rating response will have a higher value." width="576"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;7.5: A plot showing marginal or conditional predicted probabilities that a rating response will have one value (among the 1-9 rating values possible), indicating how these predicted probabilities vary given variation in values of the standardized reading strategy (FACTOR3) variable</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;7.5: A plot showing marginal or conditional predicted probabilities that a rating response will have one value (among the 1-9 rating values possible), indicating how these predicted probabilities vary given variation in values of the standardized reading strategy (FACTOR3) variable</figcaption>
 </figure>
 </div>
 </div>
@@ -1081,50 +1085,50 @@ Threshold coefficients:
 <p><span class="citation" data-cites="liddell2018">Liddell &amp; Kruschke (<a href="references.html#ref-liddell2018" role="doc-biblioref">2018</a>)</span> present a clear account of the problems associated with treating ordinal data as metric, and explain how we can better account for ordinal data.</p>
 <p><span class="citation" data-cites="bürkner2019">Bürkner &amp; Vuorre (<a href="references.html#ref-bürkner2019" role="doc-biblioref">2019</a>)</span> present a clear tutorial on cumulative and sequential ratio models.</p>
 <p>Both <span class="citation" data-cites="liddell2018">Liddell &amp; Kruschke (<a href="references.html#ref-liddell2018" role="doc-biblioref">2018</a>)</span> and <span class="citation" data-cites="bürkner2019">Bürkner &amp; Vuorre (<a href="references.html#ref-bürkner2019" role="doc-biblioref">2019</a>)</span> work from a Bayesian perspective but the insights are generally applicable.</p>
-<p>Guides to the <code>{ordinal}</code> model functions <code>clm()</code> and <code>clmm()</code> are presented in <span class="citation" data-cites="christensen2022 christensen2015">(<a href="references.html#ref-christensen2022" role="doc-biblioref">Christensen, 2022</a>; <a href="references.html#ref-christensen2015" role="doc-biblioref">Christensen, 2015</a>)</span>.</p>
+<p>Guides to the <code>{ordinal}</code> model functions <code>clm()</code> and <code>clmm()</code> are presented in <span class="citation" data-cites="christensen2022 christensen2015">(<a href="references.html#ref-christensen2015" role="doc-biblioref">Christensen, 2015</a>; <a href="references.html#ref-christensen2022" role="doc-biblioref">Christensen, 2022</a>)</span>.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography" style="display: none">
-<div id="ref-Baayen2008" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-Baayen2008" class="csl-entry" role="listitem">
 Baayen, R. H., Davidson, D. J., &amp; Bates, D. M. (2008). Mixed-effects modeling with crossed random effects for subjects and items. <em>Journal of Memory and Language</em>, <em>59</em>(4), 390–412. <a href="https://doi.org/10.1016/j.jml.2007.12.005">https://doi.org/10.1016/j.jml.2007.12.005</a>
 </div>
-<div id="ref-Barr2013a" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Barr2013a" class="csl-entry" role="listitem">
 Barr, D. J., Levy, R., Scheepers, C., &amp; Tily, H. J. (2013). Random effects structure for confirmatory hypothesis testing: Keep it maximal. <em>Journal of Memory and Language</em>, <em>68</em>, 255–278.
 </div>
-<div id="ref-bates2015parsimonious" class="csl-entry" role="doc-biblioentry">
+<div id="ref-bates2015parsimonious" class="csl-entry" role="listitem">
 Bates, D., Kliegl, R., Vasishth, S., &amp; Baayen, H. (2015). Parsimonious mixed models. <em>arXiv Preprint arXiv:1506.04967</em>.
 </div>
-<div id="ref-bürkner2019" class="csl-entry" role="doc-biblioentry">
+<div id="ref-bürkner2019" class="csl-entry" role="listitem">
 Bürkner, P.-C., &amp; Vuorre, M. (2019). Ordinal Regression Models in Psychology: A Tutorial. <em>Advances in Methods and Practices in Psychological Science</em>, <em>2</em>(1), 77–101. <a href="https://doi.org/10.1177/2515245918823199">https://doi.org/10.1177/2515245918823199</a>
 </div>
-<div id="ref-christensen2022" class="csl-entry" role="doc-biblioentry">
-Christensen, R. H. B. (2022). <em>Ordinal: Regression models for ordinal data</em>. <a href="https://CRAN.R-project.org/package=ordinal">https://CRAN.R-project.org/package=ordinal</a>
-</div>
-<div id="ref-christensen2015" class="csl-entry" role="doc-biblioentry">
+<div id="ref-christensen2015" class="csl-entry" role="listitem">
 Christensen, R. H. B. (2015). <em>Ordinal package for r. Version 3.4.2</em>. 1–22. <a href="http://www.cran.r-project.org/package=ordinal/">http://www.cran.r-project.org/package=ordinal/</a>
 </div>
-<div id="ref-dunlosky2007" class="csl-entry" role="doc-biblioentry">
+<div id="ref-christensen2022" class="csl-entry" role="listitem">
+Christensen, R. H. B. (2022). <em>Ordinal: Regression models for ordinal data</em>. <a href="https://CRAN.R-project.org/package=ordinal">https://CRAN.R-project.org/package=ordinal</a>
+</div>
+<div id="ref-dunlosky2007" class="csl-entry" role="listitem">
 Dunlosky, J., &amp; Lipko, A. R. (2007). Metacomprehension. <em>Current Directions in Psychological Science</em>, <em>16</em>(4), 228–232. <a href="https://doi.org/10.1111/j.1467-8721.2007.00509.x">https://doi.org/10.1111/j.1467-8721.2007.00509.x</a>
 </div>
-<div id="ref-liddell2018" class="csl-entry" role="doc-biblioentry">
+<div id="ref-liddell2018" class="csl-entry" role="listitem">
 Liddell, T. M., &amp; Kruschke, J. K. (2018). Analyzing ordinal data with metric models: What could possibly go wrong? <em>Journal of Experimental Social Psychology</em>, <em>79</em>, 328–348. <a href="https://doi.org/10.1016/j.jesp.2018.08.009">https://doi.org/10.1016/j.jesp.2018.08.009</a>
 </div>
-<div id="ref-matuschek2017" class="csl-entry" role="doc-biblioentry">
+<div id="ref-matuschek2017" class="csl-entry" role="listitem">
 Matuschek, H., Kliegl, R., Vasishth, S., Baayen, H., &amp; Bates, D. (2017). Balancing type i error and power in linear mixed models. <em>Journal of Memory and Language</em>, <em>94</em>, 305–315. <a href="https://doi.org/10.1016/j.jml.2017.01.001">https://doi.org/10.1016/j.jml.2017.01.001</a>
 </div>
-<div id="ref-meteyard2020a" class="csl-entry" role="doc-biblioentry">
+<div id="ref-meteyard2020a" class="csl-entry" role="listitem">
 Meteyard, L., &amp; Davies, R. A. I. (2020). Best practice guidance for linear mixed-effects models in psychological science. <em>Journal of Memory and Language</em>, <em>112</em>, 104092. <a href="https://doi.org/10.1016/j.jml.2020.104092">https://doi.org/10.1016/j.jml.2020.104092</a>
 </div>
-<div id="ref-preston2000" class="csl-entry" role="doc-biblioentry">
+<div id="ref-preston2000" class="csl-entry" role="listitem">
 Preston, C. C., &amp; Colman, A. M. (2000). Optimal number of response categories in rating scales: Reliability, validity, discriminating power, and respondent preferences. <em>Acta Psychologica</em>, <em>104</em>(1), 1–15. <a href="https://doi.org/10.1016/S0001-6918(99)00050-5">https://doi.org/10.1016/S0001-6918(99)00050-5</a>
 </div>
-<div id="ref-ricketts2021" class="csl-entry" role="doc-biblioentry">
+<div id="ref-ricketts2021" class="csl-entry" role="listitem">
 Ricketts, J., Dawson, N., &amp; Davies, R. (2021). The hidden depths of new word knowledge: Using graded measures of orthographic and semantic learning to measure vocabulary acquisition. <em>Learning and Instruction</em>, <em>74</em>, 101468. <a href="https://doi.org/10.1016/j.learninstruc.2021.101468">https://doi.org/10.1016/j.learninstruc.2021.101468</a>
 </div>
-<div id="ref-rodríguez-ferreiro2020a" class="csl-entry" role="doc-biblioentry">
+<div id="ref-rodríguez-ferreiro2020a" class="csl-entry" role="listitem">
 Rodríguez-Ferreiro, J., Aguilera, M., &amp; Davies, R. (2020). Positive schizotypy increases the acceptance of unpresented materials in false memory tasks in non-clinical individuals. <em>Frontiers in Psychology</em>, <em>11</em>. <a href="https://doi.org/10.3389/fpsyg.2020.00262">https://doi.org/10.3389/fpsyg.2020.00262</a>
 </div>
-<div id="ref-shipley2009shipley" class="csl-entry" role="doc-biblioentry">
+<div id="ref-shipley2009shipley" class="csl-entry" role="listitem">
 Shipley, W. C., Gruber, C. P., Martin, T. A., &amp; Klein, A. M. (2009). Shipley-2 manual western psychological services. <em>Western Psychological Services</em>, 65.
 </div>
 </div>
@@ -1158,9 +1162,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1172,7 +1190,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -1208,24 +1243,128 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -1233,7 +1372,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
-    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {

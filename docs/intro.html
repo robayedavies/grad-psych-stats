@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.189">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Psychological data analysis for graduate students - 7&nbsp; Introduction: the why</title>
+<title>Psychological data analysis for graduate students - 8&nbsp; Introduction: the why</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,14 +17,15 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -38,8 +39,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -50,7 +50,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./what.html" rel="next">
-<link href="./04-glmm.html" rel="prev">
+<link href="./05-ordinal.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -76,10 +76,12 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
@@ -88,11 +90,16 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction: the why</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Introduction: the why</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -100,113 +107,136 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Psychological data analysis for graduate students</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">MAKING THE MOST OF R</span>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">MAKING THE MOST OF R</span></span>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./knowledge-ecosystem.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R knowledge</span></a>
+  <a href="./knowledge-ecosystem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R knowledge</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./visualization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data visualization</span></a>
+  <a href="./visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data visualization</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">MODELS</span>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">MODELS</span></span>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-multilevel.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to multilevel data</span></a>
+  <a href="./01-multilevel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to multilevel data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-mixed.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to linear mixed-effects models</span></a>
+  <a href="./02-mixed.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to linear mixed-effects models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-mixed.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Developing linear mixed-effects models</span></a>
+  <a href="./03-mixed.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Developing linear mixed-effects models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-glmm.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to Generalized Linear Mixed-effects Models</span></a>
+  <a href="./04-glmm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to Generalized Linear Mixed-effects Models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-ordinal.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to Ordinal Models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">WRITING ABOUT RESEARCH</span>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">WRITING ABOUT RESEARCH</span></span>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction: the why</span></a>
+  <a href="./intro.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Introduction: the why</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./what.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">What</span></a>
+  <a href="./what.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">What</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./how.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">How</span></a>
+  <a href="./how.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">How</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">END</span>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">END</span></span>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  <a href="./summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#the-key-ideas" id="toc-the-key-ideas" class="nav-link active" data-scroll-target="#the-key-ideas"><span class="toc-section-number">7.1</span>  The key ideas</a></li>
-  <li><a href="#why-what-is-the-motivation-for-the-assignment" id="toc-why-what-is-the-motivation-for-the-assignment" class="nav-link" data-scroll-target="#why-what-is-the-motivation-for-the-assignment"><span class="toc-section-number">7.2</span>  Why: what is the motivation for the assignment?</a>
+  <li><a href="#the-key-ideas" id="toc-the-key-ideas" class="nav-link active" data-scroll-target="#the-key-ideas"><span class="header-section-number">8.1</span> The key ideas</a></li>
+  <li><a href="#why-what-is-the-motivation-for-the-assignment" id="toc-why-what-is-the-motivation-for-the-assignment" class="nav-link" data-scroll-target="#why-what-is-the-motivation-for-the-assignment"><span class="header-section-number">8.2</span> Why: what is the motivation for the assignment?</a>
   <ul class="collapse">
-  <li><a href="#sec-context-replication" id="toc-sec-context-replication" class="nav-link" data-scroll-target="#sec-context-replication"><span class="toc-section-number">7.2.1</span>  The wider context: crisis and revolution</a></li>
-  <li><a href="#the-specific-context-what-we-need-to-look-at-conceptually-and-practically" id="toc-the-specific-context-what-we-need-to-look-at-conceptually-and-practically" class="nav-link" data-scroll-target="#the-specific-context-what-we-need-to-look-at-conceptually-and-practically"><span class="toc-section-number">7.2.2</span>  The specific context: what we need to look at, conceptually and practically</a></li>
-  <li><a href="#multiverse-analyses-multi--what" id="toc-multiverse-analyses-multi--what" class="nav-link" data-scroll-target="#multiverse-analyses-multi--what"><span class="toc-section-number">7.2.3</span>  Multiverse analyses: multi- what?</a></li>
-  <li><a href="#sec-multiverse" id="toc-sec-multiverse" class="nav-link" data-scroll-target="#sec-multiverse"><span class="toc-section-number">7.2.4</span>  Multiverse analyses</a></li>
-  <li><a href="#from-the-multiverse-to-kinds-of-reproducibility" id="toc-from-the-multiverse-to-kinds-of-reproducibility" class="nav-link" data-scroll-target="#from-the-multiverse-to-kinds-of-reproducibility"><span class="toc-section-number">7.2.5</span>  From the multiverse to kinds of reproducibility</a></li>
-  <li><a href="#the-current-state-of-the-match-between-open-science-ideas-and-practices" id="toc-the-current-state-of-the-match-between-open-science-ideas-and-practices" class="nav-link" data-scroll-target="#the-current-state-of-the-match-between-open-science-ideas-and-practices"><span class="toc-section-number">7.2.6</span>  The current state of the match between open science ideas and practices</a></li>
+  <li><a href="#sec-context-replication" id="toc-sec-context-replication" class="nav-link" data-scroll-target="#sec-context-replication"><span class="header-section-number">8.2.1</span> The wider context: crisis and revolution</a></li>
+  <li><a href="#the-specific-context-what-we-need-to-look-at-conceptually-and-practically" id="toc-the-specific-context-what-we-need-to-look-at-conceptually-and-practically" class="nav-link" data-scroll-target="#the-specific-context-what-we-need-to-look-at-conceptually-and-practically"><span class="header-section-number">8.2.2</span> The specific context: what we need to look at, conceptually and practically</a></li>
+  <li><a href="#multiverse-analyses-multi--what" id="toc-multiverse-analyses-multi--what" class="nav-link" data-scroll-target="#multiverse-analyses-multi--what"><span class="header-section-number">8.2.3</span> Multiverse analyses: multi- what?</a></li>
+  <li><a href="#sec-multiverse" id="toc-sec-multiverse" class="nav-link" data-scroll-target="#sec-multiverse"><span class="header-section-number">8.2.4</span> Multiverse analyses</a></li>
+  <li><a href="#from-the-multiverse-to-kinds-of-reproducibility" id="toc-from-the-multiverse-to-kinds-of-reproducibility" class="nav-link" data-scroll-target="#from-the-multiverse-to-kinds-of-reproducibility"><span class="header-section-number">8.2.5</span> From the multiverse to kinds of reproducibility</a></li>
+  <li><a href="#the-current-state-of-the-match-between-open-science-ideas-and-practices" id="toc-the-current-state-of-the-match-between-open-science-ideas-and-practices" class="nav-link" data-scroll-target="#the-current-state-of-the-match-between-open-science-ideas-and-practices"><span class="header-section-number">8.2.6</span> The current state of the match between open science ideas and practices</a></li>
   </ul></li>
-  <li><a href="#this-is-why" id="toc-this-is-why" class="nav-link" data-scroll-target="#this-is-why"><span class="toc-section-number">7.3</span>  This is why</a>
+  <li><a href="#this-is-why" id="toc-this-is-why" class="nav-link" data-scroll-target="#this-is-why"><span class="header-section-number">8.3</span> This is why</a>
   <ul class="collapse">
-  <li><a href="#summary-this-is-why" id="toc-summary-this-is-why" class="nav-link" data-scroll-target="#summary-this-is-why"><span class="toc-section-number">7.3.1</span>  Summary: this is why</a></li>
+  <li><a href="#summary-this-is-why" id="toc-summary-this-is-why" class="nav-link" data-scroll-target="#summary-this-is-why"><span class="header-section-number">8.3.1</span> Summary: this is why</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -216,7 +246,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-report-intro-why" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction: the why</span></span></h1>
+<h1 class="title"><span id="sec-report-intro-why" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Introduction: the why</span></span></h1>
 </div>
 
 
@@ -224,6 +254,7 @@ div.csl-indent {
 <div class="quarto-title-meta">
 
     
+  
     
   </div>
   
@@ -240,27 +271,27 @@ div.csl-indent {
 <li>What do we expect students to do?</li>
 </ul>
 <p>It is going to appear, at first, that I am going a <em>long</em> way away from telling you what you need to do for the assignment. I hope you will agree that the discussion that follows is worth your time in reading it. It will help you to understand <em>why</em> we are asking you to do the assignment, and <em>why</em> we are looking for what we are looking for. It will help you to understand <em>how</em> this work will aid your development. And it will help to show <em>how</em> doing the assignment furnishes the opportunity for research experience that will help you later in your working life.</p>
-<p>For those who are more eager to start the work, here are the links to the what information in <a href="what.html">in Chapter&nbsp;<span>8</span></a> and to the how information <a href="how.html">in Chapter&nbsp;<span>9</span></a>.</p>
-<section id="the-key-ideas" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="the-key-ideas"><span class="header-section-number">7.1</span> The key ideas</h2>
+<p>For those who are more eager to start the work, here are the links to the what information in <a href="what.html">in Chapter&nbsp;<span>9</span></a> and to the how information <a href="how.html">in Chapter&nbsp;<span>10</span></a>.</p>
+<section id="the-key-ideas" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="the-key-ideas"><span class="header-section-number">8.1</span> The key ideas</h2>
 <p>There are two ideas motivating our approach. It will be helpful to you if I sketch them out early, here. We can demonstrate the usefulness of these ideas as we progress through our work.</p>
 <p>The first key idea is expressed clearly in sociological discussions of science. This is that there is a difference between science “…being done, science in the making, and science already done, a finished product …” [<span class="citation" data-cites="bourdieu2004">Bourdieu (<a href="references.html#ref-bourdieu2004" role="doc-biblioref">2004</a>)</span>; p.2]. The awareness we want to develop is that there are two things: there is the story that may be presented in a textbook or in a lecture about scientific work or scientific claims; and there is the work we do in practice, as we develop graduate skills, and as we exercise those skills professionally in the workplace.</p>
 <p>The second key idea connects to the first. This idea is that reported analyses are not <em>necessary</em> or <em>sufficient</em> to the data or the question. What does this mean? It means that the same data can reasonably be analysed in different ways. There is no <em>necessary</em> way to analyse some data though there may be conventions or normal practices <span class="citation" data-cites="kuhn1970">(<a href="references.html#ref-kuhn1970" role="doc-biblioref">Kuhn, 1970</a>)</span>. It means that it is unlikely that any one analysis will do all the work that could be done (a sufficiency) to get you from your data to useful or reasonable answers to your questions.</p>
 <p>These ideas may be unsettling but they are realistic. Stating them will better prepare you for professional work. In the workplace, the accuracy of these ideas will emerge when you see how a team in any sector (health, marketing …) gets from its data to its product. If we talk about the ideas now, we can get you ready for dealing with the practical and the ethical concerns you will confront when that happens.</p>
 <p>We will begin by discussing psychological research, and research <em>about</em> psychological research, to answer the question: <strong>Why: what is the motivation for the assignment?</strong> We will then move to answering the <strong>what</strong> and the <strong>how</strong> questions.</p>
 </section>
-<section id="why-what-is-the-motivation-for-the-assignment" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="why-what-is-the-motivation-for-the-assignment"><span class="header-section-number">7.2</span> Why: what is the motivation for the assignment?</h2>
-<section id="sec-context-replication" class="level3" data-number="7.2.1">
-<h3 data-number="7.2.1" class="anchored" data-anchor-id="sec-context-replication"><span class="header-section-number">7.2.1</span> The wider context: crisis and revolution</h3>
+<section id="why-what-is-the-motivation-for-the-assignment" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="why-what-is-the-motivation-for-the-assignment"><span class="header-section-number">8.2</span> Why: what is the motivation for the assignment?</h2>
+<section id="sec-context-replication" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="sec-context-replication"><span class="header-section-number">8.2.1</span> The wider context: crisis and revolution</h3>
 <p>We are here because we are interested in humans and human behaviour, and because we are interested in scientific methods of making sense of these things. Some of us are aware that science (including psychological science) has undergone a rolling series of crises: the replicability or replication crisis <span class="citation" data-cites="Pashler2012a Pashler2012b">(<a href="references.html#ref-Pashler2012a" role="doc-biblioref">Pashler &amp; Harris, 2012</a>; <a href="references.html#ref-Pashler2012b" role="doc-biblioref">Pashler &amp; Wagenmakers, 2012</a>)</span>; the statistical crisis <span class="citation" data-cites="gelman2014a">(<a href="references.html#ref-gelman2014a" role="doc-biblioref">A. Gelman &amp; Loken, 2014b</a>)</span>; and the generalizability crisis <span class="citation" data-cites="yarkoni2022">(<a href="references.html#ref-yarkoni2022" role="doc-biblioref">Yarkoni, 2022</a>)</span>. And that science is undergoing a response to these crises, evidenced in the advocacy of pre-registration <span class="citation" data-cites="nosek2018 nosek2019prereg">(<a href="references.html#ref-nosek2018" role="doc-biblioref">Nosek et al., 2018</a>, <a href="references.html#ref-nosek2019prereg" role="doc-biblioref">2019</a>)</span>, and of registered reports <span class="citation" data-cites="nosek2014">(<a href="references.html#ref-nosek2014" role="doc-biblioref">Nosek &amp; Lakens, 2014</a>)</span>, the use of open science badges (e.g., <a href="https://www.psychologicalscience.org/publications/badges" class="external" target="_blank">for the journal <em>Psychological Science</em></a>), the completion of large-scale replication studies <span class="citation" data-cites="aarts2015">(<a href="references.html#ref-aarts2015" role="doc-biblioref">Aarts et al., 2015</a>)</span>, and the identification of open science principles <span class="citation" data-cites="munafò2017">(<a href="references.html#ref-munafò2017" role="doc-biblioref">Munafò et al., 2017</a>)</span>. We may usefully refer, collectively, to the crises and the responses, as the <em>credibility revolution</em> <span class="citation" data-cites="vazire2018">(<a href="references.html#ref-vazire2018" role="doc-biblioref">Vazire, 2018</a>)</span></p>
 <p>We could teach a course on this (in Lancaster, we do) but I must be brief, here, and invite you to follow the references, if you are interested. Before going on, I want to call your attention to the fact that important elements of the hard work in trying to make science work better has been led by PhD students and by junior researchers <span class="citation" data-cites="herndon2014">(e.g., <a href="references.html#ref-herndon2014" role="doc-biblioref">Herndon et al., 2014</a>)</span>. Graduate students may, at first, assume that the fact that a research article has been published in a journal means the findings that are reported must be <em>true</em>. Most of the time, some educated skepticism is more appropriate. An important driver of the realization that there are problems evident in the literature, and that there are changes we can make to improve practice, comes from independent <strong>post-publication review work</strong> exposing the problems in published work (see, e.g., <a href="https://statmodeling.stat.columbia.edu/2016/12/16/an-efficiency-argument-for-post-publication-review/" class="external" target="_blank">this account by Andrew Gelman</a>)</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -274,8 +305,8 @@ Tip
 <p>This discussion could (again) be unsettling. This list of problems could make you angry or sad. I, like others, think it is exciting. It is exciting because these problems have probably existed for a long time <span class="citation" data-cites="cohen1962 meehl1967">(e.g., <a href="references.html#ref-cohen1962" role="doc-biblioref">Cohen, 1962</a>; <a href="references.html#ref-meehl1967" role="doc-biblioref">Meehl, 1967</a>)</span> and now, having identified the problems, we can hope to do something about it. It is exciting because if you care about people, the study of people, or the applications in clinical, education and other domains of the results of the study of people, then you might hope to see better, more useful, science in the future <span class="citation" data-cites="vazire2018">(<a href="references.html#ref-vazire2018" role="doc-biblioref">Vazire, 2018</a>)</span>.</p>
 <p>As someone who teaches graduate and undergraduate students, I want to help you to <em>be the change you want to see in the world</em> <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. We cannot solve every problem but we can try to do better those things that are within our reach. I am going to end this introduction with a brief discussion of some ideas we can use to guide our better practices.</p>
 </section>
-<section id="the-specific-context-what-we-need-to-look-at-conceptually-and-practically" class="level3" data-number="7.2.2">
-<h3 data-number="7.2.2" class="anchored" data-anchor-id="the-specific-context-what-we-need-to-look-at-conceptually-and-practically"><span class="header-section-number">7.2.2</span> The specific context: what we need to look at, conceptually and practically</h3>
+<section id="the-specific-context-what-we-need-to-look-at-conceptually-and-practically" class="level3" data-number="8.2.2">
+<h3 data-number="8.2.2" class="anchored" data-anchor-id="the-specific-context-what-we-need-to-look-at-conceptually-and-practically"><span class="header-section-number">8.2.2</span> The specific context: what we need to look at, conceptually and practically</h3>
 <p>In this course, for this assignment, we are going to focus on:</p>
 <ol type="1">
 <li>multiverse analyses</li>
@@ -290,17 +321,17 @@ Tip
 <li>variation in results</li>
 </ol>
 </section>
-<section id="multiverse-analyses-multi--what" class="level3" data-number="7.2.3">
-<h3 data-number="7.2.3" class="anchored" data-anchor-id="multiverse-analyses-multi--what"><span class="header-section-number">7.2.3</span> Multiverse analyses: multi- what?</h3>
-<section id="sec-pipeline" class="level4" data-number="7.2.3.1">
-<h4 data-number="7.2.3.1" class="anchored" data-anchor-id="sec-pipeline"><span class="header-section-number">7.2.3.1</span> A first useful metaphor: the pipeline</h4>
-<p>I am going to link this discussion to a metaphor (see Figure <a href="#fig-pipeline">Figure&nbsp;<span>7.1</span></a>) or a description you will find useful: <strong>the data analysis pipeline</strong> or <strong>workflow</strong>.</p>
+<section id="multiverse-analyses-multi--what" class="level3" data-number="8.2.3">
+<h3 data-number="8.2.3" class="anchored" data-anchor-id="multiverse-analyses-multi--what"><span class="header-section-number">8.2.3</span> Multiverse analyses: multi- what?</h3>
+<section id="sec-pipeline" class="level4" data-number="8.2.3.1">
+<h4 data-number="8.2.3.1" class="anchored" data-anchor-id="sec-pipeline"><span class="header-section-number">8.2.3.1</span> A first useful metaphor: the pipeline</h4>
+<p>I am going to link this discussion to a metaphor (see Figure <a href="#fig-pipeline">Figure&nbsp;<span>8.1</span></a>) or a description you will find useful: <strong>the data analysis pipeline</strong> or <strong>workflow</strong>.</p>
 <div class="cell" data-fig-width="5">
 <div class="cell-output-display">
 <div id="fig-pipeline" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p>
-<svg width="480" height="480" viewbox="0.00 0.00 267.00 264.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<div>
+<svg width="480" height="480" viewbox="0.00 0.00 267.00 264.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 260)">
 <title>
 Q
@@ -379,8 +410,8 @@ nd_3-&gt;nd_4
 </title>
 <path fill="none" stroke="black" d="M66.61,-73.31C76.86,-64.33 89.56,-53.19 100.75,-43.39"></path> <polygon fill="black" stroke="black" points="103.36,-45.75 108.57,-36.53 98.75,-40.49 103.36,-45.75"></polygon> </g> </g>
 </svg>
-</p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;7.1: The data analysis pipeline or workflow</figcaption><p></p>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;8.1: The data analysis pipeline or workflow</figcaption>
 </figure>
 </div>
 </div>
@@ -394,12 +425,12 @@ nd_3-&gt;nd_4
 <li>present or report our findings.</li>
 </ul>
 <p>We introduce the idea that your analysis work will flow through the stages of a <em>pipeline</em> from getting the data to presenting your findings because, next, we will examine how pipelines can <em>multiply</em>.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -410,16 +441,16 @@ Tip
 </div>
 </div>
 </section>
-<section id="sec-forking" class="level4" data-number="7.2.3.2">
-<h4 data-number="7.2.3.2" class="anchored" data-anchor-id="sec-forking"><span class="header-section-number">7.2.3.2</span> A second useful metaphor: the garden of forking paths</h4>
-<p>What researchers have come to realize: because we started looking … The open secret that has been well kept <span class="citation" data-cites="bourdieu2004">(<a href="references.html#ref-bourdieu2004" role="doc-biblioref">Bourdieu, 2004</a>)</span>: because everybody who does science knows about it, yet we may not teach it; and because we do not write textbooks revealing it … Is that at each stage in the analysis workflow, we can and do make choices where multiple alternative choices are possible. <span class="citation" data-cites="gelman2014">A. Gelman &amp; Loken (<a href="references.html#ref-gelman2014" role="doc-biblioref">2014a</a>)</span> capture this insight as the “garden of forking paths”<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> (see <a href="#fig-forking">Figure&nbsp;<span>7.2</span></a>).</p>
+<section id="sec-forking" class="level4" data-number="8.2.3.2">
+<h4 data-number="8.2.3.2" class="anchored" data-anchor-id="sec-forking"><span class="header-section-number">8.2.3.2</span> A second useful metaphor: the garden of forking paths</h4>
+<p>What researchers have come to realize: because we started looking … The open secret that has been well kept <span class="citation" data-cites="bourdieu2004">(<a href="references.html#ref-bourdieu2004" role="doc-biblioref">Bourdieu, 2004</a>)</span>: because everybody who does science knows about it, yet we may not teach it; and because we do not write textbooks revealing it … Is that at each stage in the analysis workflow, we can and do make choices where multiple alternative choices are possible. <span class="citation" data-cites="gelman2014">A. Gelman &amp; Loken (<a href="references.html#ref-gelman2014" role="doc-biblioref">2014a</a>)</span> capture this insight as the “garden of forking paths”<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> (see <a href="#fig-forking">Figure&nbsp;<span>8.2</span></a>).</p>
 <p>The general idea is that it is possible to have <strong>multiple potential different paths</strong> from the data to the results. The results will vary, depending on the path we take. In an analysis, we could take multiple different paths simply because at point A we decide to do B1, B2 or B3, maybe we choose B1, and then at point B1, we may decide to do C1, C2 or C3. Here, maybe we have our raw data at point A. Maybe we could do one of two different things when we tidy the data: action B1 or B2. Then, when we have our tidy data, maybe we can choose to do our analysis in one of six ways. Where we are at each step <em>depends</em> on the choices we made at the previous steps.</p>
 <div class="cell" data-fig-width="5">
 <div class="cell-output-display">
 <div id="fig-forking" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p>
-<svg width="480" height="480" viewbox="0.00 0.00 422.00 188.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<div>
+<svg width="480" height="480" viewbox="0.00 0.00 422.00 188.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 184)">
 <title>
 D
@@ -494,20 +525,20 @@ B2-&gt;C6
 </title>
 <path fill="none" stroke="black" d="M297.81,-76.81C315,-65.67 340.62,-49.06 359.99,-36.5"></path> <polygon fill="black" stroke="black" points="361.92,-39.43 368.4,-31.05 358.11,-33.56 361.92,-39.43"></polygon> </g> </g>
 </svg>
-</p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;7.2: Forking paths in data analysis</figcaption><p></p>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;8.2: Forking paths in data analysis</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>In the end, it may appear to us that we took one path or that only one path was possible. When we report our analysis, in a dissertation or in a published journal article, we may report the analysis <strong>as if only one analysis path had been considered</strong>. But, critically, our findings may depend on the choices we made and this variation in results may be hidden from view.</p>
 <p>I am talking about forking paths because the <em>multiplicity</em> of paths has consequences, and we discuss these next.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -519,8 +550,8 @@ Tip
 </div>
 </section>
 </section>
-<section id="sec-multiverse" class="level3" data-number="7.2.4">
-<h3 data-number="7.2.4" class="anchored" data-anchor-id="sec-multiverse"><span class="header-section-number">7.2.4</span> Multiverse analyses</h3>
+<section id="sec-multiverse" class="level3" data-number="8.2.4">
+<h3 data-number="8.2.4" class="anchored" data-anchor-id="sec-multiverse"><span class="header-section-number">8.2.4</span> Multiverse analyses</h3>
 <p>I am going to discuss, now, what are commonly called <em>multiverse analyses</em>. Psychologists use this term, having been introduced to it in an influential paper by <span class="citation" data-cites="steegen2016">Steegen et al. (<a href="references.html#ref-steegen2016" role="doc-biblioref">2016a</a>)</span>, but it comes from theoretical physics (<a href="https://en.wikipedia.org/wiki/Multiverse" class="external" target="_blank">take a look at wikipedia</a>).</p>
 <p>I explain this because I do not want you to worry. The ideas themselves are within your grasp whatever your background in psychology or elsewhere. It is the implications for our data analysis practices that are <em>challenging</em>. They are challenging because what we discuss should increase your skepticism about the results you encounter in published papers. And they are challenging because they <em>reveal your freedom</em> to question whether published authors could have done their analysis in a different way.</p>
 <p>We are going to look at:</p>
@@ -528,12 +559,12 @@ Tip
 <li>dataset construction</li>
 <li>analysis choices</li>
 </ol>
-<section id="the-link-between-the-credibility-revolution-and-the-multiverse" class="level4" data-number="7.2.4.1">
-<h4 data-number="7.2.4.1" class="anchored" data-anchor-id="the-link-between-the-credibility-revolution-and-the-multiverse"><span class="header-section-number">7.2.4.1</span> The link between the credibility revolution and the multiverse</h4>
+<section id="the-link-between-the-credibility-revolution-and-the-multiverse" class="level4" data-number="8.2.4.1">
+<h4 data-number="8.2.4.1" class="anchored" data-anchor-id="the-link-between-the-credibility-revolution-and-the-multiverse"><span class="header-section-number">8.2.4.1</span> The link between the credibility revolution and the multiverse</h4>
 <p>In first discussing the wider context (of crisis and revolution), then discussing the specific context (of multiverses and, in the following, of reproducibility), I should be clear about <strong>the link between the two things</strong>. The finding that some results may not be supported by the evidence is probably due to a mix of causes. But one of those causes will be the combination of uncertainty over data processing or the uncertainty over analysis methods revealed in multiverse analyses, as we see next, combined with the limitations of data and code sharing, and the incompleteness of results reporting (as we see later).</p>
 </section>
-<section id="sec-multiversedata" class="level4" data-number="7.2.4.2">
-<h4 data-number="7.2.4.2" class="anchored" data-anchor-id="sec-multiversedata"><span class="header-section-number">7.2.4.2</span> The data multiverse</h4>
+<section id="sec-multiversedata" class="level4" data-number="8.2.4.2">
+<h4 data-number="8.2.4.2" class="anchored" data-anchor-id="sec-multiversedata"><span class="header-section-number">8.2.4.2</span> The data multiverse</h4>
 <p>When you collect or access data for a research study, the complete raw dataset you receive is almost never the complete dataset you analyze or whose analysis you report. This is not a story about deliberately cheating. It is a story about the normal practice of science <span class="citation" data-cites="kuhn1970">(<a href="references.html#ref-kuhn1970" role="doc-biblioref">Kuhn, 1970</a>)</span>.</p>
 <p>Picture some common scenarios. You did a survey, you got responses from a 100 participants on 10 questions, and you asked people to report their education, ethnicity and gender. You did an experimental study, you tested two groups of 50 people each in 100 trials (imagine a common task like the Stroop test), and you observed the accuracy and the timing of their responses. You tested 100 children, 20 children in each of five different schools, on a range of educational ability measures.</p>
 <p>In these scenarios, the psychologist or the analyst of behavioural data <em>must</em> process their data. In doing so, you will ask yourself a series of questions like:</p>
@@ -568,12 +599,12 @@ Tip
 <li>Develop more complete and precise theory for why some processing options are better than others.</li>
 </ol>
 <p>But you will be asking yourself: <strong>what do I need to think about, for the assignment?</strong></p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -585,19 +616,19 @@ Tip
 </div>
 </div>
 </section>
-<section id="sec-multiverseanalysis" class="level4" data-number="7.2.4.3">
-<h4 data-number="7.2.4.3" class="anchored" data-anchor-id="sec-multiverseanalysis"><span class="header-section-number">7.2.4.3</span> Analysis multiverses</h4>
+<section id="sec-multiverseanalysis" class="level4" data-number="8.2.4.3">
+<h4 data-number="8.2.4.3" class="anchored" data-anchor-id="sec-multiverseanalysis"><span class="header-section-number">8.2.4.3</span> Analysis multiverses</h4>
 <p>Even if we begin with the same research question and, critically, the <em>same dataset</em>, the results of a series of studies show that different researchers will often (reasonably) make <em>different choices about the analysis</em> they do to answer the research question. We often call these studies (analysis or model) <strong>multiverse</strong> studies. In these studies, we see variation in analysis and this variation is also associated with variation in results.</p>
 <p>An influential example, in psychology, is reported by Silberzahn and colleagues <span class="citation" data-cites="silberzahn2015 silberzahn2017">(<a href="references.html#ref-silberzahn2017" role="doc-biblioref">Silberzahn et al., 2017</a>; <a href="references.html#ref-silberzahn2015" role="doc-biblioref">Silberzahn &amp; Uhlmann, 2015</a>)</span> who asked 29 teams of researchers to answer the same question (“Are (soccer) referees more likely to give red cards to players with dark skin than to players with light skin?”) with the same dataset (data about referee decisions in football league games). The teams made their own decisions about how to answer the question in doing the analysis. The teams shared their plans, and commented on each others’ ideas. The discussion did not lead to a consensus about what analysis approach is best. In the end, the different teams did different analyses and, critically, the <strong>different analyses had different results</strong>. The results varied in whether the test of the effect of players skin colour (on whether red cards were given) was significant or not, and on the strength of the estimated association between the darkness of skin colour (lighter to darker) and the chances (low to high) of getting a red card.</p>
 <p>There have now been a series of multiverse or multi-analyst studies which demonstrate that, under certain conditions, different researchers may adopt different analysis approaches – which will have <em>different results</em> – in answering the same research question with the same data. This demonstration has been repeated in studies in health, medicine, psychology, neuoscience, and sociology, among other research fields (e.g., <span class="citation" data-cites="parsons">Parsons (<a href="references.html#ref-parsons" role="doc-biblioref">n.d.</a>)</span>; <span class="citation" data-cites="breznau2022">Breznau et al. (<a href="references.html#ref-breznau2022" role="doc-biblioref">2022</a>)</span>; <span class="citation" data-cites="klau">Klau et al. (<a href="references.html#ref-klau" role="doc-biblioref">n.d.</a>)</span>; <span class="citation" data-cites="klau2021">Klau et al. (<a href="references.html#ref-klau2021" role="doc-biblioref">2021</a>)</span>; <span class="citation" data-cites="wessel2020multiverse">Wessel et al. (<a href="references.html#ref-wessel2020multiverse" role="doc-biblioref">2020</a>)</span>; <span class="citation" data-cites="poline2006">Poline et al. (<a href="references.html#ref-poline2006" role="doc-biblioref">2006</a>)</span>; <span class="citation" data-cites="maier-hein2017">Maier-Hein et al. (<a href="references.html#ref-maier-hein2017" role="doc-biblioref">2017</a>)</span>; <span class="citation" data-cites="starns2019">Starns et al. (<a href="references.html#ref-starns2019" role="doc-biblioref">2019</a>)</span>; <span class="citation" data-cites="fillard2011">Fillard et al. (<a href="references.html#ref-fillard2011" role="doc-biblioref">2011</a>)</span>; <span class="citation" data-cites="dutilh2019">Dutilh et al. (<a href="references.html#ref-dutilh2019" role="doc-biblioref">2019</a>)</span>; <span class="citation" data-cites="salganik2020">Salganik et al. (<a href="references.html#ref-salganik2020" role="doc-biblioref">2020</a>)</span>; <span class="citation" data-cites="bastiaansen2020">Bastiaansen et al. (<a href="references.html#ref-bastiaansen2020" role="doc-biblioref">2020</a>)</span>; <span class="citation" data-cites="botvinik-nezer2020">Botvinik-Nezer et al. (<a href="references.html#ref-botvinik-nezer2020" role="doc-biblioref">2020</a>)</span>; <span class="citation" data-cites="schweinsberg2021">Schweinsberg et al. (<a href="references.html#ref-schweinsberg2021" role="doc-biblioref">2021</a>)</span>; <span class="citation" data-cites="patel2015">Patel et al. (<a href="references.html#ref-patel2015" role="doc-biblioref">2015</a>)</span>; see, for reviews, and some helpful guidance, <span class="citation" data-cites="aczel2021">Aczel et al. (<a href="references.html#ref-aczel2021" role="doc-biblioref">2021</a>)</span>; <span class="citation" data-cites="delgiudice2021">Del Giudice &amp; Gangestad (<a href="references.html#ref-delgiudice2021" role="doc-biblioref">2021</a>)</span>; <span class="citation" data-cites="hoffmann">Hoffmann et al. (<a href="references.html#ref-hoffmann" role="doc-biblioref">n.d.</a>)</span>; <span class="citation" data-cites="wagenmakers2022">Wagenmakers et al. (<a href="references.html#ref-wagenmakers2022" role="doc-biblioref">2022</a>)</span>).</p>
 <p>In these studies, we typically see variation in how psychological constructs are operationalized (e.g., how do we measure or code for social status?), how data are processed or datasets constructed (as in <span class="citation" data-cites="steegen2016a">Steegen et al. (<a href="references.html#ref-steegen2016a" role="doc-biblioref">2016b</a>)</span>), plus variation in <em>what</em> statistical techniques are used, and in <em>how</em> those techniques are used. This variation can be understood to reflect kinds of <strong>uncertainty</strong> <span class="citation" data-cites="klau klau2021">(<a href="references.html#ref-klau" role="doc-biblioref">Klau et al., n.d.</a>; <a href="references.html#ref-klau2021" role="doc-biblioref">Klau et al., 2021</a>)</span>: uncertainty about how to process data, and uncertainty about the model or methods we should use to test or estimate effects. Further research makes it clear that we should be aware, if we are not already, of the variation in results that can be expected because different researchers may choose to design studies, and construct stimulus materials, in different ways given the same research hypothesis information <span class="citation" data-cites="landy2020a">(<a href="references.html#ref-landy2020a" role="doc-biblioref">Landy et al., 2020</a>)</span>.</p>
 <p>But you will be asking yourself: <strong>what do I need to think about, for the assignment?</strong></p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -609,8 +640,8 @@ Tip
 </div>
 </div>
 </section>
-<section id="what-can-we-conclude-the-story-so-far" class="level4" data-number="7.2.4.4">
-<h4 data-number="7.2.4.4" class="anchored" data-anchor-id="what-can-we-conclude-the-story-so-far"><span class="header-section-number">7.2.4.4</span> What can we conclude – the story so far?</h4>
+<section id="what-can-we-conclude-the-story-so-far" class="level4" data-number="8.2.4.4">
+<h4 data-number="8.2.4.4" class="anchored" data-anchor-id="what-can-we-conclude-the-story-so-far"><span class="header-section-number">8.2.4.4</span> What can we conclude – the story so far?</h4>
 <p>This is a good place to look at what we have discussed, and present an evaluation of the story so far.</p>
 <p>This is not a story where everybody or nobody is right or where everything or nothing is true <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Instead, we can be guided by the advice <span class="citation" data-cites="meehl1967 scheel2022 steegen2016">(<a href="references.html#ref-meehl1967" role="doc-biblioref">Meehl, 1967</a>; <a href="references.html#ref-scheel2022" role="doc-biblioref">Scheel, 2022</a>; <a href="references.html#ref-steegen2016" role="doc-biblioref">Steegen et al., 2016a</a>)</span> that we should (1.) seek better and more complete theorizing about the constructs of interest and how we measure them, and (2.) seek more complete and more precise theory so that some options are theoretically superior than others, and should be preferred, when constructing datasets or specifying analysis methods.</p>
 <p>Not all research questions and not all hypothesis information will allow an equally wide variety of potential reasonable approaches to the analysis. As Paul Meehl argued a long time ago <span class="citation" data-cites="meehl1967 meehl1978">(<a href="references.html#ref-meehl1967" role="doc-biblioref">Meehl, 1967</a>, <a href="references.html#ref-meehl1978" role="doc-biblioref">1978</a>)</span>, and researchers like Anne Scheel <span class="citation" data-cites="scheel2021 scheel2022">(<a href="references.html#ref-scheel2021" role="doc-biblioref">Scheel et al., 2021</a>; <a href="references.html#ref-scheel2022" role="doc-biblioref">Scheel, 2022</a>)</span> argued more recently, the complexity of the thing we study – people, and what they do – and the still early development of our understanding of this thing, mean that what we <em>want</em> but what we do not see, in psychology, are scientifically productive tests of <em>falsifiable theories</em>. (See, consistent with this perspective, discussions by <span class="citation" data-cites="auspurg2021">Auspurg &amp; Brüderl (<a href="references.html#ref-auspurg2021" role="doc-biblioref">2021</a>)</span> and by <span class="citation" data-cites="delgiudice2021">Del Giudice &amp; Gangestad (<a href="references.html#ref-delgiudice2021" role="doc-biblioref">2021</a>)</span> about the range of analysis possibilities that may or may not be allowed, in multiverse analyses, by more or less clear research questions or well-developed causal theories.) Our concern should not so much be with being able to do statistical analysis, or with finding significant or not significant results. It would be more useful to do analyses to test concrete, inflexible, precise predictions that <em>can be wrong</em>.</p>
@@ -618,12 +649,12 @@ Tip
 <p>Not all alternates, at a given point of choosing, in the data analysis workflow, will have equal impact. Work by Young <span class="citation" data-cites="young2017 young2018">(<a href="references.html#ref-young2018" role="doc-biblioref">Young, 2018</a>; <a href="references.html#ref-young2017" role="doc-biblioref">Young &amp; Holsteen, 2017</a>)</span> indicates that if we deliberately examine the impact of method or model uncertainty, over different sets of possible choices — about what variables or what observations we include in an analysis, for example — we may find that some results are robust to an array of different options, while other results are highly susceptible to different choices. This work suggests another way in which uncertainty about methods or variation in results can be turned into progress in understanding the phenomena that interest us: through systematic, informed, interrogation of the ways that results can vary.</p>
 <p>In general, in science, the acceptance of research findings must always be negotiated <span class="citation" data-cites="bourdieu2004">(<a href="references.html#ref-bourdieu2004" role="doc-biblioref">Bourdieu, 2004</a>)</span>. Here, we see that the grounds of negotiation should often include an analysis of the impact on the value of evidence of the different analysis approaches that researchers can or do apply to the data that underly that evidence.</p>
 <p>But you will be asking yourself: <strong>what do I need to think about, for the assignment?</strong></p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -643,8 +674,8 @@ Tip
 </ol>
 </section>
 </section>
-<section id="from-the-multiverse-to-kinds-of-reproducibility" class="level3" data-number="7.2.5">
-<h3 data-number="7.2.5" class="anchored" data-anchor-id="from-the-multiverse-to-kinds-of-reproducibility"><span class="header-section-number">7.2.5</span> From the multiverse to kinds of reproducibility</h3>
+<section id="from-the-multiverse-to-kinds-of-reproducibility" class="level3" data-number="8.2.5">
+<h3 data-number="8.2.5" class="anchored" data-anchor-id="from-the-multiverse-to-kinds-of-reproducibility"><span class="header-section-number">8.2.5</span> From the multiverse to kinds of reproducibility</h3>
 <p>Multiverse analyses and post-publication analyses, in general, show that we can and should question or critically evaluate the analyses we encounter in the literature. This work can usefully detect problems in original published analyses <span class="citation" data-cites="Gelman2009c herndon2014 Wagenmakers2011">(e.g., <a href="references.html#ref-Gelman2009c" role="doc-biblioref">A. Gelman &amp; Weakliem, 2009</a>; <a href="references.html#ref-herndon2014" role="doc-biblioref">Herndon et al., 2014</a>; <a href="references.html#ref-Wagenmakers2011" role="doc-biblioref">Wagenmakers et al., 2011</a>)</span>. It can demonstrate where original published claims are or are not robust to variation of analysis method or approach.</p>
 <p>Given these lessons, and the implications we have identified, we should expect or hope to see open science practices <span class="citation" data-cites="munafò2017 nosek2022">(<a href="references.html#ref-munafò2017" role="doc-biblioref">Munafò et al., 2017</a>; <a href="references.html#ref-nosek2022" role="doc-biblioref">Nosek et al., 2022</a>)</span>:</p>
 <ul>
@@ -661,17 +692,17 @@ Tip
 <li>inferential reproducibility</li>
 </ul>
 <p>In looking at reproducibility, here, we are considering how much, or in what ways, the results or the claims that are made in a published study can be found or <em>repeated</em> by someone else.</p>
-<section id="sec-methodsrepro" class="level4" data-number="7.2.5.1">
-<h4 data-number="7.2.5.1" class="anchored" data-anchor-id="sec-methodsrepro"><span class="header-section-number">7.2.5.1</span> Methods reproducibility</h4>
+<section id="sec-methodsrepro" class="level4" data-number="8.2.5.1">
+<h4 data-number="8.2.5.1" class="anchored" data-anchor-id="sec-methodsrepro"><span class="header-section-number">8.2.5.1</span> Methods reproducibility</h4>
 <p>As <span class="citation" data-cites="gilmore2017">Gilmore et al. (<a href="references.html#ref-gilmore2017" role="doc-biblioref">2017</a>)</span> discuss, <strong>methods reproducibility</strong> means that another researcher should be able to get the same results if they use the same tools and analysis methods to analyse the same dataset [some researchers also refer to <em>analytic reproducibility</em> or <em>computational reproducibility</em>; see e.g. <span class="citation" data-cites="crüwell">Crüwell et al. (<a href="references.html#ref-crüwell" role="doc-biblioref">n.d.</a>)</span>; <span class="citation" data-cites="hardwicke2018">Hardwicke et al. (<a href="references.html#ref-hardwicke2018" role="doc-biblioref">2018</a>)</span>; <span class="citation" data-cites="hardwicke">Hardwicke et al. (<a href="references.html#ref-hardwicke" role="doc-biblioref">n.d.</a>)</span>; <span class="citation" data-cites="laurinavichyute2022">Laurinavichyute et al. (<a href="references.html#ref-laurinavichyute2022" role="doc-biblioref">2022</a>)</span>; <span class="citation" data-cites="minocher">Minocher et al. (<a href="references.html#ref-minocher" role="doc-biblioref">n.d.</a>)</span>].</p>
 <p>In neuroimaging, the multiplicity of possible implementations of the data analysis pipeline <span class="citation" data-cites="carp2012plurality">(<a href="references.html#ref-carp2012plurality" role="doc-biblioref">Carp, 2012a</a>)</span>, and the fact that important elements or information about the pipeline deployed by researchers may be missing from published reports <span class="citation" data-cites="carp2012secret">(<a href="references.html#ref-carp2012secret" role="doc-biblioref">Carp, 2012b</a>)</span>, can make it challenging to identify how results can be reproduced.</p>
 <p>In psychological science, in evaluating reports of results from analyses of behavioural data collected through survey or experimental work, in principle, we should expect to be able to access the data collected by the study authors, follow the description of their analysis method, and reproduce the results they report.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -682,13 +713,13 @@ Tip
 </div>
 </div>
 </section>
-<section id="sec-resultsrepro" class="level4" data-number="7.2.5.2">
-<h4 data-number="7.2.5.2" class="anchored" data-anchor-id="sec-resultsrepro"><span class="header-section-number">7.2.5.2</span> Results reproducibility</h4>
+<section id="sec-resultsrepro" class="level4" data-number="8.2.5.2">
+<h4 data-number="8.2.5.2" class="anchored" data-anchor-id="sec-resultsrepro"><span class="header-section-number">8.2.5.2</span> Results reproducibility</h4>
 <p><strong>Results reproducibility</strong> means that if another researcher completes a new study with new data they are able to get the same results as the results reported following an original study: this often referred to as <em>replication</em>. The replication studies that have been reported <span class="citation" data-cites="aarts2015">(e.g., <a href="references.html#ref-aarts2015" role="doc-biblioref">Aarts et al., 2015</a>)</span>, and continue to be reported (see, for example, the studies discussed by <span class="citation" data-cites="nosek2022">Nosek et al. (<a href="references.html#ref-nosek2022" role="doc-biblioref">2022</a>)</span>), in the last several years, present attempts to examine the results reproducibility of published findings.</p>
 <p>In the classes on the linear model, we will examine if similar or different results are observed in a series of studies using the same procedure and the same materials. We shall discuss, in those classes, in more depth, what results reproducibility (or study replication) can or cannot tell us about the behaviours that interest us.</p>
 </section>
-<section id="sec-inferencerepro" class="level4" data-number="7.2.5.3">
-<h4 data-number="7.2.5.3" class="anchored" data-anchor-id="sec-inferencerepro"><span class="header-section-number">7.2.5.3</span> Inferential reproducibility</h4>
+<section id="sec-inferencerepro" class="level4" data-number="8.2.5.3">
+<h4 data-number="8.2.5.3" class="anchored" data-anchor-id="sec-inferencerepro"><span class="header-section-number">8.2.5.3</span> Inferential reproducibility</h4>
 <p><strong>Inferential reproducibility</strong> means that if a researcher repeats a study (aiming for results reproducibility) or re-analyzes an original dataset (aiming for methods reproducibility) then they can come to the same or similar conclusions as the authors of the report of an original study.</p>
 <p>How is inferential reproducibility not methods or results reproducibility? <span class="citation" data-cites="goodman2016">Goodman et al. (<a href="references.html#ref-goodman2016" role="doc-biblioref">2016</a>)</span> explain that researchers can make the same conclusions from different sets of results and <em>can reach different conclusions from the same set of results</em>.</p>
 <p>How is it possible to reach different conclusions from the same results? We can imagine two scenarios.</p>
@@ -700,12 +731,12 @@ Tip
 <li>choices in how the analysis method is used.</li>
 </ul>
 <p>Where that critical evaluation involves an analysis of the choices the original researchers made, perhaps involving an analysis of other choices they could have made, perhaps reflecting on how effectively the analyses address a given research question or test a given prediction.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -718,21 +749,21 @@ Tip
 </div>
 </section>
 </section>
-<section id="the-current-state-of-the-match-between-open-science-ideas-and-practices" class="level3" data-number="7.2.6">
-<h3 data-number="7.2.6" class="anchored" data-anchor-id="the-current-state-of-the-match-between-open-science-ideas-and-practices"><span class="header-section-number">7.2.6</span> The current state of the match between open science ideas and practices</h3>
+<section id="the-current-state-of-the-match-between-open-science-ideas-and-practices" class="level3" data-number="8.2.6">
+<h3 data-number="8.2.6" class="anchored" data-anchor-id="the-current-state-of-the-match-between-open-science-ideas-and-practices"><span class="header-section-number">8.2.6</span> The current state of the match between open science ideas and practices</h3>
 <p>I have said that we should expect or hope to see open science practices <span class="citation" data-cites="munafò2017 nosek2022">(<a href="references.html#ref-munafò2017" role="doc-biblioref">Munafò et al., 2017</a>; <a href="references.html#ref-nosek2022" role="doc-biblioref">Nosek et al., 2022</a>)</span> where researchers:</p>
 <ul>
 <li>share data and code;</li>
 <li>publish research reports in ways that enable others to check or query analyses.</li>
 </ul>
 <p>This raises an important question: <strong>What exactly do we see, when we look at current practices?</strong> The question is important because answering it helps to identify where the challenges are located when you complete your work to locate, access, analyse and report previously collected data.</p>
-<p>I break the discussion of what we see into two parts. Firstly, I look at the results of audits of data and code sharing (<a href="#sec-sharing">see Section&nbsp;<span>7.2.6.2</span></a>): are data shared and can we access the data? Secondly, I discuss analyses of methods reproducibility, and shared data and code usability (<a href="#sec-checkanalyses">see Section&nbsp;<span>7.2.6.3</span></a>): can others reproduce the results reported in published articles, given shared data? can others access and run shared analysis code? can others use the shared code to reproduce the reported results? Again, I need to be brief but reference sources that you can follow-up.</p>
-<section id="the-link-between-the-credibility-revolution-and-the-reproducibility-of-results" class="level4" data-number="7.2.6.1">
-<h4 data-number="7.2.6.1" class="anchored" data-anchor-id="the-link-between-the-credibility-revolution-and-the-reproducibility-of-results"><span class="header-section-number">7.2.6.1</span> The link between the credibility revolution and the reproducibility of results</h4>
+<p>I break the discussion of what we see into two parts. Firstly, I look at the results of audits of data and code sharing (<a href="#sec-sharing">see Section&nbsp;<span>8.2.6.2</span></a>): are data shared and can we access the data? Secondly, I discuss analyses of methods reproducibility, and shared data and code usability (<a href="#sec-checkanalyses">see Section&nbsp;<span>8.2.6.3</span></a>): can others reproduce the results reported in published articles, given shared data? can others access and run shared analysis code? can others use the shared code to reproduce the reported results? Again, I need to be brief but reference sources that you can follow-up.</p>
+<section id="the-link-between-the-credibility-revolution-and-the-reproducibility-of-results" class="level4" data-number="8.2.6.1">
+<h4 data-number="8.2.6.1" class="anchored" data-anchor-id="the-link-between-the-credibility-revolution-and-the-reproducibility-of-results"><span class="header-section-number">8.2.6.1</span> The link between the credibility revolution and the reproducibility of results</h4>
 <p>I should be clear, before we go on, about <strong>the link</strong> between the <em>credibility revolution</em> in science, and the effort to examine reproducibility of results. Many elements of the credibility revolution emerged out of the observation that it has often been difficult to repeat the results of published studies when we conduct new studies (replication studies or results reproducibility; e.g., <span class="citation" data-cites="aarts2015">Aarts et al. (<a href="references.html#ref-aarts2015" role="doc-biblioref">2015</a>)</span>). However, it is clearly difficult to know <em>what</em> to replicate or reproduce if we cannot reproduce the results presented in a study report (methods reproducibility), given the study data <span class="citation" data-cites="artner2021 laurinavichyute2022 minocher">(<a href="references.html#ref-artner2021" role="doc-biblioref">Artner et al., 2021</a>; <a href="references.html#ref-laurinavichyute2022" role="doc-biblioref">Laurinavichyute et al., 2022</a>; <a href="references.html#ref-minocher" role="doc-biblioref">Minocher et al., n.d.</a>)</span>.</p>
 </section>
-<section id="sec-sharing" class="level4" data-number="7.2.6.2">
-<h4 data-number="7.2.6.2" class="anchored" data-anchor-id="sec-sharing"><span class="header-section-number">7.2.6.2</span> Data and code sharing</h4>
+<section id="sec-sharing" class="level4" data-number="8.2.6.2">
+<h4 data-number="8.2.6.2" class="anchored" data-anchor-id="sec-sharing"><span class="header-section-number">8.2.6.2</span> Data and code sharing</h4>
 <p>Research on data and code sharing practices suggest that practices have improved, from earlier low levels.</p>
 <p>In an important early report, <span class="citation" data-cites="wicherts2006">Wicherts et al. (<a href="references.html#ref-wicherts2006" role="doc-biblioref">2006</a>)</span> observed that it was very difficult to obtain data reported in psychological research articles from the authors of the articles. They asked for data from the lead authors of 141 articles published in four leading psychology journals, for about 25% of the studies. This low response rate was found despite the fact that authors in these journals must agree to the principle that data can be shared with others wishing to verify claims.</p>
 <p>Practice <em>has</em> changed: how?</p>
@@ -740,12 +771,12 @@ Tip
 <p>In theory, initiatives like encouraging authors to earn open science badges should mean that data sharing practices improve, enabling access to data and code for those, like you, who would like to re-analyze previously published data. In theory, all you should need to do — to locate and access data — is just search articles in the journal <em>Psychological Science</em> for studies with open data badges, and follow links from the published articles to then access study data at an open repository like the <em>Open Science Framework</em> <a href="https://osf.io" class="external" target="_blank">(OSF)</a> What do we see in practice?</p>
 <p>Analyses reported by <span class="citation" data-cites="kidwell2016">Kidwell et al. (<a href="references.html#ref-kidwell2016" role="doc-biblioref">2016</a>)</span> as well as analyses reviewed by <span class="citation" data-cites="nosek2022">Nosek et al. (<a href="references.html#ref-nosek2022" role="doc-biblioref">2022</a>)</span> indicate that more articles have claimed to make data available in the time since badges were introduced. When they did their analysis, <span class="citation" data-cites="kidwell2016">Kidwell et al. (<a href="references.html#ref-kidwell2016" role="doc-biblioref">2016</a>)</span> found that a substantial proportion, but not all, of the articles in <em>Psychological Science</em> can be found to actually provide access to shared data. However, critically, many but not all the articles with open data badges provide access to data available through an open repository, data that are correct, complete and usable <span class="citation" data-cites="kidwell2016">(<a href="references.html#ref-kidwell2016" role="doc-biblioref">Kidwell et al., 2016</a>)</span>. In their later report, the analyses reviewed by <span class="citation" data-cites="nosek2022">Nosek et al. (<a href="references.html#ref-nosek2022" role="doc-biblioref">2022</a>)</span> suggest that the use of repositories like OSF for data sharing may be accelerating but that, over the last few years, the rate at which open science practices like sharing data, overall, appears to be substantial but not yet reported or observed in a majority of the work of researchers.</p>
 <p>Many journals now require the authors of articles to include a <strong>Data Availability Statement</strong> to locate their data. Analyses by <span class="citation" data-cites="federer2022">Federer (<a href="references.html#ref-federer2022" role="doc-biblioref">2022</a>)</span> indicate that Data Availability Statements for articles published in the open access <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> journal PLOS ONE often, helpfully, include Digital Object Identifiers (DOIs) or Universal resource locators (URLs) enabling direct access to shared data (i.e., without having to contact authors). Of those DOIs or URLs, most appeared to be associated with resources that could successfully be retrieved. In contrast, analyses reported by <span class="citation" data-cites="gabelica2022">Gabelica et al. (<a href="references.html#ref-gabelica2022" role="doc-biblioref">2022</a>)</span> that where article authors state that “data sets are available on reasonable request” (the most common availability statement), most of the time, the authors did not respond or declined to share the data <span class="citation" data-cites="tedersoo2021">(see similar findings, across fields, by <a href="references.html#ref-tedersoo2021" role="doc-biblioref">Tedersoo et al., 2021</a>)</span>. Clearly, in the analyses of open science practices we have seen so far, data sharing is more effective where sharing does not have to work through authors.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -758,8 +789,8 @@ Tip
 </div>
 </div>
 </section>
-<section id="sec-checkanalyses" class="level4" data-number="7.2.6.3">
-<h4 data-number="7.2.6.3" class="anchored" data-anchor-id="sec-checkanalyses"><span class="header-section-number">7.2.6.3</span> Enabling others to check or query analyses</h4>
+<section id="sec-checkanalyses" class="level4" data-number="8.2.6.3">
+<h4 data-number="8.2.6.3" class="anchored" data-anchor-id="sec-checkanalyses"><span class="header-section-number">8.2.6.3</span> Enabling others to check or query analyses</h4>
 <p>Research on data and code sharing practices suggest that practices have improved but that there are concerns about the quality of the sharing. Here, the critical concern relates to the word <em>enable</em> in the objective: that we should publish research reports in ways that <em>enable</em> others to check or query analyses.</p>
 <p>John Towse and colleagues <span class="citation" data-cites="towse2021">(<a href="references.html#ref-towse2021" role="doc-biblioref">Towse et al., 2021</a>)</span> examined the quality of open datasets to assess their quality in terms of their completeness and reusability <span class="citation" data-cites="roche2015">(see also <a href="references.html#ref-roche2015" role="doc-biblioref">Roche et al., 2015</a>)</span>.</p>
 <ul>
@@ -769,12 +800,12 @@ Tip
 <p>For a sample of datasets, they found that about half were incomplete, and about two-thirds were shared in a way that made them difficult to use. Practices tended to be slightly better in more recent publications. (Broadly similar results are reported by <span class="citation" data-cites="hardwicke2018">(<a href="references.html#ref-hardwicke2018" role="doc-biblioref">Hardwicke et al., 2018</a>)</span>.)</p>
 <p>Where data were found to be incomplete, this appeared to be, in part, because participants were excluded in the processing of the data for analysis but this information was not in the report, or because data were shared without a guide or “readme” file or data dictionary (or codebook) explaining the structure, coding or composition of the shared data.</p>
 <p>Potentially important for future open science practices, <span class="citation" data-cites="towse2021 roche2015">(<a href="references.html#ref-towse2021" role="doc-biblioref">Towse et al., 2021</a>; also <a href="references.html#ref-roche2015" role="doc-biblioref">Roche et al., 2015</a>)</span> found that sharing data as <em>Supplementary materials</em> may appear to carry risks that, in the long term, mean that data may become inaccessible.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -794,12 +825,12 @@ Tip
 </ol>
 <p>What the reproducibility studies appear to show is that, for many published reports, <em>if</em> data are shared and <em>if</em> the shared data are accessible and reusable <em>then</em>, most of the time, the researchers <strong>could reproduce</strong> the results presented by the original study authors <span class="citation" data-cites="hardwicke2018 hardwicke laurinavichyute2022 minocher obels2020 crüwell">(<a href="references.html#ref-hardwicke" role="doc-biblioref">Hardwicke et al., n.d.</a>; <a href="references.html#ref-hardwicke2018" role="doc-biblioref">Hardwicke et al., 2018</a>; <a href="references.html#ref-laurinavichyute2022" role="doc-biblioref">Laurinavichyute et al., 2022</a>; <a href="references.html#ref-minocher" role="doc-biblioref">Minocher et al., n.d.</a>; <a href="references.html#ref-obels2020" role="doc-biblioref">Obels et al., 2020</a>; but see <a href="references.html#ref-crüwell" role="doc-biblioref">Crüwell et al., n.d.</a>)</span>. This is great. But what is interesting, for us, is where the reproducibility researchers encountered challenges. You may encounter the same or similar challenges.</p>
 <p>I list some challenges that the researchers describe, following. Before you look at the list, I want to assure you: you will not find <em>all</em> these challenges present for any one article you look at. Most likely, you will find one or two challenges. Obviously, some challenges will be more difficult than others.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -810,8 +841,8 @@ Tip
 </ul>
 </div>
 </div>
-<section id="sec-datachallenges" class="level5" data-number="7.2.6.3.1">
-<h5 data-number="7.2.6.3.1" class="anchored" data-anchor-id="sec-datachallenges"><span class="header-section-number">7.2.6.3.1</span> Data challenges</h5>
+<section id="sec-datachallenges" class="level5" data-number="8.2.6.3.1">
+<h5 data-number="8.2.6.3.1" class="anchored" data-anchor-id="sec-datachallenges"><span class="header-section-number">8.2.6.3.1</span> Data challenges</h5>
 <ol type="1">
 <li>Data Availability Statements or open science badges indicate data are shared but data are not directly accessible through a link to an open repository.</li>
 <li>The data are shared and accessible but there is missing or incorrect information <em>about</em> the data. The documentation, codebook or data dictionary is missing or incomplete. There is unclear or missing information about the variables or the observations, or about the coding of variable values, responses.</li>
@@ -819,8 +850,8 @@ Tip
 <li>There may be mismatches between the variables referred to in the report and the variables named in the data file. It may be unclear how a data file corresponds to a study described in a report, where there are multiple studies and multiple data files.</li>
 </ol>
 </section>
-<section id="sec-analysischallenges" class="level5" data-number="7.2.6.3.2">
-<h5 data-number="7.2.6.3.2" class="anchored" data-anchor-id="sec-analysischallenges"><span class="header-section-number">7.2.6.3.2</span> Analysis challenges</h5>
+<section id="sec-analysischallenges" class="level5" data-number="8.2.6.3.2">
+<h5 data-number="8.2.6.3.2" class="anchored" data-anchor-id="sec-analysischallenges"><span class="header-section-number">8.2.6.3.2</span> Analysis challenges</h5>
 <ol type="1">
 <li>The original report includes a description of the analysis but the description of the analysis procedure is incomplete or ambiguous.</li>
 <li>There may be a mismatch, in the report, between a hypothesis, and the analysis specified to test the hypothesis (maybe in the Methods section), compared to a long sequence of results reported in the Results section. This makes it difficult to identify the key analysis.</li>
@@ -832,8 +863,8 @@ Tip
 </section>
 </section>
 </section>
-<section id="this-is-why" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="this-is-why"><span class="header-section-number">7.3</span> This is why</h2>
+<section id="this-is-why" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="this-is-why"><span class="header-section-number">8.3</span> This is why</h2>
 <p>The research report assignment requires students to locate, access, analyse and report previously collected data. At the start of the introduction, I said I would explain the answer to the question:</p>
 <ul>
 <li>Why: what is the motivation for the assignment?</li>
@@ -841,8 +872,8 @@ Tip
 <p>I summarize, following, the main points of the answer I have given. When you review these points, I want you to think about two things, returning to the ideas of <span class="citation" data-cites="bourdieu2004">Bourdieu (<a href="references.html#ref-bourdieu2004" role="doc-biblioref">2004</a>)</span> and <span class="citation" data-cites="kuhn1970">Kuhn (<a href="references.html#ref-kuhn1970" role="doc-biblioref">1970</a>)</span> I sketched at the start.</p>
 <p>Often what we do in science is guided by convention, the assumptions and habits of <em>normal practice</em> <span class="citation" data-cites="kuhn1970">(<a href="references.html#ref-kuhn1970" role="doc-biblioref">Kuhn, 1970</a>)</span>. These conventions can work in our minds so that if we encounter an <em>anomaly</em> or <em>discrepancy</em> between what we expect and what we find, in our work, we may usually blame ourselves: it was something wrong that we did or failed to do. It can cause us anxiety if we do not reproduce a result we think we should be able to reproduce <span class="citation" data-cites="lubega">(<a href="references.html#ref-lubega" role="doc-biblioref">Lubega et al., n.d.</a>)</span>. But I want you to understand, from the start, that sometimes, if you think you have found an error or a problem in a published analysis or a shared dataset, <strong>you may be right</strong>.</p>
 <p>If there is anything we have learned, through the findings of replication studies, multiverse analyses, and reproducibility audits it is that people make mistakes, different choices are often reasonable, and we <em>always</em> need to check the evidence.</p>
-<section id="summary-this-is-why" class="level3" data-number="7.3.1">
-<h3 data-number="7.3.1" class="anchored" data-anchor-id="summary-this-is-why"><span class="header-section-number">7.3.1</span> Summary: this is why</h3>
+<section id="summary-this-is-why" class="level3" data-number="8.3.1">
+<h3 data-number="8.3.1" class="anchored" data-anchor-id="summary-this-is-why"><span class="header-section-number">8.3.1</span> Summary: this is why</h3>
 <ol type="1">
 <li>We are in the middle of a credibility revolution. The lessons we have learned so far oblige us to think about and to teach good open science practices that safeguard the value of evidence in psychology.</li>
 <li>This matters, even if we do not care about scientific methods, because if we care about the translation into policy or practice – in clinical psychology, in education, health, marketing and other fields – what we do will depend on the value of the research evidence that informs policy ideas or practice guides.</li>
@@ -857,12 +888,12 @@ Tip
 </ol>
 <p>In constructing the assignment – in asking <em>and supporting</em> students to locate, access, analyse and report previously collected data – we are presenting an opportunity to really investigate and evaluate existing practices.</p>
 <p>You may find that this work is challenging, in some of the places that reproducibility research has identified there can be challenges. Where the challenges cannot be fixed – if you have found an interesting study but the study data are inaccessible or unusable – we will advise you to move on to another study. Where the challenges can be fixed – if data require processing, or if analysis information requires clarification – we will provide you with help or enabling information so that you fix the problems yourself.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -877,251 +908,251 @@ Tip
 <p>One last question: why not just do less demanding or challenging tasks? Because this is part of what makes graduate degree valuable, what will make you more skilled in the workplace. Most of the time, we work in teams, we inherit problems or data analysis tasks, or are given results with partial information. The lessons you learn here will help you to effectively navigate those situations.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography" style="display: none">
-<div id="ref-aarts2015" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-aarts2015" class="csl-entry" role="listitem">
 Aarts, E., Dolan, C. V., Verhage, M., &amp; Van der Sluis, S. (2015). Multilevel analysis quantifies variation in the experimental effect while optimizing power and preventing false positives. <em>BMC Neuroscience</em>, <em>16</em>(1), 1–15. <a href="https://doi.org/10.1186/s12868-015-0228-5">https://doi.org/10.1186/s12868-015-0228-5</a>
 </div>
-<div id="ref-aczel2021" class="csl-entry" role="doc-biblioentry">
+<div id="ref-aczel2021" class="csl-entry" role="listitem">
 Aczel, B., Szaszi, B., Nilsonne, G., Akker, O. R. van den, Albers, C. J., Assen, M. A. van, Bastiaansen, J. A., Benjamin, D., Boehm, U., Botvinik-Nezer, R., Bringmann, L. F., Busch, N. A., Caruyer, E., Cataldo, A. M., Cowan, N., Delios, A., Dongen, N. N. van, Donkin, C., Doorn, J. B. van, … Wagenmakers, E.-J. (2021). Consensus-based guidance for conducting and reporting multi-analyst studies. <em>eLife</em>, <em>10</em>, e72185. <a href="https://doi.org/10.7554/eLife.72185">https://doi.org/10.7554/eLife.72185</a>
 </div>
-<div id="ref-artner2021" class="csl-entry" role="doc-biblioentry">
+<div id="ref-artner2021" class="csl-entry" role="listitem">
 Artner, R., Verliefde, T., Steegen, S., Gomes, S., Traets, F., Tuerlinckx, F., &amp; Vanpaemel, W. (2021). The reproducibility of statistical results in psychological research: An investigation using unpublished raw data. <em>Psychological Methods</em>, <em>26</em>(5), 527–546. <a href="https://doi.org/10.1037/met0000365">https://doi.org/10.1037/met0000365</a>
 </div>
-<div id="ref-auspurg2021" class="csl-entry" role="doc-biblioentry">
+<div id="ref-auspurg2021" class="csl-entry" role="listitem">
 Auspurg, K., &amp; Brüderl, J. (2021). Has the Credibility of the Social Sciences Been Credibly Destroyed? Reanalyzing the <span>“</span>Many Analysts, One Data Set<span>”</span> Project. <em>Socius</em>, <em>7</em>, 23780231211024421. <a href="https://doi.org/10.1177/23780231211024421">https://doi.org/10.1177/23780231211024421</a>
 </div>
-<div id="ref-bastiaansen2020" class="csl-entry" role="doc-biblioentry">
+<div id="ref-bastiaansen2020" class="csl-entry" role="listitem">
 Bastiaansen, J. A., Kunkels, Y. K., Blaauw, F. J., Boker, S. M., Ceulemans, E., Chen, M., Chow, S.-M., Jonge, P. de, Emerencia, A. C., Epskamp, S., Fisher, A. J., Hamaker, E. L., Kuppens, P., Lutz, W., Meyer, M. J., Moulder, R., Oravecz, Z., Riese, H., Rubel, J., … Bringmann, L. F. (2020). Time to get personal? The impact of researchers choices on the selection of treatment targets using the experience sampling methodology. <em>Journal of Psychosomatic Research</em>, <em>137</em>, 110211. <a href="https://doi.org/10.1016/j.jpsychores.2020.110211">https://doi.org/10.1016/j.jpsychores.2020.110211</a>
 </div>
-<div id="ref-bornstein2013" class="csl-entry" role="doc-biblioentry">
+<div id="ref-bornstein2013" class="csl-entry" role="listitem">
 Bornstein, M. H., Jager, J., &amp; Putnick, D. L. (2013). Sampling in developmental science: Situations, shortcomings, solutions, and standards. <em>Developmental Review</em>, <em>33</em>(4), 357–370. <a href="https://doi.org/10.1016/j.dr.2013.08.003">https://doi.org/10.1016/j.dr.2013.08.003</a>
 </div>
-<div id="ref-botvinik-nezer2020" class="csl-entry" role="doc-biblioentry">
+<div id="ref-botvinik-nezer2020" class="csl-entry" role="listitem">
 Botvinik-Nezer, R., Holzmeister, F., Camerer, C. F., Dreber, A., Huber, J., Johannesson, M., Kirchler, M., Iwanir, R., Mumford, J. A., Adcock, R. A., Avesani, P., Baczkowski, B. M., Bajracharya, A., Bakst, L., Ball, S., Barilari, M., Bault, N., Beaton, D., Beitner, J., … Schonberg, T. (2020). Variability in the analysis of a single neuroimaging dataset by many teams. <em>Nature</em>, <em>582</em>(7810), 84–88. <a href="https://doi.org/10.1038/s41586-020-2314-9">https://doi.org/10.1038/s41586-020-2314-9</a>
 </div>
-<div id="ref-bourdieu2004" class="csl-entry" role="doc-biblioentry">
+<div id="ref-bourdieu2004" class="csl-entry" role="listitem">
 Bourdieu, P. (2004). <em>Science of Science and Reflexivity</em>. Polity.
 </div>
-<div id="ref-breznau2022" class="csl-entry" role="doc-biblioentry">
+<div id="ref-breznau2022" class="csl-entry" role="listitem">
 Breznau, N., Rinke, E. M., Wuttke, A., Nguyen, H. H. V., Adem, M., Adriaans, J., Alvarez-Benjumea, A., Andersen, H. K., Auer, D., Azevedo, F., Bahnsen, O., Balzer, D., Bauer, G., Bauer, P. C., Baumann, M., Baute, S., Benoit, V., Bernauer, J., Berning, C., … Żółtak, T. (2022). Observing many researchers using the same data and hypothesis reveals a hidden universe of uncertainty. <em>Proceedings of the National Academy of Sciences</em>, <em>119</em>(44), e2203150119. <a href="https://doi.org/10.1073/pnas.2203150119">https://doi.org/10.1073/pnas.2203150119</a>
 </div>
-<div id="ref-button2013" class="csl-entry" role="doc-biblioentry">
+<div id="ref-button2013" class="csl-entry" role="listitem">
 Button, K. S., Ioannidis, J. P. A., Mokrysz, C., Nosek, B. A., Flint, J., Robinson, E. S. J., &amp; Munafò, M. R. (2013). Power failure: Why small sample size undermines the reliability of neuroscience. <em>Nature Reviews Neuroscience</em>, <em>14</em>(5), 365–376.
 </div>
-<div id="ref-carp2012plurality" class="csl-entry" role="doc-biblioentry">
+<div id="ref-carp2012plurality" class="csl-entry" role="listitem">
 Carp, J. (2012a). On the plurality of (methodological) worlds: Estimating the analytic flexibility of FMRI experiments. <em>Frontiers in Neuroscience</em>, <em>6</em>, 149.
 </div>
-<div id="ref-carp2012secret" class="csl-entry" role="doc-biblioentry">
+<div id="ref-carp2012secret" class="csl-entry" role="listitem">
 Carp, J. (2012b). The secret lives of experiments: Methods reporting in the fMRI literature. <em>Neuroimage</em>, <em>63</em>(1), 289–300.
 </div>
-<div id="ref-cohen1962" class="csl-entry" role="doc-biblioentry">
+<div id="ref-cohen1962" class="csl-entry" role="listitem">
 Cohen, J. (1962). The statistical power of abnormal-social psychological research: A review. <em>Journal of Abnormal and Social Psychology</em>, <em>65</em>(3), 145–153. <a href="https://doi.org/10.1037/h0045186">https://doi.org/10.1037/h0045186</a>
 </div>
-<div id="ref-crüwell" class="csl-entry" role="doc-biblioentry">
+<div id="ref-crüwell" class="csl-entry" role="listitem">
 Crüwell, S., Apthorp, D., Baker, B. J., Colling, L., Elson, M., Geiger, S. J., Lobentanzer, S., Monéger, J., Patterson, A., Schwarzkopf, D. S., Zaneva, M., &amp; Brown, N. J. L. (n.d.). <em>What<span>’</span>s in a badge? A computational reproducibility investigation of the open data badge policy in one issue of psychological science</em>. <a href="https://doi.org/10.31234/osf.io/729qt">https://doi.org/10.31234/osf.io/729qt</a>
 </div>
-<div id="ref-delgiudice2021" class="csl-entry" role="doc-biblioentry">
+<div id="ref-delgiudice2021" class="csl-entry" role="listitem">
 Del Giudice, M., &amp; Gangestad, S. W. (2021). A Traveler<span>’</span>s Guide to the Multiverse: Promises, Pitfalls, and a Framework for the Evaluation of Analytic Decisions. <em>Advances in Methods and Practices in Psychological Science</em>, <em>4</em>(1), 2515245920954925. <a href="https://doi.org/10.1177/2515245920954925">https://doi.org/10.1177/2515245920954925</a>
 </div>
-<div id="ref-dutilh2019" class="csl-entry" role="doc-biblioentry">
+<div id="ref-dutilh2019" class="csl-entry" role="listitem">
 Dutilh, G., Annis, J., Brown, S. D., Cassey, P., Evans, N. J., Grasman, R. P. P. P., Hawkins, G. E., Heathcote, A., Holmes, W. R., Krypotos, A.-M., Kupitz, C. N., Leite, F. P., Lerche, V., Lin, Y.-S., Logan, G. D., Palmeri, T. J., Starns, J. J., Trueblood, J. S., Maanen, L. van, … Donkin, C. (2019). The Quality of Response Time Data Inference: A Blinded, Collaborative Assessment of the Validity of Cognitive Models. <em>Psychonomic Bulletin &amp; Review</em>, <em>26</em>(4), 1051–1069. <a href="https://doi.org/10.3758/s13423-017-1417-2">https://doi.org/10.3758/s13423-017-1417-2</a>
 </div>
-<div id="ref-federer2022" class="csl-entry" role="doc-biblioentry">
+<div id="ref-federer2022" class="csl-entry" role="listitem">
 Federer, L. M. (2022). Long-term availability of data associated with articles in PLOS ONE. <em>PLOS ONE</em>, <em>17</em>(8), e0272845. <a href="https://doi.org/10.1371/journal.pone.0272845">https://doi.org/10.1371/journal.pone.0272845</a>
 </div>
-<div id="ref-fillard2011" class="csl-entry" role="doc-biblioentry">
+<div id="ref-fillard2011" class="csl-entry" role="listitem">
 Fillard, P., Descoteaux, M., Goh, A., Gouttard, S., Jeurissen, B., Malcolm, J., Ramirez-Manzanares, A., Reisert, M., Sakaie, K., Tensaouti, F., Yo, T., Mangin, J.-F., &amp; Poupon, C. (2011). Quantitative evaluation of 10 tractography algorithms on a realistic diffusion MR phantom. <em>NeuroImage</em>, <em>56</em>(1), 220–234. <a href="https://doi.org/10.1016/j.neuroimage.2011.01.032">https://doi.org/10.1016/j.neuroimage.2011.01.032</a>
 </div>
-<div id="ref-flake2020" class="csl-entry" role="doc-biblioentry">
+<div id="ref-flake2020" class="csl-entry" role="listitem">
 Flake, J. K., &amp; Fried, E. I. (2020). Measurement Schmeasurement: Questionable Measurement Practices and How to Avoid Them. <em>Advances in Methods and Practices in Psychological Science</em>, <em>3</em>(4), 456–465. <a href="https://doi.org/10.1177/2515245920952393">https://doi.org/10.1177/2515245920952393</a>
 </div>
-<div id="ref-gabelica2022" class="csl-entry" role="doc-biblioentry">
+<div id="ref-gabelica2022" class="csl-entry" role="listitem">
 Gabelica, M., Bojčić, R., &amp; Puljak, L. (2022). Many researchers were not compliant with their published data sharing statement: a mixed-methods study. <em>Journal of Clinical Epidemiology</em>, <em>150</em>, 33–41. <a href="https://doi.org/10.1016/j.jclinepi.2022.05.019">https://doi.org/10.1016/j.jclinepi.2022.05.019</a>
 </div>
-<div id="ref-Gelman2015" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Gelman2015" class="csl-entry" role="listitem">
 Gelman, a. (2015). The connection between varying treatment effects and the crisis of unreplicable research: A bayesian perspective. <em>Journal of Management</em>, <em>41</em>(2), 632–643. <a href="https://doi.org/10.1177/0149206314525208">https://doi.org/10.1177/0149206314525208</a>
 </div>
-<div id="ref-gelman2014" class="csl-entry" role="doc-biblioentry">
+<div id="ref-gelman2014" class="csl-entry" role="listitem">
 Gelman, A., &amp; Loken, E. (2014a). The garden of forking paths: Why multiple comparisons can be a problem, even when there is no <span>“</span>fishing expedition<span>”</span> or <span>“</span>p-hacking<span>”</span> and the research hypothesis was posited ahead of time. <em>Psychological Bulletin</em>, <em>140</em>(5), 1272–1280.
 </div>
-<div id="ref-gelman2014a" class="csl-entry" role="doc-biblioentry">
+<div id="ref-gelman2014a" class="csl-entry" role="listitem">
 Gelman, A., &amp; Loken, E. (2014b). The statistical crisis in science. <em>American Scientist</em>, <em>102</em>(6), 460–465. <a href="https://doi.org/10.1511/2014.111.460">https://doi.org/10.1511/2014.111.460</a>
 </div>
-<div id="ref-Gelman2009c" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Gelman2009c" class="csl-entry" role="listitem">
 Gelman, A., &amp; Weakliem, D. (2009). Of beauty, sex and power. <em>American Scientist</em>, <em>97</em>(4), 310–316. <a href="https://doi.org/10.1511/2009.79.310">https://doi.org/10.1511/2009.79.310</a>
 </div>
-<div id="ref-gilmore2017" class="csl-entry" role="doc-biblioentry">
+<div id="ref-gilmore2017" class="csl-entry" role="listitem">
 Gilmore, R. O., Diaz, M. T., Wyble, B. A., &amp; Yarkoni, T. (2017). Progress toward openness, transparency, and reproducibility in cognitive neuroscience. <em>Annals of the New York Academy of Sciences</em>, <em>1396</em>, 5–18. <a href="https://doi.org/10.1111/nyas.13325">https://doi.org/10.1111/nyas.13325</a>
 </div>
-<div id="ref-goodman2016" class="csl-entry" role="doc-biblioentry">
+<div id="ref-goodman2016" class="csl-entry" role="listitem">
 Goodman, S. N., Fanelli, D., &amp; Ioannidis, J. P. A. (2016). What does research reproducibility mean? <em>Science Translational Medicine</em>, <em>8</em>(341).
 </div>
-<div id="ref-hardwicke" class="csl-entry" role="doc-biblioentry">
+<div id="ref-hardwicke" class="csl-entry" role="listitem">
 Hardwicke, T. E., Bohn, M., MacDonald, K., Hembacher, E., Nuijten, M. B., Peloquin, B. N., deMayo, B. E., Long, B., Yoon, E. J., &amp; Frank, M. C. (n.d.). Analytic reproducibility in articles receiving open data badges at the journal psychological science: An observational study. <em>Royal Society Open Science</em>, <em>8</em>(1), 201494. <a href="https://doi.org/10.1098/rsos.201494">https://doi.org/10.1098/rsos.201494</a>
 </div>
-<div id="ref-hardwicke2018" class="csl-entry" role="doc-biblioentry">
+<div id="ref-hardwicke2018" class="csl-entry" role="listitem">
 Hardwicke, T. E., Mathur, M. B., MacDonald, K., Nilsonne, G., Banks, G. C., Kidwell, M. C., Hofelich Mohr, A., Clayton, E., Yoon, E. J., Henry Tessler, M., Lenne, R. L., Altman, S., Long, B., &amp; Frank, M. C. (2018). Data availability, reusability, and analytic reproducibility: evaluating the impact of a mandatory open data policy at the journal Cognition. <em>Royal Society Open Science</em>, <em>5</em>(8), 180448. <a href="https://doi.org/10.1098/rsos.180448">https://doi.org/10.1098/rsos.180448</a>
 </div>
-<div id="ref-Henrich2010" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Henrich2010" class="csl-entry" role="listitem">
 Henrich, J., Heine, S. J., &amp; Norenzayan, A. (2010). The weirdest people in the world? <em>The Behavioral and Brain Sciences</em>, <em>33</em>(2-3). <a href="https://doi.org/10.1017/S0140525X0999152X">https://doi.org/10.1017/S0140525X0999152X</a>
 </div>
-<div id="ref-herndon2014" class="csl-entry" role="doc-biblioentry">
+<div id="ref-herndon2014" class="csl-entry" role="listitem">
 Herndon, T., Ash, M., &amp; Pollin, R. (2014). Does high public debt consistently stifle economic growth? A critique of Reinhart and Rogoff. <em>Cambridge Journal of Economics</em>, <em>38</em>(2), 257–279. <a href="https://doi.org/10.1093/cje/bet075">https://doi.org/10.1093/cje/bet075</a>
 </div>
-<div id="ref-hoffmann" class="csl-entry" role="doc-biblioentry">
+<div id="ref-hoffmann" class="csl-entry" role="listitem">
 Hoffmann, S., Schönbrodt, F., Elsas, R., Wilson, R., Strasser, U., &amp; Boulesteix, A.-L. (n.d.). The multiplicity of analysis strategies jeopardizes replicability: Lessons learned across disciplines. <em>Royal Society Open Science</em>, <em>8</em>(4), 201925. <a href="https://doi.org/10.1098/rsos.201925">https://doi.org/10.1098/rsos.201925</a>
 </div>
-<div id="ref-Ioannidis2005" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Ioannidis2005" class="csl-entry" role="listitem">
 Ioannidis, J. P. a. (2005). Why most published research findings are false. <em>PLoS Medicine</em>, <em>2</em>(8), 0696–0701. <a href="https://doi.org/10.1371/journal.pmed.0020124">https://doi.org/10.1371/journal.pmed.0020124</a>
 </div>
-<div id="ref-john2012" class="csl-entry" role="doc-biblioentry">
+<div id="ref-john2012" class="csl-entry" role="listitem">
 John, L. K., Loewenstein, G., &amp; Prelec, D. (2012). Measuring the prevalence of questionable research practices with incentives for truth telling. <em>Psychological Science</em>, <em>23</em>(5), 524–532. <a href="https://doi.org/10.1177/0956797611430953">https://doi.org/10.1177/0956797611430953</a>
 </div>
-<div id="ref-kidwell2016" class="csl-entry" role="doc-biblioentry">
+<div id="ref-kidwell2016" class="csl-entry" role="listitem">
 Kidwell, M. C., Lazarević, L. B., Baranski, E., Hardwicke, T. E., Piechowski, S., Falkenberg, L. S., Kennett, C., Slowik, A., Sonnleitner, C., Hess-Holden, C., Errington, T. M., Fiedler, S., &amp; Nosek, B. A. (2016). Badges to acknowledge open practices: A simple, low-cost, effective method for increasing transparency. <em>PLoS Biology</em>, <em>14</em>(5), 1–15. <a href="https://doi.org/10.1371/journal.pbio.1002456">https://doi.org/10.1371/journal.pbio.1002456</a>
 </div>
-<div id="ref-klau2021" class="csl-entry" role="doc-biblioentry">
+<div id="ref-klau2021" class="csl-entry" role="listitem">
 Klau, S., Hoffmann, S., Patel, C. J., Ioannidis, J. P., &amp; Boulesteix, A.-L. (2021). Examining the robustness of observational associations to model, measurement and sampling uncertainty with the vibration of effects framework. <em>International Journal of Epidemiology</em>, <em>50</em>(1), 266–278. <a href="https://doi.org/10.1093/ije/dyaa164">https://doi.org/10.1093/ije/dyaa164</a>
 </div>
-<div id="ref-klau" class="csl-entry" role="doc-biblioentry">
+<div id="ref-klau" class="csl-entry" role="listitem">
 Klau, S., Schönbrodt, F., Patel, C. J., Ioannidis, J., Boulesteix, A.-L., &amp; Hoffmann, S. (n.d.). <em>Comparing the vibration of effects due to model, data pre-processing and sampling uncertainty on a large data set in personality psychology</em>. <a href="https://doi.org/10.31234/osf.io/c7v8b">https://doi.org/10.31234/osf.io/c7v8b</a>
 </div>
-<div id="ref-kuhn1970" class="csl-entry" role="doc-biblioentry">
+<div id="ref-kuhn1970" class="csl-entry" role="listitem">
 Kuhn, T. S. (1970). <em>The structure of scientific revolutions</em> ([2d ed., enl). University of Chicago Press.
 </div>
-<div id="ref-landy2020a" class="csl-entry" role="doc-biblioentry">
+<div id="ref-landy2020a" class="csl-entry" role="listitem">
 Landy, J. F., Jia, M. L., Ding, I. L., Viganola, D., Tierney, W., Dreber, A., Johannesson, M., Pfeiffer, T., Ebersole, C. R., Gronau, Q. F., Ly, A., Bergh, D. van den, Marsman, M., Derks, K., Wagenmakers, E.-J., Proctor, A., Bartels, D. M., Bauman, C. W., Brady, W. J., … Uhlmann, E. L. (2020). Crowdsourcing hypothesis tests: Making transparent how design choices shape research results. <em>Psychological Bulletin</em>, <em>146</em>(5), 451–479. <a href="https://doi.org/10.1037/bul0000220">https://doi.org/10.1037/bul0000220</a>
 </div>
-<div id="ref-laurinavichyute2022" class="csl-entry" role="doc-biblioentry">
+<div id="ref-laurinavichyute2022" class="csl-entry" role="listitem">
 Laurinavichyute, A., Yadav, H., &amp; Vasishth, S. (2022). Share the code, not just the data: A case study of the reproducibility of articles published in the Journal of Memory and Language under the open data policy. <em>Journal of Memory and Language</em>, <em>125</em>, 104332. <a href="https://doi.org/10.1016/j.jml.2022.104332">https://doi.org/10.1016/j.jml.2022.104332</a>
 </div>
-<div id="ref-lubega" class="csl-entry" role="doc-biblioentry">
+<div id="ref-lubega" class="csl-entry" role="listitem">
 Lubega, N., Anderson, A., &amp; Nelson, N. (n.d.). <em>Experience of irreproducibility as a risk factor for poor mental health in biomedical science doctoral students: A survey and interview-based study</em>. <a href="https://doi.org/10.31222/osf.io/h37kw">https://doi.org/10.31222/osf.io/h37kw</a>
 </div>
-<div id="ref-maier-hein2017" class="csl-entry" role="doc-biblioentry">
+<div id="ref-maier-hein2017" class="csl-entry" role="listitem">
 Maier-Hein, K. H., Neher, P. F., Houde, J.-C., Côté, M.-A., Garyfallidis, E., Zhong, J., Chamberland, M., Yeh, F.-C., Lin, Y.-C., Ji, Q., Reddick, W. E., Glass, J. O., Chen, D. Q., Feng, Y., Gao, C., Wu, Y., Ma, J., He, R., Li, Q., … Descoteaux, M. (2017). The challenge of mapping the human connectome based on diffusion tractography. <em>Nature Communications</em>, <em>8</em>(1), 1349. <a href="https://doi.org/10.1038/s41467-017-01285-x">https://doi.org/10.1038/s41467-017-01285-x</a>
 </div>
-<div id="ref-meehl1967" class="csl-entry" role="doc-biblioentry">
+<div id="ref-meehl1967" class="csl-entry" role="listitem">
 Meehl, P. E. (1967). Theory-testing in psychology and physics: A methodological paradox. <em>Philosophy of Science</em>, <em>34</em>(2), 103–115.
 </div>
-<div id="ref-meehl1978" class="csl-entry" role="doc-biblioentry">
+<div id="ref-meehl1978" class="csl-entry" role="listitem">
 Meehl, P. E. (1978). <em>Theoretical risks and tabular asterisks: Sir karl, sir ronald, and the slow progress of soft psychology</em>. <em>46</em>(September 1976), 806–834.
 </div>
-<div id="ref-minocher" class="csl-entry" role="doc-biblioentry">
+<div id="ref-minocher" class="csl-entry" role="listitem">
 Minocher, R., Atmaca, S., Bavero, C., McElreath, R., &amp; Beheim, B. (n.d.). Estimating the reproducibility of social learning research published between 1955 and 2018. <em>Royal Society Open Science</em>, <em>8</em>(9), 210450. <a href="https://doi.org/10.1098/rsos.210450">https://doi.org/10.1098/rsos.210450</a>
 </div>
-<div id="ref-munafò2017" class="csl-entry" role="doc-biblioentry">
+<div id="ref-munafò2017" class="csl-entry" role="listitem">
 Munafò, M. R., Nosek, B. A., Bishop, D. V. M., Button, K. S., Chambers, C. D., Percie Du Sert, N., Simonsohn, U., Wagenmakers, E. J., Ware, J. J., &amp; Ioannidis, J. P. A. (2017). A manifesto for reproducible science. <em>Nature Human Behaviour</em>, <em>1</em>(1), 1–9. <a href="https://doi.org/10.1038/s41562-016-0021">https://doi.org/10.1038/s41562-016-0021</a>
 </div>
-<div id="ref-nosek2019prereg" class="csl-entry" role="doc-biblioentry">
+<div id="ref-nosek2019prereg" class="csl-entry" role="listitem">
 Nosek, B. A., Beck, E. D., Campbell, L., Flake, J. K., Hardwicke, T. E., Mellor, D. T., van?t Veer, A. E., &amp; Vazire, S. (2019). Preregistration is hard, and worthwhile. <em>Trends in Cognitive Sciences</em>, <em>23</em>(10), 815–818.
 </div>
-<div id="ref-nosek2018" class="csl-entry" role="doc-biblioentry">
+<div id="ref-nosek2018" class="csl-entry" role="listitem">
 Nosek, B. A., Ebersole, C. R., DeHaven, A. C., &amp; Mellor, D. T. (2018). The preregistration revolution. <em>Proceedings of the National Academy of Sciences</em>, <em>115</em>(11), 2600–2606.
 </div>
-<div id="ref-nosek2022" class="csl-entry" role="doc-biblioentry">
+<div id="ref-nosek2022" class="csl-entry" role="listitem">
 Nosek, B. A., Hardwicke, T. E., Moshontz, H., Allard, A., Corker, K. S., Dreber, A., Fidler, F., Hilgard, J., Kline Struhl, M., Nuijten, M. B., Rohrer, J. M., Romero, F., Scheel, A. M., Scherer, L. D., Schönbrodt, F. D., &amp; Vazire, S. (2022). Replicability, Robustness, and Reproducibility in Psychological Science. <em>Annual Review of Psychology</em>, <em>73</em>, 719–748. <a href="https://doi.org/10.1146/annurev-psych-020821-114157">https://doi.org/10.1146/annurev-psych-020821-114157</a>
 </div>
-<div id="ref-nosek2014" class="csl-entry" role="doc-biblioentry">
+<div id="ref-nosek2014" class="csl-entry" role="listitem">
 Nosek, B. A., &amp; Lakens, D. (2014). Registered reports: A method to increase the credibility of published results. <em>Social Psychology</em>, <em>45</em>(3), 137–141. <a href="https://doi.org/10.1027/1864-9335/a000192">https://doi.org/10.1027/1864-9335/a000192</a>
 </div>
-<div id="ref-obels2020" class="csl-entry" role="doc-biblioentry">
+<div id="ref-obels2020" class="csl-entry" role="listitem">
 Obels, P., Lakens, D., Coles, N. A., Gottfried, J., &amp; Green, S. A. (2020). Analysis of open data and computational reproducibility in registered reports in psychology. <em>Advances in Methods and Practices in Psychological Science</em>, <em>3</em>(2), 229–237. <a href="https://doi.org/10.1177/2515245920918872">https://doi.org/10.1177/2515245920918872</a>
 </div>
-<div id="ref-parsons" class="csl-entry" role="doc-biblioentry">
+<div id="ref-parsons" class="csl-entry" role="listitem">
 Parsons, S. (n.d.). <em>Exploring reliability heterogeneity with multiverse analyses: Data processing decisions unpredictably influence measurement reliability</em>. <a href="https://doi.org/10.31234/osf.io/y6tcz">https://doi.org/10.31234/osf.io/y6tcz</a>
 </div>
-<div id="ref-Pashler2012a" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Pashler2012a" class="csl-entry" role="listitem">
 Pashler, H., &amp; Harris, C. (2012). Is the replicability crisis overblown? Three arguments examined. <em>Perspectives on Psychological Science</em>, <em>7</em>(6), 531–536. <a href="https://doi.org/10.1177/1745691612463401">https://doi.org/10.1177/1745691612463401</a>
 </div>
-<div id="ref-Pashler2012b" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Pashler2012b" class="csl-entry" role="listitem">
 Pashler, H., &amp; Wagenmakers, E. J. (2012). Editors’ introduction to the special section on replicability in psychological science: A crisis of confidence? <em>Perspectives on Psychological Science</em>, <em>7</em>(6), 528–530. <a href="https://doi.org/10.1177/1745691612465253">https://doi.org/10.1177/1745691612465253</a>
 </div>
-<div id="ref-patel2015" class="csl-entry" role="doc-biblioentry">
+<div id="ref-patel2015" class="csl-entry" role="listitem">
 Patel, C. J., Burford, B., &amp; Ioannidis, J. P. A. (2015). Assessment of vibration of effects due to model specification can demonstrate the instability of observational associations. <em>Journal of Clinical Epidemiology</em>, <em>68</em>(9), 1046–1058. <a href="https://doi.org/10.1016/j.jclinepi.2015.05.029">https://doi.org/10.1016/j.jclinepi.2015.05.029</a>
 </div>
-<div id="ref-poline2006" class="csl-entry" role="doc-biblioentry">
+<div id="ref-poline2006" class="csl-entry" role="listitem">
 Poline, J.-B., Strother, S. C., Dehaene-Lambertz, G., Egan, G. F., &amp; Lancaster, J. L. (2006). Motivation and synthesis of the FIAC experiment: Reproducibility of fMRI results across expert analyses. <em>Human Brain Mapping</em>, <em>27</em>(5), 351–359. <a href="https://doi.org/10.1002/hbm.20268">https://doi.org/10.1002/hbm.20268</a>
 </div>
-<div id="ref-roche2015" class="csl-entry" role="doc-biblioentry">
+<div id="ref-roche2015" class="csl-entry" role="listitem">
 Roche, D. G., Kruuk, L. E. B., Lanfear, R., &amp; Binning, S. A. (2015). Public data archiving in ecology and evolution: How well are we doing? <em>PLoS Biology</em>, <em>13</em>(11), 1–12. <a href="https://doi.org/10.1371/journal.pbio.1002295">https://doi.org/10.1371/journal.pbio.1002295</a>
 </div>
-<div id="ref-salganik2020" class="csl-entry" role="doc-biblioentry">
+<div id="ref-salganik2020" class="csl-entry" role="listitem">
 Salganik, M. J., Lundberg, I., Kindel, A. T., Ahearn, C. E., Al-Ghoneim, K., Almaatouq, A., Altschul, D. M., Brand, J. E., Carnegie, N. B., Compton, R. J., Datta, D., Davidson, T., Filippova, A., Gilroy, C., Goode, B. J., Jahani, E., Kashyap, R., Kirchner, A., McKay, S., … McLanahan, S. (2020). Measuring the predictability of life outcomes with a scientific mass collaboration. <em>Proceedings of the National Academy of Sciences</em>, <em>117</em>(15), 8398–8403. <a href="https://doi.org/10.1073/pnas.1915006117">https://doi.org/10.1073/pnas.1915006117</a>
 </div>
-<div id="ref-scheel2022" class="csl-entry" role="doc-biblioentry">
+<div id="ref-scheel2022" class="csl-entry" role="listitem">
 Scheel, A. M. (2022). Why most psychological research findings are not even wrong. <em>Infant and Child Development</em>, <em>31</em>(1), e2295. <a href="https://doi.org/10.1002/icd.2295">https://doi.org/10.1002/icd.2295</a>
 </div>
-<div id="ref-scheel2021" class="csl-entry" role="doc-biblioentry">
+<div id="ref-scheel2021" class="csl-entry" role="listitem">
 Scheel, A. M., Tiokhin, L., Isager, P. M., &amp; Lakens, D. (2021). Why Hypothesis Testers Should Spend Less Time Testing Hypotheses. <em>Perspectives on Psychological Science</em>, <em>16</em>(4), 744–755. <a href="https://doi.org/10.1177/1745691620966795">https://doi.org/10.1177/1745691620966795</a>
 </div>
-<div id="ref-schweinsberg2021" class="csl-entry" role="doc-biblioentry">
+<div id="ref-schweinsberg2021" class="csl-entry" role="listitem">
 Schweinsberg, M., Feldman, M., Staub, N., Akker, O. R. van den, Aert, R. C. M. van, Assen, M. A. L. M. van, Liu, Y., Althoff, T., Heer, J., Kale, A., Mohamed, Z., Amireh, H., Venkatesh Prasad, V., Bernstein, A., Robinson, E., Snellman, K., Amy Sommer, S., Otner, S. M. G., Robinson, D., … Luis Uhlmann, E. (2021). Same data, different conclusions: Radical dispersion in empirical results when independent analysts operationalize and test the same hypothesis. <em>Organizational Behavior and Human Decision Processes</em>, <em>165</em>, 228–249. <a href="https://doi.org/10.1016/j.obhdp.2021.02.003">https://doi.org/10.1016/j.obhdp.2021.02.003</a>
 </div>
-<div id="ref-sedlmeier1989" class="csl-entry" role="doc-biblioentry">
+<div id="ref-sedlmeier1989" class="csl-entry" role="listitem">
 Sedlmeier, P., &amp; Gigerenzer, G. (1989). Statistical power studies. <em>Psychological Bulletin</em>, <em>105</em>(2), 309–316.
 </div>
-<div id="ref-silberzahn2015" class="csl-entry" role="doc-biblioentry">
+<div id="ref-silberzahn2015" class="csl-entry" role="listitem">
 Silberzahn, R., &amp; Uhlmann, E. L. (2015). Crowdsourced research: Many hands make tight work. <em>Nature</em>, <em>526</em>(7572), 189–191. <a href="https://doi.org/10.1038/526189a">https://doi.org/10.1038/526189a</a>
 </div>
-<div id="ref-silberzahn2017" class="csl-entry" role="doc-biblioentry">
+<div id="ref-silberzahn2017" class="csl-entry" role="listitem">
 Silberzahn, R., Uhlmann, E. L., Martin, D. P., Anselmi, P., Aust, F., Awtrey, E., Bahník, Š., Bai, F., Bannard, C., Bonnier, E., Carlsson, R., Cheung, F., Christensen, G., Clay, R., Craig, M., Dalla Rosa, A., Dam, L., Evans, M., Flores Cervantes, I., … Nosek, B. (2017). Many analysts, one dataset: Making transparent how variations in analytical choices affect results. <em>Advances in Methods and Practices in Psychological Science</em>. <a href="https://doi.org/10.31234/osf.io/qkwst">https://doi.org/10.31234/osf.io/qkwst</a>
 </div>
-<div id="ref-Simmons2011" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Simmons2011" class="csl-entry" role="listitem">
 Simmons, J. P., Nelson, L. D., &amp; Simonsohn, U. (2011b). False-positive psychology: Undisclosed flexibility in data collection and analysis allows presenting anything as significant. <em>Psychological Science</em>, <em>22</em>(11), 1359–1366. <a href="https://doi.org/10.1177/0956797611417632">https://doi.org/10.1177/0956797611417632</a>
 </div>
-<div id="ref-Simmons2011a" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Simmons2011a" class="csl-entry" role="listitem">
 Simmons, J. P., Nelson, L. D., &amp; Simonsohn, U. (2011a). False-positive psychology: Undisclosed flexibility in data collection and analysis allows presenting anything as significant. <em>Psychological Science</em>, <em>22</em>(11), 1359–1366. <a href="https://doi.org/10.1177/0956797611417632">https://doi.org/10.1177/0956797611417632</a>
 </div>
-<div id="ref-starns2019" class="csl-entry" role="doc-biblioentry">
+<div id="ref-starns2019" class="csl-entry" role="listitem">
 Starns, J. J., Cataldo, A. M., Rotello, C. M., Annis, J., Aschenbrenner, A., Bröder, A., Cox, G., Criss, A., Curl, R. A., Dobbins, I. G., Dunn, J., Enam, T., Evans, N. J., Farrell, S., Fraundorf, S. H., Gronlund, S. D., Heathcote, A., Heck, D. W., Hicks, J. L., … Wilson, J. (2019). Assessing Theoretical Conclusions With Blinded Inference to Investigate a Potential Inference Crisis. <em>Advances in Methods and Practices in Psychological Science</em>, <em>2</em>(4), 335–349. <a href="https://doi.org/10.1177/2515245919869583">https://doi.org/10.1177/2515245919869583</a>
 </div>
-<div id="ref-steegen2016" class="csl-entry" role="doc-biblioentry">
+<div id="ref-steegen2016" class="csl-entry" role="listitem">
 Steegen, S., Tuerlinckx, F., Gelman, A., &amp; Vanpaemel, W. (2016a). Increasing transparency through a multiverse analysis. <em>Perspectives on Psychological Science</em>, <em>11</em>(5), 702–712.
 </div>
-<div id="ref-steegen2016a" class="csl-entry" role="doc-biblioentry">
+<div id="ref-steegen2016a" class="csl-entry" role="listitem">
 Steegen, S., Tuerlinckx, F., Gelman, A., &amp; Vanpaemel, W. (2016b). Increasing transparency through a multiverse analysis. <em>Perspectives on Psychological Science</em>, <em>11</em>(5), 702–712.
 </div>
-<div id="ref-tedersoo2021" class="csl-entry" role="doc-biblioentry">
+<div id="ref-tedersoo2021" class="csl-entry" role="listitem">
 Tedersoo, L., Küngas, R., Oras, E., Köster, K., Eenmaa, H., Leijen, Ä., Pedaste, M., Raju, M., Astapova, A., Lukner, H., Kogermann, K., &amp; Sepp, T. (2021). Data sharing practices and data availability upon request differ across scientific disciplines. <em>Scientific Data</em>, <em>8</em>(1), 192. <a href="https://doi.org/10.1038/s41597-021-00981-0">https://doi.org/10.1038/s41597-021-00981-0</a>
 </div>
-<div id="ref-towse2021" class="csl-entry" role="doc-biblioentry">
+<div id="ref-towse2021" class="csl-entry" role="listitem">
 Towse, J. N., Ellis, D. A., &amp; Towse, A. S. (2021). Opening Pandora’s Box: Peeking inside Psychology’s data sharing practices, and seven recommendations for change. <em>Behavior Research Methods</em>, <em>53</em>(4), 1455–1468. <a href="https://doi.org/10.3758/s13428-020-01486-1">https://doi.org/10.3758/s13428-020-01486-1</a>
 </div>
-<div id="ref-Ulrich1994a" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Ulrich1994a" class="csl-entry" role="listitem">
 Ulrich, R., &amp; Miller, J. (1994). Effects of truncation on reaction time analysis. <em>Journal of Experimental Psychology: General</em>, <em>123</em>, 34–80.
 </div>
-<div id="ref-vankov2014" class="csl-entry" role="doc-biblioentry">
+<div id="ref-vankov2014" class="csl-entry" role="listitem">
 Vankov, I., Bowers, J., &amp; Munafò, M. R. (2014). On the persistence of low power in psychological science. <em>Quarterly Journal of Experimental Psychology</em>, <em>67</em>(5), 1037–1040. <a href="https://doi.org/10.1080/17470218.2014.885986">https://doi.org/10.1080/17470218.2014.885986</a>
 </div>
-<div id="ref-vasishth2021" class="csl-entry" role="doc-biblioentry">
+<div id="ref-vasishth2021" class="csl-entry" role="listitem">
 Vasishth, S., &amp; Gelman, A. (2021). How to embrace variation and accept uncertainty in linguistic and psycholinguistic data analysis. <em>Linguistics</em>, <em>59</em>(5), 1311–1342. <a href="https://doi.org/10.1515/ling-2019-0051">https://doi.org/10.1515/ling-2019-0051</a>
 </div>
-<div id="ref-vazire2018" class="csl-entry" role="doc-biblioentry">
+<div id="ref-vazire2018" class="csl-entry" role="listitem">
 Vazire, S. (2018). Implications of the Credibility Revolution for Productivity, Creativity, and Progress. <em>Perspectives on Psychological Science</em>, <em>13</em>(4), 411–417. <a href="https://doi.org/10.1177/1745691617751884">https://doi.org/10.1177/1745691617751884</a>
 </div>
-<div id="ref-wagenmakers2022" class="csl-entry" role="doc-biblioentry">
+<div id="ref-wagenmakers2022" class="csl-entry" role="listitem">
 Wagenmakers, E.-J., Sarafoglou, A., &amp; Aczel, B. (2022). One statistical analysis must not rule them all. <em>Nature</em>, <em>605</em>(7910), 423–425. <a href="https://doi.org/10.1038/d41586-022-01332-8">https://doi.org/10.1038/d41586-022-01332-8</a>
 </div>
-<div id="ref-Wagenmakers2011" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Wagenmakers2011" class="csl-entry" role="listitem">
 Wagenmakers, E.-J., Wetzels, R., Borsboom, D., &amp; Maas, H. L. J. van der. (2011). Why psychologists must change the way they analyze their data: The case of psi: Comment on bem (2011). <em>Journal of Personality and Social Psychology</em>, <em>100</em>(3), 426–432. <a href="https://doi.org/10.1037/a0022790">https://doi.org/10.1037/a0022790</a>
 </div>
-<div id="ref-wessel2020multiverse" class="csl-entry" role="doc-biblioentry">
+<div id="ref-wessel2020multiverse" class="csl-entry" role="listitem">
 Wessel, I., Albers, C., Zandstra, A. R. E., &amp; Heininga, V. E. (2020). <em>A multiverse analysis of early attempts to replicate memory suppression with the think/no-think task</em>.
 </div>
-<div id="ref-wicherts2006" class="csl-entry" role="doc-biblioentry">
+<div id="ref-wicherts2006" class="csl-entry" role="listitem">
 Wicherts, J. M., Borsboom, D., Kats, J., &amp; Molenaar, D. (2006). The poor availability of psychological research data for reanalysis. <em>American Psychologist</em>, <em>61</em>(7), 726–728. <a href="https://doi.org/10.1037/0003-066X.61.7.726">https://doi.org/10.1037/0003-066X.61.7.726</a>
 </div>
-<div id="ref-wild2022" class="csl-entry" role="doc-biblioentry">
+<div id="ref-wild2022" class="csl-entry" role="listitem">
 Wild, H., Kyröläinen, A.-J., &amp; Kuperman, V. (2022). How representative are student convenience samples? A study of literacy and numeracy skills in 32 countries. <em>PLOS ONE</em>, <em>17</em>(7), e0271191. <a href="https://doi.org/10.1371/journal.pone.0271191">https://doi.org/10.1371/journal.pone.0271191</a>
 </div>
-<div id="ref-yarkoni2022" class="csl-entry" role="doc-biblioentry">
+<div id="ref-yarkoni2022" class="csl-entry" role="listitem">
 Yarkoni, T. (2022). The generalizability crisis. <em>Behavioral and Brain Sciences</em>, <em>45</em>, e1. <a href="https://doi.org/10.1017/S0140525X20001685">https://doi.org/10.1017/S0140525X20001685</a>
 </div>
-<div id="ref-young2018" class="csl-entry" role="doc-biblioentry">
+<div id="ref-young2018" class="csl-entry" role="listitem">
 Young, C. (2018). Model uncertainty and the crisis in science. <em>Socius</em>, <em>4</em>, 2378023117737206.
 </div>
-<div id="ref-young2017" class="csl-entry" role="doc-biblioentry">
+<div id="ref-young2017" class="csl-entry" role="listitem">
 Young, C., &amp; Holsteen, K. (2017). Model Uncertainty and Robustness: A Computational Framework for Multimodel Analysis. <em>Sociological Methods &amp; Research</em>, <em>46</em>(1), 3–40. <a href="https://doi.org/10.1177/0049124115610347">https://doi.org/10.1177/0049124115610347</a>
 </div>
 </div>
@@ -1165,9 +1196,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1179,7 +1224,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -1215,24 +1277,128 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -1240,7 +1406,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
-    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -1254,13 +1420,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./04-glmm.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to Generalized Linear Mixed-effects Models</span></span>
+      <a href="./05-ordinal.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to Ordinal Models</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./what.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">What</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">What</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.189">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,48 +47,19 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -101,8 +73,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -139,10 +110,12 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
@@ -151,11 +124,16 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to Generalized Linear Mixed-effects Models</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-glmm.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to Generalized Linear Mixed-effects Models</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -163,150 +141,168 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Psychological data analysis for graduate students</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">MAKING THE MOST OF R</span>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">MAKING THE MOST OF R</span></span>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./knowledge-ecosystem.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R knowledge</span></a>
+  <a href="./knowledge-ecosystem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R knowledge</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./visualization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data visualization</span></a>
+  <a href="./visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data visualization</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">MODELS</span>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">MODELS</span></span>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-multilevel.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to multilevel data</span></a>
+  <a href="./01-multilevel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to multilevel data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-mixed.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to linear mixed-effects models</span></a>
+  <a href="./02-mixed.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to linear mixed-effects models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-mixed.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Developing linear mixed-effects models</span></a>
+  <a href="./03-mixed.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Developing linear mixed-effects models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-glmm.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to Generalized Linear Mixed-effects Models</span></a>
+  <a href="./04-glmm.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to Generalized Linear Mixed-effects Models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-ordinal.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to Ordinal Models</span></a>
+  <a href="./05-ordinal.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to Ordinal Models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">WRITING ABOUT RESEARCH</span>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">WRITING ABOUT RESEARCH</span></span>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Introduction: the why</span></a>
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Introduction: the why</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./what.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">What</span></a>
+  <a href="./what.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">What</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./how.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">How</span></a>
+  <a href="./how.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">How</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">END</span>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">END</span></span>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  <a href="./summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-glmm-motivations" id="toc-sec-glmm-motivations" class="nav-link active" data-scroll-target="#sec-glmm-motivations"><span class="toc-section-number">6.1</span>  Motivations: working with categorical outcomes</a></li>
-  <li><a href="#sec-glmm-ideas" id="toc-sec-glmm-ideas" class="nav-link" data-scroll-target="#sec-glmm-ideas"><span class="toc-section-number">6.2</span>  The key idea to get us started</a></li>
-  <li><a href="#sec-glmm-targets" id="toc-sec-glmm-targets" class="nav-link" data-scroll-target="#sec-glmm-targets"><span class="toc-section-number">6.3</span>  Targets</a></li>
-  <li><a href="#sec-glmm-study-guide" id="toc-sec-glmm-study-guide" class="nav-link" data-scroll-target="#sec-glmm-study-guide"><span class="toc-section-number">6.4</span>  Study guide</a></li>
-  <li><a href="#sec-glmm-word-learning-data" id="toc-sec-glmm-word-learning-data" class="nav-link" data-scroll-target="#sec-glmm-word-learning-data"><span class="toc-section-number">6.5</span>  The data we will work with: the Ricketts word learning study</a>
+  <li><a href="#sec-glmm-motivations" id="toc-sec-glmm-motivations" class="nav-link active" data-scroll-target="#sec-glmm-motivations"><span class="header-section-number">6.1</span> Motivations: working with categorical outcomes</a></li>
+  <li><a href="#sec-glmm-ideas" id="toc-sec-glmm-ideas" class="nav-link" data-scroll-target="#sec-glmm-ideas"><span class="header-section-number">6.2</span> The key idea to get us started</a></li>
+  <li><a href="#sec-glmm-targets" id="toc-sec-glmm-targets" class="nav-link" data-scroll-target="#sec-glmm-targets"><span class="header-section-number">6.3</span> Targets</a></li>
+  <li><a href="#sec-glmm-study-guide" id="toc-sec-glmm-study-guide" class="nav-link" data-scroll-target="#sec-glmm-study-guide"><span class="header-section-number">6.4</span> Study guide</a></li>
+  <li><a href="#sec-glmm-word-learning-data" id="toc-sec-glmm-word-learning-data" class="nav-link" data-scroll-target="#sec-glmm-word-learning-data"><span class="header-section-number">6.5</span> The data we will work with: the Ricketts word learning study</a>
   <ul class="collapse">
-  <li><a href="#sec-glmm-data-study" id="toc-sec-glmm-data-study" class="nav-link" data-scroll-target="#sec-glmm-data-study"><span class="toc-section-number">6.5.1</span>  Study information</a></li>
-  <li><a href="#sec-glmm-data-download" id="toc-sec-glmm-data-download" class="nav-link" data-scroll-target="#sec-glmm-data-download"><span class="toc-section-number">6.5.2</span>  Locate and download the data file</a></li>
-  <li><a href="#sec-glmm-data-import" id="toc-sec-glmm-data-import" class="nav-link" data-scroll-target="#sec-glmm-data-import"><span class="toc-section-number">6.5.3</span>  Read-in the data file using read_csv</a></li>
-  <li><a href="#sec-glmm-data-inspect" id="toc-sec-glmm-data-inspect" class="nav-link" data-scroll-target="#sec-glmm-data-inspect"><span class="toc-section-number">6.5.4</span>  Inspect the data</a></li>
+  <li><a href="#sec-glmm-data-study" id="toc-sec-glmm-data-study" class="nav-link" data-scroll-target="#sec-glmm-data-study"><span class="header-section-number">6.5.1</span> Study information</a></li>
+  <li><a href="#sec-glmm-data-download" id="toc-sec-glmm-data-download" class="nav-link" data-scroll-target="#sec-glmm-data-download"><span class="header-section-number">6.5.2</span> Locate and download the data file</a></li>
+  <li><a href="#sec-glmm-data-import" id="toc-sec-glmm-data-import" class="nav-link" data-scroll-target="#sec-glmm-data-import"><span class="header-section-number">6.5.3</span> Read-in the data file using read_csv</a></li>
+  <li><a href="#sec-glmm-data-inspect" id="toc-sec-glmm-data-inspect" class="nav-link" data-scroll-target="#sec-glmm-data-inspect"><span class="header-section-number">6.5.4</span> Inspect the data</a></li>
   </ul></li>
-  <li><a href="#sec-glmm-data-tidy" id="toc-sec-glmm-data-tidy" class="nav-link" data-scroll-target="#sec-glmm-data-tidy"><span class="toc-section-number">6.6</span>  Tidy the data</a>
+  <li><a href="#sec-glmm-data-tidy" id="toc-sec-glmm-data-tidy" class="nav-link" data-scroll-target="#sec-glmm-data-tidy"><span class="header-section-number">6.6</span> Tidy the data</a>
   <ul class="collapse">
-  <li><a href="#sec-glmm-data-recode" id="toc-sec-glmm-data-recode" class="nav-link" data-scroll-target="#sec-glmm-data-recode"><span class="toc-section-number">6.6.1</span>  Code categorical factors</a></li>
-  <li><a href="#sec-glmm-data-category-coding" id="toc-sec-glmm-data-category-coding" class="nav-link" data-scroll-target="#sec-glmm-data-category-coding"><span class="toc-section-number">6.6.2</span>  Category coding practicalities</a></li>
+  <li><a href="#sec-glmm-data-recode" id="toc-sec-glmm-data-recode" class="nav-link" data-scroll-target="#sec-glmm-data-recode"><span class="header-section-number">6.6.1</span> Code categorical factors</a></li>
+  <li><a href="#sec-glmm-data-category-coding" id="toc-sec-glmm-data-category-coding" class="nav-link" data-scroll-target="#sec-glmm-data-category-coding"><span class="header-section-number">6.6.2</span> Category coding practicalities</a></li>
   </ul></li>
-  <li><a href="#sec-glmm-ideas-intro" id="toc-sec-glmm-ideas-intro" class="nav-link" data-scroll-target="#sec-glmm-ideas-intro"><span class="toc-section-number">6.7</span>  Introduction to thinking about the need for generalized models</a></li>
-  <li><a href="#sec-glmm-categorical-outcomes" id="toc-sec-glmm-categorical-outcomes" class="nav-link" data-scroll-target="#sec-glmm-categorical-outcomes"><span class="toc-section-number">6.8</span>  Our focus is on the analysis of catgorical outcome variables</a>
+  <li><a href="#sec-glmm-ideas-intro" id="toc-sec-glmm-ideas-intro" class="nav-link" data-scroll-target="#sec-glmm-ideas-intro"><span class="header-section-number">6.7</span> Introduction to thinking about the need for generalized models</a></li>
+  <li><a href="#sec-glmm-categorical-outcomes" id="toc-sec-glmm-categorical-outcomes" class="nav-link" data-scroll-target="#sec-glmm-categorical-outcomes"><span class="header-section-number">6.8</span> Our focus is on the analysis of catgorical outcome variables</a>
   <ul class="collapse">
-  <li><a href="#sec-tradition-limitations" id="toc-sec-tradition-limitations" class="nav-link" data-scroll-target="#sec-tradition-limitations"><span class="toc-section-number">6.8.1</span>  Recognize the limitations of alternative methods for analyzing response accuracy</a></li>
-  <li><a href="#sec-glmm-practical-understanding" id="toc-sec-glmm-practical-understanding" class="nav-link" data-scroll-target="#sec-glmm-practical-understanding"><span class="toc-section-number">6.8.2</span>  Understanding the Generalized part of the Generalized Linear Mixed-effects Models in practical terms</a></li>
+  <li><a href="#sec-tradition-limitations" id="toc-sec-tradition-limitations" class="nav-link" data-scroll-target="#sec-tradition-limitations"><span class="header-section-number">6.8.1</span> Recognize the limitations of alternative methods for analyzing response accuracy</a></li>
+  <li><a href="#sec-glmm-practical-understanding" id="toc-sec-glmm-practical-understanding" class="nav-link" data-scroll-target="#sec-glmm-practical-understanding"><span class="header-section-number">6.8.2</span> Understanding the Generalized part of the Generalized Linear Mixed-effects Models in practical terms</a></li>
   </ul></li>
-  <li><a href="#sec-glmm-working-models" id="toc-sec-glmm-working-models" class="nav-link" data-scroll-target="#sec-glmm-working-models"><span class="toc-section-number">6.9</span>  Working with Generalized Linear Mixed-effects Models in R</a>
+  <li><a href="#sec-glmm-working-models" id="toc-sec-glmm-working-models" class="nav-link" data-scroll-target="#sec-glmm-working-models"><span class="header-section-number">6.9</span> Working with Generalized Linear Mixed-effects Models in R</a>
   <ul class="collapse">
-  <li><a href="#sec-glmm-random-intercepts" id="toc-sec-glmm-random-intercepts" class="nav-link" data-scroll-target="#sec-glmm-random-intercepts"><span class="toc-section-number">6.9.1</span>  Specify a random intercepts model</a></li>
-  <li><a href="#sec-glmm-results" id="toc-sec-glmm-results" class="nav-link" data-scroll-target="#sec-glmm-results"><span class="toc-section-number">6.9.2</span>  Read the results</a></li>
-  <li><a href="#sec-glmm-visualizing" id="toc-sec-glmm-visualizing" class="nav-link" data-scroll-target="#sec-glmm-visualizing"><span class="toc-section-number">6.9.3</span>  Presenting and visualizing the effects</a></li>
+  <li><a href="#sec-glmm-random-intercepts" id="toc-sec-glmm-random-intercepts" class="nav-link" data-scroll-target="#sec-glmm-random-intercepts"><span class="header-section-number">6.9.1</span> Specify a random intercepts model</a></li>
+  <li><a href="#sec-glmm-results" id="toc-sec-glmm-results" class="nav-link" data-scroll-target="#sec-glmm-results"><span class="header-section-number">6.9.2</span> Read the results</a></li>
+  <li><a href="#sec-glmm-visualizing" id="toc-sec-glmm-visualizing" class="nav-link" data-scroll-target="#sec-glmm-visualizing"><span class="header-section-number">6.9.3</span> Presenting and visualizing the effects</a></li>
   </ul></li>
-  <li><a href="#sec-glmm-random-effects" id="toc-sec-glmm-random-effects" class="nav-link" data-scroll-target="#sec-glmm-random-effects"><span class="toc-section-number">6.10</span>  Examining if we should include random effects</a>
+  <li><a href="#sec-glmm-random-effects" id="toc-sec-glmm-random-effects" class="nav-link" data-scroll-target="#sec-glmm-random-effects"><span class="header-section-number">6.10</span> Examining if we should include random effects</a>
   <ul class="collapse">
-  <li><a href="#sec-glmm-comparing-models" id="toc-sec-glmm-comparing-models" class="nav-link" data-scroll-target="#sec-glmm-comparing-models"><span class="toc-section-number">6.10.1</span>  Examine the utility of random effects by comparing models with the same fixed effects but varying random effects</a></li>
-  <li><a href="#sec-glmm-bad-signs" id="toc-sec-glmm-bad-signs" class="nav-link" data-scroll-target="#sec-glmm-bad-signs"><span class="toc-section-number">6.10.2</span>  Bad signs</a></li>
-  <li><a href="#sec-glmm-comparing0-models-2" id="toc-sec-glmm-comparing0-models-2" class="nav-link" data-scroll-target="#sec-glmm-comparing0-models-2"><span class="toc-section-number">6.10.3</span>  Comparison of models varying in random effects</a></li>
-  <li><a href="#sec-glmm-addressing-convergence" id="toc-sec-glmm-addressing-convergence" class="nav-link" data-scroll-target="#sec-glmm-addressing-convergence"><span class="toc-section-number">6.10.4</span>  Addressing convergence problems</a></li>
+  <li><a href="#sec-glmm-comparing-models" id="toc-sec-glmm-comparing-models" class="nav-link" data-scroll-target="#sec-glmm-comparing-models"><span class="header-section-number">6.10.1</span> Examine the utility of random effects by comparing models with the same fixed effects but varying random effects</a></li>
+  <li><a href="#sec-glmm-bad-signs" id="toc-sec-glmm-bad-signs" class="nav-link" data-scroll-target="#sec-glmm-bad-signs"><span class="header-section-number">6.10.2</span> Bad signs</a></li>
+  <li><a href="#sec-glmm-comparing0-models-2" id="toc-sec-glmm-comparing0-models-2" class="nav-link" data-scroll-target="#sec-glmm-comparing0-models-2"><span class="header-section-number">6.10.3</span> Comparison of models varying in random effects</a></li>
+  <li><a href="#sec-glmm-addressing-convergence" id="toc-sec-glmm-addressing-convergence" class="nav-link" data-scroll-target="#sec-glmm-addressing-convergence"><span class="header-section-number">6.10.4</span> Addressing convergence problems</a></li>
   </ul></li>
-  <li><a href="#sec-glmm-reporting-results" id="toc-sec-glmm-reporting-results" class="nav-link" data-scroll-target="#sec-glmm-reporting-results"><span class="toc-section-number">6.11</span>  Reporting model results</a></li>
-  <li><a href="#sec-glmm-summary" id="toc-sec-glmm-summary" class="nav-link" data-scroll-target="#sec-glmm-summary"><span class="toc-section-number">6.12</span>  Summary</a>
+  <li><a href="#sec-glmm-reporting-results" id="toc-sec-glmm-reporting-results" class="nav-link" data-scroll-target="#sec-glmm-reporting-results"><span class="header-section-number">6.11</span> Reporting model results</a></li>
+  <li><a href="#sec-glmm-summary" id="toc-sec-glmm-summary" class="nav-link" data-scroll-target="#sec-glmm-summary"><span class="header-section-number">6.12</span> Summary</a>
   <ul class="collapse">
-  <li><a href="#sec-glmm-glossary-useful-functions" id="toc-sec-glmm-glossary-useful-functions" class="nav-link" data-scroll-target="#sec-glmm-glossary-useful-functions"><span class="toc-section-number">6.12.1</span>  Glossary: useful functions</a></li>
+  <li><a href="#sec-glmm-glossary-useful-functions" id="toc-sec-glmm-glossary-useful-functions" class="nav-link" data-scroll-target="#sec-glmm-glossary-useful-functions"><span class="header-section-number">6.12.1</span> Glossary: useful functions</a></li>
   </ul></li>
-  <li><a href="#sec-glmm-recommended-reading" id="toc-sec-glmm-recommended-reading" class="nav-link" data-scroll-target="#sec-glmm-recommended-reading"><span class="toc-section-number">6.13</span>  Recommended reading</a>
+  <li><a href="#sec-glmm-recommended-reading" id="toc-sec-glmm-recommended-reading" class="nav-link" data-scroll-target="#sec-glmm-recommended-reading"><span class="header-section-number">6.13</span> Recommended reading</a>
   <ul class="collapse">
-  <li><a href="#a-very-useful-faq-by-ben-bolker" id="toc-a-very-useful-faq-by-ben-bolker" class="nav-link" data-scroll-target="#a-very-useful-faq-by-ben-bolker"><span class="toc-section-number">6.13.1</span>  A <em>very</em> useful FAQ by Ben Bolker</a></li>
+  <li><a href="#a-very-useful-faq-by-ben-bolker" id="toc-a-very-useful-faq-by-ben-bolker" class="nav-link" data-scroll-target="#a-very-useful-faq-by-ben-bolker"><span class="header-section-number">6.13.1</span> A <em>very</em> useful FAQ by Ben Bolker</a></li>
   </ul></li>
-  <li><a href="#sec-glmm-appendix" id="toc-sec-glmm-appendix" class="nav-link" data-scroll-target="#sec-glmm-appendix"><span class="toc-section-number">6.14</span>  Appendix: Example dataset variable information</a></li>
+  <li><a href="#sec-glmm-appendix" id="toc-sec-glmm-appendix" class="nav-link" data-scroll-target="#sec-glmm-appendix"><span class="header-section-number">6.14</span> Appendix: Example dataset variable information</a></li>
   </ul>
 </nav>
     </div>
@@ -315,7 +311,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-glmm-intro" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to Generalized Linear Mixed-effects Models</span></span></h1>
+<h1 class="title"><span id="sec-glmm-intro" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to Generalized Linear Mixed-effects Models</span></span></h1>
 </div>
 
 
@@ -323,15 +319,13 @@ div.csl-indent {
 <div class="quarto-title-meta">
 
     
+  
     
   </div>
   
 
 </header>
 
-<div class="cell">
-
-</div>
 <section id="sec-glmm-motivations" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="sec-glmm-motivations"><span class="header-section-number">6.1</span> Motivations: working with categorical outcomes</h2>
 <p>We have been discussing how we can use Linear Mixed-effects models to analyze multilevel structured data, the kind of data that we commonly acquire in experimental psychological studies, for example, when our studies have repeated measures designs. The use of Linear Mixed-effects models is appropriate where the outcome variable is a continuous numeric variable like reaction time. In this chapter, we extend our understanding and skills by moving to examine data where the outcome variable is <em>categorical</em>: this is a context that requires the use of <strong>Generalized Linear Mixed-effects Models (GLMMs)</strong>.</p>
@@ -339,12 +333,12 @@ div.csl-indent {
 </section>
 <section id="sec-glmm-ideas" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="sec-glmm-ideas"><span class="header-section-number">6.2</span> The key idea to get us started</h2>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -404,12 +398,12 @@ Important
 <p>The quality of lexical representations was measured in two ways. A cuing hierarchical response task (definition, cued definition, recognition) was used to elicit semantic knowledge from the phonological forms, providing a fine-grained measure of semantic learning. A spelling task indexed the extent of orthographic learning for each word. We focus on the analysis of the spelling task responses in this chapter (you may be interested in reviewing our other analyses, see <a href="#sec-glmm-data-download"><span>Section&nbsp;6.5.2</span></a>).</p>
 <p><span class="citation" data-cites="ricketts2021">Ricketts et al. (<a href="references.html#ref-ricketts2021" role="doc-biblioref">2021</a>)</span> reported two studies. We focus on Study 1, in which <span class="citation" data-cites="ricketts2021">Ricketts et al. (<a href="references.html#ref-ricketts2021" role="doc-biblioref">2021</a>)</span> measured knowledge of newly learned words at two intervals: first one week and then, again, eight months after training. Longitudinal studies of word learning are rare and this is the first longitudinal investigation of orthographic facilitation.</p>
 <p>We addressed three research questions.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -557,12 +551,12 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <p>You can see that you have an estimate, in the summary, of the effect of orthographic condition shown as:</p>
 <p><code>Orthographypresent  0.52951</code></p>
 <p>This model (and default coding) gives us an estimate of how the log odds of a child getting a response correct changes if we compare the responses in the <code>absent</code> condition (here, treated as the baseline or reference level) with responses in the <code>present</code> condition.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -589,12 +583,12 @@ Tip
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(memisc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -695,12 +689,12 @@ incidental -1</code></pre>
 <li>The percentage or proportion values are then entered as the outcome or dependent variable in ANOVA or t-test or linear model (multiple regression) analyses of response accuracy.</li>
 </ol>
 <p>You will see many reports of ANOVA or t-test or linear model analyses of accuracy.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -722,7 +716,7 @@ Tip
 <div id="fig-word-learning-lm-per-subject-for-report" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="04-glmm_files/figure-html/fig-word-learning-lm-per-subject-for-report-1.png" class="img-fluid figure-img" alt="The figure shows a grid of three scatterplots. In each plot, grey points represent individual scores for proportion of responses correct under different word learning conditions, over blocks (1-12) of learning trials. Superimposed on the points, thin grey lines indicate the individual learning gain (or loss) over blocks for each participant. In each plot, a thicker black line indicates the average learning, across all participants. Learning appears to occur most quickly in the noun only condition compared to the noun and verb learning condition (shown in middle plot) or the verb only condition (shown in rightmost plot)." width="960"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;6.1: Monaghan et al.&nbsp;(2015) artificial word learning study: plot showing the proportion of responses correct for each participant, in each of 12 blocks of 24 learning trials, in each learning condition; each grey line shows the linear model prediction of the proportion correct, for each person, by learning block, in each condition; black lines show the average prediction of the proportion correct, by learning block, in each condition. The position of points has been jittered.</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;6.1: Monaghan et al.&nbsp;(2015) artificial word learning study: plot showing the proportion of responses correct for each participant, in each of 12 blocks of 24 learning trials, in each learning condition; each grey line shows the linear model prediction of the proportion correct, for each person, by learning block, in each condition; black lines show the average prediction of the proportion correct, by learning block, in each condition. The position of points has been jittered.</figcaption>
 </figure>
 </div>
 </div>
@@ -978,7 +972,7 @@ Orthgr2:C_H -0.027  0.001  0.179  0.000 -0.035 -0.007</code></pre>
 <div id="fig-sjplot-orthography" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="04-glmm_files/figure-html/fig-sjplot-orthography-1.png" class="img-fluid figure-img" alt="Effect of orthography condition (present versus absent) on probability of a response being correct." width="672"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;6.2: Effect of orthography condition (present versus absent) on probability of a response being correct</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;6.2: Effect of orthography condition (present versus absent) on probability of a response being correct</figcaption>
 </figure>
 </div>
 </div>
@@ -999,12 +993,12 @@ Orthgr2:C_H -0.027  0.001  0.179  0.000 -0.035 -0.007</code></pre>
 <section id="sec-glmm-random-effects" class="level2" data-number="6.10">
 <h2 data-number="6.10" class="anchored" data-anchor-id="sec-glmm-random-effects"><span class="header-section-number">6.10</span> Examining if we should include random effects</h2>
 <p>So far, we have been considering the results of a <em>random intercepts</em> model in which we take into account the random effects of participants and stimulus word differences on intercepts. We have ignored the possibility that the slopes of the experimental variables might vary between participants or between words.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -1018,12 +1012,12 @@ Tip
 <p>The complexity lies, secondly, and in how we have to translate our understanding of the study design to a specification of random effects. We can master that aspect of the challenge through practice.</p>
 <section id="sec-glmm-random-effects-start" class="level4" data-number="6.10.0.1">
 <h4 data-number="6.10.0.1" class="anchored" data-anchor-id="sec-glmm-random-effects-start"><span class="header-section-number">6.10.0.1</span> Getting started</h4>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -1579,12 +1573,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li>A complete report of all models compared (e.g., in appendices/supplementary data/analysis scripts) with model equations and the result of comparisons.</li>
 <li>If models fail to converge, the approach taken to manage this should be comprehensively reported. This should include the formula for each model that did or did not converge and a rationale for a) the simplification method used and b) the final model reported. This may be most easily presented in an analysis script.</li>
 </ul>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -1646,12 +1640,12 @@ Tip
 <li><strong>Show and tell</strong></li>
 </ol>
 <p>Use figures – model prediction plots, as seen – to help the reader to see what the fixed effects estimates imply.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -1744,53 +1738,53 @@ Tip
 </ul>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography" style="display: none">
-<div id="ref-Baayen2008" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-Baayen2008" class="csl-entry" role="listitem">
 Baayen, R. H., Davidson, D. J., &amp; Bates, D. M. (2008). Mixed-effects modeling with crossed random effects for subjects and items. <em>Journal of Memory and Language</em>, <em>59</em>(4), 390–412. <a href="https://doi.org/10.1016/j.jml.2007.12.005">https://doi.org/10.1016/j.jml.2007.12.005</a>
 </div>
-<div id="ref-Barr2013a" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Barr2013a" class="csl-entry" role="listitem">
 Barr, D. J., Levy, R., Scheepers, C., &amp; Tily, H. J. (2013). Random effects structure for confirmatory hypothesis testing: Keep it maximal. <em>Journal of Memory and Language</em>, <em>68</em>, 255–278.
 </div>
-<div id="ref-bates2015parsimonious" class="csl-entry" role="doc-biblioentry">
+<div id="ref-bates2015parsimonious" class="csl-entry" role="listitem">
 Bates, D., Kliegl, R., Vasishth, S., &amp; Baayen, H. (2015). Parsimonious mixed models. <em>arXiv Preprint arXiv:1506.04967</em>.
 </div>
-<div id="ref-bolker2009" class="csl-entry" role="doc-biblioentry">
+<div id="ref-bolker2009" class="csl-entry" role="listitem">
 Bolker, B. M., Brooks, M. E., Clark, C. J., Geange, S. W., Poulsen, J. R., Stevens, M. H. H., &amp; White, J.-S. S. (2009). Generalized linear mixed models: a practical guide for ecology and evolution. <em>Trends in Ecology &amp; Evolution</em>, <em>24</em>(3), 127–135. <a href="https://doi.org/10.1016/j.tree.2008.10.008">https://doi.org/10.1016/j.tree.2008.10.008</a>
 </div>
-<div id="ref-colenbrander2019" class="csl-entry" role="doc-biblioentry">
+<div id="ref-colenbrander2019" class="csl-entry" role="listitem">
 Colenbrander, D., Miles, K. P., &amp; Ricketts, J. (2019). To See or Not to See: How Does Seeing Spellings Support Vocabulary Learning? <em>Language, Speech, and Hearing Services in Schools</em>, <em>50</em>(4), 609–628. <a href="https://doi.org/10.1044/2019_lshss-voia-18-0135">https://doi.org/10.1044/2019_lshss-voia-18-0135</a>
 </div>
-<div id="ref-eager" class="csl-entry" role="doc-biblioentry">
+<div id="ref-eager" class="csl-entry" role="listitem">
 Eager, C., &amp; Roy, J. (n.d.). <em>Mixed effects models are sometimes terrible</em>. <a href="https://doi.org/10.48550/arXiv.1701.04858">https://doi.org/10.48550/arXiv.1701.04858</a>
 </div>
-<div id="ref-Gelman2007g" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Gelman2007g" class="csl-entry" role="listitem">
 Gelman, A., &amp; Hill, J. (2007b). <em>Data analysis using regression and multilevel/hierarchical models</em>. Cambridge University Press.
 </div>
-<div id="ref-Gelman2007ga" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Gelman2007ga" class="csl-entry" role="listitem">
 Gelman, A., &amp; Hill, J. (2007a). <em>Data analysis using regression and multilevel/hierarchical models</em>. Cambridge University Press.
 </div>
-<div id="ref-jaeger2008" class="csl-entry" role="doc-biblioentry">
+<div id="ref-jaeger2008" class="csl-entry" role="listitem">
 Jaeger, T. F. (2008). Categorical data analysis: Away from ANOVAs (transformation or not) and towards logit mixed models. <em>Journal of Memory and Language</em>, <em>59</em>(4), 434–446. <a href="https://doi.org/10.1016/j.jml.2007.11.007">https://doi.org/10.1016/j.jml.2007.11.007</a>
 </div>
-<div id="ref-loo2022" class="csl-entry" role="doc-biblioentry">
+<div id="ref-loo2022" class="csl-entry" role="listitem">
 Loo, M. van der, Laan, J. van der, R Core Team, Logan, N., Muir, C., Gruber, J., &amp; Ripley, B. (2022). <em>Stringdist: Approximate string matching, fuzzy text search, and string distance functions</em>. <a href="https://CRAN.R-project.org/package=stringdist">https://CRAN.R-project.org/package=stringdist</a>
 </div>
-<div id="ref-matuschek2017" class="csl-entry" role="doc-biblioentry">
+<div id="ref-matuschek2017" class="csl-entry" role="listitem">
 Matuschek, H., Kliegl, R., Vasishth, S., Baayen, H., &amp; Bates, D. (2017). Balancing type i error and power in linear mixed models. <em>Journal of Memory and Language</em>, <em>94</em>, 305–315. <a href="https://doi.org/10.1016/j.jml.2017.01.001">https://doi.org/10.1016/j.jml.2017.01.001</a>
 </div>
-<div id="ref-meteyard2020a" class="csl-entry" role="doc-biblioentry">
+<div id="ref-meteyard2020a" class="csl-entry" role="listitem">
 Meteyard, L., &amp; Davies, R. A. I. (2020). Best practice guidance for linear mixed-effects models in psychological science. <em>Journal of Memory and Language</em>, <em>112</em>, 104092. <a href="https://doi.org/10.1016/j.jml.2020.104092">https://doi.org/10.1016/j.jml.2020.104092</a>
 </div>
-<div id="ref-monaghan2015" class="csl-entry" role="doc-biblioentry">
+<div id="ref-monaghan2015" class="csl-entry" role="listitem">
 Monaghan, P., Mattock, K., Davies, R. A. I., &amp; Smith, A. C. (2015). Gavagai is as gavagai does: Learning nouns and verbs from cross-situational statistics. <em>Cognitive Science</em>, <em>39</em>(5), 1099–1112. <a href="https://doi.org/10.1111/cogs.12186">https://doi.org/10.1111/cogs.12186</a>
 </div>
-<div id="ref-mousikou2017" class="csl-entry" role="doc-biblioentry">
+<div id="ref-mousikou2017" class="csl-entry" role="listitem">
 Mousikou, P., Sadat, J., Lucas, R., &amp; Rastle, K. (2017). Moving beyond the monosyllable in models of skilled reading: Mega-study of disyllabic nonword reading. <em>Journal of Memory and Language</em>, <em>93</em>, 169–192. <a href="https://doi.org/10.1016/j.jml.2016.09.003">https://doi.org/10.1016/j.jml.2016.09.003</a>
 </div>
-<div id="ref-ricketts2021" class="csl-entry" role="doc-biblioentry">
+<div id="ref-ricketts2021" class="csl-entry" role="listitem">
 Ricketts, J., Dawson, N., &amp; Davies, R. (2021). The hidden depths of new word knowledge: Using graded measures of orthographic and semantic learning to measure vocabulary acquisition. <em>Learning and Instruction</em>, <em>74</em>, 101468. <a href="https://doi.org/10.1016/j.learninstruc.2021.101468">https://doi.org/10.1016/j.learninstruc.2021.101468</a>
 </div>
-<div id="ref-Snijders2004a" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Snijders2004a" class="csl-entry" role="listitem">
 Snijders, T. A. B., &amp; Bosker, R. J. (2004). <em>Multilevel analysis: An introduction to basic and advanced multilevel modeling</em>. Sage Publications Ltd.
 </div>
 </div>
@@ -1824,9 +1818,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1838,7 +1846,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -1874,24 +1899,128 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -1899,7 +2028,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
-    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {

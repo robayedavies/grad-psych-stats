@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.189">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,48 +47,19 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -101,8 +73,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -139,13 +110,15 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
 <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
@@ -154,11 +127,16 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to linear mixed-effects models</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02-mixed.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to linear mixed-effects models</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -166,157 +144,175 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Psychological data analysis for graduate students</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">MAKING THE MOST OF R</span>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">MAKING THE MOST OF R</span></span>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./knowledge-ecosystem.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R knowledge</span></a>
+  <a href="./knowledge-ecosystem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R knowledge</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./visualization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data visualization</span></a>
+  <a href="./visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data visualization</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">MODELS</span>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">MODELS</span></span>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-multilevel.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to multilevel data</span></a>
+  <a href="./01-multilevel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to multilevel data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-mixed.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to linear mixed-effects models</span></a>
+  <a href="./02-mixed.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to linear mixed-effects models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-mixed.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Developing linear mixed-effects models</span></a>
+  <a href="./03-mixed.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Developing linear mixed-effects models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-glmm.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to Generalized Linear Mixed-effects Models</span></a>
+  <a href="./04-glmm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to Generalized Linear Mixed-effects Models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-ordinal.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to Ordinal Models</span></a>
+  <a href="./05-ordinal.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to Ordinal Models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">WRITING ABOUT RESEARCH</span>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">WRITING ABOUT RESEARCH</span></span>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Introduction: the why</span></a>
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Introduction: the why</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./what.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">What</span></a>
+  <a href="./what.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">What</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./how.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">How</span></a>
+  <a href="./how.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">How</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">END</span>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">END</span></span>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  <a href="./summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-intro-motivations" id="toc-sec-intro-motivations" class="nav-link active" data-scroll-target="#sec-intro-motivations"><span class="toc-section-number">4.1</span>  Motivations: repeated measures designs and crossed random effects</a></li>
-  <li><a href="#sec-intro-key" id="toc-sec-intro-key" class="nav-link" data-scroll-target="#sec-intro-key"><span class="toc-section-number">4.2</span>  The key idea to get us started</a></li>
-  <li><a href="#sec-intro-targets" id="toc-sec-intro-targets" class="nav-link" data-scroll-target="#sec-intro-targets"><span class="toc-section-number">4.3</span>  Targets</a></li>
-  <li><a href="#sec-intro-mixed-guide" id="toc-sec-intro-mixed-guide" class="nav-link" data-scroll-target="#sec-intro-mixed-guide"><span class="toc-section-number">4.4</span>  Study guide</a></li>
-  <li><a href="#sec-intro-mixed-data" id="toc-sec-intro-mixed-data" class="nav-link" data-scroll-target="#sec-intro-mixed-data"><span class="toc-section-number">4.5</span>  The data we will work with: CP reading study</a>
+  <li><a href="#sec-intro-motivations" id="toc-sec-intro-motivations" class="nav-link active" data-scroll-target="#sec-intro-motivations"><span class="header-section-number">4.1</span> Motivations: repeated measures designs and crossed random effects</a></li>
+  <li><a href="#sec-intro-key" id="toc-sec-intro-key" class="nav-link" data-scroll-target="#sec-intro-key"><span class="header-section-number">4.2</span> The key idea to get us started</a></li>
+  <li><a href="#sec-intro-targets" id="toc-sec-intro-targets" class="nav-link" data-scroll-target="#sec-intro-targets"><span class="header-section-number">4.3</span> Targets</a></li>
+  <li><a href="#sec-intro-mixed-guide" id="toc-sec-intro-mixed-guide" class="nav-link" data-scroll-target="#sec-intro-mixed-guide"><span class="header-section-number">4.4</span> Study guide</a></li>
+  <li><a href="#sec-intro-mixed-data" id="toc-sec-intro-mixed-data" class="nav-link" data-scroll-target="#sec-intro-mixed-data"><span class="header-section-number">4.5</span> The data we will work with: CP reading study</a>
   <ul class="collapse">
-  <li><a href="#sec-intro-mixed-data-download" id="toc-sec-intro-mixed-data-download" class="nav-link" data-scroll-target="#sec-intro-mixed-data-download"><span class="toc-section-number">4.5.1</span>  Locate and download the data file</a></li>
+  <li><a href="#sec-intro-mixed-data-download" id="toc-sec-intro-mixed-data-download" class="nav-link" data-scroll-target="#sec-intro-mixed-data-download"><span class="header-section-number">4.5.1</span> Locate and download the data file</a></li>
   </ul></li>
-  <li><a href="#sec-intro-mixed-data-untidy" id="toc-sec-intro-mixed-data-untidy" class="nav-link" data-scroll-target="#sec-intro-mixed-data-untidy"><span class="toc-section-number">4.6</span>  The challenges of working with real (untidy) experimental data</a>
+  <li><a href="#sec-intro-mixed-data-untidy" id="toc-sec-intro-mixed-data-untidy" class="nav-link" data-scroll-target="#sec-intro-mixed-data-untidy"><span class="header-section-number">4.6</span> The challenges of working with real (untidy) experimental data</a>
   <ul class="collapse">
-  <li><a href="#sec-intro-data-distributed" id="toc-sec-intro-data-distributed" class="nav-link" data-scroll-target="#sec-intro-data-distributed"><span class="toc-section-number">4.6.1</span>  The data we need to use for analysis are not all in the same file</a></li>
-  <li><a href="#sec-intro-mixed-data-untidy-2" id="toc-sec-intro-mixed-data-untidy-2" class="nav-link" data-scroll-target="#sec-intro-mixed-data-untidy-2"><span class="toc-section-number">4.6.2</span>  The data we need to use are untidy</a></li>
+  <li><a href="#sec-intro-data-distributed" id="toc-sec-intro-data-distributed" class="nav-link" data-scroll-target="#sec-intro-data-distributed"><span class="header-section-number">4.6.1</span> The data we need to use for analysis are not all in the same file</a></li>
+  <li><a href="#sec-intro-mixed-data-untidy-2" id="toc-sec-intro-mixed-data-untidy-2" class="nav-link" data-scroll-target="#sec-intro-mixed-data-untidy-2"><span class="header-section-number">4.6.2</span> The data we need to use are untidy</a></li>
   </ul></li>
-  <li><a href="#sec-intro-mixed-tidy-data" id="toc-sec-intro-mixed-tidy-data" class="nav-link" data-scroll-target="#sec-intro-mixed-tidy-data"><span class="toc-section-number">4.7</span>  Tidy the data</a>
+  <li><a href="#sec-intro-mixed-tidy-data" id="toc-sec-intro-mixed-tidy-data" class="nav-link" data-scroll-target="#sec-intro-mixed-tidy-data"><span class="header-section-number">4.7</span> Tidy the data</a>
   <ul class="collapse">
-  <li><a href="#sec-intro-mixed-data-import" id="toc-sec-intro-mixed-data-import" class="nav-link" data-scroll-target="#sec-intro-mixed-data-import"><span class="toc-section-number">4.7.1</span>  Read in the data files by using the read_csv() and read_tsv() functions</a></li>
-  <li><a href="#sec-intro-missing" id="toc-sec-intro-missing" class="nav-link" data-scroll-target="#sec-intro-missing"><span class="toc-section-number">4.7.2</span>  A quick lesson about missing value codes</a></li>
-  <li><a href="#sec-intro-mixed-data-restructure" id="toc-sec-intro-mixed-data-restructure" class="nav-link" data-scroll-target="#sec-intro-mixed-data-restructure"><span class="toc-section-number">4.7.3</span>  Reshape the data from wide to long using the pivot_longer() function</a></li>
-  <li><a href="#sec-intro-mixed-data-restructure-why" id="toc-sec-intro-mixed-data-restructure-why" class="nav-link" data-scroll-target="#sec-intro-mixed-data-restructure-why"><span class="toc-section-number">4.7.4</span>  Why we restructure the data</a></li>
-  <li><a href="#sec-intro-mixed-tidyverse-evolves" id="toc-sec-intro-mixed-tidyverse-evolves" class="nav-link" data-scroll-target="#sec-intro-mixed-tidyverse-evolves"><span class="toc-section-number">4.7.5</span>  The tidyverse evolves</a></li>
-  <li><a href="#sec-intro-mixed-data-join" id="toc-sec-intro-mixed-data-join" class="nav-link" data-scroll-target="#sec-intro-mixed-data-join"><span class="toc-section-number">4.7.6</span>  Merging data from different datasets using _join() functions</a></li>
-  <li><a href="#sec-intro-mixed-data-transform" id="toc-sec-intro-mixed-data-transform" class="nav-link" data-scroll-target="#sec-intro-mixed-data-transform"><span class="toc-section-number">4.7.7</span>  Select or transform the variables</a></li>
-  <li><a href="#sec-intro-mixed-data-filter" id="toc-sec-intro-mixed-data-filter" class="nav-link" data-scroll-target="#sec-intro-mixed-data-filter"><span class="toc-section-number">4.7.8</span>  Filter observations</a></li>
-  <li><a href="#sec-intro-mixed-data-omit-na" id="toc-sec-intro-mixed-data-omit-na" class="nav-link" data-scroll-target="#sec-intro-mixed-data-omit-na"><span class="toc-section-number">4.7.9</span>  Remove missing values</a></li>
-  <li><a href="#sec-intro-mixed-data-tidy-conclusions" id="toc-sec-intro-mixed-data-tidy-conclusions" class="nav-link" data-scroll-target="#sec-intro-mixed-data-tidy-conclusions"><span class="toc-section-number">4.7.10</span>  Now we have some tidy data</a></li>
-  <li><a href="#sec-intro-mixed-data-output-csv" id="toc-sec-intro-mixed-data-output-csv" class="nav-link" data-scroll-target="#sec-intro-mixed-data-output-csv"><span class="toc-section-number">4.7.11</span>  We can output the data as a .csv file</a></li>
-  <li><a href="#sec-intro-mixed-data-conclusions" id="toc-sec-intro-mixed-data-conclusions" class="nav-link" data-scroll-target="#sec-intro-mixed-data-conclusions"><span class="toc-section-number">4.7.12</span>  Data tidying – conclusions</a></li>
+  <li><a href="#sec-intro-mixed-data-import" id="toc-sec-intro-mixed-data-import" class="nav-link" data-scroll-target="#sec-intro-mixed-data-import"><span class="header-section-number">4.7.1</span> Read in the data files by using the read_csv() and read_tsv() functions</a></li>
+  <li><a href="#sec-intro-missing" id="toc-sec-intro-missing" class="nav-link" data-scroll-target="#sec-intro-missing"><span class="header-section-number">4.7.2</span> A quick lesson about missing value codes</a></li>
+  <li><a href="#sec-intro-mixed-data-restructure" id="toc-sec-intro-mixed-data-restructure" class="nav-link" data-scroll-target="#sec-intro-mixed-data-restructure"><span class="header-section-number">4.7.3</span> Reshape the data from wide to long using the pivot_longer() function</a></li>
+  <li><a href="#sec-intro-mixed-data-restructure-why" id="toc-sec-intro-mixed-data-restructure-why" class="nav-link" data-scroll-target="#sec-intro-mixed-data-restructure-why"><span class="header-section-number">4.7.4</span> Why we restructure the data</a></li>
+  <li><a href="#sec-intro-mixed-tidyverse-evolves" id="toc-sec-intro-mixed-tidyverse-evolves" class="nav-link" data-scroll-target="#sec-intro-mixed-tidyverse-evolves"><span class="header-section-number">4.7.5</span> The tidyverse evolves</a></li>
+  <li><a href="#sec-intro-mixed-data-join" id="toc-sec-intro-mixed-data-join" class="nav-link" data-scroll-target="#sec-intro-mixed-data-join"><span class="header-section-number">4.7.6</span> Merging data from different datasets using _join() functions</a></li>
+  <li><a href="#sec-intro-mixed-data-transform" id="toc-sec-intro-mixed-data-transform" class="nav-link" data-scroll-target="#sec-intro-mixed-data-transform"><span class="header-section-number">4.7.7</span> Select or transform the variables</a></li>
+  <li><a href="#sec-intro-mixed-data-filter" id="toc-sec-intro-mixed-data-filter" class="nav-link" data-scroll-target="#sec-intro-mixed-data-filter"><span class="header-section-number">4.7.8</span> Filter observations</a></li>
+  <li><a href="#sec-intro-mixed-data-omit-na" id="toc-sec-intro-mixed-data-omit-na" class="nav-link" data-scroll-target="#sec-intro-mixed-data-omit-na"><span class="header-section-number">4.7.9</span> Remove missing values</a></li>
+  <li><a href="#sec-intro-mixed-data-tidy-conclusions" id="toc-sec-intro-mixed-data-tidy-conclusions" class="nav-link" data-scroll-target="#sec-intro-mixed-data-tidy-conclusions"><span class="header-section-number">4.7.10</span> Now we have some tidy data</a></li>
+  <li><a href="#sec-intro-mixed-data-output-csv" id="toc-sec-intro-mixed-data-output-csv" class="nav-link" data-scroll-target="#sec-intro-mixed-data-output-csv"><span class="header-section-number">4.7.11</span> We can output the data as a .csv file</a></li>
+  <li><a href="#sec-intro-mixed-data-conclusions" id="toc-sec-intro-mixed-data-conclusions" class="nav-link" data-scroll-target="#sec-intro-mixed-data-conclusions"><span class="header-section-number">4.7.12</span> Data tidying – conclusions</a></li>
   </ul></li>
-  <li><a href="#sec-intro-mixed-crossed-random" id="toc-sec-intro-mixed-crossed-random" class="nav-link" data-scroll-target="#sec-intro-mixed-crossed-random"><span class="toc-section-number">4.8</span>  Repeated measures designs and crossed random effects</a></li>
-  <li><a href="#sec-intro-mixed-working-models" id="toc-sec-intro-mixed-working-models" class="nav-link" data-scroll-target="#sec-intro-mixed-working-models"><span class="toc-section-number">4.9</span>  Working with mixed-effects models</a>
+  <li><a href="#sec-intro-mixed-crossed-random" id="toc-sec-intro-mixed-crossed-random" class="nav-link" data-scroll-target="#sec-intro-mixed-crossed-random"><span class="header-section-number">4.8</span> Repeated measures designs and crossed random effects</a></li>
+  <li><a href="#sec-intro-mixed-working-models" id="toc-sec-intro-mixed-working-models" class="nav-link" data-scroll-target="#sec-intro-mixed-working-models"><span class="header-section-number">4.9</span> Working with mixed-effects models</a>
   <ul class="collapse">
-  <li><a href="#sec-intro-mixed-data-load" id="toc-sec-intro-mixed-data-load" class="nav-link" data-scroll-target="#sec-intro-mixed-data-load"><span class="toc-section-number">4.9.1</span>  Load the data if you need to</a></li>
-  <li><a href="#sec-intro-mixed-lm" id="toc-sec-intro-mixed-lm" class="nav-link" data-scroll-target="#sec-intro-mixed-lm"><span class="toc-section-number">4.9.2</span>  Linear model for multilevel data – ignoring the hierarchical structure</a></li>
-  <li><a href="#sec-intro-mixed-ignore-hierarchy" id="toc-sec-intro-mixed-ignore-hierarchy" class="nav-link" data-scroll-target="#sec-intro-mixed-ignore-hierarchy"><span class="toc-section-number">4.9.3</span>  Can we ignore the hierarchical structure?</a></li>
-  <li><a href="#sec-intro-mixed-effects-models" id="toc-sec-intro-mixed-effects-models" class="nav-link" data-scroll-target="#sec-intro-mixed-effects-models"><span class="toc-section-number">4.9.4</span>  Multilevel – here, more appropriately known as – mixed-effects models</a></li>
-  <li><a href="#sec-intro-mixed-lmer" id="toc-sec-intro-mixed-lmer" class="nav-link" data-scroll-target="#sec-intro-mixed-lmer"><span class="toc-section-number">4.9.5</span>  Fitting a mixed-effect model using the lmer() function</a></li>
-  <li><a href="#sec-intro-mixed-lmer-results" id="toc-sec-intro-mixed-lmer-results" class="nav-link" data-scroll-target="#sec-intro-mixed-lmer-results"><span class="toc-section-number">4.9.6</span>  Reading the lmer() results</a></li>
-  <li><a href="#sec-intro-mixed-BLUPs" id="toc-sec-intro-mixed-BLUPs" class="nav-link" data-scroll-target="#sec-intro-mixed-BLUPs"><span class="toc-section-number">4.9.7</span>  What we estimate when we estimate random effects</a></li>
+  <li><a href="#sec-intro-mixed-data-load" id="toc-sec-intro-mixed-data-load" class="nav-link" data-scroll-target="#sec-intro-mixed-data-load"><span class="header-section-number">4.9.1</span> Load the data if you need to</a></li>
+  <li><a href="#sec-intro-mixed-lm" id="toc-sec-intro-mixed-lm" class="nav-link" data-scroll-target="#sec-intro-mixed-lm"><span class="header-section-number">4.9.2</span> Linear model for multilevel data – ignoring the hierarchical structure</a></li>
+  <li><a href="#sec-intro-mixed-ignore-hierarchy" id="toc-sec-intro-mixed-ignore-hierarchy" class="nav-link" data-scroll-target="#sec-intro-mixed-ignore-hierarchy"><span class="header-section-number">4.9.3</span> Can we ignore the hierarchical structure?</a></li>
+  <li><a href="#sec-intro-mixed-effects-models" id="toc-sec-intro-mixed-effects-models" class="nav-link" data-scroll-target="#sec-intro-mixed-effects-models"><span class="header-section-number">4.9.4</span> Multilevel – here, more appropriately known as – mixed-effects models</a></li>
+  <li><a href="#sec-intro-mixed-lmer" id="toc-sec-intro-mixed-lmer" class="nav-link" data-scroll-target="#sec-intro-mixed-lmer"><span class="header-section-number">4.9.5</span> Fitting a mixed-effect model using the lmer() function</a></li>
+  <li><a href="#sec-intro-mixed-lmer-results" id="toc-sec-intro-mixed-lmer-results" class="nav-link" data-scroll-target="#sec-intro-mixed-lmer-results"><span class="header-section-number">4.9.6</span> Reading the lmer() results</a></li>
+  <li><a href="#sec-intro-mixed-BLUPs" id="toc-sec-intro-mixed-BLUPs" class="nav-link" data-scroll-target="#sec-intro-mixed-BLUPs"><span class="header-section-number">4.9.7</span> What we estimate when we estimate random effects</a></li>
   </ul></li>
-  <li><a href="#sec-intro-mixed-fixed-effect-fallacy" id="toc-sec-intro-mixed-fixed-effect-fallacy" class="nav-link" data-scroll-target="#sec-intro-mixed-fixed-effect-fallacy"><span class="toc-section-number">4.10</span>  Variation between stimuli: the “language as fixed-effect fallacy”</a>
+  <li><a href="#sec-intro-mixed-fixed-effect-fallacy" id="toc-sec-intro-mixed-fixed-effect-fallacy" class="nav-link" data-scroll-target="#sec-intro-mixed-fixed-effect-fallacy"><span class="header-section-number">4.10</span> Variation between stimuli: the “language as fixed-effect fallacy”</a>
   <ul class="collapse">
-  <li><a href="#sec-intro-mixed-random-effect-stimulus" id="toc-sec-intro-mixed-random-effect-stimulus" class="nav-link" data-scroll-target="#sec-intro-mixed-random-effect-stimulus"><span class="toc-section-number">4.10.1</span>  Include the random effect of stimulus</a></li>
-  <li><a href="#sec-intro-mixed-random-effect-items" id="toc-sec-intro-mixed-random-effect-items" class="nav-link" data-scroll-target="#sec-intro-mixed-random-effect-items"><span class="toc-section-number">4.10.2</span>  Fitting a mixed-effect model – now with random effects of subjects and items</a></li>
+  <li><a href="#sec-intro-mixed-random-effect-stimulus" id="toc-sec-intro-mixed-random-effect-stimulus" class="nav-link" data-scroll-target="#sec-intro-mixed-random-effect-stimulus"><span class="header-section-number">4.10.1</span> Include the random effect of stimulus</a></li>
+  <li><a href="#sec-intro-mixed-random-effect-items" id="toc-sec-intro-mixed-random-effect-items" class="nav-link" data-scroll-target="#sec-intro-mixed-random-effect-items"><span class="header-section-number">4.10.2</span> Fitting a mixed-effect model – now with random effects of subjects and items</a></li>
   </ul></li>
-  <li><a href="#sec-intro-mixed-variance-covariance" id="toc-sec-intro-mixed-variance-covariance" class="nav-link" data-scroll-target="#sec-intro-mixed-variance-covariance"><span class="toc-section-number">4.11</span>  Variances and covariances of random effects</a></li>
-  <li><a href="#sec-intro-mixed-lmer-results-reporting" id="toc-sec-intro-mixed-lmer-results-reporting" class="nav-link" data-scroll-target="#sec-intro-mixed-lmer-results-reporting"><span class="toc-section-number">4.12</span>  Reporting the results of a mixed-effects model</a></li>
-  <li><a href="#sec-intro-mixed-conclusions" id="toc-sec-intro-mixed-conclusions" class="nav-link" data-scroll-target="#sec-intro-mixed-conclusions"><span class="toc-section-number">4.13</span>  Conclusions</a>
+  <li><a href="#sec-intro-mixed-variance-covariance" id="toc-sec-intro-mixed-variance-covariance" class="nav-link" data-scroll-target="#sec-intro-mixed-variance-covariance"><span class="header-section-number">4.11</span> Variances and covariances of random effects</a></li>
+  <li><a href="#sec-intro-mixed-lmer-results-reporting" id="toc-sec-intro-mixed-lmer-results-reporting" class="nav-link" data-scroll-target="#sec-intro-mixed-lmer-results-reporting"><span class="header-section-number">4.12</span> Reporting the results of a mixed-effects model</a></li>
+  <li><a href="#sec-intro-mixed-conclusions" id="toc-sec-intro-mixed-conclusions" class="nav-link" data-scroll-target="#sec-intro-mixed-conclusions"><span class="header-section-number">4.13</span> Conclusions</a>
   <ul class="collapse">
-  <li><a href="#sec-intro-mixed-summary" id="toc-sec-intro-mixed-summary" class="nav-link" data-scroll-target="#sec-intro-mixed-summary"><span class="toc-section-number">4.13.1</span>  Summary</a></li>
-  <li><a href="#sec-intro-mixed-glossary-useful-functions" id="toc-sec-intro-mixed-glossary-useful-functions" class="nav-link" data-scroll-target="#sec-intro-mixed-glossary-useful-functions"><span class="toc-section-number">4.13.2</span>  Glossary: useful functions</a></li>
+  <li><a href="#sec-intro-mixed-summary" id="toc-sec-intro-mixed-summary" class="nav-link" data-scroll-target="#sec-intro-mixed-summary"><span class="header-section-number">4.13.1</span> Summary</a></li>
+  <li><a href="#sec-intro-mixed-glossary-useful-functions" id="toc-sec-intro-mixed-glossary-useful-functions" class="nav-link" data-scroll-target="#sec-intro-mixed-glossary-useful-functions"><span class="header-section-number">4.13.2</span> Glossary: useful functions</a></li>
   </ul></li>
-  <li><a href="#sec-intro-mixed-recommended-reading" id="toc-sec-intro-mixed-recommended-reading" class="nav-link" data-scroll-target="#sec-intro-mixed-recommended-reading"><span class="toc-section-number">4.14</span>  Recommended reading</a></li>
+  <li><a href="#sec-intro-mixed-recommended-reading" id="toc-sec-intro-mixed-recommended-reading" class="nav-link" data-scroll-target="#sec-intro-mixed-recommended-reading"><span class="header-section-number">4.14</span> Recommended reading</a></li>
   </ul>
 </nav>
     </div>
@@ -325,7 +321,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-intro-mixed" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to linear mixed-effects models</span></span></h1>
+<h1 class="title"><span id="sec-intro-mixed" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to linear mixed-effects models</span></span></h1>
 </div>
 
 
@@ -333,15 +329,13 @@ div.csl-indent {
 <div class="quarto-title-meta">
 
     
+  
     
   </div>
   
 
 </header>
 
-<div class="cell">
-
-</div>
 <section id="sec-intro-motivations" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="sec-intro-motivations"><span class="header-section-number">4.1</span> Motivations: repeated measures designs and crossed random effects</h2>
 <p>In <a href="01-multilevel.html"><span>Chapter&nbsp;3</span></a>, we looked at a multilevel structured dataset in which there were observations about children’s grades, and it became evident that those children can be grouped by or under classes. As we discussed, this kind of data structure will come from studies with a very common design in which, for example, the researcher records observations about a sample of children who are members of a sample of classes. In working with these kind of data, it is common to say that the observations of children’s grades are <em>nested</em> within classes in a hierarchy.</p>
@@ -351,12 +345,12 @@ div.csl-indent {
 </section>
 <section id="sec-intro-key" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="sec-intro-key"><span class="header-section-number">4.2</span> The key idea to get us started</h2>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -405,12 +399,12 @@ Important
 <p>In this chapter, we will be working with the <strong>CP reading study</strong> dataset. CP tested 62 children (aged 116-151 months) on reading aloud in English. In the experimental reading task, she presented 160 words as stimuli. The same 160 words were presented to all children. The words were presented one at a time on a computer screen. Each time a word was shown, each child had to read the word out loud and their response was recorded. Thus, the CP reading study dataset comprised observations about the responses made by 62 children to 160 words.</p>
 <p>In addition to the reading task, CP administered tests of reading skill <span class="citation" data-cites="torgesen1999towre">(TOWRE sight word and phonemic tests, <a href="references.html#ref-torgesen1999towre" role="doc-biblioref">Torgesen et al., 1999</a>)</span>, reading experience <span class="citation" data-cites="stainthorp1997children">(CART, <a href="references.html#ref-stainthorp1997children" role="doc-biblioref">Stainthorp, 1997</a>)</span>, the Spoonerisms sub-test of the Phonological Awareness test Battery <span class="citation" data-cites="Frederickson1997a">(PhAB, <a href="references.html#ref-Frederickson1997a" role="doc-biblioref">Frederickson et al., 1997</a>)</span>, and an orthographic choice test measure of orthographic knowledge. She also recorded the gender and the handedness of the children.</p>
 <p>We are going to use the CP study data to examine the answers to a research question similar to the question CP investigated:</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -476,7 +470,7 @@ Note
 <div id="fig-CP-study-RTs" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="CP_study_word_naming_rt_180211-excel-shot.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;4.1: CP study RTs .dat file</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;4.1: CP study RTs .dat file</figcaption>
 </figure>
 </div>
 <p>Typical of the output from data collection software, we can see a data table with:</p>
@@ -492,12 +486,12 @@ Note
 <section id="sec-intro-mixed-data-tidy" class="level4" data-number="4.6.2.1">
 <h4 data-number="4.6.2.1" class="anchored" data-anchor-id="sec-intro-mixed-data-tidy"><span class="header-section-number">4.6.2.1</span> How tidy data are tidy</h4>
 <p>There are three inter-related rules which make data <em>tidy</em> <span class="citation" data-cites="grolemund">(<a href="references.html#ref-grolemund" role="doc-biblioref">Grolemund &amp; Wickham, n.d.</a>)</span>.</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -542,12 +536,12 @@ Important
 <p>These different versions respect the different ways in which the <code>.dat</code> and <code>.csv</code> file formats work. We need <code>read_tsv()</code> when data files consist of tab separated values. We need <code>read_csv()</code> when data files consist of comma separated values.</p>
 <p>You can read more about the <code>{tidyverse}</code> <code>{readr}</code> library of helpful functions <a href="https://readr.tidyverse.org/">here</a></p>
 <p>It is <em>very</em> common to get experimental data in all sorts of different formats. Learning to use <strong>tidyverse</strong> functions will make it easier to cope with this when you do research.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -572,12 +566,12 @@ Tip
 <section id="sec-intro-missing" class="level3" data-number="4.7.2">
 <h3 data-number="4.7.2" class="anchored" data-anchor-id="sec-intro-missing"><span class="header-section-number">4.7.2</span> A quick lesson about missing value codes</h3>
 <p>In the datasets – typically, the spreadsheets – we create in our research, we will have values missing for different reasons. Take another look at the data spreadsheet you saw earlier, <a href="#fig-CP-study-RTs">Figure&nbsp;<span>4.1</span></a>.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -607,12 +601,12 @@ Tip
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>              <span class="fu">pivot_longer</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">62</span>, <span class="at">names_to =</span> <span class="st">"subjectID"</span>, <span class="at">values_to =</span> <span class="st">"accuracy"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Researchers used to have to do this sort of thing by hand, using copying and pasting, in Excel or SPSS. Doing the process by hand takes many hours or days. And you <em>always</em> make errors.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -679,333 +673,333 @@ Tip
 <p>You can see this for yourself if you inspect the source rt data using <code>head()</code> to view the top four rows of the dataset.</p>
 <div class="cell">
 <div class="cell-output-display">
-
-<table class="table" style="margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> item_name </th>
-   <th style="text-align:right;"> AislingoC </th>
-   <th style="text-align:right;"> AlexB </th>
-   <th style="text-align:right;"> AllanaD </th>
-   <th style="text-align:right;"> AmyR </th>
-   <th style="text-align:right;"> AndyD </th>
-   <th style="text-align:right;"> AnnaF </th>
-   <th style="text-align:right;"> AoifeH </th>
-   <th style="text-align:right;"> ChloeBergin </th>
-   <th style="text-align:right;"> ChloeF </th>
-   <th style="text-align:right;"> ChloeS </th>
-   <th style="text-align:right;"> CianR </th>
-   <th style="text-align:right;"> ConorF </th>
-   <th style="text-align:right;"> DavidL </th>
-   <th style="text-align:right;"> DillonF </th>
-   <th style="text-align:right;"> DJHerlihy </th>
-   <th style="text-align:right;"> EamonD </th>
-   <th style="text-align:right;"> EimearK </th>
-   <th style="text-align:right;"> EllenH </th>
-   <th style="text-align:right;"> EoinL </th>
-   <th style="text-align:right;"> GrainneH </th>
-   <th style="text-align:right;"> JackBr </th>
-   <th style="text-align:right;"> JackK </th>
-   <th style="text-align:right;"> JackS </th>
-   <th style="text-align:right;"> JamesoC </th>
-   <th style="text-align:right;"> JenniferoS </th>
-   <th style="text-align:right;"> KateF </th>
-   <th style="text-align:right;"> KayleighMc </th>
-   <th style="text-align:right;"> KenW </th>
-   <th style="text-align:right;"> KevinL </th>
-   <th style="text-align:right;"> KieranF </th>
-   <th style="text-align:right;"> KillianB </th>
-   <th style="text-align:right;"> KirstyC </th>
-   <th style="text-align:right;"> LeeJ </th>
-   <th style="text-align:right;"> MarkC </th>
-   <th style="text-align:right;"> MatthewC </th>
-   <th style="text-align:right;"> MeganoB </th>
-   <th style="text-align:right;"> MichaelaoD </th>
-   <th style="text-align:right;"> NataliaR </th>
-   <th style="text-align:right;"> NiallG </th>
-   <th style="text-align:right;"> NiallGavin </th>
-   <th style="text-align:right;"> NiallW </th>
-   <th style="text-align:right;"> OisinN </th>
-   <th style="text-align:right;"> OlaA </th>
-   <th style="text-align:right;"> OwenD </th>
-   <th style="text-align:right;"> PalomaM </th>
-   <th style="text-align:right;"> PauricT </th>
-   <th style="text-align:right;"> PerryD </th>
-   <th style="text-align:right;"> RachelD </th>
-   <th style="text-align:right;"> RebeccaGr </th>
-   <th style="text-align:right;"> RebeccaM </th>
-   <th style="text-align:right;"> RebeccaR </th>
-   <th style="text-align:right;"> RoisinF </th>
-   <th style="text-align:right;"> RonanT </th>
-   <th style="text-align:right;"> SarahP </th>
-   <th style="text-align:right;"> ShaunaBr </th>
-   <th style="text-align:right;"> SiobhanR </th>
-   <th style="text-align:right;"> TaraB </th>
-   <th style="text-align:right;"> TeeTeeOj </th>
-   <th style="text-align:right;"> ThomasK </th>
-   <th style="text-align:right;"> TristianT </th>
-   <th style="text-align:right;"> Zainab </th>
-  </tr>
- </thead>
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">item_name</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">AislingoC</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">AlexB</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">AllanaD</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">AmyR</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">AndyD</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">AnnaF</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">AoifeH</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">ChloeBergin</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">ChloeF</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">ChloeS</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">CianR</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">ConorF</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">DavidL</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">DillonF</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">DJHerlihy</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">EamonD</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">EimearK</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">EllenH</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">EoinL</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">GrainneH</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">JackBr</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">JackK</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">JackS</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">JamesoC</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">JenniferoS</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">KateF</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">KayleighMc</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">KenW</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">KevinL</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">KieranF</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">KillianB</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">KirstyC</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">LeeJ</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">MarkC</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">MatthewC</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">MeganoB</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">MichaelaoD</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">NataliaR</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">NiallG</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">NiallGavin</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">NiallW</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">OisinN</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">OlaA</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">OwenD</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">PalomaM</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">PauricT</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">PerryD</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">RachelD</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">RebeccaGr</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">RebeccaM</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">RebeccaR</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">RoisinF</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">RonanT</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">SarahP</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">ShaunaBr</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">SiobhanR</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">TaraB</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">TeeTeeOj</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">ThomasK</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">TristianT</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Zainab</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> act </td>
-   <td style="text-align:right;"> 594.8 </td>
-   <td style="text-align:right;"> 586.0 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 693.0 </td>
-   <td style="text-align:right;"> 597 </td>
-   <td style="text-align:right;"> 627.0 </td>
-   <td style="text-align:right;"> 649.0 </td>
-   <td style="text-align:right;"> 1081.0 </td>
-   <td style="text-align:right;"> 642.0 </td>
-   <td style="text-align:right;"> 622.7 </td>
-   <td style="text-align:right;"> 701.0 </td>
-   <td style="text-align:right;"> 686.0 </td>
-   <td style="text-align:right;"> 951.0 </td>
-   <td style="text-align:right;"> 661.0 </td>
-   <td style="text-align:right;"> 692.0 </td>
-   <td style="text-align:right;"> 670.0 </td>
-   <td style="text-align:right;"> 502.4 </td>
-   <td style="text-align:right;"> 578.4 </td>
-   <td style="text-align:right;"> 651.8 </td>
-   <td style="text-align:right;"> 441.6 </td>
-   <td style="text-align:right;"> 895.2 </td>
-   <td style="text-align:right;"> 529.0 </td>
-   <td style="text-align:right;"> 639.0 </td>
-   <td style="text-align:right;"> 809 </td>
-   <td style="text-align:right;"> 676.9 </td>
-   <td style="text-align:right;"> 568.8 </td>
-   <td style="text-align:right;"> 586.1 </td>
-   <td style="text-align:right;"> 591.3 </td>
-   <td style="text-align:right;"> 587 </td>
-   <td style="text-align:right;"> 586 </td>
-   <td style="text-align:right;"> 723.9 </td>
-   <td style="text-align:right;"> 1428.0 </td>
-   <td style="text-align:right;"> 557.0 </td>
-   <td style="text-align:right;"> 639.4 </td>
-   <td style="text-align:right;"> 676 </td>
-   <td style="text-align:right;"> 714.8 </td>
-   <td style="text-align:right;"> 623.3 </td>
-   <td style="text-align:right;"> 615.0 </td>
-   <td style="text-align:right;"> 796.0 </td>
-   <td style="text-align:right;"> 568.4 </td>
-   <td style="text-align:right;"> 800.9 </td>
-   <td style="text-align:right;"> 595 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 574.9 </td>
-   <td style="text-align:right;"> 628 </td>
-   <td style="text-align:right;"> 797.0 </td>
-   <td style="text-align:right;"> 652 </td>
-   <td style="text-align:right;"> 757.0 </td>
-   <td style="text-align:right;"> 631.0 </td>
-   <td style="text-align:right;"> 520.5 </td>
-   <td style="text-align:right;"> 640.0 </td>
-   <td style="text-align:right;"> 733.0 </td>
-   <td style="text-align:right;"> 566 </td>
-   <td style="text-align:right;"> 758.0 </td>
-   <td style="text-align:right;"> 670.0 </td>
-   <td style="text-align:right;"> 532.4 </td>
-   <td style="text-align:right;"> 615.7 </td>
-   <td style="text-align:right;"> 540.0 </td>
-   <td style="text-align:right;"> 1390.0 </td>
-   <td style="text-align:right;"> 747 </td>
-   <td style="text-align:right;"> 651.0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> ask </td>
-   <td style="text-align:right;"> 481.5 </td>
-   <td style="text-align:right;"> 864.0 </td>
-   <td style="text-align:right;"> 1163.0 </td>
-   <td style="text-align:right;"> 694.4 </td>
-   <td style="text-align:right;"> 616 </td>
-   <td style="text-align:right;"> 631.0 </td>
-   <td style="text-align:right;"> 538.0 </td>
-   <td style="text-align:right;"> 799.3 </td>
-   <td style="text-align:right;"> 603.0 </td>
-   <td style="text-align:right;"> 526.0 </td>
-   <td style="text-align:right;"> 591.5 </td>
-   <td style="text-align:right;"> 699.6 </td>
-   <td style="text-align:right;"> 827.2 </td>
-   <td style="text-align:right;"> 635.0 </td>
-   <td style="text-align:right;"> 654.0 </td>
-   <td style="text-align:right;"> 508.0 </td>
-   <td style="text-align:right;"> 564.0 </td>
-   <td style="text-align:right;"> 822.0 </td>
-   <td style="text-align:right;"> 479.7 </td>
-   <td style="text-align:right;"> 600.0 </td>
-   <td style="text-align:right;"> 617.6 </td>
-   <td style="text-align:right;"> 555.9 </td>
-   <td style="text-align:right;"> 654.6 </td>
-   <td style="text-align:right;"> 765 </td>
-   <td style="text-align:right;"> 856.0 </td>
-   <td style="text-align:right;"> 576.7 </td>
-   <td style="text-align:right;"> 690.3 </td>
-   <td style="text-align:right;"> 501.9 </td>
-   <td style="text-align:right;"> 634 </td>
-   <td style="text-align:right;"> 626 </td>
-   <td style="text-align:right;"> 523.3 </td>
-   <td style="text-align:right;"> 640.7 </td>
-   <td style="text-align:right;"> 516.0 </td>
-   <td style="text-align:right;"> 625.7 </td>
-   <td style="text-align:right;"> 561 </td>
-   <td style="text-align:right;"> 698.2 </td>
-   <td style="text-align:right;"> 685.0 </td>
-   <td style="text-align:right;"> 606.0 </td>
-   <td style="text-align:right;"> 793.0 </td>
-   <td style="text-align:right;"> 551.9 </td>
-   <td style="text-align:right;"> 668.7 </td>
-   <td style="text-align:right;"> 722 </td>
-   <td style="text-align:right;"> 868.0 </td>
-   <td style="text-align:right;"> 633.0 </td>
-   <td style="text-align:right;"> 578 </td>
-   <td style="text-align:right;"> 660.2 </td>
-   <td style="text-align:right;"> 851 </td>
-   <td style="text-align:right;"> 640.3 </td>
-   <td style="text-align:right;"> 630.0 </td>
-   <td style="text-align:right;"> 535.0 </td>
-   <td style="text-align:right;"> 568.0 </td>
-   <td style="text-align:right;"> 579.7 </td>
-   <td style="text-align:right;"> 562 </td>
-   <td style="text-align:right;"> 747.0 </td>
-   <td style="text-align:right;"> 602.4 </td>
-   <td style="text-align:right;"> 558.4 </td>
-   <td style="text-align:right;"> 691.0 </td>
-   <td style="text-align:right;"> 580.8 </td>
-   <td style="text-align:right;"> 590.9 </td>
-   <td style="text-align:right;"> 795 </td>
-   <td style="text-align:right;"> 740.5 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> both </td>
-   <td style="text-align:right;"> 457.5 </td>
-   <td style="text-align:right;"> 670.0 </td>
-   <td style="text-align:right;"> 1114.3 </td>
-   <td style="text-align:right;"> 980.0 </td>
-   <td style="text-align:right;"> 1019 </td>
-   <td style="text-align:right;"> 796.1 </td>
-   <td style="text-align:right;"> 545.2 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 581.0 </td>
-   <td style="text-align:right;"> 568.4 </td>
-   <td style="text-align:right;"> 665.0 </td>
-   <td style="text-align:right;"> 751.0 </td>
-   <td style="text-align:right;"> 917.0 </td>
-   <td style="text-align:right;"> 808.1 </td>
-   <td style="text-align:right;"> 737.6 </td>
-   <td style="text-align:right;"> 597.0 </td>
-   <td style="text-align:right;"> 475.0 </td>
-   <td style="text-align:right;"> 608.0 </td>
-   <td style="text-align:right;"> 699.2 </td>
-   <td style="text-align:right;"> 600.6 </td>
-   <td style="text-align:right;"> 527.3 </td>
-   <td style="text-align:right;"> 601.0 </td>
-   <td style="text-align:right;"> 982.1 </td>
-   <td style="text-align:right;"> 917 </td>
-   <td style="text-align:right;"> 854.4 </td>
-   <td style="text-align:right;"> 571.6 </td>
-   <td style="text-align:right;"> 825.3 </td>
-   <td style="text-align:right;"> 584.0 </td>
-   <td style="text-align:right;"> 720 </td>
-   <td style="text-align:right;"> 571 </td>
-   <td style="text-align:right;"> 624.0 </td>
-   <td style="text-align:right;"> 853.4 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 703.0 </td>
-   <td style="text-align:right;"> 781 </td>
-   <td style="text-align:right;"> 1065.8 </td>
-   <td style="text-align:right;"> 591.5 </td>
-   <td style="text-align:right;"> 559.2 </td>
-   <td style="text-align:right;"> 837.6 </td>
-   <td style="text-align:right;"> 612.0 </td>
-   <td style="text-align:right;"> 743.4 </td>
-   <td style="text-align:right;"> 743 </td>
-   <td style="text-align:right;"> 919.0 </td>
-   <td style="text-align:right;"> 883.0 </td>
-   <td style="text-align:right;"> 616 </td>
-   <td style="text-align:right;"> 734.6 </td>
-   <td style="text-align:right;"> 658 </td>
-   <td style="text-align:right;"> 574.4 </td>
-   <td style="text-align:right;"> 634.9 </td>
-   <td style="text-align:right;"> 559.7 </td>
-   <td style="text-align:right;"> 689.0 </td>
-   <td style="text-align:right;"> 997.8 </td>
-   <td style="text-align:right;"> 648 </td>
-   <td style="text-align:right;"> 753.4 </td>
-   <td style="text-align:right;"> 548.0 </td>
-   <td style="text-align:right;"> 530.5 </td>
-   <td style="text-align:right;"> 625.4 </td>
-   <td style="text-align:right;"> 552.0 </td>
-   <td style="text-align:right;"> 985.0 </td>
-   <td style="text-align:right;"> 640 </td>
-   <td style="text-align:right;"> 764.0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> box </td>
-   <td style="text-align:right;"> 546.0 </td>
-   <td style="text-align:right;"> 748.6 </td>
-   <td style="text-align:right;"> 975.0 </td>
-   <td style="text-align:right;"> 678.0 </td>
-   <td style="text-align:right;"> 589 </td>
-   <td style="text-align:right;"> 604.0 </td>
-   <td style="text-align:right;"> 574.0 </td>
-   <td style="text-align:right;"> 658.0 </td>
-   <td style="text-align:right;"> 688.7 </td>
-   <td style="text-align:right;"> 492.0 </td>
-   <td style="text-align:right;"> 641.0 </td>
-   <td style="text-align:right;"> 699.0 </td>
-   <td style="text-align:right;"> 824.0 </td>
-   <td style="text-align:right;"> 731.6 </td>
-   <td style="text-align:right;"> 634.0 </td>
-   <td style="text-align:right;"> 557.5 </td>
-   <td style="text-align:right;"> 520.1 </td>
-   <td style="text-align:right;"> 581.0 </td>
-   <td style="text-align:right;"> 1191.0 </td>
-   <td style="text-align:right;"> 612.0 </td>
-   <td style="text-align:right;"> 540.0 </td>
-   <td style="text-align:right;"> 540.0 </td>
-   <td style="text-align:right;"> 810.0 </td>
-   <td style="text-align:right;"> 885 </td>
-   <td style="text-align:right;"> 573.8 </td>
-   <td style="text-align:right;"> 614.9 </td>
-   <td style="text-align:right;"> 722.0 </td>
-   <td style="text-align:right;"> 594.6 </td>
-   <td style="text-align:right;"> 632 </td>
-   <td style="text-align:right;"> 549 </td>
-   <td style="text-align:right;"> 564.0 </td>
-   <td style="text-align:right;"> 632.6 </td>
-   <td style="text-align:right;"> 668.6 </td>
-   <td style="text-align:right;"> 627.0 </td>
-   <td style="text-align:right;"> 577 </td>
-   <td style="text-align:right;"> 785.9 </td>
-   <td style="text-align:right;"> 649.0 </td>
-   <td style="text-align:right;"> 616.0 </td>
-   <td style="text-align:right;"> 928.0 </td>
-   <td style="text-align:right;"> 608.7 </td>
-   <td style="text-align:right;"> 690.0 </td>
-   <td style="text-align:right;"> 857 </td>
-   <td style="text-align:right;"> 886.6 </td>
-   <td style="text-align:right;"> 544.0 </td>
-   <td style="text-align:right;"> 863 </td>
-   <td style="text-align:right;"> 726.0 </td>
-   <td style="text-align:right;"> 812 </td>
-   <td style="text-align:right;"> 640.5 </td>
-   <td style="text-align:right;"> 613.8 </td>
-   <td style="text-align:right;"> 395.1 </td>
-   <td style="text-align:right;"> 656.7 </td>
-   <td style="text-align:right;"> 604.7 </td>
-   <td style="text-align:right;"> 530 </td>
-   <td style="text-align:right;"> 667.4 </td>
-   <td style="text-align:right;"> 547.7 </td>
-   <td style="text-align:right;"> 570.0 </td>
-   <td style="text-align:right;"> 585.6 </td>
-   <td style="text-align:right;"> 532.0 </td>
-   <td style="text-align:right;"> 634.0 </td>
-   <td style="text-align:right;"> 764 </td>
-   <td style="text-align:right;"> 912.0 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">act</td>
+<td style="text-align: right;">594.8</td>
+<td style="text-align: right;">586.0</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">693.0</td>
+<td style="text-align: right;">597</td>
+<td style="text-align: right;">627.0</td>
+<td style="text-align: right;">649.0</td>
+<td style="text-align: right;">1081.0</td>
+<td style="text-align: right;">642.0</td>
+<td style="text-align: right;">622.7</td>
+<td style="text-align: right;">701.0</td>
+<td style="text-align: right;">686.0</td>
+<td style="text-align: right;">951.0</td>
+<td style="text-align: right;">661.0</td>
+<td style="text-align: right;">692.0</td>
+<td style="text-align: right;">670.0</td>
+<td style="text-align: right;">502.4</td>
+<td style="text-align: right;">578.4</td>
+<td style="text-align: right;">651.8</td>
+<td style="text-align: right;">441.6</td>
+<td style="text-align: right;">895.2</td>
+<td style="text-align: right;">529.0</td>
+<td style="text-align: right;">639.0</td>
+<td style="text-align: right;">809</td>
+<td style="text-align: right;">676.9</td>
+<td style="text-align: right;">568.8</td>
+<td style="text-align: right;">586.1</td>
+<td style="text-align: right;">591.3</td>
+<td style="text-align: right;">587</td>
+<td style="text-align: right;">586</td>
+<td style="text-align: right;">723.9</td>
+<td style="text-align: right;">1428.0</td>
+<td style="text-align: right;">557.0</td>
+<td style="text-align: right;">639.4</td>
+<td style="text-align: right;">676</td>
+<td style="text-align: right;">714.8</td>
+<td style="text-align: right;">623.3</td>
+<td style="text-align: right;">615.0</td>
+<td style="text-align: right;">796.0</td>
+<td style="text-align: right;">568.4</td>
+<td style="text-align: right;">800.9</td>
+<td style="text-align: right;">595</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">574.9</td>
+<td style="text-align: right;">628</td>
+<td style="text-align: right;">797.0</td>
+<td style="text-align: right;">652</td>
+<td style="text-align: right;">757.0</td>
+<td style="text-align: right;">631.0</td>
+<td style="text-align: right;">520.5</td>
+<td style="text-align: right;">640.0</td>
+<td style="text-align: right;">733.0</td>
+<td style="text-align: right;">566</td>
+<td style="text-align: right;">758.0</td>
+<td style="text-align: right;">670.0</td>
+<td style="text-align: right;">532.4</td>
+<td style="text-align: right;">615.7</td>
+<td style="text-align: right;">540.0</td>
+<td style="text-align: right;">1390.0</td>
+<td style="text-align: right;">747</td>
+<td style="text-align: right;">651.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ask</td>
+<td style="text-align: right;">481.5</td>
+<td style="text-align: right;">864.0</td>
+<td style="text-align: right;">1163.0</td>
+<td style="text-align: right;">694.4</td>
+<td style="text-align: right;">616</td>
+<td style="text-align: right;">631.0</td>
+<td style="text-align: right;">538.0</td>
+<td style="text-align: right;">799.3</td>
+<td style="text-align: right;">603.0</td>
+<td style="text-align: right;">526.0</td>
+<td style="text-align: right;">591.5</td>
+<td style="text-align: right;">699.6</td>
+<td style="text-align: right;">827.2</td>
+<td style="text-align: right;">635.0</td>
+<td style="text-align: right;">654.0</td>
+<td style="text-align: right;">508.0</td>
+<td style="text-align: right;">564.0</td>
+<td style="text-align: right;">822.0</td>
+<td style="text-align: right;">479.7</td>
+<td style="text-align: right;">600.0</td>
+<td style="text-align: right;">617.6</td>
+<td style="text-align: right;">555.9</td>
+<td style="text-align: right;">654.6</td>
+<td style="text-align: right;">765</td>
+<td style="text-align: right;">856.0</td>
+<td style="text-align: right;">576.7</td>
+<td style="text-align: right;">690.3</td>
+<td style="text-align: right;">501.9</td>
+<td style="text-align: right;">634</td>
+<td style="text-align: right;">626</td>
+<td style="text-align: right;">523.3</td>
+<td style="text-align: right;">640.7</td>
+<td style="text-align: right;">516.0</td>
+<td style="text-align: right;">625.7</td>
+<td style="text-align: right;">561</td>
+<td style="text-align: right;">698.2</td>
+<td style="text-align: right;">685.0</td>
+<td style="text-align: right;">606.0</td>
+<td style="text-align: right;">793.0</td>
+<td style="text-align: right;">551.9</td>
+<td style="text-align: right;">668.7</td>
+<td style="text-align: right;">722</td>
+<td style="text-align: right;">868.0</td>
+<td style="text-align: right;">633.0</td>
+<td style="text-align: right;">578</td>
+<td style="text-align: right;">660.2</td>
+<td style="text-align: right;">851</td>
+<td style="text-align: right;">640.3</td>
+<td style="text-align: right;">630.0</td>
+<td style="text-align: right;">535.0</td>
+<td style="text-align: right;">568.0</td>
+<td style="text-align: right;">579.7</td>
+<td style="text-align: right;">562</td>
+<td style="text-align: right;">747.0</td>
+<td style="text-align: right;">602.4</td>
+<td style="text-align: right;">558.4</td>
+<td style="text-align: right;">691.0</td>
+<td style="text-align: right;">580.8</td>
+<td style="text-align: right;">590.9</td>
+<td style="text-align: right;">795</td>
+<td style="text-align: right;">740.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">both</td>
+<td style="text-align: right;">457.5</td>
+<td style="text-align: right;">670.0</td>
+<td style="text-align: right;">1114.3</td>
+<td style="text-align: right;">980.0</td>
+<td style="text-align: right;">1019</td>
+<td style="text-align: right;">796.1</td>
+<td style="text-align: right;">545.2</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">581.0</td>
+<td style="text-align: right;">568.4</td>
+<td style="text-align: right;">665.0</td>
+<td style="text-align: right;">751.0</td>
+<td style="text-align: right;">917.0</td>
+<td style="text-align: right;">808.1</td>
+<td style="text-align: right;">737.6</td>
+<td style="text-align: right;">597.0</td>
+<td style="text-align: right;">475.0</td>
+<td style="text-align: right;">608.0</td>
+<td style="text-align: right;">699.2</td>
+<td style="text-align: right;">600.6</td>
+<td style="text-align: right;">527.3</td>
+<td style="text-align: right;">601.0</td>
+<td style="text-align: right;">982.1</td>
+<td style="text-align: right;">917</td>
+<td style="text-align: right;">854.4</td>
+<td style="text-align: right;">571.6</td>
+<td style="text-align: right;">825.3</td>
+<td style="text-align: right;">584.0</td>
+<td style="text-align: right;">720</td>
+<td style="text-align: right;">571</td>
+<td style="text-align: right;">624.0</td>
+<td style="text-align: right;">853.4</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">703.0</td>
+<td style="text-align: right;">781</td>
+<td style="text-align: right;">1065.8</td>
+<td style="text-align: right;">591.5</td>
+<td style="text-align: right;">559.2</td>
+<td style="text-align: right;">837.6</td>
+<td style="text-align: right;">612.0</td>
+<td style="text-align: right;">743.4</td>
+<td style="text-align: right;">743</td>
+<td style="text-align: right;">919.0</td>
+<td style="text-align: right;">883.0</td>
+<td style="text-align: right;">616</td>
+<td style="text-align: right;">734.6</td>
+<td style="text-align: right;">658</td>
+<td style="text-align: right;">574.4</td>
+<td style="text-align: right;">634.9</td>
+<td style="text-align: right;">559.7</td>
+<td style="text-align: right;">689.0</td>
+<td style="text-align: right;">997.8</td>
+<td style="text-align: right;">648</td>
+<td style="text-align: right;">753.4</td>
+<td style="text-align: right;">548.0</td>
+<td style="text-align: right;">530.5</td>
+<td style="text-align: right;">625.4</td>
+<td style="text-align: right;">552.0</td>
+<td style="text-align: right;">985.0</td>
+<td style="text-align: right;">640</td>
+<td style="text-align: right;">764.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">box</td>
+<td style="text-align: right;">546.0</td>
+<td style="text-align: right;">748.6</td>
+<td style="text-align: right;">975.0</td>
+<td style="text-align: right;">678.0</td>
+<td style="text-align: right;">589</td>
+<td style="text-align: right;">604.0</td>
+<td style="text-align: right;">574.0</td>
+<td style="text-align: right;">658.0</td>
+<td style="text-align: right;">688.7</td>
+<td style="text-align: right;">492.0</td>
+<td style="text-align: right;">641.0</td>
+<td style="text-align: right;">699.0</td>
+<td style="text-align: right;">824.0</td>
+<td style="text-align: right;">731.6</td>
+<td style="text-align: right;">634.0</td>
+<td style="text-align: right;">557.5</td>
+<td style="text-align: right;">520.1</td>
+<td style="text-align: right;">581.0</td>
+<td style="text-align: right;">1191.0</td>
+<td style="text-align: right;">612.0</td>
+<td style="text-align: right;">540.0</td>
+<td style="text-align: right;">540.0</td>
+<td style="text-align: right;">810.0</td>
+<td style="text-align: right;">885</td>
+<td style="text-align: right;">573.8</td>
+<td style="text-align: right;">614.9</td>
+<td style="text-align: right;">722.0</td>
+<td style="text-align: right;">594.6</td>
+<td style="text-align: right;">632</td>
+<td style="text-align: right;">549</td>
+<td style="text-align: right;">564.0</td>
+<td style="text-align: right;">632.6</td>
+<td style="text-align: right;">668.6</td>
+<td style="text-align: right;">627.0</td>
+<td style="text-align: right;">577</td>
+<td style="text-align: right;">785.9</td>
+<td style="text-align: right;">649.0</td>
+<td style="text-align: right;">616.0</td>
+<td style="text-align: right;">928.0</td>
+<td style="text-align: right;">608.7</td>
+<td style="text-align: right;">690.0</td>
+<td style="text-align: right;">857</td>
+<td style="text-align: right;">886.6</td>
+<td style="text-align: right;">544.0</td>
+<td style="text-align: right;">863</td>
+<td style="text-align: right;">726.0</td>
+<td style="text-align: right;">812</td>
+<td style="text-align: right;">640.5</td>
+<td style="text-align: right;">613.8</td>
+<td style="text-align: right;">395.1</td>
+<td style="text-align: right;">656.7</td>
+<td style="text-align: right;">604.7</td>
+<td style="text-align: right;">530</td>
+<td style="text-align: right;">667.4</td>
+<td style="text-align: right;">547.7</td>
+<td style="text-align: right;">570.0</td>
+<td style="text-align: right;">585.6</td>
+<td style="text-align: right;">532.0</td>
+<td style="text-align: right;">634.0</td>
+<td style="text-align: right;">764</td>
+<td style="text-align: right;">912.0</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -1045,12 +1039,12 @@ Tip
 <h3 data-number="4.7.6" class="anchored" data-anchor-id="sec-intro-mixed-data-join"><span class="header-section-number">4.7.6</span> Merging data from different datasets using _join() functions</h3>
 <p>To answer our research question, we next need to combine the <strong>RT</strong> with the <strong>accuracy</strong> data, and then the combined behavioural data with <strong>participant</strong> information and <strong>stimulus</strong> information. This is because, as we have seen, information about behavioural responses, about participant attributes or stimulus word properties, are located in separate files.</p>
 <p>Many researchers have completed this kind of operation by hand. This involves copying and pasting bits of data in a spreadsheet. It can take hours or days. I know because I have done it, and I have seen others do it.</p>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Warning
 </div>
 </div>
@@ -1106,12 +1100,12 @@ Warning
 <li>If there is a match then R joins the corresponding rows of data together.</li>
 <li>If there isn’t a match then it creates <code>NAs</code> where there are missing entries in one row for one dataset which cannot be matched to a row from the joining dataset.</li>
 </ul>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -1135,12 +1129,12 @@ Tip
 <p>We can connect datasets – relate them – according to shared variables like <code>subjectID, item_name</code> (for our data). In <code>{tidyverse}</code>, the variables that connect pairs of tables are called keys where, and this is what counts, <em>key(-s) are variable(-s) that uniquely identify an observation</em>.</p>
 <p>For the experimental reading data, we have observations about each response made by a participant (one of 61 subjects) to an item (one of 160 words). For these data, we can match up a pair of RT and accuracy observations for each (unique) <code>subjectID-item_name</code> combination. If you reflect, we could not combine the RT and accuracy data correctly if we did not have both identifying variables in both datasets, because both column variables are required to uniquely identify each observation.</p>
 <p>Further, we could not combine the RT and accuracy data correctly if there were mismatches in values of the identifying variable. Sometimes, I have done this operation and it has gone wrong because a subjectID has been spelled one way in one dataset e.g.&nbsp;<code>hugh</code> and another way in the other dataset e.g.&nbsp;<code>HughH</code>. This leads me to share some advice.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -1198,12 +1192,12 @@ Tip
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>                               age.months, TOWREW_skill, TOWRENW_skill, </span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>                               spoonerisms, CART_score)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -1253,12 +1247,12 @@ Tip
 <li><code>filter(item_name !='FALSE')</code> means: include in the new dataset <code>long.all.select.filter</code> all observations from the old dataset <code>long.all.select</code> that are not <code>!=</code> (<code>!</code> not <code>=</code> equal to) the value <code>FALSE</code> in the variable <code>item_name</code>,</li>
 <li>then recreate the <code>long.all.select.filter</code> as a version of itself (with no name change) by including in the new version only those observations where RT was greater than or equal to 200ms using <code>RT &gt;= 200</code>.</li>
 </ol>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Warning
 </div>
 </div>
@@ -1285,7 +1279,7 @@ Warning
 <li>Change the threshold for including RTs from <code>RT &gt;= 200</code> to something else</li>
 <li>Can you assess what impact the change has? Note that you can count the number of observations (rows) in a dataset using e.g.&nbsp;<code>length(data.set.name$variable.name)</code></li>
 </ol>
-<p>Filtering or re-coding observations is an important element of the research workflow in psychological science, as I discuss in <a href="intro.html#sec-multiversedata"><span>Section&nbsp;7.2.4.2</span></a>. How we do or do not remove observations from original data may have an impact on our results (as explored by, e.g., Steegen et al., 2014). It is important, therefore, that we learn how to do this reproducibly using R scripts that we can share with our research reports.</p>
+<p>Filtering or re-coding observations is an important element of the research workflow in psychological science, as I discuss in <a href="intro.html#sec-multiversedata"><span>Section&nbsp;8.2.4.2</span></a>. How we do or do not remove observations from original data may have an impact on our results (as explored by, e.g., Steegen et al., 2014). It is important, therefore, that we learn how to do this reproducibly using R scripts that we can share with our research reports.</p>
 <p>You can read further information about filtering <a href="https://r4ds.had.co.nz/transform.html?q=filter#filter-rows-with-filter">here</a>.</p>
 </section>
 </section>
@@ -1296,12 +1290,12 @@ Warning
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>long.all.noNAs <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(long.all.select.filter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -1320,25 +1314,23 @@ Tip
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(long.all.noNAs, <span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 26
-   item_n…¹ subje…²    RT accur…³ Lg.UK…⁴ brook…⁵ AoA_K…⁶ Ortho_N regul…⁷ Length
-   &lt;chr&gt;    &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
- 1 act      Aislin…  595.       1    4.03       4    6.42       5       1      3
- 2 act      AlexB    586        1    4.03       4    6.42       5       1      3
- 3 act      AmyR     693        1    4.03       4    6.42       5       1      3
- 4 act      AndyD    597        1    4.03       4    6.42       5       1      3
- 5 act      AnnaF    627        1    4.03       4    6.42       5       1      3
- 6 act      AoifeH   649        1    4.03       4    6.42       5       1      3
- 7 act      ChloeB… 1081        1    4.03       4    6.42       5       1      3
- 8 act      ChloeF   642        1    4.03       4    6.42       5       1      3
- 9 act      ChloeS   623.       1    4.03       4    6.42       5       1      3
-10 act      CianR    701        1    4.03       4    6.42       5       1      3
-# … with 16 more variables: BG_Mean &lt;dbl&gt;, Voice &lt;dbl&gt;, Nasal &lt;dbl&gt;,
-#   Fricative &lt;dbl&gt;, Liquid_SV &lt;dbl&gt;, Bilabials &lt;dbl&gt;, Labiodentals &lt;dbl&gt;,
-#   Alveolars &lt;dbl&gt;, Palatals &lt;dbl&gt;, Velars &lt;dbl&gt;, Glottals &lt;dbl&gt;,
-#   age.months &lt;dbl&gt;, TOWREW_skill &lt;dbl&gt;, TOWRENW_skill &lt;dbl&gt;,
-#   spoonerisms &lt;dbl&gt;, CART_score &lt;dbl&gt;, and abbreviated variable names
-#   ¹​item_name, ²​subjectID, ³​accuracy, ⁴​Lg.UK.CDcount, ⁵​brookesIMG,
-#   ⁶​AoA_Kup_lem, ⁷​regularity</code></pre>
+   item_name subjectID      RT accuracy Lg.UK.CDcount brookesIMG AoA_Kup_lem
+   &lt;chr&gt;     &lt;chr&gt;       &lt;dbl&gt;    &lt;dbl&gt;         &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;
+ 1 act       AislingoC    595.        1          4.03          4        6.42
+ 2 act       AlexB        586         1          4.03          4        6.42
+ 3 act       AmyR         693         1          4.03          4        6.42
+ 4 act       AndyD        597         1          4.03          4        6.42
+ 5 act       AnnaF        627         1          4.03          4        6.42
+ 6 act       AoifeH       649         1          4.03          4        6.42
+ 7 act       ChloeBergin 1081         1          4.03          4        6.42
+ 8 act       ChloeF       642         1          4.03          4        6.42
+ 9 act       ChloeS       623.        1          4.03          4        6.42
+10 act       CianR        701         1          4.03          4        6.42
+# ℹ 19 more variables: Ortho_N &lt;dbl&gt;, regularity &lt;dbl&gt;, Length &lt;dbl&gt;,
+#   BG_Mean &lt;dbl&gt;, Voice &lt;dbl&gt;, Nasal &lt;dbl&gt;, Fricative &lt;dbl&gt;, Liquid_SV &lt;dbl&gt;,
+#   Bilabials &lt;dbl&gt;, Labiodentals &lt;dbl&gt;, Alveolars &lt;dbl&gt;, Palatals &lt;dbl&gt;,
+#   Velars &lt;dbl&gt;, Glottals &lt;dbl&gt;, age.months &lt;dbl&gt;, TOWREW_skill &lt;dbl&gt;,
+#   TOWRENW_skill &lt;dbl&gt;, spoonerisms &lt;dbl&gt;, CART_score &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>If we inspect <code>long.all.noNAs</code>, we can see that we have now got a tidy dataset with all the data we need for our analyses:</p>
@@ -1361,16 +1353,7 @@ Tip
 <section id="sec-intro-mixed-data-conclusions" class="level3" data-number="4.7.12">
 <h3 data-number="4.7.12" class="anchored" data-anchor-id="sec-intro-mixed-data-conclusions"><span class="header-section-number">4.7.12</span> Data tidying – conclusions</h3>
 <p>Most research work involving quantitative evidence requires a <em>big</em> chunk of data tidying or processing before you get to the statistics. Most of the time, this is work <em>you</em> will have to do. The lessons you can learn about the process will generalize to many future research scenarios.</p>
-<div class="callout-advice callout callout-style-default no-icon callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Advice
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<div class="callout-advice">
 <p>It is a mistake to think of data tidying or wrangling as an inconvenience or as an extra task or something you need to do to get to the ‘good stuff’ (your results).</p>
 <ol type="1">
 <li>All analysis results follow from and thus are determined by the data processing steps that precede analysis.</li>
@@ -1378,15 +1361,14 @@ Advice
 <li>The process of data tidying is frequently instructive of your data recording quality: you find things out about your field measurements or your instrument integrity or quality of your recordings, when you pay attention, when you process your data.</li>
 </ol>
 </div>
-</div>
-<p>It is wise to see data tidying or processing as a key part of the data analysis workflow because, as I discuss in <a href="intro.html#sec-multiversedata"><span>Section&nbsp;7.2.4.2</span></a>, the choices you make or the integrity or quality of the actions you take, will have consequences for your analysis results or, more generally, for the quality of the evidence you share with others.</p>
+<p>It is wise to see data tidying or processing as a key part of the data analysis workflow because, as I discuss in <a href="intro.html#sec-multiversedata"><span>Section&nbsp;8.2.4.2</span></a>, the choices you make or the integrity or quality of the actions you take, will have consequences for your analysis results or, more generally, for the quality of the evidence you share with others.</p>
 <p><a href="https://counting.substack.com/p/data-cleaning-is-analysis-not-grunt">Here</a> is a nice substack post that links to some scholarly writing and makes some excellent points.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -1415,12 +1397,12 @@ Tip
 <section id="sec-intro-mixed-working-models" class="level2" data-number="4.9">
 <h2 data-number="4.9" class="anchored" data-anchor-id="sec-intro-mixed-working-models"><span class="header-section-number">4.9</span> Working with mixed-effects models</h2>
 <p>To illustrate the approach, we examine observations from the CP study. We begin, as we did previously, by ignoring differences due to grouping variables (like participant or stimulus). We pretend that all observations are independent. In this fantasy situation, we address our research question.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -1445,12 +1427,12 @@ Note
 <ul>
 <li>Here, I am requesting that <code>read_csv()</code> treats <code>subjectID</code> and <code>item_name</code> as factors.</li>
 </ul>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -1474,7 +1456,7 @@ Tip
 <div id="fig-freq-all" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="02-mixed_files/figure-html/fig-freq-all-1.png" class="img-fluid figure-img" alt="The figure shows a scatterplot: each point represents the lexical frequency (on the x-axis) and the reaction time (RT, on the y-axis) of responses made by children to a set of words. A red line is drawn through the points, indicating that RT decreases for higher values of frequency." width="432"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;4.2: Reading reaction time compared to word frequency, all data</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;4.2: Reading reaction time compared to word frequency, all data</figcaption>
 </figure>
 </div>
 </div>
@@ -1517,12 +1499,12 @@ F-statistic: 302.8 on 1 and 9083 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>In the estimates from this linear model, we see an approximate first answer to our research question.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -1564,7 +1546,7 @@ Note
 <div id="fig-freqperchildtrellis" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="02-mixed_files/figure-html/fig-freqperchildtrellis-1.png" class="img-fluid figure-img" alt="The figure shows a grid of scatterplots. In each plot, each point represents the lexical frequency (on the x-axis) and the reaction time (RT, on the y-axis) of responses made by children to a set of words. A red line is drawn through the points, indicating that RT decreases for higher values of frequency. A different plot is shown to represent the data for each child. Between plots, we can see that the potential association between RT and frequency can vary." width="720"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;4.3: RT vs.&nbsp;word frequency, considered separately for data for each child</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;4.3: RT vs.&nbsp;word frequency, considered separately for data for each child</figcaption>
 </figure>
 </div>
 </div>
@@ -1580,7 +1562,7 @@ Note
 <div id="fig-freqperchildlm" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="02-mixed_files/figure-html/fig-freqperchildlm-1.png" class="img-fluid figure-img" alt="The figure presents two scatterplots: on the left, a plot presenting estimates of intercepts (shown as points, with lines representing standard errors); on the right, a plot presenting estimates of slopes for the effect of frequency on RT (shown as points, with lines representing standard errors). The estimates clearly vary between children." width="768"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;4.4: Estimated intercepts and frequency effect slopes calculated for each child’s data, with child data analysed separately for all children. Points represent estimates. Lines represent standard errors for estimates. Point estimates are presented in order of size.</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;4.4: Estimated intercepts and frequency effect slopes calculated for each child’s data, with child data analysed separately for all children. Points represent estimates. Lines represent standard errors for estimates. Point estimates are presented in order of size.</figcaption>
 </figure>
 </div>
 </div>
@@ -1588,12 +1570,12 @@ Note
 <p><a href="#fig-freqperchildlm">Figure&nbsp;<span>4.4</span></a> presents two plots showing the estimates of the intercept and the coefficient of the effect of word frequency on reading RT, calculated separately for each child. This means that we fitted a separate linear model, for the association between RT and frequency, using the data for just one child, for each child in our sample, for all the children.</p>
 <p>The estimate for each child is shown as a black dot. The standard error of the estimate is shown as a black vertical line, shown above and below a point. You can say that where there is a longer line there we have more uncertainty about the location of the estimate.</p>
 <p>The estimates calculated for each child are shown ordered from left to right in the plot by the size of the estimate. This adjustment to the plot reveals how the estimates of both the intercept and the slope of the frequency effect vary substantially between children.</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -1606,12 +1588,12 @@ Important
 </div>
 </div>
 <p>Here, the intercept can be taken to be the average RT when all other effects in the model are set to zero. RT varies for this sample around somewhere like <span class="math inline">\(\beta_0 = 883ms\)</span> so a slower larger intercept might be e.g.&nbsp;<span class="math inline">\(\beta_0 = 1000ms\)</span>.</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -1691,12 +1673,12 @@ Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + e_{ij}
 <li>Identify what stays the same: function name … the specification of both model and random effects.</li>
 </ul>
 <p>If you can see what is different versus what stays the same then you learn what <em>you can change</em> when the time comes for your analysis with your data.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -1782,12 +1764,12 @@ Lg.UK.CDcnt -0.093</code></pre>
 <section id="sec-intro-mixed-lm-lmer-results" class="level4" data-number="4.9.6.1">
 <h4 data-number="4.9.6.1" class="anchored" data-anchor-id="sec-intro-mixed-lm-lmer-results"><span class="header-section-number">4.9.6.1</span> Is there a difference between linear model and linear mixed-effects model results?</h4>
 <p>Recall that the linear model yields the estimate for the frequency effect on reading RT such that RT decreases by about 53 ms for unit increase in log word frequency (<span class="math inline">\(\beta = -53.375\)</span>). Now, when we have taken random differences between participants into account, we see that the estimate of the effect <strong>for the mixed-effects model</strong> is <span class="math inline">\(\beta = -67.980\)</span>. Taking into account random differences clearly has an impact on results.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -1801,12 +1783,12 @@ Note
 <p>Which coefficient estimate should you trust? Well, it is obvious that the linear model and the linear mixed-effects model estimate are relatively similar. However, it is also obvious that the linear model makes an assumption – the <em>assumption of independence of observations</em> – that does not make sense theoretically (because reading responses will be similar for each child) and does not make sense empirically (because responses will differ between children, see <a href="#fig-freqperchildlm">Figure&nbsp;<span>4.4</span></a>). Thus, we have good grounds for supposing that the linear mixed-effects model estimate for the frequency effect is likely to be closer to the true underlying population effect.</p>
 <p>It is important to remember, however, that whatever estimate we can produce is the estimate <em>given</em> the sample of words we used, our information about word frequency, and our measurement of reading RT responses. How far our estimate actually generalizes to the wider population is not something we can judge in the context of a single study.</p>
 <p>Further, we have not finished in our consideration of the random effects that the account should include. We need to do more work by thinking about the differences between stimuli (<a href="#sec-intro-mixed-fixed-effect-fallacy"><span>Section&nbsp;4.10</span></a>).</p>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Warning
 </div>
 </div>
@@ -1841,7 +1823,7 @@ Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + e_{ij}
 <div id="fig-BLUPS-prediction" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="02-mixed_files/figure-html/fig-BLUPS-prediction-1.png" class="img-fluid figure-img" alt="The figure shows two histograms (a.) on the left represents the distribution of adjustments to account for per-child deviations between the overall intercept and the intercept estimated for a child while (b.) on the right represents the distribution of adjustments to account for per-child deviations between the overall slope and the slope estimated for a child. The histograms indicate widely spread deviations about the overall estimate." width="960"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;4.5: Plot showing histograms indicating the distribution of participant adjustments to account for between-child differences in intercept or slope (the Best Linear Unbiased Predictions).</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;4.5: Plot showing histograms indicating the distribution of participant adjustments to account for between-child differences in intercept or slope (the Best Linear Unbiased Predictions).</figcaption>
 </figure>
 </div>
 </div>
@@ -1877,12 +1859,12 @@ Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + e_{ij}
 <li><code>lmer(RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 0|subjectID)...)</code> gives us a <em>random slope</em> model accounting for just random differences between participants in the slope of the frequency effect</li>
 <li><code>lmer(RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1|subjectID)...)</code> gives us a <em>random intercepts and slopes</em> model accounting for both random differences between participants in the intercept and in the slope, as well as covariance in these differences.</li>
 </ol>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -1901,7 +1883,7 @@ Tip
 <div id="fig-indiv-prediction" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="02-mixed_files/figure-html/fig-indiv-prediction-1.png" class="img-fluid figure-img" alt="The figure shows a grid of scatterplots. In all scatterplots, the same scatter is shown. Points in grey represent the RT and word frequency information for children's responses in reading words in the experimental task. Superimposed on the points are sets of red lines. The lines represent the predictions of different models (a.) assuming a random effect of participants on intercepts, all slopes are the same  but intercepts vary (b.) assuming a random effect of participants on slopes only, slopes vary but intercepts are the same (c.) and assuming random effect of participants on intercepts and on slopes both intercepts and slopes can be seen to vary." width="960"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;4.6: Plot showing model predictions of the effect, for each individual, of word frequency on reading reaction time – predictions vary between models incorporating (a.) random effect of participants on intercepts only; (b.) random effect of participants on slopes only and (c.) random effect of participants on intercepts and on slopes.</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;4.6: Plot showing model predictions of the effect, for each individual, of word frequency on reading reaction time – predictions vary between models incorporating (a.) random effect of participants on intercepts only; (b.) random effect of participants on slopes only and (c.) random effect of participants on intercepts and on slopes.</figcaption>
 </figure>
 </div>
 </div>
@@ -1915,12 +1897,12 @@ Tip
 </section>
 <section id="sec-intro-mixed-exx-lmer-error" class="level4" data-number="4.9.7.2">
 <h4 data-number="4.9.7.2" class="anchored" data-anchor-id="sec-intro-mixed-exx-lmer-error"><span class="header-section-number">4.9.7.2</span> Exercise: Error messages for mixed-effects models</h4>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -1946,12 +1928,12 @@ Important
 </section>
 <section id="sec-intro-mixed-fixed-effect-fallacy" class="level2" data-number="4.10">
 <h2 data-number="4.10" class="anchored" data-anchor-id="sec-intro-mixed-fixed-effect-fallacy"><span class="header-section-number">4.10</span> Variation between stimuli: the “language as fixed-effect fallacy”</h2>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -1970,7 +1952,7 @@ Important
 <div id="fig-pitemsints" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="02-mixed_files/figure-html/fig-pitemsints-1.png" class="img-fluid figure-img" alt="The figure shows a scatterplot: each point represents the estimate for the deviation from the average intercept predicted for responses to each word, for a sample of words. The points are ordered by the estimate and the plot presents a curve of points from left to right from (low) small to (high) large deviations." width="768"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;4.7: Estimated intercepts (with SEs) calculated for each stimulus word, with coefficients ordered by average latency for each word</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;4.7: Estimated intercepts (with SEs) calculated for each stimulus word, with coefficients ordered by average latency for each word</figcaption>
 </figure>
 </div>
 </div>
@@ -2020,12 +2002,12 @@ Y_{ij} = \gamma_0 + \gamma_1X_j + U_{0i}+ U_{1i}X_j + W_{0j} + e_{ij}
 <li><em>as well as</em> random differences between items in intercepts <span class="math inline">\(W_{0j}\)</span>,</li>
 <li>in addition to the residual term <span class="math inline">\(e_{ij}\)</span>.</li>
 </ul>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Warning
 </div>
 </div>
@@ -2091,12 +2073,12 @@ Lg.UK.CDcnt -0.388</code></pre>
 <li><code>item_name   (Intercept)     3397</code> there is now an additional term in the list of random effects, giving the model estimate for variance associated with random differences between words in intercepts</li>
 <li>And you can see that the residual variance has changed. In the first model <code>lmer.all.1</code> it was <code>23734</code>, now it is <code>20704</code></li>
 </ol>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -2125,7 +2107,7 @@ Tip
 <div id="fig-covarp" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="02-mixed_files/figure-html/fig-covarp-1.png" class="img-fluid figure-img" alt="The figure shows a scatterplot: each point represents the estimate of the intercept and the slope of the frequency effect, estimated in separate linear models for the data for each child. The plot shows a narrow cloud of points trending downwards such that larger intercepts (rightwards on the x-axis) are associated with more negative slopes (lower points on the y-axis)." width="384"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;4.8: Scatterplot showing the relationship between estimated coefficients for the intercept and for the frequency effect, for each child analysed separately</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;4.8: Scatterplot showing the relationship between estimated coefficients for the intercept and for the frequency effect, for each child analysed separately</figcaption>
 </figure>
 </div>
 </div>
@@ -2134,12 +2116,12 @@ Tip
 <ul>
 <li><span class="math inline">\(covar(U_{0i}, U_{1i}X_j)\)</span></li>
 </ul>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Warning
 </div>
 </div>
@@ -2152,21 +2134,11 @@ Warning
 <section id="sec-intro-mixed-lmer-results-reporting" class="level2" data-number="4.12">
 <h2 data-number="4.12" class="anchored" data-anchor-id="sec-intro-mixed-lmer-results-reporting"><span class="header-section-number">4.12</span> Reporting the results of a mixed-effects model</h2>
 <p>There is no official convention on what or how to report the results of a mixed-effects model. Lotte Meteyard and I suggest what psychologists should report in an article <span class="citation" data-cites="meteyard2020a">(<a href="references.html#ref-meteyard2020a" role="doc-biblioref">Meteyard &amp; Davies, 2020</a>)</span> that has been downloaded a few thousand times so, maybe, our advice will help to influence practice.</p>
-<div class="callout-advice callout callout-style-default no-icon callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Advice
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<div class="callout-advice">
 <ul>
 <li>Explain what you did, and why.</li>
 <li>Explain what you found, not just whether effects are significant or not.</li>
 </ul>
-</div>
 </div>
 <ol type="1">
 <li><p>We argue that researchers should explain what analysis they have done and, where space allows, should report both the estimates of the <strong>fixed effects</strong> and the estimates of the <strong>random effects</strong>.</p></li>
@@ -2243,12 +2215,12 @@ Advice
 </table>
 <p>Note: <code>lmer(RT ~  Lg.UK.CDcount + (Lg.UK.CDcount + 1||subjectID) + (1|item_name)</code></p>
 <p><span class="citation" data-cites="Barr2013a">Barr et al. (<a href="references.html#ref-Barr2013a" role="doc-biblioref">2013</a>)</span> argued that choices about random effects structure affect the generalizability of the estimates of fixed effects. In particular, it seems sensible to examine the possibility that the slope of the effect of an explanatory variable may vary at random between participants or between stimuli. Correspondingly, researchers should report and explain their decisions about the inclusion of random effects.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -2270,12 +2242,12 @@ Tip
 <p>Whatever version of this scenario, <em>if</em> participants are responding to multiple stimuli and <em>if</em> multiple partcipants respond to each stimulus, then the data will have a multilevel structure such that each observation can be grouped both by participant and by stimulus.</p>
 <p>We are interested in taking into account the random effects associated with unexplained or random differences between participants or between stimuli. We often discuss the accounting of these effects in terms of the estimation of error variances associated with the random differences, calling the effects of the differences <em>random effects</em>. Where we have to deal with both samples of participants and samples of stimuli, we can talk about <em>crossed random effects</em>.</p>
 <p>The terms are not that important. The insight is.</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -2296,12 +2268,12 @@ Important
 <h4 data-number="4.13.1.2" class="anchored" data-anchor-id="sec-intro-mixed-summary-skills"><span class="header-section-number">4.13.1.2</span> Summary: skills</h4>
 <p>We reviewed the ways that experimental data can be untidy. And we outlined the steps that may be required to process untidy data into a tidy format suitable for analysis. As is typical for the data analysis we need to do for experimental psychological science, getting data ready for analysis requires a series of steps including: access; import; restructure; select variables; and filter observations.</p>
 <p>We then developed a mixed-effects model to answer the question:</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -2344,41 +2316,41 @@ Note
 <p>I wrote a tutorial article on mixed-effects models with Lotte Meteyard <span class="citation" data-cites="meteyard2020a">(<a href="references.html#ref-meteyard2020a" role="doc-biblioref">Meteyard &amp; Davies, 2020</a>)</span>. We discuss how important the approach now is for psychological science, what researchers worry about when they use it, and what they should do and report when they use the method.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography" style="display: none">
-<div id="ref-baayen2008" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-baayen2008" class="csl-entry" role="listitem">
 Baayen, R. H., Davidson, D. J., &amp; Bates, D. M. (2008). Mixed-effects modeling with crossed random effects for subjects and items. <em>Journal of Memory and Language</em>, <em>59</em>(4), 390–412. <a href="https://doi.org/10.1016/j.jml.2007.12.005">https://doi.org/10.1016/j.jml.2007.12.005</a>
 </div>
-<div id="ref-Barr2013a" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Barr2013a" class="csl-entry" role="listitem">
 Barr, D. J., Levy, R., Scheepers, C., &amp; Tily, H. J. (2013). Random effects structure for confirmatory hypothesis testing: Keep it maximal. <em>Journal of Memory and Language</em>, <em>68</em>, 255–278.
 </div>
-<div id="ref-clark1973" class="csl-entry" role="doc-biblioentry">
+<div id="ref-clark1973" class="csl-entry" role="listitem">
 Clark, H. (Stanford. U. (1973). <em>Clark<span>_</span>1973<span>_</span>LanguageAsAFixedEffectFallacy.pdf</em>.
 </div>
-<div id="ref-davies2017" class="csl-entry" role="doc-biblioentry">
+<div id="ref-davies2017" class="csl-entry" role="listitem">
 Davies, R. A. I., Birchenough, J. M. H., Arnell, R., Grimmond, D., &amp; Houlson, S. (2017). Reading through the life span: Individual differences in psycholinguistic effects. <em>Journal of Experimental Psychology: Learning Memory and Cognition</em>, <em>43</em>(8). <a href="https://doi.org/10.1037/xlm0000366">https://doi.org/10.1037/xlm0000366</a>
 </div>
-<div id="ref-Frederickson1997a" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Frederickson1997a" class="csl-entry" role="listitem">
 Frederickson, N., Frith, U., &amp; Reason, R. (1997). <em>Phonological assessment battery [PhAB]: Manual and test materials</em>. nfer Nelson Publishing Company Ltd.
 </div>
-<div id="ref-grolemund" class="csl-entry" role="doc-biblioentry">
+<div id="ref-grolemund" class="csl-entry" role="listitem">
 Grolemund, G., &amp; Wickham, H. (n.d.). <em>R for Data Science [Book]</em>. <a href="https://www.oreilly.com/library/view/r-for-data/9781491910382/">https://www.oreilly.com/library/view/r-for-data/9781491910382/</a>
 </div>
-<div id="ref-judd2012" class="csl-entry" role="doc-biblioentry">
+<div id="ref-judd2012" class="csl-entry" role="listitem">
 Judd, C. M., Westfall, J., &amp; Kenny, D. A. (2012). <em>Treating stimuli as a random factor in social psychology : A new and comprehensive solution to a pervasive but largely ignored problem</em>. <em>103</em>(1), 54–69. <a href="https://doi.org/10.1037/a0028347">https://doi.org/10.1037/a0028347</a>
 </div>
-<div id="ref-lorch1990" class="csl-entry" role="doc-biblioentry">
+<div id="ref-lorch1990" class="csl-entry" role="listitem">
 Lorch, R. F., &amp; Myers, J. L. (1990). Regression analyses of repeated measures data in cognitive research. <em>Journal of Experimental Psychology: Learning, Memory, and Cognition</em>, <em>16</em>(1), 149–157. <a href="https://doi.org/10.1037/0278-7393.16.1.149">https://doi.org/10.1037/0278-7393.16.1.149</a>
 </div>
-<div id="ref-meteyard2020a" class="csl-entry" role="doc-biblioentry">
+<div id="ref-meteyard2020a" class="csl-entry" role="listitem">
 Meteyard, L., &amp; Davies, R. A. I. (2020). Best practice guidance for linear mixed-effects models in psychological science. <em>Journal of Memory and Language</em>, <em>112</em>, 104092. <a href="https://doi.org/10.1016/j.jml.2020.104092">https://doi.org/10.1016/j.jml.2020.104092</a>
 </div>
-<div id="ref-raaijmakers1999" class="csl-entry" role="doc-biblioentry">
+<div id="ref-raaijmakers1999" class="csl-entry" role="listitem">
 Raaijmakers, J. G. W., Schrijnemakers, J. M. C., &amp; Gremmen, F. (1999). How to deal with <span>"</span>the language-as-fixed-effect fallacy<span>"</span>: Common misconceptions and alternative solutions. <em>Journal of Memory and Language</em>, <em>41</em>(3), 416–426. <a href="https://doi.org/10.1006/jmla.1999.2650">https://doi.org/10.1006/jmla.1999.2650</a>
 </div>
-<div id="ref-stainthorp1997children" class="csl-entry" role="doc-biblioentry">
+<div id="ref-stainthorp1997children" class="csl-entry" role="listitem">
 Stainthorp, R. (1997). A children<span>’</span>s author recognition test: A useful tool in reading research. <em>Journal of Research in Reading</em>, <em>20</em>(2), 148158.
 </div>
-<div id="ref-torgesen1999towre" class="csl-entry" role="doc-biblioentry">
+<div id="ref-torgesen1999towre" class="csl-entry" role="listitem">
 Torgesen, J. K., Rashotte, C. A., &amp; Wagner, R. K. (1999). <em>TOWRE: Test of word reading efficiency</em>. Pro-ed Austin, TX.
 </div>
 </div>
@@ -2412,9 +2384,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -2426,7 +2412,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -2462,24 +2465,128 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -2487,7 +2594,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
-    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
