@@ -237,6 +237,7 @@ You can inspect the first few rows of the dataset using `head()`.
 ```{r}
 #| label: headcheck-wide
 #| echo: false
+#| warning: false
 # head(ML.all)
 ML.all %>%
   filter(item_number == 1) %>%
@@ -331,6 +332,19 @@ The density plot shows us that the raw ML lexical decision `RT` variable include
 ML.all.correct <- filter(ML.all, RT >= 200)
 ```
 
+The filter code is written to subset the data by rows **using a condition** on the values of the `RT` variable.
+
+`ML.all.correct <- filter(ML.all, RT >= 200)` works as follows.
+
+1.  `ML.all.correct <- filter(ML.all ...)` creates a new dataset with a new name `ML.all.correct` from the old dataset `ML.all` using the `filter()` function.
+2.  `filter(... RT >= 200)` specifies an argument for the `filter()` function.
+
+In effect, we are asking R to check every value in the `RT` column.
+
+-   R will do a check through the `ML.all` dataset, row by row.
+-   *If* a row includes an RT that is greater than or equal to 200 *then* that row will be included in the new dataset `ML.all.correct`. This is what I mean by **using a condition**.
+-   *But if* a row includes an RT that is less than 200, then that row will not be included. We express this condition as `RT >= 200`.
+
 After we have removed negative (error) RTs, we check that the size of the dataset -- here, the number of rows -- matches our expectations. We do this to make sure that we did the filter operation correctly.
 
 ```{r}
@@ -347,6 +361,12 @@ It is wise to *check* that the operations you perform to tidy, process or wrangl
 1.  Forming expectations or predictions about what the operation is supposed to do e.g. filter out some rows by some number;
 2.  Check what you get against these predictions e.g. count the number of rows before versus after filtering.
 :::
+
+The `length()` function will count the elements in whatever object is specified as an argument in the function call.
+
+-   This means that if you put a variable name into the function as in `length(dataset$variable)` it will count how long that variable is -- how many rows there are in the column.
+-   If that variable happens to be, as here, part of a dataset, the same calculation will tell you how many rows there are in the dataset as a whole.
+-   If you just enter `length(dataset)`, naming some dataset, then the function will return a count of the number of columns in the dataset.
 
 Having obtained a new data frame with data on just those trials where responses were correct, we can plot the distribution of RTs for just the correct responses (@fig-rt-correct-density).
 
@@ -365,25 +385,6 @@ ML.all.correct %>%
   ggtitle("Correct RTs") +
   theme_bw()
 ```
-
-The filter code is written to subset the data by rows **using a condition** on the values of the RT variable.
-
-`ML.all.correct <- filter(ML.all, RT >= 200)` works as follows.
-
-1.  `ML.all.correct <- filter(ML.all ...)` creates a new dataset with a new name `ML.all.correct` from the old dataset `ML.all` using the `filter()` function.
-2.  `filter(... RT >= 200)` specifies an argument for the `filter()` function.
-
-In effect, we are asking R to check every value in the `RT` column.
-
--   R will do a check through the `ML.all` dataset, row by row.
--   *If* a row includes an RT that is greater than or equal to 200 *then* that row will be included in the new dataset `ML.all.correct`. This is what I mean by **using a condition**.
--   *But if* a row includes an RT that is less than 200, then that row will not be included. We express this condition as `RT >= 200`.
-
-The `length()` function will count the elements in whatever object is specified as an argument in the function call.
-
--   This means that if you put a variable name into the function as in `length(dataset$variable)` it will count how long that variable is -- how many rows there are in the column.
--   If that variable happens to be, as here, part of a dataset, the same calculation will tell you how many rows there are in the dataset as a whole.
--   If you just enter `length(dataset)`, naming some dataset, then the function will return a count of the number of columns in the dataset.
 
 #### Exercise {#sec-dev-mixed-exx-filter}
 
@@ -436,6 +437,11 @@ Psychology researchers often take the log (often the log base 10) of RT values b
 ML.all.correct$logrt <- log10(ML.all.correct$RT)			
 ```
 
+The `log10()` function works as follows:-
+
+1.  `ML.all.correct$logrt <- log10(...)` creates a a new variable `logrt`, adding it to the `ML.all.correct` dataset. The variable is created using the transformation function `log10()`.
+2.  `log10(ML.all.correct$RT)` creates a the new variable by transforming (to log10) the values of the old variable, `RT`.
+
 We can see the effect of the transformation if we plot the log10 transformed RTs (see @fig-rt-correct-log-density). We arrive at a distribution that more closely approximates the normal distribution.
 
 ```{r}
@@ -453,11 +459,6 @@ ML.all.correct %>%
   ggtitle("Correct log10 RTs") +
   theme_bw()
 ```
-
-The `log10()` function works as follows:-
-
-1.  `ML.all.correct$logrt <- log10(...)` creates a a new variable `logrt`, adding it to the `ML.all.correct` dataset. The variable is created using the transformation function `log10()`.
-2.  `log10(ML.all.correct$RT)` creates a the new variable by transforming (to log10) the values of the old variable, `RT`.
 
 ::: callout-tip
 There are other log transformation functions and we often see researchers using the natural log instead of the log base 10 as discussed [here](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/log)
@@ -522,7 +523,7 @@ The grid of plots illustrates some interesting features about the data in the ML
 
 I think the key message of the plot is that some distributions are wider (RTs are more spread out) than others. We might be concerned that people who present more variable reaction times (wider distributions) may be associated with less reliable estimates of their average response speed, or of the impact of word attributes (like word frequency) on their response speed.
 
-#### Combining data processing and plotting code {sec-dev-mixed-combine-wrangling-plotting}
+#### Combining data processing and plotting code {#sec-dev-mixed-combine-wrangling-plotting}
 
 The plotting code I used to produce @fig-rt-correct-log-den-by-subj progresses through a series of steps. This example demonstrates how you can combine data tidying and plotting steps in a single sequence, using `tidyverse` functions and the `%>%` pipe, so I will take the time to explain what is going on.
 
