@@ -171,7 +171,7 @@ In tidy data:
 3.  Each value must have its own cell.
 :::
 
-You can read more about tidy data [here](http://r4ds.had.co.nz/tidy-data.html).
+You can read more about tidy data [here](https://r4ds.hadley.nz/data-tidy.html#sec-tidy-data).
 
 For our purposes, the reason we want the data in *tidy* format is that it is required for the functions we are going to use for mixed-effects modelling. However, in general, *tidy* format is maximally flexible, and convenient, for use with different R functions.
 
@@ -384,13 +384,13 @@ These data are *now tidy*.
 
 This is a big part of data tidying now done. However, these data are *incomplete*. Next we shall combine behavioural observations with data about stimulus words and about participants.
 
-### The tidyverse evolves {#sec-intro-mixed-tidyverse-evolves}
+<!-- ### The tidyverse evolves {#sec-intro-mixed-tidyverse-evolves} -->
 
-Over the years, different ways of reshaping data have evolved. This reflects how important and common the task is. An older way to do the same operation uses the function `gather()`.
+<!-- Over the years, different ways of reshaping data have evolved. This reflects how important and common the task is. An older way to do the same operation uses the function `gather()`. -->
 
-You can read more about `gather()` [here](http://r4ds.had.co.nz/tidy-data.html#spreading-and-gathering)
+<!-- You can read more about `gather()` [here](http://r4ds.had.co.nz/tidy-data.html#spreading-and-gathering) -->
 
-In `{tidyverse}` the functions designed to enable you to restructure data have evolved through a series of different forms. This change is one of the real benefits of using open software like R. In my experience, the newer functions can be useful for *really* untidy data. I expect things will continue to evolve and improve over time.
+<!-- In `{tidyverse}` the functions designed to enable you to restructure data have evolved through a series of different forms. This change is one of the real benefits of using open software like R. In my experience, the newer functions can be useful for *really* untidy data. I expect things will continue to evolve and improve over time. -->
 
 ### Merging data from different datasets using \_join() functions {#sec-intro-mixed-data-join}
 
@@ -790,7 +790,7 @@ In the estimates from this linear model, we see an approximate first answer to o
 
 ::: callout-note
 -   Research question: What word properties influence responses to words in a test of reading aloud?
--   Result: Our analysis shows that the estimated effect of word frequency is $\beta = -53.375$. This means that, according to the linear model, RT decreases by about 54 milliseconds for each unit increase in log word frequency.
+-   Result: Our analysis shows that the estimated effect of word frequency is $\beta = -53.375$. This means that, according to the linear model, RT decreases by about 53 milliseconds for each unit increase in log word frequency.
 :::
 
 Notice that, here, word frequency information is located in the `Lg.UK.CDcount` variable. In a common move for reading data analyses, we transformed the frequency estimate to the Log base 10 of the word frequency values, prior to analysis, in part because word frequency estimates are usually highly skewed.
