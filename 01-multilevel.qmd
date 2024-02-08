@@ -106,6 +106,8 @@ I have provided a collection of materials you can use. Here, I explain what they
 - [402-week-17-LME-1_1pp.pdf](files/402-week-17-LME-1_1pp.pdf): low resolution .pdf, printable version, one-slide-per-page [359 KB];
 - [402-week-17-LME-1_6pp.pdf](files/402-week-17-LME-1_6pp.pdf): low resolution .pdf, printable version, six-slides-per-page [359 KB].
 
+The high resolution version is the version delivered for the lecture recordings. Because the images are produced to be high resolution, the file size is quite big (4 MB) so, to make the slides easier to download, I produced low resolution versions: 1pp and 6pp. These should be easier to download and print out if that is what you want to do.
+
 **2. Chapter: 01-multilevel**
 
 2.1. I have written this chapter to discuss the main ideas and set out the practical steps you can follow to start to develop the skills required to analyse multilevel structured data. 
