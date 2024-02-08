@@ -144,7 +144,7 @@ The `BAFACALO_DATASET.RData` data were collected and shared online by @golino201
 The practical materials folder includes:
 
 - `BAFACALO_DATASET.RData`
--  `01-multilevel-workbook.R` the workbook you will need to do the practical exercises.
+-  `402-01-multilevel-workbook.R` the workbook you will need to do the practical exercises.
 
 The data file is in the `.RData` format: `.RData` is R's own file format so the code you use to load and access the data for analysis is a bit simpler than you are used to, see @sec-multi-data-load next.
 (You will have used `read.csv()` or `read_csv()` previously.)

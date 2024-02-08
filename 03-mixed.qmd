@@ -114,9 +114,9 @@ The high resolution version is the version delivered for the lecture recordings.
 -   Run linear mixed-effects models of alternate data sets.
 -   Review the recommended readings (@sec-dev-mixed-recommended-reading).
 
-**3. Practical workbook materials**
+**3. Practical materials**
 
-3.1 In the following sections, I describe the practical steps, and associated resources, you can use for your learning.
+3.1 In the following sections, I describe the practical steps, and associated practical materials (exercise workbooks and data), you can use for your learning.
 
 ## The data we will work with: ML word recognition study {#sec-dev-mixed-data}
 
@@ -188,20 +188,41 @@ The ML study data includes the following variables that we will work with (as we
 -   `BG_Sum, BG_Mean, BG_Freq_By_Pos` -- measures of how common are pairs of letters that compose stimulus words
 -   `SUBTLWF, LgSUBTLWF, SUBTLCD, LgSUBTLCD` -- measures of how common stimulus words are, taken from the SUBTLEX corpus analysis of word frequency [@Brysbaert2009a]
 
-### Locate and download the data file {#sec-dev-mixed-data-download}
+### Locate and download the practical materials {#sec-dev-mixed-data-download}
 
-You can download the [data-03-mixed.zip](files/data-03-mixed.zip) files folder to get the data you need for the practical work we will be doing for this chapter.
+::: callout-important
+**Get the data**: get the data file and the .R script you can use to do the exercises that will support your learning.
 
-The data are held in one file:
+- You can download the files folder for this chapter by clicking on the link [03-mixed.zip](files/03-mixed.zip).
+:::
+
+The practical materials folder includes data files and an `.R` script:
 
 -   `subjects.behaviour.words-310114.csv` which holds information about the (word) stimuli, participants, and the responses recorded in the ML study.
 
 The `.csv` file is a *comma separated values* file and can be opened in Excel.
 
-The data file is collected together with the .R scripts:
+The data file is collected together with the .R script:
 
--   `03-mixed-workbook.R` the workbook you will need to do the practical exercises.
--   `03-mixed-workbook-answers.R` with answers to questions and code for exercises.
+-   `402-03-mixed-workbook.R` the workbook you will need to do the practical exercises.
+
+*During* practical sessions, each week, you can use the workbook to prompt your code construction and your thinking, with support.
+
+#### The answers version {#sec-dev-mixed-answers-download}
+
+*After* practical sessions, you will be able to download an answers version of the workbook .R so check back here after the session.
+
+::: callout-important
+**Get the answers**: get the data file and the .R script with answers.
+
+- You can download the files folder for this chapter by clicking on the link [02-mixed-answers.zip](files/02-mixed-answers.zip).
+:::
+
+The link to this folder will not work until after a session has finished.
+
+When the link is live, you will be able to download a folder including:
+
+-   `402-03-mixed-workbook-with-answers.R` with answers to questions and example code for doing the exercises.
 
 ## Tidy the data {#sec-dev-mixed-tidy}
 
