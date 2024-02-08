@@ -87,7 +87,17 @@ I have provided a collection of materials you can use. Here, I explain what they
 -   [Part 2](https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=01dccf63-8b1e-406c-8694-ace401229f10) -- about 13 minutes
 -   [Part 3](https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=ddde4efb-2975-4347-b255-ace401328b39) -- about 24 minutes
 
-1.2. I suggest you watch the recordings then read the rest of this chapter. The lectures provide a summary of the main points.
+1.2. I suggest you watch the recordings then read the rest of this chapter. 
+
+- The lectures provide a summary of the main points.
+
+1.3. You can download the lecture slides in three different versions:
+
+- [402-week-19-LME-3.pdf](files/402-week-19-LME-3.pdf): high resolution .pdf, exactly as delivered [1.3 MB];
+- [402-week-19-LME-3_1pp.pdf](files/402-week-19-LME-3_1pp.pdf): printable version, one-slide-per-page [1.2 MB];
+- [402-week-19-LME-3_6pp.pdf](files/402-week-19-LME-3_6pp.pdf): printable version, six-slides-per-page [1.3 MB].
+
+The high resolution version is the version delivered for the lecture recordings. To make the slides easier to download, I produced lower resolution versions: 1pp and 6pp. These should be easier to download and print out if that is what you want to do.
 
 **2. Chapter: 03-mixed**
 
