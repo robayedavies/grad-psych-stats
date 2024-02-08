@@ -59,8 +59,8 @@ I have provided a collection of materials you can use. Here, I explain what they
 1.3. You can download the lecture slides in three different versions:
 
 - [402-week-18-LME-2.pdf](files/402-week-18-LME-2.pdf): high resolution .pdf, exactly as delivered [6 MB];
-- [402-week-18-LME-2_1pp-lo.pdf](files/402-week-17-LME-1_1pp.pdf): lower resolution .pdf, printable version, one-slide-per-page [about 900 KB];
-- [402-week-18-LME-2_6pp-lo.pdf](files/402-week-17-LME-1_6pp.pdf): low resolution .pdf, printable version, six-slides-per-page [about 900 KB].
+- [402-week-18-LME-2_1pp-lo.pdf](files/402-week-18-LME-2_1pp-lo.pdf): lower resolution .pdf, printable version, one-slide-per-page [about 900 KB];
+- [402-week-18-LME-2_6pp-lo.pdf](files/402-week-18-LME-2_6pp-lo.pdf): lower resolution .pdf, printable version, six-slides-per-page [about 900 KB].
 
 The high resolution version is the version delivered for the lecture recordings. Because the images are produced to be high resolution, the file size is quite big (6 MB) so, to make the slides easier to download, I produced low resolution versions: 1pp and 6pp. These should be easier to download and print out if that is what you want to do.
 
