@@ -830,7 +830,7 @@ However, if you take your education in this area further, you will find that the
 
 ### Is there a difference between linear model and linear mixed-effects model results? {#sec-multi-lm-vs-lmer}
 
-Recall that the linear model yields the estimate that for unit increase in Portuguese grade there is an associated .5 increase in English grade, on average ($F(1, 228) = 35, p < .001; adj. R^2 = .13$). We can see that the estimate of the effect **for the mixed-effects model** is $\beta = .659$ which is somewhat different from the effect estimate we got from the linear model.
+Recall that the linear model yields the estimate that for unit increase in Portuguese grade there is an associated .47 increase in English grade, on average [@sec-multi-lm-ignore]. We can see that the estimate of the effect **for the mixed-effects model** is $\beta = .659$ which is somewhat different from the effect estimate we got from the linear model.
 
 ::: callout-note
 -   Research question: Does Portuguese grade predict English grade?
