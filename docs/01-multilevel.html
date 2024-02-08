@@ -269,7 +269,7 @@ div.csl-indent {
   <li><a href="#sec-multi-guide" id="toc-sec-multi-guide" class="nav-link" data-scroll-target="#sec-multi-guide"><span class="header-section-number">3.6</span> Study guide</a></li>
   <li><a href="#sec-multi-data-intro" id="toc-sec-multi-data-intro" class="nav-link" data-scroll-target="#sec-multi-data-intro"><span class="header-section-number">3.7</span> The data we will work with: Brazilian school children</a>
   <ul class="collapse">
-  <li><a href="#sec-multi-data-download" id="toc-sec-multi-data-download" class="nav-link" data-scroll-target="#sec-multi-data-download"><span class="header-section-number">3.7.1</span> Locate and download the data file</a></li>
+  <li><a href="#sec-multi-data-download" id="toc-sec-multi-data-download" class="nav-link" data-scroll-target="#sec-multi-data-download"><span class="header-section-number">3.7.1</span> Locate and download the practical materials</a></li>
   <li><a href="#sec-multi-data-load" id="toc-sec-multi-data-load" class="nav-link" data-scroll-target="#sec-multi-data-load"><span class="header-section-number">3.7.2</span> Read in the data file using the load() function</a></li>
   <li><a href="#sec-multi-data-inspect" id="toc-sec-multi-data-inspect" class="nav-link" data-scroll-target="#sec-multi-data-inspect"><span class="header-section-number">3.7.3</span> Inspect the data</a></li>
   </ul></li>
@@ -450,15 +450,15 @@ Important
 <p><strong>2. Chapter: 01-multilevel</strong></p>
 <p>2.1. I have written this chapter to discuss the main ideas and set out the practical steps you can follow to start to develop the skills required to analyse multilevel structured data.</p>
 <p>2.2. The practical elements include data tidying, visualization and analysis steps.</p>
-<p>2.3. You can read the chapter, run the code, and do the exercises.</p>
+<p>2.3. You can read the chapter, see in the chapter how to run the code, and do the exercises.</p>
 <ul>
 <li>Read in the example data <code>BAFACALO_DATASET.RData</code> and identify how the data are structured at multiple levels.</li>
 <li>Use visualizations to explore the impact of the structure.</li>
 <li>Run analyses using linear models (revision) and linear mixed-effects models (extension) code.</li>
 <li>Review the recommended readings (<a href="#sec-multi-reading"><span>Section&nbsp;3.11</span></a>).</li>
 </ul>
-<p><strong>3. Practical workbook materials</strong></p>
-<p>3.1 In the following sections, I describe the practical steps, and associated resources, you can use for your learning.</p>
+<p><strong>3. Practical materials</strong></p>
+<p>3.1 In the following sections, I describe the practical steps, and associated practical materials (exercise workbooks and data), you can use for your learning.</p>
 </section>
 <section id="sec-multi-data-intro" class="level2" data-number="3.7">
 <h2 data-number="3.7" class="anchored" data-anchor-id="sec-multi-data-intro"><span class="header-section-number">3.7</span> The data we will work with: Brazilian school children</h2>
@@ -466,17 +466,59 @@ Important
 <p>The <code>BAFACALO_DATASET.RData</code> data were collected and shared online by <span class="citation" data-cites="golino2014">Golino &amp; Gomes (<a href="references.html#ref-golino2014" role="doc-biblioref">2014</a>)</span>. Information about the background motivating the study, the methods of data collection, along with the dataset itself, can be found <a href="https://openpsychologydata.metajnl.com/articles/10.5334/jopd.af/">here</a>.</p>
 <p><span class="citation" data-cites="golino2014">Golino &amp; Gomes (<a href="references.html#ref-golino2014" role="doc-biblioref">2014</a>)</span> collected school end-of-year subject grades for a sample of 292 children recruited from multiple classes in a school in Brazil. Here, each subject is a theme or course that children studied in school, e.g., Physics or English language, and for which each child was awarded a grade at the end of the school year. So, we have information on different children, and information about their subject grades. Children were taught in different classes but the classes appear to be units of the school organization (the information is not quite clear) not subject or course groupings. Thus, we also have information on which classes children were in when data about them were collected.</p>
 <section id="sec-multi-data-download" class="level3" data-number="3.7.1">
-<h3 data-number="3.7.1" class="anchored" data-anchor-id="sec-multi-data-download"><span class="header-section-number">3.7.1</span> Locate and download the data file</h3>
-<p>You can access the data from the link associated with the <span class="citation" data-cites="golino2014">Golino &amp; Gomes (<a href="references.html#ref-golino2014" role="doc-biblioref">2014</a>)</span> article <a href="http://dx.doi.org/10.7910/DVN/23150">here</a>.</p>
-<p>Or you can download the <a href="files/data-01-multilevel.zip">data-01-multilevel.zip</a> files folder for this chapter.</p>
-<p>The data were compiled to an .RData format file.</p>
-<p><code>.RData</code> is R’s own file format so the code you use to load and access the data for analysis is a bit simpler than you are used to. (You will have used <code>read.csv()</code> or <code>read_csv()</code> previously.)</p>
-<p>In my own practice, I prefer to keep files in formats like <code>.csv</code> which can be opened and read in other software applications (like Excel), so using an <code>.RData</code> is an exception in these materials.</p>
-<p>The file is located in a .zip folder called <code>data-01-multilevel</code>. The data file is collected together with the .R scripts:</p>
+<h3 data-number="3.7.1" class="anchored" data-anchor-id="sec-multi-data-download"><span class="header-section-number">3.7.1</span> Locate and download the practical materials</h3>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Get the data</strong>: get the data file and the .R script you can use to do the exercises that will support your learning.</p>
 <ul>
-<li><code>01-multilevel-workbook.R</code> the workbook you will need to do the practical exercises.</li>
-<li><code>01-multilevel-workbook-answers.R</code> with answers to questions and code for exercises.</li>
+<li>You can download the files folder for this chapter by clicking on the link <a href="files/01-multilevel.zip">01-multilevel.zip</a>.</li>
 </ul>
+</div>
+</div>
+<p>The practical materials folder includes:</p>
+<ul>
+<li><code>BAFACALO_DATASET.RData</code></li>
+<li><code>01-multilevel-workbook.R</code> the workbook you will need to do the practical exercises.</li>
+</ul>
+<p>The data file is in the <code>.RData</code> format: <code>.RData</code> is R’s own file format so the code you use to load and access the data for analysis is a bit simpler than you are used to, see <a href="#sec-multi-data-load"><span>Section&nbsp;3.7.2</span></a> next. (You will have used <code>read.csv()</code> or <code>read_csv()</code> previously.)</p>
+<p>In my own practice, I prefer to keep files in formats like <code>.csv</code> which can be opened and read in other software applications (like Excel), so using an <code>.RData</code> is an exception in these materials.</p>
+<p>You can also access the data from the link associated with the <span class="citation" data-cites="golino2014">Golino &amp; Gomes (<a href="references.html#ref-golino2014" role="doc-biblioref">2014</a>)</span> article <a href="http://dx.doi.org/10.7910/DVN/23150">here</a>.</p>
+<section id="sec-multi-answers-download" class="level4" data-number="3.7.1.1">
+<h4 data-number="3.7.1.1" class="anchored" data-anchor-id="sec-multi-answers-download"><span class="header-section-number">3.7.1.1</span> The answers version</h4>
+<ul>
+<li><em>During</em> practical sessions, each week, you can use the workbook to prompt your code construction and your thinking, with support.</li>
+<li><em>After</em> practical sessions, you will be able to download an answers version of the workbook .R so check back here after the session.</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Get the answers</strong>: get the data file and the .R script with answers.</p>
+<ul>
+<li>You can download the files folder for this chapter by clicking on the link <a href="files/01-multilevel-answers.zip">01-multilevel-answers.zip</a>.</li>
+</ul>
+</div>
+</div>
+<p>The link to this folder will not work until after a session has finished.</p>
+<p>When the link is live, you will be able to download a folder including:</p>
+<ul>
+<li><code>01-multilevel-workbook-answers.R</code> with answers to questions and example code for doing the exercises.</li>
+</ul>
+</section>
 </section>
 <section id="sec-multi-data-load" class="level3" data-number="3.7.2">
 <h3 data-number="3.7.2" class="anchored" data-anchor-id="sec-multi-data-load"><span class="header-section-number">3.7.2</span> Read in the data file using the load() function</h3>

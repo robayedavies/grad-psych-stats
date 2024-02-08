@@ -114,16 +114,16 @@ The high resolution version is the version delivered for the lecture recordings.
 
 2.2. The practical elements include data tidying, visualization and analysis steps. 
 
-2.3. You can read the chapter, run the code, and do the exercises.
+2.3. You can read the chapter, see in the chapter how to run the code, and do the exercises.
 
 -   Read in the example data `BAFACALO_DATASET.RData` and identify how the data are structured at multiple levels.
 -   Use visualizations to explore the impact of the structure.
 -   Run analyses using linear models (revision) and linear mixed-effects models (extension) code.
 -   Review the recommended readings (@sec-multi-reading).
 
-**3. Practical workbook materials**
+**3. Practical materials**
 
-3.1 In the following sections, I describe the practical steps, and associated resources, you can use for your learning.
+3.1 In the following sections, I describe the practical steps, and associated practical materials (exercise workbooks and data), you can use for your learning.
 
 ## The data we will work with: Brazilian school children {#sec-multi-data-intro}
 
@@ -133,22 +133,42 @@ The `BAFACALO_DATASET.RData` data were collected and shared online by @golino201
 
 @golino2014 collected school end-of-year subject grades for a sample of 292 children recruited from multiple classes in a school in Brazil. Here, each subject is a theme or course that children studied in school, e.g., Physics or English language, and for which each child was awarded a grade at the end of the school year. So, we have information on different children, and information about their subject grades. Children were taught in different classes but the classes appear to be units of the school organization (the information is not quite clear) not subject or course groupings. Thus, we also have information on which classes children were in when data about them were collected.
 
-### Locate and download the data file {#sec-multi-data-download}
+### Locate and download the practical materials {#sec-multi-data-download}
 
-You can access the data from the link associated with the @golino2014 article [here](http://dx.doi.org/10.7910/DVN/23150).
+::: callout-important
+**Get the data**: get the data file and the .R script you can use to do the exercises that will support your learning.
 
-Or you can download the [data-01-multilevel.zip](files/data-01-multilevel.zip) files folder for this chapter.
+- You can download the files folder for this chapter by clicking on the link [01-multilevel.zip](files/01-multilevel.zip).
+:::
 
-The data were compiled to an .RData format file.
+The practical materials folder includes:
 
-`.RData` is R's own file format so the code you use to load and access the data for analysis is a bit simpler than you are used to. (You will have used `read.csv()` or `read_csv()` previously.)
+- `BAFACALO_DATASET.RData`
+-  `01-multilevel-workbook.R` the workbook you will need to do the practical exercises.
+
+The data file is in the `.RData` format: `.RData` is R's own file format so the code you use to load and access the data for analysis is a bit simpler than you are used to, see @sec-multi-data-load next.
+(You will have used `read.csv()` or `read_csv()` previously.)
 
 In my own practice, I prefer to keep files in formats like `.csv` which can be opened and read in other software applications (like Excel), so using an `.RData` is an exception in these materials.
 
-The file is located in a .zip folder called `data-01-multilevel`. The data file is collected together with the .R scripts:
+You can also access the data from the link associated with the @golino2014 article [here](http://dx.doi.org/10.7910/DVN/23150).
 
--   `01-multilevel-workbook.R` the workbook you will need to do the practical exercises.
--   `01-multilevel-workbook-answers.R` with answers to questions and code for exercises.
+#### The answers version {#sec-multi-answers-download}
+
+- *During* practical sessions, each week, you can use the workbook to prompt your code construction and your thinking, with support.
+- *After* practical sessions, you will be able to download an answers version of the workbook .R so check back here after the session.
+
+::: callout-important
+**Get the answers**: get the data file and the .R script with answers.
+
+- You can download the files folder for this chapter by clicking on the link [01-multilevel-answers.zip](files/01-multilevel-answers.zip).
+:::
+
+The link to this folder will not work until after a session has finished.
+
+When the link is live, you will be able to download a folder including:
+
+-   `01-multilevel-workbook-answers.R` with answers to questions and example code for doing the exercises.
 
 ### Read in the data file using the load() function {#sec-multi-data-load}
 
