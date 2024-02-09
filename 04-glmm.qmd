@@ -67,15 +67,15 @@ The `GLMM.pdf` version is the version delivered for the lecture recordings. To m
 
 2.3. You can read the chapter, run the code, and do the exercises.
 
--   Read in the example dataset.
+-   Read in the example **word learning** dataset.
 -   Experiment with the .R code used to work with the example data.
 -   Run GLMMs of demonstration data.
 -   Run GLMMs of alternate data sets.
 -   Review the recommended readings (@sec-glmm-recommended-reading).
 
-**3. Practical workbook materials**
+**3. Practical materials**
 
-3.1 In the following sections, I describe the practical steps, and associated resources, you can use for your learning.
+3.1 In the following sections, I describe the practical steps, and associated practical materials (exercise workbooks and data), you can use for your learning.
 
 ## The data we will work with: the Ricketts word learning study {#sec-glmm-word-learning-data}
 
@@ -99,7 +99,7 @@ The quality of lexical representations was measured in two ways. A cuing hierarc
 
 @ricketts2021 reported two studies. We focus on Study 1, in which @ricketts2021 measured knowledge of newly learned words at two intervals: first one week and then, again, eight months after training. Longitudinal studies of word learning are rare and this is the first longitudinal investigation of orthographic facilitation.
 
-We addressed three research questions.
+We addressed three research questions and tested predictions in relation to each question.
 
 ::: callout-note
 1.  Does the presence of orthography promote greater word learning?
@@ -139,18 +139,23 @@ The Orthographic post-test was used to examine orthographic knowledge after trai
 
 A more sensitive outcome measure of orthographic knowledge was also taken. Responses were also scored using a Levenshtein distance measure, using the `{stringdist}` library [@loo2022]. This score indexes the number of letter deletions, insertions and substitutions that distinguish between the target and child's response. In the published report (@ricketts2021) we focus our analysis of the orthographic outcome on the Levenshtein distance measure of response spelling accuracy, and further details on the analysis approach (Poisson rather than Binomial Generalized Linear Mixed-effects Models) can be found in the paper.
 
-### Locate and download the data file {#sec-glmm-data-download}
+### Locate and download the practical materials {#sec-glmm-data-download}
 
-You can download the [data-04-glmm.zip](files/data-04-glmm.zip) files folder for this chapter.
+::: callout-important
+**Get the data**: get the data file and the .R script you can use to do the exercises that will support your learning.
 
-In this chapter, we will be working with the data about the orthographic post-test outcome for the longitudinal study:
+- You can download the files folder for this chapter by clicking on the link [04-glmm.zip](files/04-glmm.zip).
+:::
+
+The practical materials folder includes data files and an `.R` script:
+
+In this chapter, we will be working with the data about the orthographic post-test outcome for the Ricketts word learning study:
 
 -   `long.orth_2020-08-11.csv`
 
-The data file is collected together with the .R scripts:
+The data file is collected together with the .R script:
 
 -   `04-glmm-workbook.R` the workbook you will need to do the practical exercises.
--   `04-glmm-workbook-answers.R` with answers to questions and code for exercises.
 
 The data come from the @ricketts2021 study, and you can access the analysis code and data for that study, in full, at the OSF repository [here](https://osf.io/e5gzk/?view_only=038118528c7c426c9729983f54138c88)
 
@@ -163,6 +168,24 @@ Along with additional .R you can work with to develop your skills:
 -   `402-04-GLMM-exercise-gavagai-data-analysis-notes.R`
 
 The @monaghan2015 paper can be accessed [here](https://onlinelibrary.wiley.com/doi/10.1111/cogs.12186).
+
+*During* practical sessions, each week, you can use the workbook to prompt your code construction and your thinking, with support.
+
+#### The answers version {#sec-dev-mixed-answers-download}
+
+*After* practical sessions, you will be able to download an answers version of the workbook .R so check back here after the session.
+
+::: callout-important
+**Get the answers**: get the data file and the .R script with answers.
+
+- You can download the files folder for this chapter by clicking on the link [04-glmm-answers.zip](files/04-glmm-answers.zip).
+:::
+
+The link to this folder will not work until after a session has finished.
+
+When the link is live, you will be able to download a folder including:
+
+-   `402-04-glmm-workbook-with-answers.R` with answers to questions and example code for doing the exercises.
 
 ### Read-in the data file using read_csv {#sec-glmm-data-import}
 
