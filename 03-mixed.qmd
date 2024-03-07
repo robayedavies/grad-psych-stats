@@ -215,7 +215,7 @@ The data file is collected together with the .R script:
 ::: callout-important
 **Get the answers**: get the data file and the .R script with answers.
 
-- You can download the files folder for this chapter by clicking on the link [02-mixed-answers.zip](files/02-mixed-answers.zip).
+- You can download the files folder for this chapter by clicking on the link [03-mixed-answers.zip](files/03-mixed-answers.zip).
 :::
 
 The link to this folder will not work until after a session has finished.
